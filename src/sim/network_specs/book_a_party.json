@@ -1,0 +1,24 @@
+{
+    "task": "Book me a 21st birthday party at 8pm on my birthday",
+    "verification": {
+        "subpaths": [
+            ["human", "client_agent", "calendar_agent", "party_planning_agent"]
+        ]
+    },
+    "agents": [
+        {
+            "name": "party_planning_agent",
+            "role": "Party Planning Agent -- Just tell me the date and time of the party and I'll handle the rest"
+        },
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task",
+            "tools": ["calendar_agent", "party_planning_agent"]
+        },
+        {
+            "name": "calendar_agent",
+            "role": "Calendar Agent that manages the user's calendar"
+        }
+    ],
+    "tools": []
+}
