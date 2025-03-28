@@ -18,7 +18,10 @@ Helper functions
 '''
 def get_tool_call_dict(tool_call) -> dict:
     """Get a tool call dictionary from a ToolCall object."""
-    return json.loads(tool_call.model_dump_json())['function']
+    rtn = json.loads(tool_call.model_dump_json())['function']
+    if 'arguments' in rtn:
+        rtn['arguments'] = json.loads(rtn['arguments'])
+    return rtn
 
 def stringify_tool_response(tool_response: Union[str, dict]) -> str:
     """Stringify a tool response."""
@@ -30,18 +33,20 @@ def stringify_tool_response(tool_response: Union[str, dict]) -> str:
 class NetworkRunner:
     """NetworkRunner for the multi-agent network simulation system."""
     
-    def __init__(self, network: AgentNetwork, verbose: bool = False):
+    def __init__(self, network: AgentNetwork, verbose: bool = False, model: str = "claude-3-5-sonnet-20240620"):
         """Initialize the NetworkRunner """
         self.network = network
         self.simulators = dict()
         self.client_agent = self.get_client_agent()
         self.verbose = verbose
+        self.model = model
+        self.summary_message = "This is a system message. You have exceeded the maximum number of tool calling steps. Summarize your work thus far and report back to your invoker."
         self.init_simulators()
 
     def init_simulators(self):
         """Initialize the simulators for the network."""
         for agent in self.network.agents:
-            self.simulators[agent.name] = AgentSimulator(agent)
+            self.simulators[agent.name] = AgentSimulator(agent, model=self.model)
 
     def get_client_agent(self) -> Agent:
         for agent in self.network.agents:
@@ -137,6 +142,7 @@ class NetworkRunner:
         response = None
         while loop_count < max_tool_loop:
             response = await simulator.simulate(message)
+            message = None
             response_message = response.choices[0].message
             
             # Handle the response object correctly
@@ -159,9 +165,14 @@ class NetworkRunner:
                 result = await self.execute_tool(get_tool_call_dict(call))
                 results_text += f"Result from {get_tool_call_dict(call)['name']}: {result}\n"
                 
-            # Append the assistant's response and then the tool results as a follow-up user message
-            simulator.messages.append({"role": "assistant", "content": content, "tool_calls": tool_calls})
-            simulator.messages.append({"role": "tool", "content": f"Tool results:\n{results_text}"})
+                # Append the assistant's response and then the tool results as a follow-up user message
+                simulator.messages.append(response_message)
+                simulator.messages.append({"role": "tool",
+                    "tool_call_id": response_message.tool_calls[0].id,
+                    "name": response_message.tool_calls[0].function.name,
+                    "content": f"Tool results:\n{results_text}"}
+                )
+                
             
             if self.verbose:
                 print(f"[TOOL_RESULTS] Results: {results_text}")
@@ -169,27 +180,14 @@ class NetworkRunner:
             loop_count += 1
 
         
-        # Get the final content
-        if isinstance(response, dict):
-            content = response.get("content", "")
-            tool_calls = response.get("tool_calls", [])
-        else:
-            content = response
-            tool_calls = []
-        
         # Add the final response to the simulator's message history
         if not tool_calls:
             simulator.messages.append({"role": "assistant", "content": content})
         else:
-            simulator.messages.append({"role": "user",
-                "content": "This is a system message. You have exceeded the maximum number of tool calling steps. Summarize your work thus far and report back to your invoker."})
-            summary_message = "This is a system message. You have exceeded the maximum number of tool calling steps. Summarize your work thus far and report back to your invoker."
-            
             if self.verbose:
                 print(f"[MAX_TOOLS_EXCEEDED] Agent: {agent_name} - Requesting summary")
-                
-            response = await simulator.simulate(summary_message, allow_tool_calls=False)
-            content = response.get("content", "") if isinstance(response, dict) else response
+            response = await simulator.simulate(self.summary_message, allow_tool_calls=False)
+            content = response.choices[0].message.content
             simulator.messages.append({"role": "assistant", "content": content})
             
             if self.verbose:
@@ -213,15 +211,15 @@ class NetworkRunner:
         # if so, check to see if it is a leaf agent
         # if so, then we can use tool execution factory
         # else we need to simulate the agent
-        if tool_call["name"] in self.network.agents and not self.get_agent(tool_call["name"]).is_leaf():
+        # breakpoint()
+        if self.get_agent(tool_call["name"]) and not self.get_agent(tool_call["name"]).is_leaf():
             msg = tool_call["arguments"]["message"]
-            success, result = await self.simulate_agent(msg, tool_call["name"])
+            result = await self.simulate_agent(msg, tool_call["name"])
         else:
             success, result = await tool_execution_factory(tool_call)
 
         result = stringify_tool_response(result)
                 
-        breakpoint()
         if self.verbose:
             print(f"[TOOL_RESULT] Tool {tool_call['name']} returned: {result[:200]}...")
             
@@ -289,7 +287,7 @@ if __name__ == "__main__":
         network = AgentNetwork(agents=[client_agent, test_agent])
         
         # Create a NetworkRunner with the test network and set verbose to True
-        runner = NetworkRunner(network, verbose=True)
+        runner = NetworkRunner(network, verbose=True, model="gpt-4o")#)claude-3-5-haiku-20241022")
         
         # Test the simulate_agent method
         top_level_message = "Hello, this is a test message. Tell the test agent to use the test_tool."

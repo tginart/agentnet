@@ -2,7 +2,7 @@ from agent_network import Agent, Tool
 import asyncio
 from litellm import acompletion
 from dotenv import load_dotenv
-
+from typing import Optional
 load_dotenv()
 
 DEFAULT_PROMPT = lambda agent: f"""
@@ -23,9 +23,11 @@ class AgentSimulator:
             {"role": "system", "content": self.prompt},
         ]
 
-    async def simulate(self, message: str, allow_tool_calls: bool = True) -> str:
+    async def simulate(self, message: Optional[str] = None, allow_tool_calls: bool = True) -> str:
         """Simplified simulator that just appends the message to history and generates one response."""
-        self.messages.append({"role": "user", "content": message})
+        
+        if message:
+            self.messages.append({"role": "user", "content": message})
         
         response = await acompletion(
             model=self.model,
@@ -35,6 +37,8 @@ class AgentSimulator:
             tools=[tool.json() for tool in self.agent.tools] if allow_tool_calls else None,
             top_p=1,
         )
+
+        # breakpoint()
         
         content = response.get("content", "") if isinstance(response, dict) else response
         self.messages.append({"role": "assistant", "content": content})
