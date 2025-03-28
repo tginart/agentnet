@@ -78,6 +78,7 @@ from typing import List
 
 from agent_network import Agent, AgentNetwork, Tool
 
+
 def initialize_network(spec: dict) -> AgentNetwork:
     # Create all tools first (non-agent tools)
     all_tools = {}
@@ -89,22 +90,28 @@ def initialize_network(spec: dict) -> AgentNetwork:
         )
         all_tools[tool.name] = tool
     
-    # Create all agents (which are also tools)
+    # First pass: Create all agents without their tools
+    agent_configs = {}  # Store agent configs for second pass
     for agent_spec in spec['agents']:
-        # Get the tool objects for this agent
-        agent_tools = []
-        for tool_name in agent_spec['tools']:
-            # Tool might be either a regular tool or an agent that was already created
-            if tool_name in all_tools:
-                agent_tools.append(all_tools[tool_name])
-            
         agent = Agent(
             name=agent_spec['name'],
             role=agent_spec['role'],
-            tools=agent_tools
+            tools=[]  # Empty tools list for now
         )
         # Add the agent to the tools dictionary since Agent is a Tool
         all_tools[agent.name] = agent
+        # Store the agent's tool names for the second pass
+        agent_configs[agent.name] = agent_spec['tools']
+    
+    # Second pass: Assign tools to agents
+    for agent_name, tool_names in agent_configs.items():
+        agent = all_tools[agent_name]
+        # Get the tool objects for this agent
+        for tool_name in tool_names:
+            if tool_name in all_tools:
+                agent.tools.append(all_tools[tool_name])
+            else:
+                print(f"Warning: Tool '{tool_name}' not found for agent '{agent_name}'")
     
     # Get just the agents from all_tools to create the network
     agents = [tool for tool in all_tools.values() if isinstance(tool, Agent)]

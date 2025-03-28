@@ -7,7 +7,8 @@ load_dotenv()
 
 DEFAULT_PROMPT = lambda agent: f"""
 You are a helpful agent in a multi-agent system.
-Your role is {agent.name}.
+Your role is: {agent.name}.
+Role description: {agent.description}.
 
 You have the following tools:
 {agent.tools}
@@ -29,7 +30,8 @@ class AgentSimulator:
         if message:
             self.messages.append({"role": "user", "content": message})
         
-        response = await acompletion(
+        # breakpoint() # -- uncomment helpful for debugging
+        return await acompletion(
             model=self.model,
             messages=self.messages,
             max_tokens=4000,
@@ -37,13 +39,7 @@ class AgentSimulator:
             tools=[tool.json() for tool in self.agent.tools] if allow_tool_calls else None,
             top_p=1,
         )
-
-        # breakpoint()
         
-        content = response.get("content", "") if isinstance(response, dict) else response
-        self.messages.append({"role": "assistant", "content": content})
-        
-        return content
 
 
 if __name__ == "__main__":
