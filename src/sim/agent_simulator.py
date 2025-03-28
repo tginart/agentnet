@@ -2,7 +2,8 @@ from agent_network import Agent, Tool
 import asyncio
 from litellm import acompletion
 from dotenv import load_dotenv
-from typing import Optional
+from typing import Optional, List
+from dataclasses import dataclass, field
 load_dotenv()
 
 DEFAULT_PROMPT = lambda agent: f"""
@@ -14,12 +15,23 @@ You have the following tools:
 {agent.tools}
 """
 
+@dataclass
+class SamplingParams:
+    model: str = "claude-3-5-sonnet-20240620"
+    temperature: float = 0.0
+    top_p: float = 1.0
+    top_k: int = 50
+    max_tokens: int = 2048
+
+
 class AgentSimulator:
     def __init__(self, agent: Agent,
+                 sampling_params: SamplingParams = SamplingParams(),
                  model: str = "claude-3-5-sonnet-20240620"):
         self.agent = agent
         self.prompt = DEFAULT_PROMPT(agent)
         self.model = model
+        self.sampling_params = sampling_params
         self.messages = [
             {"role": "system", "content": self.prompt},
         ]
@@ -32,12 +44,13 @@ class AgentSimulator:
         
         # breakpoint() # -- uncomment helpful for debugging
         return await acompletion(
-            model=self.model,
+            model=self.sampling_params.model,
             messages=self.messages,
-            max_tokens=4000,
-            temperature=0.5,
-            tools=[tool.json() for tool in self.agent.tools] if allow_tool_calls else None,
-            top_p=1,
+            temperature=self.sampling_params.temperature,
+            tools=[tool.json() for tool in self.agent.tools] if allow_tool_calls else [],
+            top_p=self.sampling_params.top_p,
+            top_k=self.sampling_params.top_k,
+            max_tokens=self.sampling_params.max_tokens,
         )
         
 

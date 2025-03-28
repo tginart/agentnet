@@ -48,8 +48,9 @@ class UniversalAPI:
         try:
             response = await acompletion(
                 model=self.model,
+                temperature=0.0,
                 messages=self.messages[tool_name],
-                max_tokens=1000
+                max_tokens=2048
             )
             content = response.choices[0].message.content
             # Append the assistant's response to the message history

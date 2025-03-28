@@ -100,8 +100,8 @@ def initialize_network(spec: dict) -> AgentNetwork:
         )
         # Add the agent to the tools dictionary since Agent is a Tool
         all_tools[agent.name] = agent
-        # Store the agent's tool names for the second pass
-        agent_configs[agent.name] = agent_spec['tools']
+        # Store the agent's tool names for the second pass, defaulting to empty list if tools not specified
+        agent_configs[agent.name] = agent_spec.get('tools', [])
     
     # Second pass: Assign tools to agents
     for agent_name, tool_names in agent_configs.items():

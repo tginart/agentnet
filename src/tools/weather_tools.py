@@ -82,3 +82,24 @@ Forecast: {period['detailedForecast']}
         forecasts.append(forecast)
 
     return "\n---\n".join(forecasts)
+
+
+
+if __name__ == "__main__":
+    import asyncio
+    
+    async def test_weather_tools():
+        print("Testing weather tools...")
+        
+        # Test get_forecast
+        print("\nTesting get_forecast for San Francisco:")
+        sf_forecast = await get_forecast(37.77, -122.42)
+        print(sf_forecast)
+        
+        # Test get_alerts
+        #print("\nTesting get_alerts for California:")
+        #ca_alerts = await get_alerts("CA") 
+        #print(ca_alerts)
+
+    asyncio.run(test_weather_tools())
+

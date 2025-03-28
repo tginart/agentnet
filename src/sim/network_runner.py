@@ -8,14 +8,38 @@ import asyncio
 from typing import Dict, List, Any, Optional, Callable, Union, Tuple
 
 from agent_network import Agent, AgentNetwork, Tool
-from agent_simulator import AgentSimulator
+from agent_simulator import AgentSimulator, SamplingParams
 from network_initalizer import initialize_network
 from tool_exec import tool_execution_factory, discover_tools
+from dataclasses import dataclass
 
+'''
+The network arch is specified in the network_spec
+The runconfig contains hyperparameters for the simulation
+'''
+@dataclass
+class RunConfig:
+    max_tool_loop: int = 8
+    max_human_loop: int = 4
+    max_tokens: int = 2048
+    temperature: float = 0.0
+    top_p: float = 1.0
+    verbose: bool = False
+    model: str = "claude-3-5-sonnet-20240620"
+    summary_message: str = "This is a system message. You have exceeded the maximum number of tool calling steps. Summarize your work thus far and report back to your invoker."
+    human_role_message: str = f"The human user. This is the task message you sent to your top-level client agent: {task_message}\n\nPlease simulate the human user's response to the client agent's response.\n\nIf you deem the task complete, please respond with 'TASK COMPLETE'."
 
 '''
 Helper functions
 '''
+def get_message_from_model_response(model_response: dict) -> str:
+    """Get the message from a model response."""
+    return model_response.choices[0].message
+
+def get_content_from_model_response(model_response: dict) -> str:
+    """Get the content from a model response."""
+    return get_message_from_model_response(model_response).content
+
 def get_tool_call_dict(tool_call) -> dict:
     """Get a tool call dictionary from a ToolCall object."""
     rtn = json.loads(tool_call.model_dump_json())['function']
@@ -114,6 +138,13 @@ class NetworkRunner:
             return None
         return self.simulators[network_name].get(agent_name)
     
+    def get_human_simulator(self, task_message: str) -> AgentSimulator:
+        human_agent = Agent(
+            name="human",
+            role=f"The human user. This is the task message you sent to your top-level client agent: {task_message}\n\nPlease simulate the human user's response to the client agent's response.\n\nIf you deem the task complete, please respond with 'TASK COMPLETE'.",
+            tools=[]
+        )
+        return AgentSimulator(human_agent, model=self.model, sampling_params=SamplingParams(temperature=0.0))
 
     async def simulate_agent(self, message: str, agent_name: str, is_initial_call: bool = False) -> str:
         """Simulate an agent by sending it a message and getting a response.
@@ -128,6 +159,7 @@ class NetworkRunner:
         """
         # Define sender at the beginning to avoid UnboundLocalError
         sender = "human" if self.current_sender == "human" else self.current_sender
+
         
         # Log the message being sent to the agent (unless this is the initial call from run_network)
         if self.logger and not is_initial_call:
@@ -141,7 +173,7 @@ class NetworkRunner:
         if not simulator:
             raise ValueError(f"Simulator for agent {agent_name} not found")
         
-        max_tool_loop = 3
+        max_tool_loop = 8
         loop_count = 0
         
         # Add the user message to the simulator
@@ -175,6 +207,7 @@ class NetworkRunner:
             results_text = ""
             
             for call in tool_calls:
+                # breakpoint()
                 # Log the tool call
                 tool_call_dict = get_tool_call_dict(call)
                 if self.logger:
@@ -214,9 +247,10 @@ class NetworkRunner:
             simulator.messages.append(response_message)
         else:
             if self.verbose:
+                # breakpoint()
                 print(f"[MAX_TOOLS_EXCEEDED] Agent: {agent_name} - Requesting summary")
             response = await simulator.simulate(self.summary_message, allow_tool_calls=False)
-            response_message = response.choices[0].message
+            response_message = get_message_from_model_response(response)
             simulator.messages.append(response_message)
             
             if self.verbose:
@@ -253,7 +287,6 @@ class NetworkRunner:
             print(f"[TOOL_RESULT] Tool {tool_call['name']} returned: {result[:200]}...")
             
         return result
-    
     async def run_network(self, task_message: str) -> str:
         """Run the network by sending a message to the client agent."""
         if self.logger:
@@ -263,9 +296,36 @@ class NetworkRunner:
             print(f"[RUN_NETWORK] Starting network with message: {task_message}")
             
         self.current_sender = "human"
-        # Pass is_initial_call=True to avoid double logging
-        result = await self.simulate_agent(task_message, self.client_agent.name, is_initial_call=True)
-        
+        human_simulator = self.get_human_simulator(task_message)
+        max_human_loop = 3
+        human_loop_count = 0
+
+        while human_loop_count < max_human_loop:
+            # Pass is_initial_call=True to avoid double logging
+            result = await self.simulate_agent(task_message, self.client_agent.name, is_initial_call=human_loop_count == 0)
+            
+            # Log client agent's response to human
+            if self.logger:
+                self.logger.log_message(self.client_agent.name, "human", result)
+                
+            # get human response
+            human_response = await human_simulator.simulate(result, allow_tool_calls=False)
+            human_response_content = get_content_from_model_response(human_response)
+            
+            if "TASK COMPLETE" in human_response_content.upper():
+                if self.verbose:
+                    print(f"[HUMAN] Task COMPLETE. Human response: {human_response_content[:200]}...")
+                if self.logger:
+                    self.logger.log_message("human", self.client_agent.name, human_response_content)
+                break
+            else:
+                if self.verbose:
+                    print(f"[HUMAN] Task INCOMPLETE. Human response: {human_response_content[:200]}...")
+                if self.logger:
+                    self.logger.log_message("human", self.client_agent.name, human_response_content)
+                human_simulator.messages.append(get_message_from_model_response(human_response))
+                task_message = human_response_content
+            human_loop_count += 1
         if self.verbose:
             print(f"[RUN_NETWORK] Network execution complete. Final result: {result[:200]}...")
             
