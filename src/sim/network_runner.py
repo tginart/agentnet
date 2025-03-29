@@ -10,8 +10,34 @@ from typing import Dict, List, Any, Optional, Callable, Union, Tuple
 from agent_network import Agent, AgentNetwork, Tool
 from agent_simulator import AgentSimulator, SamplingParams
 from network_initalizer import initialize_network
-from tool_exec import tool_execution_factory, discover_tools
+from tool_exec import ToolFactory
 from dataclasses import dataclass
+
+# ANSI color codes for terminal output
+class Colors:
+    HEADER = '\033[95m'      # Purple
+    BLUE = '\033[94m'        # Blue
+    GREEN = '\033[92m'       # Green
+    YELLOW = '\033[93m'      # Yellow
+    RED = '\033[91m'         # Red
+    ENDC = '\033[0m'         # Reset color
+    BOLD = '\033[1m'         # Bold text
+    CYAN = '\033[96m'        # Cyan
+    PURPLE = '\033[95m'      # Purple (same as HEADER)
+
+# Color-coded log prefixes
+LOG_PREFIXES = {
+    'SIMULATE': f"{Colors.BLUE}[SIMULATE]{Colors.ENDC}",
+    'RESPONSE': f"{Colors.GREEN}[RESPONSE]{Colors.ENDC}",
+    'TOOL_CALLS': f"{Colors.YELLOW}[TOOL_CALLS]{Colors.ENDC}",
+    'TOOL_EXEC': f"{Colors.CYAN}[TOOL_EXEC]{Colors.ENDC}",
+    'TOOL_RESULT': f"{Colors.PURPLE}[TOOL_RESULT]{Colors.ENDC}",
+    'TOOL_RESULTS': f"{Colors.PURPLE}[TOOL_RESULTS]{Colors.ENDC}",
+    'MAX_TOOLS_EXCEEDED': f"{Colors.RED}[MAX_TOOLS_EXCEEDED]{Colors.ENDC}",
+    'SUMMARY': f"{Colors.YELLOW}[SUMMARY]{Colors.ENDC}",
+    'HUMAN': f"{Colors.BOLD}[HUMAN]{Colors.ENDC}",
+    'RUN_NETWORK': f"{Colors.BLUE}[RUN_NETWORK]{Colors.ENDC}"
+}
 
 '''
 The network arch is specified in the network_spec
@@ -27,7 +53,8 @@ class RunConfig:
     verbose: bool = False
     model: str = "claude-3-5-sonnet-20240620"
     summary_message: str = "This is a system message. You have exceeded the maximum number of tool calling steps. Summarize your work thus far and report back to your invoker."
-    human_role_message: str = f"The human user. This is the task message you sent to your top-level client agent: {task_message}\n\nPlease simulate the human user's response to the client agent's response.\n\nIf you deem the task complete, please respond with 'TASK COMPLETE'."
+    human_role_message: str = "The human user. This is the task message you sent to your top-level client agent: {task_message}\n\nPlease simulate the human user's response to the client agent's response. You are lazy and refuse to do any work but you are fairly flexible in terms of accepting the client agent's ideas.\n\nIf you deem the task complete, please respond with 'TASK COMPLETE'. It is very important that you respond with 'TASK COMPLETE' if you deem the task complete. If you do not respond with 'TASK COMPLETE', the client agent will continue to work on the task."
+    
 
 '''
 Helper functions
@@ -91,6 +118,7 @@ class NetworkRunner:
         self.verbose = verbose
         self.model = model
         self.summary_message = "This is a system message. You have exceeded the maximum number of tool calling steps. Summarize your work thus far and report back to your invoker."
+        self.tool_factory = ToolFactory()
         self.init_simulators()
         
         # Logging support
@@ -121,6 +149,13 @@ class NetworkRunner:
         for agent in self.network.agents:
             if agent.name == agent_name:
                 return agent
+        return None
+    
+    def get_tool_description(self, tool_name: str) -> Optional[str]:
+        """Get the description of a tool."""
+        for tool in self.network.get_all_tools():
+            if tool.name == tool_name:
+                return tool.description
         return None
     
 
@@ -178,7 +213,7 @@ class NetworkRunner:
         
         # Add the user message to the simulator
         if self.verbose:
-            print(f"\n[SIMULATE] Agent: {agent_name} received message: {message}")
+            print(f"\n{LOG_PREFIXES['SIMULATE']} Agent: {agent_name} received message: {message}")
         
         response = None
         while loop_count < max_tool_loop:
@@ -192,9 +227,9 @@ class NetworkRunner:
             
             if self.verbose:
                 if content:
-                    print(f"\n[RESPONSE] Agent: {agent_name} responded: {content[:200]}...")
+                    print(f"\n{LOG_PREFIXES['RESPONSE']} Agent: {agent_name} responded: {content[:200]}...")
                 if tool_calls:
-                    print(f"[TOOL_CALLS] Agent: {agent_name} called tools: {str([get_tool_call_dict(tool_call) for tool_call in tool_calls])}")
+                    print(f"{LOG_PREFIXES['TOOL_CALLS']} Agent: {agent_name} called tools: {str([get_tool_call_dict(tool_call) for tool_call in tool_calls])}")
             
             # Log the agent's response if it has content
             if content and self.logger:
@@ -204,6 +239,9 @@ class NetworkRunner:
             if not tool_calls:
                 break
                 
+            # Append the assistant's message (containing tool calls) ONCE
+            simulator.messages.append(response_message)
+            
             results_text = ""
             
             for call in tool_calls:
@@ -227,8 +265,7 @@ class NetworkRunner:
                 if self.logger:
                     self.logger.log_tool_result(tool_call_dict['name'], agent_name, result)
                 
-                # Append the assistant's response and then the tool results as a follow-up user message
-                simulator.messages.append(response_message)
+                # Append the tool results as a follow-up message
                 simulator.messages.append({"role": "tool",
                     "tool_call_id": call.id,
                     "name": tool_call_dict['name'],
@@ -237,7 +274,7 @@ class NetworkRunner:
                 
             
             if self.verbose:
-                print(f"[TOOL_RESULTS] Results: {results_text}")
+                print(f"{LOG_PREFIXES['TOOL_RESULTS']} Results: {results_text}")
                 
             loop_count += 1
 
@@ -247,14 +284,13 @@ class NetworkRunner:
             simulator.messages.append(response_message)
         else:
             if self.verbose:
-                # breakpoint()
-                print(f"[MAX_TOOLS_EXCEEDED] Agent: {agent_name} - Requesting summary")
+                print(f"{LOG_PREFIXES['MAX_TOOLS_EXCEEDED']} Agent: {agent_name} - Requesting summary")
             response = await simulator.simulate(self.summary_message, allow_tool_calls=False)
             response_message = get_message_from_model_response(response)
             simulator.messages.append(response_message)
             
             if self.verbose:
-                print(f"[SUMMARY] Agent: {agent_name} summary: {content}...")
+                print(f"{LOG_PREFIXES['SUMMARY']} Agent: {agent_name} summary: {content}...")
                 
         return content
     
@@ -268,23 +304,26 @@ class NetworkRunner:
             Result of the tool execution
         """
         if self.verbose:
-            print(f"[TOOL_EXEC] Executing tool: {tool_call['name']} with args: {tool_call.get('arguments', {})}")
+            print(f"{LOG_PREFIXES['TOOL_EXEC']} Executing tool: {tool_call['name']} with args: {tool_call.get('arguments', {})}")
             
         # check if tool_call name is an agent
         # if so, check to see if it is a leaf agent
         # if so, then we can use tool execution factory
         # else we need to simulate the agent
-        if self.get_agent(tool_call["name"]) and not self.get_agent(tool_call["name"]).is_leaf():
+        is_agent = self.get_agent(tool_call["name"])
+        is_leaf = is_agent and not is_agent.is_leaf()
+        if is_agent and is_leaf:
             msg = tool_call["arguments"]["message"]
             # Pass is_initial_call=False to ensure proper logging
             result = await self.simulate_agent(msg, tool_call["name"], is_initial_call=False)
         else:
-            success, result = await tool_execution_factory(tool_call)
+            tool_description = self.get_tool_description(tool_call["name"])
+            success, result = await self.tool_factory.tool_execution(tool_call, tool_description)
 
         result = stringify_tool_response(result)
                 
         if self.verbose:
-            print(f"[TOOL_RESULT] Tool {tool_call['name']} returned: {result[:200]}...")
+            print(f"{LOG_PREFIXES['TOOL_RESULT']} Tool {tool_call['name']} returned: {result[:200]}...")
             
         return result
     async def run_network(self, task_message: str) -> str:
@@ -293,7 +332,7 @@ class NetworkRunner:
             self.logger.log_message("human", self.client_agent.name, task_message)
             
         if self.verbose:
-            print(f"[RUN_NETWORK] Starting network with message: {task_message}")
+            print(f"{LOG_PREFIXES['RUN_NETWORK']} Starting network with message: {task_message}")
             
         self.current_sender = "human"
         human_simulator = self.get_human_simulator(task_message)
@@ -314,20 +353,20 @@ class NetworkRunner:
             
             if "TASK COMPLETE" in human_response_content.upper():
                 if self.verbose:
-                    print(f"[HUMAN] Task COMPLETE. Human response: {human_response_content[:200]}...")
+                    print(f"{LOG_PREFIXES['HUMAN']} Task COMPLETE. Human response: {human_response_content[:200]}...")
                 if self.logger:
                     self.logger.log_message("human", self.client_agent.name, human_response_content)
                 break
             else:
                 if self.verbose:
-                    print(f"[HUMAN] Task INCOMPLETE. Human response: {human_response_content[:200]}...")
+                    print(f"{LOG_PREFIXES['HUMAN']} Task INCOMPLETE. Human response: {human_response_content[:200]}...")
                 if self.logger:
                     self.logger.log_message("human", self.client_agent.name, human_response_content)
                 human_simulator.messages.append(get_message_from_model_response(human_response))
                 task_message = human_response_content
             human_loop_count += 1
         if self.verbose:
-            print(f"[RUN_NETWORK] Network execution complete. Final result: {result[:200]}...")
+            print(f"{LOG_PREFIXES['RUN_NETWORK']} Network execution complete. Final result: {result[:200]}...")
             
         return result
 
@@ -337,7 +376,7 @@ class NetworkRunner:
         Returns:
             List of tool names
         """
-        return list(discover_tools().keys())
+        return list(self.tool_factory.discover_tools().keys())
     
     def list_all_tools(self) -> List[str]:
         """List all tools in the system.

@@ -1,0 +1,193 @@
+{
+    "task": "File my taxes",
+    "verification": {
+        "subpaths": [
+            ["human", "client_agent", "finance_and_accounting_agent", "turbotax_agent", "vangard_agent", "human"],
+            ["human", "client_agent", "finance_and_accounting_agent", "turbotax_agent", "robinhood_agent", "human"],
+            ["human", "client_agent", "finance_and_accounting_agent", "turbotax_agent", "fidelity_agent", "human"],
+            ["human", "client_agent", "finance_and_accounting_agent", "turbotax_agent", "schwab_agent", "human"],
+            ["human", "client_agent", "finance_and_accounting_agent", "turbotax_agent", "td_ameritrade_agent", "human"],
+            ["human", "client_agent", "finance_and_accounting_agent", "turbotax_agent", "crypto_agent", "coinbase_agent", "human"],
+            ["human", "client_agent", "finance_and_accounting_agent", "turbotax_agent", "crypto_agent", "kraken_agent", "human"],
+            ["human", "client_agent", "finance_and_accounting_agent", "turbotax_agent", "crypto_agent", "binance_agent", "human"],
+            ["human", "client_agent", "finance_and_accounting_agent", "turbotax_agent", "crypto_agent", "filesystem_agent", "human"],
+            ["human", "client_agent", "finance_and_accounting_agent", "turbotax_agent", "mortgage_agent", "human"],
+            ["human", "client_agent", "finance_and_accounting_agent", "turbotax_agent", "email_agent", "human"],
+            ["human", "client_agent", "finance_and_accounting_agent", "turbotax_agent", "software_inc_hr_agent", "human"],
+            ["client_agent", "software_inc_hr_agent", "filesystem_agent"]
+        ]
+    },
+    "agents": [
+        {
+            "name": "coinbase_agent",
+            "role": "Coinbase Agent -- Manages user's Coinbase account",
+            "tools": []
+        },
+        {
+            "name": "kraken_agent",
+            "role": "Kraken Agent -- Manages user's Kraken account",
+            "tools": []
+        },
+        {
+            "name": "binance_agent",
+            "role": "Binance Agent -- Manages user's Binance account",
+            "tools": []
+        },
+        {
+            "name": "airbnb_agent",
+            "role": "Airbnb Agent",
+            "tools": ["get_airbnb_listings", "get_airbnb_reviews"]
+        },
+        {
+            "name": "weather_agent",
+            "role": "Weather Agent",
+            "tools": ["get_forecast", "get_alerts", "get_geocode"]
+        },
+        {
+            "name": "calendar_agent",
+            "role": "Calendar Agent",
+            "tools": []
+        },
+        {
+            "name": "software_inc_hr_agent",
+            "role": "Software Inc HR Agent. This is the user's employer. Employee-facing agent that connects employee's personal agents to HR agent. Can share information on worker benefits, salary (W2), and other HR-related information. Asks for authentication from the employee before sharing information.",
+            "tools": []
+        },
+        {
+            "name": "email_agent",
+            "role": "Email Agent. Manages user's email. Has a both symbolic and semantic index of the user's email. Can read and write emails.",
+            "tools": []
+        },
+        {
+            "name": "vangard_agent",
+            "role": "Vangard Agent -- Manages user's Vanguard account",
+            "tools": []
+        },
+        {
+            "name": "robinhood_agent",
+            "role": "Robinhood Agent -- Manages user's Robinhood account",
+            "tools": []
+        },
+        {
+            "name": "fidelity_agent",
+            "role": "Fidelity Agent -- Manages user's Fidelity account",
+            "tools": []
+        },
+        {
+            "name": "schwab_agent",
+            "role": "Schwab Agent -- Manages user's Schwab account",
+            "tools": []
+        },
+        {
+            "name": "td_ameritrade_agent",
+            "role": "TD Ameritrade Agent -- Manages user's TD Ameritrade account",
+            "tools": []
+        },
+        {
+            "name": "crypto_agent",
+            "role": "Crypto Agent -- Manages user's crypto ecosystem, including crypto trading and staking as well custodial and non-custodial wallets",
+            "tools": [
+                "coinbase_agent",
+                "kraken_agent",
+                "binance_agent",
+                "filesystem_agent",
+                "email_agent"
+            ]
+        },
+        {
+            "name": "filesystem_agent",
+            "role": "Filesystem Agent -- Manages user's filesystem, including files, folders, crypto wallets, and metadata. Has a both symbolic and semantic index of the user's filesystem.",
+            "tools": []
+        },
+        {
+            "name": "mortgage_agent",
+            "role": "Mortgage Agent -- Manages user's mortgage",
+            "tools": []
+        },
+        {
+            "name": "finance_and_accounting_agent",
+            "role": "Finance and Accounting Agent -- Manages user's financial and accounting information. Connects to brokerage, crypto, investment, and bank accounts.",
+            "tools": [
+                "vangard_agent",
+                "robinhood_agent",
+                "fidelity_agent",
+                "schwab_agent",
+                "td_ameritrade_agent",
+                "crypto_agent",
+                "mortgage_agent",
+                "turbotax_agent",
+                "email_agent",
+                "filesystem_agent",
+                "wells_fargo_agent"
+            ]
+        },
+        {
+            "name": "wells_fargo_agent",
+            "role": "Wells Fargo Agent -- Manages user's Wells Fargo account. Checking + Savings + Credit Card + Mortgage.",
+            "tools" : []
+        },
+        {
+            "name": "turbotax_agent",
+            "role": "TurboTax Agent -- Manages user's TurboTax information and access the TurboTax API. The user pays for this AI TurboTax service. If given all of the information, the agent can file the user's taxes and has access to last year's tax return.",
+            "tools": []
+        },
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": ["airbnb_agent", "weather_agent", "calendar_agent", "finance_and_accounting_agent", "software_inc_hr_agent", "email_agent", "filesystem_agent"]
+        }
+    ],
+    "tools": [
+        {
+            "name": "get_airbnb_listings",
+            "description": "Get Airbnb listings",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {"type": "string", "description": "The location to get Airbnb listings for"}
+                }
+            }
+        },
+        {
+            "name": "get_airbnb_reviews",
+            "description": "Get Airbnb reviews",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {"type": "string", "description": "The location to get Airbnb reviews for"}
+                }
+            }
+        },
+        {
+            "name": "get_forecast",
+            "description": "Get weather forecast",  
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "latitude": {"type": "number", "description": "The latitude of the location to get weather forecast for"},
+                    "longitude": {"type": "number", "description": "The longitude of the location to get weather forecast for"}
+                }   
+            }
+        },
+        {
+            "name": "get_alerts",
+            "description": "Get weather alerts",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "state": {"type": "string", "description": "The state to get weather alerts for"}
+                }
+            }
+        },
+        {
+            "name": "get_geocode",
+            "description": "Get latitude and longitude for a location",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {"type": "string", "description": "The location to get geocode for"}
+                }
+            }
+        }
+    ]
+}
