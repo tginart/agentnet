@@ -1,17 +1,13 @@
-from network_initalizer import initialize_network
-from agent_simulator import AgentSimulator
 from litellm import acompletion
-
-
 import json
 import asyncio
 from typing import Dict, List, Any, Optional, Callable, Union, Tuple
-
-from agent_network import Agent, AgentNetwork, Tool
-from agent_simulator import AgentSimulator, SamplingParams
-from network_initalizer import initialize_network
-from tool_exec import ToolFactory
 from dataclasses import dataclass
+
+from .network_initalizer import initialize_network
+from .agent_simulator import AgentSimulator, SamplingParams
+from .tool_exec import ToolFactory, ToolFactoryConfig
+from .agent_network import Agent, AgentNetwork, Tool
 
 # ANSI color codes for terminal output
 class Colors:
@@ -50,8 +46,9 @@ class RunConfig:
     max_tokens: int = 2048
     temperature: float = 0.0
     top_p: float = 1.0
-    verbose: bool = False
+    stdout: bool = False
     model: str = "claude-3-5-sonnet-20240620"
+    universal_simulator_model: str = "gpt-4o"
     summary_message: str = "This is a system message. You have exceeded the maximum number of tool calling steps. Summarize your work thus far and report back to your invoker."
     human_role_message: str = "The human user. This is the task message you sent to your top-level client agent: {task_message}\n\nPlease simulate the human user's response to the client agent's response. You are lazy and refuse to do any work but you are fairly flexible in terms of accepting the client agent's ideas.\n\nIf you deem the task complete, please respond with 'TASK COMPLETE'. It is very important that you respond with 'TASK COMPLETE' if you deem the task complete. If you do not respond with 'TASK COMPLETE', the client agent will continue to work on the task."
     
@@ -104,7 +101,9 @@ def create_network_from_file(file_path: str) -> AgentNetwork:
 class NetworkRunner:
     """NetworkRunner for the multi-agent network simulation system."""
     
-    def __init__(self, network: Union[AgentNetwork, str, Dict[str, Any]], verbose: bool = False, model: str = "claude-3-5-sonnet-20240620", logger=None):
+    def __init__(self, network: Union[AgentNetwork, str, Dict[str, Any]],
+                 run_config: Optional[RunConfig] = None,
+                 logger=None):
         """Initialize the NetworkRunner """
         if isinstance(network, str):
             network = create_network_from_file(network)
@@ -113,12 +112,17 @@ class NetworkRunner:
         else:
             network = network
         self.network = network
+        if run_config is None:
+            run_config = RunConfig()
+        self.run_config = run_config
         self.simulators = dict()
         self.client_agent = self.get_client_agent()
-        self.verbose = verbose
-        self.model = model
-        self.summary_message = "This is a system message. You have exceeded the maximum number of tool calling steps. Summarize your work thus far and report back to your invoker."
-        self.tool_factory = ToolFactory()
+        self.stdout = run_config.stdout
+        self.model = run_config.model
+        self.summary_message = run_config.summary_message
+        self.human_role_message = run_config.human_role_message
+        tf_config = ToolFactoryConfig(model=run_config.universal_simulator_model)
+        self.tool_factory = ToolFactory(config=tf_config)
         self.init_simulators()
         
         # Logging support
@@ -212,7 +216,7 @@ class NetworkRunner:
         loop_count = 0
         
         # Add the user message to the simulator
-        if self.verbose:
+        if self.stdout:
             print(f"\n{LOG_PREFIXES['SIMULATE']} Agent: {agent_name} received message: {message}")
         
         response = None
@@ -225,7 +229,7 @@ class NetworkRunner:
             content = response_message.content
             tool_calls = response_message.tool_calls
             
-            if self.verbose:
+            if self.stdout:
                 if content:
                     print(f"\n{LOG_PREFIXES['RESPONSE']} Agent: {agent_name} responded: {content[:200]}...")
                 if tool_calls:
@@ -273,7 +277,7 @@ class NetworkRunner:
                 })
                 
             
-            if self.verbose:
+            if self.stdout:
                 print(f"{LOG_PREFIXES['TOOL_RESULTS']} Results: {results_text}")
                 
             loop_count += 1
@@ -283,13 +287,13 @@ class NetworkRunner:
         if not tool_calls:
             simulator.messages.append(response_message)
         else:
-            if self.verbose:
+            if self.stdout:
                 print(f"{LOG_PREFIXES['MAX_TOOLS_EXCEEDED']} Agent: {agent_name} - Requesting summary")
             response = await simulator.simulate(self.summary_message, allow_tool_calls=False)
             response_message = get_message_from_model_response(response)
             simulator.messages.append(response_message)
             
-            if self.verbose:
+            if self.stdout:
                 print(f"{LOG_PREFIXES['SUMMARY']} Agent: {agent_name} summary: {content}...")
                 
         return content
@@ -303,7 +307,7 @@ class NetworkRunner:
         Returns:
             Result of the tool execution
         """
-        if self.verbose:
+        if self.stdout:
             print(f"{LOG_PREFIXES['TOOL_EXEC']} Executing tool: {tool_call['name']} with args: {tool_call.get('arguments', {})}")
             
         # check if tool_call name is an agent
@@ -322,7 +326,7 @@ class NetworkRunner:
 
         result = stringify_tool_response(result)
                 
-        if self.verbose:
+        if self.stdout:
             print(f"{LOG_PREFIXES['TOOL_RESULT']} Tool {tool_call['name']} returned: {result[:200]}...")
             
         return result
@@ -331,7 +335,7 @@ class NetworkRunner:
         if self.logger:
             self.logger.log_message("human", self.client_agent.name, task_message)
             
-        if self.verbose:
+        if self.stdout:
             print(f"{LOG_PREFIXES['RUN_NETWORK']} Starting network with message: {task_message}")
             
         self.current_sender = "human"
@@ -352,20 +356,20 @@ class NetworkRunner:
             human_response_content = get_content_from_model_response(human_response)
             
             if "TASK COMPLETE" in human_response_content.upper():
-                if self.verbose:
+                if self.stdout:
                     print(f"{LOG_PREFIXES['HUMAN']} Task COMPLETE. Human response: {human_response_content[:200]}...")
                 if self.logger:
                     self.logger.log_message("human", self.client_agent.name, human_response_content)
                 break
             else:
-                if self.verbose:
+                if self.stdout:
                     print(f"{LOG_PREFIXES['HUMAN']} Task INCOMPLETE. Human response: {human_response_content[:200]}...")
                 if self.logger:
                     self.logger.log_message("human", self.client_agent.name, human_response_content)
                 human_simulator.messages.append(get_message_from_model_response(human_response))
                 task_message = human_response_content
             human_loop_count += 1
-        if self.verbose:
+        if self.stdout:
             print(f"{LOG_PREFIXES['RUN_NETWORK']} Network execution complete. Final result: {result[:200]}...")
             
         return result
@@ -419,9 +423,9 @@ if __name__ == "__main__":
         
         network = AgentNetwork(agents=[client_agent, test_agent])
         
-        # Create a NetworkRunner with the test network and set verbose to True
-        # runner = NetworkRunner(network, verbose=True, model="gpt-4o")#)claude-3-5-haiku-20241022")
-        runner = NetworkRunner(network, verbose=True, model="claude-3-5-sonnet-20240620")
+        # Create a NetworkRunner with the test network and set stdout to True
+        # runner = NetworkRunner(network, stdout=True, model="gpt-4o")#)claude-3-5-haiku-20241022")
+        runner = NetworkRunner(network, stdout=True, model="claude-3-5-sonnet-20240620")
         # Test the simulate_agent method
         top_level_message = "Hello, this is a test message. Tell the test agent to use the test_tool with whatever arguments you want."
         

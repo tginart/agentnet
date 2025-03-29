@@ -1,9 +1,11 @@
-from agent_network import Agent, Tool
 import asyncio
 from litellm import acompletion
 from dotenv import load_dotenv
 from typing import Optional, List
 from dataclasses import dataclass, field
+
+from .agent_network import Agent, Tool
+
 load_dotenv()
 
 DEFAULT_PROMPT = lambda agent: f"""
@@ -24,6 +26,8 @@ class SamplingParams:
     top_p: float = 1.0
     top_k: int = 50
     max_tokens: int = 2048
+    rate_limit_wait_time: int = 60
+    max_retries: int = 3 # global max retries
 
 
 class AgentSimulator:
@@ -39,6 +43,8 @@ class AgentSimulator:
         ]
         if self.agent.name == "client_agent":
             self.messages[0]["content"] += DEFAULT_CLIENT_AGENT_PROMPT
+        self.max_retries = sampling_params.max_retries
+
 
     async def simulate(self, message: Optional[str] = None, allow_tool_calls: bool = True) -> str:
         """Simplified simulator that just appends the message to history and generates one response."""
@@ -59,8 +65,13 @@ class AgentSimulator:
             )
         except Exception as e:
             print(f"Error simulating agent: {e}")
-            breakpoint()
-            return "Error simulating agent"
+            # if error is a "rate_limit_error" then we should wait and retry
+            if "rate_limit_error" in str(e) and self.max_retries > 0:
+                self.max_retries -= 1
+                await asyncio.sleep(self.sampling_params.rate_limit_wait_time)
+                return await self.simulate(None, allow_tool_calls=allow_tool_calls)
+            else:
+                raise e
 
 
 if __name__ == "__main__":

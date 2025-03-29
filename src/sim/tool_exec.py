@@ -7,13 +7,14 @@ import sys
 from typing import Any, Callable, Dict, List, Optional, Tuple
 from dotenv import load_dotenv
 from dataclasses import dataclass
-from agent_network import Tool
-from universal_api import UniversalAPI, UniversalAPIConfig
+
+from .agent_network import Tool
+from .universal_api import UniversalAPI, UniversalAPIConfig
 
 
 @dataclass
 class ToolFactoryConfig:
-    model: str = "claude-3-5-sonnet-20240620"
+    model: str = "gpt-4o"
     simulate_tools_mode: bool = True
 
 class ToolFactory:
@@ -23,7 +24,7 @@ class ToolFactory:
             config = ToolFactoryConfig()
         self.config = config
         if config.simulate_tools_mode and universal_api is None:
-            universal_api = UniversalAPI()
+            universal_api = UniversalAPI(config=UniversalAPIConfig(model=config.model))
         self.universal_api = universal_api
 
     def register_tool(self, tool: Tool):

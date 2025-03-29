@@ -11,8 +11,6 @@ import json
 from dataclasses import dataclass
 from litellm import acompletion
 
-# Default model to use for API simulation
-DEFAULT_MODEL = "claude-3-5-sonnet-20240620"    
 
 DEFAULT_PROMPT = """
 You are simulating an API call to the "{tool_name}" API.
@@ -33,7 +31,7 @@ API Response:
 
 @dataclass
 class UniversalAPIConfig:
-    model: str = DEFAULT_MODEL
+    model: str = "gpt-4o"
     prompt: str = DEFAULT_PROMPT
     temperature: float = 0.0
     max_tokens: int = 2048

@@ -76,7 +76,7 @@ spec = '''
 import json
 from typing import List
 
-from agent_network import Agent, AgentNetwork, Tool
+from .agent_network import Agent, AgentNetwork, Tool
 
 
 def initialize_network(spec: dict) -> AgentNetwork:
