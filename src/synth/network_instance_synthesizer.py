@@ -11,6 +11,7 @@ import asyncio
 from typing import List, Dict, Any, Tuple
 import random
 from pathlib import Path
+import argparse
 
 from litellm import acompletion
 from dotenv import load_dotenv
@@ -32,15 +33,22 @@ THEMES = [
     "Smart Home Security"
 ]
 
-THEMES = ["Health and Wellness"]
+#THEMES = ["Education and Learning"]
 
 # Default model to use for generating network specs
 DEFAULT_MODEL = "gpt-4o"
 
 # Minimum complexity requirements
 MIN_AGENTS = 10
-MIN_TOOLS = 5
-MIN_LEAF_AGENTS = 2 # Minimum number of agents with no tools/other agents assigned
+MIN_TOOLS = 2
+MIN_LEAF_AGENTS = 2
+REQUIRED_DEPTH = 4
+
+MIN_AGENTS_DIFFICULTY_BOOST = 14
+MIN_TOOLS_DIFFICULTY_BOOST = 2
+MIN_LEAF_AGENTS_DIFFICULTY_BOOST = 4
+REQUIRED_DEPTH_DIFFICULTY_BOOST = 5
+
 
 # Directory with existing network specs
 EXISTING_SPECS_DIR = Path(__file__).parent.parent / "sim/network_specs"
@@ -51,12 +59,14 @@ EXAMPLE_SPECS_TO_USE = [
     'find_an_apartment',
 ]
 
+EXAMPLE_TAXES_SPEC = json.load(open(EXISTING_SPECS_DIR / "file_my_taxes.json"))
+
 # Directory to save generated network specs
 OUTPUT_DIR = Path(__file__).parent / "synth_network_specs"
 
 # Maximum number of attempts to fix JSON or verification issues
-MAX_FIX_ATTEMPTS = 6  # Used by top-level fix_network_spec() to retry JSON/verification fixes
-REQUIRED_DEPTH = 4
+MAX_FIX_ATTEMPTS = 6  # Used by top-level fix_network_spec() to retry JSON/verification fixex
+MAX_FIX_ATTEMPTS_DIFFICULTY_BOOST = 8
 
 # Prompt templates
 SYSTEM_PROMPT = """You are a helpful assistant that generates detailed agent network specifications in JSON format.
@@ -113,7 +123,6 @@ The JSON should have the following structure:
                     "param3": {{"type": "array", "items": {{"type": "string"}}, "description": "Detailed description of parameter"}},
                     ...
                 }},
-                "required": ["param1", "param2"]  # List of required parameters
             }}
         }},
         ...
@@ -143,11 +152,10 @@ REQUIREMENTS_PROMPT = """IMPORTANT REQUIREMENTS:
    - THERE IS A REQUIRED_DEPTH VARIABLE THAT YOU MUST MEET: REQUIRED_DEPTH = {REQUIRED_DEPTH}.
    - AGAIN IT IS EXTREMELY IMPORTANT YOU HAVE AT LEAST ONE DEEP PATH WITH MORE THAN {REQUIRED_DEPTH} AGENTS
 8. Include tools with different parameter types (string, number, boolean, array, object)
-9. Specify required parameters in tool input schemas
+9. DO NOT use "required": true in any properties. This is STRICTLY PROHIBITED. Again, NEVER USED REQUIRED FIELDS in input schemas for tool. That is NOT YET SUPPORTED.
 10. Use descriptive, domain-specific naming for agents, tools, and parameters. The description fields should be sufficient that a human could simulate the agent or tool purely based on the description.
 11. The first agent must ALWAYS BE "client_agent" --> this is ALWAYS the top-level agent that the human interacts with.
 12. Ensure all agents *except* `client_agent` are listed in the `tools` list of at least one other agent (i.e., no orphaned agents).
-
 
 Return only the JSON object, properly formatted.
 """
@@ -216,8 +224,23 @@ Here is a valid network specification:
 {json.dumps(example_spec, indent=2)}
 ```
 
-Please make it more complex and detailed.
+Please make it more complex and DIFFICULT. You should make the task request more intricate and specific.
+Based on the more complex task, you can add new agents and subpaths to the verification!
 
+The verification subpaths should make sense from the perspective of the task, but should be tricky and subtle.
+
+It is also important to increase the depth of the network. You should add some really deep paths. Go hog wild.
+
+You can hide hints in the role of certain agents, such as this find_an_apartment example.
+
+Finally, don't worry so much about adding tools. You can add more agents, including leaf agents, and that will make the network more complex.
+
+
+EXAMPLE:
+```json
+{json.dumps(EXAMPLE_TAXES_SPEC, indent=2)}
+```
+Return only the JSON object, properly formatted.
 """
 
 class NetworkSpecSynthesizer:
@@ -279,7 +302,7 @@ class NetworkSpecSynthesizer:
                     # Add request for next variant, referencing the previous one
                     messages.append({"role": "user", "content": NEXT_VARIANT_TEMPLATE(theme, variant_id, previous_spec)})
                 
-                # Generate the spec
+                # Generate the spec using standard requirements
                 spec, messages = await self._generate_valid_spec(messages, theme, variant_id)
                 
                 if spec is None:
@@ -298,11 +321,18 @@ class NetworkSpecSynthesizer:
         
         return variants
     
-    async def _generate_valid_spec(self, messages: List[Dict[str, str]], theme: str, variant_id: int) -> Tuple[Dict[str, Any], List[Dict[str, str]]]:
+    async def _generate_valid_spec(self, messages: List[Dict[str, str]], theme: str, variant_id: int,
+                                   min_agents: int = MIN_AGENTS, 
+                                   min_tools: int = MIN_TOOLS, 
+                                   min_leaf_agents: int = MIN_LEAF_AGENTS, 
+                                   required_depth: int = REQUIRED_DEPTH) -> Tuple[Dict[str, Any], List[Dict[str, str]]]:
         """Generate a valid network specification, retrying if there are JSON errors or verification failures."""
         
         verification_attempts = 0
-        while verification_attempts < MAX_FIX_ATTEMPTS:
+        # Use MAX_FIX_ATTEMPTS for standard, MAX_FIX_ATTEMPTS_DIFFICULTY_BOOST for harder
+        max_attempts = MAX_FIX_ATTEMPTS_DIFFICULTY_BOOST if theme == "harder" else MAX_FIX_ATTEMPTS
+
+        while verification_attempts < max_attempts:
             try:
                 # Get a specification that at least parses as valid JSON
                 spec_json, updated_messages = await self._generate_valid_json(messages)
@@ -310,8 +340,14 @@ class NetworkSpecSynthesizer:
 
                 # breakpoint()
                 
-                # Check if the specification passes all verification checks
-                verification_result, error_msg = self.verify_network_spec_with_error(spec_json)
+                # Check if the specification passes all verification checks using provided requirements
+                verification_result, error_msg = self.verify_network_spec_with_error(
+                    spec_json, 
+                    min_agents=min_agents, 
+                    min_tools=min_tools, 
+                    min_leaf_agents=min_leaf_agents, 
+                    required_depth=required_depth
+                )
                 
                 if verification_result:
                     # If verification passes, return the spec
@@ -320,7 +356,7 @@ class NetworkSpecSynthesizer:
                 # If verification fails but we have attempts left, try to fix it
                 verification_attempts += 1
                 print(f"  Verification failed for {theme} variant {variant_id}: {error_msg}")
-                print(f"  Attempting to fix (verification attempt {verification_attempts}/{MAX_FIX_ATTEMPTS})")
+                print(f"  Attempting to fix (verification attempt {verification_attempts}/{max_attempts})")
                 
                 # Add the verification error message to the conversation
                 fix_prompt = FIX_VERIFICATION_TEMPLATE(spec_json, error_msg)
@@ -328,9 +364,15 @@ class NetworkSpecSynthesizer:
                 
             except Exception as e:
                 print(f"  Error in generate_valid_spec: {str(e)}")
-                verification_attempts += 1
+                # Also count exceptions as attempts? Decide based on desired behavior.
+                # For now, let's not count exceptions towards verification attempts, only generation/parsing issues.
+                # If generation itself fails repeatedly, _generate_valid_json will raise an error.
+                # We might want to add a separate retry mechanism around the LLM call itself if needed.
+                # Let's increment verification attempts here too to prevent infinite loops on persistent errors.
+                verification_attempts += 1 # Count errors as attempts to avoid infinite loops
         
         # If we've exhausted our verification attempts, return None
+        print(f"  Failed to generate valid spec for {theme} variant {variant_id} after {max_attempts} attempts.")
         return None, messages
     
     async def _generate_valid_json(self, messages: List[Dict[str, str]]) -> Tuple[Dict[str, Any], List[Dict[str, str]]]:
@@ -378,8 +420,26 @@ class NetworkSpecSynthesizer:
                     raise ValueError(f"Failed to fix JSON after {MAX_FIX_ATTEMPTS} attempts: {str(e)}")
                 
     
-    def verify_network_spec_with_error(self, spec: Dict[str, Any]) -> Tuple[bool, str]:
+    def verify_network_spec_with_error(self, spec: Dict[str, Any], 
+                                       min_agents: int = MIN_AGENTS, 
+                                       min_tools: int = MIN_TOOLS, 
+                                       min_leaf_agents: int = MIN_LEAF_AGENTS, 
+                                       required_depth: int = REQUIRED_DEPTH) -> Tuple[bool, str]:
         """Verify network spec and return whether it's valid along with an error message if not."""
+        
+        # Helper function to recursively check for "required": true in a dict
+        def check_required_true(obj):
+            if isinstance(obj, dict):
+                for key, value in obj.items():
+                    if key == "required" and value is True:
+                        return True
+                    if check_required_true(value):
+                        return True
+            elif isinstance(obj, list):
+                for item in obj:
+                    if check_required_true(item):
+                        return True
+            return False
         
         # Check required top-level keys
         required_keys = ["task", "verification", "agents", "tools"]
@@ -414,7 +474,10 @@ class NetworkSpecSynthesizer:
             input_schema = tool["input_schema"]
             if not isinstance(input_schema, dict) or "type" not in input_schema or "properties" not in input_schema:
                 return False, f"Invalid input schema for tool {tool['name']}"
-        
+            
+            # Check for "required": true in the tool and its input schema
+            if check_required_true(tool):
+                return False, f"Tool {tool['name']} contains 'required': true which is not allowed. Use the 'required' array at the schema level instead."
 
         agent_names = {agent["name"] for agent in spec["agents"]}
         tool_names = {tool["name"] for tool in spec["tools"]}
@@ -449,11 +512,11 @@ class NetworkSpecSynthesizer:
                     return False, f"Subpath contains non-existent agent or tool: {node}. Please add this node to the spec."
         
         # Check complexity requirements
-        if len(spec["agents"]) < MIN_AGENTS:
-            return False, f"Not enough agents: {len(spec['agents'])} (minimum {MIN_AGENTS} required)"
+        if len(spec["agents"]) < min_agents:
+            return False, f"Not enough agents: {len(spec['agents'])} (minimum {min_agents} required)"
             
-        if len(spec["tools"]) < MIN_TOOLS:
-            return False, f"Not enough tools: {len(spec['tools'])} (minimum {MIN_TOOLS} required)"
+        if len(spec["tools"]) < min_tools:
+            return False, f"Not enough tools: {len(spec['tools'])} (minimum {min_tools} required)"
             
         # Count leaf agents
         leaf_agent_count = 0
@@ -461,8 +524,8 @@ class NetworkSpecSynthesizer:
             if "tools" not in agent or not agent["tools"]:
                 leaf_agent_count += 1
         
-        if leaf_agent_count < MIN_LEAF_AGENTS:
-            return False, f"Not enough leaf agents: {leaf_agent_count} (minimum {MIN_LEAF_AGENTS} required) -- DO NOT REMOVE AGENTS; INSTEAD JUST ADD NEW LEAF AGENTS WITH NO TOOLS"
+        if leaf_agent_count < min_leaf_agents:
+            return False, f"Not enough leaf agents: {leaf_agent_count} (minimum {min_leaf_agents} required) -- DO NOT REMOVE AGENTS; INSTEAD JUST ADD NEW LEAF AGENTS WITH NO TOOLS"
             
         if len(spec["verification"]["subpaths"]) < 2:
             return False, f"Not enough verification subpaths: {len(spec['verification']['subpaths'])} (minimum 2 required)"
@@ -479,7 +542,7 @@ class NetworkSpecSynthesizer:
         if not agent_hierarchy_exists:
             return False, "No agent hierarchy found (agents calling other agents)"
         
-        # Check for deep paths (at least one path with REQUIRED_DEPTH+ levels of delegation)
+        # Check for deep paths (at least one path with required_depth+ levels of delegation)
         max_found_depth = 0 # Track the maximum depth found
         deepest_path_found = [] # Track the path corresponding to the max depth
         agent_tools_map = {agent["name"]: agent.get("tools", []) for agent in spec["agents"]}
@@ -521,9 +584,9 @@ class NetworkSpecSynthesizer:
                 deepest_path_found = current_path # Store the path associated with the max depth
 
         # Check if the maximum found depth meets the requirement
-        if max_found_depth < REQUIRED_DEPTH:
+        if max_found_depth < required_depth:
             path_str = " -> ".join(deepest_path_found) if deepest_path_found else "N/A"
-            return False, f"Deepest delegation path found has depth {max_found_depth} ({path_str}), but minimum required depth is {REQUIRED_DEPTH}. Ensure at least one path has {REQUIRED_DEPTH}+ levels of agent delegation."
+            return False, f"Deepest delegation path found has depth {max_found_depth} ({path_str}), but minimum required depth is {required_depth}. Ensure at least one path has {required_depth}+ levels of agent delegation."
         
         return True, ""
     
@@ -549,20 +612,125 @@ class NetworkSpecSynthesizer:
         
         return str(filepath)
 
+    async def generate_harder_variants(self, input_spec_path: str, num_variants: int = 3) -> List[Dict[str, Any]]:
+        """Generate harder variants of an existing network specification.
+        
+        Args:
+            input_spec_path: Path to the input specification JSON file
+            num_variants: Number of harder variants to generate (default: 3)
+            
+        Returns:
+            List of generated harder variants
+        """
+        # Load the input specification
+        input_spec = None
+        
+        # First try to load from the specified path
+        try:
+            with open(input_spec_path, "r") as f:
+                input_spec = json.load(f)
+        except (FileNotFoundError, IOError):
+            print(f"File not found at {input_spec_path}, checking in network_specs directory...")
+            
+            # If not found, try to find in the EXISTING_SPECS_DIR
+            try:
+                # Get just the filename from the path
+                spec_filename = Path(input_spec_path).name
+                
+                # If no extension is provided, try adding .json
+                if not spec_filename.endswith('.json'):
+                    spec_filename += '.json'
+                
+                fallback_path = EXISTING_SPECS_DIR / spec_filename
+                with open(fallback_path, "r") as f:
+                    input_spec = json.load(f)
+                print(f"Successfully loaded spec from {fallback_path}")
+            except Exception as e:
+                print(f"Error loading from network_specs directory: {e}")
+        except Exception as e:
+            print(f"Error loading input spec: {e}")
+        
+        if input_spec is None:
+            print(f"Could not load specification from {input_spec_path} or network_specs directory")
+            return []
+
+        # Format the requirements prompt with difficulty boost values
+        harder_requirements = REQUIREMENTS_PROMPT.format(
+            MIN_AGENTS=MIN_AGENTS_DIFFICULTY_BOOST,
+            MIN_TOOLS=MIN_TOOLS_DIFFICULTY_BOOST,
+            MIN_LEAF_AGENTS=MIN_LEAF_AGENTS_DIFFICULTY_BOOST,
+            REQUIRED_DEPTH=REQUIRED_DEPTH_DIFFICULTY_BOOST
+        )
+
+        # Initialize conversation messages
+        messages = [
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": DIFFICULTY_BOOSTING_PROMPT(input_spec) + '\n\n' + harder_requirements}
+        ]
+
+        variants = []
+        previous_spec = input_spec
+
+        for variant_id in range(1, num_variants + 1):
+            try:
+                if variant_id > 1:
+                    # Add request for next variant, referencing the previous one
+                    messages.append({"role": "user", "content": NEXT_VARIANT_TEMPLATE("harder", variant_id, previous_spec)})
+
+                # Generate the spec using difficulty boost requirements
+                spec, messages = await self._generate_valid_spec(
+                    messages, 
+                    "harder", 
+                    variant_id,
+                    min_agents=MIN_AGENTS_DIFFICULTY_BOOST,
+                    min_tools=MIN_TOOLS_DIFFICULTY_BOOST,
+                    min_leaf_agents=MIN_LEAF_AGENTS_DIFFICULTY_BOOST,
+                    required_depth=REQUIRED_DEPTH_DIFFICULTY_BOOST
+                )
+
+                if spec is None:
+                    print(f"  Failed to generate valid harder spec variant {variant_id} after multiple attempts")
+                    continue
+
+                variants.append(spec)
+                previous_spec = spec
+
+                # Save the spec with _harder_variant_N suffix
+                input_path = Path(input_spec_path)
+                harder_filename = f"{input_path.stem}_harder_variant_{variant_id}.json"
+                filepath = OUTPUT_DIR / harder_filename
+
+                # Save to file
+                os.makedirs(OUTPUT_DIR, exist_ok=True)
+                with open(filepath, "w") as f:
+                    json.dump(spec, f, indent=4)
+                print(f"  Saved harder variant {variant_id} to {filepath}")
+
+            except Exception as e:
+                print(f"  Error generating harder network spec variant {variant_id}: {e}")
+
+        return variants
+
 async def main():
     """Generate network specifications for all themes and variants."""
     
-    synthesizer = NetworkSpecSynthesizer()
+    parser = argparse.ArgumentParser(description='Generate network specifications')
+    parser.add_argument('--input-spec', type=str, help='Path to input spec to generate harder variants from')
+    parser.add_argument('--num-variants', type=int, default=3, help='Number of harder variants to generate (default: 3)')
+    args = parser.parse_args()
     
+    synthesizer = NetworkSpecSynthesizer()
     print(f"Loaded {len(synthesizer.example_specs)} example specs")
     
-    for theme in THEMES:
-        print(f"Generating network specs for theme: {theme}")
-        
-        # Generate all variants for this theme in the same conversation thread
-        variants = await synthesizer.generate_network_specs_for_theme(theme)
-        
-        print(f"  Generated {len(variants)} variants for {theme}")
+    if args.input_spec:
+        print(f"Generating harder variants from spec: {args.input_spec}")
+        variants = await synthesizer.generate_harder_variants(args.input_spec, args.num_variants)
+        print(f"  Generated {len(variants)} harder variants")
+    else:
+        for theme in THEMES:
+            print(f"Generating network specs for theme: {theme}")
+            variants = await synthesizer.generate_network_specs_for_theme(theme)
+            print(f"  Generated {len(variants)} variants for {theme}")
     
     print("Done!")
 

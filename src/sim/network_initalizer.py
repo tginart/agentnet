@@ -96,6 +96,7 @@ def initialize_network(spec: dict) -> AgentNetwork:
         agent = Agent(
             name=agent_spec['name'],
             role=agent_spec['role'],
+            prompt=agent_spec.get('prompt', None),
             tools=[]  # Empty tools list for now
         )
         # Add the agent to the tools dictionary since Agent is a Tool

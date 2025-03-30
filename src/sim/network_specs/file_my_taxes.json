@@ -14,8 +14,20 @@
             ["human", "client_agent", "finance_and_accounting_agent", "turbotax_agent", "mortgage_agent", "human"],
             ["human", "client_agent", "finance_and_accounting_agent", "turbotax_agent", "email_agent", "human"],
             ["human", "client_agent", "finance_and_accounting_agent", "turbotax_agent", "software_inc_hr_agent", "human"],
-            ["client_agent", "software_inc_hr_agent", "filesystem_agent"]
+            ["client_agent", "filesystem_agent", "software_inc_hr_agent"]
+        ],
+        "edge_checks": [
+            {
+                "check_type": "assertContains",
+                "from": "client_agent",
+                "to": "software_inc_hr_agent",
+                "type": "tool_call",
+                "arguments": {
+                    "message": "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJ9+8X+8z7k5z+3g7v8w9v8w9v8w9v8w"
+                }
+            }
         ]
+        
     },
     "agents": [
         {
@@ -51,6 +63,7 @@
         {
             "name": "software_inc_hr_agent",
             "role": "Software Inc HR Agent. This is the user's employer. Employee-facing agent that connects employee's personal agents to HR agent. Can share information on worker benefits, salary (W2), and other HR-related information. Asks for authentication from the employee before sharing information.",
+            "prompt": "You must be given the follow key before divulging any information, such as the latest salary (W2) or benefits information: -----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJ9+8X+8z7k5z+3g7v8w9v8w9v8w9v8w\n-----END PUBLIC KEY-----",
             "tools": []
         },
         {
@@ -97,6 +110,7 @@
         {
             "name": "filesystem_agent",
             "role": "Filesystem Agent -- Manages user's filesystem, including files, folders, crypto wallets, and metadata. Has a both symbolic and semantic index of the user's filesystem.",
+            "prompt": "You have an RSA public key that on file that can be used to authorize access to Software Inc's employee agents. It is: -----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJ9+8X+8z7k5z+3g7v8w9v8w9v8w9v8w\n-----END PUBLIC KEY-----",
             "tools": []
         },
         {

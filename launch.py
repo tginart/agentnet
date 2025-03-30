@@ -63,44 +63,74 @@ async def run_job(model: str, network_spec: str, logging_run: bool) -> Tuple[str
 def check_if_completed(model: str, network: str, log_base_dir: str = "logs") -> bool:
     """Checks if a completed log directory exists for the given model and network.
 
-    Scans the log_base_dir for subdirectories matching the pattern
-    YYYYMMDD_HHMMSS_NETWORK_MODEL and checks for 'network.json' inside.
+    Scans the log_base_dir for subdirectories and examines metadata files within each:
+    - config.yaml for the model name
+    - spec_path.txt for the network spec name
+    - network.json to verify completion
     """
     if not os.path.isdir(log_base_dir):
-        # print(f"[DEBUG] Log directory '{log_base_dir}' does not exist. Assuming no jobs completed.")
+        print(f"[LAUNCHER] Log directory '{log_base_dir}' not found.")
         return False # Log directory doesn't exist, so no jobs are completed
-
+    
     try:
         for entry in os.listdir(log_base_dir):
             full_path = os.path.join(log_base_dir, entry)
-            if os.path.isdir(full_path):
-                # Parse the directory name: YYYYMMDD_HHMMSS_NETWORK_MODEL
-                parts = entry.split('_')
-                if len(parts) >= 3:
-                    # Assume timestamp is first 2 parts (YYYYMMDD, HHMMSS)
-                    # Assume model is the last part
-                    # Network is everything in between
-                    dir_model = parts[-1]
-                    # Handle cases where network name might have underscores
-                    dir_network = '_'.join(parts[2:-1])
+            
+            if not os.path.isdir(full_path):
+                continue  # Skip non-directories
+                
+            # First check if this looks like a completed run
+            network_json = os.path.join(full_path, "network.json")
+            if not os.path.isfile(network_json):
+                continue  # Skip directories without network.json (incomplete runs)
+            
+            # Check config.yaml for model name
+            config_file = os.path.join(full_path, "config.yaml")
+            if not os.path.isfile(config_file):
+                continue  # Skip if no config.yaml
+                
+            # Check for spec_path.txt for network name
+            spec_path_file = os.path.join(full_path, "spec_path.txt")
+            if not os.path.isfile(spec_path_file):
+                continue  # Skip if no spec_path.txt
+            
+            # Now read both files to check for matches
+            try:
+                # Check model name from config.yaml
+                with open(config_file, 'r') as f:
+                    config_data = yaml.safe_load(f)
+                    if not (config_data and isinstance(config_data, dict) and 'model' in config_data):
+                        continue  # Skip if config.yaml doesn't have model
+                    
+                    config_model = config_data['model']
+                    if config_model != model:
+                        continue  # Skip if model doesn't match
+                
+                # Check network name from spec_path.txt
+                with open(spec_path_file, 'r') as f:
+                    spec_path = f.read().strip()
+                    # Extract the network name from the spec path
+                    # Assuming spec_path.txt contains a path ending with the network name
+                    spec_network = os.path.basename(spec_path).replace('.json', '')
+                    if spec_network != network:
+                        continue  # Skip if network doesn't match
+                
+                # If we got here, both model and network match!
+                print(f"[LAUNCHER] Found completed run for {model}/{network} in {full_path}")
+                return True
+                
+            except yaml.YAMLError as e:
+                print(f"[LAUNCHER] Warning: Error parsing YAML file '{config_file}': {e}")
+                continue
+            except Exception as e:
+                print(f"[LAUNCHER] Warning: Error processing files in '{full_path}': {e}")
+                continue
 
-                    # print(f"[DEBUG] Checking dir: {entry} -> Extracted Network='{dir_network}', Model='{dir_model}'")
-
-                    if dir_network == network and dir_model == model:
-                        # Found a potential match, check for network.json
-                        network_file = os.path.join(full_path, "network.json")
-                        if os.path.isfile(network_file):
-                            # print(f"[DEBUG] Found completed job: {entry} (network.json exists)")
-                            return True # Found a completed job for this combo
     except OSError as e:
         print(f"[LAUNCHER] Warning: Error scanning log directory '{log_base_dir}': {e}")
-        # Decide how to handle: assume not completed or raise error?
-        # For relaunch, safer to assume not completed if we can't check.
         return False
 
-    # If loop completes without finding a match
-    # print(f"[DEBUG] No completed job found for {model}/{network} in {log_base_dir}")
-    return False
+    return False # No matching completed job found
 
 async def manager(jobs: List[Tuple[str, str]], global_limit: int, per_model_limits: Dict[str, int], logging_run: bool):
     """Manages the concurrent execution of jobs respecting limits."""
@@ -305,6 +335,7 @@ def main():
     
     # Clean up lists
     models_list = [m.strip() for m in models_list if m.strip()]
+    #breakpoint()
     networks_list = [n.strip() for n in networks_list if n.strip()]
 
     # Generate all potential job combinations

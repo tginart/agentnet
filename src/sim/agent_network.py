@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 import json
 
 class Tool:
@@ -22,7 +22,7 @@ class Tool:
     
 
 class Agent(Tool):
-    def __init__(self, name: str, role: str, tools: List[Tool],
+    def __init__(self, name: str, role: str, tools: List[Tool], prompt: Optional[str] = None,
                 message_description: str = "The message to send to the agent"):
         # define agent input schema --> send_chat_message
         agent_input_schema = {
@@ -35,6 +35,7 @@ class Agent(Tool):
         }
         super().__init__(name, role, agent_input_schema)
         self.tools = tools
+        self.prompt = prompt
 
     def __repr__(self):
         # add tools to super's repr

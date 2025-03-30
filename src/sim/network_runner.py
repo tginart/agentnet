@@ -2,7 +2,7 @@ from litellm import acompletion
 import json
 import asyncio
 from typing import Dict, List, Any, Optional, Callable, Union, Tuple
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from .network_initalizer import initialize_network
 from .agent_simulator import AgentSimulator, SamplingParams
@@ -43,15 +43,16 @@ The runconfig contains hyperparameters for the simulation
 class RunConfig:
     max_tool_loop: int = 8
     max_human_loop: int = 4
-    max_tokens: int = 2048
-    temperature: float = 0.0
-    top_p: float = 1.0
+    max_total_rounds: int = 500
+    sampling_params: SamplingParams = field(default_factory=SamplingParams)
     stdout: bool = False
     model: str = ""
     universal_simulator_model: str = "gpt-4o"
     summary_message: str = "This is a system message. You have exceeded the maximum number of tool calling steps. Summarize your work thus far and report back to your invoker."
     human_role_message: str = "The human user. This is the task message you sent to your top-level client agent: {task_message}\n\nPlease simulate the human user's response to the client agent's response. You are lazy and refuse to do any work but you are fairly flexible in terms of accepting the client agent's ideas.\n\nIf you deem the task complete, please respond with 'TASK COMPLETE'. It is very important that you respond with 'TASK COMPLETE' if you deem the task complete. If you do not respond with 'TASK COMPLETE', the client agent will continue to work on the task."
-    
+    default_agent_prompt: str = "You are a helpful agent in a multi-agent system.\n\nYour role is: {agent.name}.\n\nRole description: {agent.description}."
+    client_agent_prompt: str = "\n\nAs the top-level client agent, you are responsible for coordinating the other agents to complete the task. You know the user is lazy and refuses to do any work. You should not need to bother the user with locating information since you have access to everything you need through your sub-agents."
+
 
 '''
 Helper functions
@@ -119,8 +120,11 @@ class NetworkRunner:
         self.client_agent = self.get_client_agent()
         self.stdout = run_config.stdout
         self.model = run_config.model
+        self.round_count = 0
         self.summary_message = run_config.summary_message
         self.human_role_message = run_config.human_role_message
+        self.default_agent_prompt = run_config.default_agent_prompt
+        self.client_agent_prompt = run_config.client_agent_prompt
         tf_config = ToolFactoryConfig(model=run_config.universal_simulator_model)
         self.tool_factory = ToolFactory(config=tf_config)
         self.init_simulators()
@@ -132,7 +136,13 @@ class NetworkRunner:
     def init_simulators(self):
         """Initialize the simulators for the network."""
         for agent in self.network.agents:
-            self.simulators[agent.name] = AgentSimulator(agent, model=self.model)
+            prompt = self.default_agent_prompt.format(agent=agent) if agent.name != "client_agent" else self.client_agent_prompt
+            self.simulators[agent.name] = AgentSimulator(
+                agent,
+                model=self.model,
+                default_prompt=prompt,
+                sampling_params=SamplingParams(**self.run_config.sampling_params)
+            )
 
     def get_client_agent(self) -> Agent:
         for agent in self.network.agents:
@@ -159,10 +169,17 @@ class NetworkRunner:
         """Get the description of a tool."""
         for tool in self.network.get_all_tools():
             if tool.name == tool_name:
+                # if tool is of type Agent, then return the agent description
+                if isinstance(tool, Agent):
+                    return self.get_agent_description(tool.name)
                 return tool.description
         return None
     
-
+    def get_agent_description(self, agent_name: str) -> Optional[str]:
+        """Get the description of an agent."""
+        agent = self.get_agent(agent_name)
+        return agent.description + '\n\n' + agent.prompt if agent.prompt else ""
+    
     def get_simulator(self, network_name: str, agent_name: str) -> Optional[AgentSimulator]:
         """Get a simulator for a specific agent in a network.
         
@@ -177,13 +194,13 @@ class NetworkRunner:
             return None
         return self.simulators[network_name].get(agent_name)
     
-    def get_human_simulator(self, task_message: str) -> AgentSimulator:
+    def create_human_simulator(self, task_message: str) -> AgentSimulator:
         human_agent = Agent(
             name="human",
-            role=f"The human user. This is the task message you sent to your top-level client agent: {task_message}\n\nPlease simulate the human user's response to the client agent's response.\n\nIf you deem the task complete, please respond with 'TASK COMPLETE'.",
+            role=self.human_role_message.format(task_message=task_message),
             tools=[]
         )
-        return AgentSimulator(human_agent, model=self.model, sampling_params=SamplingParams(temperature=0.0))
+        return AgentSimulator(human_agent, model=self.model, default_prompt="")
 
     async def simulate_agent(self, message: str, agent_name: str, is_initial_call: bool = False) -> str:
         """Simulate an agent by sending it a message and getting a response.
@@ -198,6 +215,9 @@ class NetworkRunner:
         """
         # Define sender at the beginning to avoid UnboundLocalError
         sender = "human" if self.current_sender == "human" else self.current_sender
+        self.round_count += 1
+        if self.round_count > self.run_config.max_total_rounds:
+            return "System Message: Interrupt! TASK COMPLETE due to max rounds exceeded!"
 
         
         # Log the message being sent to the agent (unless this is the initial call from run_network)
@@ -315,8 +335,7 @@ class NetworkRunner:
         # if so, then we can use tool execution factory
         # else we need to simulate the agent
         is_agent = self.get_agent(tool_call["name"])
-        is_leaf = is_agent and not is_agent.is_leaf()
-        if is_agent and is_leaf:
+        if is_agent and not is_agent.is_leaf():
             msg = tool_call["arguments"]["message"]
             # Pass is_initial_call=False to ensure proper logging
             result = await self.simulate_agent(msg, tool_call["name"], is_initial_call=False)
@@ -339,8 +358,8 @@ class NetworkRunner:
             print(f"{LOG_PREFIXES['RUN_NETWORK']} Starting network with message: {task_message}")
             
         self.current_sender = "human"
-        human_simulator = self.get_human_simulator(task_message)
-        max_human_loop = 3
+        human_simulator = self.create_human_simulator(task_message)
+        max_human_loop = self.run_config.max_human_loop
         human_loop_count = 0
 
         while human_loop_count < max_human_loop:

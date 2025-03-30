@@ -8,16 +8,6 @@ from .agent_network import Agent, Tool
 
 load_dotenv()
 
-DEFAULT_PROMPT = lambda agent: f"""
-You are a helpful agent in a multi-agent system.
-Your role is: {agent.name}.
-Role description: {agent.description}.
-
-You have the following tools:
-{agent.tools}
-"""
-
-DEFAULT_CLIENT_AGENT_PROMPT = "\n\nAs the top-level client agent, you are responsible for coordinating the other agents to complete the task. You know the user is lazy and refuses to do any work. You should not need to bother the user with locating information since you have access to everything you need through your sub-agents."
 
 @dataclass
 class SamplingParams:
@@ -31,10 +21,15 @@ class SamplingParams:
 
 class AgentSimulator:
     def __init__(self, agent: Agent,
-                 sampling_params: SamplingParams = SamplingParams(),
-                model: Optional[str] = None):
+            default_prompt: str,
+            sampling_params: SamplingParams = SamplingParams(),
+            model: Optional[str] = None):
         self.agent = agent
-        self.prompt = DEFAULT_PROMPT(agent)
+        self.prompt = default_prompt
+        if agent.description:
+            self.prompt += "\n\n" + agent.description
+        if agent.prompt:
+            self.prompt += "\n\n" + agent.prompt
         if model:
             self.model = model
         else:
@@ -45,8 +40,6 @@ class AgentSimulator:
         self.messages = [
             {"role": "system", "content": self.prompt},
         ]
-        if self.agent.name == "client_agent":
-            self.messages[0]["content"] += DEFAULT_CLIENT_AGENT_PROMPT
         self.max_retries = sampling_params.max_retries
 
 
@@ -67,6 +60,7 @@ class AgentSimulator:
                 max_tokens=self.sampling_params.max_tokens,
             )
         except Exception as e:
+            # breakpoint()
             print(f"Error simulating agent: {e}")
             # if error is a "rate_limit_error" then we should wait and retry
             # sometimes anthropic also returns an "overloaded_error"

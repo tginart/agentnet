@@ -464,7 +464,7 @@ def verify_edge_check(log_data, check):
         return False, f"No exact match found for the specified criteria"
 
     # For contains check
-    elif check_type == 'contains':
+    elif check_type == 'assertContains':
         expected_content = check.get('content') # Get expected content once
         for log in edge_logs:
             if msg_type == 'tool_call' and 'arguments' in log:

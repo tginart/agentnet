@@ -481,7 +481,7 @@ def interactive_run_browser(log_dir: str = "logs", specs_dir: str = None, only_c
     show_all_runs_mode = False # Start in 'most recent only' mode
 
     # --- Helper function to get and filter runs --- 
-    def _get_filtered_runs(current_log_dir: str, show_all: bool, model_filter: str = None, task_filter: str = None) -> List[Dict]:
+    def _get_filtered_runs(current_log_dir: str, show_all: bool, model_filter: str = None, spec_filter: str = None) -> List[Dict]:
         """Fetches and filters runs based on the mode and optional filters."""
         print("\nFetching run list...")
         all_runs_before_filtering = list_runs(current_log_dir, only_complete=True) # Fetch all first
@@ -492,10 +492,10 @@ def interactive_run_browser(log_dir: str = "logs", specs_dir: str = None, only_c
             filtered_runs = [run for run in filtered_runs if run.get('model') == model_filter]
             print(f"Applied model filter: {model_filter} ({len(filtered_runs)} runs)")
         
-        # Apply task filter if specified (now uses exact match)
-        if task_filter:
-            filtered_runs = [run for run in filtered_runs if run.get('task') == task_filter]
-            print(f"Applied task filter: {task_filter} ({len(filtered_runs)} runs)")
+        # Apply spec filter if specified (uses exact match on spec_name)
+        if spec_filter:
+            filtered_runs = [run for run in filtered_runs if run.get('spec_name') == spec_filter]
+            print(f"Applied spec filter: {spec_filter} ({len(filtered_runs)} runs)")
         
         if not show_all and filtered_runs:
             print("Filtering for most recent run per model-spec pair...")
@@ -524,9 +524,9 @@ def interactive_run_browser(log_dir: str = "logs", specs_dir: str = None, only_c
 
     selected_run = None
     page = 0
-    page_size = 10
+    page_size = 25
     current_model_filter = None
-    current_task_filter = None
+    current_spec_filter = None
     
     # --- Batch Operations Helper ---
     # (Moved from network_analysis.py)
@@ -633,7 +633,7 @@ def interactive_run_browser(log_dir: str = "logs", specs_dir: str = None, only_c
                      continue
 
                 # --- Display Table Code (copied and adapted from main loop) ---
-                headers = ["#", "Date", "Spec", "Model", "Task", "Nodes", "Edges", "Duration", "Status"]
+                headers = ["#", "Date", "Spec", "Model", "Task", "Nodes", "Edges", "Duration", "Completion %"]
                 table_data = []
                 for i, run_idx in enumerate(filtered_runs_indices): # Iterate through indices of selection
                     run = runs[run_idx] # Get run data using index
@@ -661,17 +661,29 @@ def interactive_run_browser(log_dir: str = "logs", specs_dir: str = None, only_c
                             if len(parts) > 3: model_short = "-".join(parts[:-1]) + "-..."
                         else: model_short = model[:12] + "..."
 
-                    network_file = os.path.join(run["path"], "network.json")
-                    status = "✅" if os.path.exists(network_file) else "❌"
+                    # --- Calculate Completion Rate --- 
+                    completion_rate_str = "N/A"
+                    if specs_dir: # Need spec dir to evaluate
+                        try:
+                            eval_result = compute_eval(run['name'], log_dir, specs_dir)
+                            if eval_result and 'completion_rate' in eval_result:
+                                rate = eval_result['completion_rate']
+                                completion_rate_str = f"{rate*100:.1f}%"
+                        except FileNotFoundError: # Handle missing spec or log files gracefully
+                            pass # Keep N/A
+                        except Exception as e:
+                            # print(f"Warning: Could not compute eval for {run['name']}: {e}") # Optional warning
+                            pass # Keep N/A
+                    # --- End Calculation ---
 
                     # Ensure final values are strings before formatting (extra safety)
                     spec_name_final = str(spec_name) # Use full spec name
                     model_short_final = str(model_short) if model_short is not None else "ERR"
 
                     table_data.append([
-                        f"{i + 1:2d}", f"{date_str:16}", f"{spec_name_final:20}", f"{model_short_final:12}", # Increased spec width
-                        f"{task_short:22}", f"{str(run.get('num_nodes', 'N/A')):5}", f"{str(run.get('num_edges', 'N/A')):5}", # Decreased task width
-                        f"{duration_str:6}", f"{status:4}"
+                        f"{i + 1:2d}", f"{date_str:16}", f"{spec_name_final:20}", f"{model_short_final:12}", 
+                        f"{task_short:22}", f"{str(run.get('num_nodes', 'N/A')):5}", f"{str(run.get('num_edges', 'N/A')):5}", 
+                        f"{duration_str:6}", f"{completion_rate_str:>12}" # Use completion rate string, right aligned
                     ])
                 print('\n')
                 print(tabulate(table_data, headers=headers, tablefmt="simple",
@@ -810,12 +822,12 @@ def interactive_run_browser(log_dir: str = "logs", specs_dir: str = None, only_c
                 print(f"\nShowing {filter_desc} - {len(runs)} runs found")
                 
                 # Display active filters if any
-                if current_model_filter or current_task_filter:
+                if current_model_filter or current_spec_filter:
                     print("\nActive filters:")
                     if current_model_filter:
                         print(f"  • Model = '{current_model_filter}'")
-                    if current_task_filter:
-                        print(f"  • Task = '{current_task_filter}'")
+                    if current_spec_filter:
+                        print(f"  • Spec = '{current_spec_filter}'")
 
                 total_pages = (len(runs) + page_size - 1) // page_size
                 page = max(0, min(page, total_pages - 1)) # Ensure page is valid
@@ -823,7 +835,7 @@ def interactive_run_browser(log_dir: str = "logs", specs_dir: str = None, only_c
                 end_idx = min(start_idx + page_size, len(runs))
 
                 # --- Display Table Code (Copied and adapted) ---
-                headers = ["#", "Date", "Spec", "Model", "Task", "Nodes", "Edges", "Duration", "Status"]
+                headers = ["#", "Date", "Spec", "Model", "Task", "Nodes", "Edges", "Duration", "Completion %"]
                 table_data = []
                 for i in range(start_idx, end_idx):
                      run = runs[i]
@@ -839,8 +851,7 @@ def interactive_run_browser(log_dir: str = "logs", specs_dir: str = None, only_c
 
                      # Ensure spec_name is a string, default to "Unknown"
                      spec_name = str(run.get("spec_name")) if run.get("spec_name") is not None else "Unknown"
-                     # Remove spec name truncation: spec_short = (spec_name[:12] + "...") if len(spec_name) > 15 else spec_name
-
+                     
                      # Ensure model is a string, default to "N/A"
                      model = str(run.get("model")) if run.get("model") is not None else "N/A"
                      model_short = model # Start with guaranteed string
@@ -851,17 +862,29 @@ def interactive_run_browser(log_dir: str = "logs", specs_dir: str = None, only_c
                              if len(parts) > 3: model_short = "-".join(parts[:-1]) + "-..."
                          else: model_short = model[:12] + "..."
 
-                     network_file = os.path.join(run["path"], "network.json")
-                     status = "✅" if os.path.exists(network_file) else "❌"
+                     # --- Calculate Completion Rate --- 
+                     completion_rate_str = "N/A"
+                     if specs_dir: # Need spec dir to evaluate
+                         try:
+                             eval_result = compute_eval(run['name'], log_dir, specs_dir)
+                             if eval_result and 'completion_rate' in eval_result:
+                                 rate = eval_result['completion_rate']
+                                 completion_rate_str = f"{rate*100:.1f}%"
+                         except FileNotFoundError: # Handle missing spec or log files gracefully
+                             pass # Keep N/A
+                         except Exception as e:
+                             # print(f"Warning: Could not compute eval for {run['name']}: {e}") # Optional warning
+                             pass # Keep N/A
+                     # --- End Calculation ---
 
                      # Ensure final values are strings before formatting (extra safety)
                      spec_name_final = str(spec_name) # Use full spec name
                      model_short_final = str(model_short) if model_short is not None else "ERR"
 
                      table_data.append([
-                         f"{i + 1:2d}", f"{date_str:16}", f"{spec_name_final:20}", f"{model_short_final:12}", # Increased spec width
-                         f"{task_short:22}", f"{str(run.get('num_nodes', 'N/A')):5}", f"{str(run.get('num_edges', 'N/A')):5}", # Decreased task width
-                         f"{duration_str:6}", f"{status:4}"
+                         f"{i + 1:2d}", f"{date_str:16}", f"{spec_name_final:20}", f"{model_short_final:12}", 
+                         f"{task_short:22}", f"{str(run.get('num_nodes', 'N/A')):5}", f"{str(run.get('num_edges', 'N/A')):5}", 
+                         f"{duration_str:6}", f"{completion_rate_str:>12}" # Use completion rate string, right aligned
                      ])
                 print('\n')
                 print(tabulate(table_data, headers=headers, tablefmt="simple",
@@ -882,7 +905,7 @@ def interactive_run_browser(log_dir: str = "logs", specs_dir: str = None, only_c
                 # Add toggle option
                 print("  f - Toggle view: " + ("Show most recent only" if show_all_runs_mode else "Show all runs"))
                 print("  m - Filter by model")
-                print("  t - Filter by task")
+                print("  t - Filter by spec")
                 print("  c - Clear all filters")
                 print("  b - Batch operations")
                 print("  r - Refresh run list")
@@ -900,13 +923,13 @@ def interactive_run_browser(log_dir: str = "logs", specs_dir: str = None, only_c
                 batch_operations() # Enter the batch submenu
             elif choice == 'r':
                  # Refresh using the helper function and current mode
-                 runs = _get_filtered_runs(log_dir, show_all_runs_mode, current_model_filter, current_task_filter)
+                 runs = _get_filtered_runs(log_dir, show_all_runs_mode, current_model_filter, current_spec_filter)
                  page = 0
                  selected_run = None
             elif choice == 'f': # Toggle display mode
                  show_all_runs_mode = not show_all_runs_mode
                  print(f"\nSwitching view to show {'all complete runs' if show_all_runs_mode else 'most recent run per model-spec pair'}...")
-                 runs = _get_filtered_runs(log_dir, show_all_runs_mode, current_model_filter, current_task_filter)
+                 runs = _get_filtered_runs(log_dir, show_all_runs_mode, current_model_filter, current_spec_filter)
                  page = 0
                  selected_run = None
                  input("Press Enter...") # Pause to show the message
@@ -933,43 +956,43 @@ def interactive_run_browser(log_dir: str = "logs", specs_dir: str = None, only_c
                     print("\nInvalid model selection.")
                 
                 # Refresh with new filter
-                runs = _get_filtered_runs(log_dir, show_all_runs_mode, current_model_filter, current_task_filter)
+                runs = _get_filtered_runs(log_dir, show_all_runs_mode, current_model_filter, current_spec_filter)
                 page = 0
                 input("Press Enter...")
-            elif choice == 't': # Filter by task
-                # Get unique tasks from current runs list
-                # Use original list_runs result for task options, but filter the currently displayed 'runs'
-                all_tasks = sorted(list(set(run.get("task", "Unknown") for run in _get_filtered_runs(log_dir, show_all_runs_mode, current_model_filter, None) if run.get("task")))) # Get tasks based on current model filter
+            elif choice == 't': # Filter by spec
+                # Get unique specs from current runs list
+                # Use original list_runs result for spec options, but filter the currently displayed 'runs'
+                all_specs = sorted(list(set(run.get("spec_name", "Unknown") for run in _get_filtered_runs(log_dir, show_all_runs_mode, current_model_filter, None) if run.get("spec_name")))) # Get specs based on current model filter
                 
-                if not all_tasks:
-                    print("\nNo tasks found in the current run selection to filter by.")
+                if not all_specs:
+                    print("\nNo specs found in the current run selection to filter by.")
                     input("Press Enter...")
                     continue
                     
-                print("\nSelect task to filter by (or enter 'clear' to clear task filter):")
-                for i, task in enumerate(all_tasks):
-                    # Truncate long tasks for display in the list
-                    display_task = (task[:60] + "...") if len(task) > 63 else task
-                    print(f"  {i+1}. {display_task}")
-                task_choice = input("Enter task number: ").strip()
+                print("\nSelect spec to filter by (or enter 'clear' to clear spec filter):")
+                for i, spec in enumerate(all_specs):
+                    # Truncate long specs for display in the list
+                    display_spec = (spec[:60] + "...") if len(spec) > 63 else spec
+                    print(f"  {i+1}. {display_spec}")
+                spec_choice = input("Enter spec number: ").strip()
                 
-                if task_choice.lower() == 'clear':
-                    current_task_filter = None
-                    print("\nCleared task filter.")
-                elif task_choice.isdigit() and 0 < int(task_choice) <= len(all_tasks):
-                    current_task_filter = all_tasks[int(task_choice)-1]
-                    print(f"\nFiltering by task: {current_task_filter}")
+                if spec_choice.lower() == 'clear':
+                    current_spec_filter = None
+                    print("\nCleared spec filter.")
+                elif spec_choice.isdigit() and 0 < int(spec_choice) <= len(all_specs):
+                    current_spec_filter = all_specs[int(spec_choice)-1]
+                    print(f"\nFiltering by spec: {current_spec_filter}")
                 else:
-                    print("\nInvalid task selection.")
+                    print("\nInvalid spec selection.")
                 
                 # Refresh with new filter
-                runs = _get_filtered_runs(log_dir, show_all_runs_mode, current_model_filter, current_task_filter)
+                runs = _get_filtered_runs(log_dir, show_all_runs_mode, current_model_filter, current_spec_filter)
                 page = 0
                 input("Press Enter...")
             elif choice == 'c': # Clear all filters
-                if current_model_filter or current_task_filter:
+                if current_model_filter or current_spec_filter:
                     current_model_filter = None
-                    current_task_filter = None
+                    current_spec_filter = None
                     print("\nCleared all filters.")
                     runs = _get_filtered_runs(log_dir, show_all_runs_mode, None, None)
                     page = 0
