@@ -592,20 +592,34 @@ def create_sequence_log_table(sequence_log_with_indices):
 
 def create_subpath_list(spec_data):
     """Create a list of subpaths from the spec data"""
+    items = [] # Initialize items list
+
+    # Add the "All subpaths" option first
+    all_item_id = {'type': 'subpath-item', 'index': 'all'} # Special index for 'all'
+    items.append(html.Li(
+        "All subpaths", 
+        id=all_item_id, 
+        className="subpath-item", 
+        n_clicks=0
+    ))
+
+    # Now add the individual subpaths
     if not spec_data or 'verification' not in spec_data or 'subpaths' not in spec_data['verification']:
-        return html.Div("No subpaths found in spec data")
-    
-    subpaths = spec_data['verification']['subpaths']
-    items = []
-    
-    for i, subpath in enumerate(subpaths):
-        # Use pattern-matching ID for clientside callback input
-        item_id = {'type': 'subpath-item', 'index': i}
-        items.append(html.Li([
-            html.Span(f"Subpath {i+1}: "),
-            html.Span(" → ".join(subpath))
-        # Use the dictionary ID, add className for styling/selection
-        ], id=item_id, className="subpath-item", n_clicks=0)) 
+        # Still return the 'All' item even if no specific paths exist
+        if not items:
+             return html.Div("No subpaths found in spec data")
+        # else fall through to return the list containing just 'All'
+        pass 
+    else:
+        subpaths = spec_data['verification']['subpaths']
+        for i, subpath in enumerate(subpaths):
+            # Use pattern-matching ID for clientside callback input
+            item_id = {'type': 'subpath-item', 'index': i}
+            items.append(html.Li([
+                html.Span(f"Subpath {i+1}: "),
+                html.Span(" → ".join(subpath))
+            # Use the dictionary ID, add className for styling/selection
+            ], id=item_id, className="subpath-item", n_clicks=0)) 
     
     return html.Ul(items, className="list-group")
 
@@ -994,13 +1008,21 @@ def create_app(log_dir="logs", initial_run=None):
         
         highlight_nodes_list = []
         try:
-            # Get the actual node list for the selected subpath index
             if spec_data and 'verification' in spec_data and 'subpaths' in spec_data['verification']:
                 subpaths = spec_data['verification']['subpaths']
-                if 0 <= subpath_index < len(subpaths):
+                if subpath_index == 'all':
+                    # Calculate the union of all nodes in all subpaths
+                    all_subpath_nodes = set()
+                    for path in subpaths:
+                        all_subpath_nodes.update(path)
+                    highlight_nodes_list = list(all_subpath_nodes)
+                    if not highlight_nodes_list:
+                        print("Warning: 'All subpaths' selected, but no nodes found in any subpath.")
+                elif isinstance(subpath_index, int) and 0 <= subpath_index < len(subpaths):
+                    # Get the specific subpath node list
                     highlight_nodes_list = subpaths[subpath_index]
                 else:
-                    print(f"Warning: Selected subpath index {subpath_index} out of bounds.")
+                    print(f"Warning: Selected subpath index '{subpath_index}' is invalid.")
             else:
                 print("Warning: Could not find subpaths in spec_data.")
         except Exception as e:
