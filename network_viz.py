@@ -696,7 +696,7 @@ def create_app(log_dir="logs", initial_run=None):
                         dbc.CardHeader("Verification Subpaths"),
                         dbc.CardBody([
                             html.Div(id="subpath-list", children=subpath_list)
-                        ]),
+                        ], id="subpath-card-body"),
                         dbc.CardFooter([
                             dbc.Button("Highlight Selected Subpath", id="highlight-subpath-btn", color="primary", className="mr-2"),
                             dbc.Button("Reset View", id="reset-view-btn", color="secondary")
@@ -1070,7 +1070,7 @@ def create_app(log_dir="logs", initial_run=None):
         # Return the default figure and None to clear the selected subpath store
         return fig, None
     
-    # Add custom CSS including selection style
+    # Add custom CSS including selection style AND subpath scrolling
     app.index_string = """
     <!DOCTYPE html>
     <html>
@@ -1114,6 +1114,11 @@ def create_app(log_dir="logs", initial_run=None):
                     text-decoration: underline;
                     color: #0d6efd; /* Bootstrap primary blue */
                     background-color: #e7f1ff; /* Light blue background */
+                }
+                /* Style for the subpath card body */
+                #subpath-card-body {
+                    height: 550px; /* Adjust as needed to match graph height */
+                    overflow-y: auto;
                 }
             </style>
         </head>
