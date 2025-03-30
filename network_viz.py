@@ -1,5 +1,5 @@
 import dash
-from dash import html, dcc, Input, Output, State, callback, ALL
+from dash import html, dcc, Input, Output, State, callback, ALL, MATCH
 import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
 import networkx as nx
@@ -493,33 +493,63 @@ def create_network_animation(G, node_types, sequence_log, pos=None, highlight_su
 
 
 def create_sequence_log_table(sequence_log):
-    """Create a table from the sequence log"""
-    rows = []
+    """Create a table from the sequence log with expandable rows."""
+    table_rows = [] # Changed name from 'rows' to avoid confusion
+    
+    # Truncation length
+    TRUNCATE_LEN = 100
+
     for i, entry in enumerate(sequence_log):
         timestamp = entry.get('timestamp', '').split('T')[1].split('.')[0] if 'timestamp' in entry else ''
         from_node = entry.get('from', '')
         to_node = entry.get('to', '')
         msg_type = entry.get('type', '')
         
-        # Format content based on message type
+        # Get full content
         if msg_type == 'tool_call' and 'arguments' in entry:
-            content = str(entry.get('arguments', {}))
-            if len(content) > 50:
-                content = content[:50] + "..."
+            full_content = json.dumps(entry.get('arguments', {}), indent=2)
+            content_type = "Arguments"
         else:
-            content = entry.get('content', '')
-            if content and len(content) > 50:
-                content = content[:50] + "..."
+            full_content = str(entry.get('content', ''))
+            content_type = "Content"
         
-        rows.append(html.Tr([
+        # Create truncated content
+        truncated_content = full_content
+        is_truncated = False
+        if len(truncated_content) > TRUNCATE_LEN:
+            truncated_content = truncated_content[:TRUNCATE_LEN] + "..."
+            is_truncated = True
+            
+        row_id = {'type': 'log-row', 'index': i}
+        collapse_id = {'type': 'log-collapse', 'index': i}
+
+        # Create the main row with truncated content
+        main_row = html.Tr([
             html.Td(i+1),
             html.Td(timestamp),
             html.Td(from_node),
             html.Td(to_node),
             html.Td(msg_type),
-            html.Td(content, id=f"step-content-{i+1}")
-        ], id=f"log-row-{i+1}", className="log-row"))
-    
+            html.Td(truncated_content, className="log-content-truncated")
+        ], id=row_id, className="log-row", n_clicks=0) # Add n_clicks to make it clickable
+        
+        # Create the collapsible row with full content (only if truncated)
+        if is_truncated:
+            collapsible_row = html.Tr([
+                html.Td(colSpan=6, children=[
+                    dbc.Collapse([
+                        html.Div([
+                            html.H6(f"Full {content_type}:", style={'margin-top': '10px'}),
+                            html.Pre(full_content, className="log-content-full")
+                        ], className="log-content-expanded-container")
+                    ], id=collapse_id, is_open=False)
+                ])
+            ], className="log-row-expanded") # Add class for potential styling
+            table_rows.append(main_row)
+            table_rows.append(collapsible_row)
+        else:
+             table_rows.append(main_row) # No need for collapsible row if not truncated
+
     return html.Table([
         html.Thead(
             html.Tr([
@@ -531,7 +561,8 @@ def create_sequence_log_table(sequence_log):
                 html.Th("Content")
             ])
         ),
-        html.Tbody(rows, id="log-table-body")
+        # Pass the list of Tr elements directly
+        html.Tbody(table_rows, id="log-table-body") 
     ], className="table table-striped table-hover")
 
 
@@ -630,6 +661,8 @@ def create_app(log_dir="logs", initial_run=None):
     app.layout = html.Div([
         # Store for selected subpath ID
         dcc.Store(id='selected-subpath-store', data=None),
+        # Store for expanded log row index
+        dcc.Store(id='expanded-log-row-store', data=None),
         dbc.Container([
             dbc.Row([
                 dbc.Col([
@@ -721,6 +754,22 @@ def create_app(log_dir="logs", initial_run=None):
                     dbc.Card([
                         dbc.CardHeader("Event Sequence Log"),
                         dbc.CardBody([
+                            # Add Filter Controls Row
+                            dbc.Row([
+                                dbc.Col([
+                                    dbc.Label("From Node:"),
+                                    dcc.Dropdown(id='filter-from-node', multi=True, placeholder="Filter by source...")
+                                ], width=4),
+                                dbc.Col([
+                                    dbc.Label("To Node:"),
+                                    dcc.Dropdown(id='filter-to-node', multi=True, placeholder="Filter by target...")
+                                ], width=4),
+                                dbc.Col([
+                                    dbc.Label("Message Type:"),
+                                    dcc.Dropdown(id='filter-msg-type', multi=True, placeholder="Filter by type...")
+                                ], width=4)
+                            ], className="mb-3"),
+                            # Existing Table Div
                             html.Div(
                                 id="sequence-log-table",
                                 className="sequence-log-container",
@@ -743,12 +792,16 @@ def create_app(log_dir="logs", initial_run=None):
         [Output("network-graph", "figure"),
          Output("subpath-list", "children"),
          Output("sequence-log-table", "children"),
-         Output("animation-state", "data")],
+         Output("animation-state", "data"),
+         Output("filter-from-node", "options"),
+         Output("filter-to-node", "options"),
+         Output("filter-msg-type", "options")],
         [Input("run-selector", "value")]
     )
     def update_run(selected_run):
         if not selected_run:
-            return dash.no_update, dash.no_update, dash.no_update, dash.no_update
+            # Add no_updates for the new filter option outputs
+            return dash.no_update, dash.no_update, dash.no_update, dash.no_update, dash.no_update, dash.no_update, dash.no_update
         
         # Load data (guaranteed to work if run is listed)
         network_data = load_network_data(selected_run)
@@ -769,7 +822,19 @@ def create_app(log_dir="logs", initial_run=None):
         # Reset animation state
         animation_state = {"current_step": 0, "playing": False}
         
-        return fig, subpath_list, sequence_table, animation_state
+        # Generate filter options from sequence log
+        all_nodes = set()
+        all_types = set()
+        for entry in sequence_log:
+            if entry.get('from'): all_nodes.add(entry['from'])
+            if entry.get('to'): all_nodes.add(entry['to'])
+            if entry.get('type'): all_types.add(entry['type'])
+            
+        node_options = sorted([{'label': n, 'value': n} for n in all_nodes], key=lambda x: x['label'])
+        type_options = sorted([{'label': t, 'value': t} for t in all_types], key=lambda x: x['label'])
+        
+        # Adjust return values to include filter options
+        return fig, subpath_list, sequence_table, animation_state, node_options, node_options, type_options
     
     @app.callback(
         Output("current-step", "children"),
@@ -1070,6 +1135,68 @@ def create_app(log_dir="logs", initial_run=None):
         # Return the default figure and None to clear the selected subpath store
         return fig, None
     
+    # Callback to filter sequence log table
+    @app.callback(
+        Output("sequence-log-table", "children", allow_duplicate=True),
+        [Input("filter-from-node", "value"),
+         Input("filter-to-node", "value"),
+         Input("filter-msg-type", "value")],
+        [State("run-selector", "value")],
+        prevent_initial_call=True
+    )
+    def filter_log_table(selected_from, selected_to, selected_types, selected_run):
+        if not selected_run:
+            return dash.no_update
+            
+        network_data = load_network_data(selected_run)
+        sequence_log = network_data.get('sequence_log', [])
+        
+        if not selected_from and not selected_to and not selected_types:
+            # No filters applied, return the original table
+            return create_sequence_log_table(sequence_log)
+        
+        filtered_log = []
+        for entry in sequence_log:
+            match_from = not selected_from or entry.get('from') in selected_from
+            match_to = not selected_to or entry.get('to') in selected_to
+            match_type = not selected_types or entry.get('type') in selected_types
+            
+            if match_from and match_to and match_type:
+                filtered_log.append(entry)
+                
+        return create_sequence_log_table(filtered_log)
+
+    # Callback to handle log row expansion
+    @app.callback(
+        Output('expanded-log-row-store', 'data'),
+        Input({'type': 'log-row', 'index': ALL}, 'n_clicks'),
+        [State('expanded-log-row-store', 'data')],
+        prevent_initial_call=True,
+    )
+    def update_expanded_log_row(n_clicks, current_expanded_index):
+        ctx = dash.callback_context
+        if not ctx.triggered_id:
+            return dash.no_update
+
+        clicked_index = ctx.triggered_id['index']
+        
+        # Toggle: if clicking the already expanded row, collapse it (set store to None)
+        if clicked_index == current_expanded_index:
+            return None
+        else:
+            # Otherwise, expand the clicked row
+            return clicked_index
+            
+    # Callback to toggle the collapse component based on the store
+    @app.callback(
+        Output({'type': 'log-collapse', 'index': MATCH}, 'is_open'),
+        Input('expanded-log-row-store', 'data'),
+        [State({'type': 'log-collapse', 'index': MATCH}, 'id')],
+        prevent_initial_call=True,
+    )
+    def toggle_log_collapse(expanded_index, collapse_id):
+        return expanded_index == collapse_id['index']
+
     # Add custom CSS including selection style AND subpath scrolling
     app.index_string = """
     <!DOCTYPE html>
@@ -1119,6 +1246,23 @@ def create_app(log_dir="logs", initial_run=None):
                 #subpath-card-body {
                     height: 550px; /* Adjust as needed to match graph height */
                     overflow-y: auto;
+                }
+                /* Style for expanded log row content */
+                .log-content-expanded-container {
+                    padding: 10px;
+                    background-color: #f8f9fa; /* Light background */
+                    border: 1px solid #dee2e6; /* Border */
+                    border-radius: 4px;
+                    margin-top: -1px; /* Overlap slightly with the row above */
+                }
+                .log-content-full {
+                    max-height: 200px; /* Limit height and add scroll */
+                    overflow-y: auto;
+                    white-space: pre-wrap; /* Keep formatting */
+                    word-break: break-all; /* Break long words */
+                    background-color: white; /* White background for pre */
+                    padding: 5px;
+                    border: 1px solid #ced4da;
                 }
             </style>
         </head>
