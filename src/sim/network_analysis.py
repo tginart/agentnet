@@ -892,7 +892,11 @@ def compute_completion_rate(verification_results: Dict[str, Any]) -> float:
     Compute the completion rate from verification results.
 
     This is defined as the percentage of subpaths in the specification that were
-    found in the run's trajectory.
+    found in the run's trajectory + the number of edge checks that passed.
+
+    More concretely, for a given trajectory:
+
+    rtn = (num_subpaths_passed + num_edge_checks_passed) / (num_subpaths + num_edge_checks)
 
     Args:
         verification_results: The dictionary returned by verify_network_trajectory.
@@ -901,18 +905,23 @@ def compute_completion_rate(verification_results: Dict[str, Any]) -> float:
         float: The completion rate (0.0 to 1.0).
     """
     subpath_checks = verification_results.get('subpath_checks', [])
-    if not subpath_checks:
-        return 1.0  # No subpaths to check, so 100% complete by definition
-
-    passed_count = sum(1 for check in subpath_checks if check['passed'])
-    return passed_count / len(subpath_checks)
+    edge_checks = verification_results.get('edge_checks', [])
+    
+    if not subpath_checks and not edge_checks:
+        return 1.0  # No checks to verify, so 100% complete by definition
+        
+    total_checks = len(subpath_checks) + len(edge_checks)
+    passed_subpaths = sum(1 for check in subpath_checks if check['passed'])
+    passed_edges = sum(1 for check in edge_checks if check['passed'])
+    
+    return (passed_subpaths + passed_edges) / total_checks
 
 def compute_veracity_rate(verification_results: Dict[str, Any]) -> float:
     """
     Compute the veracity rate from verification results.
 
-    This is defined as the percentage of edge checks specified in the verification
-    that passed during the run.
+    This is just a 0-1 metric that is 1 if all subpath checks and edge checks passed.
+    Else 0.0.
 
     Args:
         verification_results: The dictionary returned by verify_network_trajectory.
@@ -920,12 +929,18 @@ def compute_veracity_rate(verification_results: Dict[str, Any]) -> float:
     Returns:
         float: The veracity rate (0.0 to 1.0).
     """
-    edge_checks_results = verification_results.get('edge_checks', [])
-    if not edge_checks_results:
-        return 1.0 # No edge checks to verify, so 100% veracious by definition
-
-    passed_count = sum(1 for result in edge_checks_results if result['passed'])
-    return passed_count / len(edge_checks_results)
+    subpath_checks = verification_results.get('subpath_checks', [])
+    edge_checks = verification_results.get('edge_checks', [])
+    
+    if not subpath_checks and not edge_checks:
+        return 1.0  # No checks to verify, so 100% veracious by definition
+        
+    total_checks = len(subpath_checks) + len(edge_checks)
+    passed_subpaths = sum(1 for check in subpath_checks if check['passed'])
+    passed_edges = sum(1 for check in edge_checks if check['passed'])
+    
+    # Only return 1.0 if ALL checks passed, otherwise 0.0
+    return 1.0 if (passed_subpaths + passed_edges) == total_checks else 0.0
 
 def compute_efficiency(log_data: Dict[str, Any], verification_results: Dict[str, Any]) -> float:
     """
