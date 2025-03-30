@@ -1,0 +1,274 @@
+{
+    "task": "Develop an autonomous smart city system to manage environmental sustainability by integrating autonomous waste management, dynamic lighting controls, renewable energy utilization, and community engagement modules for promoting ecological well-being.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "sustainability_management_agent",
+                "waste_reduction_agent",
+                "intelligent_sorting_agent",
+                "recycling_statistics_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "sustainability_management_agent",
+                "energy_efficiency_agent",
+                "lighting_optimization_agent",
+                "smart_street_lamp_control_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "sustainability_management_agent",
+                "renewable_energy_agent",
+                "energy_storage_optimizer_agent",
+                "battery_reserve_management_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "community_outreach_agent",
+                "citizen_participation_agent",
+                "eco_awareness_campaign_agent",
+                "feedback_analysis_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "urban_ecosystem_monitoring_agent",
+                "biodiversity_management_agent",
+                "wildlife_detection_agent",
+                "image_processing_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Top-level agent coordinating tasks for ecological sustainability in the city.",
+            "tools": [
+                "sustainability_management_agent",
+                "community_outreach_agent",
+                "urban_ecosystem_monitoring_agent"
+            ]
+        },
+        {
+            "name": "sustainability_management_agent",
+            "role": "Coordinates various environmental sustainability initiatives across the city.",
+            "tools": [
+                "waste_reduction_agent",
+                "energy_efficiency_agent",
+                "renewable_energy_agent"
+            ]
+        },
+        {
+            "name": "waste_reduction_agent",
+            "role": "Manages intelligent waste sorting and reduction strategies.",
+            "tools": [
+                "intelligent_sorting_agent",
+                "composting_management_agent"
+            ]
+        },
+        {
+            "name": "energy_efficiency_agent",
+            "role": "Optimizes energy consumption through advanced monitoring and control systems.",
+            "tools": [
+                "lighting_optimization_agent",
+                "power_usage_evaluator_agent"
+            ]
+        },
+        {
+            "name": "renewable_energy_agent",
+            "role": "Oversees the integration and optimization of renewable energy sources.",
+            "tools": [
+                "energy_storage_optimizer_agent",
+                "solar_panel_maintenance_agent"
+            ]
+        },
+        {
+            "name": "community_outreach_agent",
+            "role": "Engages with citizens to promote eco-friendly practices.",
+            "tools": [
+                "citizen_participation_agent",
+                "public_forums_management_agent"
+            ]
+        },
+        {
+            "name": "urban_ecosystem_monitoring_agent",
+            "role": "Monitors biodiversity and ecological health within urban settings.",
+            "tools": [
+                "biodiversity_management_agent",
+                "pollution_tracking_agent"
+            ]
+        },
+        {
+            "name": "intelligent_sorting_agent",
+            "role": "Analyzes and sorts waste for recycling and composting.",
+            "tools": [
+                "recycling_statistics_tool"
+            ]
+        },
+        {
+            "name": "lighting_optimization_agent",
+            "role": "Controls dynamic lighting systems to minimize energy use while maintaining safety.",
+            "tools": [
+                "smart_street_lamp_control_tool"
+            ]
+        },
+        {
+            "name": "energy_storage_optimizer_agent",
+            "role": "Manages and optimizes energy storage for fluctuating demand.",
+            "tools": [
+                "battery_reserve_management_agent"
+            ]
+        },
+        {
+            "name": "citizen_participation_agent",
+            "role": "Facilitates citizen involvement in sustainability initiatives.",
+            "tools": [
+                "eco_awareness_campaign_agent"
+            ]
+        },
+        {
+            "name": "biodiversity_management_agent",
+            "role": "Enhances and monitors wildlife presence in the city.",
+            "tools": [
+                "wildlife_detection_agent"
+            ]
+        },
+        {
+            "name": "composting_management_agent",
+            "role": "Oversees urban composting facilities to ensure efficient waste decomposition.",
+            "tools": []
+        },
+        {
+            "name": "power_usage_evaluator_agent",
+            "role": "Evaluates power consumption patterns to identify efficiency improvements.",
+            "tools": []
+        },
+        {
+            "name": "solar_panel_maintenance_agent",
+            "role": "Ensures solar panels are operated and maintained for peak efficiency.",
+            "tools": []
+        },
+        {
+            "name": "public_forums_management_agent",
+            "role": "Organizes public meetings and forums for environmental education and discussions.",
+            "tools": []
+        },
+        {
+            "name": "pollution_tracking_agent",
+            "role": "Tracks pollutants in air, water, and soil to improve urban ecosystem health.",
+            "tools": []
+        },
+        {
+            "name": "eco_awareness_campaign_agent",
+            "role": "Develops and manages campaigns to raise ecological awareness among city residents.",
+            "tools": [
+                "feedback_analysis_tool"
+            ]
+        },
+        {
+            "name": "wildlife_detection_agent",
+            "role": "Uses various technologies to detect and monitor wildlife presence and movement.",
+            "tools": [
+                "image_processing_tool"
+            ]
+        },
+        {
+            "name": "battery_reserve_management_agent",
+            "role": "Maintains optimal battery reserves for renewable energy systems.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "recycling_statistics_tool",
+            "description": "Generates reports on recycling rates and effectiveness.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "time_period": {
+                        "type": "string",
+                        "description": "The time period for which to generate the report."
+                    },
+                    "waste_category": {
+                        "type": "string",
+                        "description": "Category of waste to analyze (general, plastics, organics, etc.)."
+                    }
+                }
+            }
+        },
+        {
+            "name": "smart_street_lamp_control_tool",
+            "description": "Controls street lamp brightness and timing to optimize energy use.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location_id": {
+                        "type": "string",
+                        "description": "Identifier for the street or area where adjustments are needed."
+                    },
+                    "operation_mode": {
+                        "type": "string",
+                        "description": "Night mode, auto-dimming, or full brightness."
+                    },
+                    "duration": {
+                        "type": "number",
+                        "description": "Duration for the operational mode in hours."
+                    }
+                }
+            }
+        },
+        {
+            "name": "feedback_analysis_tool",
+            "description": "Analyzes citizen feedback regarding eco-campaigns and public measures.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "campaign_id": {
+                        "type": "string",
+                        "description": "The unique ID of the campaign to analyze feedback for."
+                    },
+                    "feedback_type": {
+                        "type": "string",
+                        "description": "Type of feedback to analyze, such as sentiment or specific suggestions."
+                    }
+                }
+            }
+        },
+        {
+            "name": "image_processing_tool",
+            "description": "Processes images from wildlife cameras to detect animals.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "image_source": {
+                        "type": "string",
+                        "description": "The source of images to analyze."
+                    },
+                    "detection_parameters": {
+                        "type": "object",
+                        "properties": {
+                            "species": {
+                                "type": "string",
+                                "description": "Species to detect in the images."
+                            },
+                            "resolution": {
+                                "type": "string",
+                                "description": "Required resolution for image processing."
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

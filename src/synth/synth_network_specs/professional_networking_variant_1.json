@@ -1,0 +1,159 @@
+{
+    "task": "I'm planning a conference and need to connect with industry professionals and speakers, identify potential sponsors, and promote the event through various channels. Please assist me with this process.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "industry_network_agent",
+                "professional_connection_agent",
+                "email_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "event_promotion_agent",
+                "social_media_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "sponsorship_agent",
+                "crm_system_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "industry_network_agent",
+                "research_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "event_management_agent",
+                "session_scheduling_tool",
+                "venue_booking_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "industry_network_agent",
+            "role": "This agent identifies and connects with industry professionals and potential speakers using in-depth research and contact databases.",
+            "tools": [
+                "professional_connection_agent",
+                "research_agent"
+            ]
+        },
+        {
+            "name": "professional_connection_agent",
+            "role": "This agent manages communications with professionals and speakers, ensuring they are informed and engaged about the upcoming event.",
+            "tools": [
+                "email_agent"
+            ]
+        },
+        {
+            "name": "research_agent",
+            "role": "Conducts research and provides data on industry trends, potential speakers, and their profiles.",
+            "tools": []
+        },
+        {
+            "name": "sponsorship_agent",
+            "role": "Identifies and reaches out to potential sponsors, handling negotiations and sponsorship agreements.",
+            "tools": [
+                "crm_system_agent"
+            ]
+        },
+        {
+            "name": "crm_system_agent",
+            "role": "Manages sponsor and participant contact information, tracks interactions and agreements.",
+            "tools": []
+        },
+        {
+            "name": "event_management_agent",
+            "role": "Oversees the logistics of the event, including scheduling sessions and booking venues.",
+            "tools": [
+                "session_scheduling_tool",
+                "venue_booking_tool"
+            ]
+        },
+        {
+            "name": "event_promotion_agent",
+            "role": "Creates and implements promotional strategies for the event across various channels.",
+            "tools": [
+                "social_media_agent"
+            ]
+        },
+        {
+            "name": "social_media_agent",
+            "role": "Promotes the event on social media platforms, manages ad campaigns, and community engagement.",
+            "tools": []
+        },
+        {
+            "name": "email_agent",
+            "role": "Handles email communications, including sending invitations and updates to potential speakers and professionals.",
+            "tools": []
+        },
+        {
+            "name": "client_agent",
+            "role": "Coordinates all agents to ensure task completion and communicates with the user to gather requirements and provide updates.",
+            "tools": [
+                "industry_network_agent",
+                "event_promotion_agent",
+                "sponsorship_agent",
+                "event_management_agent"
+            ]
+        }
+    ],
+    "tools": [
+        {
+            "name": "session_scheduling_tool",
+            "description": "Schedules sessions and allocates slots for speakers during the conference.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "speakers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of speakers and their topics"
+                    },
+                    "time_slots": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Available time slots for sessions"
+                    }
+                }
+            }
+        },
+        {
+            "name": "venue_booking_tool",
+            "description": "Handles the booking of venues for the event, considering location, capacity, and facilities.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "event_date": {
+                        "type": "string",
+                        "description": "The date of the event"
+                    },
+                    "expected_attendance": {
+                        "type": "number",
+                        "description": "Expected number of attendees"
+                    },
+                    "location_preferences": {
+                        "type": "string",
+                        "description": "Preferred location for the event"
+                    }
+                }
+            }
+        }
+    ]
+}

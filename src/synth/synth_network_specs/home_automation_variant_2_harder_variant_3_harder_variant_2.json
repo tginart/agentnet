@@ -1,0 +1,295 @@
+{
+    "task": "Develop a smart-city integration platform to enhance urban planning and disaster management. The system should incorporate real-time urban planning metrics, disaster response coordination, wildlife monitoring, smart water management, and renewable energy optimization.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "urban_planning_agent",
+                "zoning_analysis_agent",
+                "demographic_data_collector_agent",
+                "urban_growth_prediction_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "disaster_management_agent",
+                "evacuation_coordinator_agent",
+                "resource_dispatcher_agent",
+                "disaster_alert_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wildlife_monitoring_agent",
+                "animal_movement_tracker_agent",
+                "habitat_change_detector_agent",
+                "wildlife_alert_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "water_management_agent",
+                "leak_detection_agent",
+                "consumption_analyzer_agent",
+                "water_quality_assessment_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "energy_optimization_agent",
+                "renewable_energy_allocator_agent",
+                "energy_storage_manager_agent",
+                "renewable_source_forecaster_tool",
+                "human"
+            ],
+            [
+                "client_agent",
+                "urban_planning_agent",
+                "energy_optimization_agent",
+                "renewable_energy_allocator_agent"
+            ],
+            [
+                "client_agent",
+                "disaster_management_agent",
+                "wildlife_monitoring_agent",
+                "animal_movement_tracker_agent"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Acts as the central hub for user interaction, coordinating communication among various smart-city management agents.",
+            "tools": [
+                "urban_planning_agent",
+                "disaster_management_agent",
+                "wildlife_monitoring_agent",
+                "water_management_agent",
+                "energy_optimization_agent"
+            ]
+        },
+        {
+            "name": "urban_planning_agent",
+            "role": "Monitors and analyses city development, focusing on zoning laws and urban expansion.",
+            "tools": [
+                "zoning_analysis_agent",
+                "energy_optimization_agent",
+                "urban_traffic_modeling_agent"
+            ]
+        },
+        {
+            "name": "zoning_analysis_agent",
+            "role": "Investigates zoning laws and their implications on city growth.",
+            "tools": [
+                "demographic_data_collector_agent"
+            ]
+        },
+        {
+            "name": "demographic_data_collector_agent",
+            "role": "Gathers demographic data to forecast urban growth and development needs.",
+            "tools": [
+                "urban_growth_prediction_tool"
+            ]
+        },
+        {
+            "name": "disaster_management_agent",
+            "role": "Plans and coordinates disaster recovery and evacuation strategies.",
+            "tools": [
+                "evacuation_coordinator_agent",
+                "wildlife_monitoring_agent",
+                "public_safety_monitor_agent"
+            ]
+        },
+        {
+            "name": "evacuation_coordinator_agent",
+            "role": "Designs and executes evacuation plans for emergency scenarios.",
+            "tools": [
+                "resource_dispatcher_agent"
+            ]
+        },
+        {
+            "name": "resource_dispatcher_agent",
+            "role": "Distributes necessary resources and supplies during disaster response efforts.",
+            "tools": [
+                "disaster_alert_tool"
+            ]
+        },
+        {
+            "name": "wildlife_monitoring_agent",
+            "role": "Keeps track of local wildlife populations and their movements.",
+            "tools": [
+                "animal_movement_tracker_agent"
+            ]
+        },
+        {
+            "name": "animal_movement_tracker_agent",
+            "role": "Monitors movements of wildlife to prevent conflicts with urban areas.",
+            "tools": [
+                "habitat_change_detector_agent"
+            ]
+        },
+        {
+            "name": "habitat_change_detector_agent",
+            "role": "Detects changes in wildlife habitats and assesses the impact of urban development.",
+            "tools": [
+                "wildlife_alert_tool"
+            ]
+        },
+        {
+            "name": "water_management_agent",
+            "role": "Oversees water distribution and ensures efficient water usage throughout the city.",
+            "tools": [
+                "leak_detection_agent",
+                "public_transportation_coordinator_agent"
+            ]
+        },
+        {
+            "name": "leak_detection_agent",
+            "role": "Identifies leaks in the water distribution system and proposes solutions.",
+            "tools": [
+                "consumption_analyzer_agent"
+            ]
+        },
+        {
+            "name": "consumption_analyzer_agent",
+            "role": "Analyzes water consumption patterns for efficiency and sustainability.",
+            "tools": [
+                "water_quality_assessment_tool"
+            ]
+        },
+        {
+            "name": "energy_optimization_agent",
+            "role": "Manages the allocation and optimization of energy resources, focusing on renewable sources.",
+            "tools": [
+                "renewable_energy_allocator_agent",
+                "weather_data_agent"
+            ]
+        },
+        {
+            "name": "renewable_energy_allocator_agent",
+            "role": "Allocates renewable energy resources according to real-time demand and supply.",
+            "tools": [
+                "energy_storage_manager_agent"
+            ]
+        },
+        {
+            "name": "energy_storage_manager_agent",
+            "role": "Manages stored energy and coordinates distribution for peak efficiency.",
+            "tools": [
+                "renewable_source_forecaster_tool"
+            ]
+        },
+        {
+            "name": "urban_traffic_modeling_agent",
+            "role": "Simulates and models urban traffic to aid in city planning and management.",
+            "tools": []
+        },
+        {
+            "name": "public_safety_monitor_agent",
+            "role": "Tracks public safety issues and trends, assisting law enforcement planning.",
+            "tools": []
+        },
+        {
+            "name": "weather_data_agent",
+            "role": "Provides weather data and forecasts to support various city operations.",
+            "tools": []
+        },
+        {
+            "name": "public_transportation_coordinator_agent",
+            "role": "Ensures efficient public transportation scheduling and operation.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "urban_growth_prediction_tool",
+            "description": "Predicts urban growth trends using demographic and zoning data.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "region_id": {
+                        "type": "string",
+                        "description": "Identifier for the city region to analyze growth patterns"
+                    },
+                    "population_trends": {
+                        "type": "array",
+                        "description": "Population growth data records"
+                    }
+                }
+            }
+        },
+        {
+            "name": "disaster_alert_tool",
+            "description": "Issues alerts and guidance during disasters to assist in coordinated response.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "disaster_type": {
+                        "type": "string",
+                        "description": "Type of disaster (e.g., flood, earthquake)"
+                    },
+                    "response_priority": {
+                        "type": "string",
+                        "description": "Level of urgency for the response effort"
+                    }
+                }
+            }
+        },
+        {
+            "name": "wildlife_alert_tool",
+            "description": "Notifies city authorities of wildlife movements to mitigate human-wildlife conflict.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "species_id": {
+                        "type": "string",
+                        "description": "Identifier for the species being monitored"
+                    },
+                    "movement_pattern": {
+                        "type": "string",
+                        "description": "Observed movement pattern of the species"
+                    }
+                }
+            }
+        },
+        {
+            "name": "water_quality_assessment_tool",
+            "description": "Evaluates the quality of water in the city\u2019s supply system.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "source_id": {
+                        "type": "string",
+                        "description": "Identifier for the water source or pipeline being tested"
+                    },
+                    "quality_parameters": {
+                        "type": "array",
+                        "description": "Array of assessed quality parameters"
+                    }
+                }
+            }
+        },
+        {
+            "name": "renewable_source_forecaster_tool",
+            "description": "Forecasts availability of renewable energy resources based on environmental data.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "resource_type": {
+                        "type": "string",
+                        "description": "Type of renewable resource (e.g., solar, wind)"
+                    },
+                    "forecast_period": {
+                        "type": "number",
+                        "description": "Period in hours for resource availability prediction"
+                    }
+                }
+            }
+        }
+    ]
+}

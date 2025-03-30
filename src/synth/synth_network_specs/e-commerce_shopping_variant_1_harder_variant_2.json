@@ -1,0 +1,238 @@
+{
+    "task": "Organize an eco-friendly wedding weekend in Bali: 1. Find a sustainable venue and coordinate transport, 2. Secure fully vegetarian catering, 3. Arrange local immersive experiences for guests, 4. Coordinate with a carbon offset program, 5. Arrange a digital invitation system, 6. Capture the event with eco-conscious photographers.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "wedding_management_agent",
+                "venue_selection_agent",
+                "sustainable_certification_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wedding_management_agent",
+                "catering_agent",
+                "vegetarian_menu_curator_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wedding_management_agent",
+                "experience_coordination_agent",
+                "local_guide_agent",
+                "cultural_event_selection_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wedding_management_agent",
+                "offset_program_agent",
+                "carbon_calculation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wedding_management_agent",
+                "invitation_system_agent",
+                "digital_design_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wedding_management_agent",
+                "photography_agent",
+                "eco_aware_photographers_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wedding_management_agent",
+                "transport_management_agent",
+                "eco_friendly_transport_agent",
+                "vehicle_arrangement_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wedding_management_agent",
+                "catering_agent",
+                "local_produce_sourcing_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "wedding_management_agent"
+            ]
+        },
+        {
+            "name": "wedding_management_agent",
+            "role": "Oversees the entire wedding planning process focusing on eco-friendly solutions.",
+            "tools": [
+                "venue_selection_agent",
+                "catering_agent",
+                "experience_coordination_agent",
+                "offset_program_agent",
+                "invitation_system_agent",
+                "photography_agent",
+                "transport_management_agent"
+            ]
+        },
+        {
+            "name": "venue_selection_agent",
+            "role": "Identifies potential venues for the wedding, ensuring sustainable practices.",
+            "tools": [
+                "sustainable_certification_agent"
+            ]
+        },
+        {
+            "name": "sustainable_certification_agent",
+            "role": "Verifies the sustainability certifications and practices of venues.",
+            "tools": []
+        },
+        {
+            "name": "catering_agent",
+            "role": "Coordinates catering services with a focus on vegetarian and locally sourced menu.",
+            "tools": [
+                "vegetarian_menu_curator_agent",
+                "local_produce_sourcing_agent"
+            ]
+        },
+        {
+            "name": "vegetarian_menu_curator_agent",
+            "role": "Designs and curates an appealing vegetarian menu.",
+            "tools": []
+        },
+        {
+            "name": "local_produce_sourcing_agent",
+            "role": "Sources ingredients from local sustainable farms.",
+            "tools": []
+        },
+        {
+            "name": "experience_coordination_agent",
+            "role": "Arranges local interactive experiences for wedding guests.",
+            "tools": [
+                "local_guide_agent"
+            ]
+        },
+        {
+            "name": "local_guide_agent",
+            "role": "Connects with local guides to provide authentic experiences.",
+            "tools": [
+                "cultural_event_selection_agent"
+            ]
+        },
+        {
+            "name": "cultural_event_selection_agent",
+            "role": "Selects cultural events that align with the wedding itinerary.",
+            "tools": []
+        },
+        {
+            "name": "offset_program_agent",
+            "role": "Coordinates with carbon offset programs to neutralize the wedding's environmental impact.",
+            "tools": [
+                "carbon_calculation_agent"
+            ]
+        },
+        {
+            "name": "carbon_calculation_agent",
+            "role": "Calculates the carbon footprint generated by the wedding.",
+            "tools": []
+        },
+        {
+            "name": "invitation_system_agent",
+            "role": "Manages the development of a digital invitation system.",
+            "tools": [
+                "digital_design_agent"
+            ]
+        },
+        {
+            "name": "digital_design_agent",
+            "role": "Designs aesthetically pleasing digital invitations.",
+            "tools": []
+        },
+        {
+            "name": "photography_agent",
+            "role": "Selects photographers who adhere to eco-conscious practices.",
+            "tools": [
+                "eco_aware_photographers_agent"
+            ]
+        },
+        {
+            "name": "eco_aware_photographers_agent",
+            "role": "Engages photographers who specialize in eco-friendly services.",
+            "tools": []
+        },
+        {
+            "name": "transport_management_agent",
+            "role": "Manages transportation arrangements with an eco-friendly focus.",
+            "tools": [
+                "eco_friendly_transport_agent"
+            ]
+        },
+        {
+            "name": "eco_friendly_transport_agent",
+            "role": "Secures transportation options that minimize carbon emissions.",
+            "tools": [
+                "vehicle_arrangement_agent"
+            ]
+        },
+        {
+            "name": "vehicle_arrangement_agent",
+            "role": "Arranges eco-friendly vehicles for guests.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "carbon_footprint_tool",
+            "description": "Calculates the carbon footprint of activities and provides suggestions for offsets.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "activity_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of activities to calculate carbon footprint."
+                    },
+                    "location": {
+                        "type": "string",
+                        "description": "Location of the activities to tailor the carbon calculation."
+                    }
+                }
+            }
+        },
+        {
+            "name": "sustainable_venue_finder_tool",
+            "description": "Finds venues certified for sustainability.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "region": {
+                        "type": "string",
+                        "description": "The region to search for sustainable venues."
+                    },
+                    "capacity": {
+                        "type": "number",
+                        "description": "The minimum seating capacity required for the venue."
+                    }
+                }
+            }
+        }
+    ]
+}

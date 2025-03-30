@@ -1,0 +1,299 @@
+{
+    "task": "Coordinate an intercontinental zero-waste innovation summit featuring AI-driven sustainability workshops, electric vehicle transition programs, sustainable accommodation options, a digital waste reduction dashboard, and a comprehensive resource optimization strategy for all event phases.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "summit_coordinator_agent",
+                "regional_director_agent",
+                "ai_technology_lead_agent",
+                "sustainability_workshop_facilitator_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "resource_optimization_agent",
+                "supply_chain_efficiency_agent",
+                "resource_management_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "transport_infrastructure_agent",
+                "ev_integration_specialist_agent",
+                "charging_network_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "accommodation_expert_agent",
+                "eco_hospitality_manager_agent",
+                "green_lodging_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "digital_operations_chief_agent",
+                "waste_reduction_dashboard_agent",
+                "waste_data_analytics_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "public_relations_agent",
+                "sustainability_communications_agent",
+                "digital_outreach_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "resource_optimization_agent",
+                "circular_economy_advisor_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Overseer of the intercontinental zero-waste innovation summit, managing all components to ensure sustainability and coordination.",
+            "tools": [
+                "summit_coordinator_agent",
+                "resource_optimization_agent",
+                "transport_infrastructure_agent",
+                "accommodation_expert_agent",
+                "digital_operations_chief_agent",
+                "public_relations_agent"
+            ]
+        },
+        {
+            "name": "summit_coordinator_agent",
+            "role": "Directs summit activities across various regions, maintaining high standards of sustainability.",
+            "tools": [
+                "regional_director_agent",
+                "global_innovation_leader_agent"
+            ]
+        },
+        {
+            "name": "regional_director_agent",
+            "role": "Ensures seamless execution of summit activities within designated regions, focusing on local adaptations.",
+            "tools": [
+                "ai_technology_lead_agent",
+                "local_eco_services_agent"
+            ]
+        },
+        {
+            "name": "ai_technology_lead_agent",
+            "role": "Develops and manages AI-driven sustainability workshops for summit participants.",
+            "tools": [
+                "sustainability_workshop_facilitator_agent"
+            ]
+        },
+        {
+            "name": "sustainability_workshop_facilitator_agent",
+            "role": "Leads workshops on sustainability, encouraging innovation through AI solutions.",
+            "tools": []
+        },
+        {
+            "name": "resource_optimization_agent",
+            "role": "Implements strategies to optimize resource use and reduce waste in all summit phases.",
+            "tools": [
+                "supply_chain_efficiency_agent",
+                "circular_economy_advisor_agent"
+            ]
+        },
+        {
+            "name": "supply_chain_efficiency_agent",
+            "role": "Improves supply chain logistics to enhance resource efficiency.",
+            "tools": [
+                "resource_management_tool"
+            ]
+        },
+        {
+            "name": "transport_infrastructure_agent",
+            "role": "Coordinates the transition to electric vehicles and eco-friendly transport solutions.",
+            "tools": [
+                "ev_integration_specialist_agent"
+            ]
+        },
+        {
+            "name": "ev_integration_specialist_agent",
+            "role": "Manages the integration of electric vehicles and charging solutions.",
+            "tools": [
+                "charging_network_tool"
+            ]
+        },
+        {
+            "name": "accommodation_expert_agent",
+            "role": "Supports the selection and management of sustainable accommodation facilities.",
+            "tools": [
+                "eco_hospitality_manager_agent"
+            ]
+        },
+        {
+            "name": "eco_hospitality_manager_agent",
+            "role": "Oversees eco-friendly lodging and works with accommodations to meet green certification.",
+            "tools": [
+                "green_lodging_tool"
+            ]
+        },
+        {
+            "name": "digital_operations_chief_agent",
+            "role": "Oversees digital platforms and systems, including the waste reduction dashboard.",
+            "tools": [
+                "waste_reduction_dashboard_agent"
+            ]
+        },
+        {
+            "name": "waste_reduction_dashboard_agent",
+            "role": "Implements a digital dashboard for tracking and analyzing waste reduction during the summit.",
+            "tools": [
+                "waste_data_analytics_tool"
+            ]
+        },
+        {
+            "name": "public_relations_agent",
+            "role": "Leads communication strategies to market the summit's sustainability initiatives.",
+            "tools": [
+                "sustainability_communications_agent"
+            ]
+        },
+        {
+            "name": "sustainability_communications_agent",
+            "role": "Focuses on digital communication and outreach about summit sustainability practices.",
+            "tools": [
+                "digital_outreach_tool"
+            ]
+        },
+        {
+            "name": "global_innovation_leader_agent",
+            "role": "Provides thought leadership on global innovation and sustainability trends.",
+            "tools": []
+        },
+        {
+            "name": "local_eco_services_agent",
+            "role": "Provides local services and eco solutions for summit operations within regions.",
+            "tools": []
+        },
+        {
+            "name": "circular_economy_advisor_agent",
+            "role": "Advises on incorporating circular economy principles into summit operations.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "resource_management_tool",
+            "description": "Optimizes the management of resources for the summit to enhance efficiency and minimize waste.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "resource_types": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Types of resources to manage."
+                    },
+                    "optimization_parameters": {
+                        "type": "object",
+                        "description": "Parameters for resource optimization.",
+                        "additionalProperties": {
+                            "type": "number"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "charging_network_tool",
+            "description": "Sets up and manages electric vehicle charging networks for summit attendees.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "station_locations": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Locations where charging stations are needed."
+                    },
+                    "charge_capacity": {
+                        "type": "number",
+                        "description": "Estimated total charging capacity required."
+                    }
+                }
+            }
+        },
+        {
+            "name": "green_lodging_tool",
+            "description": "Facilitates finding and reserving green-certified accommodations for summit participants.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "certification_levels": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Acceptable certification levels for green lodgings."
+                    },
+                    "room_requirements": {
+                        "type": "number",
+                        "description": "Number of rooms required."
+                    }
+                }
+            }
+        },
+        {
+            "name": "waste_data_analytics_tool",
+            "description": "Analyzes waste data to assess and improve waste reduction strategies.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "waste_types": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Types of waste to analyze."
+                    },
+                    "data_coverage_days": {
+                        "type": "number",
+                        "description": "Duration of the data coverage period in days."
+                    }
+                }
+            }
+        },
+        {
+            "name": "digital_outreach_tool",
+            "description": "Enhances digital communication efforts to boost awareness of summit sustainability efforts.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "campaign_platforms": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Platforms to be used in the outreach campaign."
+                    },
+                    "engagement_goals": {
+                        "type": "object",
+                        "description": "Goals for audience engagement.",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

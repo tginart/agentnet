@@ -1,0 +1,253 @@
+{
+    "task": "Organize a 48-hour global virtual innovation challenge for university students focusing on sustainable technologies, integrating multilingual collaboration, expert coaching, peer reviews, and a market feasibility evaluation.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "challenge_coordinator_agent",
+                "language_support_agent",
+                "translation_service_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "data_analytics_agent",
+                "poll_data_collector_agent",
+                "market_feasibility_evaluator_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "challenge_coordinator_agent",
+                "core_committee_agent",
+                "sponsorship_manager_agent",
+                "legal_consultant_agent",
+                "contract_management_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "remote_management_agent",
+                "time_zone_scheduler_agent",
+                "scheduling_algorithm_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "challenge_coordinator_agent",
+                "mentor_coordinator_agent",
+                "international_expert_agent",
+                "cultural_advisory_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "technical_support_agent",
+                "platform_compatibility_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The primary agent interacting with users to organize the innovation challenge and coordinate among subagents.",
+            "tools": [
+                "challenge_coordinator_agent",
+                "data_analytics_agent",
+                "remote_management_agent",
+                "technical_support_agent"
+            ]
+        },
+        {
+            "name": "challenge_coordinator_agent",
+            "role": "Oversees the entire challenge, ensuring all participating, educational, technical, and logistic components are synchronized.",
+            "tools": [
+                "language_support_agent",
+                "core_committee_agent",
+                "mentor_coordinator_agent"
+            ]
+        },
+        {
+            "name": "language_support_agent",
+            "role": "Facilitates multilingual communication and document translation for international participants.",
+            "tools": [
+                "translation_service_agent"
+            ]
+        },
+        {
+            "name": "translation_service_agent",
+            "role": "Provides document and verbal translations to/from multiple languages to ensure smooth communication.",
+            "tools": []
+        },
+        {
+            "name": "data_analytics_agent",
+            "role": "Analyzes market data and participant feedback during the challenge for insights and feasibility studies.",
+            "tools": [
+                "poll_data_collector_agent"
+            ]
+        },
+        {
+            "name": "poll_data_collector_agent",
+            "role": "Gathers data through surveys and polls from participants to assess market appeal and challenge engagement.",
+            "tools": [
+                "market_feasibility_evaluator_agent"
+            ]
+        },
+        {
+            "name": "market_feasibility_evaluator_agent",
+            "role": "Evaluates feedback data and market trends to determine the feasibility of proposed solutions.",
+            "tools": []
+        },
+        {
+            "name": "core_committee_agent",
+            "role": "Manages the legal, financial, and strategic aspects of the challenge, working closely with sponsors and legal advisors.",
+            "tools": [
+                "sponsorship_manager_agent"
+            ]
+        },
+        {
+            "name": "sponsorship_manager_agent",
+            "role": "Liaises with potential and current sponsors, ensuring alignment of goals and secure sponsorship deals.",
+            "tools": [
+                "legal_consultant_agent"
+            ]
+        },
+        {
+            "name": "legal_consultant_agent",
+            "role": "Provides legal advice for contracts and subscriber agreements during the challenge.",
+            "tools": [
+                "contract_management_agent"
+            ]
+        },
+        {
+            "name": "contract_management_agent",
+            "role": "Automates creation of contracts and legal documents based on specified sponsorship and logistical agreements.",
+            "tools": []
+        },
+        {
+            "name": "remote_management_agent",
+            "role": "Coordinates the remote execution of the challenge, aligning time zones and logistics for worldwide participants.",
+            "tools": [
+                "time_zone_scheduler_agent"
+            ]
+        },
+        {
+            "name": "time_zone_scheduler_agent",
+            "role": "Manages schedules across multiple time zones, ensuring all participants are synchronized for event activities.",
+            "tools": [
+                "scheduling_algorithm_tool"
+            ]
+        },
+        {
+            "name": "technical_support_agent",
+            "role": "Ensures technical systems and platforms are fully operational and integrated for the duration of the challenge.",
+            "tools": [
+                "platform_compatibility_agent"
+            ]
+        },
+        {
+            "name": "platform_compatibility_agent",
+            "role": "Integrates and maintains compatibility between various platforms and tools used during the challenge.",
+            "tools": []
+        },
+        {
+            "name": "mentor_coordinator_agent",
+            "role": "Assigns and manages mentors from different regions and industries to assist participants during the challenge.",
+            "tools": [
+                "international_expert_agent"
+            ]
+        },
+        {
+            "name": "international_expert_agent",
+            "role": "Connects participants with industry experts worldwide and provides cultural and technical advisement.",
+            "tools": [
+                "cultural_advisory_agent"
+            ]
+        },
+        {
+            "name": "cultural_advisory_agent",
+            "role": "Offers guidance respecting cultural differences to ensure inclusive and respectful collaboration.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "scheduling_algorithm_tool",
+            "description": "Calculates optimal schedules for global events considering all participant time zones and availability.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "participants": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "Name of the participant"
+                                },
+                                "time_zone": {
+                                    "type": "string",
+                                    "description": "Time zone of the participant"
+                                }
+                            }
+                        },
+                        "description": "List of participants with their time zones."
+                    },
+                    "event_times": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "description": "Scheduled times for events in UTC"
+                        },
+                        "description": "Suggested event times for coordination."
+                    }
+                }
+            }
+        },
+        {
+            "name": "contract_generation_tool",
+            "description": "Automatically drafts contracts based on the inputs for sponsorship and event logistics.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "sponsor_info": {
+                        "type": "object",
+                        "properties": {
+                            "sponsor_name": {
+                                "type": "string",
+                                "description": "Name of the sponsor"
+                            },
+                            "contribution": {
+                                "type": "number",
+                                "description": "Financial contribution amount"
+                            }
+                        },
+                        "description": "Details about the sponsor and their contribution."
+                    },
+                    "event_details": {
+                        "type": "object",
+                        "properties": {
+                            "event_name": {
+                                "type": "string",
+                                "description": "Name of the event"
+                            },
+                            "date": {
+                                "type": "string",
+                                "description": "Date of the event"
+                            }
+                        },
+                        "description": "Details about the event logistics."
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,272 @@
+{
+    "task": "Design an advanced marine ecosystem management system to monitor and enhance aquatic biodiversity, sustainably manage fishing activities, predict environmental impacts, assess species population dynamics, prevent illegal fishing, and integrate socio-economic benefits for local communities.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "biodiversity_monitoring_agent",
+                "marine_habitat_assessment_agent",
+                "species_interaction_analysis_agent",
+                "ecosystem_trend_forecasting_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "sustainable_fishing_management_agent",
+                "fishing_activity_prediction_agent",
+                "fishing_quota_optimization_agent",
+                "catch_sustainability_evaluation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "environmental_impact_forecaster_agent",
+                "pollution_analysis_agent",
+                "climate_change_effect_agent",
+                "oceanographic_data_integration_tool",
+                "impact_mitigation_suggestions_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "population_dynamics_agent",
+                "species_population_modeling_agent",
+                "genetic_diversity_analysis_agent",
+                "species_recovery_plan_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "illegal_fishing_prevention_agent",
+                "real_time_surveillance_agent",
+                "enforcement_strategy_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "community_benefits_agent",
+                "economic_impact_analysis_agent",
+                "livelihood_enhancement_planner_agent",
+                "stakeholder_engagement_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Centralized coordinator that connects the user with all other agents, ensuring smooth functioning of the marine ecosystem management system.",
+            "tools": [
+                "biodiversity_monitoring_agent",
+                "sustainable_fishing_management_agent",
+                "environmental_impact_forecaster_agent",
+                "population_dynamics_agent",
+                "illegal_fishing_prevention_agent",
+                "community_benefits_agent"
+            ]
+        },
+        {
+            "name": "biodiversity_monitoring_agent",
+            "role": "Monitors marine biodiversity to track ecological changes and trends.",
+            "tools": [
+                "marine_habitat_assessment_agent"
+            ]
+        },
+        {
+            "name": "marine_habitat_assessment_agent",
+            "role": "Assesses the status of marine habitats and checks for biodiversity-rich areas.",
+            "tools": [
+                "species_interaction_analysis_agent"
+            ]
+        },
+        {
+            "name": "species_interaction_analysis_agent",
+            "role": "Analyzes interactions between species to understand ecosystem dependencies.",
+            "tools": [
+                "ecosystem_trend_forecasting_agent"
+            ]
+        },
+        {
+            "name": "ecosystem_trend_forecasting_agent",
+            "role": "Projects future ecosystem trends based on current data and species interactions.",
+            "tools": []
+        },
+        {
+            "name": "sustainable_fishing_management_agent",
+            "role": "Manages sustainable fishing practices to balance ecological health and economic needs.",
+            "tools": [
+                "fishing_activity_prediction_agent"
+            ]
+        },
+        {
+            "name": "fishing_activity_prediction_agent",
+            "role": "Predicts future fishing activities and trends based on historical data.",
+            "tools": [
+                "fishing_quota_optimization_agent"
+            ]
+        },
+        {
+            "name": "fishing_quota_optimization_agent",
+            "role": "Optimizes fishing quotas to ensure long-term sustainability.",
+            "tools": [
+                "catch_sustainability_evaluation_agent"
+            ]
+        },
+        {
+            "name": "catch_sustainability_evaluation_agent",
+            "role": "Evaluates the sustainability of current catch levels against ecological benchmarks.",
+            "tools": []
+        },
+        {
+            "name": "environmental_impact_forecaster_agent",
+            "role": "Forecasts environmental impacts of marine activities to pre-emptively mitigate issues.",
+            "tools": [
+                "pollution_analysis_agent"
+            ]
+        },
+        {
+            "name": "pollution_analysis_agent",
+            "role": "Analyzes levels of marine pollution and their sources.",
+            "tools": [
+                "climate_change_effect_agent"
+            ]
+        },
+        {
+            "name": "climate_change_effect_agent",
+            "role": "Assesses climate change effects on marine ecosystems and forecasts future scenarios.",
+            "tools": [
+                "oceanographic_data_integration_tool",
+                "impact_mitigation_suggestions_agent"
+            ]
+        },
+        {
+            "name": "impact_mitigation_suggestions_agent",
+            "role": "Suggests strategies to mitigate identified environmental impacts.",
+            "tools": []
+        },
+        {
+            "name": "population_dynamics_agent",
+            "role": "Monitors and models species population dynamics to support conservation efforts.",
+            "tools": [
+                "species_population_modeling_agent"
+            ]
+        },
+        {
+            "name": "species_population_modeling_agent",
+            "role": "Models population dynamics using current data to identify risk and recovery areas.",
+            "tools": [
+                "genetic_diversity_analysis_agent"
+            ]
+        },
+        {
+            "name": "genetic_diversity_analysis_agent",
+            "role": "Analyzes genetic diversity to inform species survival strategies.",
+            "tools": [
+                "species_recovery_plan_agent"
+            ]
+        },
+        {
+            "name": "species_recovery_plan_agent",
+            "role": "Develops recovery plans for endangered species based on population dynamics and genetic data.",
+            "tools": []
+        },
+        {
+            "name": "illegal_fishing_prevention_agent",
+            "role": "Prevents illegal fishing activities by monitoring and enforcing regulations.",
+            "tools": [
+                "real_time_surveillance_agent"
+            ]
+        },
+        {
+            "name": "real_time_surveillance_agent",
+            "role": "Provides real-time monitoring of fishing zones to detect illegal activities.",
+            "tools": [
+                "enforcement_strategy_agent"
+            ]
+        },
+        {
+            "name": "enforcement_strategy_agent",
+            "role": "Develops enforcement strategies based on surveillance data to deter illegal fishing.",
+            "tools": []
+        },
+        {
+            "name": "community_benefits_agent",
+            "role": "Ensures socio-economic benefits for communities dependent on marine resources.",
+            "tools": [
+                "economic_impact_analysis_agent"
+            ]
+        },
+        {
+            "name": "economic_impact_analysis_agent",
+            "role": "Analyzes the economic impacts of marine management strategies on local communities.",
+            "tools": [
+                "livelihood_enhancement_planner_agent"
+            ]
+        },
+        {
+            "name": "livelihood_enhancement_planner_agent",
+            "role": "Plans strategies to enhance community livelihoods in harmony with marine conservation.",
+            "tools": [
+                "stakeholder_engagement_tool"
+            ]
+        }
+    ],
+    "tools": [
+        {
+            "name": "oceanographic_data_integration_tool",
+            "description": "Integrates diverse oceanographic datasets for comprehensive analysis.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "data_sources": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of sources from which oceanographic data is compiled."
+                    },
+                    "analysis_types": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Types of analysis to be conducted with the integrated data."
+                    }
+                }
+            }
+        },
+        {
+            "name": "stakeholder_engagement_tool",
+            "description": "Facilitates communication and engagement with community stakeholders.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "stakeholders": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of stakeholders to engage."
+                    },
+                    "communication_channels": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Preferred channels for communication."
+                    },
+                    "feedback_required": {
+                        "type": "boolean",
+                        "description": "Whether feedback from stakeholders is needed."
+                    }
+                }
+            }
+        }
+    ]
+}

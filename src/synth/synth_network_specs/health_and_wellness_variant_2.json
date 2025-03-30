@@ -1,0 +1,185 @@
+{
+    "task": "Develop a holistic mental wellness program that includes mindfulness activities, cognitive behavioral strategies, and social connectivity plans. Ensure the program is adaptable to various levels of mindfulness experience, provides detailed guides, and offers recommendations for wearable technology to monitor mental wellbeing.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "mental_wellness_coordinator_agent",
+                "mindfulness_activity_agent",
+                "guided_meditation_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "mental_wellness_coordinator_agent",
+                "cognitive_behavioral_strategy_agent",
+                "cbt_tracker_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "mental_wellness_coordinator_agent",
+                "social_connectivity_agent",
+                "community_event_finder_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "mental_wellness_coordinator_agent",
+                "wearable_recommendation_agent",
+                "wearable_tech_advisor_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Top-level agent facilitating user interactions and directing the creation of a mental wellness program.",
+            "tools": [
+                "mental_wellness_coordinator_agent"
+            ]
+        },
+        {
+            "name": "mental_wellness_coordinator_agent",
+            "role": "Coordinates the development of a comprehensive mental wellness program, integrating different strategies and tools.",
+            "tools": [
+                "mindfulness_activity_agent",
+                "cognitive_behavioral_strategy_agent",
+                "social_connectivity_agent",
+                "wearable_recommendation_agent"
+            ]
+        },
+        {
+            "name": "mindfulness_activity_agent",
+            "role": "Designs a series of mindfulness activities adaptable to user's experience level.",
+            "tools": [
+                "guided_meditation_tool"
+            ]
+        },
+        {
+            "name": "cognitive_behavioral_strategy_agent",
+            "role": "Formulates cognitive behavioral strategies to address mental wellness challenges.",
+            "tools": [
+                "cbt_tracker_tool"
+            ]
+        },
+        {
+            "name": "social_connectivity_agent",
+            "role": "Creates a plan to improve social connections and find community events.",
+            "tools": [
+                "community_event_finder_tool"
+            ]
+        },
+        {
+            "name": "wearable_recommendation_agent",
+            "role": "Suggests wearable technology options that can track and support mental wellbeing.",
+            "tools": [
+                "wearable_tech_advisor_tool"
+            ]
+        },
+        {
+            "name": "guided_meditation_tool",
+            "role": "Provides guided meditation sessions tailored to the user's mindfulness level.",
+            "tools": []
+        },
+        {
+            "name": "cbt_tracker_tool",
+            "role": "Tracks and organizes the user's progress through cognitive behavioral therapy exercises.",
+            "tools": []
+        },
+        {
+            "name": "community_event_finder_tool",
+            "role": "Finds local events and social groups that match the user's interests and availability.",
+            "tools": []
+        },
+        {
+            "name": "wearable_tech_advisor_tool",
+            "role": "Advises on wearable tech based on the user's lifestyle and mental health goals.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "guided_meditation_tool",
+            "description": "Delivers personalized meditation guides, adjusting to skill level and user's feedback.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "experience_level": {
+                        "type": "string",
+                        "description": "User's mindfulness experience level, e.g., beginner, intermediate, advanced."
+                    },
+                    "meditation_duration": {
+                        "type": "number",
+                        "description": "Desired duration for meditation sessions in minutes."
+                    }
+                }
+            }
+        },
+        {
+            "name": "cbt_tracker_tool",
+            "description": "Monitors user's progress in cognitive behavioral strategies with personalized feedback.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "goals": {
+                        "type": "string",
+                        "description": "Mental wellness goals the user aims to achieve through CBT."
+                    },
+                    "session_notes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Notes from past CBT sessions for tracking progress."
+                    }
+                }
+            }
+        },
+        {
+            "name": "community_event_finder_tool",
+            "description": "Discovers social events that align with user interests and social goals.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "interests": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of user interests for finding relevant community events."
+                    },
+                    "availability": {
+                        "type": "string",
+                        "description": "User's availability for attending events."
+                    }
+                }
+            }
+        },
+        {
+            "name": "wearable_tech_advisor_tool",
+            "description": "Provides recommendations on wearable tech to monitor mental health based on user preferences.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "preferred_features": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "User's preferred features for wearable technology, e.g., heart rate monitor, sleep tracker."
+                    },
+                    "budget": {
+                        "type": "number",
+                        "description": "Maximum budget available for purchasing wearable technology."
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,281 @@
+{
+    "task": "Facilitate a 72-hour hackathon for graduate students focused on developing AI-driven solutions for smart cities, incorporating real-time data analysis, virtual collaboration spaces, challenge-specific mentorship, and compliance evaluation.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "event_manager_agent",
+                "collaboration_platform_agent",
+                "virtual_meeting_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "data_services_agent",
+                "real_time_data_collector_agent",
+                "city_data_analysis_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "event_manager_agent",
+                "financial_planner_agent",
+                "sponsorship_funding_agent",
+                "regulatory_compliance_agent",
+                "regulation_assessment_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "technical_workflow_agent",
+                "development_environment_agent",
+                "resource_management_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "event_manager_agent",
+                "mentorship_coordinator_agent",
+                "industry_leader_connector_agent",
+                "mentorship_feedback_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "support_services_agent",
+                "tech_support_agent",
+                "hardware_indicator_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The primary agent facilitating setup, execution, and monitoring of the 72-hour hackathon, while interfacing with participants.",
+            "tools": [
+                "event_manager_agent",
+                "data_services_agent",
+                "technical_workflow_agent",
+                "support_services_agent"
+            ]
+        },
+        {
+            "name": "event_manager_agent",
+            "role": "Oversees logistics and coordination of the hackathon, ensuring seamless integration of sessions and resources.",
+            "tools": [
+                "collaboration_platform_agent",
+                "financial_planner_agent",
+                "mentorship_coordinator_agent"
+            ]
+        },
+        {
+            "name": "collaboration_platform_agent",
+            "role": "Enables real-time communication and collaboration through virtual meeting and project management tools.",
+            "tools": [
+                "virtual_meeting_tool"
+            ]
+        },
+        {
+            "name": "data_services_agent",
+            "role": "Provides data feeds and analytics services to participants by leveraging real-time data sources.",
+            "tools": [
+                "real_time_data_collector_agent"
+            ]
+        },
+        {
+            "name": "real_time_data_collector_agent",
+            "role": "Collects and processes real-time data relevant to smart city applications.",
+            "tools": [
+                "city_data_analysis_agent",
+                "environmental_sensor_agent"
+            ]
+        },
+        {
+            "name": "city_data_analysis_agent",
+            "role": "Analyzes urban datasets for insights into transportation, utilities, and infrastructure management.",
+            "tools": []
+        },
+        {
+            "name": "environmental_sensor_agent",
+            "role": "Monitors environmental data and parameters critical to the sustainability aspects of smart cities.",
+            "tools": []
+        },
+        {
+            "name": "financial_planner_agent",
+            "role": "Coordinates financial aspects, including funding and budget allocation for the hackathon.",
+            "tools": [
+                "sponsorship_funding_agent"
+            ]
+        },
+        {
+            "name": "sponsorship_funding_agent",
+            "role": "Engages with sponsors and manages the inflow of funds to support hackathon functionalities.",
+            "tools": [
+                "regulatory_compliance_agent"
+            ]
+        },
+        {
+            "name": "regulatory_compliance_agent",
+            "role": "Ensures all projects adhere to relevant city and technology regulations.",
+            "tools": [
+                "regulation_assessment_tool",
+                "legal_advisory_agent"
+            ]
+        },
+        {
+            "name": "legal_advisory_agent",
+            "role": "Provides legal guidance and consultations for hackathon projects focused on legal and regulatory compliance.",
+            "tools": []
+        },
+        {
+            "name": "technical_workflow_agent",
+            "role": "Supports technical collaboration, offering tools for coding, resource management, and project integration.",
+            "tools": [
+                "development_environment_agent",
+                "devops_support_agent"
+            ]
+        },
+        {
+            "name": "devops_support_agent",
+            "role": "Provides DevOps support to ensure continuous integration and deployment pipelines function smoothly.",
+            "tools": []
+        },
+        {
+            "name": "development_environment_agent",
+            "role": "Provides participants with access to necessary development frameworks and resources.",
+            "tools": [
+                "resource_management_tool"
+            ]
+        },
+        {
+            "name": "support_services_agent",
+            "role": "Provides technical support and troubleshooting services for hackathon participants.",
+            "tools": [
+                "tech_support_agent"
+            ]
+        },
+        {
+            "name": "tech_support_agent",
+            "role": "Diagnoses and solves hardware and software issues that arise during the hackathon.",
+            "tools": [
+                "hardware_indicator_tool"
+            ]
+        },
+        {
+            "name": "mentorship_coordinator_agent",
+            "role": "Facilitates connections with mentors from industry and academia tailored to specific challenges.",
+            "tools": [
+                "industry_leader_connector_agent"
+            ]
+        },
+        {
+            "name": "industry_leader_connector_agent",
+            "role": "Links teams with thought leaders who provide specialized guidance and critique.",
+            "tools": [
+                "mentorship_feedback_tool"
+            ]
+        }
+    ],
+    "tools": [
+        {
+            "name": "virtual_meeting_tool",
+            "description": "Facilitates virtual video meetings with capabilities for screen sharing and interactive workshops.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "meeting_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the virtual meeting."
+                    },
+                    "host_name": {
+                        "type": "string",
+                        "description": "Name of the host organizing the meeting."
+                    },
+                    "attendees": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "description": "List of attendee names."
+                        },
+                        "description": "Names of attendees for the meeting."
+                    }
+                }
+            }
+        },
+        {
+            "name": "regulation_assessment_tool",
+            "description": "Evaluates project proposals against legal and regulatory criteria for smart cities.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "project_id": {
+                        "type": "string",
+                        "description": "Identifier for the project undergoing compliance evaluation."
+                    },
+                    "compliance_criteria": {
+                        "type": "string",
+                        "description": "Set of criteria used for compliance assessment."
+                    }
+                }
+            }
+        },
+        {
+            "name": "resource_management_tool",
+            "description": "Helps allocate computational and network resources for development tasks.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "resource_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the resource."
+                    },
+                    "allocation_parameters": {
+                        "type": "object",
+                        "description": "Parameters defining the extent of usage for the allocated resources."
+                    }
+                }
+            }
+        },
+        {
+            "name": "hardware_indicator_tool",
+            "description": "Monitors and indicates the status of hardware components in the development setup.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "component_id": {
+                        "type": "string",
+                        "description": "Identifier for the hardware component being monitored."
+                    },
+                    "status_metrics": {
+                        "type": "object",
+                        "description": "Metrics indicating the operational status of the hardware."
+                    }
+                }
+            }
+        },
+        {
+            "name": "mentorship_feedback_tool",
+            "description": "Collects and organizes feedback provided by mentors on participant progress.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "session_id": {
+                        "type": "string",
+                        "description": "Identifier for the mentorship session."
+                    },
+                    "feedback_summary": {
+                        "type": "string",
+                        "description": "Summary of feedback given by mentors."
+                    }
+                }
+            }
+        }
+    ]
+}

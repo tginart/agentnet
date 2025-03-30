@@ -1,0 +1,178 @@
+{
+    "task": "Find me a recipe that is gluten-free and can be prepared within 30 minutes using a chicken breast, and provide nutritional information, a cooking video, and shopping list suggestions.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "recipe_search_agent",
+                "quick_meals_tool",
+                "shopping_list_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "recipe_search_agent",
+                "gluten_free_recipes_agent",
+                "nutritional_info_tool",
+                "shopping_list_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "recipe_search_agent",
+                "video_tutorial_agent",
+                "cooking_video_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "health_and_diet_advisor_agent",
+                "nutritional_info_tool",
+                "shopping_list_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Top-level client agent communicating with the user and orchestrating other agents.",
+            "tools": [
+                "recipe_search_agent",
+                "health_and_diet_advisor_agent"
+            ]
+        },
+        {
+            "name": "recipe_search_agent",
+            "role": "Agent that queries recipe databases and delegates tasks to specialized agents based on dietary restrictions and preparation time.",
+            "tools": [
+                "quick_meals_tool",
+                "gluten_free_recipes_agent",
+                "video_tutorial_agent"
+            ]
+        },
+        {
+            "name": "health_and_diet_advisor_agent",
+            "role": "Agent providing health and dietary advice, including nutritional analysis and recommendations.",
+            "tools": [
+                "nutritional_info_tool",
+                "shopping_list_tool"
+            ]
+        },
+        {
+            "name": "gluten_free_recipes_agent",
+            "role": "Agent that specializes in finding gluten-free recipes only.",
+            "tools": [
+                "nutritional_info_tool",
+                "shopping_list_agent"
+            ]
+        },
+        {
+            "name": "video_tutorial_agent",
+            "role": "Agent that finds and delivers cooking video tutorials.",
+            "tools": [
+                "cooking_video_tool"
+            ]
+        },
+        {
+            "name": "shopping_list_agent",
+            "role": "Agent that helps create a shopping list based on given recipes and ingredients.",
+            "tools": [
+                "shopping_list_tool"
+            ]
+        },
+        {
+            "name": "quick_meals_tool",
+            "role": "Leaf node tool to find recipes that can be prepared in under 30 minutes.",
+            "tools": []
+        },
+        {
+            "name": "nutritional_info_tool",
+            "role": "Leaf node tool to provide nutritional information for a given recipe.",
+            "tools": []
+        },
+        {
+            "name": "cooking_video_tool",
+            "role": "Leaf node tool to find and provide a cooking video tutorial for a recipe.",
+            "tools": []
+        },
+        {
+            "name": "shopping_list_tool",
+            "role": "Leaf node tool to generate a shopping list from a list of ingredients.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "quick_meals_tool",
+            "description": "Tool to find recipes that can be prepared in under 30 minutes.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "main_ingredient": {
+                        "type": "string",
+                        "description": "The main ingredient for the recipe."
+                    },
+                    "max_preparation_time": {
+                        "type": "number",
+                        "description": "Maximum preparation time in minutes."
+                    }
+                }
+            }
+        },
+        {
+            "name": "nutritional_info_tool",
+            "description": "Tool to provide nutritional information for a given recipe.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "recipe_id": {
+                        "type": "string",
+                        "description": "The identifier of the recipe."
+                    },
+                    "include_details": {
+                        "type": "boolean",
+                        "description": "Flag to include detailed nutritional breakdown."
+                    }
+                }
+            }
+        },
+        {
+            "name": "cooking_video_tool",
+            "description": "Tool to find and provide a cooking video tutorial for a recipe.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "recipe_title": {
+                        "type": "string",
+                        "description": "Title of the recipe for which the video tutorial is needed."
+                    },
+                    "preferred_platform": {
+                        "type": "string",
+                        "description": "Preferred platform for video tutorials (e.g., YouTube)."
+                    }
+                }
+            }
+        },
+        {
+            "name": "shopping_list_tool",
+            "description": "Tool to generate a shopping list based on the ingredients required for a recipe.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "ingredients": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of ingredients needed for the recipe."
+                    }
+                }
+            }
+        }
+    ]
+}

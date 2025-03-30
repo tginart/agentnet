@@ -1,0 +1,292 @@
+{
+    "task": "Organize a comprehensive film festival in Paris with specific requirements: 1. Coordinate international travel for VIP guests using sustainable airlines. 2. Secure accommodations in eco-certified hotels. 3. Curate a screening schedule of diverse international films, ensuring representation from every continent. 4. Plan networking events focusing on cross-cultural collaborations. 5. Ensure all activities comply with international film distribution regulations. 6. Develop a marketing campaign targeting global audiences using digital platforms. 7. Conduct an analysis ensuring the entire festival's carbon footprint is neutralized. 8. Provide gourmet halal, vegan, and gluten-free catering options.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "travel_coordinator_agent",
+                "vip_transportation_agent",
+                "sustainable_airline_analysis_agent",
+                "carbon_offsetting_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "travel_coordinator_agent",
+                "eco_accommodation_agent",
+                "green_hotel_certification_verifier",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "film_programmer_agent",
+                "cultural_diversity_agent",
+                "continent_representative_agent",
+                "festival_theme_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "networking_event_planner_agent",
+                "cross_cultural_collaborations_agent",
+                "event_logistics_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "legal_compliance_agent",
+                "film_distribution_regulations_agent",
+                "regulatory_documentation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "marketing_director_agent",
+                "digital_platform_agent",
+                "audience_engagement_analysis_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "environmental_impact_agent",
+                "carbon_footprint_analysis_agent",
+                "carbon_offset_strategy_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "culinary_agent",
+                "special_dietary_requirements_agent",
+                "gourmet_catering_agent",
+                "local_supplier_contact_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level agent coordinating the entire film festival organization, communicating directly with the user.",
+            "tools": [
+                "travel_coordinator_agent",
+                "film_programmer_agent",
+                "networking_event_planner_agent",
+                "legal_compliance_agent",
+                "marketing_director_agent",
+                "environmental_impact_agent",
+                "culinary_agent"
+            ]
+        },
+        {
+            "name": "travel_coordinator_agent",
+            "role": "Manages international travel and accommodation for all festival VIP guests.",
+            "tools": [
+                "vip_transportation_agent",
+                "eco_accommodation_agent"
+            ]
+        },
+        {
+            "name": "vip_transportation_agent",
+            "role": "Arranges sustainable air travel for VIP guests, ensuring eco-friendliness.",
+            "tools": [
+                "sustainable_airline_analysis_agent"
+            ]
+        },
+        {
+            "name": "sustainable_airline_analysis_agent",
+            "role": "Analyzes airlines for sustainability and eco-friendliness.",
+            "tools": []
+        },
+        {
+            "name": "eco_accommodation_agent",
+            "role": "Secures hotel accommodations with eco-certification for festival attendees.",
+            "tools": [
+                "green_hotel_certification_verifier"
+            ]
+        },
+        {
+            "name": "green_hotel_certification_verifier",
+            "role": "Verifies the green certification of selected hotels.",
+            "tools": []
+        },
+        {
+            "name": "film_programmer_agent",
+            "role": "Curates the film festival lineup, focusing on diversity and international representation.",
+            "tools": [
+                "cultural_diversity_agent"
+            ]
+        },
+        {
+            "name": "cultural_diversity_agent",
+            "role": "Ensures film selection for the festival includes global cultural representation.",
+            "tools": [
+                "continent_representative_agent"
+            ]
+        },
+        {
+            "name": "continent_representative_agent",
+            "role": "Oversees selection of films from each continent to maintain diverse representation.",
+            "tools": [
+                "festival_theme_agent"
+            ]
+        },
+        {
+            "name": "festival_theme_agent",
+            "role": "Develops thematic elements for the festival based on selected films.",
+            "tools": []
+        },
+        {
+            "name": "networking_event_planner_agent",
+            "role": "Designs networking opportunities that foster cross-cultural artistic collaborations.",
+            "tools": [
+                "cross_cultural_collaborations_agent"
+            ]
+        },
+        {
+            "name": "cross_cultural_collaborations_agent",
+            "role": "Creates networking sessions aimed at encouraging cross-cultural collaborations.",
+            "tools": [
+                "event_logistics_agent"
+            ]
+        },
+        {
+            "name": "event_logistics_agent",
+            "role": "Organizes logistics required for networking events at the festival.",
+            "tools": []
+        },
+        {
+            "name": "legal_compliance_agent",
+            "role": "Handles compliance with international film distribution and screening regulations.",
+            "tools": [
+                "film_distribution_regulations_agent"
+            ]
+        },
+        {
+            "name": "film_distribution_regulations_agent",
+            "role": "Ensures all designated films comply with distribution laws.",
+            "tools": [
+                "regulatory_documentation_agent"
+            ]
+        },
+        {
+            "name": "regulatory_documentation_agent",
+            "role": "Prepares necessary documentation for regulatory compliance.",
+            "tools": []
+        },
+        {
+            "name": "marketing_director_agent",
+            "role": "Directs the festival's marketing strategy, focusing on global audience reach.",
+            "tools": [
+                "digital_platform_agent"
+            ]
+        },
+        {
+            "name": "digital_platform_agent",
+            "role": "Manages global campaign engagement across digital platforms.",
+            "tools": [
+                "audience_engagement_analysis_tool"
+            ]
+        },
+        {
+            "name": "environmental_impact_agent",
+            "role": "Assesses and neutralizes the carbon footprint of the film festival.",
+            "tools": [
+                "carbon_footprint_analysis_agent"
+            ]
+        },
+        {
+            "name": "carbon_footprint_analysis_agent",
+            "role": "Analyzes and aids in offsetting the festival's carbon footprint.",
+            "tools": [
+                "carbon_offset_strategy_agent"
+            ]
+        },
+        {
+            "name": "carbon_offset_strategy_agent",
+            "role": "Develops strategies to neutralize the festival's overall carbon footprint.",
+            "tools": []
+        },
+        {
+            "name": "culinary_agent",
+            "role": "Organizes catering with special diet options, including halal, vegan, and gluten-free menus.",
+            "tools": [
+                "special_dietary_requirements_agent",
+                "local_supplier_contact_agent"
+            ]
+        },
+        {
+            "name": "special_dietary_requirements_agent",
+            "role": "Ensures catering options meet diverse dietary needs and ethical standards.",
+            "tools": [
+                "gourmet_catering_agent"
+            ]
+        },
+        {
+            "name": "gourmet_catering_agent",
+            "role": "Focuses on providing gourmet-level catering with diverse dietary options.",
+            "tools": []
+        },
+        {
+            "name": "local_supplier_contact_agent",
+            "role": "Connects with local suppliers to source ingredients for catering.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "audience_engagement_analysis_tool",
+            "description": "Analyzes engagement metrics to optimize marketing strategies.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "campaign_id": {
+                        "type": "string",
+                        "description": "Identifier for the marketing campaign."
+                    },
+                    "engagement_metrics": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of engagement metrics to analyze."
+                    },
+                    "suggested_improvements": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Potential enhancements for improving campaign reach."
+                    }
+                }
+            }
+        },
+        {
+            "name": "carbon_offsetting_tool",
+            "description": "Calculates and analyzes offsets for carbon emissions.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "flight_distance": {
+                        "type": "number",
+                        "description": "Distance of the flight in kilometers."
+                    },
+                    "passenger_count": {
+                        "type": "number",
+                        "description": "Number of passengers traveling."
+                    },
+                    "travel_class": {
+                        "type": "string",
+                        "description": "Class of travel (economy, business, etc.)."
+                    }
+                }
+            }
+        }
+    ]
+}

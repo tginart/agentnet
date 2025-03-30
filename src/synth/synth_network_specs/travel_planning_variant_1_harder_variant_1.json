@@ -1,0 +1,313 @@
+{
+    "task": "Organize and execute a comprehensive family reunion event. The reunion should include the following: 1. Select a suitable venue that accommodates 50 guests with facilities for both indoor and outdoor activities. 2. Plan a 3-day schedule filled with a variety of activities for all age groups, including local tours, games, and a cultural night. 3. Arrange catering services providing breakfast, lunch, and dinner, including options for dietary restrictions. 4. Coordinate transportation for out-of-town guests, including airport pickups and drop-offs. 5. Ensure the total budget remains under $10,000. 6. Implement a memory-making station with photography services and a scrapbook creation area. 7. Manage RSVPs and provide a digital copy of the itinerary and checking details to attendees.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "event_planning_agent",
+                "venue_selection_agent",
+                "facility_review_agent",
+                "location_assessment_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "schedule_management_agent",
+                "activity_planner_agent",
+                "local_tour_agent",
+                "historical_sites_expert_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "catering_management_agent",
+                "menu_customization_agent",
+                "dietary_needs_agent",
+                "ingredient_sourcing_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "transportation_agent",
+                "vehicle_booking_agent",
+                "route_optimization_agent",
+                "airport_services_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "budget_control_agent",
+                "finance_tool",
+                "cost_analysis_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "memory_station_agent",
+                "photography_agent",
+                "photo_booth_agent",
+                "scrapbooking_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "rsvp_management_agent",
+                "itinerary_distribution_agent",
+                "digital_copy_sender_agent",
+                "cloud_storage_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Top-level agent orchestrating the family reunion planning, interactions with users, and delegating tasks to specialized agents.",
+            "tools": [
+                "event_planning_agent",
+                "schedule_management_agent",
+                "catering_management_agent",
+                "transportation_agent",
+                "budget_control_agent",
+                "memory_station_agent",
+                "rsvp_management_agent"
+            ]
+        },
+        {
+            "name": "event_planning_agent",
+            "role": "Responsible for the overall planning of the reunion event, especially the selection of venue and coordinating logistics.",
+            "tools": [
+                "venue_selection_agent"
+            ]
+        },
+        {
+            "name": "schedule_management_agent",
+            "role": "Handles the creation and management of the event schedule, making sure there's a variety of activities for everyone involved.",
+            "tools": [
+                "activity_planner_agent"
+            ]
+        },
+        {
+            "name": "catering_management_agent",
+            "role": "Oversees the catering requirements, ensuring meals are well-planned and accommodate dietary restrictions.",
+            "tools": [
+                "menu_customization_agent"
+            ]
+        },
+        {
+            "name": "transportation_agent",
+            "role": "Coordinates all transportation needs including guest pickups, drop-offs, and intra-event transport solutions.",
+            "tools": [
+                "vehicle_booking_agent"
+            ]
+        },
+        {
+            "name": "budget_control_agent",
+            "role": "Monitors and ensures that spending is within the $10,000 budget, allocating funds smartly across all activities.",
+            "tools": [
+                "finance_tool",
+                "cost_analysis_agent"
+            ]
+        },
+        {
+            "name": "memory_station_agent",
+            "role": "Arranges for a photography service and scrapbook creation area to preserve memories of the reunion.",
+            "tools": [
+                "photography_agent",
+                "scrapbooking_agent"
+            ]
+        },
+        {
+            "name": "rsvp_management_agent",
+            "role": "Manages guest RSVPs, keeps track of attendance, and oversees the distribution of event information.",
+            "tools": [
+                "itinerary_distribution_agent"
+            ]
+        },
+        {
+            "name": "venue_selection_agent",
+            "role": "Finds an appropriate venue that can accommodate the family reunion, ensuring it meets all specified requirements.",
+            "tools": [
+                "facility_review_agent"
+            ]
+        },
+        {
+            "name": "facility_review_agent",
+            "role": "Evaluates the facilities of the shortlisted venues to determine suitability for the event activities.",
+            "tools": [
+                "location_assessment_agent"
+            ]
+        },
+        {
+            "name": "activity_planner_agent",
+            "role": "Designs a variety of activities appealing to different age groups, including arranging local tours.",
+            "tools": [
+                "local_tour_agent"
+            ]
+        },
+        {
+            "name": "local_tour_agent",
+            "role": "Specializes in organizing guided tours to local attractions or places of interest for guests.",
+            "tools": [
+                "historical_sites_expert_agent"
+            ]
+        },
+        {
+            "name": "menu_customization_agent",
+            "role": "Works on creating a diverse menu while addressing dietary restrictions and special needs.",
+            "tools": [
+                "dietary_needs_agent"
+            ]
+        },
+        {
+            "name": "dietary_needs_agent",
+            "role": "Ensures that meal options are available for guests with specific dietary needs like vegan or gluten-free.",
+            "tools": [
+                "ingredient_sourcing_agent"
+            ]
+        },
+        {
+            "name": "vehicle_booking_agent",
+            "role": "Handles transportation bookings by coordinating with local car rental services and airport shuttle providers.",
+            "tools": [
+                "route_optimization_agent",
+                "airport_services_agent"
+            ]
+        },
+        {
+            "name": "route_optimization_agent",
+            "role": "Optimizes transportation routes to ensure efficient travel between destinations.",
+            "tools": []
+        },
+        {
+            "name": "photography_agent",
+            "role": "Provides professional photography services to capture memorable moments during the event.",
+            "tools": [
+                "photo_booth_agent"
+            ]
+        },
+        {
+            "name": "scrapbooking_agent",
+            "role": "Facilitates the creation of a scrapbook as a keepsake for guests using event photos and memorabilia.",
+            "tools": []
+        },
+        {
+            "name": "photo_booth_agent",
+            "role": "Sets up and manages interactive photography stations at the event.",
+            "tools": []
+        },
+        {
+            "name": "itinerary_distribution_agent",
+            "role": "Prepares and distributes digital itineraries and event details to all confirmed attendees.",
+            "tools": [
+                "digital_copy_sender_agent"
+            ]
+        },
+        {
+            "name": "digital_copy_sender_agent",
+            "role": "Ensures that all guests receive a digital copy of the itinerary and vital event details.",
+            "tools": [
+                "cloud_storage_agent"
+            ]
+        },
+        {
+            "name": "location_assessment_agent",
+            "role": "Conducts thorough assessments of venues' capabilities and amenities for large family gatherings.",
+            "tools": []
+        },
+        {
+            "name": "historical_sites_expert_agent",
+            "role": "Provides expert guidance on notable historical sites that can be included in the tour package.",
+            "tools": []
+        },
+        {
+            "name": "ingredient_sourcing_agent",
+            "role": "Sources high-quality ingredients for catering while ensuring dietary compliance.",
+            "tools": []
+        },
+        {
+            "name": "cloud_storage_agent",
+            "role": "Stores and manages digital event materials such as itineraries and photos securely.",
+            "tools": []
+        },
+        {
+            "name": "cost_analysis_agent",
+            "role": "Analyzes and provides detailed reporting of event costs to aid budget compliance.",
+            "tools": []
+        },
+        {
+            "name": "airport_services_agent",
+            "role": "Focuses on coordinating transport services for airport arrivals and departures efficiently.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "finance_tool",
+            "description": "A tool for managing and tracking expenses against the predetermined budget to keep the event within financial limits.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "budget_limit": {
+                        "type": "number",
+                        "description": "The maximum amount available for the event."
+                    },
+                    "expenses": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "category": {
+                                    "type": "string",
+                                    "description": "The category of the expense (e.g., Catering, Venue)."
+                                },
+                                "amount": {
+                                    "type": "number",
+                                    "description": "The cost attributed to this category."
+                                }
+                            }
+                        },
+                        "description": "A list of current expenses with amounts to track spending."
+                    }
+                }
+            }
+        },
+        {
+            "name": "event_communication_tool",
+            "description": "Facilitates communication of event details to all attendees via email or text.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "attendees": {
+                        "type": "array",
+                        "description": "List of attendees to communicate with.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "Name of the attendee."
+                                },
+                                "contact_info": {
+                                    "type": "string",
+                                    "description": "Either email or phone number for the attendee."
+                                }
+                            }
+                        }
+                    },
+                    "message_content": {
+                        "type": "string",
+                        "description": "The content of the message to be sent to attendees."
+                    }
+                }
+            }
+        }
+    ]
+}

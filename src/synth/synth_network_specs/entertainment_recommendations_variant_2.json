@@ -1,0 +1,200 @@
+{
+    "task": "Create a personalized cultural entertainment itinerary for a family day out, including suitable films, live theater events, and family-friendly attractions in New York City.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "cultural_itinerary_agent",
+                "family_film_recommender_agent",
+                "cinema_database_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "cultural_itinerary_agent",
+                "theater_event_agent",
+                "event_ticket_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "cultural_itinerary_agent",
+                "attraction_planner_agent",
+                "weather_checker_agent",
+                "attraction_finder_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "cultural_itinerary_agent",
+                "social_media_trends_agent",
+                "cultural_trends_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "cultural_itinerary_agent",
+                "feedback_collection_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "cultural_itinerary_agent",
+                "local_guides_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Serves as the primary interface with the user, orchestrating the development of a family day cultural itinerary.",
+            "tools": [
+                "cultural_itinerary_agent"
+            ]
+        },
+        {
+            "name": "cultural_itinerary_agent",
+            "role": "Responsible for compiling a diverse cultural itinerary that includes films, theater events, and attractions suitable for the whole family.",
+            "tools": [
+                "family_film_recommender_agent",
+                "theater_event_agent",
+                "attraction_planner_agent",
+                "feedback_collection_agent",
+                "social_media_trends_agent",
+                "local_guides_agent"
+            ]
+        },
+        {
+            "name": "family_film_recommender_agent",
+            "role": "Specializes in recommending family-friendly films playing in local cinemas.",
+            "tools": [
+                "cinema_database_tool"
+            ]
+        },
+        {
+            "name": "theater_event_agent",
+            "role": "Sources live theater events suitable for family enjoyment and retrieves ticket availability.",
+            "tools": [
+                "event_ticket_tool"
+            ]
+        },
+        {
+            "name": "attraction_planner_agent",
+            "role": "Plans visits to popular family-friendly attractions considering the current weather forecast.",
+            "tools": [
+                "attraction_finder_tool",
+                "weather_checker_agent"
+            ]
+        },
+        {
+            "name": "weather_checker_agent",
+            "role": "Provides up-to-date weather information to ensure that the attraction plans are suitable given current conditions.",
+            "tools": [
+                "weather_service_tool"
+            ]
+        },
+        {
+            "name": "feedback_collection_agent",
+            "role": "Collects feedback from the family after the event day to improve future itinerary suggestions.",
+            "tools": []
+        },
+        {
+            "name": "social_media_trends_agent",
+            "role": "Analyzes social media to identify trending family activities and popular destinations.",
+            "tools": [
+                "cultural_trends_agent"
+            ]
+        },
+        {
+            "name": "cultural_trends_agent",
+            "role": "Monitors broad cultural trends to ensure itinerary suggestions are up-to-date and engaging.",
+            "tools": []
+        },
+        {
+            "name": "local_guides_agent",
+            "role": "Consults with local guides to provide insider tips and suggestions for hidden gems in New York City.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "cinema_database_tool",
+            "description": "Accesses a local cinema database to find current family-friendly films and showtimes.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "film_genre": {
+                        "type": "string",
+                        "description": "Genre of the film to filter family-friendly options."
+                    },
+                    "showtime_range": {
+                        "type": "string",
+                        "description": "Preferred time range for film showings."
+                    }
+                }
+            }
+        },
+        {
+            "name": "event_ticket_tool",
+            "description": "Retrieves live theater event details and ticket availability specifically targeting family-friendly productions.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "event_type": {
+                        "type": "string",
+                        "description": "Type of theater event (e.g., musical, play, etc.)."
+                    },
+                    "date": {
+                        "type": "string",
+                        "description": "The date for which the ticket availability is required."
+                    }
+                }
+            }
+        },
+        {
+            "name": "attraction_finder_tool",
+            "description": "Finds popular family attractions and plans visits according to the weather conditions.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "attraction_type": {
+                        "type": "string",
+                        "description": "Type of attraction suitable for family outings."
+                    },
+                    "location": {
+                        "type": "string",
+                        "description": "Specific area within New York City where attractions should be located."
+                    },
+                    "current_weather": {
+                        "type": "string",
+                        "description": "Weather conditions to consider when planning the visit."
+                    }
+                }
+            }
+        },
+        {
+            "name": "weather_service_tool",
+            "description": "Provides real-time weather forecast and updates to enable optimal planning.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "city": {
+                        "type": "string",
+                        "description": "City for which weather forecasts need to be retrieved."
+                    },
+                    "time_of_day": {
+                        "type": "string",
+                        "description": "Time of day for which the weather forecast is needed."
+                    }
+                }
+            }
+        }
+    ]
+}

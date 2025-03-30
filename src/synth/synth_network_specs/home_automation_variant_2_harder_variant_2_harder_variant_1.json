@@ -1,0 +1,379 @@
+{
+    "task": "Develop a comprehensive and adaptive security management system for a futuristic office building. The system should integrate surveillance analytics, biometric access control, energy consumption optimization, guided evacuation protocols, environmental health monitoring, and generate a weekly security and environmental report. It should handle real-time adjustments and predictive maintenance based on data analytics.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "security_management_agent",
+                "surveillance_center_agent",
+                "video_analytics_agent",
+                "pattern_recognition_agent",
+                "suspicious_activity_detector_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "security_management_agent",
+                "biometric_access_agent",
+                "access_approval_agent",
+                "fingerprint_scanner_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "security_management_agent",
+                "energy_management_agent",
+                "energy_optimizer_agent",
+                "distribution_control_agent",
+                "load_distribution_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "security_management_agent",
+                "evacuation_coordinator_agent",
+                "evacuation_strategy_agent",
+                "path_finder_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "security_management_agent",
+                "environmental_monitor_agent",
+                "air_quality_agent",
+                "carbon_footprint_calculator_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "security_management_agent",
+                "reporting_center_agent",
+                "weekly_summary_report_agent",
+                "compile_weekly_report_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "security_management_agent",
+                "environmental_monitor_agent",
+                "water_quality_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "security_management_agent",
+                "surveillance_center_agent",
+                "face_recognition_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "security_management_agent",
+                "maintenance_planning_agent",
+                "predictive_maintenance_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "security_management_agent",
+                "cyber_security_agent",
+                "network_monitor_agent",
+                "intrusion_detection_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The primary interface agent that manages requests and orchestrates the security and environmental operations in the office building.",
+            "tools": [
+                "security_management_agent"
+            ]
+        },
+        {
+            "name": "security_management_agent",
+            "role": "Oversees all security protocols, coordinates various sub-agents to support an adaptive and comprehensive security system.",
+            "tools": [
+                "surveillance_center_agent",
+                "biometric_access_agent",
+                "energy_management_agent",
+                "evacuation_coordinator_agent",
+                "environmental_monitor_agent",
+                "reporting_center_agent",
+                "maintenance_planning_agent",
+                "cyber_security_agent"
+            ]
+        },
+        {
+            "name": "surveillance_center_agent",
+            "role": "Monitors and analyzes video feeds to ensure security and safety in the building.",
+            "tools": [
+                "video_analytics_agent",
+                "face_recognition_agent"
+            ]
+        },
+        {
+            "name": "video_analytics_agent",
+            "role": "Analyzes video data for unusual or suspicious activities within the premises.",
+            "tools": [
+                "pattern_recognition_agent"
+            ]
+        },
+        {
+            "name": "pattern_recognition_agent",
+            "role": "Utilizes machine learning to identify suspicious patterns in surveillance data.",
+            "tools": [
+                "suspicious_activity_detector_tool"
+            ]
+        },
+        {
+            "name": "face_recognition_agent",
+            "role": "Performs facial recognition to identify authorized personnel and potential intruders.",
+            "tools": []
+        },
+        {
+            "name": "biometric_access_agent",
+            "role": "Manages biometric authentication systems for secure access to different areas of the building.",
+            "tools": [
+                "access_approval_agent"
+            ]
+        },
+        {
+            "name": "access_approval_agent",
+            "role": "Authorizes or denies access based on biometric data and security protocols.",
+            "tools": [
+                "fingerprint_scanner_tool"
+            ]
+        },
+        {
+            "name": "energy_management_agent",
+            "role": "Optimizes energy consumption and efficiency throughout the building.",
+            "tools": [
+                "energy_optimizer_agent"
+            ]
+        },
+        {
+            "name": "energy_optimizer_agent",
+            "role": "Analyzes energy usage patterns to enhance efficiency.",
+            "tools": [
+                "distribution_control_agent"
+            ]
+        },
+        {
+            "name": "distribution_control_agent",
+            "role": "Controls the distribution of energy loads in response to real-time data.",
+            "tools": [
+                "load_distribution_tool"
+            ]
+        },
+        {
+            "name": "evacuation_coordinator_agent",
+            "role": "Develops and manages evacuation plans for emergency situations.",
+            "tools": [
+                "evacuation_strategy_agent"
+            ]
+        },
+        {
+            "name": "evacuation_strategy_agent",
+            "role": "Creates optimized routes and guidance for building evacuations.",
+            "tools": [
+                "path_finder_tool"
+            ]
+        },
+        {
+            "name": "environmental_monitor_agent",
+            "role": "Monitors environmental health indicators to ensure a safe and sustainable building environment.",
+            "tools": [
+                "air_quality_agent",
+                "water_quality_agent"
+            ]
+        },
+        {
+            "name": "air_quality_agent",
+            "role": "Analyzes air quality metrics to maintain a healthy indoor environment.",
+            "tools": [
+                "carbon_footprint_calculator_tool"
+            ]
+        },
+        {
+            "name": "water_quality_agent",
+            "role": "Checks and reports the water quality standards compliance within the building.",
+            "tools": []
+        },
+        {
+            "name": "reporting_center_agent",
+            "role": "Compiles and presents comprehensive reports on the building's security and environmental metrics.",
+            "tools": [
+                "weekly_summary_report_agent"
+            ]
+        },
+        {
+            "name": "weekly_summary_report_agent",
+            "role": "Generates a detailed weekly report summarizing the performance of all security and environmental systems.",
+            "tools": [
+                "compile_weekly_report_tool"
+            ]
+        },
+        {
+            "name": "maintenance_planning_agent",
+            "role": "Coordinates predictive maintenance activities to prevent system failures.",
+            "tools": [
+                "predictive_maintenance_agent"
+            ]
+        },
+        {
+            "name": "predictive_maintenance_agent",
+            "role": "Uses predictive analytics to schedule and optimize maintenance activities.",
+            "tools": []
+        },
+        {
+            "name": "cyber_security_agent",
+            "role": "Ensures digital security by monitoring network activities and preventing cyber threats.",
+            "tools": [
+                "network_monitor_agent"
+            ]
+        },
+        {
+            "name": "network_monitor_agent",
+            "role": "Monitors network traffic and detects anomalies that could indicate security threats.",
+            "tools": [
+                "intrusion_detection_agent"
+            ]
+        },
+        {
+            "name": "intrusion_detection_agent",
+            "role": "Detects and alerts on any unauthorized access attempts or suspicious activities within the digital network.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "suspicious_activity_detector_tool",
+            "description": "Detects and flags unusual or suspicious activities from video surveillance data.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "camera_id": {
+                        "type": "string",
+                        "description": "Identifier for the camera capturing the footage."
+                    },
+                    "analysis_duration": {
+                        "type": "number",
+                        "description": "Duration in minutes over which to perform the analysis."
+                    }
+                }
+            }
+        },
+        {
+            "name": "fingerprint_scanner_tool",
+            "description": "Scans and verifies fingerprints for authorization of building access.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "door_id": {
+                        "type": "string",
+                        "description": "The identification code for the door being accessed."
+                    },
+                    "user_id": {
+                        "type": "string",
+                        "description": "Unique ID of the user attempting access."
+                    }
+                }
+            }
+        },
+        {
+            "name": "load_distribution_tool",
+            "description": "Distributes energy load effectively across the building's grid systems.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "zone_id": {
+                        "type": "string",
+                        "description": "Identifier for the specific energy zone."
+                    },
+                    "priority_level": {
+                        "type": "number",
+                        "description": "The priority level for energy distribution (higher means more priority)."
+                    }
+                }
+            }
+        },
+        {
+            "name": "path_finder_tool",
+            "description": "Optimizes and suggests evacuation routes based on the current building layout and emergency exits.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "emergency_type": {
+                        "type": "string",
+                        "description": "The type of emergency (e.g., fire, earthquake)."
+                    },
+                    "occupancy_data": {
+                        "type": "object",
+                        "description": "Data about current occupants in each floor or area.",
+                        "properties": {
+                            "floor_numbers": {
+                                "type": "array",
+                                "items": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "carbon_footprint_calculator_tool",
+            "description": "Calculates and reports the carbon footprint based on current air quality data.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "sampling_frequency": {
+                        "type": "number",
+                        "description": "Frequency of data sampling in hours."
+                    },
+                    "include_outdoor_readings": {
+                        "type": "boolean",
+                        "description": "Whether to include outdoor air quality readings in the calculation."
+                    }
+                }
+            }
+        },
+        {
+            "name": "compile_weekly_report_tool",
+            "description": "Generates a comprehensive report detailing security and environmental performance metrics over the week.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "start_date": {
+                        "type": "string",
+                        "description": "Start date for the report period."
+                    },
+                    "end_date": {
+                        "type": "string",
+                        "description": "End date for the report period."
+                    },
+                    "sections_to_include": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "description": "Sections like 'security', 'energy', 'environment' to be included in the report."
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

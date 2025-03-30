@@ -1,0 +1,307 @@
+{
+    "task": "Coordinate a 5-day global virtual symposium on AI in healthcare, featuring interactive workshops, keynote speeches, AI ethics roundtables, and live demonstrations, while ensuring participant engagement and GDPR compliance.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "symposium_coordinator_agent",
+                "workshop_manager_agent",
+                "speaker_engagement_agent",
+                "feedback_collection_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "data_privacy_agent",
+                "gdpr_compliance_agent",
+                "legal_review_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "symposium_coordinator_agent",
+                "publicity_manager_agent",
+                "social_media_integration_agent",
+                "live_broadcast_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "technical_support_agent",
+                "webinar_technology_agent",
+                "network_monitoring_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "symposium_coordinator_agent",
+                "roundtable_coordinator_agent",
+                "ethics_panel_agent",
+                "discussion_summarization_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "participant_engagement_agent",
+                "interactive_polling_agent",
+                "live_polling_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The primary agent responsible for organizing the symposium and ensuring all components function smoothly.",
+            "tools": [
+                "symposium_coordinator_agent",
+                "data_privacy_agent",
+                "technical_support_agent",
+                "participant_engagement_agent"
+            ]
+        },
+        {
+            "name": "symposium_coordinator_agent",
+            "role": "Oversees the overall planning and execution of the symposium, managing individual event components.",
+            "tools": [
+                "workshop_manager_agent",
+                "publicity_manager_agent",
+                "roundtable_coordinator_agent",
+                "logistics_support_agent"
+            ]
+        },
+        {
+            "name": "workshop_manager_agent",
+            "role": "Coordinates workshop sessions, liaising with speakers and ensuring participant interaction.",
+            "tools": [
+                "speaker_engagement_agent"
+            ]
+        },
+        {
+            "name": "speaker_engagement_agent",
+            "role": "Ensures speakers are prepared and their sessions are interactive and engaging for participants.",
+            "tools": [
+                "feedback_collection_tool"
+            ]
+        },
+        {
+            "name": "data_privacy_agent",
+            "role": "Ensures all symposium activities adhere to data privacy regulations and GDPR compliance.",
+            "tools": [
+                "gdpr_compliance_agent"
+            ]
+        },
+        {
+            "name": "gdpr_compliance_agent",
+            "role": "Conducts GDPR compliance checks and ensures data handling meets privacy standards.",
+            "tools": [
+                "legal_review_tool"
+            ]
+        },
+        {
+            "name": "publicity_manager_agent",
+            "role": "Manages publicity and outreach for the symposium across various media channels.",
+            "tools": [
+                "social_media_integration_agent",
+                "translation_service_agent"
+            ]
+        },
+        {
+            "name": "social_media_integration_agent",
+            "role": "Integrates symposium content into social media platforms to maximize reach and engagement.",
+            "tools": [
+                "live_broadcast_tool"
+            ]
+        },
+        {
+            "name": "technical_support_agent",
+            "role": "Provides IT support, ensuring that all symposium technologies function seamlessly.",
+            "tools": [
+                "webinar_technology_agent"
+            ]
+        },
+        {
+            "name": "webinar_technology_agent",
+            "role": "Manages webinar technologies, ensuring reliable streaming and user access.",
+            "tools": [
+                "network_monitoring_tool"
+            ]
+        },
+        {
+            "name": "roundtable_coordinator_agent",
+            "role": "Organizes and facilitates AI ethics roundtable discussions among experts and participants.",
+            "tools": [
+                "ethics_panel_agent"
+            ]
+        },
+        {
+            "name": "ethics_panel_agent",
+            "role": "Leads AI ethics discussions and compiles outcomes and insights for further exploration.",
+            "tools": [
+                "discussion_summarization_tool",
+                "international_ethics_consultant_agent"
+            ]
+        },
+        {
+            "name": "international_ethics_consultant_agent",
+            "role": "Provides international perspectives and ethical guidance for AI applications in healthcare.",
+            "tools": []
+        },
+        {
+            "name": "participant_engagement_agent",
+            "role": "Ensures high levels of engagement and interaction among participants throughout the symposium.",
+            "tools": [
+                "interactive_polling_agent",
+                "content_curator_agent"
+            ]
+        },
+        {
+            "name": "interactive_polling_agent",
+            "role": "Facilitates real-time interactive polling to gauge participant opinions and enhance involvement.",
+            "tools": [
+                "live_polling_tool"
+            ]
+        },
+        {
+            "name": "logistics_support_agent",
+            "role": "Manages logistical arrangements for virtual sessions including scheduling and platform setup.",
+            "tools": []
+        },
+        {
+            "name": "translation_service_agent",
+            "role": "Provides real-time translation services for international participants to ensure inclusivity.",
+            "tools": []
+        },
+        {
+            "name": "content_curator_agent",
+            "role": "Curates and organizes educational content and resources for the symposium's sessions.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "feedback_collection_tool",
+            "description": "Collects feedback from workshop participants to improve speaker engagement and content quality.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "workshop_id": {
+                        "type": "string",
+                        "description": "Identifier for the workshop session."
+                    },
+                    "participant_comments": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "description": "Feedback comments from participants."
+                        },
+                        "description": "Feedback comments for each session."
+                    }
+                }
+            }
+        },
+        {
+            "name": "legal_review_tool",
+            "description": "Performs a legal review of symposium processes to ensure compliance with GDPR regulations.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "process_id": {
+                        "type": "string",
+                        "description": "The ID of the process being reviewed."
+                    },
+                    "regulations": {
+                        "type": "string",
+                        "description": "The specific regulations to check against."
+                    }
+                }
+            }
+        },
+        {
+            "name": "live_broadcast_tool",
+            "description": "Broadcasts symposium events live to social media platforms and manages viewership analytics.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "event_id": {
+                        "type": "string",
+                        "description": "The ID of the event being broadcasted."
+                    },
+                    "platforms": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "description": "Social media platforms being used."
+                        },
+                        "description": "Platforms for broadcasting."
+                    }
+                }
+            }
+        },
+        {
+            "name": "network_monitoring_tool",
+            "description": "Monitors network conditions and optimizes bandwidth for smooth streaming experiences.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "stream_id": {
+                        "type": "string",
+                        "description": "Identifier for the stream being monitored."
+                    },
+                    "status_metrics": {
+                        "type": "object",
+                        "description": "Metrics about current network conditions."
+                    }
+                }
+            }
+        },
+        {
+            "name": "discussion_summarization_tool",
+            "description": "Summarizes key points and outcomes from roundtable discussions for documentation and action.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "session_id": {
+                        "type": "string",
+                        "description": "ID of the discussion session."
+                    },
+                    "key_points": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "description": "Key discussion points summarized."
+                        },
+                        "description": "Key points from the session."
+                    }
+                }
+            }
+        },
+        {
+            "name": "live_polling_tool",
+            "description": "Conducts live polls during symposium sessions to gather participant feedback and engagement data.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "poll_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the live poll."
+                    },
+                    "questions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "description": "Questions included in the poll."
+                        },
+                        "description": "Poll questions to participants."
+                    }
+                }
+            }
+        }
+    ]
+}

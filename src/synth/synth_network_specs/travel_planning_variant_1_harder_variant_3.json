@@ -1,0 +1,321 @@
+{
+    "task": "Coordinate and execute a sustainable and eco-friendly family reunion event, ensuring it meets the following criteria: 1. Select a venue with eco-certifications and capabilities to host 75 guests with minimal carbon footprint. 2. Implement a green transportation plan, prioritizing carpooling and electric vehicles. 3. Organize a multi-day schedule focusing on nature-based activities and workshops on sustainability. 4. Arrange for catering services using locally sourced, organic produce. 5. Setup a waste management system that emphasizes recycling and composting. 6. Monitor carbon emissions and provide a report to attendees. 7. Keep the entire event under a budget of $7,500.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "venue_coordination_agent",
+                "eco_certified_venue_agent",
+                "carbon_footprint_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "transportation_planning_agent",
+                "carpooling_agent",
+                "eco_transport_network_agent",
+                "electric_vehicle_rental_agent",
+                "eco_fuel_management_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "activity_planning_agent",
+                "sustainability_workshop_agent",
+                "guest_interaction_agent",
+                "feedback_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "catering_planning_agent",
+                "local_produce_supplier_agent",
+                "organic_meal_agent",
+                "menu_customization_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "waste_management_agent",
+                "recycling_coordinator_agent",
+                "composting_specialist_agent",
+                "waste_audit_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "carbon_emission_monitoring_agent",
+                "emission_reporting_agent",
+                "impact_analysis_agent",
+                "report_generation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "budget_management_agent",
+                "sustainability_audit_tool",
+                "expense_verification_agent",
+                "budget_allocation_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Primary agent orchestrating the eco-friendly family reunion planning, facilitating communication with users, and delegating tasks to specialized agents.",
+            "tools": [
+                "venue_coordination_agent",
+                "transportation_planning_agent",
+                "activity_planning_agent",
+                "catering_planning_agent",
+                "waste_management_agent",
+                "carbon_emission_monitoring_agent",
+                "budget_management_agent"
+            ]
+        },
+        {
+            "name": "venue_coordination_agent",
+            "role": "Handles the selection and coordination of venues with eco-certifications.",
+            "tools": [
+                "eco_certified_venue_agent"
+            ]
+        },
+        {
+            "name": "transportation_planning_agent",
+            "role": "Develops transportation plans that minimize emissions, focusing on green options like carpooling and electric vehicles.",
+            "tools": [
+                "carpooling_agent",
+                "eco_transport_network_agent"
+            ]
+        },
+        {
+            "name": "activity_planning_agent",
+            "role": "Creates the event's schedule, prioritizing nature-based activities and educational workshops on sustainability.",
+            "tools": [
+                "sustainability_workshop_agent"
+            ]
+        },
+        {
+            "name": "catering_planning_agent",
+            "role": "Organizes catering services that prioritize sustainability through the use of organic, locally sourced produce.",
+            "tools": [
+                "local_produce_supplier_agent"
+            ]
+        },
+        {
+            "name": "waste_management_agent",
+            "role": "Establishes an efficient waste management system centered around recycling and composting practices.",
+            "tools": [
+                "recycling_coordinator_agent"
+            ]
+        },
+        {
+            "name": "carbon_emission_monitoring_agent",
+            "role": "Tracks and monitors carbon emissions throughout the event, providing comprehensive reports.",
+            "tools": [
+                "emission_reporting_agent"
+            ]
+        },
+        {
+            "name": "budget_management_agent",
+            "role": "Ensures the budget stays within $7,500 while aligning with sustainable practices.",
+            "tools": [
+                "sustainability_audit_tool",
+                "expense_verification_agent"
+            ]
+        },
+        {
+            "name": "eco_certified_venue_agent",
+            "role": "Identifies and procures eco-certified venues that meet the event's sustainability standards.",
+            "tools": [
+                "carbon_footprint_tool"
+            ]
+        },
+        {
+            "name": "carpooling_agent",
+            "role": "Coordinates carpooling arrangements to reduce the transportation carbon footprint.",
+            "tools": []
+        },
+        {
+            "name": "eco_transport_network_agent",
+            "role": "Enhances the transportation network with efficient routes that support carpooling and electric vehicles.",
+            "tools": [
+                "electric_vehicle_rental_agent"
+            ]
+        },
+        {
+            "name": "electric_vehicle_rental_agent",
+            "role": "Arranges rentals of electric vehicles for the duration of the event.",
+            "tools": [
+                "eco_fuel_management_agent"
+            ]
+        },
+        {
+            "name": "eco_fuel_management_agent",
+            "role": "Manages fuel logistics for electric vehicles, ensuring minimal environmental impact.",
+            "tools": []
+        },
+        {
+            "name": "sustainability_workshop_agent",
+            "role": "Develops and facilitates workshops focused on green practices and sustainability education.",
+            "tools": [
+                "guest_interaction_agent"
+            ]
+        },
+        {
+            "name": "guest_interaction_agent",
+            "role": "Engages guests in interactive sustainability-focused activities and gathers feedback.",
+            "tools": [
+                "feedback_agent"
+            ]
+        },
+        {
+            "name": "feedback_agent",
+            "role": "Collects and analyzes feedback from participants about their experience during the event.",
+            "tools": []
+        },
+        {
+            "name": "local_produce_supplier_agent",
+            "role": "Sources organic produce from local farms to support sustainable catering operations.",
+            "tools": [
+                "organic_meal_agent"
+            ]
+        },
+        {
+            "name": "organic_meal_agent",
+            "role": "Crafts meal plans using organic ingredients that are locally sourced.",
+            "tools": [
+                "menu_customization_agent"
+            ]
+        },
+        {
+            "name": "menu_customization_agent",
+            "role": "Customizes menus to align with dietary preferences and sustainability goals.",
+            "tools": []
+        },
+        {
+            "name": "recycling_coordinator_agent",
+            "role": "Oversees recycling operations, ensuring waste is properly sorted and processed.",
+            "tools": [
+                "composting_specialist_agent"
+            ]
+        },
+        {
+            "name": "composting_specialist_agent",
+            "role": "Facilitates composting practices to effectively manage biodegradable waste.",
+            "tools": [
+                "waste_audit_agent"
+            ]
+        },
+        {
+            "name": "waste_audit_agent",
+            "role": "Conducts audits to ensure efficient waste management and recycling practices are followed.",
+            "tools": []
+        },
+        {
+            "name": "emission_reporting_agent",
+            "role": "Compiles and generates reports on carbon emissions data collected during the event.",
+            "tools": [
+                "impact_analysis_agent"
+            ]
+        },
+        {
+            "name": "impact_analysis_agent",
+            "role": "Conducts an analysis of the environmental impact based on emission data, offering insights for future improvements.",
+            "tools": [
+                "report_generation_agent"
+            ]
+        },
+        {
+            "name": "report_generation_agent",
+            "role": "Generates detailed reports on environmental and event metrics for stakeholders.",
+            "tools": []
+        },
+        {
+            "name": "expense_verification_agent",
+            "role": "Verifies expenses to ensure their adherence to both budget constraints and sustainability goals.",
+            "tools": [
+                "budget_allocation_agent"
+            ]
+        },
+        {
+            "name": "budget_allocation_agent",
+            "role": "Allocates budget efficiently to cover event needs while ensuring sustainability criteria are met.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "sustainability_audit_tool",
+            "description": "Evaluates event plans and activities against sustainability criteria, ensuring all practices are environmentally responsible.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "planned_activities": {
+                        "type": "array",
+                        "description": "A list of activities planned for the event with associated environmental impact scores.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "activity_name": {
+                                    "type": "string",
+                                    "description": "Name of the activity."
+                                },
+                                "impact_score": {
+                                    "type": "number",
+                                    "description": "Environmental impact score of the activity."
+                                }
+                            }
+                        }
+                    },
+                    "budget_limit": {
+                        "type": "number",
+                        "description": "Maximum allowable budget for the event."
+                    }
+                }
+            }
+        },
+        {
+            "name": "carbon_footprint_tool",
+            "description": "Calculates the carbon footprint of event venues and provides recommendations for reducing emissions.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "venue_id": {
+                        "type": "string",
+                        "description": "Identifier for the venue being evaluated."
+                    },
+                    "guest_count": {
+                        "type": "number",
+                        "description": "Number of guests expected to attend the event."
+                    },
+                    "energy_usage_data": {
+                        "type": "array",
+                        "description": "Historical energy usage data for the venue.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "energy_source": {
+                                    "type": "string",
+                                    "description": "Type of energy source used (e.g., Solar, Wind, Electric)."
+                                },
+                                "consumption": {
+                                    "type": "number",
+                                    "description": "Amount of energy consumed in kWh."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

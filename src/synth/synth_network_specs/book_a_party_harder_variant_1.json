@@ -1,0 +1,221 @@
+{
+    "task": "Plan a surprise anniversary getaway for my parents. Book a scenic hotel by the beach during the first weekend of October, arrange for a private dinner with seafood options, and schedule a surprise couples spa session with a sunset view. Please ensure travel arrangements from their home are included.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "travel_arrangement_agent",
+                "transportation_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "location_selection_agent",
+                "hotel_booking_agent",
+                "cuisine_specialist_agent",
+                "restaurant_booking_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "spa_booking_agent",
+                "weather_forecast_agent",
+                "sunset_time_agent",
+                "get_sunset_time"
+            ],
+            [
+                "human",
+                "client_agent",
+                "finance_monitoring_agent",
+                "budget_analysis_agent",
+                "payment_confirmation_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "calendar_management_agent",
+                "schedule_optimizer_agent",
+                "hotel_booking_agent",
+                "restaurant_booking_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "travel_arrangement_agent",
+                "flight_booking_agent",
+                "weather_forecast_agent",
+                "get_geocode"
+            ],
+            [
+                "human",
+                "client_agent",
+                "location_selection_agent",
+                "geography_info_agent",
+                "local_events_agent",
+                "entertainment_suggestions_agent"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "travel_arrangement_agent",
+                "location_selection_agent",
+                "spa_booking_agent",
+                "finance_monitoring_agent",
+                "calendar_management_agent"
+            ]
+        },
+        {
+            "name": "travel_arrangement_agent",
+            "role": "Arranges all travel components including flights, local transport, and emergency contacts.",
+            "tools": [
+                "flight_booking_agent",
+                "transportation_agent"
+            ]
+        },
+        {
+            "name": "location_selection_agent",
+            "role": "Selects the most scenic and suitable beach locations for a weekend getaway.",
+            "tools": [
+                "geography_info_agent",
+                "hotel_booking_agent"
+            ]
+        },
+        {
+            "name": "spa_booking_agent",
+            "role": "Books spa sessions emphasizing relaxation with sunset views wherever possible.",
+            "tools": [
+                "weather_forecast_agent"
+            ]
+        },
+        {
+            "name": "finance_monitoring_agent",
+            "role": "Monitors spending to ensure all bookings stay within budget and confirms payments.",
+            "tools": [
+                "budget_analysis_agent",
+                "payment_confirmation_agent"
+            ]
+        },
+        {
+            "name": "calendar_management_agent",
+            "role": "Manages and updates the schedule for the getaway to avoid any conflicts.",
+            "tools": [
+                "schedule_optimizer_agent",
+                "hotel_booking_agent"
+            ]
+        },
+        {
+            "name": "flight_booking_agent",
+            "role": "Books flights ensuring the most seamless travel times and routes.",
+            "tools": []
+        },
+        {
+            "name": "transportation_agent",
+            "role": "Organizes local transportation and provides rental or chauffeur services.",
+            "tools": []
+        },
+        {
+            "name": "geography_info_agent",
+            "role": "Provides detailed geographic and tourist information about potential destinations.",
+            "tools": [
+                "local_events_agent"
+            ]
+        },
+        {
+            "name": "hotel_booking_agent",
+            "role": "Facilitates the booking of hotel accommodations based on preferences and availability.",
+            "tools": [
+                "cuisine_specialist_agent"
+            ]
+        },
+        {
+            "name": "restaurant_booking_agent",
+            "role": "Books a table at selected restaurants with specific menu options such as seafood.",
+            "tools": []
+        },
+        {
+            "name": "weather_forecast_agent",
+            "role": "Provides weather forecasts, including sunset times, to enhance activity planning.",
+            "tools": [
+                "sunset_time_agent"
+            ]
+        },
+        {
+            "name": "payment_confirmation_agent",
+            "role": "Handles payment processing and confirmations across various booking agents.",
+            "tools": []
+        },
+        {
+            "name": "local_events_agent",
+            "role": "Searches for local events or activities happening during the getaway period.",
+            "tools": [
+                "entertainment_suggestions_agent"
+            ]
+        },
+        {
+            "name": "sunset_time_agent",
+            "role": "Provides detailed sunset information for any location and date.",
+            "tools": [
+                "get_sunset_time"
+            ]
+        },
+        {
+            "name": "cuisine_specialist_agent",
+            "role": "Recommends specific cuisines or restaurant options based on dietary preferences.",
+            "tools": [
+                "restaurant_booking_agent"
+            ]
+        },
+        {
+            "name": "budget_analysis_agent",
+            "role": "Analyzes budget constraints and adjusts booking options accordingly.",
+            "tools": []
+        },
+        {
+            "name": "schedule_optimizer_agent",
+            "role": "Optimizes and streamlines the itinerary to maximize relaxation and enjoyment.",
+            "tools": []
+        },
+        {
+            "name": "entertainment_suggestions_agent",
+            "role": "Provides suggestions for entertainment based on local events and preferences.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "get_sunset_time",
+            "description": "Retrieve the expected sunset time for a given location and date.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "date": {
+                        "type": "string",
+                        "description": "The date to get the sunset time for"
+                    },
+                    "location": {
+                        "type": "string",
+                        "description": "The location to get the sunset time for"
+                    }
+                }
+            }
+        },
+        {
+            "name": "get_geocode",
+            "description": "Get latitude and longitude for a specified location.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {
+                        "type": "string",
+                        "description": "The location to get geocode for"
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,316 @@
+{
+    "task": "Design a comprehensive personal wealth management system that integrates different financial aspects such as household expenditure tracking, investment monitoring and forecasting, personalized financial risk assessments, estate planning, and social security benefits optimization. This system should also manage complex scenarios like retirement income alternatives, currency exchange management, and adjusting to changes in family structures. The system is tasked to provide timely financial advice and recommend flexible strategies to adapt to future uncertainties.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "wealth_management_agent",
+                "household_expense_tracker_agent",
+                "expense_analyzer_agent",
+                "spending_behavior_identifier_agent",
+                "cost_reduction_suggestion_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wealth_management_agent",
+                "investment_monitor_agent",
+                "asset_allocation_analyzer_agent",
+                "portfolio_diversification_advisor_agent",
+                "forecasting_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wealth_management_agent",
+                "risk_assessment_agent",
+                "dynamic_risk_evaluator_agent",
+                "threat_detection_agent",
+                "insurance_coverage_suggestion_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wealth_management_agent",
+                "estate_planning_agent",
+                "estate_liquidity_analyzer_agent",
+                "tax_liability_evaluator_agent",
+                "asset_distribution_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wealth_management_agent",
+                "social_security_optimizer_agent",
+                "benefit_adjustment_adapter_agent",
+                "lifetime_benefit_maximizer_agent",
+                "retirement_income_calculator_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wealth_management_agent",
+                "currency_exchange_manager_agent",
+                "market_volatility_detector_agent",
+                "exchange_timing_strategy_agent",
+                "exchange_rate_optimizer_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Facilitates communication with the user and coordinates the flow of tasks to specific agents.",
+            "tools": [
+                "wealth_management_agent"
+            ]
+        },
+        {
+            "name": "wealth_management_agent",
+            "role": "Oversees the entire personal wealth management operation, directing activities across multiple specialized agents.",
+            "tools": [
+                "household_expense_tracker_agent",
+                "investment_monitor_agent",
+                "risk_assessment_agent",
+                "estate_planning_agent",
+                "social_security_optimizer_agent",
+                "currency_exchange_manager_agent"
+            ]
+        },
+        {
+            "name": "household_expense_tracker_agent",
+            "role": "Monitors and analyzes household expenditures to provide insights on spending patterns and saving opportunities.",
+            "tools": [
+                "expense_analyzer_agent",
+                "cost_reduction_suggestion_agent"
+            ]
+        },
+        {
+            "name": "expense_analyzer_agent",
+            "role": "Analyzes expenses to identify trends and potential areas for cost savings.",
+            "tools": [
+                "spending_behavior_identifier_agent"
+            ]
+        },
+        {
+            "name": "spending_behavior_identifier_agent",
+            "role": "Identifies and categorizes spending behaviors to personalize financial advice.",
+            "tools": []
+        },
+        {
+            "name": "cost_reduction_suggestion_agent",
+            "role": "Suggests strategies to reduce unnecessary expenses and enhance savings.",
+            "tools": []
+        },
+        {
+            "name": "investment_monitor_agent",
+            "role": "Keeps a watchful eye on investments, ensuring they align with financial goals.",
+            "tools": [
+                "asset_allocation_analyzer_agent",
+                "forecasting_tool"
+            ]
+        },
+        {
+            "name": "asset_allocation_analyzer_agent",
+            "role": "Evaluates the distribution of assets to ensure balanced and strategic investment.",
+            "tools": [
+                "portfolio_diversification_advisor_agent"
+            ]
+        },
+        {
+            "name": "portfolio_diversification_advisor_agent",
+            "role": "Advises on diversification strategies to mitigate risk and optimize returns.",
+            "tools": []
+        },
+        {
+            "name": "risk_assessment_agent",
+            "role": "Performs comprehensive risk assessments, customizing them to the user's financial portfolio.",
+            "tools": [
+                "dynamic_risk_evaluator_agent",
+                "insurance_coverage_suggestion_agent"
+            ]
+        },
+        {
+            "name": "dynamic_risk_evaluator_agent",
+            "role": "Adjusts risk assessments in real-time to reflect changes in market conditions and personal circumstances.",
+            "tools": [
+                "threat_detection_agent"
+            ]
+        },
+        {
+            "name": "threat_detection_agent",
+            "role": "Detects potential financial threats and suggests preemptive actions.",
+            "tools": []
+        },
+        {
+            "name": "insurance_coverage_suggestion_agent",
+            "role": "Recommends the best insurance coverage options based on current assessed risks.",
+            "tools": []
+        },
+        {
+            "name": "estate_planning_agent",
+            "role": "Assists in estate planning by analyzing current assets and forecasting needs for distribution.",
+            "tools": [
+                "estate_liquidity_analyzer_agent",
+                "asset_distribution_tool"
+            ]
+        },
+        {
+            "name": "estate_liquidity_analyzer_agent",
+            "role": "Analyzes estate assets to ensure liquidity suffices future needs.",
+            "tools": [
+                "tax_liability_evaluator_agent"
+            ]
+        },
+        {
+            "name": "tax_liability_evaluator_agent",
+            "role": "Evaluates potential tax liabilities involved in estate transfer to minimize tax exposure.",
+            "tools": []
+        },
+        {
+            "name": "social_security_optimizer_agent",
+            "role": "Optimizes the use of social security benefits to maximize retirement income.",
+            "tools": [
+                "benefit_adjustment_adapter_agent",
+                "retirement_income_calculator_agent"
+            ]
+        },
+        {
+            "name": "benefit_adjustment_adapter_agent",
+            "role": "Adjusts the allocation of social security benefits according to changes in needs and regulations.",
+            "tools": [
+                "lifetime_benefit_maximizer_agent"
+            ]
+        },
+        {
+            "name": "lifetime_benefit_maximizer_agent",
+            "role": "Maximizes benefits over a lifetime based on changing regulations and personal circumstances.",
+            "tools": []
+        },
+        {
+            "name": "retirement_income_calculator_agent",
+            "role": "Calculates projected retirement income based on social security optimizations and other income sources.",
+            "tools": []
+        },
+        {
+            "name": "currency_exchange_manager_agent",
+            "role": "Manages currency exchange transactions, optimizing for favorable exchange rates.",
+            "tools": [
+                "market_volatility_detector_agent",
+                "exchange_rate_optimizer_tool"
+            ]
+        },
+        {
+            "name": "market_volatility_detector_agent",
+            "role": "Detects market volatility to advise on potential currency exchange opportunities.",
+            "tools": [
+                "exchange_timing_strategy_agent"
+            ]
+        },
+        {
+            "name": "exchange_timing_strategy_agent",
+            "role": "Suggests optimal timing for currency exchanges to capitalize on market conditions.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "forecasting_tool",
+            "description": "Generates investment forecasts based on current market data and potential future trends.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "current_portfolio": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "asset_name": {
+                                    "type": "string",
+                                    "description": "Name of the investment asset"
+                                },
+                                "quantity": {
+                                    "type": "number",
+                                    "description": "Quantity of the asset held"
+                                }
+                            }
+                        },
+                        "description": "Current investment portfolio details"
+                    },
+                    "economic_indicators": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of economic indicators to consider, e.g., inflation rate, GDP growth rate."
+                    }
+                }
+            }
+        },
+        {
+            "name": "asset_distribution_tool",
+            "description": "Facilitates the equitable distribution of estate assets among beneficiaries.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "asset_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "asset_type": {
+                                    "type": "string",
+                                    "description": "Type of asset (e.g., property, stocks)"
+                                },
+                                "value": {
+                                    "type": "number",
+                                    "description": "Current estimated value of the asset"
+                                }
+                            }
+                        },
+                        "description": "Details of the assets to be distributed"
+                    },
+                    "beneficiaries": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of beneficiaries for the estate"
+                    }
+                }
+            }
+        },
+        {
+            "name": "exchange_rate_optimizer_tool",
+            "description": "Optimizes currency exchange based on current and historical market data.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "base_currency": {
+                        "type": "string",
+                        "description": "Currency to convert from"
+                    },
+                    "target_currency": {
+                        "type": "string",
+                        "description": "Currency to convert to"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "description": "Amount to be exchanged"
+                    },
+                    "time_frame": {
+                        "type": "string",
+                        "description": "Time frame to optimize the exchange rate"
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,214 @@
+{
+    "task": "Automate a biodynamic farm's operations by using AI-driven sensors for soil nutrients, deploy autonomous tractors for planting, optimize fertilization schedules, track livestock health with wearable technology, and generate a comprehensive sustainability report bi-annually.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "sensor_management_agent",
+                "soil_nutrient_evaluation_agent",
+                "fertilizer_schedule_optimizer_agent",
+                "activity_logging_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "autonomous_tractor_control_agent",
+                "task_planning_agent",
+                "resource_allocation_agent",
+                "logistics_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "livestock_monitoring_agent",
+                "wearable_tech_evaluation_agent",
+                "health_analysis_agent",
+                "alert_system_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "sustainability_report_agent",
+                "biodiversity_data_integration_agent",
+                "impact_assessment_tool",
+                "long_term_goals_review_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Acts as the main point of contact with users, coordinating between various farm automation agents.",
+            "tools": [
+                "sensor_management_agent",
+                "autonomous_tractor_control_agent",
+                "sustainability_report_agent",
+                "livestock_monitoring_agent",
+                "energy_management_agent"
+            ]
+        },
+        {
+            "name": "sensor_management_agent",
+            "role": "Oversees all AI-driven sensors on the farm for real-time data collection.",
+            "tools": [
+                "soil_nutrient_evaluation_agent"
+            ]
+        },
+        {
+            "name": "soil_nutrient_evaluation_agent",
+            "role": "Analyzes soil samples to report nutrient levels and imbalances.",
+            "tools": [
+                "fertilizer_schedule_optimizer_agent"
+            ]
+        },
+        {
+            "name": "fertilizer_schedule_optimizer_agent",
+            "role": "Creates and adjusts fertilization schedules based on soil nutrient data.",
+            "tools": [
+                "activity_logging_agent"
+            ]
+        },
+        {
+            "name": "autonomous_tractor_control_agent",
+            "role": "Manages the deployment and control of autonomous tractors for efficient farming tasks.",
+            "tools": [
+                "task_planning_agent"
+            ]
+        },
+        {
+            "name": "task_planning_agent",
+            "role": "Plans and sequences tasks for the autonomous tractors based on current farm needs.",
+            "tools": [
+                "resource_allocation_agent"
+            ]
+        },
+        {
+            "name": "resource_allocation_agent",
+            "role": "Allocates necessary resources like seeds and fuel for each planned task.",
+            "tools": [
+                "logistics_agent"
+            ]
+        },
+        {
+            "name": "logistics_agent",
+            "role": "Handles the logistics of getting resources to where they\u2019re needed on the farm.",
+            "tools": []
+        },
+        {
+            "name": "livestock_monitoring_agent",
+            "role": "Tracks the health and activity of livestock using wearable tech.",
+            "tools": [
+                "wearable_tech_evaluation_agent"
+            ]
+        },
+        {
+            "name": "wearable_tech_evaluation_agent",
+            "role": "Evaluates data from livestock wearables to assess health indicators.",
+            "tools": [
+                "health_analysis_agent"
+            ]
+        },
+        {
+            "name": "health_analysis_agent",
+            "role": "Analyzes health data to detect early signs of illness in livestock.",
+            "tools": [
+                "alert_system_agent"
+            ]
+        },
+        {
+            "name": "alert_system_agent",
+            "role": "Sends alerts to the farm management when health thresholds are breached.",
+            "tools": []
+        },
+        {
+            "name": "sustainability_report_agent",
+            "role": "Compiles reports on the farm's operations and sustainability metrics.",
+            "tools": [
+                "biodiversity_data_integration_agent"
+            ]
+        },
+        {
+            "name": "biodiversity_data_integration_agent",
+            "role": "Integrates biodiversity data into sustainability analysis to enhance farm practices.",
+            "tools": [
+                "impact_assessment_tool",
+                "long_term_goals_review_agent"
+            ]
+        },
+        {
+            "name": "long_term_goals_review_agent",
+            "role": "Reviews long-term farm goals against current sustainability metrics.",
+            "tools": []
+        },
+        {
+            "name": "energy_management_agent",
+            "role": "Oversees both energy consumption and water management to ensure sustainable resource use.",
+            "tools": [
+                "energy_consumption_agent",
+                "water_management_agent"
+            ]
+        },
+        {
+            "name": "energy_consumption_agent",
+            "role": "Monitors and analyzes the farm's energy consumption to improve efficiency.",
+            "tools": []
+        },
+        {
+            "name": "water_management_agent",
+            "role": "Oversees water usage and management strategies to ensure sustainability.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "impact_assessment_tool",
+            "description": "Assesses environmental and operational impacts of farming practices.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "practice_type": {
+                        "type": "string",
+                        "description": "The specific practice being evaluated (e.g., irrigation, fertilization)."
+                    },
+                    "impact_metric": {
+                        "type": "string",
+                        "description": "The metric used to measure environmental impact."
+                    },
+                    "historical_comparison": {
+                        "type": "boolean",
+                        "description": "Whether to include comparisons with historical data."
+                    }
+                }
+            }
+        },
+        {
+            "name": "activity_logging_agent",
+            "description": "Logs all activities related to fertilization and soil treatment in the system.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "activity_details": {
+                        "type": "string",
+                        "description": "Description of the fertilization activity performed."
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "description": "The time when this activity was logged."
+                    },
+                    "involved_resources": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Resources used in the activity."
+                    }
+                }
+            }
+        }
+    ]
+}

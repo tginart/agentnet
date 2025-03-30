@@ -1,0 +1,169 @@
+{
+    "task": "Enable the smart home security system, check the status of the entry sensors, ensure all cameras are operational, and prepare a full security report with recommendations. If any issues are detected, alert the homeowner.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "security_management_agent",
+                "sensor_status_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "security_management_agent",
+                "camera_status_agent",
+                "video_analysis_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "report_generation_agent",
+                "recommendation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "alert_agent",
+                "email_notification_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "report_generation_agent",
+                "security_report_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Handles user interactions and delegates tasks to appropriate security agents.",
+            "tools": [
+                "security_management_agent",
+                "alert_agent",
+                "report_generation_agent"
+            ]
+        },
+        {
+            "name": "security_management_agent",
+            "role": "Manages security configurations and ensures all components are operational.",
+            "tools": [
+                "sensor_status_agent",
+                "camera_status_agent",
+                "network_monitoring_agent"
+            ]
+        },
+        {
+            "name": "sensor_status_agent",
+            "role": "Checks the status of all entry sensors to ensure they are responsive.",
+            "tools": []
+        },
+        {
+            "name": "camera_status_agent",
+            "role": "Ensures all surveillance cameras are functioning and feeds are active.",
+            "tools": [
+                "video_analysis_agent"
+            ]
+        },
+        {
+            "name": "video_analysis_agent",
+            "role": "Analyzes video feeds from cameras for any suspicious activities.",
+            "tools": []
+        },
+        {
+            "name": "alert_agent",
+            "role": "Alerts the homeowner of any detected security breaches.",
+            "tools": [
+                "email_notification_tool"
+            ]
+        },
+        {
+            "name": "report_generation_agent",
+            "role": "Compiles data to generate a detailed security report.",
+            "tools": [
+                "security_report_tool",
+                "recommendation_agent",
+                "log_manager_agent"
+            ]
+        },
+        {
+            "name": "recommendation_agent",
+            "role": "Provides security recommendations based on the report analysis.",
+            "tools": []
+        },
+        {
+            "name": "log_manager_agent",
+            "role": "Keeps records of all security events and system status logs.",
+            "tools": []
+        },
+        {
+            "name": "network_monitoring_agent",
+            "role": "Monitors network traffic to detect any unusual patterns indicating potential security threats.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "email_notification_tool",
+            "description": "Sends email notifications to homeowners with alert details.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "recipient_email": {
+                        "type": "string",
+                        "description": "The email address of the homeowner."
+                    },
+                    "alert_level": {
+                        "type": "string",
+                        "description": "The level of urgency for the alert."
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Detailed message about the alert."
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "description": "The time when the alert was triggered."
+                    }
+                }
+            }
+        },
+        {
+            "name": "security_report_tool",
+            "description": "Generates a comprehensive security report, including statuses and recommendations.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "report_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the security report."
+                    },
+                    "date_range": {
+                        "type": "object",
+                        "properties": {
+                            "start_date": {
+                                "type": "string",
+                                "description": "Start date for the report."
+                            },
+                            "end_date": {
+                                "type": "string",
+                                "description": "End date for the report."
+                            }
+                        },
+                        "description": "Defines the period covered by the security report."
+                    },
+                    "include_images": {
+                        "type": "boolean",
+                        "description": "Whether to include camera snapshots in the report."
+                    }
+                }
+            }
+        }
+    ]
+}

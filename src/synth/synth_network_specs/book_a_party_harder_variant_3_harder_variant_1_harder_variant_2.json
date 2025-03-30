@@ -1,0 +1,245 @@
+{
+    "task": "Launch a multi-faceted digital strategy for a luxury fashion brand's anniversary, integrating advanced AI for personalized marketing, orchestrating an international virtual exhibition of timeless collections, securing partnerships with eco-friendly advertisers, and implementing a strategy for data-driven future growth through big data analysis.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "digital_strategy_manager",
+                "personalized_marketing_team",
+                "machine_learning_specialist_agent",
+                "ai_modeling_agent",
+                "consumer_preference_predictor_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "virtual_exhibition_coordinator_agent",
+                "digital_design_team",
+                "interactive_showcase_designer_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "eco_partner_relations_agent",
+                "sustainable_brand_negotiator_agent",
+                "green_policy_compliance_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "big_data_analysis_team",
+                "data_collection_specialist_agent",
+                "future_growth_strategy_planner_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "tech_infrastructure_agent",
+                "cloud_service_manager_agent",
+                "network_security_officer_agent",
+                "resilience_planner_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "brand_ambassador_outreach_agent",
+                "celebrity_collaboration_negotiator",
+                "brand_alignment_researcher_agent"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Primary interface managing the digital strategy launch for the fashion brand's anniversary, coordinating tasks among agents.",
+            "tools": [
+                "digital_strategy_manager",
+                "virtual_exhibition_coordinator_agent",
+                "eco_partner_relations_agent",
+                "big_data_analysis_team",
+                "tech_infrastructure_agent",
+                "brand_ambassador_outreach_agent"
+            ]
+        },
+        {
+            "name": "digital_strategy_manager",
+            "role": "Orchestrates the overall strategy ensuring integration of AI for personalized marketing and seamless execution.",
+            "tools": [
+                "personalized_marketing_team"
+            ]
+        },
+        {
+            "name": "personalized_marketing_team",
+            "role": "Develops and implements AI-driven marketing strategies tailored for individual consumers.",
+            "tools": [
+                "machine_learning_specialist_agent"
+            ]
+        },
+        {
+            "name": "machine_learning_specialist_agent",
+            "role": "Designs machine learning models to predict and understand consumer preferences.",
+            "tools": [
+                "ai_modeling_agent"
+            ]
+        },
+        {
+            "name": "ai_modeling_agent",
+            "role": "Crafts AI models for customized consumer engagement and enhanced brand interaction.",
+            "tools": [
+                "consumer_preference_predictor_agent"
+            ]
+        },
+        {
+            "name": "consumer_preference_predictor_agent",
+            "role": "Predicts consumer trends and preferences using AI models.",
+            "tools": []
+        },
+        {
+            "name": "virtual_exhibition_coordinator_agent",
+            "role": "Manages the virtual exhibition showcasing historical and contemporary collections.",
+            "tools": [
+                "digital_design_team"
+            ]
+        },
+        {
+            "name": "digital_design_team",
+            "role": "Creates digital experiences for the virtual exhibition.",
+            "tools": [
+                "interactive_showcase_designer_agent"
+            ]
+        },
+        {
+            "name": "interactive_showcase_designer_agent",
+            "role": "Designs interactive elements and showcases for the virtual event.",
+            "tools": []
+        },
+        {
+            "name": "eco_partner_relations_agent",
+            "role": "Secures partnerships with eco-friendly brands and advertisers to support the campaign's sustainability goals.",
+            "tools": [
+                "sustainable_brand_negotiator_agent"
+            ]
+        },
+        {
+            "name": "sustainable_brand_negotiator_agent",
+            "role": "Negotiates terms with eco-friendly brands ensuring compliance with green policies.",
+            "tools": [
+                "green_policy_compliance_agent"
+            ]
+        },
+        {
+            "name": "green_policy_compliance_agent",
+            "role": "Ensures all partnership activities comply with environmental standards.",
+            "tools": []
+        },
+        {
+            "name": "big_data_analysis_team",
+            "role": "Analyzes large datasets to derive insights for future growth.",
+            "tools": [
+                "data_collection_specialist_agent"
+            ]
+        },
+        {
+            "name": "data_collection_specialist_agent",
+            "role": "Collects and organizes data from various sources for analysis.",
+            "tools": [
+                "future_growth_strategy_planner_agent"
+            ]
+        },
+        {
+            "name": "future_growth_strategy_planner_agent",
+            "role": "Develops strategies for sustainable growth based on data insights.",
+            "tools": []
+        },
+        {
+            "name": "tech_infrastructure_agent",
+            "role": "Oversees the technology infrastructure ensuring reliability and security.",
+            "tools": [
+                "cloud_service_manager_agent"
+            ]
+        },
+        {
+            "name": "cloud_service_manager_agent",
+            "role": "Manages cloud computing resources for scalable and secure operations.",
+            "tools": [
+                "network_security_officer_agent"
+            ]
+        },
+        {
+            "name": "network_security_officer_agent",
+            "role": "Ensures security and integrity of digital platforms used in the campaign.",
+            "tools": [
+                "resilience_planner_agent"
+            ]
+        },
+        {
+            "name": "resilience_planner_agent",
+            "role": "Plans for resilience and disaster recovery to keep services running smoothly.",
+            "tools": []
+        },
+        {
+            "name": "brand_ambassador_outreach_agent",
+            "role": "Reaches out to potential celebrity brand ambassadors for collaboration.",
+            "tools": [
+                "celebrity_collaboration_negotiator"
+            ]
+        },
+        {
+            "name": "celebrity_collaboration_negotiator",
+            "role": "Facilitates agreements with celebrities ensuring alignment with brand vision.",
+            "tools": [
+                "brand_alignment_researcher_agent"
+            ]
+        },
+        {
+            "name": "brand_alignment_researcher_agent",
+            "role": "Researches and ensures that all ambassadors align with the brand's core values.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "data_collection_specialist_agent",
+            "description": "Collects and organizes data from various sources to enable comprehensive analysis.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "data_sources": {
+                        "type": "array",
+                        "description": "List of sources from which to collect data"
+                    },
+                    "data_types": {
+                        "type": "array",
+                        "description": "Types of data to collect"
+                    },
+                    "storage_preferences": {
+                        "type": "string",
+                        "description": "Preferences for data storage systems"
+                    }
+                }
+            }
+        },
+        {
+            "name": "network_security_officer_agent",
+            "description": "Oversees the security measures and integrity of digital operations in the campaign.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "security_protocols": {
+                        "type": "array",
+                        "description": "Security protocols to be enforced"
+                    },
+                    "threat_detection_capabilities": {
+                        "type": "boolean",
+                        "description": "If there are capabilities for threat detection in place"
+                    },
+                    "audit_frequencies": {
+                        "type": "number",
+                        "description": "Number of audits scheduled per year"
+                    }
+                }
+            }
+        }
+    ]
+}

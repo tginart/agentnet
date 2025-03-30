@@ -1,0 +1,227 @@
+{
+    "task": "Implement a holistic eco-farming strategy for a smart farm, involving the integration of permaculture principles, tracking biodiversity indices, optimizing aquaponics systems, coordinating with wildlife conservation, renewable resource allocation, and generating a strategic sustainability blueprint.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "eco_farming_coordinator_agent",
+                "permaculture_integration_agent",
+                "agroforestry_specialist_agent",
+                "soil_health_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "eco_farming_coordinator_agent",
+                "biodiversity_monitor_agent",
+                "species_tracker_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "eco_farming_coordinator_agent",
+                "aquaponics_optimizer_agent",
+                "water_efficiency_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "eco_farming_coordinator_agent",
+                "wildlife_conservation_agent",
+                "habitat_preservation_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "eco_farming_coordinator_agent",
+                "resource_allocator_agent",
+                "solar_energy_operator_agent",
+                "renewable_energy_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "strategic_sustainability_agent",
+                "sustainability_blueprint_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "farm_dashboard_agent",
+                "biodiversity_monitor_agent",
+                "species_tracker_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "farm_dashboard_agent",
+                "aquaponics_optimizer_agent",
+                "water_efficiency_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "farm_dashboard_agent",
+                "resource_allocator_agent",
+                "renewable_energy_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Core coordinator agent that directly interacts with the user, launching the suite of eco-farming agents.",
+            "tools": [
+                "eco_farming_coordinator_agent",
+                "farm_dashboard_agent"
+            ]
+        },
+        {
+            "name": "eco_farming_coordinator_agent",
+            "role": "Manages the implementation of eco-farming principles across the farm.",
+            "tools": [
+                "permaculture_integration_agent",
+                "biodiversity_monitor_agent",
+                "aquaponics_optimizer_agent",
+                "wildlife_conservation_agent",
+                "resource_allocator_agent",
+                "strategic_sustainability_agent"
+            ]
+        },
+        {
+            "name": "permaculture_integration_agent",
+            "role": "Guides the integration of permaculture practices into existing farming systems to enhance sustainability.",
+            "tools": [
+                "agroforestry_specialist_agent"
+            ]
+        },
+        {
+            "name": "agroforestry_specialist_agent",
+            "role": "Integrates agroforestry approaches with permaculture, optimizing soil health and ecosystem benefits.",
+            "tools": [
+                "soil_health_tool"
+            ]
+        },
+        {
+            "name": "biodiversity_monitor_agent",
+            "role": "Tracks and analyzes farm biodiversity levels to ensure ecological stability.",
+            "tools": [
+                "species_tracker_tool"
+            ]
+        },
+        {
+            "name": "aquaponics_optimizer_agent",
+            "role": "Fine-tunes aquaponics systems for maximized efficiency and productivity.",
+            "tools": [
+                "water_efficiency_tool"
+            ]
+        },
+        {
+            "name": "wildlife_conservation_agent",
+            "role": "Coordinates efforts to preserve wildlife habitats and maintain biodiversity within the farm ecosystem.",
+            "tools": [
+                "habitat_preservation_tool"
+            ]
+        },
+        {
+            "name": "resource_allocator_agent",
+            "role": "Allocates renewable resources efficiently, prioritizing sustainability.",
+            "tools": [
+                "solar_energy_operator_agent"
+            ]
+        },
+        {
+            "name": "solar_energy_operator_agent",
+            "role": "Operates and optimizes solar energy systems for effective energy usage.",
+            "tools": [
+                "renewable_energy_tool"
+            ]
+        },
+        {
+            "name": "strategic_sustainability_agent",
+            "role": "Develops a strategic blueprint focusing on long-term sustainability measures and impact.",
+            "tools": [
+                "sustainability_blueprint_tool"
+            ]
+        },
+        {
+            "name": "farm_dashboard_agent",
+            "role": "Provides real-time analytics and insights on all eco-farming activities to aid decision-making.",
+            "tools": [
+                "biodiversity_monitor_agent",
+                "aquaponics_optimizer_agent",
+                "resource_allocator_agent"
+            ]
+        },
+        {
+            "name": "soil_health_tool",
+            "role": "Analyzes soil health and fertility metrics to inform permaculture designs.",
+            "tools": []
+        },
+        {
+            "name": "species_tracker_tool",
+            "role": "Monitors the diversity and population of species residing on the farm.",
+            "tools": []
+        },
+        {
+            "name": "water_efficiency_tool",
+            "role": "Optimizes water usage within aquaponics to ensure sustainable practices.",
+            "tools": []
+        },
+        {
+            "name": "renewable_energy_tool",
+            "role": "Provides insights into renewable energy operation and optimization on the farm.",
+            "tools": []
+        },
+        {
+            "name": "habitat_preservation_tool",
+            "role": "Facilitates the conservation of natural habitats on the farm to support wildlife.",
+            "tools": []
+        },
+        {
+            "name": "sustainability_blueprint_tool",
+            "role": "Generates a comprehensive and strategic blueprint for advancing the farm's sustainability efforts.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "soil_health_tool",
+            "description": "Assesses various indicators of soil health necessary for effective permaculture integration.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "soil_sample_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the soil sample being analyzed."
+                    },
+                    "date_collected": {
+                        "type": "string",
+                        "description": "Date when the soil sample was collected, in ISO format."
+                    }
+                }
+            }
+        },
+        {
+            "name": "species_tracker_tool",
+            "description": "Tracks and logs species presence and abundance across the farm area.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "region": {
+                        "type": "string",
+                        "description": "Region of the farm where species tracking is conducted."
+                    },
+                    "season": {
+                        "type": "string",
+                        "description": "Current farming season which may affect species diversity."
+                    }
+                }
+            }
+        }
+    ]
+}

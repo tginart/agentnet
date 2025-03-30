@@ -1,0 +1,309 @@
+{
+    "task": "Design and execute a five-day film industry summit in Beverly Hills for 100 global filmmakers and producers. Secure a high-profile venue with access to advanced cinematic technology. Coordinate luxury travel arrangements for attendees arriving from various global hubs. Organize a series of panel discussions featuring renowned directors, a red-carpet opening gala, and a cinephile marketplace showcasing the latest in film tech. Ensure that each event offers real-time interpretation services, and implement a blockchain-based guest credentialing system for event access. Conclude with a bespoke awards ceremony, preparing digitally-enhanced award tokens for each winner.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "summit_planning_agent",
+                "venue_selection_agent",
+                "technology_amenities_assessment_agent",
+                "cinema_technology_liaison"
+            ],
+            [
+                "human",
+                "client_agent",
+                "travel_arrangement_agent",
+                "luxury_transportation_specialist",
+                "global_ticketing_office",
+                "vip_guest_handling_unit"
+            ],
+            [
+                "human",
+                "client_agent",
+                "event_scheduling_agent",
+                "panel_discussion_coordinator",
+                "director_invitation_management_agent",
+                "celebrity_liason_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "security_access_agent",
+                "blockchain_credentialing_service",
+                "digital_verification_team"
+            ],
+            [
+                "human",
+                "client_agent",
+                "gala_event_agent",
+                "red_carpet_arrangement_specialist",
+                "fashion_designer_collaboration_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "interpretation_service_agent",
+                "multilingual_support_team",
+                "on_demand_interpreter_unit"
+            ],
+            [
+                "human",
+                "client_agent",
+                "marketplace_organization_agent",
+                "film_tech_exhibitor_management",
+                "tech_logistics_support"
+            ],
+            [
+                "human",
+                "client_agent",
+                "awards_ceremony_planning_agent",
+                "digital_awards_and_accolades_agent",
+                "token_creation_specialist"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "summit_planning_agent",
+                "travel_arrangement_agent",
+                "event_scheduling_agent",
+                "security_access_agent",
+                "gala_event_agent",
+                "interpretation_service_agent",
+                "marketplace_organization_agent",
+                "awards_ceremony_planning_agent"
+            ]
+        },
+        {
+            "name": "summit_planning_agent",
+            "role": "Oversees the entire planning and execution of the film industry summit.",
+            "tools": [
+                "venue_selection_agent"
+            ]
+        },
+        {
+            "name": "venue_selection_agent",
+            "role": "Selects and secures high-profile venues with necessary technology for events.",
+            "tools": [
+                "technology_amenities_assessment_agent"
+            ]
+        },
+        {
+            "name": "technology_amenities_assessment_agent",
+            "role": "Evaluates and ensures venues have cutting-edge cinematic technology.",
+            "tools": [
+                "cinema_technology_liaison"
+            ]
+        },
+        {
+            "name": "cinema_technology_liaison",
+            "role": "Coordinates with tech providers to integrate cinema innovations at the venue.",
+            "tools": []
+        },
+        {
+            "name": "travel_arrangement_agent",
+            "role": "Coordinates luxury transportation and travel logistics for summit attendees.",
+            "tools": [
+                "luxury_transportation_specialist"
+            ]
+        },
+        {
+            "name": "luxury_transportation_specialist",
+            "role": "Specializes in booking and managing high-end travel arrangements.",
+            "tools": [
+                "global_ticketing_office"
+            ]
+        },
+        {
+            "name": "global_ticketing_office",
+            "role": "Processes travel tickets, ensuring VIP treatment for all guests.",
+            "tools": [
+                "vip_guest_handling_unit"
+            ]
+        },
+        {
+            "name": "vip_guest_handling_unit",
+            "role": "Handles special requests and requirements of VIP guests.",
+            "tools": []
+        },
+        {
+            "name": "event_scheduling_agent",
+            "role": "Plans and schedules all summit events and activities.",
+            "tools": [
+                "panel_discussion_coordinator",
+                "gala_event_agent"
+            ]
+        },
+        {
+            "name": "panel_discussion_coordinator",
+            "role": "Organizes and manages panel discussions with industry leaders.",
+            "tools": [
+                "director_invitation_management_agent"
+            ]
+        },
+        {
+            "name": "director_invitation_management_agent",
+            "role": "Handles invitations and manages relationships with celebrity directors.",
+            "tools": [
+                "celebrity_liason_agent"
+            ]
+        },
+        {
+            "name": "celebrity_liason_agent",
+            "role": "Maintains direct communication with celebrities attending the summit.",
+            "tools": []
+        },
+        {
+            "name": "security_access_agent",
+            "role": "Manages secure access for attendees using blockchain-based credentialing.",
+            "tools": [
+                "blockchain_credentialing_service"
+            ]
+        },
+        {
+            "name": "blockchain_credentialing_service",
+            "role": "Implements blockchain technologies for secure and verifiable event access.",
+            "tools": [
+                "digital_verification_team"
+            ]
+        },
+        {
+            "name": "digital_verification_team",
+            "role": "Ensures the integrity and security of digital credentials issued to attendees.",
+            "tools": []
+        },
+        {
+            "name": "gala_event_agent",
+            "role": "Organizes and executes the red-carpet gala events.",
+            "tools": [
+                "red_carpet_arrangement_specialist"
+            ]
+        },
+        {
+            "name": "red_carpet_arrangement_specialist",
+            "role": "Plans and coordinates high-profile red carpet appearances.",
+            "tools": [
+                "fashion_designer_collaboration_agent"
+            ]
+        },
+        {
+            "name": "fashion_designer_collaboration_agent",
+            "role": "Collaborates with designers to provide attendees with custom fashion options.",
+            "tools": []
+        },
+        {
+            "name": "interpretation_service_agent",
+            "role": "Provides multilingual interpretation services throughout the summit.",
+            "tools": [
+                "multilingual_support_team"
+            ]
+        },
+        {
+            "name": "multilingual_support_team",
+            "role": "Coordinates a team of interpreters for real-time language translation.",
+            "tools": [
+                "on_demand_interpreter_unit"
+            ]
+        },
+        {
+            "name": "on_demand_interpreter_unit",
+            "role": "Deploys interpreters to various events on demand to facilitate communication.",
+            "tools": []
+        },
+        {
+            "name": "marketplace_organization_agent",
+            "role": "Facilitates the cinephile marketplace, showcasing film technology.",
+            "tools": [
+                "film_tech_exhibitor_management"
+            ]
+        },
+        {
+            "name": "film_tech_exhibitor_management",
+            "role": "Manages exhibitor participation and logistics for showcasing tech.",
+            "tools": [
+                "tech_logistics_support"
+            ]
+        },
+        {
+            "name": "tech_logistics_support",
+            "role": "Ensures technical setup and functionality for all exhibitors in the marketplace.",
+            "tools": []
+        },
+        {
+            "name": "awards_ceremony_planning_agent",
+            "role": "Plans and conducts the summit's award ceremony.",
+            "tools": [
+                "digital_awards_and_accolades_agent"
+            ]
+        },
+        {
+            "name": "digital_awards_and_accolades_agent",
+            "role": "Designs and creates digitally-enhanced awards for winners.",
+            "tools": [
+                "token_creation_specialist"
+            ]
+        },
+        {
+            "name": "token_creation_specialist",
+            "role": "Crafts unique digital award tokens using advanced technology.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "panel_discussion_planning_tool",
+            "description": "Schedules panel discussions and manages speakers.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "topics": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Topics for discussion at the summit."
+                    },
+                    "desired_speakers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of key speakers to invite."
+                    }
+                }
+            }
+        },
+        {
+            "name": "event_credentialing_tool",
+            "description": "Configures blockchain credentials for secure event access.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "attendee_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of attendees needing credentials."
+                    },
+                    "access_types": {
+                        "type": "object",
+                        "description": "Different access levels for the event.",
+                        "properties": {
+                            "general_access": {
+                                "type": "boolean"
+                            },
+                            "vip_access": {
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

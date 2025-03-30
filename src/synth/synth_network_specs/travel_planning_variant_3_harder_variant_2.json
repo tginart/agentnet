@@ -1,0 +1,412 @@
+{
+    "task": "Coordinate an international music festival in Berlin, entailing: 1. Booking renowned music artists. 2. Organizing multimedia stage productions with cutting-edge technology. 3. Managing global participant travel and accommodations. 4. Creating immersive digital experiences for online audiences. 5. Promoting eco-sustainability throughout the event. 6. Setting a comprehensive budget cap of \u20ac1,000,000.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "artist_coordination_agent",
+                "international_artist_booking_agent",
+                "artist_contract_agent",
+                "final_contract_approval_agent",
+                "contract_finalization_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "stage_management_agent",
+                "tech_integration_agent",
+                "equipment_supplier_agent",
+                "cutting_edge_tech_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "travel_logistics_agent",
+                "accommodation_booking_agent",
+                "luxury_stay_finder_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "digital_experience_agent",
+                "online_engagement_agent",
+                "immersive_content_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "sustainability_agent",
+                "green_initiative_planner",
+                "eco_partner_locator_agent",
+                "eco_friendly_strategy_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "financial_supervisor_agent",
+                "comprehensive_budget_agent",
+                "expense_monitoring_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "security_detail_agent",
+                "local_engagement_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "community_outreach_agent",
+                "volunteer_management_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "public_relations_agent",
+                "media_outreach_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The main agent interacting with the user to manage the international music festival planning.",
+            "tools": [
+                "artist_coordination_agent",
+                "stage_management_agent",
+                "travel_logistics_agent",
+                "digital_experience_agent",
+                "sustainability_agent",
+                "financial_supervisor_agent",
+                "security_detail_agent",
+                "community_outreach_agent",
+                "public_relations_agent",
+                "logistics_management_agent"
+            ]
+        },
+        {
+            "name": "artist_coordination_agent",
+            "role": "Handles the bookings and schedules for music artists globally.",
+            "tools": [
+                "international_artist_booking_agent"
+            ]
+        },
+        {
+            "name": "international_artist_booking_agent",
+            "role": "Uses global resources to book renowned music artists for the festival.",
+            "tools": [
+                "artist_contract_agent"
+            ]
+        },
+        {
+            "name": "artist_contract_agent",
+            "role": "Responsible for finalizing contracts with artists to ensure their participation.",
+            "tools": [
+                "final_contract_approval_agent"
+            ]
+        },
+        {
+            "name": "final_contract_approval_agent",
+            "role": "Approves all finalized contracts and facilitates final agreements.",
+            "tools": [
+                "contract_finalization_tool"
+            ]
+        },
+        {
+            "name": "stage_management_agent",
+            "role": "Plans and manages stage setups using advanced technology.",
+            "tools": [
+                "tech_integration_agent"
+            ]
+        },
+        {
+            "name": "tech_integration_agent",
+            "role": "Integrates cutting-edge multimedia technologies for stage productions.",
+            "tools": [
+                "equipment_supplier_agent"
+            ]
+        },
+        {
+            "name": "equipment_supplier_agent",
+            "role": "Sources and supplies necessary equipment for stage productions.",
+            "tools": [
+                "cutting_edge_tech_tool"
+            ]
+        },
+        {
+            "name": "travel_logistics_agent",
+            "role": "Arranges worldwide travel and accommodation logistics.",
+            "tools": [
+                "accommodation_booking_agent"
+            ]
+        },
+        {
+            "name": "accommodation_booking_agent",
+            "role": "Books luxury accommodations for festival participants.",
+            "tools": [
+                "luxury_stay_finder_tool"
+            ]
+        },
+        {
+            "name": "digital_experience_agent",
+            "role": "Curates digital experiences to engage online audiences.",
+            "tools": [
+                "online_engagement_agent"
+            ]
+        },
+        {
+            "name": "online_engagement_agent",
+            "role": "Delivers immersive content for digital festival-goers.",
+            "tools": [
+                "immersive_content_tool"
+            ]
+        },
+        {
+            "name": "sustainability_agent",
+            "role": "Promotes eco-friendly initiatives to reduce the festival's carbon footprint.",
+            "tools": [
+                "green_initiative_planner"
+            ]
+        },
+        {
+            "name": "green_initiative_planner",
+            "role": "Plans and implements sustainability strategies for the event.",
+            "tools": [
+                "eco_partner_locator_agent"
+            ]
+        },
+        {
+            "name": "eco_partner_locator_agent",
+            "role": "Identifies partners and organizations for executing sustainability strategies.",
+            "tools": [
+                "eco_friendly_strategy_tool"
+            ]
+        },
+        {
+            "name": "financial_supervisor_agent",
+            "role": "Oversees the financial aspects, ensuring budgetary limits are respected.",
+            "tools": [
+                "comprehensive_budget_agent"
+            ]
+        },
+        {
+            "name": "comprehensive_budget_agent",
+            "role": "Monitors and analyzes all budget-related activities.",
+            "tools": [
+                "expense_monitoring_tool"
+            ]
+        },
+        {
+            "name": "local_engagement_agent",
+            "role": "Coordinates with local representatives for regional involvements.",
+            "tools": []
+        },
+        {
+            "name": "security_detail_agent",
+            "role": "Ensures all security measures are in place for festival safety.",
+            "tools": [
+                "local_engagement_agent"
+            ]
+        },
+        {
+            "name": "community_outreach_agent",
+            "role": "Facilitates community collaboration and volunteering efforts for the festival.",
+            "tools": [
+                "volunteer_management_agent"
+            ]
+        },
+        {
+            "name": "volunteer_management_agent",
+            "role": "Oversees and manages volunteers for the event.",
+            "tools": []
+        },
+        {
+            "name": "public_relations_agent",
+            "role": "Manages public relations and media outreach for the music festival.",
+            "tools": [
+                "media_outreach_tool"
+            ]
+        },
+        {
+            "name": "logistics_management_agent",
+            "role": "Oversees all event logistics, including vendor and hospitality management.",
+            "tools": [
+                "vendor_management_agent",
+                "hospitality_agent"
+            ]
+        },
+        {
+            "name": "hospitality_agent",
+            "role": "Manages hospitality services throughout the festival.",
+            "tools": []
+        },
+        {
+            "name": "vendor_management_agent",
+            "role": "Coordinates with vendors to provide seamless services at the festival.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "world_talent_database",
+            "description": "A database to source renowned global music talents.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "genre_preference": {
+                        "type": "string",
+                        "description": "Desired genre of music artist, e.g., Rock, Jazz."
+                    },
+                    "artist_popularity": {
+                        "type": "string",
+                        "description": "Level of fame and following, e.g., Mainstream, Indie."
+                    }
+                }
+            }
+        },
+        {
+            "name": "contract_finalization_tool",
+            "description": "Facilitates the finalization of contracts with artists.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "artist_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the artist."
+                    },
+                    "contract_terms": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of contract terms to be agreed upon."
+                    }
+                }
+            }
+        },
+        {
+            "name": "cutting_edge_tech_tool",
+            "description": "Integrates the latest multimedia technology for enhanced stage production.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "tech_requirements": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of technology requirements, e.g., 3D Projections, VR."
+                    },
+                    "installation_duration": {
+                        "type": "number",
+                        "description": "Estimated duration for technology setup in hours."
+                    }
+                }
+            }
+        },
+        {
+            "name": "luxury_stay_finder_tool",
+            "description": "Discover and book luxury accommodations for attendees.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "desired_location": {
+                        "type": "string",
+                        "description": "Preferred location for accommodation."
+                    },
+                    "stars_rating": {
+                        "type": "number",
+                        "description": "Minimum stars rating for the accommodation."
+                    }
+                }
+            }
+        },
+        {
+            "name": "immersive_content_tool",
+            "description": "Develops rich, engaging content for digital audiences.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "content_type": {
+                        "type": "string",
+                        "description": "Type of digital content, e.g., Livestream, Interactive."
+                    },
+                    "target_audience": {
+                        "type": "string",
+                        "description": "Primary audience for the digital experience."
+                    }
+                }
+            }
+        },
+        {
+            "name": "eco_friendly_strategy_tool",
+            "description": "Designs and suggests eco-friendly strategies for the event footprint.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "strategy_focus": {
+                        "type": "string",
+                        "description": "Core focus of the eco strategy, e.g., Waste Management."
+                    },
+                    "partners_involved": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Potential partners and collaborators for green strategy."
+                    }
+                }
+            }
+        },
+        {
+            "name": "expense_monitoring_tool",
+            "description": "Tracks and manages a detailed account of all expenses.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "expense_categories": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Categories of expenses to watch, e.g., Talent Costs, Logistics."
+                    },
+                    "monthly_budget_limit": {
+                        "type": "number",
+                        "description": "Monthly budget constraints for expenses."
+                    }
+                }
+            }
+        },
+        {
+            "name": "media_outreach_tool",
+            "description": "Handles interactions with media outlets and manages press releases.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "media_channels": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of media channels to be targeted."
+                    },
+                    "release_schedule": {
+                        "type": "number",
+                        "description": "Timeframe for releasing media content in days."
+                    }
+                }
+            }
+        }
+    ]
+}

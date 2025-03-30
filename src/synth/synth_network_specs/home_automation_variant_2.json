@@ -1,0 +1,168 @@
+{
+    "task": "Create a nighttime security protocol for my home. Ensure all doors are locked, outdoor lights are on, security cameras are activated, and notify me if there are any issues.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "security_protocol_agent",
+                "lock_system_agent",
+                "door_lock_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "security_protocol_agent",
+                "lighting_control_agent",
+                "outdoor_lights_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "security_protocol_agent",
+                "camera_system_agent",
+                "activate_cameras_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "security_protocol_agent",
+                "notification_agent",
+                "notification_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates other agents to complete the task.",
+            "tools": [
+                "security_protocol_agent"
+            ]
+        },
+        {
+            "name": "security_protocol_agent",
+            "role": "Manages home security protocols, coordinating various security-related agents.",
+            "tools": [
+                "lock_system_agent",
+                "lighting_control_agent",
+                "camera_system_agent",
+                "notification_agent"
+            ]
+        },
+        {
+            "name": "lock_system_agent",
+            "role": "Controls and monitors the locking mechanisms on doors throughout the home.",
+            "tools": [
+                "door_lock_tool"
+            ]
+        },
+        {
+            "name": "lighting_control_agent",
+            "role": "Manages lighting settings, particularly for security purposes in outdoor areas.",
+            "tools": [
+                "outdoor_lights_tool"
+            ]
+        },
+        {
+            "name": "camera_system_agent",
+            "role": "Activates and monitors security cameras around the home.",
+            "tools": [
+                "activate_cameras_tool"
+            ]
+        },
+        {
+            "name": "notification_agent",
+            "role": "Responsible for sending notifications and alerts to the user regarding the security status.",
+            "tools": [
+                "notification_tool"
+            ]
+        },
+        {
+            "name": "door_lock_tool",
+            "role": "Operates and verifies the locking of doors.",
+            "tools": []
+        },
+        {
+            "name": "outdoor_lights_tool",
+            "role": "Controls the activation and deactivation of outdoor lights.",
+            "tools": []
+        },
+        {
+            "name": "activate_cameras_tool",
+            "role": "Turns on security cameras and ensures they are recording.",
+            "tools": []
+        },
+        {
+            "name": "notification_tool",
+            "role": "Sends notifications to the user about any security-related issues.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "door_lock_tool",
+            "description": "Locks all doors and checks their lock status.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "lock_all": {
+                        "type": "boolean",
+                        "description": "If true, locks all doors"
+                    }
+                }
+            }
+        },
+        {
+            "name": "outdoor_lights_tool",
+            "description": "Activates or deactivates outdoor lights.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "activate": {
+                        "type": "boolean",
+                        "description": "True to turn on, False to turn off all outdoor lights"
+                    }
+                }
+            }
+        },
+        {
+            "name": "activate_cameras_tool",
+            "description": "Activates all security cameras around the home.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "activate": {
+                        "type": "boolean",
+                        "description": "If true, activates all cameras"
+                    },
+                    "record_duration": {
+                        "type": "number",
+                        "description": "Duration in hours to keep the cameras recording"
+                    }
+                }
+            }
+        },
+        {
+            "name": "notification_tool",
+            "description": "Sends a notification to the user about the security protocol status.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "issue_detected": {
+                        "type": "boolean",
+                        "description": "True if there's a security issue that needs attention"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Detailed message about the security status or issue"
+                    }
+                }
+            }
+        }
+    ]
+}

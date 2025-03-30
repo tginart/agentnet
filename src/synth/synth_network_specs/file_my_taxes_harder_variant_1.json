@@ -1,0 +1,262 @@
+{
+    "task": "Prepare an in-depth financial risk analysis and tax optimization strategy for the upcoming fiscal year, including options for investing in sustainable energy and cryptocurrency assets, and assess the potential impacts of remote working compliance across international borders.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "strategy_planning_agent",
+                "investment_analysis_agent",
+                "sustainable_energy_investment_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "strategy_planning_agent",
+                "investment_analysis_agent",
+                "crypto_investment_planning_agent",
+                "crypto_asset_evaluator",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "strategy_planning_agent",
+                "tax_optimization_agent",
+                "international_tax_law_agent",
+                "country_specific_tax_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "strategy_planning_agent",
+                "financial_risk_assessment_agent",
+                "currency_fluctuation_analysis_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "strategy_planning_agent",
+                "remote_work_compliance_agent",
+                "legal_compliance_agent",
+                "employee_location_verification_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "strategy_planning_agent",
+                "investment_analysis_agent",
+                "traditional_investment_agent",
+                "stock_evaluation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "strategy_planning_agent",
+                "tax_optimization_agent",
+                "property_tax_management_agent",
+                "real_estate_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "compliance_verification_agent",
+                "filesystem_agent",
+                "legal_compliance_agent"
+            ]
+        ],
+        "edge_checks": [
+            {
+                "check_type": "assertContains",
+                "from": "crypto_investment_planning_agent",
+                "to": "crypto_asset_evaluator",
+                "type": "data_analysis_call",
+                "arguments": {
+                    "portfolio": [
+                        "BTC",
+                        "ETH",
+                        "SOL"
+                    ],
+                    "evaluate": true
+                }
+            }
+        ]
+    },
+    "agents": [
+        {
+            "name": "sustainable_energy_investment_agent",
+            "role": "Specializes in evaluating and recommending investments in sustainable and renewable energy projects",
+            "tools": []
+        },
+        {
+            "name": "crypto_asset_evaluator",
+            "role": "Conducts comprehensive evaluations of various cryptocurrency assets for potential investment",
+            "tools": []
+        },
+        {
+            "name": "country_specific_tax_agent",
+            "role": "Provides detailed insights into the tax laws and benefits specific to different countries",
+            "tools": []
+        },
+        {
+            "name": "currency_fluctuation_analysis_agent",
+            "role": "Analyzes currency fluctuations and their potential risks in international investments",
+            "tools": []
+        },
+        {
+            "name": "employee_location_verification_agent",
+            "role": "Verifies the locations of remote employees for compliance with international work laws",
+            "tools": []
+        },
+        {
+            "name": "stock_evaluation_agent",
+            "role": "Evaluates traditional stock investments focusing on their risk and growth potentials",
+            "tools": []
+        },
+        {
+            "name": "real_estate_agent",
+            "role": "Manages and provides details on real estate properties, focusing on property tax management",
+            "tools": []
+        },
+        {
+            "name": "strategy_planning_agent",
+            "role": "Manages holistic financial strategy planning incorporating tax, investment, and risk assessments",
+            "tools": [
+                "investment_analysis_agent",
+                "tax_optimization_agent",
+                "financial_risk_assessment_agent",
+                "remote_work_compliance_agent"
+            ]
+        },
+        {
+            "name": "investment_analysis_agent",
+            "role": "Analyzes various investment avenues for risk and return potential",
+            "tools": [
+                "sustainable_energy_investment_agent",
+                "crypto_investment_planning_agent",
+                "traditional_investment_agent"
+            ]
+        },
+        {
+            "name": "crypto_investment_planning_agent",
+            "role": "Advises on potential cryptocurrency investments and integrates them into financial strategies",
+            "tools": [
+                "crypto_asset_evaluator"
+            ]
+        },
+        {
+            "name": "tax_optimization_agent",
+            "role": "Focuses on optimizing tax obligations through strategic planning and insights into laws",
+            "tools": [
+                "international_tax_law_agent",
+                "property_tax_management_agent"
+            ]
+        },
+        {
+            "name": "financial_risk_assessment_agent",
+            "role": "Performs comprehensive financial risk assessments to identify potential vulnerabilities",
+            "tools": [
+                "currency_fluctuation_analysis_agent"
+            ]
+        },
+        {
+            "name": "remote_work_compliance_agent",
+            "role": "Ensures compliance with remote work laws and international regulations for distributed teams",
+            "tools": [
+                "legal_compliance_agent",
+                "employee_location_verification_agent"
+            ]
+        },
+        {
+            "name": "legal_compliance_agent",
+            "role": "Ensures that business practices adhere to international legal standards and compliance",
+            "tools": []
+        },
+        {
+            "name": "traditional_investment_agent",
+            "role": "Assesses traditional investment opportunities such as stocks, bonds, and mutual funds",
+            "tools": [
+                "stock_evaluation_agent"
+            ]
+        },
+        {
+            "name": "property_tax_management_agent",
+            "role": "Provides insights and management strategies for minimizing property taxes",
+            "tools": [
+                "real_estate_agent"
+            ]
+        },
+        {
+            "name": "international_tax_law_agent",
+            "role": "Expert in international tax laws, focusing on cross-border transactions",
+            "tools": [
+                "country_specific_tax_agent"
+            ]
+        },
+        {
+            "name": "compliance_verification_agent",
+            "role": "Verifies compliance with various financial and legal standards",
+            "tools": [
+                "filesystem_agent"
+            ]
+        },
+        {
+            "name": "filesystem_agent",
+            "role": "Manages the user's document storage, including sensitive legal and financial documents",
+            "tools": []
+        },
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "strategy_planning_agent",
+                "compliance_verification_agent"
+            ]
+        }
+    ],
+    "tools": [
+        {
+            "name": "data_analysis_call",
+            "description": "Calls an external system to evaluate cryptocurrency portfolios",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "portfolio": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of cryptocurrencies to be evaluated"
+                    },
+                    "evaluate": {
+                        "type": "boolean",
+                        "description": "Flag to initiate evaluation"
+                    }
+                }
+            }
+        },
+        {
+            "name": "risk_assessment_tool",
+            "description": "Performs risk assessments on specified financial sectors",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "sector": {
+                        "type": "string",
+                        "description": "Financial sector to assess risk levels"
+                    },
+                    "historical_data": {
+                        "type": "boolean",
+                        "description": "Whether to include historical data in the assessment"
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,182 @@
+{
+    "task": "Design a personalized physical rehabilitation program that includes exercise regimens, dietary suggestions, and progress tracking. Ensure the plan accounts for injury type and rehabilitation stage, and includes digital resources for patient education and interactions.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "rehabilitation_coordinator_agent",
+                "injury_assessment_agent",
+                "physical_therapy_resource_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "rehabilitation_coordinator_agent",
+                "rehabilitation_exercise_agent",
+                "exercise_video_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "rehabilitation_coordinator_agent",
+                "dietary_guidance_agent",
+                "nutrient_analyzer_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "rehabilitation_coordinator_agent",
+                "progress_tracking_agent",
+                "rehab_tracker_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Primary interface agent that communicates with the user to design a personalized rehabilitation program.",
+            "tools": [
+                "rehabilitation_coordinator_agent"
+            ]
+        },
+        {
+            "name": "rehabilitation_coordinator_agent",
+            "role": "Oversees the creation of a rehabilitation program by integrating assessments, exercises, dietary suggestions, and tracking.",
+            "tools": [
+                "injury_assessment_agent",
+                "rehabilitation_exercise_agent",
+                "dietary_guidance_agent",
+                "progress_tracking_agent"
+            ]
+        },
+        {
+            "name": "injury_assessment_agent",
+            "role": "Evaluates the user's injury type and rehabilitation stage to recommend appropriate resources.",
+            "tools": [
+                "physical_therapy_resource_tool"
+            ]
+        },
+        {
+            "name": "rehabilitation_exercise_agent",
+            "role": "Develops specific exercise regimens suitable for the user's rehabilitation stage.",
+            "tools": [
+                "exercise_video_tool"
+            ]
+        },
+        {
+            "name": "dietary_guidance_agent",
+            "role": "Provides dietary guidelines to support recovery based on the user's specific injury and rehabilitation needs.",
+            "tools": [
+                "nutrient_analyzer_tool"
+            ]
+        },
+        {
+            "name": "progress_tracking_agent",
+            "role": "Monitors the user's rehabilitation progress, providing feedback and updates on recovery.",
+            "tools": [
+                "rehab_tracker_tool"
+            ]
+        },
+        {
+            "name": "physical_therapy_resource_tool",
+            "role": "Provides access to educational resources on physical therapy relevant to the user's injuries.",
+            "tools": []
+        },
+        {
+            "name": "exercise_video_tool",
+            "role": "Offers instructional videos for rehabilitation exercises, tailored to the user's current capabilities.",
+            "tools": []
+        },
+        {
+            "name": "nutrient_analyzer_tool",
+            "role": "Analyzes dietary information to ensure nutritional needs are met, contributing to faster recovery.",
+            "tools": []
+        },
+        {
+            "name": "rehab_tracker_tool",
+            "role": "Tracks rehabilitation activities and logs patient progress data.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "physical_therapy_resource_tool",
+            "description": "Provides digital resources and educational materials tailored to the type of injury and therapy needed.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "injury_type": {
+                        "type": "string",
+                        "description": "The specific type of injury, e.g., knee injury, shoulder dislocation."
+                    },
+                    "therapy_stage": {
+                        "type": "string",
+                        "description": "Current stage of rehabilitation, such as acute, subacute, or chronic."
+                    }
+                }
+            }
+        },
+        {
+            "name": "exercise_video_tool",
+            "description": "Delivers exercise videos suitable for the rehabilitation stage and user's physical limits.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "rehabilitation_stage": {
+                        "type": "string",
+                        "description": "The current stage of rehabilitation for selecting appropriate exercises."
+                    },
+                    "physical_capability_level": {
+                        "type": "string",
+                        "description": "User's physical ability level to ensure exercises are suitable."
+                    }
+                }
+            }
+        },
+        {
+            "name": "nutrient_analyzer_tool",
+            "description": "Analyzes user's dietary intake to optimize recovery nutrition.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "current_diet": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of current dietary habits to analyze."
+                    },
+                    "nutrition_goals": {
+                        "type": "string",
+                        "description": "Specific nutritional goals to aid recovery, like increased protein intake."
+                    }
+                }
+            }
+        },
+        {
+            "name": "rehab_tracker_tool",
+            "description": "Tracks and logs rehabilitation sessions, providing feedback on progress.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "session_details": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Details of each rehabilitation session to be logged."
+                    },
+                    "progress_feedback": {
+                        "type": "string",
+                        "description": "Feedback message or notes on user's progress."
+                    }
+                }
+            }
+        }
+    ]
+}

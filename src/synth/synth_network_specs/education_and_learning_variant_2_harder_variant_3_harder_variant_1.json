@@ -1,0 +1,219 @@
+{
+    "task": "Launch a multi-disciplinary, climate-focused marine expedition, collaborating with international institutes for biodiversity assessment, deploying AI-monitored autonomous drones, and ensuring compliance with global environmental treaties. Enable secure, multilingual communication channels across the research teams, and integrate real-time data visualization tools.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "expedition_planning_agent",
+                "international_collaboration_agent",
+                "biodiversity_specialist_agent",
+                "data_exchange_protocol_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "expedition_planning_agent",
+                "autonomous_drone_management_agent",
+                "ai_monitoring_agent",
+                "data_collection_agent",
+                "visualization_tool_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "communications_infrastructure_agent",
+                "secure_channel_agent",
+                "language_translation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "expedition_planning_agent",
+                "logistics_coordinator_agent",
+                "equipment_tracking_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "policy_compliance_agent",
+                "environmental_treaty_advisor_agent",
+                "legal_inspection_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "communications_infrastructure_agent",
+                "satellite_network_agent",
+                "signal_boost_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that coordinates with the user and manages orchestration among specialized agents to accomplish the task.",
+            "tools": [
+                "expedition_planning_agent",
+                "communications_infrastructure_agent",
+                "policy_compliance_agent"
+            ]
+        },
+        {
+            "name": "expedition_planning_agent",
+            "role": "Orchestrates the entire climate-focused marine expedition, facilitating coordination among research teams and ensuring efficient mission execution.",
+            "tools": [
+                "international_collaboration_agent",
+                "autonomous_drone_management_agent",
+                "logistics_coordinator_agent"
+            ]
+        },
+        {
+            "name": "international_collaboration_agent",
+            "role": "Facilitates collaboration with various international academic and research institutes for broad scientific input and resource sharing.",
+            "tools": [
+                "biodiversity_specialist_agent",
+                "data_exchange_protocol_agent"
+            ]
+        },
+        {
+            "name": "autonomous_drone_management_agent",
+            "role": "Oversees deployment and operation of AI-monitored autonomous drones for data collection in marine environments.",
+            "tools": [
+                "ai_monitoring_agent",
+                "data_collection_agent"
+            ]
+        },
+        {
+            "name": "communications_infrastructure_agent",
+            "role": "Establishes secure and efficient communication channels among all parties involved in the expedition.",
+            "tools": [
+                "secure_channel_agent",
+                "satellite_network_agent"
+            ]
+        },
+        {
+            "name": "policy_compliance_agent",
+            "role": "Ensures compliance with global environmental treaties and regulations throughout the expedition.",
+            "tools": [
+                "environmental_treaty_advisor_agent",
+                "legal_inspection_agent"
+            ]
+        },
+        {
+            "name": "biodiversity_specialist_agent",
+            "role": "Provides expertise on marine biodiversity assessment methodologies and protocols.",
+            "tools": []
+        },
+        {
+            "name": "data_exchange_protocol_agent",
+            "role": "Designs protocols for efficient and secure data exchange between collaborative institutes.",
+            "tools": []
+        },
+        {
+            "name": "ai_monitoring_agent",
+            "role": "Utilizes artificial intelligence to monitor data streams and performance of autonomous drones.",
+            "tools": []
+        },
+        {
+            "name": "data_collection_agent",
+            "role": "Handles real-time data collection from marine environments and prepares it for analysis.",
+            "tools": [
+                "visualization_tool_agent"
+            ]
+        },
+        {
+            "name": "secure_channel_agent",
+            "role": "Establishes and maintains secure communication channels between all research teams and partners.",
+            "tools": [
+                "language_translation_agent"
+            ]
+        },
+        {
+            "name": "satellite_network_agent",
+            "role": "Manages satellite networks for reliable long-range communication for marine operations.",
+            "tools": [
+                "signal_boost_tool"
+            ]
+        },
+        {
+            "name": "environmental_treaty_advisor_agent",
+            "role": "Advises on adherence to environmental treaties relevant to marine exploration and research.",
+            "tools": []
+        },
+        {
+            "name": "legal_inspection_agent",
+            "role": "Conducts legal inspections to verify compliance with environmental regulations.",
+            "tools": []
+        },
+        {
+            "name": "visualization_tool_agent",
+            "role": "Implements tools for real-time visualization of collected data for detailed analysis.",
+            "tools": []
+        },
+        {
+            "name": "language_translation_agent",
+            "role": "Provides translation services to facilitate multilingual communication among international teams.",
+            "tools": []
+        },
+        {
+            "name": "logistics_coordinator_agent",
+            "role": "Manages logistics related to equipment deployment, transportation, and inventory control.",
+            "tools": [
+                "equipment_tracking_tool"
+            ]
+        }
+    ],
+    "tools": [
+        {
+            "name": "signal_boost_tool",
+            "description": "Boosts the signal strength of satellite networks to enhance communication reliability.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "network_id": {
+                        "type": "string",
+                        "description": "Identifier for the satellite network."
+                    },
+                    "desired_strength": {
+                        "type": "number",
+                        "description": "Target signal strength level."
+                    },
+                    "duration": {
+                        "type": "string",
+                        "format": "duration",
+                        "description": "Duration to maintain the boosted signal."
+                    }
+                }
+            }
+        },
+        {
+            "name": "equipment_tracking_tool",
+            "description": "Tracks global shipments of research equipment, ensuring timely delivery to expedition sites.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "shipment_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the equipment shipment."
+                    },
+                    "current_location": {
+                        "type": "string",
+                        "description": "Current location of the shipment."
+                    },
+                    "expected_delivery_date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Projected delivery date and time."
+                    }
+                }
+            }
+        }
+    ]
+}

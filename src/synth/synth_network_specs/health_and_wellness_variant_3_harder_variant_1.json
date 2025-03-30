@@ -1,0 +1,247 @@
+{
+    "task": "Design a holistic personal development program for mastery in advanced data science, incorporating machine learning, statistical analysis, data engineering, and model deployment. This should include theoretical lessons, hands-on projects, collaborative learning, adaptive feedback, and a comprehensive progress tracking mechanism through various stages of the program.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "learning_path_coordinator_agent",
+                "advanced_ml_coordinator_agent",
+                "ml_project_manager_agent",
+                "ml_theoretical_resources_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "learning_path_coordinator_agent",
+                "statistical_analysis_expert_agent",
+                "project_tracking_agent",
+                "stats_project_resources_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "learning_path_coordinator_agent",
+                "data_engineering_expert_agent",
+                "data_pipeline_tool",
+                "data_quality_inspector_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "learning_path_coordinator_agent",
+                "deployment_expert_agent",
+                "performance_monitor_agent",
+                "model_deployment_tool",
+                "deployment_feedback_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "learning_path_coordinator_agent",
+                "collaboration_facilitator_agent",
+                "peer_review_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "learning_path_coordinator_agent",
+                "progress_tracker_agent",
+                "adaptive_feedback_agent",
+                "learning_curve_analyzer_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The main entry point for users to create a personalized advanced data science learning program.",
+            "tools": [
+                "learning_path_coordinator_agent"
+            ]
+        },
+        {
+            "name": "learning_path_coordinator_agent",
+            "role": "Coordinates the development of a comprehensive learning pathway, engaging various specialty agents to integrate diverse training components.",
+            "tools": [
+                "advanced_ml_coordinator_agent",
+                "statistical_analysis_expert_agent",
+                "data_engineering_expert_agent",
+                "deployment_expert_agent",
+                "collaboration_facilitator_agent",
+                "progress_tracker_agent"
+            ]
+        },
+        {
+            "name": "advanced_ml_coordinator_agent",
+            "role": "Guides the advanced machine learning curriculum including theory and applied projects, utilizing project managers for deeper insights.",
+            "tools": [
+                "ml_project_manager_agent"
+            ]
+        },
+        {
+            "name": "ml_project_manager_agent",
+            "role": "Manages machine learning projects and delegates tasks to resources and theoretical underpinnings.",
+            "tools": [
+                "ml_theoretical_resources_tool"
+            ]
+        },
+        {
+            "name": "statistical_analysis_expert_agent",
+            "role": "Specializes in planning and executing the statistical analysis portion of the curriculum, including hands-on projects.",
+            "tools": [
+                "project_tracking_agent"
+            ]
+        },
+        {
+            "name": "project_tracking_agent",
+            "role": "Tracks project progress and integrates necessary resources for statistical analysis projects.",
+            "tools": [
+                "stats_project_resources_tool"
+            ]
+        },
+        {
+            "name": "data_engineering_expert_agent",
+            "role": "Provides training for building and maintaining scalable data infrastructures with quality control checkpoints.",
+            "tools": [
+                "data_pipeline_tool",
+                "data_quality_inspector_agent"
+            ]
+        },
+        {
+            "name": "deployment_expert_agent",
+            "role": "Focuses on the deployment of data science models and their performance best practices.",
+            "tools": [
+                "performance_monitor_agent"
+            ]
+        },
+        {
+            "name": "performance_monitor_agent",
+            "role": "Monitors deployed model performance and works with tools for strategic improvements.",
+            "tools": [
+                "model_deployment_tool",
+                "deployment_feedback_agent"
+            ]
+        },
+        {
+            "name": "collaboration_facilitator_agent",
+            "role": "Encourages teamwork in learning through structured interactions and platform-based reviews.",
+            "tools": [
+                "peer_review_agent"
+            ]
+        },
+        {
+            "name": "progress_tracker_agent",
+            "role": "Analyzes learner progress and delivers customized feedback to optimize the learning path.",
+            "tools": [
+                "adaptive_feedback_agent"
+            ]
+        },
+        {
+            "name": "data_quality_inspector_agent",
+            "role": "Ensures data integrity and quality in engineering projects through inspections and reports.",
+            "tools": []
+        },
+        {
+            "name": "deployment_feedback_agent",
+            "role": "Provides strategic feedback on model deployment processes to enhance learning outcomes.",
+            "tools": []
+        },
+        {
+            "name": "peer_review_agent",
+            "role": "Manages peer review interactions, promoting an exchange of feedback among learners.",
+            "tools": []
+        },
+        {
+            "name": "adaptive_feedback_agent",
+            "role": "Supplies adaptive feedback based on tracked progress, supporting personalized learning approaches.",
+            "tools": [
+                "learning_curve_analyzer_agent"
+            ]
+        },
+        {
+            "name": "learning_curve_analyzer_agent",
+            "role": "Analyzes and models student learning curves to optimize feedback and improve the curriculum.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "ml_theoretical_resources_tool",
+            "description": "Supplies extensive learning resources related to machine learning theory and applications.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "topic": {
+                        "type": "string",
+                        "description": "Machine Learning subject matter such as reinforcement learning or deep learning."
+                    },
+                    "difficulty_level": {
+                        "type": "string",
+                        "description": "Level of difficulty, such as foundational, intermediate, or advanced."
+                    }
+                }
+            }
+        },
+        {
+            "name": "stats_project_resources_tool",
+            "description": "Provides materials to support statistical project execution, including datasets and guides.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "project_topic": {
+                        "type": "string",
+                        "description": "Topic for the statistical project such as multivariate analysis or predictive modeling."
+                    },
+                    "required_materials": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Materials like datasets, research papers, or project guides."
+                    }
+                }
+            }
+        },
+        {
+            "name": "data_pipeline_tool",
+            "description": "Assists in building data pipelines, covering the entire process from ingestion to processing.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "pipeline_type": {
+                        "type": "string",
+                        "description": "Type of pipeline such as ETL or ELT."
+                    },
+                    "expected_data_flow": {
+                        "type": "string",
+                        "description": "Description of data flow characteristics and volume expectations."
+                    }
+                }
+            }
+        },
+        {
+            "name": "model_deployment_tool",
+            "description": "Supports the deployment phase of machine learning models, offering scalability advice.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "deployment_env": {
+                        "type": "string",
+                        "description": "Target environment for deployment, for example cloud-native or on-premises."
+                    },
+                    "model_scalability": {
+                        "type": "string",
+                        "description": "Planned strategy for scaling the deployed models such as autoscaling or manual scaling."
+                    }
+                }
+            }
+        }
+    ]
+}

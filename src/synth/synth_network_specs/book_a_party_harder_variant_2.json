@@ -1,0 +1,226 @@
+{
+    "task": "Organize a surprise destination vow renewal for my grandparents. Find a historical venue in Europe for August next year, arrange for a photographer, secure catering with gourmet options, and plan group transportation and accommodation for the family. Ensure invitations are sent out on time.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "venue_selection_agent",
+                "historical_venue_agent",
+                "booking_management_agent",
+                "contract_review_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "event_planning_agent",
+                "photographer_booking_agent",
+                "local_services_coordination_agent",
+                "contract_review_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "catering_arrangement_agent",
+                "gourmet_chef_agent",
+                "menu_design_agent",
+                "dietary_restriction_analysis_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "transportation_and_lodging_agent",
+                "group_transportation_agent",
+                "family_accommodation_agent",
+                "travel_documentation_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "communication_agent",
+                "invitation_agent",
+                "guest_list_agent",
+                "rsvp_tracker_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "budget_management_agent",
+                "exchange_rate_monitor_agent"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "venue_selection_agent",
+                "event_planning_agent",
+                "catering_arrangement_agent",
+                "transportation_and_lodging_agent",
+                "communication_agent",
+                "budget_management_agent"
+            ]
+        },
+        {
+            "name": "venue_selection_agent",
+            "role": "Selects and secures historical venues for the vow renewal ceremony.",
+            "tools": [
+                "historical_venue_agent",
+                "booking_management_agent"
+            ]
+        },
+        {
+            "name": "event_planning_agent",
+            "role": "Plans the event flow and finds local professionals such as photographers.",
+            "tools": [
+                "photographer_booking_agent",
+                "local_services_coordination_agent"
+            ]
+        },
+        {
+            "name": "catering_arrangement_agent",
+            "role": "Handles all food and beverage needs and collaborates with gourmet chefs.",
+            "tools": [
+                "gourmet_chef_agent"
+            ]
+        },
+        {
+            "name": "transportation_and_lodging_agent",
+            "role": "Organizes group travel and accommodation arrangements for the family.",
+            "tools": [
+                "group_transportation_agent",
+                "family_accommodation_agent"
+            ]
+        },
+        {
+            "name": "communication_agent",
+            "role": "Manages guest communication and ensures timely send-out of invitations.",
+            "tools": [
+                "invitation_agent",
+                "guest_list_agent"
+            ]
+        },
+        {
+            "name": "budget_management_agent",
+            "role": "Oversees the total budget and monitors currency exchange rates for international expenses.",
+            "tools": [
+                "exchange_rate_monitor_agent"
+            ]
+        },
+        {
+            "name": "historical_venue_agent",
+            "role": "Researches and provides information on potential historical venues.",
+            "tools": []
+        },
+        {
+            "name": "booking_management_agent",
+            "role": "Handles bookings and confirmations with all involved parties.",
+            "tools": [
+                "contract_review_agent"
+            ]
+        },
+        {
+            "name": "photographer_booking_agent",
+            "role": "Finds and books photographers who specialize in wedding and renewal ceremonies.",
+            "tools": []
+        },
+        {
+            "name": "local_services_coordination_agent",
+            "role": "Coordinates with local service providers for the event, such as decorators and audio-visual services.",
+            "tools": []
+        },
+        {
+            "name": "gourmet_chef_agent",
+            "role": "Specializes in crafting exclusive gourmet menus tailored to client preferences.",
+            "tools": [
+                "menu_design_agent"
+            ]
+        },
+        {
+            "name": "menu_design_agent",
+            "role": "Designs seven-course menus and coordinates taste tests.",
+            "tools": [
+                "dietary_restriction_analysis_agent"
+            ]
+        },
+        {
+            "name": "group_transportation_agent",
+            "role": "Arranges group transport, including shuttles and car rentals.",
+            "tools": []
+        },
+        {
+            "name": "family_accommodation_agent",
+            "role": "Secures suitable accommodations for family members close to the event venue.",
+            "tools": [
+                "travel_documentation_agent"
+            ]
+        },
+        {
+            "name": "invitation_agent",
+            "role": "Creates and sends personalized invitations to guests.",
+            "tools": []
+        },
+        {
+            "name": "guest_list_agent",
+            "role": "Maintains and manages the guest list to ensure all important attendees are included.",
+            "tools": [
+                "rsvp_tracker_agent"
+            ]
+        },
+        {
+            "name": "exchange_rate_monitor_agent",
+            "role": "Monitors and reports on current exchange rates to help budget planning.",
+            "tools": []
+        },
+        {
+            "name": "contract_review_agent",
+            "role": "Reviews contracts for venue and service bookings to ensure all terms are favorable.",
+            "tools": []
+        },
+        {
+            "name": "dietary_restriction_analysis_agent",
+            "role": "Analyzes dietary restrictions to adjust menus accordingly.",
+            "tools": []
+        },
+        {
+            "name": "travel_documentation_agent",
+            "role": "Manages and verifies travel documentation needs for international travel.",
+            "tools": []
+        },
+        {
+            "name": "rsvp_tracker_agent",
+            "role": "Tracks RSVPs and updates the guest list accordingly.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "menu_design_agent",
+            "description": "Crafts a customized menu for the event's catering, including dietary consideration options.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "preferences": {
+                        "type": "array",
+                        "description": "List of dietary preferences to be considered"
+                    }
+                }
+            }
+        },
+        {
+            "name": "guest_list_agent",
+            "description": "Manages the guest list including RSVPs and contact information.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "addition": {
+                        "type": "string",
+                        "description": "Name of guest to be added"
+                    }
+                }
+            }
+        }
+    ]
+}

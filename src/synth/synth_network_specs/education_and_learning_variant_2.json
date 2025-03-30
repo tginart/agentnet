@@ -1,0 +1,139 @@
+{
+    "task": "Facilitate the enrollment of a student into an international online university course, ensuring credit transfer and compliance with regional educational standards. Include AI for language learning support and connectivity with educational forums.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "enrollment_management_agent",
+                "course_selection_agent",
+                "credit_transfer_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "regional_compliance_agent",
+                "education_standards_agent",
+                "credit_transfer_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "language_support_agent",
+                "language_enhancement_tool",
+                "online_forum_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Central agent that interacts with the human user and coordinates with education-specific agents to fulfill the task.",
+            "tools": [
+                "enrollment_management_agent",
+                "regional_compliance_agent",
+                "language_support_agent",
+                "financial_aid_agent"
+            ]
+        },
+        {
+            "name": "enrollment_management_agent",
+            "role": "Manages the process of enrolling students into courses, handling application details and database interactions.",
+            "tools": [
+                "course_selection_agent",
+                "student_database_agent"
+            ]
+        },
+        {
+            "name": "course_selection_agent",
+            "role": "Helps students choose desirable international courses based on preferences, enrollment criteria, and credit transfer possibilities.",
+            "tools": [
+                "credit_transfer_agent"
+            ]
+        },
+        {
+            "name": "regional_compliance_agent",
+            "role": "Ensures that courses and credits meet regional education policies and standards.",
+            "tools": [
+                "education_standards_agent",
+                "credit_transfer_agent"
+            ]
+        },
+        {
+            "name": "language_support_agent",
+            "role": "Provides AI-based language learning support tailored to the student's needs and regional language requirements.",
+            "tools": [
+                "language_enhancement_tool",
+                "online_forum_agent"
+            ]
+        },
+        {
+            "name": "credit_transfer_agent",
+            "role": "Manages the transfer of credits between institutions and ensures they're recognized by relevant educational bodies.",
+            "tools": []
+        },
+        {
+            "name": "education_standards_agent",
+            "role": "Consults a database of education standards to advise on curriculum compliance and credit validity.",
+            "tools": []
+        },
+        {
+            "name": "student_database_agent",
+            "role": "Maintains comprehensive records of student profiles, including previous coursework and credit histories.",
+            "tools": []
+        },
+        {
+            "name": "online_forum_agent",
+            "role": "Facilitates student engagement through educational forums, connecting them with peers and mentors.",
+            "tools": []
+        },
+        {
+            "name": "financial_aid_agent",
+            "role": "Handles inquiries and processing related to student financial aid options for international courses.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "course_info_tool",
+            "description": "Retrieves information on international courses, including outlines, prerequisites, and costs.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "course_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the course."
+                    },
+                    "institution_name": {
+                        "type": "string",
+                        "description": "Name of the institution offering the course."
+                    }
+                }
+            }
+        },
+        {
+            "name": "language_enhancement_tool",
+            "description": "Provides language enhancement exercises tailored to the student's level and the course language requirements.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "student_id": {
+                        "type": "string",
+                        "description": "Identifier for the student using the language tool."
+                    },
+                    "language": {
+                        "type": "string",
+                        "description": "Language the student wishes to improve."
+                    },
+                    "skill_level": {
+                        "type": "string",
+                        "description": "Current proficiency level of the student."
+                    }
+                }
+            }
+        }
+    ]
+}

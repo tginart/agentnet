@@ -1,0 +1,292 @@
+{
+    "task": "Plan a surprise multi-destination luxury anniversary celebration. The event will span three countries over two weeks. Arrange private jet transport, luxury accommodation, gourmet dining reservations, personalized tours in each location, and private performances. Nutritional and health preferences must be respected. Engage a private photographer and videographer to document the trip. Include a health check-up before and after the trip, with all travel aligning with health guidelines.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "transportation_agent",
+                "private_jet_agent",
+                "flight_permission_agent",
+                "pilot_coordination_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "accommodation_agent",
+                "luxury_hotel_booking_agent",
+                "suite_customization_agent",
+                "guest_preparation_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "dining_experience_agent",
+                "gourmet_reservation_agent",
+                "menu_customization_agent",
+                "dietary_preference_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "tour_organizer_agent",
+                "local_adventure_agent",
+                "cultural_experience_agent",
+                "language_translator_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "entertainment_agent",
+                "performance_scheduler_agent",
+                "artist_recruitment_agent",
+                "legal_contracts_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "media_documentation_agent",
+                "photography_services_agent",
+                "videography_services_agent",
+                "content_delivery_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "health_management_agent",
+                "pre_trip_medical_check_agent",
+                "post_trip_health_check_agent",
+                "vaccination_standard_agent"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that orchestrates the planning and execution of the luxury anniversary celebration.",
+            "tools": [
+                "transportation_agent",
+                "accommodation_agent",
+                "dining_experience_agent",
+                "tour_organizer_agent",
+                "entertainment_agent",
+                "media_documentation_agent",
+                "health_management_agent"
+            ]
+        },
+        {
+            "name": "transportation_agent",
+            "role": "Handles all transport arrangements, including securing private jets and managing flight logistics.",
+            "tools": [
+                "private_jet_agent"
+            ]
+        },
+        {
+            "name": "accommodation_agent",
+            "role": "Manages bookings for luxury accommodations and customizes the suite experiences.",
+            "tools": [
+                "luxury_hotel_booking_agent",
+                "suite_customization_agent"
+            ]
+        },
+        {
+            "name": "dining_experience_agent",
+            "role": "Arranges gourmet dining experiences tailored to personal preferences.",
+            "tools": [
+                "gourmet_reservation_agent"
+            ]
+        },
+        {
+            "name": "tour_organizer_agent",
+            "role": "Plans tailored tours including adventure and cultural experiences.",
+            "tools": [
+                "local_adventure_agent"
+            ]
+        },
+        {
+            "name": "entertainment_agent",
+            "role": "Arranges private performances, concerts, or shows during the trip.",
+            "tools": [
+                "performance_scheduler_agent"
+            ]
+        },
+        {
+            "name": "media_documentation_agent",
+            "role": "Coordinates photography and videography services to document the event.",
+            "tools": [
+                "photography_services_agent",
+                "videography_services_agent"
+            ]
+        },
+        {
+            "name": "health_management_agent",
+            "role": "Ensures health checks and vaccination compliance before and after the trip, aligning with health guidelines.",
+            "tools": [
+                "pre_trip_medical_check_agent",
+                "post_trip_health_check_agent"
+            ]
+        },
+        {
+            "name": "private_jet_agent",
+            "role": "Sources and secures private jet transport for the event.",
+            "tools": [
+                "flight_permission_agent",
+                "pilot_coordination_agent"
+            ]
+        },
+        {
+            "name": "luxury_hotel_booking_agent",
+            "role": "Books luxury hotels and manages guest readiness prior to arrival.",
+            "tools": [
+                "guest_preparation_agent"
+            ]
+        },
+        {
+            "name": "gourmet_reservation_agent",
+            "role": "Makes gourmet dining reservations and customizes menu choices.",
+            "tools": [
+                "menu_customization_agent",
+                "dietary_preference_agent"
+            ]
+        },
+        {
+            "name": "local_adventure_agent",
+            "role": "Arranges local adventurous tours tailored to the travelers' interests.",
+            "tools": [
+                "cultural_experience_agent"
+            ]
+        },
+        {
+            "name": "performance_scheduler_agent",
+            "role": "Schedules performances and recruits artists while handling legal contracts.",
+            "tools": [
+                "artist_recruitment_agent"
+            ]
+        },
+        {
+            "name": "photography_services_agent",
+            "role": "Organizes photography sessions and coordinates content delivery.",
+            "tools": [
+                "content_delivery_agent"
+            ]
+        },
+        {
+            "name": "videography_services_agent",
+            "role": "Conducts videography sessions and coordinates the production of video content.",
+            "tools": [
+                "content_delivery_agent"
+            ]
+        },
+        {
+            "name": "pre_trip_medical_check_agent",
+            "role": "Coordinates pre-trip medical checks and vaccination requirements.",
+            "tools": [
+                "vaccination_standard_agent"
+            ]
+        },
+        {
+            "name": "suite_customization_agent",
+            "role": "Customizes hotel suites as per guest preferences.",
+            "tools": []
+        },
+        {
+            "name": "guest_preparation_agent",
+            "role": "Prepares rooms with personalized amenities and requests.",
+            "tools": []
+        },
+        {
+            "name": "pilot_coordination_agent",
+            "role": "Manages pilot scheduling and ensures adherence to schedules.",
+            "tools": []
+        },
+        {
+            "name": "dietary_preference_agent",
+            "role": "Ensures all meals adhere to dietary restrictions and preferences.",
+            "tools": []
+        },
+        {
+            "name": "cultural_experience_agent",
+            "role": "Organizes cultural events and offerings in each location.",
+            "tools": [
+                "language_translator_agent"
+            ]
+        },
+        {
+            "name": "artist_recruitment_agent",
+            "role": "Recruits artists for private performances and manages contracts.",
+            "tools": [
+                "legal_contracts_agent"
+            ]
+        },
+        {
+            "name": "content_delivery_agent",
+            "role": "Delivers media content through secure channels post-documentation.",
+            "tools": []
+        },
+        {
+            "name": "vaccination_standard_agent",
+            "role": "Verifies and ensures vaccination standards meet international travel requirements.",
+            "tools": []
+        },
+        {
+            "name": "language_translator_agent",
+            "role": "Provides translation services to enhance the travel experience.",
+            "tools": []
+        },
+        {
+            "name": "legal_contracts_agent",
+            "role": "Reviews and handles all legal contracts involved in the performances.",
+            "tools": []
+        },
+        {
+            "name": "flight_permission_agent",
+            "role": "Secures necessary airspace clearances and permissions for private jet flights.",
+            "tools": []
+        },
+        {
+            "name": "post_trip_health_check_agent",
+            "role": "Arranges and conducts health check-ups after the trip to ensure wellbeing and guideline adherence.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "menu_customization_agent",
+            "description": "Customizes menus for gourmet dining experiences, considering dietary restrictions.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "cuisine_type": {
+                        "type": "string",
+                        "description": "Preferred type of cuisine for dining"
+                    },
+                    "dietary_restrictions": {
+                        "type": "array",
+                        "description": "List of dietary restrictions that need to be accommodated"
+                    }
+                }
+            }
+        },
+        {
+            "name": "legal_contracts_agent",
+            "description": "Handles legal contract creation and review for entertainment services.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "contract_type": {
+                        "type": "string",
+                        "description": "Type of contract (e.g., performance, service)"
+                    },
+                    "participant_names": {
+                        "type": "array",
+                        "description": "List of names of all parties involved"
+                    },
+                    "agreement_details": {
+                        "type": "string",
+                        "description": "Detailed terms and conditions of the contract"
+                    }
+                }
+            }
+        }
+    ]
+}

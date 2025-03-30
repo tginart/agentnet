@@ -1,0 +1,293 @@
+{
+    "task": "Design and implement a community-driven renewable energy project in Southeast Asia: 1. Identify and assess potential renewable energy sites, 2. Develop a scalable implementation plan involving local communities, 3. Establish educational programs for skill development in renewable technologies, 4. Secure necessary funding and investment in collaboration with financial institutions, 5. Create a monitoring system to track project impact, 6. Build a communication strategy for community engagement and awareness.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "project_management_agent",
+                "site_assessment_agent",
+                "site_survey_agent",
+                "renewable_resource_analysis_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "project_management_agent",
+                "community_engagement_agent",
+                "local_community_leader_agent",
+                "cultural_liaison_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "project_management_agent",
+                "education_program_agent",
+                "training_material_developer_agent",
+                "renewable_technology_specialist_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "project_management_agent",
+                "funding_acquisition_agent",
+                "financial_analysis_agent",
+                "investment_partner_engagement_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "project_management_agent",
+                "monitoring_system_agent",
+                "data_collection_agent",
+                "impact_analysis_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "project_management_agent",
+                "communication_strategy_agent",
+                "media_specialist_agent",
+                "campaign_development_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "project_management_agent",
+                "site_assessment_agent",
+                "governmental_permission_agent",
+                "local_regulation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "project_management_agent",
+                "community_engagement_agent",
+                "awareness_campaign_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "project_management_agent",
+                "education_program_agent",
+                "local_education_institution_agent",
+                "curriculum_customization_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "project_management_agent"
+            ]
+        },
+        {
+            "name": "project_management_agent",
+            "role": "Oversees the entire renewable energy project, ensuring all tasks are completed efficiently and sustainably.",
+            "tools": [
+                "site_assessment_agent",
+                "community_engagement_agent",
+                "education_program_agent",
+                "funding_acquisition_agent",
+                "monitoring_system_agent",
+                "communication_strategy_agent"
+            ]
+        },
+        {
+            "name": "site_assessment_agent",
+            "role": "Assesses various sites for their potential to support renewable energy projects.",
+            "tools": [
+                "site_survey_agent",
+                "renewable_resource_analysis_agent",
+                "governmental_permission_agent"
+            ]
+        },
+        {
+            "name": "site_survey_agent",
+            "role": "Conducts on-ground surveys to evaluate site suitability for energy generation.",
+            "tools": []
+        },
+        {
+            "name": "renewable_resource_analysis_agent",
+            "role": "Analyzes resource availability and potential productivity of proposed sites.",
+            "tools": []
+        },
+        {
+            "name": "governmental_permission_agent",
+            "role": "Secures governmental permissions and checks compliance with local regulations.",
+            "tools": [
+                "local_regulation_agent"
+            ]
+        },
+        {
+            "name": "local_regulation_agent",
+            "role": "Expert on local regulations affecting renewable energy projects.",
+            "tools": []
+        },
+        {
+            "name": "community_engagement_agent",
+            "role": "Facilitates engagement with local communities to ensure their involvement and address cultural considerations.",
+            "tools": [
+                "local_community_leader_agent",
+                "awareness_campaign_agent"
+            ]
+        },
+        {
+            "name": "local_community_leader_agent",
+            "role": "Interfaces with community leaders to garner support and involvement.",
+            "tools": [
+                "cultural_liaison_agent"
+            ]
+        },
+        {
+            "name": "cultural_liaison_agent",
+            "role": "Advises on cultural norms and sensitivities, facilitating respectful integration.",
+            "tools": []
+        },
+        {
+            "name": "awareness_campaign_agent",
+            "role": "Develops campaigns to raise awareness and garner support for the project.",
+            "tools": []
+        },
+        {
+            "name": "education_program_agent",
+            "role": "Develops and implements educational initiatives to build local capacity in renewable technologies.",
+            "tools": [
+                "training_material_developer_agent",
+                "local_education_institution_agent"
+            ]
+        },
+        {
+            "name": "training_material_developer_agent",
+            "role": "Creates training materials tailored to developing skills in renewable energy technologies.",
+            "tools": [
+                "renewable_technology_specialist_agent"
+            ]
+        },
+        {
+            "name": "renewable_technology_specialist_agent",
+            "role": "Provides expertise on cutting-edge sustainable technologies.",
+            "tools": []
+        },
+        {
+            "name": "local_education_institution_agent",
+            "role": "Collaborates with local institutions to customize training curricula.",
+            "tools": [
+                "curriculum_customization_agent"
+            ]
+        },
+        {
+            "name": "curriculum_customization_agent",
+            "role": "Aligns educational programs to local needs and capabilities.",
+            "tools": []
+        },
+        {
+            "name": "funding_acquisition_agent",
+            "role": "Secures financial backing and investment for the project.",
+            "tools": [
+                "financial_analysis_agent",
+                "investment_partner_engagement_agent"
+            ]
+        },
+        {
+            "name": "financial_analysis_agent",
+            "role": "Performs financial analysis to structure viable investment opportunities.",
+            "tools": []
+        },
+        {
+            "name": "investment_partner_engagement_agent",
+            "role": "Builds partnerships with potential investors and funding bodies.",
+            "tools": []
+        },
+        {
+            "name": "monitoring_system_agent",
+            "role": "Develops systems to track and report on the project's impact over time.",
+            "tools": [
+                "data_collection_agent",
+                "impact_analysis_agent"
+            ]
+        },
+        {
+            "name": "data_collection_agent",
+            "role": "Collects data critical to evaluating project success and areas for improvement.",
+            "tools": []
+        },
+        {
+            "name": "impact_analysis_agent",
+            "role": "Analyzes collected data to measure project outcomes and inform future strategies.",
+            "tools": []
+        },
+        {
+            "name": "communication_strategy_agent",
+            "role": "Creators of communication strategies to keep stakeholders informed and engaged.",
+            "tools": [
+                "media_specialist_agent",
+                "campaign_development_agent"
+            ]
+        },
+        {
+            "name": "media_specialist_agent",
+            "role": "Specializes in crafting media for different platforms to effectively communicate project goals.",
+            "tools": []
+        },
+        {
+            "name": "campaign_development_agent",
+            "role": "Designs specific campaigns to communicate project progress and benefits.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "site_evaluation_tool",
+            "description": "Evaluates potential sites based on environmental and logistical criteria.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {
+                        "type": "string",
+                        "description": "The geographical area to evaluate."
+                    },
+                    "resource_types": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Types of renewable resources available to analyze, e.g., solar, wind, hydro."
+                    }
+                }
+            }
+        },
+        {
+            "name": "community_feedback_tool",
+            "description": "Gathers and manages feedback from community stakeholders.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "community_id": {
+                        "type": "string",
+                        "description": "Identifier for the community involved in the project."
+                    },
+                    "feedback_type": {
+                        "type": "string",
+                        "description": "Type of feedback being collected, e.g., support, concerns, suggestions."
+                    },
+                    "anonymous_submission": {
+                        "type": "boolean",
+                        "description": "Allow anonymous submissions to encourage honest feedback."
+                    }
+                }
+            }
+        }
+    ]
+}

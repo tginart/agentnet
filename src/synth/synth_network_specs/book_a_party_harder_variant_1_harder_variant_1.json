@@ -1,0 +1,335 @@
+{
+    "task": "Organize an elaborate family reunion event in December. Secure a historic villa in Tuscany for a week, arrange travel for 25 family members from various locations, plan daily themed activities including a cooking class with a local chef, a wine tasting tour, and a cultural heritage tour. Ensure dietary preferences are considered for all meals. Finally, prepare personalized welcome packages for each family member.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "event_planning_agent",
+                "venue_booking_agent",
+                "villa_research_and_negotiation_agent",
+                "historical_villa_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "transportation_coordinator_agent",
+                "international_travel_booking_agent",
+                "flight_booking_department",
+                "local_transfer_management"
+            ],
+            [
+                "human",
+                "client_agent",
+                "activity_coordinator_agent",
+                "thematic_activity_planner",
+                "culinary_experience_designer",
+                "local_chef_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "activity_coordinator_agent",
+                "thematic_activity_planner",
+                "wine_tour_planner_agent",
+                "vineyard_contact_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "activity_coordinator_agent",
+                "cultural_heritage_tour_organizer",
+                "site_selection_specialist",
+                "historical_guide_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "family_preferences_agent",
+                "dietary_requirement_processor",
+                "chef_and_kitchen_coordinator",
+                "meal_validation_unit"
+            ],
+            [
+                "human",
+                "client_agent",
+                "logistics_and_finance_manager",
+                "financial_planning_specialist",
+                "budget_analysis_agent",
+                "expenditure_analysis_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "accommodation_and_welcome_agent",
+                "welcome_package_designer",
+                "personalization_specialist_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "event_planning_agent",
+                "logistics_and_finance_manager",
+                "secure_payment_processor",
+                "payment_audit_trail"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "event_planning_agent",
+                "transportation_coordinator_agent",
+                "activity_coordinator_agent",
+                "family_preferences_agent",
+                "logistics_and_finance_manager",
+                "accommodation_and_welcome_agent"
+            ]
+        },
+        {
+            "name": "event_planning_agent",
+            "role": "Coordinates the overall planning and scheduling of the event.",
+            "tools": [
+                "venue_booking_agent",
+                "logistics_and_finance_manager"
+            ]
+        },
+        {
+            "name": "venue_booking_agent",
+            "role": "Handles booking of venues, ensuring they meet the event's requirements.",
+            "tools": [
+                "villa_research_and_negotiation_agent"
+            ]
+        },
+        {
+            "name": "villa_research_and_negotiation_agent",
+            "role": "Finds and negotiates bookings for historic villas.",
+            "tools": [
+                "historical_villa_agent"
+            ]
+        },
+        {
+            "name": "transportation_coordinator_agent",
+            "role": "Manages transportation logistics for all family members.",
+            "tools": [
+                "international_travel_booking_agent"
+            ]
+        },
+        {
+            "name": "international_travel_booking_agent",
+            "role": "Coordinates all international flight bookings.",
+            "tools": [
+                "flight_booking_department",
+                "local_transfer_management"
+            ]
+        },
+        {
+            "name": "activity_coordinator_agent",
+            "role": "Plans and arranges all the activities throughout the event.",
+            "tools": [
+                "thematic_activity_planner",
+                "cultural_heritage_tour_organizer"
+            ]
+        },
+        {
+            "name": "thematic_activity_planner",
+            "role": "Specializes in planning themed activities.",
+            "tools": [
+                "culinary_experience_designer",
+                "wine_tour_planner_agent"
+            ]
+        },
+        {
+            "name": "culinary_experience_designer",
+            "role": "Designs and organizes cooking classes and experiences.",
+            "tools": [
+                "local_chef_agent"
+            ]
+        },
+        {
+            "name": "wine_tour_planner_agent",
+            "role": "Plans wine tasting tours and collaborates with local vineyards.",
+            "tools": [
+                "vineyard_contact_agent"
+            ]
+        },
+        {
+            "name": "cultural_heritage_tour_organizer",
+            "role": "Plans tours of local cultural heritage sites.",
+            "tools": [
+                "site_selection_specialist"
+            ]
+        },
+        {
+            "name": "site_selection_specialist",
+            "role": "Identifies and selects appropriate cultural heritage sites for visits.",
+            "tools": [
+                "historical_guide_agent"
+            ]
+        },
+        {
+            "name": "family_preferences_agent",
+            "role": "Gathers and processes family members' preferences and dietary restrictions.",
+            "tools": [
+                "dietary_requirement_processor"
+            ]
+        },
+        {
+            "name": "dietary_requirement_processor",
+            "role": "Processes dietary restrictions to ensure suitable meal planning.",
+            "tools": [
+                "chef_and_kitchen_coordinator"
+            ]
+        },
+        {
+            "name": "chef_and_kitchen_coordinator",
+            "role": "Ensures all meal plans accommodate dietary preferences.",
+            "tools": [
+                "meal_validation_unit"
+            ]
+        },
+        {
+            "name": "logistics_and_finance_manager",
+            "role": "Oversees the logistics and ensures financial aspects of the event remain on track.",
+            "tools": [
+                "financial_planning_specialist",
+                "secure_payment_processor"
+            ]
+        },
+        {
+            "name": "financial_planning_specialist",
+            "role": "Specializes in planning financial aspects of large events.",
+            "tools": [
+                "budget_analysis_agent",
+                "expenditure_analysis_agent"
+            ]
+        },
+        {
+            "name": "secure_payment_processor",
+            "role": "Handles all financial transactions and payment confirmations.",
+            "tools": [
+                "payment_audit_trail"
+            ]
+        },
+        {
+            "name": "accommodation_and_welcome_agent",
+            "role": "Arranges accommodations and prepares personalized welcome packages.",
+            "tools": [
+                "welcome_package_designer"
+            ]
+        },
+        {
+            "name": "welcome_package_designer",
+            "role": "Designs personalized welcome packages for each family member.",
+            "tools": [
+                "personalization_specialist_agent"
+            ]
+        },
+        {
+            "name": "historical_villa_agent",
+            "role": "Responsible for acquiring accommodation at a scenic historical villa.",
+            "tools": []
+        },
+        {
+            "name": "flight_booking_department",
+            "role": "Books flights for all family members, ensuring optimal travel routes and timing.",
+            "tools": []
+        },
+        {
+            "name": "local_transfer_management",
+            "role": "Coordinates local transportation, including car rentals and shuttle services.",
+            "tools": []
+        },
+        {
+            "name": "local_chef_agent",
+            "role": "Communicates with local chefs to organize cooking classes.",
+            "tools": []
+        },
+        {
+            "name": "vineyard_contact_agent",
+            "role": "Establishes connections with vineyards for tour arrangements.",
+            "tools": []
+        },
+        {
+            "name": "historical_guide_agent",
+            "role": "A local guide responsible for educational tours of historical sites.",
+            "tools": []
+        },
+        {
+            "name": "meal_validation_unit",
+            "role": "Validates all meal plans against dietary restrictions.",
+            "tools": []
+        },
+        {
+            "name": "budget_analysis_agent",
+            "role": "Analyzes budget constraints and aligns events within financial limits.",
+            "tools": []
+        },
+        {
+            "name": "expenditure_analysis_agent",
+            "role": "Analyzes planned expenditures to ensure they align with the budget.",
+            "tools": []
+        },
+        {
+            "name": "payment_audit_trail",
+            "role": "Tracks all payments and ensures audit compliance.",
+            "tools": []
+        },
+        {
+            "name": "personalization_specialist_agent",
+            "role": "Customizes welcome packages based on individual preferences and needs.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "event_activity_generator",
+            "description": "Generates a list of potential activities for the event based on location and preferences.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {
+                        "type": "string",
+                        "description": "The event location to suggest activities for"
+                    },
+                    "preferences": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "An array of preferences to tailor activity suggestions"
+                    }
+                }
+            }
+        },
+        {
+            "name": "meal_planner_tool",
+            "description": "Creates meal plans accommodating dietary restrictions.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "dietary_preferences": {
+                        "type": "object",
+                        "description": "Detailed dietary preferences and restrictions",
+                        "properties": {
+                            "vegan": {
+                                "type": "boolean",
+                                "description": "Includes only vegan meals"
+                            },
+                            "gluten_free": {
+                                "type": "boolean",
+                                "description": "Includes only gluten-free meals"
+                            }
+                        }
+                    },
+                    "number_of_meals": {
+                        "type": "number",
+                        "description": "Total number of meals to plan"
+                    }
+                }
+            }
+        }
+    ]
+}

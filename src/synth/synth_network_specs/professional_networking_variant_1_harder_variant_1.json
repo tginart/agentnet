@@ -1,0 +1,233 @@
+{
+    "task": "I am organizing an international scientific symposium and need to manage invitations to renowned researchers, coordinate travel and accommodation for attendees, secure academic journal partnerships for publication of selected papers, and promote the event globally. Assist with the logistics, outreach, and promotional strategies, ensuring a seamless experience for all participants.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "academic_outreach_agent",
+                "invitation_manager_agent",
+                "email_delivery_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "logistics_planning_agent",
+                "travel_coordinator_agent",
+                "airline_booking_agent",
+                "hotel_booking_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "journal_partnership_agent",
+                "academic_promotion_agent",
+                "scientific_journal_contact_agent",
+                "negotiation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "global_promotion_agent",
+                "targeted_ads_agent",
+                "social_media_strategy_agent",
+                "social_metrics_analysis_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "event_execution_agent",
+                "venue_preparation_agent",
+                "onsite_technical_support_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "academic_outreach_agent",
+            "role": "This agent is responsible for identifying and reaching out to key researchers and academics to invite them to the symposium.",
+            "tools": [
+                "invitation_manager_agent",
+                "academic_promotion_agent"
+            ]
+        },
+        {
+            "name": "invitation_manager_agent",
+            "role": "Handles the drafting and sending of personalized invitations and manages responses.",
+            "tools": [
+                "email_delivery_agent"
+            ]
+        },
+        {
+            "name": "email_delivery_agent",
+            "role": "Executes email communications including sending invitations and updates.",
+            "tools": []
+        },
+        {
+            "name": "logistics_planning_agent",
+            "role": "Coordinates the logistical aspects of the symposium, including travel and lodging arrangements.",
+            "tools": [
+                "travel_coordinator_agent"
+            ]
+        },
+        {
+            "name": "travel_coordinator_agent",
+            "role": "Manages travel arrangements, liaising with airlines and hotels to accommodate attendees.",
+            "tools": [
+                "airline_booking_agent",
+                "hotel_booking_agent"
+            ]
+        },
+        {
+            "name": "airline_booking_agent",
+            "role": "Books flights and manages itineraries for attendees internationally.",
+            "tools": []
+        },
+        {
+            "name": "hotel_booking_agent",
+            "role": "Secures hotel accommodations based on availability, proximity to venue, and attendee preferences.",
+            "tools": []
+        },
+        {
+            "name": "journal_partnership_agent",
+            "role": "Secures partnerships with academic journals for the publication of selected symposium papers.",
+            "tools": [
+                "scientific_journal_contact_agent"
+            ]
+        },
+        {
+            "name": "scientific_journal_contact_agent",
+            "role": "Involves initial communication with journals to establish interest and partnership terms.",
+            "tools": [
+                "negotiation_agent"
+            ]
+        },
+        {
+            "name": "negotiation_agent",
+            "role": "Handles detailed negotiations of terms, ensuring mutually beneficial agreements with journals.",
+            "tools": []
+        },
+        {
+            "name": "global_promotion_agent",
+            "role": "Creates and coordinates promotion strategies to ensure maximum international attendance.",
+            "tools": [
+                "targeted_ads_agent"
+            ]
+        },
+        {
+            "name": "targeted_ads_agent",
+            "role": "Runs digital advertisement campaigns and optimizes for target academic audiences.",
+            "tools": [
+                "social_media_strategy_agent"
+            ]
+        },
+        {
+            "name": "social_media_strategy_agent",
+            "role": "Develops social media strategies that effectively promote the symposium.",
+            "tools": [
+                "social_metrics_analysis_agent"
+            ]
+        },
+        {
+            "name": "social_metrics_analysis_agent",
+            "role": "Analyzes metrics to measure the reach and effectiveness of social media campaigns.",
+            "tools": []
+        },
+        {
+            "name": "event_execution_agent",
+            "role": "Oversees the on-the-ground execution of the symposium, ensuring all plans are implemented smoothly.",
+            "tools": [
+                "venue_preparation_agent",
+                "onsite_technical_support_agent"
+            ]
+        },
+        {
+            "name": "venue_preparation_agent",
+            "role": "Prepares the venue, including seating arrangements, signage, and necessary equipment setup.",
+            "tools": []
+        },
+        {
+            "name": "onsite_technical_support_agent",
+            "role": "Provides technical assistance during the event, covering audio/visual needs and internet connectivity.",
+            "tools": []
+        },
+        {
+            "name": "academic_promotion_agent",
+            "role": "Focuses on academic channels for promotion, leveraging networks in universities and research institutes.",
+            "tools": []
+        },
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that coordinates all tasks according to user requirements and provides periodic updates.",
+            "tools": [
+                "academic_outreach_agent",
+                "logistics_planning_agent",
+                "journal_partnership_agent",
+                "global_promotion_agent",
+                "event_execution_agent"
+            ]
+        }
+    ],
+    "tools": [
+        {
+            "name": "airline_booking_api",
+            "description": "Books flights for attendees, managing dates and preferences.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "attendee_name": {
+                        "type": "string",
+                        "description": "Name of attendee"
+                    },
+                    "travel_dates": {
+                        "type": "object",
+                        "properties": {
+                            "departure": {
+                                "type": "string",
+                                "description": "Departure date"
+                            },
+                            "return": {
+                                "type": "string",
+                                "description": "Return date"
+                            }
+                        }
+                    },
+                    "preferred_airline": {
+                        "type": "string",
+                        "description": "Preferred airline or flight class"
+                    }
+                }
+            }
+        },
+        {
+            "name": "hotel_booking_tool",
+            "description": "Reserves hotel rooms for attendees, managing booking details.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "attendee_name": {
+                        "type": "string",
+                        "description": "Name of attendee"
+                    },
+                    "check_in_date": {
+                        "type": "string",
+                        "description": "Check-in date"
+                    },
+                    "check_out_date": {
+                        "type": "string",
+                        "description": "Check-out date"
+                    },
+                    "room_type": {
+                        "type": "string",
+                        "description": "Type of room requested"
+                    }
+                }
+            }
+        }
+    ]
+}

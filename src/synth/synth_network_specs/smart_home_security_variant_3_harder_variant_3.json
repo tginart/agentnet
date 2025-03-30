@@ -1,0 +1,184 @@
+{
+    "task": "Implement a smart aquaculture system to optimize fish health by analyzing water quality, detect and mitigate diseases, automate feeding schedules, track growth metrics, and compile comprehensive monthly reports on operations and environmental impact.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "water_quality_monitoring_agent",
+                "chemical_balance_analysis_agent",
+                "disease_detection_agent",
+                "health_response_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "automated_feeding_control_agent",
+                "feeding_schedule_optimization_agent",
+                "fish_nutrition_analysis_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "growth_tracking_agent",
+                "biometric_data_collection_agent",
+                "growth_analytics_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "monthly_report_agent",
+                "environmental_impact_report_agent",
+                "data_aggregation_tool",
+                "sustainability_improvements_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Facilitates interaction between the user and the smart aquaculture system, coordinating various subordinate agents.",
+            "tools": [
+                "water_quality_monitoring_agent",
+                "automated_feeding_control_agent",
+                "growth_tracking_agent",
+                "monthly_report_agent"
+            ]
+        },
+        {
+            "name": "water_quality_monitoring_agent",
+            "role": "Continuously monitors water conditions to ensure optimal living conditions for fish.",
+            "tools": [
+                "chemical_balance_analysis_agent"
+            ]
+        },
+        {
+            "name": "chemical_balance_analysis_agent",
+            "role": "Analyzes chemical balances in the water to detect potential imbalances that may harm fish.",
+            "tools": [
+                "disease_detection_agent"
+            ]
+        },
+        {
+            "name": "disease_detection_agent",
+            "role": "Identifies early signs of disease based on changes in water chemistry.",
+            "tools": [
+                "health_response_agent"
+            ]
+        },
+        {
+            "name": "health_response_agent",
+            "role": "Implements measures to counter detected diseases and improve fish health.",
+            "tools": []
+        },
+        {
+            "name": "automated_feeding_control_agent",
+            "role": "Controls and supervises the automated feeding of fish.",
+            "tools": [
+                "feeding_schedule_optimization_agent"
+            ]
+        },
+        {
+            "name": "feeding_schedule_optimization_agent",
+            "role": "Optimizes fish feeding schedules based on health and growth data.",
+            "tools": [
+                "fish_nutrition_analysis_agent"
+            ]
+        },
+        {
+            "name": "fish_nutrition_analysis_agent",
+            "role": "Analyzes nutrition levels in fish food to ensure dietary needs are met.",
+            "tools": []
+        },
+        {
+            "name": "growth_tracking_agent",
+            "role": "Monitors fish growth through regular data collection and analysis.",
+            "tools": [
+                "biometric_data_collection_agent"
+            ]
+        },
+        {
+            "name": "biometric_data_collection_agent",
+            "role": "Collects biometric data from fish to analyze growth patterns and health.",
+            "tools": [
+                "growth_analytics_agent"
+            ]
+        },
+        {
+            "name": "growth_analytics_agent",
+            "role": "Analyzes collected growth data to identify trends and inform decision making.",
+            "tools": []
+        },
+        {
+            "name": "monthly_report_agent",
+            "role": "Compiles and delivers a comprehensive report on the aquaculture operations and their environmental impact.",
+            "tools": [
+                "environmental_impact_report_agent"
+            ]
+        },
+        {
+            "name": "environmental_impact_report_agent",
+            "role": "Focuses on analyzing and reporting the environmental impact of aquaculture practices.",
+            "tools": [
+                "data_aggregation_tool",
+                "sustainability_improvements_agent"
+            ]
+        },
+        {
+            "name": "sustainability_improvements_agent",
+            "role": "Suggests improvements in practices for better sustainability and reduced environmental footprint.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "data_aggregation_tool",
+            "description": "Aggregates disparate pieces of data into a cohesive report format.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "data_sources": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Sources of data to be aggregated for reporting."
+                    },
+                    "report_type": {
+                        "type": "string",
+                        "description": "The type of report being generated."
+                    },
+                    "include_analysis": {
+                        "type": "boolean",
+                        "description": "Whether to include analysis results in the report."
+                    }
+                }
+            }
+        },
+        {
+            "name": "feeding_efficiency_tool",
+            "description": "Evaluates and improves the efficiency of the automated feeding schedule.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "fish_species": {
+                        "type": "string",
+                        "description": "The species of fish being fed."
+                    },
+                    "current_feeding_schedule": {
+                        "type": "string",
+                        "description": "The current feeding schedule being followed."
+                    },
+                    "waste_percentage": {
+                        "type": "number",
+                        "description": "The percentage of feed which is being wasted."
+                    }
+                }
+            }
+        }
+    ]
+}

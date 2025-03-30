@@ -1,0 +1,327 @@
+{
+    "task": "Plan an eco-friendly vacation to Spain with a focus on sustainable accommodations, local organic dining options, transport options with a low carbon footprint, and include travel insurance, cultural activity recommendations, health safety measures, and weather preparation tips.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "travel_planning_agent",
+                "sustainable_travel_consultancy_agent",
+                "sustainable_accommodations_agent",
+                "eco_certified_hotels_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "travel_planning_agent",
+                "local_dining_agent",
+                "organic_restaurants_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "travel_planning_agent",
+                "transportation_agent",
+                "low_emission_travel_planner_agent",
+                "low_emission_recommendation_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "travel_planning_agent",
+                "insurance_agent",
+                "travel_insurance_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "health_safety_agent",
+                "health_guidelines_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "culture_agent",
+                "local_cultural_expert_agent",
+                "cultural_activities_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "travel_planning_agent",
+                "weather_preparation_agent",
+                "forecast_and_tips_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "travel_planning_agent",
+                "sustainable_travel_consultancy_agent",
+                "sustainable_accommodations_agent",
+                "eco_certified_hotels_tool",
+                "local_dining_agent",
+                "organic_restaurants_agent",
+                "transportation_agent",
+                "low_emission_travel_planner_agent",
+                "low_emission_recommendation_tool",
+                "insurance_agent",
+                "travel_insurance_tool",
+                "weather_preparation_agent",
+                "forecast_and_tips_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Top-level client agent orchestrating vacation planning, ensuring eco-friendly and sustainable travel.",
+            "tools": [
+                "travel_planning_agent",
+                "health_safety_agent",
+                "culture_agent"
+            ]
+        },
+        {
+            "name": "travel_planning_agent",
+            "role": "Agent responsible for overall travel arrangements, balancing sustainability and user preferences.",
+            "tools": [
+                "sustainable_travel_consultancy_agent",
+                "local_dining_agent",
+                "transportation_agent",
+                "insurance_agent",
+                "weather_preparation_agent"
+            ]
+        },
+        {
+            "name": "sustainable_travel_consultancy_agent",
+            "role": "Agent providing consultancy services for sustainable travel including accommodations and activities.",
+            "tools": [
+                "sustainable_accommodations_agent"
+            ]
+        },
+        {
+            "name": "sustainable_accommodations_agent",
+            "role": "Agent that specializes in finding eco-friendly accommodations and lodging certified for sustainability.",
+            "tools": [
+                "eco_certified_hotels_tool"
+            ]
+        },
+        {
+            "name": "local_dining_agent",
+            "role": "Agent tasked with sourcing organic and local dining options adhering to environmental standards.",
+            "tools": [
+                "organic_restaurants_agent"
+            ]
+        },
+        {
+            "name": "transportation_agent",
+            "role": "Agent recommending transportation options with minimal carbon footprint.",
+            "tools": [
+                "low_emission_travel_planner_agent"
+            ]
+        },
+        {
+            "name": "low_emission_travel_planner_agent",
+            "role": "Agent that further explores and plans low-emission travel options.",
+            "tools": [
+                "low_emission_recommendation_tool"
+            ]
+        },
+        {
+            "name": "insurance_agent",
+            "role": "Agent providing travel insurance packages with a focus on coverage for eco-friendly activities.",
+            "tools": [
+                "travel_insurance_tool"
+            ]
+        },
+        {
+            "name": "weather_preparation_agent",
+            "role": "Agent providing weather forecasts and packing tips tailored for environmentally conscious travelers.",
+            "tools": [
+                "forecast_and_tips_tool"
+            ]
+        },
+        {
+            "name": "health_safety_agent",
+            "role": "Agent focusing on health safety measures and local guidelines for travelers.",
+            "tools": [
+                "health_guidelines_tool"
+            ]
+        },
+        {
+            "name": "culture_agent",
+            "role": "Agent providing cultural activity recommendations and local event insights.",
+            "tools": [
+                "local_cultural_expert_agent"
+            ]
+        },
+        {
+            "name": "local_cultural_expert_agent",
+            "role": "Agent offering specialized knowledge of cultural activities and local events.",
+            "tools": [
+                "cultural_activities_tool"
+            ]
+        },
+        {
+            "name": "eco_certified_hotels_tool",
+            "role": "Tool to find hotels that are certified for their eco-friendly practices.",
+            "tools": []
+        },
+        {
+            "name": "organic_restaurants_agent",
+            "role": "Agent that lists and reviews organic restaurants and eateries in desired locations.",
+            "tools": []
+        },
+        {
+            "name": "low_emission_recommendation_tool",
+            "role": "Tool to recommend transportation methods that produce the lowest emissions.",
+            "tools": []
+        },
+        {
+            "name": "travel_insurance_tool",
+            "role": "Tool to provide detailed information on travel insurance options focusing on eco-centric activities.",
+            "tools": []
+        },
+        {
+            "name": "forecast_and_tips_tool",
+            "role": "Tool providing weather forecasts along with packing recommendations for eco-travelers.",
+            "tools": []
+        },
+        {
+            "name": "health_guidelines_tool",
+            "role": "Tool detailing health safety measures for travelers.",
+            "tools": []
+        },
+        {
+            "name": "cultural_activities_tool",
+            "role": "Tool for finding local cultural activities and events.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "eco_certified_hotels_tool",
+            "description": "Tool to find hotels that are certified for their eco-friendly practices.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "city": {
+                        "type": "string",
+                        "description": "Name of the city where to find eco-certified hotels."
+                    },
+                    "max_price": {
+                        "type": "number",
+                        "description": "Maximum price per night for hotel stay."
+                    }
+                }
+            }
+        },
+        {
+            "name": "low_emission_recommendation_tool",
+            "description": "Tool for suggesting transportation with the lowest carbon emissions.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "start_location": {
+                        "type": "string",
+                        "description": "Starting location for the itinerary."
+                    },
+                    "destination": {
+                        "type": "string",
+                        "description": "Destination location for the itinerary."
+                    },
+                    "passenger_count": {
+                        "type": "number",
+                        "description": "Number of travelers using the suggested transport."
+                    }
+                }
+            }
+        },
+        {
+            "name": "travel_insurance_tool",
+            "description": "Tool for providing travel insurance options suitable for eco-trips.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "destination_country": {
+                        "type": "string",
+                        "description": "Country of travel for insurance coverage."
+                    },
+                    "activities_included": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of activities to be included in the insurance coverage."
+                    }
+                }
+            }
+        },
+        {
+            "name": "forecast_and_tips_tool",
+            "description": "Tool for providing weather information along with packing tips suitable for eco-friendly travel.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "destination_city": {
+                        "type": "string",
+                        "description": "City for which the weather information is needed."
+                    },
+                    "travel_dates": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "date"
+                        },
+                        "description": "Array of travel dates to provide a forecast for."
+                    }
+                }
+            }
+        },
+        {
+            "name": "health_guidelines_tool",
+            "description": "Tool detailing health safety measures for travelers.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "destination": {
+                        "type": "string",
+                        "description": "Destination for which to provide health guidelines."
+                    },
+                    "vaccination_status": {
+                        "type": "string",
+                        "description": "Current vaccination status of the traveler."
+                    }
+                }
+            }
+        },
+        {
+            "name": "cultural_activities_tool",
+            "description": "Tool for listing cultural events and activities at a travel destination.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "destination_city": {
+                        "type": "string",
+                        "description": "City to find cultural activities."
+                    },
+                    "interest_topics": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Topics of interest for cultural activities."
+                    }
+                }
+            }
+        }
+    ]
+}

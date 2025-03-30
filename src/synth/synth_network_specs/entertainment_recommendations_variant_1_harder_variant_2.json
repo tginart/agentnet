@@ -1,0 +1,302 @@
+{
+    "task": "Organize a unique Italian culinary and historical exploration tour for a group of chefs and historians, including private cooking classes, historical site tours, transport logistics, health advisories, cultural immersion experiences with local communities, specially tailored photo-documentation services, and logistics for ingredient sourcing from local markets.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "tour_coordinator_agent",
+                "culinary_experience_planner_agent",
+                "private_chefs_network_agent",
+                "ingredient_sourcing_agent",
+                "market_vendor_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "tour_coordinator_agent",
+                "historic_tour_agent",
+                "archaeological_site_guide_agent",
+                "site_entry_booking_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "tour_coordinator_agent",
+                "transport_logistics_agent",
+                "group_transportation_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "tour_coordinator_agent",
+                "health_advisory_agent",
+                "covid_and_health_guidelines_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "tour_coordinator_agent",
+                "cultural_immersion_agent",
+                "local_community_engagement_agent",
+                "language_support_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "tour_coordinator_agent",
+                "participant_feedback_agent",
+                "experience_improvement_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "tour_coordinator_agent",
+                "photo_documentation_agent",
+                "event_photographer_agent",
+                "photography_schedule_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Initial point of contact for the group organizers, coordinating all aspects of the culinary and historical tour.",
+            "tools": [
+                "tour_coordinator_agent"
+            ]
+        },
+        {
+            "name": "tour_coordinator_agent",
+            "role": "Oversees the planning and execution of the entire tour, ensuring seamless integration of culinary, historical, cultural, and additional services.",
+            "tools": [
+                "culinary_experience_planner_agent",
+                "historic_tour_agent",
+                "transport_logistics_agent",
+                "health_advisory_agent",
+                "cultural_immersion_agent",
+                "participant_feedback_agent",
+                "photo_documentation_agent"
+            ]
+        },
+        {
+            "name": "culinary_experience_planner_agent",
+            "role": "Designs and arranges private culinary experiences with Italian chefs and food experts.",
+            "tools": [
+                "private_chefs_network_agent",
+                "ingredient_sourcing_agent"
+            ]
+        },
+        {
+            "name": "private_chefs_network_agent",
+            "role": "Connects with a network of private Italian chefs to arrange personalized cooking classes.",
+            "tools": [
+                "cooking_class_scheduling_tool"
+            ]
+        },
+        {
+            "name": "historic_tour_agent",
+            "role": "Plans visits and tours to various historical sites, providing in-depth historical context.",
+            "tools": [
+                "archaeological_site_guide_agent",
+                "site_entry_booking_tool"
+            ]
+        },
+        {
+            "name": "transport_logistics_agent",
+            "role": "Coordinates all transport needs, including arranging for group travel and local transit.",
+            "tools": [
+                "group_transportation_tool"
+            ]
+        },
+        {
+            "name": "health_advisory_agent",
+            "role": "Keeps the group informed of all health and safety advisories, especially concerning COVID-19.",
+            "tools": [
+                "covid_and_health_guidelines_tool"
+            ]
+        },
+        {
+            "name": "cultural_immersion_agent",
+            "role": "Facilitates meaningful interactions with local communities for a deeper cultural immersion.",
+            "tools": [
+                "local_community_engagement_agent",
+                "language_support_agent"
+            ]
+        },
+        {
+            "name": "participant_feedback_agent",
+            "role": "Collects feedback from participants to refine future tour experiences and address immediate concerns.",
+            "tools": [
+                "experience_improvement_tool"
+            ]
+        },
+        {
+            "name": "photo_documentation_agent",
+            "role": "Organizes professional photo-documentation services to capture the events and activities of the tour.",
+            "tools": [
+                "event_photographer_agent",
+                "photography_schedule_tool"
+            ]
+        },
+        {
+            "name": "ingredient_sourcing_agent",
+            "role": "Handles the logistics of sourcing fresh ingredients for cooking classes from local markets.",
+            "tools": [
+                "market_vendor_agent"
+            ]
+        },
+        {
+            "name": "archaeological_site_guide_agent",
+            "role": "Provides guided tours for archaeological sites, emphasizing historical significance.",
+            "tools": []
+        },
+        {
+            "name": "local_community_engagement_agent",
+            "role": "Coordinates activities with local communities to enhance cultural exchange.",
+            "tools": []
+        },
+        {
+            "name": "language_support_agent",
+            "role": "Offers language translation and support services to ease communication barriers.",
+            "tools": []
+        },
+        {
+            "name": "event_photographer_agent",
+            "role": "Connects with professional photographers to capture high-quality images of the group's experience.",
+            "tools": []
+        },
+        {
+            "name": "market_vendor_agent",
+            "role": "Sources fresh produce and specialty items from local markets in Italy for culinary events.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "cooking_class_scheduling_tool",
+            "description": "Schedules private cooking classes with top Italian chefs, matching class themes with group preferences.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "cuisine_focus": {
+                        "type": "string",
+                        "description": "Focus of the cooking class, such as pasta or dessert preparation."
+                    },
+                    "group_size": {
+                        "type": "number",
+                        "description": "Number of participants in the class."
+                    },
+                    "date_range": {
+                        "type": "string",
+                        "description": "Preferred dates for the classes."
+                    }
+                }
+            }
+        },
+        {
+            "name": "site_entry_booking_tool",
+            "description": "Arranges entry tickets and schedules visit times for historical and archaeological sites.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "site_name": {
+                        "type": "string",
+                        "description": "Name of the historical site."
+                    },
+                    "visit_date": {
+                        "type": "string",
+                        "description": "Date planned for the visit."
+                    },
+                    "time_slot": {
+                        "type": "string",
+                        "description": "Preferred time slot for the tour."
+                    }
+                }
+            }
+        },
+        {
+            "name": "group_transportation_tool",
+            "description": "Organizes shuttles or private coaches for large groups, suitable for both long-distance and short commutes.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "departure_point": {
+                        "type": "string",
+                        "description": "Starting location for the transport."
+                    },
+                    "destination_point": {
+                        "type": "string",
+                        "description": "End location for the transport."
+                    },
+                    "travel_dates": {
+                        "type": "string",
+                        "description": "Dates when the transport will be needed."
+                    }
+                }
+            }
+        },
+        {
+            "name": "covid_and_health_guidelines_tool",
+            "description": "Provides current health advisories and COVID-19 guidelines for travelers in Italy.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "region_of_interest": {
+                        "type": "string",
+                        "description": "Specific region in Italy for which health advisories are sought."
+                    },
+                    "advisory_date": {
+                        "type": "string",
+                        "description": "Date for which the latest guidelines are needed."
+                    }
+                }
+            }
+        },
+        {
+            "name": "experience_improvement_tool",
+            "description": "Analyzes participant feedback to optimize future travel experiences and improve client satisfaction.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "feedback_date": {
+                        "type": "string",
+                        "description": "Date when feedback was collected."
+                    },
+                    "feedback_type": {
+                        "type": "string",
+                        "description": "Type of feedback provided, such as culinary or historical experience."
+                    }
+                }
+            }
+        },
+        {
+            "name": "photography_schedule_tool",
+            "description": "Schedules photography sessions with professional photographers to document the trip.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "event_date": {
+                        "type": "string",
+                        "description": "Date of the event to be photographed."
+                    },
+                    "location": {
+                        "type": "string",
+                        "description": "Location of the event."
+                    },
+                    "photographer_availability": {
+                        "type": "string",
+                        "description": "Availability of photographers for the event."
+                    }
+                }
+            }
+        }
+    ]
+}

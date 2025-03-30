@@ -1,0 +1,303 @@
+{
+    "task": "Design an international week-long festival in Rome, Italy showcasing diverse cultures through culinary arts, traditional music, immersive workshops, arts and crafts exhibitions, interactive digital galleries, responsible travel logistics, and fundraisers for cultural preservation. The festival should include a multilingual mobile app for navigation, real-time event updates, a feedback system for continuous improvement, and integration with public transportation schedules to ensure eco-friendly approaches.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "cultural_festival_coordinator_agent",
+                "culinary_experience_manager_agent",
+                "chef_network_agent",
+                "feedback_system_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "cultural_festival_coordinator_agent",
+                "music_event_organizer_agent",
+                "traditional_music_archivist_agent",
+                "concert_schedule_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "cultural_festival_coordinator_agent",
+                "workshop_facilitator_agent",
+                "interactive_workshop_designer_agent",
+                "digital_gallery_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "cultural_festival_coordinator_agent",
+                "arts_and_crafts_exhibition_agent",
+                "local_artist_network_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "cultural_festival_coordinator_agent",
+                "festival_app_developer_agent",
+                "multilingual_support_tool",
+                "real_time_update_tool",
+                "human"
+            ],
+            [
+                "human",
+                "cultural_festival_coordinator_agent",
+                "public_transport_integration_agent",
+                "eco_friendly_transport_planner_agent",
+                "travel_schedule_sync_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "cultural_festival_coordinator_agent",
+                "fundraiser_organizer_agent",
+                "cultural_preservation_fund_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "cultural_festival_coordinator_agent",
+                "festival_marketing_agent",
+                "public_relations_specialist_agent",
+                "media_partner_network_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Main interface for the user, facilitating the organization of the cultural festival.",
+            "tools": [
+                "cultural_festival_coordinator_agent"
+            ]
+        },
+        {
+            "name": "cultural_festival_coordinator_agent",
+            "role": "Oversees all aspects of the festival, coordinating various agents to achieve the festival's objectives.",
+            "tools": [
+                "culinary_experience_manager_agent",
+                "music_event_organizer_agent",
+                "workshop_facilitator_agent",
+                "arts_and_crafts_exhibition_agent",
+                "festival_app_developer_agent",
+                "public_transport_integration_agent",
+                "fundraiser_organizer_agent",
+                "festival_marketing_agent"
+            ]
+        },
+        {
+            "name": "culinary_experience_manager_agent",
+            "role": "Coordinates culinary experiences, partnering with chefs to host cooking demonstrations and tastings.",
+            "tools": [
+                "chef_network_agent"
+            ]
+        },
+        {
+            "name": "chef_network_agent",
+            "role": "Connects with a network of chefs specializing in diverse cuisines.",
+            "tools": [
+                "feedback_system_agent"
+            ]
+        },
+        {
+            "name": "music_event_organizer_agent",
+            "role": "Organizes musical events, collaborating with traditional musicians.",
+            "tools": [
+                "traditional_music_archivist_agent"
+            ]
+        },
+        {
+            "name": "traditional_music_archivist_agent",
+            "role": "Maintains an archive of traditional music recordings and cultural information.",
+            "tools": [
+                "concert_schedule_tool"
+            ]
+        },
+        {
+            "name": "workshop_facilitator_agent",
+            "role": "Facilitates interactive workshops combining art and cultural traditions.",
+            "tools": [
+                "interactive_workshop_designer_agent"
+            ]
+        },
+        {
+            "name": "interactive_workshop_designer_agent",
+            "role": "Designs workshops incorporating digital media and immersive experiences.",
+            "tools": [
+                "digital_gallery_tool"
+            ]
+        },
+        {
+            "name": "arts_and_crafts_exhibition_agent",
+            "role": "Curates exhibitions featuring local and international artists.",
+            "tools": [
+                "local_artist_network_agent"
+            ]
+        },
+        {
+            "name": "local_artist_network_agent",
+            "role": "Connects with a network of artists to feature their work at the festival.",
+            "tools": []
+        },
+        {
+            "name": "festival_app_developer_agent",
+            "role": "Responsible for creating a mobile app with multilingual support and real-time updates.",
+            "tools": [
+                "multilingual_support_tool",
+                "real_time_update_tool"
+            ]
+        },
+        {
+            "name": "public_transport_integration_agent",
+            "role": "Integrates festival logistics with public transport schedules to promote eco-friendly travel.",
+            "tools": [
+                "eco_friendly_transport_planner_agent"
+            ]
+        },
+        {
+            "name": "eco_friendly_transport_planner_agent",
+            "role": "Specializes in planning sustainable transportation solutions.",
+            "tools": [
+                "travel_schedule_sync_tool"
+            ]
+        },
+        {
+            "name": "fundraiser_organizer_agent",
+            "role": "Arranges fundraising events to support cultural heritage preservation.",
+            "tools": [
+                "cultural_preservation_fund_agent"
+            ]
+        },
+        {
+            "name": "cultural_preservation_fund_agent",
+            "role": "Manages funds dedicated to preserving cultural traditions and heritage.",
+            "tools": []
+        },
+        {
+            "name": "festival_marketing_agent",
+            "role": "Handles the marketing aspects of the festival and manages media outreach.",
+            "tools": [
+                "public_relations_specialist_agent"
+            ]
+        },
+        {
+            "name": "public_relations_specialist_agent",
+            "role": "Facilitates communication with media and assists in establishing partnerships.",
+            "tools": [
+                "media_partner_network_agent"
+            ]
+        },
+        {
+            "name": "media_partner_network_agent",
+            "role": "Connects with media partners to promote festival events and activities.",
+            "tools": []
+        },
+        {
+            "name": "feedback_system_agent",
+            "role": "Collects and analyzes participant feedback for improving the festival experience.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "concert_schedule_tool",
+            "description": "Helps to schedule concerts and coordinate with musicians.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "musician_id": {
+                        "type": "string",
+                        "description": "ID of the musician to be scheduled."
+                    },
+                    "availability": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Array of available dates for the musician."
+                    }
+                }
+            }
+        },
+        {
+            "name": "digital_gallery_tool",
+            "description": "Integrates digital gallery experiences with festival events.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "gallery_id": {
+                        "type": "string",
+                        "description": "Identifier for the digital gallery session."
+                    },
+                    "interactive_features": {
+                        "type": "boolean",
+                        "description": "Toggle for interactive features in the gallery experience."
+                    }
+                }
+            }
+        },
+        {
+            "name": "multilingual_support_tool",
+            "description": "Provides multilingual assistance for the mobile app.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "language_options": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of language options available in the app."
+                    }
+                }
+            }
+        },
+        {
+            "name": "real_time_update_tool",
+            "description": "Communicates real-time updates within the festival app.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "event_id": {
+                        "type": "string",
+                        "description": "Event identifier for which updates are needed."
+                    },
+                    "update_message": {
+                        "type": "string",
+                        "description": "Message containing the update information."
+                    }
+                }
+            }
+        },
+        {
+            "name": "travel_schedule_sync_tool",
+            "description": "Synchronizes travel schedules with festival events for logistical planning.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "route_id": {
+                        "type": "string",
+                        "description": "ID of the travel route to be synchronized."
+                    },
+                    "departure_times": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Scheduled departure times for public transportation."
+                    }
+                }
+            }
+        }
+    ]
+}

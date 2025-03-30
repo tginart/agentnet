@@ -1,0 +1,298 @@
+{
+    "task": "Develop a fully automated personal finance management system capable of handling diverse financial tasks such as monthly budgeting, savings goal tracking, bill payment scheduling, investment analysis, tax estimation, risk assessment, debt management, and integration with third-party services. The system should accommodate customer profiles with complex financial structures, including multiple income streams, joint accounts, and investment portfolios. It must be able to optimize spending, automate savings, handle dynamic changes in income and expenses, and provide alerts for budget overspending or bill payment reminders.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "finance_planner_agent",
+                "monthly_budget_creator_agent",
+                "income_analyzer_agent",
+                "debt_manager_agent",
+                "adjustment_advisor_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "finance_planner_agent",
+                "bill_scheduler_agent",
+                "calendar_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "finance_planner_agent",
+                "investment_analysis_agent",
+                "market_trends_agent",
+                "portfolio_optimizer_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "finance_planner_agent",
+                "savings_goal_tracker_agent",
+                "savings_pattern_analyzer_agent",
+                "alert_generator_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "finance_planner_agent",
+                "income_stream_manager_agent",
+                "dynamic_adjustment_agent",
+                "tax_estimator_agent",
+                "financial_aid_advisor_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "finance_planner_agent",
+                "risk_assessment_agent",
+                "risk_evaluator_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "finance_planner_agent",
+                "external_integration_agent",
+                "third_party_service_connector",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Top-level client agent that communicates with users and coordinates other agents to accomplish financial tasks.",
+            "tools": [
+                "finance_planner_agent"
+            ]
+        },
+        {
+            "name": "finance_planner_agent",
+            "role": "Oversees overall personal finance management, coordinating budgeting, investments, savings, and risk assessment operations.",
+            "tools": [
+                "monthly_budget_creator_agent",
+                "bill_scheduler_agent",
+                "investment_analysis_agent",
+                "savings_goal_tracker_agent",
+                "income_stream_manager_agent",
+                "risk_assessment_agent",
+                "external_integration_agent"
+            ]
+        },
+        {
+            "name": "monthly_budget_creator_agent",
+            "role": "Creates detailed monthly budgets, analyzing income and expense trends to optimize personal finances.",
+            "tools": [
+                "income_analyzer_agent",
+                "debt_manager_agent"
+            ]
+        },
+        {
+            "name": "income_analyzer_agent",
+            "role": "Analyzes multiple income streams to project monthly income and suggest savings strategies.",
+            "tools": [
+                "adjustment_advisor_agent"
+            ]
+        },
+        {
+            "name": "debt_manager_agent",
+            "role": "Manages and strategizes debt repayment plans to minimize interest and accelerate debt clearance.",
+            "tools": []
+        },
+        {
+            "name": "adjustment_advisor_agent",
+            "role": "Provides advice on adjusting budgets and savings in response to analysis from income and debt agents.",
+            "tools": []
+        },
+        {
+            "name": "bill_scheduler_agent",
+            "role": "Schedules bill payments and ensures synchronization with user calendars for timely payments.",
+            "tools": [
+                "calendar_tool"
+            ]
+        },
+        {
+            "name": "investment_analysis_agent",
+            "role": "Analyzes investment portfolios and provides insights to optimize returns based on market conditions.",
+            "tools": [
+                "market_trends_agent",
+                "portfolio_optimizer_tool"
+            ]
+        },
+        {
+            "name": "market_trends_agent",
+            "role": "Monitors current market trends and forecasts to inform investment decisions.",
+            "tools": []
+        },
+        {
+            "name": "savings_goal_tracker_agent",
+            "role": "Tracks progress towards savings goals using historical spending and savings pattern analysis.",
+            "tools": [
+                "savings_pattern_analyzer_agent",
+                "alert_generator_agent"
+            ]
+        },
+        {
+            "name": "savings_pattern_analyzer_agent",
+            "role": "Analyzes past savings patterns to predict future savings potential and suggest improvements.",
+            "tools": []
+        },
+        {
+            "name": "alert_generator_agent",
+            "role": "Generates alerts regarding critical financial events like approaching savings goals or overspending.",
+            "tools": []
+        },
+        {
+            "name": "income_stream_manager_agent",
+            "role": "Handles varying income sources and adjusts financial plans to align with dynamic cash flows.",
+            "tools": [
+                "dynamic_adjustment_agent",
+                "tax_estimator_agent"
+            ]
+        },
+        {
+            "name": "dynamic_adjustment_agent",
+            "role": "Adapts financial strategies in response to real-time changes in income and expenses.",
+            "tools": []
+        },
+        {
+            "name": "tax_estimator_agent",
+            "role": "Estimates taxes based on current income streams and financial activities, also provides aid optimization advice.",
+            "tools": [
+                "financial_aid_advisor_agent"
+            ]
+        },
+        {
+            "name": "financial_aid_advisor_agent",
+            "role": "Advises on potential financial aids, tax credits, and deductions to maximize benefits.",
+            "tools": []
+        },
+        {
+            "name": "risk_assessment_agent",
+            "role": "Evaluates financial risks and advises on mitigation strategies to ensure financial stability.",
+            "tools": [
+                "risk_evaluator_tool"
+            ]
+        },
+        {
+            "name": "external_integration_agent",
+            "role": "Manages connections between internal finance tools and external services for a seamless user experience.",
+            "tools": [
+                "third_party_service_connector"
+            ]
+        }
+    ],
+    "tools": [
+        {
+            "name": "calendar_tool",
+            "description": "Synchronizes payment schedules with the user's personal calendar to prevent missed payments.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "bills": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "bill_name": {
+                                    "type": "string",
+                                    "description": "Name of the bill to be scheduled"
+                                },
+                                "due_date": {
+                                    "type": "string",
+                                    "description": "Due date of the bill"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "portfolio_optimizer_tool",
+            "description": "Analyzes and rebalances investment portfolios to maximize returns based on user preferences.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "portfolio": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "investment_name": {
+                                    "type": "string",
+                                    "description": "Name of the investment"
+                                },
+                                "current_value": {
+                                    "type": "number",
+                                    "description": "Current market value of the investment"
+                                }
+                            }
+                        }
+                    },
+                    "risk_tolerance": {
+                        "type": "string",
+                        "description": "User's risk tolerance level"
+                    }
+                }
+            }
+        },
+        {
+            "name": "risk_evaluator_tool",
+            "description": "Analyzes financial decisions to assess risk levels and suggest mitigative actions.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "financial_decisions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of financial decisions to evaluate"
+                    },
+                    "current_debts": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "debt_type": {
+                                    "type": "string",
+                                    "description": "Type of debt"
+                                },
+                                "amount": {
+                                    "type": "number",
+                                    "description": "Amount of the debt"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "third_party_service_connector",
+            "description": "Facilitates integration with third-party financial services to enhance service capabilities.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "service_name": {
+                        "type": "string",
+                        "description": "Name of the third-party service to connect"
+                    },
+                    "api_key": {
+                        "type": "string",
+                        "description": "API key for the service"
+                    }
+                }
+            }
+        }
+    ]
+}

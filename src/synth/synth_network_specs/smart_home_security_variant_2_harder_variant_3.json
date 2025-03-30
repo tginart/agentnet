@@ -1,0 +1,200 @@
+{
+    "task": "Develop a smart city traffic management system that optimizes traffic flow, utilizes real-time sensor data, predicts traffic patterns, and coordinates emergency response routes.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "traffic_monitoring_agent",
+                "real_time_data_agent",
+                "sensor_fusion_agent",
+                "traffic_prediction_agent",
+                "data_analysis_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "congestion_management_agent",
+                "traffic_diversion_agent",
+                "route_planning_agent",
+                "navigation_assistance_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "emergency_management_agent",
+                "priority_route_agent",
+                "incident_response_agent",
+                "communication_coordinator_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "infrastructure_analysis_agent",
+                "road_condition_assessment_agent",
+                "maintenance_scheduler_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Facilitates human interaction with the city traffic management system and delegates tasks.",
+            "tools": [
+                "traffic_monitoring_agent",
+                "congestion_management_agent",
+                "emergency_management_agent",
+                "infrastructure_analysis_agent"
+            ]
+        },
+        {
+            "name": "traffic_monitoring_agent",
+            "role": "Monitors traffic flow and integrates real-time data from city sensors.",
+            "tools": [
+                "real_time_data_agent",
+                "traffic_analysis_agent"
+            ]
+        },
+        {
+            "name": "real_time_data_agent",
+            "role": "Collects and processes real-time traffic data from city-wide sensors.",
+            "tools": [
+                "sensor_fusion_agent"
+            ]
+        },
+        {
+            "name": "sensor_fusion_agent",
+            "role": "Integrates sensor data from multiple sources to create a unified traffic view.",
+            "tools": [
+                "traffic_prediction_agent"
+            ]
+        },
+        {
+            "name": "traffic_prediction_agent",
+            "role": "Forecasts future traffic patterns based on integrated real-time data.",
+            "tools": [
+                "data_analysis_tool"
+            ]
+        },
+        {
+            "name": "traffic_analysis_agent",
+            "role": "Analyzes traffic data to identify inefficiencies and proposes solutions.",
+            "tools": []
+        },
+        {
+            "name": "congestion_management_agent",
+            "role": "Develops and implements strategies to manage and reduce traffic congestion.",
+            "tools": [
+                "traffic_diversion_agent",
+                "control_center_agent"
+            ]
+        },
+        {
+            "name": "traffic_diversion_agent",
+            "role": "Plans alternative routes and diversions to alleviate congestion.",
+            "tools": [
+                "route_planning_agent"
+            ]
+        },
+        {
+            "name": "route_planning_agent",
+            "role": "Creates optimized traffic flow routes, including for emergencies.",
+            "tools": [
+                "navigation_assistance_tool"
+            ]
+        },
+        {
+            "name": "emergency_management_agent",
+            "role": "Ensures emergency vehicles can navigate traffic efficiently.",
+            "tools": [
+                "priority_route_agent"
+            ]
+        },
+        {
+            "name": "priority_route_agent",
+            "role": "Plans priority emergency vehicle routes to ensure rapid response.",
+            "tools": [
+                "incident_response_agent"
+            ]
+        },
+        {
+            "name": "incident_response_agent",
+            "role": "Coordinates with first responders to prioritize route clearances.",
+            "tools": [
+                "communication_coordinator_agent"
+            ]
+        },
+        {
+            "name": "communication_coordinator_agent",
+            "role": "Facilitates communication between traffic control and emergency response teams.",
+            "tools": []
+        },
+        {
+            "name": "infrastructure_analysis_agent",
+            "role": "Evaluates and monitors the condition of transportation infrastructure.",
+            "tools": [
+                "road_condition_assessment_agent"
+            ]
+        },
+        {
+            "name": "road_condition_assessment_agent",
+            "role": "Assesses road conditions and prioritizes areas for maintenance.",
+            "tools": [
+                "maintenance_scheduler_agent"
+            ]
+        },
+        {
+            "name": "maintenance_scheduler_agent",
+            "role": "Schedules maintenance tasks based on road condition assessments.",
+            "tools": []
+        },
+        {
+            "name": "control_center_agent",
+            "role": "Operates the central control centers to manage traffic signals and road signs.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "data_analysis_tool",
+            "description": "Processes and analyzes traffic data to predict future traffic conditions.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "traffic_data_sources": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of sources of traffic data for analysis."
+                    },
+                    "analysis_interval": {
+                        "type": "number",
+                        "description": "Duration for which the analysis should predict traffic patterns (in hours)."
+                    }
+                }
+            }
+        },
+        {
+            "name": "navigation_assistance_tool",
+            "description": "Provides optimized navigation instructions based on real-time traffic data.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "start_location": {
+                        "type": "string",
+                        "description": "Starting location for navigation."
+                    },
+                    "end_location": {
+                        "type": "string",
+                        "description": "End destination for the navigation route."
+                    }
+                }
+            }
+        }
+    ]
+}

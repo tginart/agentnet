@@ -1,0 +1,213 @@
+{
+    "task": "Implement a cross-continental bio-research study involving secure data exchange between IoT sensors and analysis centers, ensuring compliance with environmental regulations, and coordinating multi-language communication between scientific teams.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "research_coordination_agent",
+                "global_team_management_agent",
+                "environmental_compliance_agent",
+                "regulation_analysis_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "technology_integration_agent",
+                "iot_network_agent",
+                "sensor_deployment_agent",
+                "secure_data_exchange_agent",
+                "data_collation_agent",
+                "database_linking_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "communication_services_agent",
+                "real_time_translation_agent",
+                "video_conferencing_tool",
+                "conference_management_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "logistic_support_agent",
+                "international_shipment_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "communication_services_agent",
+                "document_translation_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Main interface with the user to manage the execution of tasks through interaction with other specified agents.",
+            "tools": [
+                "research_coordination_agent",
+                "technology_integration_agent",
+                "communication_services_agent"
+            ]
+        },
+        {
+            "name": "research_coordination_agent",
+            "role": "Coordinates the execution of the study, managing research inputs, collaborations, and compliance checks.",
+            "tools": [
+                "global_team_management_agent",
+                "logistic_support_agent",
+                "environmental_compliance_agent"
+            ]
+        },
+        {
+            "name": "technology_integration_agent",
+            "role": "Oversees the integration of technology and setup of communication systems for data and sensor management.",
+            "tools": [
+                "iot_network_agent",
+                "secure_data_exchange_agent"
+            ]
+        },
+        {
+            "name": "communication_services_agent",
+            "role": "Handles international communication, including translation and scheduling for meetings between scientific teams.",
+            "tools": [
+                "real_time_translation_agent",
+                "document_translation_agent"
+            ]
+        },
+        {
+            "name": "global_team_management_agent",
+            "role": "Manages the different scientific teams spread across continents, coordinating their activities and data reporting.",
+            "tools": [
+                "conference_management_agent",
+                "regulation_analysis_agent"
+            ]
+        },
+        {
+            "name": "real_time_translation_agent",
+            "role": "Provides instant translation for conversations and meetings in multiple languages.",
+            "tools": []
+        },
+        {
+            "name": "document_translation_agent",
+            "role": "Specializes in translating technical documents and research papers with high accuracy.",
+            "tools": []
+        },
+        {
+            "name": "conference_management_agent",
+            "role": "Organizes and manages virtual meetings and ensures all technical aspects are handled efficiently.",
+            "tools": [
+                "video_conferencing_tool"
+            ]
+        },
+        {
+            "name": "environmental_compliance_agent",
+            "role": "Ensures the research adheres to local and international environmental guidelines.",
+            "tools": [
+                "regulation_analysis_agent"
+            ]
+        },
+        {
+            "name": "regulation_analysis_agent",
+            "role": "Analyzes and updates the team with current international regulations impacting environmental research.",
+            "tools": []
+        },
+        {
+            "name": "iot_network_agent",
+            "role": "Designs, implements, and monitors IoT networks facilitating sensor communication and data retrieval.",
+            "tools": [
+                "sensor_deployment_agent"
+            ]
+        },
+        {
+            "name": "secure_data_exchange_agent",
+            "role": "Handles secure and encrypted data exchange over the internet between international research centers.",
+            "tools": [
+                "data_collation_agent"
+            ]
+        },
+        {
+            "name": "sensor_deployment_agent",
+            "role": "Deploys and maintains sensors in the field, ensuring they are operational and compliant with standards.",
+            "tools": []
+        },
+        {
+            "name": "data_collation_agent",
+            "role": "Aggregates and organizes data from multiple sources for analysis and storage.",
+            "tools": [
+                "database_linking_agent"
+            ]
+        },
+        {
+            "name": "database_linking_agent",
+            "role": "Links data from IoT devices to central databases securely, maintaining data integrity and availability.",
+            "tools": []
+        },
+        {
+            "name": "logistic_support_agent",
+            "role": "Coordinates the logistics for transporting research equipment and samples across different regions.",
+            "tools": [
+                "international_shipment_tool"
+            ]
+        }
+    ],
+    "tools": [
+        {
+            "name": "video_conferencing_tool",
+            "description": "Facilitates virtual meetings with options for multilingual support and secure media sharing.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "meeting_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the video meeting session."
+                    },
+                    "attendees": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of attendee identifiers."
+                    },
+                    "language_support": {
+                        "type": "boolean",
+                        "description": "Indicator of whether translation is needed."
+                    },
+                    "media_sharing_enabled": {
+                        "type": "boolean",
+                        "description": "Determines if media sharing features are enabled."
+                    }
+                }
+            }
+        },
+        {
+            "name": "international_shipment_tool",
+            "description": "Tracks international shipments of research materials, ensuring timely and safe delivery.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "tracking_number": {
+                        "type": "string",
+                        "description": "Tracking number for the shipment."
+                    },
+                    "shipment_destination": {
+                        "type": "string",
+                        "description": "Destination of the shipment."
+                    },
+                    "expected_arrival_date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Expected arrival date of the shipment."
+                    }
+                }
+            }
+        }
+    ]
+}

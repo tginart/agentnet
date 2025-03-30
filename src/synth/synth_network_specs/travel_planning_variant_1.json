@@ -1,0 +1,173 @@
+{
+    "task": "Plan a vacation to Iceland. The vacation should include the following: 1. A detailed itinerary with activities for 5 days. 2. Hotel bookings that are family-friendly and offer both wifi and breakfast. 3. Include a car rental service. 4. Ensure the budget does not exceed $5000. 5. Check local COVID-19 travel advisories and weather forecast.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "trip_planning_agent",
+                "itinerary_agent",
+                "activity_recommendation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "booking_agent",
+                "hotel_booking_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "booking_agent",
+                "car_rental_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "budget_management_agent",
+                "accounting_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "advisory_agent",
+                "covid_guidelines_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "advisory_agent",
+                "weather_forecast_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and coordinates the various tasks for planning the trip.",
+            "tools": [
+                "trip_planning_agent",
+                "booking_agent",
+                "budget_management_agent",
+                "advisory_agent"
+            ]
+        },
+        {
+            "name": "trip_planning_agent",
+            "role": "This agent is responsible for creating a detailed itinerary for the trip, suggesting activities and points of interest in Iceland.",
+            "tools": [
+                "itinerary_agent"
+            ]
+        },
+        {
+            "name": "booking_agent",
+            "role": "Handles all types of bookings, ensures requirements like family-friendliness, wifi, and breakfast are met.",
+            "tools": [
+                "hotel_booking_agent",
+                "car_rental_agent"
+            ]
+        },
+        {
+            "name": "itinerary_agent",
+            "role": "Specializes in crafting daily itineraries with activities, ensuring each day is filled with events.",
+            "tools": [
+                "activity_recommendation_agent"
+            ]
+        },
+        {
+            "name": "activity_recommendation_agent",
+            "role": "Provides recommendations for activities and attractions in Iceland based on user preferences.",
+            "tools": []
+        },
+        {
+            "name": "hotel_booking_agent",
+            "role": "Finds and books hotels that meet the specified criteria of being family-friendly and providing wifi and breakfast.",
+            "tools": []
+        },
+        {
+            "name": "car_rental_agent",
+            "role": "Arranges car rentals that are suitable for families traveling in Iceland.",
+            "tools": []
+        },
+        {
+            "name": "budget_management_agent",
+            "role": "Ensures the trip's expenses do not exceed the budget of $5000.",
+            "tools": [
+                "accounting_tool"
+            ]
+        },
+        {
+            "name": "advisory_agent",
+            "role": "Provides travel advisories including health guidelines and weather forecasts.",
+            "tools": [
+                "covid_guidelines_agent",
+                "weather_forecast_agent"
+            ]
+        },
+        {
+            "name": "covid_guidelines_agent",
+            "role": "Keeps track of the current COVID-19 travel advisories for Iceland.",
+            "tools": []
+        },
+        {
+            "name": "weather_forecast_agent",
+            "role": "Delivers the latest weather forecast for Iceland to help plan activities.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "accounting_tool",
+            "description": "Tool for calculating and managing the trip's budget to ensure it is within limits.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "total_budget": {
+                        "type": "number",
+                        "description": "The maximum amount allocated for the trip."
+                    },
+                    "estimated_costs": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "item": {
+                                    "type": "string",
+                                    "description": "Description of the expenditure item."
+                                },
+                                "cost": {
+                                    "type": "number",
+                                    "description": "Estimated cost of this item."
+                                }
+                            }
+                        },
+                        "description": "A list of estimated costs for the trip."
+                    }
+                }
+            }
+        },
+        {
+            "name": "risk_assessment_tool",
+            "description": "Assesses travel risks based on current advisories related to health and safety.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "destination": {
+                        "type": "string",
+                        "description": "The travel destination for risk assessment."
+                    },
+                    "current_advisories": {
+                        "type": "string",
+                        "description": "Current travel advisories available."
+                    }
+                }
+            }
+        }
+    ]
+}

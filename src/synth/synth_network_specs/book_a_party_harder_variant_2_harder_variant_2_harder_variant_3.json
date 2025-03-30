@@ -1,0 +1,242 @@
+{
+    "task": "Design an AI-assisted personalized wellness journey platform with integrated biofeedback mechanisms, modular mindfulness exercises, and AI-generated botanical gardens for relaxation. The platform should include features for custom meal planning with nutrient tracking, creation of virtual fitness trainers for varied workouts, facilitating interactive community challenges, and managing real-time data analytics and wellness insights. Ensure the system supports multilingual interfaces, provides localized wellness recommendations, and incorporates real-time environmental data for adaptive ambiance settings.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "platform_development_agent",
+                "biofeedback_analysis_agent",
+                "sensor_integration_agent",
+                "biometric_data_processor_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wellness_content_management_agent",
+                "mindfulness_exercise_designer_agent",
+                "botanical_garden_generator_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "custom_nutrition_management_agent",
+                "meal_planning_agent",
+                "nutrient_tracking_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "virtual_fitness_trainer_agent",
+                "workout_template_creator_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "interactive_challenge_agent",
+                "community_engagement_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "data_analysis_and_insights_agent",
+                "real_time_analytics_agent",
+                "personalized_insights_generator_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "ambient_settings_adaptation_agent",
+                "environmental_data_agent",
+                "local_weather_service_agent"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The main client agent that interacts directly with users to execute the overall wellness journey program.",
+            "tools": [
+                "platform_development_agent",
+                "wellness_content_management_agent",
+                "custom_nutrition_management_agent",
+                "virtual_fitness_trainer_agent",
+                "interactive_challenge_agent",
+                "data_analysis_and_insights_agent",
+                "ambient_settings_adaptation_agent"
+            ]
+        },
+        {
+            "name": "platform_development_agent",
+            "role": "Guides the development of a user-friendly wellness journey platform integrated with biofeedback devices.",
+            "tools": [
+                "biofeedback_analysis_agent"
+            ]
+        },
+        {
+            "name": "biofeedback_analysis_agent",
+            "role": "Analyzes biofeedback data to tailor wellness activities.",
+            "tools": [
+                "sensor_integration_agent"
+            ]
+        },
+        {
+            "name": "sensor_integration_agent",
+            "role": "Integrates sensors to collect biometric data.",
+            "tools": [
+                "biometric_data_processor_agent"
+            ]
+        },
+        {
+            "name": "biometric_data_processor_agent",
+            "role": "Processes biometric data to inform personalized wellness suggestions.",
+            "tools": []
+        },
+        {
+            "name": "wellness_content_management_agent",
+            "role": "Hosts a library of wellness content including mindfulness exercises.",
+            "tools": [
+                "mindfulness_exercise_designer_agent"
+            ]
+        },
+        {
+            "name": "mindfulness_exercise_designer_agent",
+            "role": "Designs guided mindfulness exercises adapted for user preferences.",
+            "tools": [
+                "botanical_garden_generator_agent"
+            ]
+        },
+        {
+            "name": "botanical_garden_generator_agent",
+            "role": "Generates virtual botanical gardens to create calming environments.",
+            "tools": []
+        },
+        {
+            "name": "custom_nutrition_management_agent",
+            "role": "Provides custom meal plans and nutrition advice.",
+            "tools": [
+                "meal_planning_agent"
+            ]
+        },
+        {
+            "name": "meal_planning_agent",
+            "role": "Develops meal plans based on user dietary preferences and goals.",
+            "tools": [
+                "nutrient_tracking_agent"
+            ]
+        },
+        {
+            "name": "nutrient_tracking_agent",
+            "role": "Tracks nutritional intake and provides feedback.",
+            "tools": []
+        },
+        {
+            "name": "virtual_fitness_trainer_agent",
+            "role": "Customizes workout plans and guides user exercise routines.",
+            "tools": [
+                "workout_template_creator_agent"
+            ]
+        },
+        {
+            "name": "workout_template_creator_agent",
+            "role": "Creates workout templates for various fitness goals.",
+            "tools": []
+        },
+        {
+            "name": "interactive_challenge_agent",
+            "role": "Facilitates community challenges to enhance engagement.",
+            "tools": [
+                "community_engagement_agent"
+            ]
+        },
+        {
+            "name": "community_engagement_agent",
+            "role": "Builds a connected user community around wellness challenges.",
+            "tools": []
+        },
+        {
+            "name": "data_analysis_and_insights_agent",
+            "role": "Manages data analytics to generate actionable wellness insights.",
+            "tools": [
+                "real_time_analytics_agent"
+            ]
+        },
+        {
+            "name": "real_time_analytics_agent",
+            "role": "Analyzes user data in real time to monitor progress.",
+            "tools": [
+                "personalized_insights_generator_agent"
+            ]
+        },
+        {
+            "name": "personalized_insights_generator_agent",
+            "role": "Provides personalized wellness insights based on analytics findings.",
+            "tools": []
+        },
+        {
+            "name": "ambient_settings_adaptation_agent",
+            "role": "Adapts platform settings based on environmental data for ambiance optimization.",
+            "tools": [
+                "environmental_data_agent"
+            ]
+        },
+        {
+            "name": "environmental_data_agent",
+            "role": "Collects and processes environmental data to inform ambiance settings.",
+            "tools": [
+                "local_weather_service_agent"
+            ]
+        },
+        {
+            "name": "local_weather_service_agent",
+            "role": "Provides localized weather data for adaptive platform features.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "meal_planning_agent",
+            "description": "Develops tailored meal plans based on user preferences and goals.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "dietary_preferences": {
+                        "type": "array",
+                        "description": "User's dietary preferences and restrictions"
+                    },
+                    "caloric_intake_goal": {
+                        "type": "number",
+                        "description": "Daily caloric intake goal"
+                    }
+                }
+            }
+        },
+        {
+            "name": "real_time_analytics_agent",
+            "description": "Performs real-time data analysis for wellness monitoring.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "user_activity_data": {
+                        "type": "array",
+                        "description": "Collected data on user activities and exercises"
+                    },
+                    "progress_metrics": {
+                        "type": "object",
+                        "description": "Metrics for tracking user progress",
+                        "properties": {
+                            "steps_count": {
+                                "type": "number",
+                                "description": "Number of steps taken by the user"
+                            },
+                            "heart_rate": {
+                                "type": "number",
+                                "description": "User's heart rate data"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

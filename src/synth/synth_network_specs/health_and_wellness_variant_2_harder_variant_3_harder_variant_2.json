@@ -1,0 +1,249 @@
+{
+    "task": "Design a holistic employee well-being system for remote and hybrid office environments that includes health and wellness tracking, ergonomic assessments, adaptive workspaces, social engagement integration, career development planning, and multi-layered cybersecurity protection.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "wellness_management_agent",
+                "health_monitoring_agent",
+                "biometric_data_collector_agent",
+                "activity_recommender_tool",
+                "health_alert_dispatcher_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "workspace_optimization_agent",
+                "ergonomics_assessment_agent",
+                "workspace_adaptation_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "social_engagement_agent",
+                "virtual_event_planner_agent",
+                "engagement_metrics_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "cybersecurity_layer_agent",
+                "security_protocol_agent",
+                "data_encryption_tool",
+                "intrusion_detection_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "career_growth_agent",
+                "skill_analytics_agent",
+                "career_path_suggestion_tool",
+                "development_plan_generator_agent",
+                "human"
+            ],
+            [
+                "client_agent",
+                "social_engagement_agent",
+                "community_building_agent"
+            ],
+            [
+                "client_agent",
+                "health_monitoring_agent",
+                "biometric_data_collector_agent",
+                "activity_recommender_tool"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Primary interaction point for users, facilitating the integration of well-being and workspace optimization solutions.",
+            "tools": [
+                "wellness_management_agent",
+                "workspace_optimization_agent",
+                "social_engagement_agent",
+                "cybersecurity_layer_agent",
+                "career_growth_agent"
+            ]
+        },
+        {
+            "name": "wellness_management_agent",
+            "role": "Oversees the health and wellness tracking for employees, tailoring plans based on personal metrics and feedback.",
+            "tools": [
+                "health_monitoring_agent"
+            ]
+        },
+        {
+            "name": "health_monitoring_agent",
+            "role": "Monitors health indicators using biometric sensors and generates wellness reports.",
+            "tools": [
+                "biometric_data_collector_agent",
+                "health_alert_dispatcher_agent"
+            ]
+        },
+        {
+            "name": "workspace_optimization_agent",
+            "role": "Enhances work environments by conducting ergonomic assessments and adapting setups to individual needs.",
+            "tools": [
+                "ergonomics_assessment_agent"
+            ]
+        },
+        {
+            "name": "ergonomics_assessment_agent",
+            "role": "Evaluates workspace ergonomics to prevent strain and improve comfort.",
+            "tools": [
+                "workspace_adaptation_tool"
+            ]
+        },
+        {
+            "name": "social_engagement_agent",
+            "role": "Facilitates social connections and engagement among remote workers to boost morale and collaboration.",
+            "tools": [
+                "virtual_event_planner_agent",
+                "community_building_agent"
+            ]
+        },
+        {
+            "name": "cybersecurity_layer_agent",
+            "role": "Implements multi-layered cybersecurity frameworks to protect employee data and communications.",
+            "tools": [
+                "security_protocol_agent",
+                "intrusion_detection_agent"
+            ]
+        },
+        {
+            "name": "career_growth_agent",
+            "role": "Provides career development services, mentoring, and skill development resources.",
+            "tools": [
+                "skill_analytics_agent",
+                "development_plan_generator_agent"
+            ]
+        },
+        {
+            "name": "biometric_data_collector_agent",
+            "role": "Collects detailed biometric data from wearables and other devices for health status monitoring.",
+            "tools": [
+                "activity_recommender_tool"
+            ]
+        },
+        {
+            "name": "security_protocol_agent",
+            "role": "Establishes and supervises data handling protocols to ensure security compliance.",
+            "tools": [
+                "data_encryption_tool"
+            ]
+        },
+        {
+            "name": "virtual_event_planner_agent",
+            "role": "Organizes virtual events and activities to foster employee engagement in remote settings.",
+            "tools": [
+                "engagement_metrics_agent"
+            ]
+        },
+        {
+            "name": "skill_analytics_agent",
+            "role": "Analyzes skills and competencies to propose effective career paths.",
+            "tools": [
+                "career_path_suggestion_tool"
+            ]
+        },
+        {
+            "name": "workspace_adaptation_tool",
+            "role": "Adjusts physical and digital workspaces to suit ergonomic recommendations.",
+            "tools": []
+        },
+        {
+            "name": "health_alert_dispatcher_agent",
+            "role": "Dispatches alerts for critical health deviations and recommends corrective actions.",
+            "tools": []
+        },
+        {
+            "name": "data_encryption_tool",
+            "role": "Encrypts sensitive data to protect employee privacy and company information.",
+            "tools": []
+        },
+        {
+            "name": "intrusion_detection_agent",
+            "role": "Detects and responds to potential security threats and network intrusions.",
+            "tools": []
+        },
+        {
+            "name": "community_building_agent",
+            "role": "Promotes community solidarity and intercultural understanding through planned events.",
+            "tools": []
+        },
+        {
+            "name": "activity_recommender_tool",
+            "role": "Suggests tailored physical and mental activities to enhance employee wellness based on collected data.",
+            "tools": []
+        },
+        {
+            "name": "development_plan_generator_agent",
+            "role": "Generates personalized career development plans with milestones and resource recommendations.",
+            "tools": []
+        },
+        {
+            "name": "career_path_suggestion_tool",
+            "role": "Identifies career advancement opportunities and suggests tailored professional paths.",
+            "tools": []
+        },
+        {
+            "name": "engagement_metrics_agent",
+            "role": "Evaluates the effectiveness of social engagement initiatives and activities.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "workspace_adaptation_tool",
+            "description": "Modifies the workspace environment to fit ergonomic standards.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "workstation_measurements": {
+                        "type": "object",
+                        "properties": {
+                            "desk_height": {
+                                "type": "number",
+                                "description": "Height of the desk in centimeters."
+                            },
+                            "chair_height": {
+                                "type": "number",
+                                "description": "Height of the chair in centimeters."
+                            }
+                        }
+                    },
+                    "user_preferences": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of user preferences for their workspace setup."
+                    }
+                }
+            }
+        },
+        {
+            "name": "data_encryption_tool",
+            "description": "Encrypts user data to secure it against unauthorized access.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "data_type": {
+                        "type": "string",
+                        "description": "Type of data to be encrypted (e.g., personal, financial)."
+                    },
+                    "encryption_strength": {
+                        "type": "string",
+                        "description": "Strength of encryption to be applied (e.g., AES-256)."
+                    }
+                }
+            }
+        }
+    ]
+}

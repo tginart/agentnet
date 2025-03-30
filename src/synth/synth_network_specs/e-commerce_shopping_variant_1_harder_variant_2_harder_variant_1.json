@@ -1,0 +1,269 @@
+{
+    "task": "Plan a six-month expedition to explore sustainable energy solutions in Southeast Asia: 1. Secure permits for environmental research in targeted regions, 2. Arrange logistics including eco-friendly transport and accommodation, 3. Coordinate with local universities and experts for research collaborations, 4. Set up digital platforms for real-time data sharing and stakeholder engagement, 5. Establish partnerships with governmental and non-governmental organizations in the area, 6. Document the expedition with a team of sustainable media professionals and create an immersive multimedia experience for public awareness.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "expedition_management_agent",
+                "permit_acquisition_agent",
+                "local_authority_contact_agent",
+                "governmental_clearance_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "expedition_management_agent",
+                "logistics_agent",
+                "eco_transport_agent",
+                "sustainable_vehicle_provider_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "expedition_management_agent",
+                "academic_collaboration_agent",
+                "local_university_contact_agent",
+                "research_partner_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "expedition_management_agent",
+                "technology_platform_agent",
+                "data_visualization_tool_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "expedition_management_agent",
+                "partnership_building_agent",
+                "ngo_outreach_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "expedition_management_agent",
+                "media_documentation_agent",
+                "documentary_film_team_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "expedition_management_agent",
+                "logistics_agent",
+                "accommodation_agent",
+                "eco_lodge_provider_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "expedition_management_agent",
+                "permit_acquisition_agent",
+                "governmental_clearance_agent",
+                "local_ecosystem_office_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "expedition_management_agent",
+                "partnership_building_agent",
+                "governmental_relations_agent",
+                "policy_alignment_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "expedition_management_agent"
+            ]
+        },
+        {
+            "name": "expedition_management_agent",
+            "role": "Oversees the planning and execution of the expedition with a focus on sustainable practices.",
+            "tools": [
+                "permit_acquisition_agent",
+                "logistics_agent",
+                "academic_collaboration_agent",
+                "technology_platform_agent",
+                "partnership_building_agent",
+                "media_documentation_agent"
+            ]
+        },
+        {
+            "name": "permit_acquisition_agent",
+            "role": "Coordinates the acquisition of necessary permits from local authorities and governments.",
+            "tools": [
+                "local_authority_contact_agent",
+                "governmental_clearance_agent"
+            ]
+        },
+        {
+            "name": "local_authority_contact_agent",
+            "role": "Engages with local authority figures to facilitate smooth permitting processes.",
+            "tools": []
+        },
+        {
+            "name": "governmental_clearance_agent",
+            "role": "Secures clearance from governmental bodies, adhering to local regulations and policies.",
+            "tools": [
+                "local_ecosystem_office_agent"
+            ]
+        },
+        {
+            "name": "local_ecosystem_office_agent",
+            "role": "Assists with permits in sensitive ecological areas, ensuring compliance with conservation efforts.",
+            "tools": []
+        },
+        {
+            "name": "logistics_agent",
+            "role": "Manages travel and accommodation arrangements with a focus on sustainability.",
+            "tools": [
+                "eco_transport_agent",
+                "accommodation_agent"
+            ]
+        },
+        {
+            "name": "eco_transport_agent",
+            "role": "Finds and arranges transportation options with minimal environmental impact.",
+            "tools": [
+                "sustainable_vehicle_provider_agent"
+            ]
+        },
+        {
+            "name": "sustainable_vehicle_provider_agent",
+            "role": "Provides eco-friendly vehicles for transportation needs during the expedition.",
+            "tools": []
+        },
+        {
+            "name": "accommodation_agent",
+            "role": "Secures sustainable lodging options during the expedition.",
+            "tools": [
+                "eco_lodge_provider_agent"
+            ]
+        },
+        {
+            "name": "eco_lodge_provider_agent",
+            "role": "Offers lodgings that follow eco-friendly practices.",
+            "tools": []
+        },
+        {
+            "name": "academic_collaboration_agent",
+            "role": "Facilitates partnerships with academic institutions for collaborative research.",
+            "tools": [
+                "local_university_contact_agent",
+                "research_partner_agent"
+            ]
+        },
+        {
+            "name": "local_university_contact_agent",
+            "role": "Liaison for engaging with local universities to discuss potential research collaborations.",
+            "tools": []
+        },
+        {
+            "name": "research_partner_agent",
+            "role": "Engages with specific research entities to solidify partnerships.",
+            "tools": []
+        },
+        {
+            "name": "technology_platform_agent",
+            "role": "Develops digital tools for data sharing and public engagement.",
+            "tools": [
+                "data_visualization_tool_agent"
+            ]
+        },
+        {
+            "name": "data_visualization_tool_agent",
+            "role": "Creates tools to visualize data collected during the expedition for stakeholders.",
+            "tools": []
+        },
+        {
+            "name": "partnership_building_agent",
+            "role": "Establishes connections with other organizations to expand the expedition's reach.",
+            "tools": [
+                "ngo_outreach_agent",
+                "governmental_relations_agent"
+            ]
+        },
+        {
+            "name": "ngo_outreach_agent",
+            "role": "Engages non-governmental organizations with similar objectives for collaboration.",
+            "tools": []
+        },
+        {
+            "name": "governmental_relations_agent",
+            "role": "Works with government entities to align the expedition's goals with policy objectives.",
+            "tools": [
+                "policy_alignment_agent"
+            ]
+        },
+        {
+            "name": "policy_alignment_agent",
+            "role": "Ensures that expedition activities align with current and anticipated policies.",
+            "tools": []
+        },
+        {
+            "name": "media_documentation_agent",
+            "role": "Responsible for documenting the expedition through various media.",
+            "tools": [
+                "documentary_film_team_agent"
+            ]
+        },
+        {
+            "name": "documentary_film_team_agent",
+            "role": "Produces immersive film content documenting the expedition's progress and findings.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "digital_data_tool",
+            "description": "Facilitates live data updates and visualization for stakeholders.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "data_sources": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of data sources to be integrated."
+                    },
+                    "enable_real_time": {
+                        "type": "boolean",
+                        "description": "Toggle real-time updates for stakeholders."
+                    }
+                }
+            }
+        },
+        {
+            "name": "sustainability_check_tool",
+            "description": "Verifies sustainability practices of vendors and partners.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "vendor_name": {
+                        "type": "string",
+                        "description": "Name of the vendor to verify."
+                    },
+                    "certification_level": {
+                        "type": "string",
+                        "description": "Required level of sustainability certification."
+                    }
+                }
+            }
+        }
+    ]
+}

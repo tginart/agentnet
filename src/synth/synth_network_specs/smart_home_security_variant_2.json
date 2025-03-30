@@ -1,0 +1,181 @@
+{
+    "task": "Perform a comprehensive security audit of the smart home, check for software updates on all security devices, optimize the camera settings for low light, and set up a weekly security summary email for the homeowner.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "security_audit_agent",
+                "vulnerability_scan_agent",
+                "historical_data_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "device_update_agent",
+                "backup_agent",
+                "firmware_update_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "camera_configuration_agent",
+                "low_light_optimizer_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "communication_agent",
+                "schedule_email_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "connectivity_check_agent",
+                "connectivity_monitor_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Coordinates interactions with the user and delegates tasks across the smart home security network.",
+            "tools": [
+                "security_audit_agent",
+                "device_update_agent",
+                "camera_configuration_agent",
+                "communication_agent",
+                "connectivity_check_agent"
+            ]
+        },
+        {
+            "name": "security_audit_agent",
+            "role": "Conducts an extensive audit of all security settings and protocols in place.",
+            "tools": [
+                "vulnerability_scan_agent",
+                "report_anomalies_agent"
+            ]
+        },
+        {
+            "name": "vulnerability_scan_agent",
+            "role": "Scans all smart home devices for known vulnerabilities and security flaws.",
+            "tools": [
+                "historical_data_agent"
+            ]
+        },
+        {
+            "name": "report_anomalies_agent",
+            "role": "Identifies and reports any anomalies detected during the security audit.",
+            "tools": []
+        },
+        {
+            "name": "device_update_agent",
+            "role": "Manages the update process for all security-related device firmware and software.",
+            "tools": [
+                "firmware_update_tool",
+                "backup_agent"
+            ]
+        },
+        {
+            "name": "camera_configuration_agent",
+            "role": "Adjusts camera settings to optimize for various lighting conditions.",
+            "tools": [
+                "low_light_optimizer_tool"
+            ]
+        },
+        {
+            "name": "communication_agent",
+            "role": "Manages communications and notifications within the smart home ecosystem.",
+            "tools": [
+                "schedule_email_tool"
+            ]
+        },
+        {
+            "name": "historical_data_agent",
+            "role": "Analyzes past security data to predict future security needs.",
+            "tools": []
+        },
+        {
+            "name": "backup_agent",
+            "role": "Ensures all security settings and data are backed up to prevent loss.",
+            "tools": []
+        },
+        {
+            "name": "connectivity_check_agent",
+            "role": "Coordinates network checks and connectivity diagnostics.",
+            "tools": [
+                "connectivity_monitor_agent"
+            ]
+        },
+        {
+            "name": "connectivity_monitor_agent",
+            "role": "Monitors network connectivity and ensures all devices are communicating as intended.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "firmware_update_tool",
+            "description": "Updates the firmware on all security devices to the latest version available.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "device_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of devices to update."
+                    },
+                    "preferred_update_time": {
+                        "type": "string",
+                        "description": "User's preferred time for updates to occur."
+                    }
+                }
+            }
+        },
+        {
+            "name": "low_light_optimizer_tool",
+            "description": "Adjusts camera settings to enhance visibility in low light environments.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "camera_id": {
+                        "type": "string",
+                        "description": "The identifier for the camera to be optimized."
+                    },
+                    "optimize_level": {
+                        "type": "string",
+                        "description": "The level of optimization desired (e.g., low, medium, high)."
+                    }
+                }
+            }
+        },
+        {
+            "name": "schedule_email_tool",
+            "description": "Schedules a weekly email summary of the home's security status to be sent to the homeowner.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "description": "The email address of the homeowner."
+                    },
+                    "day_of_week": {
+                        "type": "string",
+                        "description": "Preferred day of the week for sending the summary."
+                    },
+                    "time_of_day": {
+                        "type": "string",
+                        "description": "Preferred time of day for sending the summary."
+                    }
+                }
+            }
+        }
+    ]
+}

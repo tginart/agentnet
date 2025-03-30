@@ -1,0 +1,309 @@
+{
+    "task": "Help me plan my retirement by assessing my current financial situation, suggesting investment strategies, calculating future expenses, and exploring potential health insurance and annuity options.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "retirement_planner_agent",
+                "financial_snapshot_agent",
+                "financial_overview_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "retirement_planner_agent",
+                "investment_strategy_agent",
+                "market_trend_analysis_agent",
+                "risk_analysis_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "retirement_planner_agent",
+                "future_expense_calculator_agent",
+                "expense_projection_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "healthcare_planner_agent",
+                "premium_estimator_agent",
+                "insurance_analyzer_agent",
+                "insurance_premium_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "annuity_explorer_agent",
+                "annuity_options_evaluation_agent",
+                "annuity_comparison_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "tax_planning_agent",
+                "tax_efficiency_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The main agent that interfaces with the user to coordinate retirement planning activities and delegates tasks to other agents.",
+            "tools": [
+                "retirement_planner_agent",
+                "healthcare_planner_agent",
+                "annuity_explorer_agent",
+                "tax_planning_agent"
+            ]
+        },
+        {
+            "name": "retirement_planner_agent",
+            "role": "Analyzes the user's financial data to plan for retirement, encompassing snapshot evaluation, investment advice, and expense projections.",
+            "tools": [
+                "financial_snapshot_agent",
+                "investment_strategy_agent",
+                "future_expense_calculator_agent"
+            ]
+        },
+        {
+            "name": "financial_snapshot_agent",
+            "role": "Provides a comprehensive overview of the user's current financial assets, liabilities, and net worth.",
+            "tools": [
+                "financial_overview_tool"
+            ]
+        },
+        {
+            "name": "investment_strategy_agent",
+            "role": "Develops personalized investment strategies based on user preferences and market trends.",
+            "tools": [
+                "market_trend_analysis_agent",
+                "risk_analysis_tool"
+            ]
+        },
+        {
+            "name": "future_expense_calculator_agent",
+            "role": "Estimates future expenses based on current lifestyle, inflation, and expected life changes.",
+            "tools": [
+                "expense_projection_tool"
+            ]
+        },
+        {
+            "name": "healthcare_planner_agent",
+            "role": "Assesses future healthcare needs and provides insurance plan options.",
+            "tools": [
+                "premium_estimator_agent",
+                "insurance_analyzer_agent"
+            ]
+        },
+        {
+            "name": "premium_estimator_agent",
+            "role": "Calculates expected health insurance premiums using user-specific health data.",
+            "tools": [
+                "insurance_premium_tool"
+            ]
+        },
+        {
+            "name": "annuity_explorer_agent",
+            "role": "Explores and evaluates annuity options for income during retirement.",
+            "tools": [
+                "annuity_options_evaluation_agent"
+            ]
+        },
+        {
+            "name": "annuity_options_evaluation_agent",
+            "role": "Compares different annuity options based on the user's financial goals and risk tolerance.",
+            "tools": [
+                "annuity_comparison_tool"
+            ]
+        },
+        {
+            "name": "tax_planning_agent",
+            "role": "Advises on tax-optimized saving and investment strategies to enhance retirement funds.",
+            "tools": [
+                "tax_efficiency_tool"
+            ]
+        },
+        {
+            "name": "market_trend_analysis_agent",
+            "role": "Analyzes current market trends to aid in investment strategy development.",
+            "tools": []
+        },
+        {
+            "name": "insurance_analyzer_agent",
+            "role": "Provides detailed analysis of potential health insurance options based on user's needs.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "financial_overview_tool",
+            "description": "Generates a detailed report of the user's current financial state, including assets, debts, and net worth.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "bank_accounts": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "account_type": {
+                                    "type": "string",
+                                    "description": "Type of bank account, e.g., savings, checking."
+                                },
+                                "balance": {
+                                    "type": "number",
+                                    "description": "Current balance in the account."
+                                }
+                            }
+                        },
+                        "description": "List of user's bank accounts with current balances."
+                    },
+                    "debts": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string",
+                                    "description": "Type of debt, e.g., mortgage, credit card."
+                                },
+                                "amount": {
+                                    "type": "number",
+                                    "description": "Outstanding debt amount."
+                                }
+                            }
+                        },
+                        "description": "List of user's debts."
+                    }
+                }
+            }
+        },
+        {
+            "name": "risk_analysis_tool",
+            "description": "Assesses investment risks and provides recommendations aligned with user's risk tolerance.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "current_investments": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "investment_type": {
+                                    "type": "string",
+                                    "description": "Type of investment, e.g., stocks, bonds."
+                                },
+                                "value": {
+                                    "type": "number",
+                                    "description": "Current value of the investment."
+                                }
+                            }
+                        },
+                        "description": "Details of current investments."
+                    },
+                    "risk_tolerance": {
+                        "type": "string",
+                        "description": "User's risk tolerance: low, medium, high."
+                    }
+                }
+            }
+        },
+        {
+            "name": "expense_projection_tool",
+            "description": "Projects future expenses based on historical spending and potential future changes.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "current_expenses": {
+                        "type": "object",
+                        "properties": {
+                            "monthly_living": {
+                                "type": "number",
+                                "description": "Average monthly living expenses."
+                            },
+                            "annual_vacations": {
+                                "type": "number",
+                                "description": "Planned annual vacation expenses."
+                            }
+                        },
+                        "description": "Current expense details."
+                    },
+                    "inflation_rate": {
+                        "type": "number",
+                        "description": "Expected annual inflation rate as a percentage."
+                    }
+                }
+            }
+        },
+        {
+            "name": "insurance_premium_tool",
+            "description": "Estimates insurance premiums based on the user's medical history and projected healthcare needs.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "health_history": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of significant medical history details."
+                    },
+                    "coverage_needs": {
+                        "type": "string",
+                        "description": "Type of insurance coverage needed, e.g., basic, comprehensive."
+                    }
+                }
+            }
+        },
+        {
+            "name": "annuity_comparison_tool",
+            "description": "Evaluates multiple annuity options to advise on the most suitable plan.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "desired_income": {
+                        "type": "number",
+                        "description": "Desired monthly income from annuity."
+                    },
+                    "retirement_age": {
+                        "type": "number",
+                        "description": "Age at which the user plans to retire."
+                    },
+                    "risk_preference": {
+                        "type": "string",
+                        "description": "User's preference regarding annuity risk: fixed, variable, indexed."
+                    }
+                }
+            }
+        },
+        {
+            "name": "tax_efficiency_tool",
+            "description": "Calculates the most tax-efficient strategies for retirement savings and withdrawals.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "current_income": {
+                        "type": "number",
+                        "description": "Current annual income of the user."
+                    },
+                    "tax_bracket": {
+                        "type": "string",
+                        "description": "Current tax bracket of the user."
+                    },
+                    "retirement_contributions": {
+                        "type": "number",
+                        "description": "Current contributions to retirement accounts per year."
+                    }
+                }
+            }
+        }
+    ]
+}

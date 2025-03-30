@@ -1,0 +1,233 @@
+{
+    "task": "Plan and execute a three-day tech conference in San Francisco: 1. Find and book a tech-savvy conference center, 2. Arrange keynote speakers and panelists with secure scheduling, 3. Design and implement a tech showcase area, 4. Organize eco-friendly catering services, 5. Develop a comprehensive digital attendee registration system, 6. Coordinate remote participation options.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "conference_planning_agent",
+                "venue_booking_agent",
+                "tech_center_verification_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "conference_planning_agent",
+                "speaker_arrangement_agent",
+                "secure_schedule_management_agent",
+                "speaker_verification_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "conference_planning_agent",
+                "tech_showcase_design_agent",
+                "exhibitor_acquisition_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "conference_planning_agent",
+                "catering_management_agent",
+                "green_catering_service_agent",
+                "menu_creation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "conference_planning_agent",
+                "registration_system_agent",
+                "digital_interface_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "conference_planning_agent",
+                "remote_participation_agent",
+                "streaming_setup_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "conference_planning_agent",
+                "tech_showcase_design_agent",
+                "resource_allocation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "conference_planning_agent",
+                "venue_booking_agent",
+                "tech_center_verification_agent",
+                "wifi_installation_supervisor_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "conference_planning_agent"
+            ]
+        },
+        {
+            "name": "conference_planning_agent",
+            "role": "Oversees the organization of the conference, managing all necessary components.",
+            "tools": [
+                "venue_booking_agent",
+                "speaker_arrangement_agent",
+                "tech_showcase_design_agent",
+                "catering_management_agent",
+                "registration_system_agent",
+                "remote_participation_agent"
+            ]
+        },
+        {
+            "name": "venue_booking_agent",
+            "role": "Handles the booking of appropriate venues with tech capabilities.",
+            "tools": [
+                "tech_center_verification_agent"
+            ]
+        },
+        {
+            "name": "tech_center_verification_agent",
+            "role": "Ensures the venue has the necessary tech infrastructure for the conference.",
+            "tools": [
+                "wifi_installation_supervisor_agent"
+            ]
+        },
+        {
+            "name": "wifi_installation_supervisor_agent",
+            "role": "Supervises the installation of high-speed internet for attendees and exhibitors.",
+            "tools": []
+        },
+        {
+            "name": "speaker_arrangement_agent",
+            "role": "Coordinates the scheduling and verification of keynote speakers and panelists.",
+            "tools": [
+                "secure_schedule_management_agent"
+            ]
+        },
+        {
+            "name": "secure_schedule_management_agent",
+            "role": "Manages secure scheduling for speakers ensuring no overlaps and confirms their participation.",
+            "tools": [
+                "speaker_verification_agent"
+            ]
+        },
+        {
+            "name": "speaker_verification_agent",
+            "role": "Verifies credentials and availability of speakers.",
+            "tools": []
+        },
+        {
+            "name": "tech_showcase_design_agent",
+            "role": "Designs the tech showcase area for exhibitors.",
+            "tools": [
+                "exhibitor_acquisition_agent",
+                "resource_allocation_agent"
+            ]
+        },
+        {
+            "name": "exhibitor_acquisition_agent",
+            "role": "Recruits and manages exhibitors for the tech showcase.",
+            "tools": []
+        },
+        {
+            "name": "resource_allocation_agent",
+            "role": "Allocates physical and virtual resources for the tech showcase.",
+            "tools": []
+        },
+        {
+            "name": "catering_management_agent",
+            "role": "Arranges eco-friendly catering options for the event.",
+            "tools": [
+                "green_catering_service_agent"
+            ]
+        },
+        {
+            "name": "green_catering_service_agent",
+            "role": "Connects with catering services that provide sustainable food options.",
+            "tools": [
+                "menu_creation_agent"
+            ]
+        },
+        {
+            "name": "menu_creation_agent",
+            "role": "Develops menu options focusing on eco-friendly fare.",
+            "tools": []
+        },
+        {
+            "name": "registration_system_agent",
+            "role": "Develops a digital system for attendee registration.",
+            "tools": [
+                "digital_interface_agent"
+            ]
+        },
+        {
+            "name": "digital_interface_agent",
+            "role": "Creates the digital interface for registrations and ticketing.",
+            "tools": []
+        },
+        {
+            "name": "remote_participation_agent",
+            "role": "Manages remote access options for virtual attendees.",
+            "tools": [
+                "streaming_setup_agent"
+            ]
+        },
+        {
+            "name": "streaming_setup_agent",
+            "role": "Configures streaming services for remote conference attendees.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "tech_venue_locator_tool",
+            "description": "Finds venues with advanced tech infrastructure.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "city": {
+                        "type": "string",
+                        "description": "The city to search for tech-conference venues."
+                    },
+                    "capacity_requirement": {
+                        "type": "number",
+                        "description": "The required seating capacity for the venue."
+                    }
+                }
+            }
+        },
+        {
+            "name": "virtual_attendee_tool",
+            "description": "Facilitates the management of virtual attendees.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "participation_format": {
+                        "type": "string",
+                        "description": "Format of virtual participation (e.g., live stream, recorded)"
+                    },
+                    "timezones": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Timezones to accommodate for live sessions."
+                    }
+                }
+            }
+        }
+    ]
+}

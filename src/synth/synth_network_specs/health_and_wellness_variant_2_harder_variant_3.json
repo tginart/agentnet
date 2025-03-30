@@ -1,0 +1,213 @@
+{
+    "task": "Develop an integrated life coaching system to assist users in realizing personal and professional aspirations, including career transitions, entrepreneurial endeavors, emotional intelligence growth, and high-performance habits. The system should adapt to varying user circumstances and stress levels, provide gamification elements to motivate users, and ensure privacy in data handling.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "life_coaching_system_coordinator_agent",
+                "career_transitions_agent",
+                "opportunity_discovery_agent",
+                "career_transition_tool",
+                "stress_management_feedback_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "life_coaching_system_coordinator_agent",
+                "entrepreneur_support_agent",
+                "business_ideation_tool",
+                "feasibility_assessor_agent",
+                "venture_planning_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "life_coaching_system_coordinator_agent",
+                "emotional_intelligence_growth_agent",
+                "empathy_training_tool",
+                "peer_interaction_analyzer_agent",
+                "journey_challenger_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "life_coaching_system_coordinator_agent",
+                "performance_optimization_agent",
+                "behavioral_gamification_tool",
+                "performance_tracking_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Primary interface for the user, coordinating life coaching tasks and ensuring system integration for user benefits.",
+            "tools": [
+                "life_coaching_system_coordinator_agent"
+            ]
+        },
+        {
+            "name": "life_coaching_system_coordinator_agent",
+            "role": "Manages the entire life coaching program across career, entrepreneurship, emotional intelligence, and performance.",
+            "tools": [
+                "career_transitions_agent",
+                "entrepreneur_support_agent",
+                "emotional_intelligence_growth_agent",
+                "performance_optimization_agent"
+            ]
+        },
+        {
+            "name": "career_transitions_agent",
+            "role": "Specializes in supporting users through career changes and identifying new opportunities.",
+            "tools": [
+                "opportunity_discovery_agent",
+                "stress_management_feedback_agent"
+            ]
+        },
+        {
+            "name": "opportunity_discovery_agent",
+            "role": "Finds and evaluates new career opportunities tailored to the user\u2019s goals and skills.",
+            "tools": [
+                "career_transition_tool"
+            ]
+        },
+        {
+            "name": "entrepreneur_support_agent",
+            "role": "Provides guidance for entrepreneurial activities from ideation to execution.",
+            "tools": [
+                "business_ideation_tool",
+                "feasibility_assessor_agent"
+            ]
+        },
+        {
+            "name": "feasibility_assessor_agent",
+            "role": "Evaluates the feasibility of business ideas and recommends venture plans.",
+            "tools": [
+                "venture_planning_tool"
+            ]
+        },
+        {
+            "name": "emotional_intelligence_growth_agent",
+            "role": "Helps users develop emotional intelligence through training and social interactions.",
+            "tools": [
+                "empathy_training_tool",
+                "peer_interaction_analyzer_agent"
+            ]
+        },
+        {
+            "name": "peer_interaction_analyzer_agent",
+            "role": "Analyzes peer interactions to provide feedback and strategies for empathy improvement.",
+            "tools": [
+                "journey_challenger_agent"
+            ]
+        },
+        {
+            "name": "performance_optimization_agent",
+            "role": "Focuses on optimizing user performance through behavioral enhancements and habit formation.",
+            "tools": [
+                "behavioral_gamification_tool",
+                "performance_tracking_tool"
+            ]
+        },
+        {
+            "name": "stress_management_feedback_agent",
+            "role": "Monitors stress levels and provides feedback to ensure smooth career transition management.",
+            "tools": []
+        },
+        {
+            "name": "behavioral_gamification_tool",
+            "role": "Integrates elements of gamification to motivate and track personal development activities.",
+            "tools": []
+        },
+        {
+            "name": "performance_tracking_tool",
+            "role": "Tracks performance metrics and helps maintain focus on personal goals.",
+            "tools": []
+        },
+        {
+            "name": "career_transition_tool",
+            "role": "Facilitates career transitions with detailed planning and stress reduction strategies.",
+            "tools": []
+        },
+        {
+            "name": "journey_challenger_agent",
+            "role": "Challenges users to push their boundaries in emotional growth through practical tasks.",
+            "tools": []
+        },
+        {
+            "name": "business_ideation_tool",
+            "role": "Assists in brainstorming and refining business ideas to match market needs and user interests.",
+            "tools": []
+        },
+        {
+            "name": "venture_planning_tool",
+            "role": "Develops comprehensive plans for launching and scaling new ventures.",
+            "tools": []
+        },
+        {
+            "name": "empathy_training_tool",
+            "role": "Provides exercises to develop empathy and understanding of others.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "business_ideation_tool",
+            "description": "Facilitates the development of business ideas with a focus on creativity and market alignment.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "current_business_ideas": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of current business ideas user wants to explore."
+                    },
+                    "user_interest_fields": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Field of interests that aligns with user expertise and passion."
+                    }
+                }
+            }
+        },
+        {
+            "name": "behavioral_gamification_tool",
+            "description": "Implements gamification strategies to enhance user engagement with self-improvement routines.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "personal_goals": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "User-defined goals that are to be gamified."
+                    },
+                    "reward_system": {
+                        "type": "object",
+                        "properties": {
+                            "reward_type": {
+                                "type": "string",
+                                "description": "Type of rewards the user prefers to receive."
+                            },
+                            "points_system": {
+                                "type": "boolean",
+                                "description": "Whether a points system should be used for tracking progress."
+                            }
+                        },
+                        "description": "Structure of the reward system for motivation purposes."
+                    }
+                }
+            }
+        }
+    ]
+}

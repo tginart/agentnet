@@ -1,0 +1,272 @@
+{
+    "task": "Implement an automated vigilant monitoring system for a smart-home ecosystem, focusing on environment, device health, and user activity patterns. Integrate real-time environmental readings, proactive device maintenance notifications, predictive user behavior analysis, and daily summary reports.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "monitoring_strategy_agent",
+                "environment_monitor_agent",
+                "sensor_hub_agent",
+                "temperature_sensor_agent",
+                "collect_temperature_data_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "monitoring_strategy_agent",
+                "device_health_agent",
+                "maintenance_scheduler_agent",
+                "maintenance_notification_agent",
+                "send_maintenance_notification_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "monitoring_strategy_agent",
+                "user_behavior_agent",
+                "activity_pattern_agent",
+                "prediction_engine_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "monitoring_strategy_agent",
+                "reporting_hub_agent",
+                "report_generator_agent",
+                "generate_daily_summary_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "monitoring_strategy_agent",
+                "network_security_agent",
+                "firewall_configuration_agent",
+                "apply_firewall_rules_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "User interface agent that coordinates with all sub-agents to implement the monitoring system requested by the user.",
+            "tools": [
+                "monitoring_strategy_agent"
+            ]
+        },
+        {
+            "name": "monitoring_strategy_agent",
+            "role": "Forms and implements the holistic strategy for smart-home monitoring, covering environmental, device, and user metrics.",
+            "tools": [
+                "environment_monitor_agent",
+                "device_health_agent",
+                "user_behavior_agent",
+                "reporting_hub_agent",
+                "network_security_agent"
+            ]
+        },
+        {
+            "name": "environment_monitor_agent",
+            "role": "Gathers and analyzes environmental data to ensure optimal home conditions.",
+            "tools": [
+                "sensor_hub_agent"
+            ]
+        },
+        {
+            "name": "sensor_hub_agent",
+            "role": "Controls various environmental sensors and gathers their readings.",
+            "tools": [
+                "temperature_sensor_agent",
+                "humidity_sensor_agent",
+                "carbon_dioxide_sensor_agent",
+                "water_leak_detector_agent"
+            ]
+        },
+        {
+            "name": "temperature_sensor_agent",
+            "role": "Specialized in measuring and reporting temperature data within the home environment.",
+            "tools": [
+                "collect_temperature_data_tool"
+            ]
+        },
+        {
+            "name": "humidity_sensor_agent",
+            "role": "Records and reports humidity levels to maintain a healthy home environment.",
+            "tools": []
+        },
+        {
+            "name": "device_health_agent",
+            "role": "Monitors the health and status of devices, planning maintenance activities.",
+            "tools": [
+                "maintenance_scheduler_agent"
+            ]
+        },
+        {
+            "name": "maintenance_scheduler_agent",
+            "role": "Schedules and prioritizes maintenance tasks for all home devices.",
+            "tools": [
+                "maintenance_notification_agent"
+            ]
+        },
+        {
+            "name": "maintenance_notification_agent",
+            "role": "Sends notifications to users about necessary maintenance tasks.",
+            "tools": [
+                "send_maintenance_notification_tool"
+            ]
+        },
+        {
+            "name": "user_behavior_agent",
+            "role": "Analyzes user activities to forecast patterns and optimize energy use.",
+            "tools": [
+                "activity_pattern_agent",
+                "motion_detector_agent"
+            ]
+        },
+        {
+            "name": "activity_pattern_agent",
+            "role": "Detects and analyzes patterns in user activity to improve system efficiency.",
+            "tools": [
+                "prediction_engine_tool"
+            ]
+        },
+        {
+            "name": "reporting_hub_agent",
+            "role": "Compiles data and generates reports about the smart-home ecosystem.",
+            "tools": [
+                "report_generator_agent"
+            ]
+        },
+        {
+            "name": "report_generator_agent",
+            "role": "Generates comprehensive reports summarizing the state and activities of the smart-home system.",
+            "tools": [
+                "generate_daily_summary_tool"
+            ]
+        },
+        {
+            "name": "network_security_agent",
+            "role": "Ensures the security of the home's network, preventing unauthorized access.",
+            "tools": [
+                "firewall_configuration_agent"
+            ]
+        },
+        {
+            "name": "firewall_configuration_agent",
+            "role": "Applies and adjusts firewall settings to secure the home network.",
+            "tools": [
+                "apply_firewall_rules_tool"
+            ]
+        },
+        {
+            "name": "carbon_dioxide_sensor_agent",
+            "role": "Tracks CO2 levels to ensure air quality is within a safe range.",
+            "tools": []
+        },
+        {
+            "name": "motion_detector_agent",
+            "role": "Monitors movement to assist in user behavior analysis and security alerts.",
+            "tools": []
+        },
+        {
+            "name": "water_leak_detector_agent",
+            "role": "Detects potential water leaks to prevent water damage.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "collect_temperature_data_tool",
+            "description": "Collects real-time temperature data from sensor devices in the home.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location_id": {
+                        "type": "string",
+                        "description": "The location identifier where the temperature data is collected"
+                    },
+                    "frequency": {
+                        "type": "number",
+                        "description": "Frequency in minutes for data collection"
+                    }
+                }
+            }
+        },
+        {
+            "name": "send_maintenance_notification_tool",
+            "description": "Sends out notifications to alert users of upcoming or required device maintenance tasks.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "device_id": {
+                        "type": "string",
+                        "description": "Identifier of the device requiring maintenance"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Notification message describing the maintenance task"
+                    }
+                }
+            }
+        },
+        {
+            "name": "prediction_engine_tool",
+            "description": "Predicts user activity patterns for optimizing resource management and energy use.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "activity_type": {
+                        "type": "string",
+                        "description": "Type of user activity to analyze (e.g., 'morning routine', 'evening entertainment')"
+                    },
+                    "time_period": {
+                        "type": "string",
+                        "description": "Time period for analysis (e.g., 'weekly', 'monthly')"
+                    }
+                }
+            }
+        },
+        {
+            "name": "generate_daily_summary_tool",
+            "description": "Generates a daily summary report on home environment, device status, and activity patterns.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "date": {
+                        "type": "string",
+                        "description": "Date for which the summary report is generated"
+                    },
+                    "include_sections": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "description": "Sections to include in the summary (e.g., 'environment', 'devices', 'activities')"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "apply_firewall_rules_tool",
+            "description": "Applies firewall rules to secure network endpoints and prevent unauthorized access.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "rule_set_id": {
+                        "type": "string",
+                        "description": "Identifier for the set of firewall rules to apply"
+                    },
+                    "activate_immediately": {
+                        "type": "boolean",
+                        "description": "Whether to activate the rules immediately"
+                    }
+                }
+            }
+        }
+    ]
+}

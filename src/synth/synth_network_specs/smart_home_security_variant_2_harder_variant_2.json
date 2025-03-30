@@ -1,0 +1,177 @@
+{
+    "task": "Implement a smart city maintenance system that forecasts equipment failure, schedules repairs, optimizes resources, and reports system health to city planners.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "forecasting_agent",
+                "equipment_failure_agent",
+                "sensor_analysis_agent",
+                "data_aggregation_agent",
+                "forecasting_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "maintenance_scheduling_agent",
+                "resource_optimization_agent",
+                "logistics_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "reporting_agent",
+                "system_health_agent",
+                "historical_data_agent",
+                "visualization_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "compliance_assurance_agent",
+                "policy_adherence_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Facilitates human interaction with the system and delegates tasks across the smart city maintenance network.",
+            "tools": [
+                "forecasting_agent",
+                "maintenance_scheduling_agent",
+                "reporting_agent",
+                "compliance_assurance_agent"
+            ]
+        },
+        {
+            "name": "forecasting_agent",
+            "role": "Oversees the prediction of equipment failures and required maintenance interventions.",
+            "tools": [
+                "equipment_failure_agent",
+                "predictive_analysis_agent"
+            ]
+        },
+        {
+            "name": "equipment_failure_agent",
+            "role": "Predicts potential equipment failures by analyzing sensor data across the city infrastructure.",
+            "tools": [
+                "sensor_analysis_agent"
+            ]
+        },
+        {
+            "name": "sensor_analysis_agent",
+            "role": "Analyzes data collected from city-wide sensors for anomalies and trends indicating equipment failure.",
+            "tools": [
+                "data_aggregation_agent"
+            ]
+        },
+        {
+            "name": "data_aggregation_agent",
+            "role": "Aggregates and organizes sensor data for further processing in maintenance forecasts.",
+            "tools": [
+                "forecasting_tool"
+            ]
+        },
+        {
+            "name": "predictive_analysis_agent",
+            "role": "Applies predictive algorithms to identify potential future equipment malfunctions.",
+            "tools": []
+        },
+        {
+            "name": "maintenance_scheduling_agent",
+            "role": "Plans and schedules maintenance activities to ensure optimal resource allocation.",
+            "tools": [
+                "resource_optimization_agent"
+            ]
+        },
+        {
+            "name": "resource_optimization_agent",
+            "role": "Optimizes resource usage for all maintenance activities covering manpower, equipment, and materials.",
+            "tools": [
+                "logistics_agent"
+            ]
+        },
+        {
+            "name": "logistics_agent",
+            "role": "Manages the logistics of repair operations including route planning and supply chain coordination.",
+            "tools": []
+        },
+        {
+            "name": "reporting_agent",
+            "role": "Generates detailed reports on system status and maintenance activities for city planners.",
+            "tools": [
+                "system_health_agent"
+            ]
+        },
+        {
+            "name": "system_health_agent",
+            "role": "Monitors and assesses the overall health of the city\u2019s infrastructure.",
+            "tools": [
+                "historical_data_agent",
+                "visualization_tool"
+            ]
+        },
+        {
+            "name": "historical_data_agent",
+            "role": "Utilizes historical data to inform current maintenance strategies and predict future needs.",
+            "tools": []
+        },
+        {
+            "name": "compliance_assurance_agent",
+            "role": "Ensures all maintenance activities comply with local and national regulations.",
+            "tools": [
+                "policy_adherence_agent"
+            ]
+        },
+        {
+            "name": "policy_adherence_agent",
+            "role": "Validates adherence to updated policies and regulatory compliance for maintenance protocols.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "forecasting_tool",
+            "description": "Utilizes aggregated data to produce timely and accurate equipment failure forecasts.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "data_sources": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of data sources to be used for forecasting."
+                    },
+                    "forecast_horizon": {
+                        "type": "number",
+                        "description": "Number of days ahead for which forecasts should be generated."
+                    }
+                }
+            }
+        },
+        {
+            "name": "visualization_tool",
+            "description": "Creates visual representations of system health metrics and trends based on historical data.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "metric_type": {
+                        "type": "string",
+                        "description": "Type of system health metrics to visualize."
+                    },
+                    "time_period": {
+                        "type": "string",
+                        "description": "Time period over which data should be visualized."
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,255 @@
+{
+    "task": "Organize a high-profile global art exhibition tour. The event will take place across five international cities over three months. Arrange transportation of art pieces, secure exhibition spaces, coordinate with local artists for collaborations, manage PR and marketing campaigns, ensure art piece insurance, and provide gallery security. Engage an art historian for guided tours, and a professional catering service for Vernissage events.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "transport_agent",
+                "art_piece_transport_agent",
+                "customs_clearance_agent",
+                "logistics_management_agent",
+                "transport_route_optimization_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "venue_management_agent",
+                "exhibition_space_booking_agent",
+                "venue_customization_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "public_relations_agent",
+                "social_media_strategy_agent",
+                "international_media_coordination_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "collaboration_agent",
+                "local_artist_coordination_agent",
+                "joint_exhibition_planning_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "security_and_insurance_agent",
+                "art_insurance_planning_agent",
+                "gallery_security_setup_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "educational_programming_agent",
+                "art_historian_recruitment_agent",
+                "guided_tour_itinerary_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "event_services_agent",
+                "professional_catering_services_agent",
+                "vernissage_event_coordination_agent"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Top-level client agent orchestrating the organization of the global art exhibition tour.",
+            "tools": [
+                "transport_agent",
+                "venue_management_agent",
+                "public_relations_agent",
+                "collaboration_agent",
+                "security_and_insurance_agent",
+                "educational_programming_agent",
+                "event_services_agent"
+            ]
+        },
+        {
+            "name": "transport_agent",
+            "role": "Handles transportation logistics for the art pieces across international locations.",
+            "tools": [
+                "art_piece_transport_agent"
+            ]
+        },
+        {
+            "name": "venue_management_agent",
+            "role": "Secures and manages exhibition spaces suitable for art displays globally.",
+            "tools": [
+                "exhibition_space_booking_agent"
+            ]
+        },
+        {
+            "name": "public_relations_agent",
+            "role": "Manages PR and marketing for the exhibition tour, including social media.",
+            "tools": [
+                "social_media_strategy_agent"
+            ]
+        },
+        {
+            "name": "collaboration_agent",
+            "role": "Coordinates collaboration events with local artists in each city.",
+            "tools": [
+                "local_artist_coordination_agent"
+            ]
+        },
+        {
+            "name": "security_and_insurance_agent",
+            "role": "Handles all security arrangements and insurance for the art pieces.",
+            "tools": [
+                "art_insurance_planning_agent"
+            ]
+        },
+        {
+            "name": "educational_programming_agent",
+            "role": "Provides educational content and guided tours for exhibit visitors.",
+            "tools": [
+                "art_historian_recruitment_agent"
+            ]
+        },
+        {
+            "name": "event_services_agent",
+            "role": "Offers comprehensive services for event organization and management.",
+            "tools": [
+                "professional_catering_services_agent"
+            ]
+        },
+        {
+            "name": "art_piece_transport_agent",
+            "role": "Arranges transport of art pieces, ensuring safe handling and delivery.",
+            "tools": [
+                "customs_clearance_agent",
+                "logistics_management_agent"
+            ]
+        },
+        {
+            "name": "exhibition_space_booking_agent",
+            "role": "Books suitable spaces for exhibitions and customizes them as needed.",
+            "tools": [
+                "venue_customization_agent"
+            ]
+        },
+        {
+            "name": "social_media_strategy_agent",
+            "role": "Develops and executes a comprehensive social media strategy for outreach.",
+            "tools": [
+                "international_media_coordination_agent"
+            ]
+        },
+        {
+            "name": "local_artist_coordination_agent",
+            "role": "Coordinates with local artists for joint exhibitions and collaborations.",
+            "tools": [
+                "joint_exhibition_planning_agent"
+            ]
+        },
+        {
+            "name": "art_insurance_planning_agent",
+            "role": "Plans and secures insurance coverage for art pieces during the tour.",
+            "tools": [
+                "gallery_security_setup_agent"
+            ]
+        },
+        {
+            "name": "art_historian_recruitment_agent",
+            "role": "Recruits knowledgeable art historians for guided exhibit tours.",
+            "tools": [
+                "guided_tour_itinerary_agent"
+            ]
+        },
+        {
+            "name": "professional_catering_services_agent",
+            "role": "Provides professional catering services for events and vernissages.",
+            "tools": [
+                "vernissage_event_coordination_agent"
+            ]
+        },
+        {
+            "name": "customs_clearance_agent",
+            "role": "Ensures all art pieces clear international customs smoothly.",
+            "tools": []
+        },
+        {
+            "name": "logistics_management_agent",
+            "role": "Handles scheduling and optimization of art piece logistics.",
+            "tools": [
+                "transport_route_optimization_agent"
+            ]
+        },
+        {
+            "name": "venue_customization_agent",
+            "role": "Customizes exhibition venues to fit the needs of the art display.",
+            "tools": []
+        },
+        {
+            "name": "international_media_coordination_agent",
+            "role": "Coordinates international media coverage for the art exhibition tour.",
+            "tools": []
+        },
+        {
+            "name": "joint_exhibition_planning_agent",
+            "role": "Plans collaborative exhibition events with local artists.",
+            "tools": []
+        },
+        {
+            "name": "gallery_security_setup_agent",
+            "role": "Sets up security systems and personnel at galleries and venues.",
+            "tools": []
+        },
+        {
+            "name": "guided_tour_itinerary_agent",
+            "role": "Designs itineraries for guided tours led by art historians.",
+            "tools": []
+        },
+        {
+            "name": "vernissage_event_coordination_agent",
+            "role": "Coordinates and manages vernissage events for art openings.",
+            "tools": []
+        },
+        {
+            "name": "transport_route_optimization_agent",
+            "role": "Optimizes the transportation routes for efficiency and safety.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "logistics_management_agent",
+            "description": "Schedules and manages logistics for moving art pieces efficiently.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "destination_cities": {
+                        "type": "array",
+                        "description": "List of cities where exhibitions will be held"
+                    },
+                    "art_piece_list": {
+                        "type": "array",
+                        "description": "List of art pieces to be transported"
+                    }
+                }
+            }
+        },
+        {
+            "name": "joint_exhibition_planner",
+            "description": "Helps in planning and organizing joint exhibitions with local artists.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "local_artist_accounts": {
+                        "type": "array",
+                        "description": "Handles of local artists for collaboration"
+                    },
+                    "event_date_ranges": {
+                        "type": "array",
+                        "description": "Preferred date ranges for each city"
+                    }
+                }
+            }
+        }
+    ]
+}

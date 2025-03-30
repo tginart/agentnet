@@ -1,0 +1,212 @@
+{
+    "task": "Initiate an expedition for the comprehensive mapping of ocean floor topography, deploying a network of autonomous submarines for seismic data acquisition. Collaborate with international geological institutes to synthesize data for earthquake prediction models, ensure legality under oceanic data sharing laws, and establish a secure digital framework for the collection and dissemination of insights.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "expedition_initiation_agent",
+                "submarine_deployment_agent",
+                "seismic_data_acquisition_agent",
+                "data_integration_agent",
+                "data_validation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "compliance_management_agent",
+                "oceanic_data_sharing_agent",
+                "authorization_manager_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "international_collaboration_agent",
+                "geological_institute_interface_agent",
+                "geological_data_synthesis_agent",
+                "prediction_modeling_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "network_security_agent",
+                "digital_framework_setup_agent",
+                "encryption_manager_agent",
+                "secure_communication_channel_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Orchestrates interactions and coordinates the efforts of specialized agents to fulfill the expedition goals.",
+            "tools": [
+                "expedition_initiation_agent",
+                "compliance_management_agent",
+                "international_collaboration_agent",
+                "network_security_agent"
+            ]
+        },
+        {
+            "name": "expedition_initiation_agent",
+            "role": "Launches and oversees the expedition to map ocean floor topography with submarines.",
+            "tools": [
+                "submarine_deployment_agent",
+                "data_integration_agent"
+            ]
+        },
+        {
+            "name": "submarine_deployment_agent",
+            "role": "Coordinates the deployment and operation of autonomous submarines for seismic data collection.",
+            "tools": [
+                "seismic_data_acquisition_agent"
+            ]
+        },
+        {
+            "name": "compliance_management_agent",
+            "role": "Ensures adherence to international laws and agreements on oceanic data sharing and research.",
+            "tools": [
+                "oceanic_data_sharing_agent",
+                "authorization_manager_agent"
+            ]
+        },
+        {
+            "name": "international_collaboration_agent",
+            "role": "Facilitates joint efforts with global geological institutes for enhanced research outcomes.",
+            "tools": [
+                "geological_institute_interface_agent",
+                "geological_data_synthesis_agent"
+            ]
+        },
+        {
+            "name": "network_security_agent",
+            "role": "Establishes secure systems for data collection and ensures integrity during dissemination.",
+            "tools": [
+                "digital_framework_setup_agent",
+                "encryption_manager_agent"
+            ]
+        },
+        {
+            "name": "seismic_data_acquisition_agent",
+            "role": "Specializes in collecting and processing seismic data through submarine instruments.",
+            "tools": [
+                "data_validation_agent"
+            ]
+        },
+        {
+            "name": "data_integration_agent",
+            "role": "Integrates various data streams from submarines into coherent datasets for analysis.",
+            "tools": []
+        },
+        {
+            "name": "oceanic_data_sharing_agent",
+            "role": "Handles permissions and protocols for legally sharing gathered data with partners.",
+            "tools": []
+        },
+        {
+            "name": "authorization_manager_agent",
+            "role": "Manages authorization processes for data access and sharing agreements.",
+            "tools": []
+        },
+        {
+            "name": "geological_institute_interface_agent",
+            "role": "Interfaces with geological institutes to ensure data is aligned with research objectives.",
+            "tools": []
+        },
+        {
+            "name": "digital_framework_setup_agent",
+            "role": "Sets up a comprehensive digital framework to support secure and efficient data workflows.",
+            "tools": [
+                "secure_communication_channel_agent"
+            ]
+        },
+        {
+            "name": "encryption_manager_agent",
+            "role": "Oversees encryption protocols for protecting sensitive data and communications.",
+            "tools": []
+        },
+        {
+            "name": "geological_data_synthesis_agent",
+            "role": "Synthesizes geological data into formats suitable for prediction modeling.",
+            "tools": []
+        },
+        {
+            "name": "data_validation_agent",
+            "role": "Validates the integrity and accuracy of seismic data collected from the field.",
+            "tools": []
+        },
+        {
+            "name": "secure_communication_channel_agent",
+            "role": "Ensures communication channels are secure and reliable for data transmission.",
+            "tools": [
+                "secure_transmission_tool"
+            ]
+        }
+    ],
+    "tools": [
+        {
+            "name": "prediction_modeling_tool",
+            "description": "Converts seismic data into prediction models for potential earthquake activity based on geological movements.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "data_stream": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "location_coordinates": {
+                                    "type": "object",
+                                    "properties": {
+                                        "latitude": {
+                                            "type": "number"
+                                        },
+                                        "longitude": {
+                                            "type": "number"
+                                        }
+                                    }
+                                },
+                                "seismic_activity_readings": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "number"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Array of seismic data points with location and activity readings."
+                    },
+                    "model_params": {
+                        "type": "object",
+                        "description": "Parameters required for generating prediction models."
+                    }
+                }
+            }
+        },
+        {
+            "name": "secure_transmission_tool",
+            "description": "Facilitates the secure transmission of data across communication channels.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "channel_id": {
+                        "type": "string",
+                        "description": "Identifier for the communication channel."
+                    },
+                    "encryption_level": {
+                        "type": "string",
+                        "description": "The level of encryption applied to the transmission."
+                    },
+                    "data_payload": {
+                        "type": "object",
+                        "description": "Payload of data to be transmitted securely."
+                    }
+                }
+            }
+        }
+    ]
+}

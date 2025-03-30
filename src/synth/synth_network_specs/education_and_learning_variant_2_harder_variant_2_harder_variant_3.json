@@ -1,0 +1,281 @@
+{
+    "task": "Develop an integrated urban security and surveillance system with AI-driven threat detection, emergency response coordination, and public safety information dissemination, while ensuring privacy and legal compliance across metropolitan areas with multilingual communication capability.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "system_design_agent",
+                "ai_threat_detection_agent",
+                "machine_learning_module_agent",
+                "pattern_recognition_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "emergency_response_agent",
+                "dispatch_coordination_agent",
+                "resource_allocation_agent",
+                "drone_support_agent",
+                "navigation_system_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "privacy_monitoring_agent",
+                "data_encryption_agent",
+                "privacy_audit_agent",
+                "legal_consultation_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "public_safety_communication_agent",
+                "multilingual_alerting_agent",
+                "language_selection_agent",
+                "social_media_integration_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "legal_compliance_agent",
+                "regulatory_advisory_agent",
+                "local_legislation_analysis_agent",
+                "compliance_verification_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The main interactor with the project's user, coordinating overall system design and integration across the network.",
+            "tools": [
+                "system_design_agent",
+                "emergency_response_agent",
+                "privacy_monitoring_agent",
+                "public_safety_communication_agent",
+                "legal_compliance_agent"
+            ]
+        },
+        {
+            "name": "system_design_agent",
+            "role": "Designs the architecture for the urban security and surveillance system, ensuring cohesion among components.",
+            "tools": [
+                "ai_threat_detection_agent"
+            ]
+        },
+        {
+            "name": "ai_threat_detection_agent",
+            "role": "Uses AI technologies to analyze and detect potential security threats in urban areas.",
+            "tools": [
+                "machine_learning_module_agent"
+            ]
+        },
+        {
+            "name": "machine_learning_module_agent",
+            "role": "Develops and trains machine learning models to improve threat detection accuracy.",
+            "tools": [
+                "pattern_recognition_tool"
+            ]
+        },
+        {
+            "name": "emergency_response_agent",
+            "role": "Coordinates the response efforts for detected threats and emergencies.",
+            "tools": [
+                "dispatch_coordination_agent"
+            ]
+        },
+        {
+            "name": "dispatch_coordination_agent",
+            "role": "Manages dispatching resources for emergency response actions.",
+            "tools": [
+                "resource_allocation_agent"
+            ]
+        },
+        {
+            "name": "resource_allocation_agent",
+            "role": "Allocates emergency resources effectively based on situational needs.",
+            "tools": [
+                "drone_support_agent",
+                "visual_survey_agent"
+            ]
+        },
+        {
+            "name": "drone_support_agent",
+            "role": "Deploys drones to provide real-time situational awareness during emergencies.",
+            "tools": [
+                "navigation_system_tool"
+            ]
+        },
+        {
+            "name": "privacy_monitoring_agent",
+            "role": "Ensures all surveillance operations comply with privacy laws and standards.",
+            "tools": [
+                "data_encryption_agent"
+            ]
+        },
+        {
+            "name": "data_encryption_agent",
+            "role": "Implements encryption protocols to protect data collected by the system.",
+            "tools": [
+                "privacy_audit_agent"
+            ]
+        },
+        {
+            "name": "privacy_audit_agent",
+            "role": "Conducts audits to verify compliance with privacy standards.",
+            "tools": [
+                "legal_consultation_tool"
+            ]
+        },
+        {
+            "name": "public_safety_communication_agent",
+            "role": "Disseminates safety information and alerts to the public in multiple languages.",
+            "tools": [
+                "multilingual_alerting_agent",
+                "language_processing_agent"
+            ]
+        },
+        {
+            "name": "multilingual_alerting_agent",
+            "role": "Provides alerts and updates in multiple languages for diverse populations.",
+            "tools": [
+                "language_selection_agent"
+            ]
+        },
+        {
+            "name": "language_selection_agent",
+            "role": "Selects the appropriate languages for public announcements based on region.",
+            "tools": [
+                "social_media_integration_agent"
+            ]
+        },
+        {
+            "name": "social_media_integration_agent",
+            "role": "Integrates public safety alerts with social media platforms for wider reach.",
+            "tools": [
+                "public_feedback_agent"
+            ]
+        },
+        {
+            "name": "legal_compliance_agent",
+            "role": "Ensures legal compliance for operations across different jurisdictions.",
+            "tools": [
+                "regulatory_advisory_agent"
+            ]
+        },
+        {
+            "name": "regulatory_advisory_agent",
+            "role": "Advises on regulatory issues related to security and surveillance laws.",
+            "tools": [
+                "local_legislation_analysis_agent"
+            ]
+        },
+        {
+            "name": "local_legislation_analysis_agent",
+            "role": "Analyzes local laws and regulations to maintain compliance.",
+            "tools": [
+                "compliance_verification_agent"
+            ]
+        },
+        {
+            "name": "compliance_verification_agent",
+            "role": "Verifies system compliance with local legislation.",
+            "tools": []
+        },
+        {
+            "name": "language_processing_agent",
+            "role": "Handles complex language processing tasks for multilingual alerts.",
+            "tools": []
+        },
+        {
+            "name": "public_feedback_agent",
+            "role": "Collects and analyzes public feedback on the surveillance system's effectiveness.",
+            "tools": []
+        },
+        {
+            "name": "visual_survey_agent",
+            "role": "Conducts visual surveys using drone footage for data collection.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "pattern_recognition_tool",
+            "description": "Identifies patterns within data streams to detect potential threats.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "data_source": {
+                        "type": "string",
+                        "description": "Identifier for the data source to be analyzed."
+                    },
+                    "pattern_complexity": {
+                        "type": "string",
+                        "description": "Complexity level for pattern detection e.g., 'basic', 'advanced'."
+                    },
+                    "time_frame": {
+                        "type": "string",
+                        "description": "Time frame within which the data is considered."
+                    }
+                }
+            }
+        },
+        {
+            "name": "navigation_system_tool",
+            "description": "Guides drones for effective deployment and navigation during operations.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "drone_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the drone being navigated."
+                    },
+                    "destination_coordinates": {
+                        "type": "object",
+                        "description": "GPS coordinates of the intended destination.",
+                        "properties": {
+                            "latitude": {
+                                "type": "number",
+                                "description": "Latitude of the destination."
+                            },
+                            "longitude": {
+                                "type": "number",
+                                "description": "Longitude of the destination."
+                            }
+                        }
+                    },
+                    "operation_mode": {
+                        "type": "string",
+                        "description": "Mode of operation for the drone, e.g., 'manual', 'autonomous'."
+                    }
+                }
+            }
+        },
+        {
+            "name": "legal_consultation_tool",
+            "description": "Provides legal advice and consultation for privacy and surveillance operations.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "query_issues": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of legal issues or questions requiring consultation."
+                    },
+                    "jurisdiction": {
+                        "type": "string",
+                        "description": "Legal jurisdiction for which advice is being sought."
+                    }
+                }
+            }
+        }
+    ]
+}

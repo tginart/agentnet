@@ -1,0 +1,309 @@
+{
+    "task": "Implement a smart-city management system optimizing traffic flow, emergency services response, and environmental monitoring. The system should encompass real-time traffic analysis, emergency dispatch coordination, pollution level monitoring, waste collection optimization, and smart street lighting controls.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "traffic_management_agent",
+                "real_time_traffic_analyzer_agent",
+                "traffic_sensor_network_agent",
+                "road_safety_improvement_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "emergency_services_agent",
+                "dispatch_coordination_agent",
+                "first_responder_agent",
+                "emergency_alert_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "environment_monitoring_agent",
+                "pollution_monitor_agent",
+                "air_quality_sensor_agent",
+                "pollution_forecast_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "waste_management_agent",
+                "collection_route_optimizer_agent",
+                "waste_sensor_agent",
+                "optimize_collection_route_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "traffic_management_agent",
+                "automated_signal_controller_agent",
+                "traffic_light_controller_agent",
+                "dynamic_signal_adjustment_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "city_security_agent",
+                "surveillance_management_agent",
+                "incident_detection_agent",
+                "video_analysis_tool",
+                "human"
+            ],
+            [
+                "client_agent",
+                "emergency_services_agent",
+                "city_security_agent",
+                "surveillance_management_agent"
+            ],
+            [
+                "client_agent",
+                "traffic_management_agent",
+                "environment_monitoring_agent",
+                "pollution_monitor_agent"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the smart-city management tasks.",
+            "tools": [
+                "traffic_management_agent",
+                "emergency_services_agent",
+                "environment_monitoring_agent",
+                "waste_management_agent",
+                "city_security_agent",
+                "smart_street_lighting_agent"
+            ]
+        },
+        {
+            "name": "traffic_management_agent",
+            "role": "Optimizes city-wide traffic flow using real-time data and predictive analytics.",
+            "tools": [
+                "real_time_traffic_analyzer_agent",
+                "automated_signal_controller_agent"
+            ]
+        },
+        {
+            "name": "real_time_traffic_analyzer_agent",
+            "role": "Analyzes current traffic conditions using sensor data to identify bottlenecks and suggest improvements.",
+            "tools": [
+                "traffic_sensor_network_agent"
+            ]
+        },
+        {
+            "name": "traffic_sensor_network_agent",
+            "role": "Collects data from a network of traffic sensors placed across key city locations.",
+            "tools": [
+                "road_safety_improvement_tool"
+            ]
+        },
+        {
+            "name": "automated_signal_controller_agent",
+            "role": "Dynamically adjusts traffic signals to improve flow efficiency.",
+            "tools": [
+                "traffic_light_controller_agent"
+            ]
+        },
+        {
+            "name": "traffic_light_controller_agent",
+            "role": "Controls individual traffic lights to synchronize city traffic systems effectively.",
+            "tools": [
+                "dynamic_signal_adjustment_tool"
+            ]
+        },
+        {
+            "name": "emergency_services_agent",
+            "role": "Coordinates emergency services to ensure rapid response and resource allocation.",
+            "tools": [
+                "dispatch_coordination_agent",
+                "city_security_agent"
+            ]
+        },
+        {
+            "name": "dispatch_coordination_agent",
+            "role": "Optimizes dispatching of emergency vehicles using real-time and historical data.",
+            "tools": [
+                "first_responder_agent"
+            ]
+        },
+        {
+            "name": "first_responder_agent",
+            "role": "Interacts with on-ground emergency service units to ensure optimized incident response.",
+            "tools": []
+        },
+        {
+            "name": "environment_monitoring_agent",
+            "role": "Monitors environmental parameters to ensure compliance with health and safety standards.",
+            "tools": [
+                "pollution_monitor_agent"
+            ]
+        },
+        {
+            "name": "pollution_monitor_agent",
+            "role": "Tracks pollution levels in different city sectors, reporting anomalies and trends.",
+            "tools": [
+                "air_quality_sensor_agent"
+            ]
+        },
+        {
+            "name": "air_quality_sensor_agent",
+            "role": "Deploys sensors to continuously measure air quality metrics.",
+            "tools": []
+        },
+        {
+            "name": "waste_management_agent",
+            "role": "Manages waste collection strategies for efficiency and environmental sustainability benefits.",
+            "tools": [
+                "collection_route_optimizer_agent"
+            ]
+        },
+        {
+            "name": "collection_route_optimizer_agent",
+            "role": "Determines the most efficient routes for waste collection services, minimizing fuel consumption.",
+            "tools": [
+                "waste_sensor_agent"
+            ]
+        },
+        {
+            "name": "waste_sensor_agent",
+            "role": "Uses sensor data from waste bins to assess and optimize waste collection schedules.",
+            "tools": []
+        },
+        {
+            "name": "city_security_agent",
+            "role": "Oversees the city's security infrastructure, integrating surveillance and emergency responses.",
+            "tools": [
+                "surveillance_management_agent"
+            ]
+        },
+        {
+            "name": "surveillance_management_agent",
+            "role": "Manages the city's surveillance systems to detect and respond to incidents quickly.",
+            "tools": [
+                "incident_detection_agent"
+            ]
+        },
+        {
+            "name": "incident_detection_agent",
+            "role": "Utilizes video feeds to detect security incidents in real time, triggering alerts.",
+            "tools": []
+        },
+        {
+            "name": "smart_street_lighting_agent",
+            "role": "Manages the smart street lighting system to optimize energy usage and improve urban safety.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "road_safety_improvement_tool",
+            "description": "Suggests road safety improvements based on traffic sensor data analysis.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location_id": {
+                        "type": "string",
+                        "description": "Identifier for the location needing safety improvements"
+                    },
+                    "incident_history": {
+                        "type": "array",
+                        "description": "Historical incident data records"
+                    }
+                }
+            }
+        },
+        {
+            "name": "emergency_alert_tool",
+            "description": "Sends alerts to first responders for any emergency incidents requiring immediate attention.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "incident_id": {
+                        "type": "string",
+                        "description": "The incident identifier"
+                    },
+                    "priority_level": {
+                        "type": "string",
+                        "description": "Priority level of the incident"
+                    }
+                }
+            }
+        },
+        {
+            "name": "pollution_forecast_tool",
+            "description": "Generates forecasts for air quality based on current and historical data.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location_zone": {
+                        "type": "string",
+                        "description": "ID of the zone for which the forecast is generated"
+                    },
+                    "forecast_period": {
+                        "type": "number",
+                        "description": "Period in days for which the forecast is made"
+                    }
+                }
+            }
+        },
+        {
+            "name": "optimize_collection_route_tool",
+            "description": "Optimizes waste collection routes based on sensor data from waste bins.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "area_id": {
+                        "type": "string",
+                        "description": "Area identifier within the city"
+                    },
+                    "fill_levels": {
+                        "type": "array",
+                        "description": "Array of fill levels for waste bins in the area"
+                    }
+                }
+            }
+        },
+        {
+            "name": "dynamic_signal_adjustment_tool",
+            "description": "Adjust traffic signal timings to optimize traffic flow dynamically.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "intersection_id": {
+                        "type": "string",
+                        "description": "Identifier for the traffic intersection"
+                    },
+                    "traffic_density": {
+                        "type": "number",
+                        "description": "Real-time traffic density metric"
+                    }
+                }
+            }
+        },
+        {
+            "name": "video_analysis_tool",
+            "description": "Analyzes video feeds to identify and classify security incidents in the city.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "camera_id": {
+                        "type": "string",
+                        "description": "The identifier for the surveillance camera in question"
+                    },
+                    "footage_duration": {
+                        "type": "number",
+                        "description": "Duration of the footage to process in minutes"
+                    }
+                }
+            }
+        }
+    ]
+}

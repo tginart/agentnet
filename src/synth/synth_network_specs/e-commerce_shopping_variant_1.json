@@ -1,0 +1,150 @@
+{
+    "task": "Place an order on an e-commerce platform for a new smartphone with the following conditions: 1. Check the best price among verified sellers, 2. Apply available discount coupons, 3. Ensure the delivery within 3 days, 4. Notify me about the warranty terms, and 5. Get a recommendation for an insurance policy for the device.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "order_management_agent",
+                "pricing_analysis_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "order_management_agent",
+                "discount_management_agent",
+                "coupon_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "order_management_agent",
+                "logistics_agent",
+                "shipping_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "order_management_agent",
+                "warranty_service_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "order_management_agent",
+                "insurance_recommendation_agent",
+                "policy_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "order_management_agent"
+            ]
+        },
+        {
+            "name": "order_management_agent",
+            "role": "An agent responsible for handling the end-to-end process of placing an order, managing various agents involved in order completion.",
+            "tools": [
+                "pricing_analysis_agent",
+                "discount_management_agent",
+                "logistics_agent",
+                "warranty_service_agent",
+                "insurance_recommendation_agent"
+            ]
+        },
+        {
+            "name": "pricing_analysis_agent",
+            "role": "Analyzes various sellers and their pricing to determine the best price for the specified product.",
+            "tools": []
+        },
+        {
+            "name": "discount_management_agent",
+            "role": "Manages available discounts and ensures they are applied to products being purchased.",
+            "tools": [
+                "coupon_agent"
+            ]
+        },
+        {
+            "name": "coupon_agent",
+            "role": "Retrieves and verifies available discount coupons for application.",
+            "tools": []
+        },
+        {
+            "name": "logistics_agent",
+            "role": "Handles logistics procedures ensuring the delivery timeframes are met.",
+            "tools": [
+                "shipping_agent"
+            ]
+        },
+        {
+            "name": "shipping_agent",
+            "role": "Coordinates shipping details and confirms delivery options within the requested timeframes.",
+            "tools": []
+        },
+        {
+            "name": "warranty_service_agent",
+            "role": "Provides detailed information on warranty options for the selected item.",
+            "tools": []
+        },
+        {
+            "name": "insurance_recommendation_agent",
+            "role": "Offers insurance policy recommendations tailored for electronic devices based on user needs.",
+            "tools": [
+                "policy_agent"
+            ]
+        },
+        {
+            "name": "policy_agent",
+            "role": "Provides detailed terms and conditions of the recommended insurance policies.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "best_price_tool",
+            "description": "Tool to analyze and fetch the best price from various verified sellers.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "product_name": {
+                        "type": "string",
+                        "description": "Name of the product to search for the best price."
+                    },
+                    "verified_sellers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of verified sellers to consider."
+                    }
+                }
+            }
+        },
+        {
+            "name": "delivery_check_tool",
+            "description": "Tool to verify and ensure delivery schedules can meet the specified timeframe.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "delivery_date": {
+                        "type": "string",
+                        "description": "The latest delivery date by which the order should arrive."
+                    },
+                    "location": {
+                        "type": "string",
+                        "description": "Delivery location to confirm logistics capability."
+                    }
+                }
+            }
+        }
+    ]
+}

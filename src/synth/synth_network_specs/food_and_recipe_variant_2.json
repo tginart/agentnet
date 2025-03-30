@@ -1,0 +1,175 @@
+{
+    "task": "Plan a week-long vegan meal plan with a focus on high protein. Provide a grocery list and daily recipes with instructions and alternatives for common allergens.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "meal_plan_agent",
+                "vegan_recipe_agent",
+                "allergen_alternatives_tool",
+                "grocery_list_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "meal_plan_agent",
+                "high_protein_recipes_tool",
+                "grocery_list_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "dietary_constraints_agent",
+                "allergen_alternatives_tool",
+                "grocery_list_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "meal_plan_agent",
+                "recipe_instructions_agent",
+                "weekly_menu_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Top-level client agent communicating with the user and coordinating various agents to compile a weekly meal plan.",
+            "tools": [
+                "meal_plan_agent",
+                "dietary_constraints_agent"
+            ]
+        },
+        {
+            "name": "meal_plan_agent",
+            "role": "Agent responsible for creating meal plans based on dietary needs such as vegan and high protein requirements.",
+            "tools": [
+                "vegan_recipe_agent",
+                "weekly_menu_tool",
+                "recipe_instructions_agent"
+            ]
+        },
+        {
+            "name": "dietary_constraints_agent",
+            "role": "Agent that ensures meal plans meet specific dietary constraints, including allergen considerations.",
+            "tools": [
+                "allergen_alternatives_tool",
+                "grocery_list_agent"
+            ]
+        },
+        {
+            "name": "vegan_recipe_agent",
+            "role": "Agent specializing in sourcing vegan recipes that are nutritious and varied for consistent meal plans.",
+            "tools": [
+                "high_protein_recipes_tool",
+                "grocery_list_agent"
+            ]
+        },
+        {
+            "name": "grocery_list_agent",
+            "role": "Agent that compiles a complete grocery list based on selected recipes and meal plans.",
+            "tools": [
+                "grocery_list_tool"
+            ]
+        },
+        {
+            "name": "recipe_instructions_agent",
+            "role": "Agent that provides detailed step-by-step instructions for each recipe in the meal plan.",
+            "tools": []
+        },
+        {
+            "name": "allergen_alternatives_tool",
+            "role": "Tool to find and suggest alternatives to common allergens in recipes.",
+            "tools": []
+        },
+        {
+            "name": "high_protein_recipes_tool",
+            "role": "Leaf node tool focusing on finding high-protein vegan recipes.",
+            "tools": []
+        },
+        {
+            "name": "weekly_menu_tool",
+            "role": "Leaf node tool to organize recipes into a coherent weekly menu.",
+            "tools": []
+        },
+        {
+            "name": "grocery_list_tool",
+            "role": "Leaf node tool for generating a comprehensive grocery list from selected meal plans.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "allergen_alternatives_tool",
+            "description": "Tool to identify allergens in recipes and suggest suitable alternatives.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "recipe_id": {
+                        "type": "string",
+                        "description": "The identifier for the recipe."
+                    },
+                    "allergens": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of allergens to be avoided."
+                    }
+                }
+            }
+        },
+        {
+            "name": "high_protein_recipes_tool",
+            "description": "Tool to find vegan recipes that are high in protein.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "protein_requirement": {
+                        "type": "number",
+                        "description": "Minimum protein content required per meal in grams."
+                    },
+                    "meal_type": {
+                        "type": "string",
+                        "description": "Type of meal (e.g., breakfast, lunch, dinner)."
+                    }
+                }
+            }
+        },
+        {
+            "name": "weekly_menu_tool",
+            "description": "Tool to compile a weekly meal plan from selected recipes.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "recipe_ids": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of recipe identifiers to include in the weekly menu."
+                    }
+                }
+            }
+        },
+        {
+            "name": "grocery_list_tool",
+            "description": "Tool to generate a grocery list from the meal plan, ensuring all ingredients are included.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "meal_plan_id": {
+                        "type": "string",
+                        "description": "The identifier of the meal plan for which to generate the grocery list."
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,301 @@
+{
+    "task": "Coordinate a multinational collaborative research initiative focused on the impact of climate change on marine ecosystems: 1. Establish partnerships with global research institutions, 2. Develop a centralized data-sharing platform with real-time analytics, 3. Organize international symposiums for knowledge exchange, 4. Acquire and deploy modular oceanographic equipment, 5. Secure funding through government and private grants, 6. Design a public outreach and education program, 7. Implement a global environmental impact monitoring system with AI-driven insights, 8. Initiate an interdisciplinary mentorship program for young scientists.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "initiative_coordinator_agent",
+                "partnership_development_agent",
+                "global_research_institution_agent",
+                "legal_affairs_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "initiative_coordinator_agent",
+                "data_platform_development_agent",
+                "real_time_analytics_agent",
+                "cybersecurity_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "initiative_coordinator_agent",
+                "symposium_organizer_agent",
+                "schedule_management_agent",
+                "speaker_invitation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "initiative_coordinator_agent",
+                "equipment_acquisition_agent",
+                "modular_equipment_supplier_agent",
+                "deployment_strategy_agent",
+                "installation_supervisor_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "initiative_coordinator_agent",
+                "funding_agent",
+                "grant_application_management_agent",
+                "funding_sources_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "initiative_coordinator_agent",
+                "public_outreach_agent",
+                "content_creation_agent",
+                "social_media_strategy_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "initiative_coordinator_agent",
+                "environmental_monitoring_system_agent",
+                "ai_insights_generator_agent",
+                "data_verification_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "initiative_coordinator_agent",
+                "mentorship_program_agent",
+                "mentee_matchmaker_agent",
+                "senior_scientist_engagement_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "initiative_coordinator_agent"
+            ]
+        },
+        {
+            "name": "initiative_coordinator_agent",
+            "role": "Coordinates the entire multinational initiative, managing partnerships, funding, outreach, and scientific activities.",
+            "tools": [
+                "partnership_development_agent",
+                "data_platform_development_agent",
+                "symposium_organizer_agent",
+                "equipment_acquisition_agent",
+                "funding_agent",
+                "public_outreach_agent",
+                "environmental_monitoring_system_agent",
+                "mentorship_program_agent"
+            ]
+        },
+        {
+            "name": "partnership_development_agent",
+            "role": "Facilitates the development of partnerships with global research institutions.",
+            "tools": [
+                "global_research_institution_agent",
+                "legal_affairs_agent"
+            ]
+        },
+        {
+            "name": "global_research_institution_agent",
+            "role": "Engages directly with international research entities to establish the groundwork for collaboration.",
+            "tools": []
+        },
+        {
+            "name": "legal_affairs_agent",
+            "role": "Manages the legal agreements and compliance documentation needed for international partnerships.",
+            "tools": []
+        },
+        {
+            "name": "data_platform_development_agent",
+            "role": "Leads the creation of an advanced data-sharing platform with real-time analytics capabilities.",
+            "tools": [
+                "real_time_analytics_agent",
+                "cybersecurity_agent"
+            ]
+        },
+        {
+            "name": "real_time_analytics_agent",
+            "role": "Implements analytics services to ensure the platform provides real-time data processing.",
+            "tools": []
+        },
+        {
+            "name": "cybersecurity_agent",
+            "role": "Ensures that the data platform is secure against threats and maintains integrity.",
+            "tools": []
+        },
+        {
+            "name": "symposium_organizer_agent",
+            "role": "Organizes international symposiums focused on climate and marine research.",
+            "tools": [
+                "schedule_management_agent",
+                "speaker_invitation_agent"
+            ]
+        },
+        {
+            "name": "schedule_management_agent",
+            "role": "Creates detailed schedules for symposium events ensuring speaker and session coordination.",
+            "tools": []
+        },
+        {
+            "name": "speaker_invitation_agent",
+            "role": "Manages the invitation and engagement of expert speakers.",
+            "tools": []
+        },
+        {
+            "name": "equipment_acquisition_agent",
+            "role": "Acquires and coordinates the deployment of oceanographic equipment.",
+            "tools": [
+                "modular_equipment_supplier_agent",
+                "deployment_strategy_agent"
+            ]
+        },
+        {
+            "name": "modular_equipment_supplier_agent",
+            "role": "Sources sustainable and modular equipment necessary for research deployment.",
+            "tools": []
+        },
+        {
+            "name": "deployment_strategy_agent",
+            "role": "Plans the deployment strategy for oceanographic equipment.",
+            "tools": [
+                "installation_supervisor_agent"
+            ]
+        },
+        {
+            "name": "installation_supervisor_agent",
+            "role": "Oversees the installation and operational setup of marine equipment.",
+            "tools": []
+        },
+        {
+            "name": "funding_agent",
+            "role": "Secures project funding through grants and other financial avenues.",
+            "tools": [
+                "grant_application_management_agent",
+                "funding_sources_agent"
+            ]
+        },
+        {
+            "name": "grant_application_management_agent",
+            "role": "Handles the submission and tracking of grant applications to secure funding.",
+            "tools": []
+        },
+        {
+            "name": "funding_sources_agent",
+            "role": "Identifies potential government and private funding opportunities for the initiative.",
+            "tools": []
+        },
+        {
+            "name": "public_outreach_agent",
+            "role": "Develops public awareness and engagement strategies about the initiative's goals and findings.",
+            "tools": [
+                "content_creation_agent",
+                "social_media_strategy_agent"
+            ]
+        },
+        {
+            "name": "content_creation_agent",
+            "role": "Produces educational and informational content for various outreach channels.",
+            "tools": []
+        },
+        {
+            "name": "social_media_strategy_agent",
+            "role": "Designs and executes a strategy for sharing content via social media platforms.",
+            "tools": []
+        },
+        {
+            "name": "environmental_monitoring_system_agent",
+            "role": "Establishes a global system for monitoring environmental changes with AI-generated insights.",
+            "tools": [
+                "ai_insights_generator_agent",
+                "data_verification_agent"
+            ]
+        },
+        {
+            "name": "ai_insights_generator_agent",
+            "role": "Creates AI models for generating insights from environmental data collected from around the world.",
+            "tools": []
+        },
+        {
+            "name": "data_verification_agent",
+            "role": "Verifies the accuracy and reliability of environmental monitoring data.",
+            "tools": []
+        },
+        {
+            "name": "mentorship_program_agent",
+            "role": "Organizes an interdisciplinary mentorship program to foster young scientists' growth.",
+            "tools": [
+                "mentee_matchmaker_agent",
+                "senior_scientist_engagement_agent"
+            ]
+        },
+        {
+            "name": "mentee_matchmaker_agent",
+            "role": "Matches young scientists with experienced mentors based on expertise and interest.",
+            "tools": []
+        },
+        {
+            "name": "senior_scientist_engagement_agent",
+            "role": "Engages with senior scientists to participate as mentors and share expertise.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "ocean_data_collection_tool",
+            "description": "A tool for oceanographic data collection and sensor network management.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "sensor_type": {
+                        "type": "string",
+                        "description": "The type of sensor deployed for data collection (e.g., temperature, salinity)."
+                    },
+                    "deployment_location": {
+                        "type": "string",
+                        "description": "Specific location coordinates for sensor deployment."
+                    },
+                    "data_frequency": {
+                        "type": "number",
+                        "description": "The frequency in minutes for data collection."
+                    }
+                }
+            }
+        },
+        {
+            "name": "outreach_campaign_tool",
+            "description": "Tool for designing and managing public outreach campaigns.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "target_audience": {
+                        "type": "string",
+                        "description": "The primary audience for the campaign."
+                    },
+                    "channels": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The communication channels to be used for the campaign."
+                    },
+                    "campaign_duration": {
+                        "type": "number",
+                        "description": "Duration of the campaign in days."
+                    }
+                }
+            }
+        }
+    ]
+}

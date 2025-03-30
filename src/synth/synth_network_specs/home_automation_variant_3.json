@@ -1,0 +1,169 @@
+{
+    "task": "Schedule a weekly energy efficiency audit in my smart home. This includes analyzing energy usage of all devices, recommending the optimal time for using high-energy appliances, suggesting lighting schedules, and summarizing insights in a report.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "energy_audit_agent",
+                "device_analysis_agent",
+                "energy_usage_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "energy_audit_agent",
+                "appliance_scheduler_agent",
+                "schedule_optimizer_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "energy_audit_agent",
+                "lighting_schedule_agent",
+                "lighting_recommendation_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "energy_audit_agent",
+                "reporting_agent",
+                "generate_report_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates other agents to complete the task.",
+            "tools": [
+                "energy_audit_agent"
+            ]
+        },
+        {
+            "name": "energy_audit_agent",
+            "role": "Conducts a comprehensive energy audit by coordinating other agents to analyze usage, optimize schedules, and generate reports.",
+            "tools": [
+                "device_analysis_agent",
+                "appliance_scheduler_agent",
+                "lighting_schedule_agent",
+                "reporting_agent"
+            ]
+        },
+        {
+            "name": "device_analysis_agent",
+            "role": "Analyzes the energy consumption of all smart devices in the home.",
+            "tools": [
+                "energy_usage_tool"
+            ]
+        },
+        {
+            "name": "appliance_scheduler_agent",
+            "role": "Suggests optimal usage times for high-energy appliances to reduce energy costs.",
+            "tools": [
+                "schedule_optimizer_tool"
+            ]
+        },
+        {
+            "name": "lighting_schedule_agent",
+            "role": "Analyzes and suggests optimal lighting schedules to improve energy efficiency.",
+            "tools": [
+                "lighting_recommendation_tool"
+            ]
+        },
+        {
+            "name": "reporting_agent",
+            "role": "Generates detailed reports on energy usage along with recommendations for efficiency improvements.",
+            "tools": [
+                "generate_report_tool"
+            ]
+        },
+        {
+            "name": "energy_usage_tool",
+            "role": "Collects and analyzes energy usage data for all devices.",
+            "tools": []
+        },
+        {
+            "name": "schedule_optimizer_tool",
+            "role": "Recommends optimal times for appliance usage based on energy tariffs.",
+            "tools": []
+        },
+        {
+            "name": "lighting_recommendation_tool",
+            "role": "Suggests lighting schedules that save energy.",
+            "tools": []
+        },
+        {
+            "name": "generate_report_tool",
+            "role": "Creates a comprehensive energy audit report with insights and recommendations.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "energy_usage_tool",
+            "description": "Analyzes energy consumption of devices.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "device_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of device names to analyze energy usage for"
+                    }
+                }
+            }
+        },
+        {
+            "name": "schedule_optimizer_tool",
+            "description": "Optimizes schedules for appliance usage based on energy costs.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "appliance_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of appliances to optimize usage schedule for"
+                    }
+                }
+            }
+        },
+        {
+            "name": "lighting_recommendation_tool",
+            "description": "Provides recommendations for lighting schedules to enhance energy efficiency.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "room_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of rooms for which lighting schedules should be evaluated"
+                    }
+                }
+            }
+        },
+        {
+            "name": "generate_report_tool",
+            "description": "Generates a detailed audit report with energy usage insights and recommendations.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "include_graphics": {
+                        "type": "boolean",
+                        "description": "Whether to include graphical summaries in the report"
+                    }
+                }
+            }
+        }
+    ]
+}

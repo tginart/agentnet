@@ -1,0 +1,229 @@
+{
+    "task": "Plan a virtual international film festival experience at home, including movie streaming, ethnic recipes, cultural music, and expert-led workshops.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "festival_planner_agent",
+                "film_streaming_agent",
+                "streaming_platform_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "festival_planner_agent",
+                "cuisine_recommender_agent",
+                "recipe_database_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "festival_planner_agent",
+                "music_selector_agent",
+                "cultural_music_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "festival_planner_agent",
+                "workshop_coordinator_agent",
+                "expert_scheduling_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "festival_planner_agent",
+                "feedback_collection_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "festival_planner_agent",
+                "festival_social_agent",
+                "social_media_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "festival_planner_agent",
+                "schedule_optimizer_agent",
+                "participant_engagement_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Interacts with the user to gather preferences and coordinates the organization of a virtual film festival.",
+            "tools": [
+                "festival_planner_agent"
+            ]
+        },
+        {
+            "name": "festival_planner_agent",
+            "role": "Oversees the creation of a well-rounded international film festival experience by managing various thematic agents.",
+            "tools": [
+                "film_streaming_agent",
+                "cuisine_recommender_agent",
+                "music_selector_agent",
+                "workshop_coordinator_agent",
+                "feedback_collection_agent",
+                "festival_social_agent",
+                "schedule_optimizer_agent"
+            ]
+        },
+        {
+            "name": "film_streaming_agent",
+            "role": "Handles the selection of films from different countries, arranging for them to be streamed online.",
+            "tools": [
+                "streaming_platform_tool"
+            ]
+        },
+        {
+            "name": "cuisine_recommender_agent",
+            "role": "Suggests authentic recipes corresponding to the regions of the featured films.",
+            "tools": [
+                "recipe_database_tool"
+            ]
+        },
+        {
+            "name": "music_selector_agent",
+            "role": "Curates playlists of cultural music to accompany the film themes, enhancing the festival ambiance.",
+            "tools": [
+                "cultural_music_tool"
+            ]
+        },
+        {
+            "name": "workshop_coordinator_agent",
+            "role": "Organizes expert-led workshops that delve into film analysis, cultural contexts, and cooking classes.",
+            "tools": [
+                "expert_scheduling_tool"
+            ]
+        },
+        {
+            "name": "feedback_collection_agent",
+            "role": "Gathers feedback from participants post-festival to enhance future virtual festival experiences.",
+            "tools": []
+        },
+        {
+            "name": "festival_social_agent",
+            "role": "Engages with social media platforms to promote the virtual festival and gather attendee expectations.",
+            "tools": [
+                "social_media_tool"
+            ]
+        },
+        {
+            "name": "schedule_optimizer_agent",
+            "role": "Optimizes the festival schedule to ensure no overlaps between film viewings, workshops, and meals.",
+            "tools": [
+                "participant_engagement_agent"
+            ]
+        },
+        {
+            "name": "participant_engagement_agent",
+            "role": "Enhances participant engagement through interactive quizzes, polls, and discussion forums during the screenings.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "streaming_platform_tool",
+            "description": "Connects with various streaming platforms to fetch international films and schedule streaming.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "country_origin": {
+                        "type": "string",
+                        "description": "Country origin of the film to be streamed."
+                    },
+                    "available_times": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Available time slots for streaming."
+                    }
+                }
+            }
+        },
+        {
+            "name": "recipe_database_tool",
+            "description": "Accesses a comprehensive recipe database to find authentic ethnic recipes for festival-themed meals.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "cuisine_type": {
+                        "type": "string",
+                        "description": "The type of cuisine based on the film's country."
+                    },
+                    "difficulty_level": {
+                        "type": "string",
+                        "description": "Preferred difficulty level of the recipes."
+                    }
+                }
+            }
+        },
+        {
+            "name": "cultural_music_tool",
+            "description": "Provides playlists of cultural music themed around various countries represented in the film selections.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "music_genre": {
+                        "type": "string",
+                        "description": "Specific genre or style of music to include."
+                    },
+                    "region_focus": {
+                        "type": "string",
+                        "description": "Geographical focus for cultural music selection."
+                    }
+                }
+            }
+        },
+        {
+            "name": "expert_scheduling_tool",
+            "description": "Facilitates the scheduling and management of expert-led virtual workshops.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "expert_name": {
+                        "type": "string",
+                        "description": "The name of the expert leading the workshop."
+                    },
+                    "available_dates": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Dates when the expert is available."
+                    }
+                }
+            }
+        },
+        {
+            "name": "social_media_tool",
+            "description": "Interfaces with social media platforms to promote the festival and gather user sentiments.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "platform_name": {
+                        "type": "string",
+                        "description": "Name of the social media platform to engage with."
+                    },
+                    "campaign_details": {
+                        "type": "object",
+                        "description": "Details about the promotional campaign."
+                    }
+                }
+            }
+        }
+    ]
+}

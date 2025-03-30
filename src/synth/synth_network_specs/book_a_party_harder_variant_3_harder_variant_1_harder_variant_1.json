@@ -1,0 +1,250 @@
+{
+    "task": "Coordinate a global marketing campaign for a luxury fashion brand's new eco-friendly collection. The task includes creating and distributing promotional content across digital platforms, securing influencers for brand endorsements, organizing virtual fashion shows with international participation, negotiating with high-profile event venues, and ensuring compliance with environmental regulations. Develop a comprehensive reporting system to analyze campaign effectiveness and make real-time adjustments.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "promotion_strategy_agent",
+                "content_creation_agent",
+                "copywriting_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "promotion_strategy_agent",
+                "distribution_coordination_agent",
+                "social_media_management_agent",
+                "platform_usage_specialist_agent",
+                "compliance_officer_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "influencer_management_agent",
+                "contract_negotiation_agent",
+                "brand_ambassador_selection_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "virtual_event_management_agent",
+                "tech_support_agent",
+                "international_guest_coordination_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "venue_booking_agent",
+                "high_profile_event_venue_negotiator",
+                "eco_compliance_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "campaign_analysis_agent",
+                "data_analytics_agent",
+                "adjustment_strategy_planner_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "eco_compliance_agent",
+                "legal_compliance_check_agent"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Main coordinator for the global marketing campaign, communicating the task requirements with specialized agents.",
+            "tools": [
+                "promotion_strategy_agent",
+                "influencer_management_agent",
+                "virtual_event_management_agent",
+                "venue_booking_agent",
+                "campaign_analysis_agent",
+                "eco_compliance_agent"
+            ]
+        },
+        {
+            "name": "promotion_strategy_agent",
+            "role": "Designs the promotional strategy, ensuring all content aligns with brand values and marketing goals.",
+            "tools": [
+                "content_creation_agent",
+                "distribution_coordination_agent"
+            ]
+        },
+        {
+            "name": "content_creation_agent",
+            "role": "Produces all promotional materials required for the campaign.",
+            "tools": [
+                "copywriting_agent"
+            ]
+        },
+        {
+            "name": "copywriting_agent",
+            "role": "Generates compelling written content for promotional material across platforms.",
+            "tools": []
+        },
+        {
+            "name": "distribution_coordination_agent",
+            "role": "Oversees the distribution of promotional content to ensure reach and impact across channels.",
+            "tools": [
+                "social_media_management_agent"
+            ]
+        },
+        {
+            "name": "social_media_management_agent",
+            "role": "Manages posting schedules and interacts with followers on social media platforms.",
+            "tools": [
+                "platform_usage_specialist_agent"
+            ]
+        },
+        {
+            "name": "platform_usage_specialist_agent",
+            "role": "Optimizes the usage of different platforms to maximize campaign visibility.",
+            "tools": [
+                "compliance_officer_agent"
+            ]
+        },
+        {
+            "name": "compliance_officer_agent",
+            "role": "Ensures all promotional activities comply with digital and advertising standards.",
+            "tools": []
+        },
+        {
+            "name": "influencer_management_agent",
+            "role": "Handles partnerships with influencers, from negotiation to activation.",
+            "tools": [
+                "contract_negotiation_agent"
+            ]
+        },
+        {
+            "name": "contract_negotiation_agent",
+            "role": "Negotiates terms and ensures enforceable agreements with influencers.",
+            "tools": [
+                "brand_ambassador_selection_agent"
+            ]
+        },
+        {
+            "name": "brand_ambassador_selection_agent",
+            "role": "Selects potential brand ambassadors based on their audience and alignment with brand values.",
+            "tools": []
+        },
+        {
+            "name": "virtual_event_management_agent",
+            "role": "Organizes and coordinates virtual events, including fashion shows and live sessions.",
+            "tools": [
+                "tech_support_agent"
+            ]
+        },
+        {
+            "name": "tech_support_agent",
+            "role": "Provides technical infrastructure and support for virtual events.",
+            "tools": [
+                "international_guest_coordination_agent"
+            ]
+        },
+        {
+            "name": "international_guest_coordination_agent",
+            "role": "Manages international guests participating in virtual events.",
+            "tools": []
+        },
+        {
+            "name": "venue_booking_agent",
+            "role": "Arranges bookings and logistics for high-profile event venues.",
+            "tools": [
+                "high_profile_event_venue_negotiator"
+            ]
+        },
+        {
+            "name": "high_profile_event_venue_negotiator",
+            "role": "Negotiates terms with event venues, ensuring they meet campaign standards.",
+            "tools": [
+                "eco_compliance_agent"
+            ]
+        },
+        {
+            "name": "eco_compliance_agent",
+            "role": "Ensures all campaign operations comply with environmental regulations.",
+            "tools": [
+                "legal_compliance_check_agent"
+            ]
+        },
+        {
+            "name": "legal_compliance_check_agent",
+            "role": "Conducts final checks to ensure full legal compliance of the campaign activities.",
+            "tools": []
+        },
+        {
+            "name": "campaign_analysis_agent",
+            "role": "Analyzes campaign data to understand performance and suggest optimizations.",
+            "tools": [
+                "data_analytics_agent"
+            ]
+        },
+        {
+            "name": "data_analytics_agent",
+            "role": "Processes data from the campaign to provide insights and reports.",
+            "tools": [
+                "adjustment_strategy_planner_agent"
+            ]
+        },
+        {
+            "name": "adjustment_strategy_planner_agent",
+            "role": "Develops strategies for real-time adjustments based on analytical insights.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "social_media_management_agent",
+            "description": "Facilitates managing and scheduling posts across various social media platforms.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "platforms": {
+                        "type": "array",
+                        "description": "List of platforms to manage"
+                    },
+                    "schedule": {
+                        "type": "object",
+                        "description": "Posting schedule for each platform",
+                        "properties": {
+                            "dates": {
+                                "type": "array",
+                                "description": "List of dates for scheduled posts"
+                            },
+                            "times": {
+                                "type": "array",
+                                "description": "List of times for scheduled posts"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "data_analytics_agent",
+            "description": "Analyzes campaign data, offering insights for decision-making.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "data_sources": {
+                        "type": "array",
+                        "description": "Sources of data for analysis"
+                    },
+                    "metrics": {
+                        "type": "array",
+                        "description": "Campaign metrics to analyze"
+                    },
+                    "output_format": {
+                        "type": "string",
+                        "description": "Desired format of the analysis report"
+                    }
+                }
+            }
+        }
+    ]
+}

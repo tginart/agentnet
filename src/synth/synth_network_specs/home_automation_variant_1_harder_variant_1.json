@@ -1,0 +1,272 @@
+{
+    "task": "Create a comprehensive meal planning and grocery shopping automation system for diverse dietary needs, including managing allergies (nuts, gluten), vegan preferences, calorie count, and budget constraints. Integrate with online grocery ordering, recipe customization, and meal scheduling. Tasks should include selecting recipes, adjusting ingredients for dietary needs, creating a shopping list, cross-checking pantry stock, ordering groceries online, and scheduling meal preparations.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "meal_planner_agent",
+                "recipe_selector_agent",
+                "dietary_restriction_checker_agent",
+                "ingredient_adjuster_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "meal_planner_agent",
+                "recipe_selector_agent",
+                "ingredient_adjuster_agent",
+                "nutrition_analyzer_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "meal_planner_agent",
+                "shopping_list_creator_agent",
+                "pantry_manager_agent",
+                "inventory_checker_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "meal_planner_agent",
+                "shopping_list_creator_agent",
+                "budget_optimizer_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "meal_planner_agent",
+                "online_shopping_agent",
+                "groceries_api_agent",
+                "order_groceries_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "meal_planner_agent",
+                "meal_scheduler_agent",
+                "calendar_sync_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "meal_planner_agent",
+                "allergy_alert_agent",
+                "notification_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "meal_planner_agent",
+                "feedback_collector_agent",
+                "feedback_storage_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "meal_planner_agent",
+                "recipe_selector_agent",
+                "dietary_restriction_checker_agent",
+                "ingredient_adjuster_agent",
+                "nutrition_analyzer_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates other agents to complete the task.",
+            "tools": [
+                "meal_planner_agent"
+            ]
+        },
+        {
+            "name": "meal_planner_agent",
+            "role": "Manages overall meal planning including recipe selection, dietary adjustments, grocery list creation, and meal scheduling.",
+            "tools": [
+                "recipe_selector_agent",
+                "shopping_list_creator_agent",
+                "online_shopping_agent",
+                "meal_scheduler_agent",
+                "nutrition_analyzer_agent",
+                "allergy_alert_agent",
+                "feedback_collector_agent"
+            ]
+        },
+        {
+            "name": "recipe_selector_agent",
+            "role": "Selects suitable recipes based on dietary needs and preferences.",
+            "tools": [
+                "dietary_restriction_checker_agent",
+                "ingredient_adjuster_agent"
+            ]
+        },
+        {
+            "name": "dietary_restriction_checker_agent",
+            "role": "Checks recipes for any dietary restrictions or allergies and flags necessary adjustments.",
+            "tools": [
+                "ingredient_adjuster_agent"
+            ]
+        },
+        {
+            "name": "ingredient_adjuster_agent",
+            "role": "Adjusts recipes to fit specific dietary needs while maintaining nutritional balance.",
+            "tools": []
+        },
+        {
+            "name": "shopping_list_creator_agent",
+            "role": "Creates a detailed grocery list balancing dietary constraints and budget.",
+            "tools": [
+                "pantry_manager_agent",
+                "budget_optimizer_agent"
+            ]
+        },
+        {
+            "name": "pantry_manager_agent",
+            "role": "Manages inventory of items in the pantry to avoid unnecessary purchases.",
+            "tools": [
+                "inventory_checker_tool"
+            ]
+        },
+        {
+            "name": "budget_optimizer_agent",
+            "role": "Adjusts the shopping list to fit within a specified budget while considering bulk purchase options.",
+            "tools": []
+        },
+        {
+            "name": "online_shopping_agent",
+            "role": "Handles the online purchase of groceries from supported services.",
+            "tools": [
+                "groceries_api_agent"
+            ]
+        },
+        {
+            "name": "groceries_api_agent",
+            "role": "Interfaces with various grocery store APIs to facilitate online orders.",
+            "tools": [
+                "order_groceries_tool"
+            ]
+        },
+        {
+            "name": "meal_scheduler_agent",
+            "role": "Organizes meals on a calendar ensuring all dietary and timing constraints are met.",
+            "tools": [
+                "calendar_sync_tool"
+            ]
+        },
+        {
+            "name": "nutrition_analyzer_agent",
+            "role": "Analyzes nutritional content of meals to ensure adherence to dietary goals.",
+            "tools": []
+        },
+        {
+            "name": "allergy_alert_agent",
+            "role": "Monitors for potential allergen exposure in selected recipes and alerts the user.",
+            "tools": [
+                "notification_tool"
+            ]
+        },
+        {
+            "name": "feedback_collector_agent",
+            "role": "Collects user feedback about meals and the planning system for future improvements.",
+            "tools": [
+                "feedback_storage_agent"
+            ]
+        },
+        {
+            "name": "feedback_storage_agent",
+            "role": "Stores feedback received from users for analysis and improvements.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "inventory_checker_tool",
+            "description": "Checks the current stock levels in the pantry against the shopping list.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "items_to_check": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of items to check in the pantry inventory"
+                    }
+                }
+            }
+        },
+        {
+            "name": "order_groceries_tool",
+            "description": "Places an online order for the specified grocery list at chosen stores.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "grocery_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of grocery items to order"
+                    },
+                    "store": {
+                        "type": "string",
+                        "description": "Preferred store to place the order"
+                    }
+                }
+            }
+        },
+        {
+            "name": "calendar_sync_tool",
+            "description": "Syncs scheduled meals with the user's calendar to ensure timely preparation and notifications.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "meal_schedule": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "meal_name": {
+                                    "type": "string",
+                                    "description": "Name of the meal to schedule"
+                                },
+                                "scheduled_time": {
+                                    "type": "string",
+                                    "description": "Time the meal is scheduled for"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "notification_tool",
+            "description": "Sends alerts and notifications regarding allergen warnings and meal preparation reminders.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "description": "The notification message to be sent to the user"
+                    },
+                    "priority": {
+                        "type": "string",
+                        "description": "Priority level of the notification, e.g., 'high', 'medium', 'low'"
+                    }
+                }
+            }
+        }
+    ]
+}

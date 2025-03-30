@@ -1,0 +1,207 @@
+{
+    "task": "Manage a smart farming system to optimize crop yield using drone surveillance, analyze plant health, adjust irrigation schedules, monitor weather patterns, notify owners of critical updates, and generate a seasonal report on farm productivity.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "drone_control_agent",
+                "drone_data_analysis_agent",
+                "plant_health_eval_agent",
+                "soil_moisture_agent",
+                "irrigation_management_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "weather_monitoring_agent",
+                "weather_data_interpreter_agent",
+                "weather_alert_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "productivity_report_agent",
+                "data_compilation_agent",
+                "seasonal_insights_agent",
+                "recommendation_generation_tool",
+                "historical_performance_review_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "notification_system_agent",
+                "communication_protocol_agent",
+                "alert_category_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Main interface for the user to interact with the smart farming system.",
+            "tools": [
+                "drone_control_agent",
+                "weather_monitoring_agent",
+                "productivity_report_agent",
+                "notification_system_agent"
+            ]
+        },
+        {
+            "name": "drone_control_agent",
+            "role": "Manages and controls agricultural drones for surveillance of the farm.",
+            "tools": [
+                "drone_data_analysis_agent"
+            ]
+        },
+        {
+            "name": "drone_data_analysis_agent",
+            "role": "Analyzes data collected from drones to assess plant health and growth patterns.",
+            "tools": [
+                "plant_health_eval_agent",
+                "soil_moisture_agent"
+            ]
+        },
+        {
+            "name": "plant_health_eval_agent",
+            "role": "Evaluates the health of crops by analyzing visual and infrared data from drones.",
+            "tools": []
+        },
+        {
+            "name": "soil_moisture_agent",
+            "role": "Monitors soil moisture levels to ensure optimal irrigation scheduling.",
+            "tools": [
+                "irrigation_management_agent"
+            ]
+        },
+        {
+            "name": "irrigation_management_agent",
+            "role": "Adjusts irrigation schedules based on soil moisture and weather forecasts.",
+            "tools": []
+        },
+        {
+            "name": "weather_monitoring_agent",
+            "role": "Tracks and forecasts weather patterns that may impact farming operations.",
+            "tools": [
+                "weather_data_interpreter_agent"
+            ]
+        },
+        {
+            "name": "weather_data_interpreter_agent",
+            "role": "Interprets weather data to produce actionable insights for farming.",
+            "tools": [
+                "weather_alert_agent"
+            ]
+        },
+        {
+            "name": "weather_alert_agent",
+            "role": "Issues alerts based on significant weather changes that could affect crops.",
+            "tools": []
+        },
+        {
+            "name": "productivity_report_agent",
+            "role": "Compiles data into reports that detail seasonal farming productivity.",
+            "tools": [
+                "data_compilation_agent",
+                "seasonal_insights_agent"
+            ]
+        },
+        {
+            "name": "data_compilation_agent",
+            "role": "Collects and organizes data from various sources into a coherent report.",
+            "tools": []
+        },
+        {
+            "name": "seasonal_insights_agent",
+            "role": "Generates insights from seasonal data to optimize future crop yield.",
+            "tools": [
+                "recommendation_generation_tool",
+                "historical_performance_review_agent"
+            ]
+        },
+        {
+            "name": "notification_system_agent",
+            "role": "Manages and sends important notifications to farm operators.",
+            "tools": [
+                "communication_protocol_agent"
+            ]
+        },
+        {
+            "name": "communication_protocol_agent",
+            "role": "Handles the specifics of how notifications are sent.",
+            "tools": [
+                "alert_category_agent"
+            ]
+        },
+        {
+            "name": "alert_category_agent",
+            "role": "Categorizes alerts to prioritize the most critical information.",
+            "tools": []
+        },
+        {
+            "name": "historical_performance_review_agent",
+            "role": "Analyzes historical farming data to evaluate past performance.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "recommendation_generation_tool",
+            "description": "Generates actionable recommendations based on data analysis.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "current_season_data": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "metric": {
+                                    "type": "string",
+                                    "description": "The metric evaluated (e.g., moisture, yield)."
+                                },
+                                "value": {
+                                    "type": "number",
+                                    "description": "The current value of the metric."
+                                }
+                            }
+                        },
+                        "description": "An array of current metrics for evaluation."
+                    },
+                    "target_improvement_areas": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Specific areas in need of improvement."
+                    }
+                }
+            }
+        },
+        {
+            "name": "scheduling_adjustment_tool",
+            "description": "Automatically adjusts the irrigation schedule based on external inputs.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "adjustment_factor": {
+                        "type": "number",
+                        "description": "Factor by which to alter the schedule."
+                    },
+                    "weather_impact_score": {
+                        "type": "number",
+                        "description": "Score indicating expected impact of upcoming weather."
+                    },
+                    "emergency_override": {
+                        "type": "boolean",
+                        "description": "Flag to apply immediate emergency adjustments."
+                    }
+                }
+            }
+        }
+    ]
+}

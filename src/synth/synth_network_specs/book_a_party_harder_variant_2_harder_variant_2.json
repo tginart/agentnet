@@ -1,0 +1,259 @@
+{
+    "task": "Plan and execute a multi-day, immersive New Zealand Hobbiton adventure tour next year. Begin with crafting unique itineraries with private film set tours, hobbit-themed accommodations, and regional culinary experiences. Organize storytelling workshops with local authors, schedule landscape photography sessions, and coordinate eco-tourism activities. Arrange and manage international travel logistics with environment-friendly options and design digital and physical memorabilia for participants.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "itinerary_design_agent",
+                "private_tour_coordination_agent",
+                "exclusive_access_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "accommodation_management_agent",
+                "hobbiton_stay_agent",
+                "booking_finalization_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "culinary_experience_agent",
+                "local_gastronomy_agent",
+                "chef_interaction_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "workshop_and_activities_agent",
+                "storytelling_workshop_agent",
+                "local_author_collaboration_agent",
+                "session_scheduling_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "travel_management_agent",
+                "eco_travel_agent",
+                "transport_service_provider_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "photography_session_agent",
+                "landscape_photography_agent",
+                "photo_procurement_agent",
+                "editing_service_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "memorabilia_creation_agent",
+                "digital_media_agent",
+                "physical_souvenir_design_agent",
+                "packaging_and_dispatch_agent"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "itinerary_design_agent",
+                "accommodation_management_agent",
+                "culinary_experience_agent",
+                "workshop_and_activities_agent",
+                "travel_management_agent",
+                "photography_session_agent",
+                "memorabilia_creation_agent"
+            ]
+        },
+        {
+            "name": "itinerary_design_agent",
+            "role": "Crafts custom itineraries for an immersive tour, focusing on private film set access.",
+            "tools": [
+                "private_tour_coordination_agent",
+                "exclusive_access_agent"
+            ]
+        },
+        {
+            "name": "accommodation_management_agent",
+            "role": "Manages bookings for hobbit-themed accommodations.",
+            "tools": [
+                "hobbiton_stay_agent",
+                "booking_finalization_agent"
+            ]
+        },
+        {
+            "name": "culinary_experience_agent",
+            "role": "Oversees culinary encounters featuring regional dishes and cultural culinary traditions.",
+            "tools": [
+                "local_gastronomy_agent",
+                "chef_interaction_agent"
+            ]
+        },
+        {
+            "name": "workshop_and_activities_agent",
+            "role": "Coordinates storytelling and other enriching workshops and activities.",
+            "tools": [
+                "storytelling_workshop_agent",
+                "session_scheduling_agent"
+            ]
+        },
+        {
+            "name": "travel_management_agent",
+            "role": "Organizes eco-friendly travel logistics and ensures smooth transportation for participants.",
+            "tools": [
+                "eco_travel_agent",
+                "transport_service_provider_agent"
+            ]
+        },
+        {
+            "name": "photography_session_agent",
+            "role": "Facilitates photography sessions to capture scenic landscapes during the tour.",
+            "tools": [
+                "landscape_photography_agent",
+                "photo_procurement_agent"
+            ]
+        },
+        {
+            "name": "memorabilia_creation_agent",
+            "role": "Designs digital and physical memorabilia to commemorate the tour experience.",
+            "tools": [
+                "digital_media_agent",
+                "physical_souvenir_design_agent"
+            ]
+        },
+        {
+            "name": "private_tour_coordination_agent",
+            "role": "Ensures exclusive coordination with film set personnel for private tours.",
+            "tools": []
+        },
+        {
+            "name": "exclusive_access_agent",
+            "role": "Arranges for exclusive access permissions to restricted areas of film sets.",
+            "tools": []
+        },
+        {
+            "name": "hobbiton_stay_agent",
+            "role": "Books charming Hobbiton-themed accommodations for guests.",
+            "tools": []
+        },
+        {
+            "name": "booking_finalization_agent",
+            "role": "Finalizes accommodation bookings ensuring all preferences are met.",
+            "tools": []
+        },
+        {
+            "name": "local_gastronomy_agent",
+            "role": "Collabores with local chefs to provide authentic New Zealand culinary experiences.",
+            "tools": []
+        },
+        {
+            "name": "chef_interaction_agent",
+            "role": "Facilitates interaction sessions between guests and local chefs.",
+            "tools": []
+        },
+        {
+            "name": "storytelling_workshop_agent",
+            "role": "Organizes immersive storytelling workshops with local narrative experts.",
+            "tools": [
+                "local_author_collaboration_agent"
+            ]
+        },
+        {
+            "name": "local_author_collaboration_agent",
+            "role": "Partners with local authors to provide unique workshop experiences.",
+            "tools": []
+        },
+        {
+            "name": "session_scheduling_agent",
+            "role": "Schedules all workshops and activities ensuring smooth experience flow.",
+            "tools": []
+        },
+        {
+            "name": "eco_travel_agent",
+            "role": "Identifies and arranges environment-friendly travel options.",
+            "tools": []
+        },
+        {
+            "name": "transport_service_provider_agent",
+            "role": "Works with travel service providers to secure transport for participants.",
+            "tools": []
+        },
+        {
+            "name": "landscape_photography_agent",
+            "role": "Focuses on capturing beautiful landscapes from iconic Hobbiton locations.",
+            "tools": [
+                "photo_procurement_agent"
+            ]
+        },
+        {
+            "name": "photo_procurement_agent",
+            "role": "Manages the acquisition and rights management for photographs.",
+            "tools": [
+                "editing_service_agent"
+            ]
+        },
+        {
+            "name": "editing_service_agent",
+            "role": "Edits and refines photographs to ensure professional-quality results.",
+            "tools": []
+        },
+        {
+            "name": "digital_media_agent",
+            "role": "Creates digital content to complement the physical tour experience.",
+            "tools": []
+        },
+        {
+            "name": "physical_souvenir_design_agent",
+            "role": "Designs and produces physical mementos for participants.",
+            "tools": [
+                "packaging_and_dispatch_agent"
+            ]
+        },
+        {
+            "name": "packaging_and_dispatch_agent",
+            "role": "Handles the packaging and distribution of physical souvenirs to guests.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "private_tour_coordination_agent",
+            "description": "Ensures exclusive coordination with film set personnel for private tours.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "tour_dates": {
+                        "type": "array",
+                        "description": "Available dates for private film set tours"
+                    },
+                    "special_requests": {
+                        "type": "string",
+                        "description": "Any special requests for the tour"
+                    }
+                }
+            }
+        },
+        {
+            "name": "digital_media_agent",
+            "description": "Creates digital content to complement the physical tour experience.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "content_theme": {
+                        "type": "string",
+                        "description": "Overall theme for digital content"
+                    },
+                    "media_format": {
+                        "type": "array",
+                        "description": "Preferred formats for digital media (e.g., video, eBook)"
+                    }
+                }
+            }
+        }
+    ]
+}

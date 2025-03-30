@@ -1,0 +1,431 @@
+{
+    "task": "Establish a global, AI-driven heritage restoration program: 1. Implement drone-based architectural assessment, 2. Develop an AI-driven structural integrity prediction model, 3. Coordinate international restoration teams, 4. Build an immersive virtual reality simulation of restored sites, 5. Manage international cultural heritage compliance, and 6. Enable real-time feedback collection from local communities.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "architectural_assessment_agent",
+                "drone_survey_agent",
+                "advanced_drone_toolkit",
+                "drone_data_analysis_agent",
+                "structural_pattern_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "integrity_prediction_agent",
+                "ai_structure_modeling_agent",
+                "material_lifecycle_agent",
+                "age_estimation_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "restoration_coordinator_agent",
+                "global_team_management_agent",
+                "resource_allocator_agent",
+                "logistical_simulation_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "vr_simulation_agent",
+                "3d_modeler_agent",
+                "historical_accuracy_tool",
+                "virtual_environment_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "compliance_management_agent",
+                "international_law_expert_agent",
+                "heritage_compliance_tool",
+                "legal_review_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "community_feedback_agent",
+                "real_time_feedback_collector",
+                "cultural_impact_analysis_tool",
+                "engagement_strategy_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The main orchestration agent for the heritage restoration program, overseeing various modules and operations.",
+            "tools": [
+                "architectural_assessment_agent",
+                "integrity_prediction_agent",
+                "restoration_coordinator_agent",
+                "vr_simulation_agent",
+                "compliance_management_agent",
+                "community_feedback_agent"
+            ]
+        },
+        {
+            "name": "architectural_assessment_agent",
+            "role": "Manages drone surveys to assess the current state of heritage structures.",
+            "tools": [
+                "drone_survey_agent",
+                "drone_maintenance_agent"
+            ]
+        },
+        {
+            "name": "drone_survey_agent",
+            "role": "Conducts aerial surveys using drones to collect data on building conditions.",
+            "tools": [
+                "advanced_drone_toolkit",
+                "drone_data_analysis_agent"
+            ]
+        },
+        {
+            "name": "drone_data_analysis_agent",
+            "role": "Analyzes drone survey data to detect structural patterns and anomalies.",
+            "tools": [
+                "structural_pattern_tool"
+            ]
+        },
+        {
+            "name": "integrity_prediction_agent",
+            "role": "Predicts future structural issues using AI models based on current data.",
+            "tools": [
+                "ai_structure_modeling_agent"
+            ]
+        },
+        {
+            "name": "ai_structure_modeling_agent",
+            "role": "Creates and optimizes AI models to predict structural integrity over time.",
+            "tools": [
+                "material_lifecycle_agent"
+            ]
+        },
+        {
+            "name": "material_lifecycle_agent",
+            "role": "Analyzes materials used in structures to predict their degradation over time.",
+            "tools": [
+                "age_estimation_tool",
+                "heritage_conservation_expert_agent"
+            ]
+        },
+        {
+            "name": "restoration_coordinator_agent",
+            "role": "Oversees the coordination of international restoration efforts.",
+            "tools": [
+                "global_team_management_agent"
+            ]
+        },
+        {
+            "name": "global_team_management_agent",
+            "role": "Manages international teams and allocates resources effectively.",
+            "tools": [
+                "resource_allocator_agent"
+            ]
+        },
+        {
+            "name": "resource_allocator_agent",
+            "role": "Allocates materials and financial resources across global restoration sites.",
+            "tools": [
+                "logistical_simulation_tool"
+            ]
+        },
+        {
+            "name": "vr_simulation_agent",
+            "role": "Creates immersive virtual reality models of heritage sites post-restoration.",
+            "tools": [
+                "3d_modeler_agent"
+            ]
+        },
+        {
+            "name": "3d_modeler_agent",
+            "role": "Generates detailed 3D models of restored heritage sites for VR simulations.",
+            "tools": [
+                "historical_accuracy_tool",
+                "virtual_environment_tool"
+            ]
+        },
+        {
+            "name": "compliance_management_agent",
+            "role": "Ensures compliance with international laws and heritage preservation standards.",
+            "tools": [
+                "international_law_expert_agent"
+            ]
+        },
+        {
+            "name": "international_law_expert_agent",
+            "role": "Provides expertise on international heritage laws and standards.",
+            "tools": [
+                "heritage_compliance_tool",
+                "legal_review_agent"
+            ]
+        },
+        {
+            "name": "legal_review_agent",
+            "role": "Conducts legal reviews to ensure all restoration activities meet international laws.",
+            "tools": []
+        },
+        {
+            "name": "community_feedback_agent",
+            "role": "Collects feedback from local communities regarding restoration impact.",
+            "tools": [
+                "real_time_feedback_collector",
+                "local_community_liaison_agent"
+            ]
+        },
+        {
+            "name": "real_time_feedback_collector",
+            "role": "Collects and processes community feedback in real-time to guide restoration efforts.",
+            "tools": [
+                "cultural_impact_analysis_tool",
+                "engagement_strategy_agent"
+            ]
+        },
+        {
+            "name": "engagement_strategy_agent",
+            "role": "Develops strategies to enhance community engagement and reduce negative impacts.",
+            "tools": []
+        },
+        {
+            "name": "drone_maintenance_agent",
+            "role": "Ensures drones are maintained for optimal performance in surveying.",
+            "tools": []
+        },
+        {
+            "name": "heritage_conservation_expert_agent",
+            "role": "Provides insights and guidelines on the conservation of heritage materials.",
+            "tools": []
+        },
+        {
+            "name": "local_community_liaison_agent",
+            "role": "Acts as a bridge between the restoration teams and local communities to ensure smooth communication.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "advanced_drone_toolkit",
+            "description": "Provides enhanced capabilities for drone surveying, including data collection and remote operations.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "drone_id": {
+                        "type": "string",
+                        "description": "Identifier for the drone in use."
+                    },
+                    "survey_area": {
+                        "type": "object",
+                        "properties": {
+                            "latitude": {
+                                "type": "number",
+                                "description": "Central latitude of the survey area."
+                            },
+                            "longitude": {
+                                "type": "number",
+                                "description": "Central longitude of the survey area."
+                            }
+                        }
+                    },
+                    "operation_parameters": {
+                        "type": "object",
+                        "description": "Parameters for conducting the survey efficiently.",
+                        "properties": {
+                            "altitude": {
+                                "type": "number",
+                                "description": "Operational altitude for the survey."
+                            },
+                            "speed": {
+                                "type": "number",
+                                "description": "Speed of drone during survey operations."
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "structural_pattern_tool",
+            "description": "Detects and analyzes structural patterns and potential issues from survey data.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "image_data": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "description": "Unique image identifier."
+                                },
+                                "data": {
+                                    "type": "string",
+                                    "description": "Data of the captured image."
+                                }
+                            }
+                        },
+                        "description": "Images captured for pattern recognition."
+                    },
+                    "pattern_settings": {
+                        "type": "object",
+                        "description": "Settings for pattern detection algorithms.",
+                        "properties": {
+                            "sensitivity_level": {
+                                "type": "number",
+                                "description": "Sensitivity for detecting structural changes."
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "age_estimation_tool",
+            "description": "Estimates the age and degradation rate of materials used in heritage structures.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "material_type": {
+                        "type": "string",
+                        "description": "Type of material used in the building structure."
+                    },
+                    "exposure_conditions": {
+                        "type": "string",
+                        "description": "Conditions affecting material degradation, e.g., climate, pollution."
+                    }
+                }
+            }
+        },
+        {
+            "name": "logistical_simulation_tool",
+            "description": "Simulates logistical scenarios to optimize resource allocation for restoration projects.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "simulation_parameters": {
+                        "type": "object",
+                        "description": "Parameters to run logistics simulations.",
+                        "properties": {
+                            "team_size": {
+                                "type": "number",
+                                "description": "Number of team members involved."
+                            },
+                            "resource_availability": {
+                                "type": "string",
+                                "description": "Availability of materials and financial resources."
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "historical_accuracy_tool",
+            "description": "Ensures 3D models reflect historical accuracy in restoration projects.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "model_id": {
+                        "type": "string",
+                        "description": "Identifier of the 3D model."
+                    },
+                    "historical_references": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "References ensuring historical accuracy."
+                    }
+                }
+            }
+        },
+        {
+            "name": "virtual_environment_tool",
+            "description": "Creates virtual environments for immersive experiences in heritage sites.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "environment_id": {
+                        "type": "string",
+                        "description": "Identifier for the specific virtual environment."
+                    },
+                    "features": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Features included in the virtual environment, e.g., interactive guided tours."
+                    }
+                }
+            }
+        },
+        {
+            "name": "heritage_compliance_tool",
+            "description": "Ensures projects align with heritage preservation laws and standards.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "project_id": {
+                        "type": "string",
+                        "description": "ID of the restoration project."
+                    },
+                    "compliance_checklist": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of compliance items to be verified."
+                    }
+                }
+            }
+        },
+        {
+            "name": "cultural_impact_analysis_tool",
+            "description": "Analyzes the impact of restoration efforts on local culture and communities.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "community_feedback": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "feedback_id": {
+                                    "type": "string",
+                                    "description": "ID of the feedback entry."
+                                },
+                                "content": {
+                                    "type": "string",
+                                    "description": "Actual feedback content."
+                                }
+                            }
+                        },
+                        "description": "Collection of feedback from local communities."
+                    },
+                    "impact_metrics": {
+                        "type": "object",
+                        "description": "Metrics for measuring cultural impact.",
+                        "properties": {
+                            "positive_engagement": {
+                                "type": "number",
+                                "description": "Level of positive engagement from the community."
+                            },
+                            "negative_impact": {
+                                "type": "number",
+                                "description": "Level of any negative impact noted."
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

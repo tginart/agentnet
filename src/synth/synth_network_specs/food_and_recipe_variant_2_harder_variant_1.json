@@ -1,0 +1,322 @@
+{
+    "task": "Plan and manage an eco-friendly wedding. Include a sustainable vendor list, plant-based catering options, green transportation for guests, eco-conscious wedding attire, and a zero-waste post-wedding cleanup plan.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "wedding_planner_agent",
+                "sustainability_consultant_agent",
+                "vendor_selection_agent",
+                "eco_vendor_database_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "catering_agent",
+                "plant_based_options_agent",
+                "nutritional_analysis_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wedding_logistics_agent",
+                "green_transport_agent",
+                "transport_analysis_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "attire_agent",
+                "eco_fashion_agent",
+                "sustainable_fabric_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "post_event_cleanup_agent",
+                "zero_waste_strategy_agent",
+                "waste_management_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wedding_planner_agent",
+                "venue_selection_agent",
+                "eco_friendly_venues_agent",
+                "venue_inquiry_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wedding_logistics_agent",
+                "green_transport_agent",
+                "route_optimization_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The central coordinator managing all aspects of the eco-friendly wedding planning and execution.",
+            "tools": [
+                "wedding_planner_agent",
+                "catering_agent",
+                "wedding_logistics_agent",
+                "attire_agent",
+                "post_event_cleanup_agent"
+            ]
+        },
+        {
+            "name": "wedding_planner_agent",
+            "role": "Agent responsible for overseeing the entire wedding planning process, ensuring all aspects adhere to sustainability principles.",
+            "tools": [
+                "sustainability_consultant_agent",
+                "venue_selection_agent",
+                "floral_design_agent",
+                "guest_accommodation_agent",
+                "digital_invitations_agent"
+            ]
+        },
+        {
+            "name": "sustainability_consultant_agent",
+            "role": "Provides expert advice on sustainable practices and selections throughout the wedding planning process.",
+            "tools": [
+                "vendor_selection_agent"
+            ]
+        },
+        {
+            "name": "vendor_selection_agent",
+            "role": "Assists in choosing vendors that meet eco-friendly criteria.",
+            "tools": [
+                "eco_vendor_database_agent"
+            ]
+        },
+        {
+            "name": "eco_vendor_database_agent",
+            "role": "A database of verified eco-friendly vendors for weddings.",
+            "tools": []
+        },
+        {
+            "name": "catering_agent",
+            "role": "Handles all aspects of the wedding catering with a focus on plant-based and sustainable options.",
+            "tools": [
+                "plant_based_options_agent"
+            ]
+        },
+        {
+            "name": "plant_based_options_agent",
+            "role": "Specializes in providing diverse plant-based menu options.",
+            "tools": [
+                "nutritional_analysis_tool"
+            ]
+        },
+        {
+            "name": "wedding_logistics_agent",
+            "role": "Manages logistics for the wedding including transportation and accommodation arrangements.",
+            "tools": [
+                "green_transport_agent"
+            ]
+        },
+        {
+            "name": "green_transport_agent",
+            "role": "Plans and coordinates eco-friendly transportation for wedding guests.",
+            "tools": [
+                "transport_analysis_tool",
+                "route_optimization_tool"
+            ]
+        },
+        {
+            "name": "attire_agent",
+            "role": "Handles the procurement and design of eco-conscious wedding attire.",
+            "tools": [
+                "eco_fashion_agent"
+            ]
+        },
+        {
+            "name": "eco_fashion_agent",
+            "role": "Specializes in sustainable fashion solutions, including material sourcing.",
+            "tools": [
+                "sustainable_fabric_tool"
+            ]
+        },
+        {
+            "name": "post_event_cleanup_agent",
+            "role": "Organizes the post-wedding cleanup in line with zero-waste policies.",
+            "tools": [
+                "zero_waste_strategy_agent"
+            ]
+        },
+        {
+            "name": "zero_waste_strategy_agent",
+            "role": "Focuses on minimizing waste through comprehensive planning and strategic cleanup.",
+            "tools": [
+                "waste_management_tool"
+            ]
+        },
+        {
+            "name": "venue_selection_agent",
+            "role": "Agent for selecting wedding venues that align with sustainability goals.",
+            "tools": [
+                "eco_friendly_venues_agent"
+            ]
+        },
+        {
+            "name": "eco_friendly_venues_agent",
+            "role": "Provides listings and information for environmentally sustainable wedding venues.",
+            "tools": [
+                "venue_inquiry_tool"
+            ]
+        },
+        {
+            "name": "floral_design_agent",
+            "role": "Specializes in arranging eco-friendly floral decorations using locally sourced, seasonal flowers.",
+            "tools": []
+        },
+        {
+            "name": "guest_accommodation_agent",
+            "role": "Arranges eco-friendly accommodation options for guests, ensuring low impact on the environment.",
+            "tools": []
+        },
+        {
+            "name": "digital_invitations_agent",
+            "role": "Handles the creation and distribution of digital wedding invitations to minimize paper waste.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "nutritional_analysis_tool",
+            "description": "A tool to analyze the nutritional content of proposed plant-based menus.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "menu_id": {
+                        "type": "string",
+                        "description": "Identifier for the menu to be analyzed."
+                    },
+                    "dietary_restrictions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of dietary restrictions to consider."
+                    }
+                }
+            }
+        },
+        {
+            "name": "transport_analysis_tool",
+            "description": "Evaluates the environmental impact of various transportation options to optimize for sustainability.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "transport_options": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of available transportation options."
+                    },
+                    "guest_count": {
+                        "type": "number",
+                        "description": "The number of guests requiring transportation."
+                    }
+                }
+            }
+        },
+        {
+            "name": "sustainable_fabric_tool",
+            "description": "Assists in selecting sustainable fabrics for wedding attire.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "fabric_type": {
+                        "type": "string",
+                        "description": "Type of fabric to analyze for sustainability."
+                    },
+                    "attire_type": {
+                        "type": "string",
+                        "description": "Specifies the type of attire (e.g., dress, suit)."
+                    }
+                }
+            }
+        },
+        {
+            "name": "waste_management_tool",
+            "description": "Helps design a zero-waste plan for the post-event cleanup.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "event_details": {
+                        "type": "object",
+                        "description": "Detailed information about the event layout and waste production points.",
+                        "properties": {
+                            "venue_size": {
+                                "type": "number",
+                                "description": "Square footage of the venue."
+                            },
+                            "expected_waste_types": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "description": "Types of waste expected from the event."
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "venue_inquiry_tool",
+            "description": "Tool used for checking availability and details of eco-friendly wedding venues.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {
+                        "type": "string",
+                        "description": "The geographic location of the venue."
+                    },
+                    "dates": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of preferred dates for the wedding."
+                    }
+                }
+            }
+        },
+        {
+            "name": "route_optimization_tool",
+            "description": "Optimizes transportation routes to minimize carbon footprint.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "route_data": {
+                        "type": "object",
+                        "description": "Information on potential routes and mileage.",
+                        "properties": {
+                            "start_location": {
+                                "type": "string",
+                                "description": "The starting point for the transportation."
+                            },
+                            "end_location": {
+                                "type": "string",
+                                "description": "The destination point for the transportation."
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

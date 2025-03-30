@@ -1,0 +1,162 @@
+{
+    "task": "Find and purchase a kitchen appliance bundle: 1. Include a blender, toaster, and coffee maker, 2. Items should have a high customer rating (above 4 stars), 3. Check for bundle discounts, 4. Ensure the warranty is at least 1 year for each item, 5. Arrange for professional installation of the items, and 6. Provide a comparison report of top brands.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "product_selection_agent",
+                "ratings_review_agent",
+                "review_analysis_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "bundle_offers_agent",
+                "discount_applicator_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "warranty_validation_agent",
+                "warranty_check_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "installation_service_agent",
+                "installation_provider_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "brand_analysis_agent",
+                "comparison_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "product_selection_agent",
+                "bundle_offers_agent",
+                "warranty_validation_agent",
+                "installation_service_agent",
+                "brand_analysis_agent"
+            ]
+        },
+        {
+            "name": "product_selection_agent",
+            "role": "Handles the selection of products based on user preferences and ensures high customer ratings.",
+            "tools": [
+                "ratings_review_agent"
+            ]
+        },
+        {
+            "name": "ratings_review_agent",
+            "role": "Verifies product ratings to ensure they meet the required criteria for selection and passes the analysis to a specialist.",
+            "tools": [
+                "review_analysis_agent"
+            ]
+        },
+        {
+            "name": "review_analysis_agent",
+            "role": "Analyzes customer reviews in detail to ensure product quality and trustworthiness.",
+            "tools": []
+        },
+        {
+            "name": "bundle_offers_agent",
+            "role": "Identifies potential bundle offers and applies available discounts.",
+            "tools": [
+                "discount_applicator_agent"
+            ]
+        },
+        {
+            "name": "discount_applicator_agent",
+            "role": "Applies available bundle discounts and verifies their validity.",
+            "tools": []
+        },
+        {
+            "name": "warranty_validation_agent",
+            "role": "Checks warranty terms for each item to ensure they meet the criteria, working through a dedicated check agent.",
+            "tools": [
+                "warranty_check_agent"
+            ]
+        },
+        {
+            "name": "warranty_check_agent",
+            "role": "Validates the warranty details and ensures compliance with user requirements.",
+            "tools": []
+        },
+        {
+            "name": "installation_service_agent",
+            "role": "Arranges professional installation services for the purchased items.",
+            "tools": [
+                "installation_provider_agent"
+            ]
+        },
+        {
+            "name": "installation_provider_agent",
+            "role": "Connects with professional installers to schedule service.",
+            "tools": []
+        },
+        {
+            "name": "brand_analysis_agent",
+            "role": "Conducts analysis on top brands and provides a detailed comparison report.",
+            "tools": [
+                "comparison_tool"
+            ]
+        },
+        {
+            "name": "comparison_tool",
+            "role": "Generates comprehensive brand comparison reports based on product specs and user reviews.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "product_ranking_tool",
+            "description": "Ranks products based on customer ratings and review analysis.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "category": {
+                        "type": "string",
+                        "description": "Product category for ranking (e.g., blenders, toasters)."
+                    },
+                    "minimum_rating": {
+                        "type": "number",
+                        "description": "Minimum customer rating required."
+                    }
+                }
+            }
+        },
+        {
+            "name": "discount_calculator_tool",
+            "description": "Calculates potential savings from bundle offers and discounts.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "bundle_items": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of items included in the bundle to check for discounts."
+                    },
+                    "customer_cart_value": {
+                        "type": "number",
+                        "description": "Current total value of the customer's cart."
+                    }
+                }
+            }
+        }
+    ]
+}

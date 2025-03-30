@@ -1,0 +1,319 @@
+{
+    "task": "Implement a comprehensive smart greenhouse optimization system. Conduct a thorough evaluation of energy utilization, automate the integration of renewable energy sources, manage waste recycling, and optimize water usage. Track plant growth patterns using integrated AI for improved yield prediction, and compile an integrated sustainability report with AI-driven recommendations. Trigger alerts for system inefficiencies and forecast upcoming resource needs with predictive models.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "energy_management_agent",
+                "energy_audit_agent",
+                "renewable_integration_agent",
+                "solar_system_agent",
+                "solar_efficiency_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "resource_management_agent",
+                "predictive_modeling_agent",
+                "forecasting_agent",
+                "trend_analysis_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "water_usage_agent",
+                "irrigation_optimizer_agent",
+                "leak_detection_agent",
+                "repair_recommendation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "ai_growth_monitor_agent",
+                "plant_growth_analytics_agent",
+                "yield_prediction_agent",
+                "growth_pattern_analyzer_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "alert_agent",
+                "inefficiency_notification_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "sustainability_report_agent",
+                "recommendation_analysis_agent",
+                "implementation_plan_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "waste_management_agent",
+                "waste_recycling_agent",
+                "biomass_conversion_agent",
+                "efficiency_audit_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Acts as the central interface for user interactions, coordinating tasks to optimize greenhouse management.",
+            "tools": [
+                "energy_management_agent",
+                "resource_management_agent",
+                "water_usage_agent",
+                "ai_growth_monitor_agent",
+                "alert_agent",
+                "sustainability_report_agent",
+                "waste_management_agent"
+            ]
+        },
+        {
+            "name": "energy_management_agent",
+            "role": "Evaluates and optimizes energy consumption, focusing on sustainable resource use.",
+            "tools": [
+                "energy_audit_agent",
+                "renewable_integration_agent"
+            ]
+        },
+        {
+            "name": "energy_audit_agent",
+            "role": "Conducts comprehensive energy audits to identify inefficiencies and propose solutions.",
+            "tools": []
+        },
+        {
+            "name": "renewable_integration_agent",
+            "role": "Manages the integration of renewable energy systems into the greenhouse operations.",
+            "tools": [
+                "solar_system_agent",
+                "wind_turbine_agent"
+            ]
+        },
+        {
+            "name": "solar_system_agent",
+            "role": "Oversees solar power systems, ensuring optimal performance and integration.",
+            "tools": [
+                "solar_efficiency_agent"
+            ]
+        },
+        {
+            "name": "solar_efficiency_agent",
+            "role": "Analyzes solar system performance for efficiency improvements.",
+            "tools": []
+        },
+        {
+            "name": "wind_turbine_agent",
+            "role": "Manages wind turbines, integrating them into the energy grid of the greenhouse.",
+            "tools": []
+        },
+        {
+            "name": "resource_management_agent",
+            "role": "Oversees resource allocation and predictive modeling for future needs.",
+            "tools": [
+                "predictive_modeling_agent"
+            ]
+        },
+        {
+            "name": "predictive_modeling_agent",
+            "role": "Develops models to forecast resource requirements and optimize supply chains.",
+            "tools": [
+                "forecasting_agent"
+            ]
+        },
+        {
+            "name": "forecasting_agent",
+            "role": "Forecasts future resource needs based on current usage patterns and trends.",
+            "tools": [
+                "trend_analysis_agent"
+            ]
+        },
+        {
+            "name": "trend_analysis_agent",
+            "role": "Analyzes long-term trends to refine predictive models and resource allocation.",
+            "tools": []
+        },
+        {
+            "name": "water_usage_agent",
+            "role": "Optimizes water usage by managing irrigation systems and detecting leaks.",
+            "tools": [
+                "irrigation_optimizer_agent",
+                "leak_detection_agent"
+            ]
+        },
+        {
+            "name": "irrigation_optimizer_agent",
+            "role": "Adjusts irrigation schedules for the efficient use of water resources.",
+            "tools": []
+        },
+        {
+            "name": "leak_detection_agent",
+            "role": "Identifies water leaks in the greenhouse systems to prevent waste.",
+            "tools": [
+                "repair_recommendation_agent"
+            ]
+        },
+        {
+            "name": "repair_recommendation_agent",
+            "role": "Provides repair recommendations for detected leaks to ensure system integrity.",
+            "tools": []
+        },
+        {
+            "name": "ai_growth_monitor_agent",
+            "role": "Utilizes AI to monitor plant growth patterns and predict yields.",
+            "tools": [
+                "plant_growth_analytics_agent",
+                "yield_prediction_agent"
+            ]
+        },
+        {
+            "name": "plant_growth_analytics_agent",
+            "role": "Analyzes plant growth data to identify trends and issues.",
+            "tools": []
+        },
+        {
+            "name": "yield_prediction_agent",
+            "role": "Predicts future plant yields using AI models and growth data.",
+            "tools": [
+                "growth_pattern_analyzer_agent"
+            ]
+        },
+        {
+            "name": "growth_pattern_analyzer_agent",
+            "role": "Provides detailed analysis of growth patterns to inform yield forecasts.",
+            "tools": []
+        },
+        {
+            "name": "alert_agent",
+            "role": "Generates alerts for inefficiencies or unusual patterns detected in systems.",
+            "tools": [
+                "inefficiency_notification_tool"
+            ]
+        },
+        {
+            "name": "sustainability_report_agent",
+            "role": "Compiles detailed sustainability reports with curated data and AI-driven insights.",
+            "tools": [
+                "recommendation_analysis_agent"
+            ]
+        },
+        {
+            "name": "recommendation_analysis_agent",
+            "role": "Provides sustainability recommendations based on comprehensive report data.",
+            "tools": [
+                "implementation_plan_agent"
+            ]
+        },
+        {
+            "name": "implementation_plan_agent",
+            "role": "Designs actionable implementation plans from recommendation analyses.",
+            "tools": []
+        },
+        {
+            "name": "waste_management_agent",
+            "role": "Oversees waste recycling and conversion into usable biomass.",
+            "tools": [
+                "waste_recycling_agent"
+            ]
+        },
+        {
+            "name": "waste_recycling_agent",
+            "role": "Manages the recycling processes of greenhouse waste products.",
+            "tools": [
+                "biomass_conversion_agent"
+            ]
+        },
+        {
+            "name": "biomass_conversion_agent",
+            "role": "Converts organic waste into biomass energy, promoting recycling and sustainability.",
+            "tools": [
+                "efficiency_audit_agent"
+            ]
+        },
+        {
+            "name": "efficiency_audit_agent",
+            "role": "Conducts audits to ensure biomass conversion processes are efficient and effective.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "inefficiency_notification_tool",
+            "description": "Sends alerts via email or SMS about detected inefficiencies or anomalies.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "contact_method": {
+                        "type": "string",
+                        "description": "Preferred method of communication, e.g., email or SMS."
+                    },
+                    "contact_details": {
+                        "type": "string",
+                        "description": "Email address or phone number for receiving alerts."
+                    },
+                    "alert_details": {
+                        "type": "string",
+                        "description": "Details of the inefficiency detected."
+                    }
+                }
+            }
+        },
+        {
+            "name": "yield_optimization_tool",
+            "description": "Provides AI-driven insights to maximize plant yields.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "current_yield_data": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "plant_type": {
+                                    "type": "string",
+                                    "description": "Type of plant being analyzed."
+                                },
+                                "growth_statistics": {
+                                    "type": "object",
+                                    "properties": {
+                                        "growth_rate": {
+                                            "type": "number",
+                                            "description": "Growth rate of the plant."
+                                        },
+                                        "health_metrics": {
+                                            "type": "number",
+                                            "description": "Overall health score of the plant."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "optimization_goals": {
+                        "type": "object",
+                        "properties": {
+                            "target_yield": {
+                                "type": "number",
+                                "description": "Target yield desired by the user."
+                            },
+                            "time_frame": {
+                                "type": "string",
+                                "description": "Time frame for achieving target yield."
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

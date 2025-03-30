@@ -1,0 +1,248 @@
+{
+    "task": "Organize a sustainable hiking trip through the national parks in Costa Rica. The plan should include: 1. Eco-friendly accommodations and transportation. 2. A schedule of hiking trails with difficulty levels and landscapes. 3. Awareness of environmental regulations and permits needed. 4. A packing list with sustainable gear recommendations. 5. Total cost assessment to stay under $3000.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "sustainability_agent",
+                "transportation_agent",
+                "eco_transport_tools",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "sustainability_agent",
+                "eco_accommodation_agent",
+                "booking_verifier_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "adventure_agent",
+                "trail_finder_agent",
+                "landscape_analysis_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "adventure_agent",
+                "trail_finder_agent",
+                "difficulty_level_assessment_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "gearpicker_agent",
+                "packing_guidance_agent",
+                "gear_recommendation_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "regulation_mediator_agent",
+                "permit_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "budget_analyst_agent",
+                "cost_estimation_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The initial agent for organizing a sustainable travel experience, communicating with the user and directing tasks.",
+            "tools": [
+                "sustainability_agent",
+                "adventure_agent",
+                "gearpicker_agent",
+                "regulation_mediator_agent",
+                "budget_analyst_agent"
+            ]
+        },
+        {
+            "name": "sustainability_agent",
+            "role": "Ensures travel plans adhere to eco-friendly standards, sourcing sustainable options.",
+            "tools": [
+                "transportation_agent",
+                "eco_accommodation_agent"
+            ]
+        },
+        {
+            "name": "transportation_agent",
+            "role": "Coordinates eco-friendly transportation options within Costa Rica.",
+            "tools": [
+                "eco_transport_tools"
+            ]
+        },
+        {
+            "name": "eco_accommodation_agent",
+            "role": "Sources environmentally sustainable accommodations aligning with eco-tourism values.",
+            "tools": [
+                "booking_verifier_agent"
+            ]
+        },
+        {
+            "name": "booking_verifier_agent",
+            "role": "Verifies eco-accommodation bookings meet sustainability standards.",
+            "tools": []
+        },
+        {
+            "name": "adventure_agent",
+            "role": "Plans hiking adventures, identifying trails, and preparing guides for different levels of hikers.",
+            "tools": [
+                "trail_finder_agent"
+            ]
+        },
+        {
+            "name": "trail_finder_agent",
+            "role": "Finds trails based on landscape and difficulty, suitable for sustainable travel.",
+            "tools": [
+                "landscape_analysis_tool",
+                "difficulty_level_assessment_tool"
+            ]
+        },
+        {
+            "name": "gearpicker_agent",
+            "role": "Provides a list of sustainable gear options and packing tips for environmentally conscious hiking.",
+            "tools": [
+                "packing_guidance_agent"
+            ]
+        },
+        {
+            "name": "packing_guidance_agent",
+            "role": "Suggests packing lists with eco-friendly gear for hiking.",
+            "tools": [
+                "gear_recommendation_tool"
+            ]
+        },
+        {
+            "name": "gear_recommendation_tool",
+            "role": "Recommends eco-friendly gear suitable for hiking trips.",
+            "tools": []
+        },
+        {
+            "name": "regulation_mediator_agent",
+            "role": "Ensures all universal and local environmental regulations are followed, acquiring necessary travel permits.",
+            "tools": [
+                "permit_agent"
+            ]
+        },
+        {
+            "name": "permit_agent",
+            "role": "Handles requests and submission for all required travel and hiking permits.",
+            "tools": []
+        },
+        {
+            "name": "budget_analyst_agent",
+            "role": "Calculates potential costs for the trip to ensure they align with budget constraints.",
+            "tools": [
+                "cost_estimation_tool"
+            ]
+        }
+    ],
+    "tools": [
+        {
+            "name": "eco_transport_tools",
+            "description": "Provides options for environmentally friendly transportation, such as electric vehicles or carbon offsetting.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "departure_location": {
+                        "type": "string",
+                        "description": "Starting point for transportation analysis."
+                    },
+                    "destination": {
+                        "type": "string",
+                        "description": "Desired destination for transport."
+                    },
+                    "passenger_count": {
+                        "type": "number",
+                        "description": "Number of travelers requiring transport."
+                    }
+                }
+            }
+        },
+        {
+            "name": "landscape_analysis_tool",
+            "description": "Analyzes trail paths for environmental features and scenic quality.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "trail_names": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Names of the trails to be analyzed for landscapes."
+                    }
+                }
+            }
+        },
+        {
+            "name": "difficulty_level_assessment_tool",
+            "description": "Provides difficulty ratings for various hiking trails.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "trail_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the trail being assessed."
+                    },
+                    "hiker_experience": {
+                        "type": "string",
+                        "description": "Experience level of the hiker (e.g., beginner, intermediate, advanced)."
+                    }
+                }
+            }
+        },
+        {
+            "name": "cost_estimation_tool",
+            "description": "Estimates total expected costs for the trip, including possible expenses.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "trip_duration": {
+                        "type": "number",
+                        "description": "Total duration of the trip in days."
+                    },
+                    "accommodation_cost_per_day": {
+                        "type": "number",
+                        "description": "Average daily cost for accommodations."
+                    },
+                    "transportation_cost": {
+                        "type": "number",
+                        "description": "Total expected transportation cost."
+                    },
+                    "miscellaneous_expenses": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "item": {
+                                    "type": "string",
+                                    "description": "Description of miscellaneous cost items."
+                                },
+                                "cost": {
+                                    "type": "number",
+                                    "description": "Cost of the item."
+                                }
+                            }
+                        },
+                        "description": "Additional costs expected during the trip."
+                    }
+                }
+            }
+        }
+    ]
+}

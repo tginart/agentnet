@@ -1,0 +1,159 @@
+{
+    "task": "Create a personalized learning plan for a high school student focusing on STEM subjects, using the latest educational technologies and resources. Include AI-driven tutoring and VR-based labs.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "learning_coordinator_agent",
+                "stem_curriculum_agent",
+                "ai_tutoring_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "edtech_integration_agent",
+                "vr_lab_agent",
+                "edu_resource_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "student_services_agent",
+                "ai_tutoring_agent",
+                "assessment_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The primary interface for users seeking educational solutions, orchestrating the interaction among various educational agents.",
+            "tools": [
+                "learning_coordinator_agent",
+                "edtech_integration_agent",
+                "student_services_agent"
+            ]
+        },
+        {
+            "name": "learning_coordinator_agent",
+            "role": "Agent responsible for designing and customizing curricula to meet individual student needs in STEM education.",
+            "tools": [
+                "stem_curriculum_agent",
+                "edu_resource_agent"
+            ]
+        },
+        {
+            "name": "stem_curriculum_agent",
+            "role": "Agent in charge of selecting and organizing STEM courses and resources specific to each student's learning plan.",
+            "tools": [
+                "ai_tutoring_agent",
+                "vr_lab_agent"
+            ]
+        },
+        {
+            "name": "edtech_integration_agent",
+            "role": "Coordinates the integration of educational technology tools, including AI tutors and VR labs, into the student learning experience.",
+            "tools": [
+                "vr_lab_agent",
+                "edu_resource_agent",
+                "digital_library_agent"
+            ]
+        },
+        {
+            "name": "student_services_agent",
+            "role": "Provides administrative and supportive services, including learning assessments and progress tracking.",
+            "tools": [
+                "ai_tutoring_agent",
+                "assessment_agent"
+            ]
+        },
+        {
+            "name": "ai_tutoring_agent",
+            "role": "Offers AI-driven tutoring services that adapt to the learning pace and style of each student, focusing on STEM topics.",
+            "tools": []
+        },
+        {
+            "name": "vr_lab_agent",
+            "role": "Provides VR-based lab experiences that simulate real-world science experiments and explorations.",
+            "tools": []
+        },
+        {
+            "name": "edu_resource_agent",
+            "role": "Curates educational resources from various portals to supplement the learning process with up-to-date information and materials.",
+            "tools": []
+        },
+        {
+            "name": "assessment_agent",
+            "role": "Conducts necessary learning assessments to gauge student progress and adjust learning plans as needed.",
+            "tools": []
+        },
+        {
+            "name": "digital_library_agent",
+            "role": "Maintains a vast digital library of textbooks, articles, and research papers that students can access for their studies.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "stem_course_selection_tool",
+            "description": "Selects appropriate STEM courses based on student interests, needs, and skill levels.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "student_profile": {
+                        "type": "object",
+                        "description": "Profile of the student including academic strengths and weaknesses."
+                    },
+                    "available_courses": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of available STEM courses."
+                    }
+                }
+            }
+        },
+        {
+            "name": "vr_lab_setup_tool",
+            "description": "Configures virtual reality labs with simulations and experiments tied to the student's curriculum focus.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "lab_topics": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of topics to be explored in VR labs."
+                    },
+                    "equipment_requirements": {
+                        "type": "string",
+                        "description": "Any special equipment or software requirements for the VR lab."
+                    }
+                }
+            }
+        },
+        {
+            "name": "tutoring_schedule_tool",
+            "description": "Schedules tutoring sessions by matching student availability with AI tutor schedules.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "student_availability": {
+                        "type": "string",
+                        "description": "Times when the student is available for tutoring."
+                    },
+                    "tutor_specialization": {
+                        "type": "string",
+                        "description": "Specific STEM fields the tutor is specialized in."
+                    }
+                }
+            }
+        }
+    ]
+}

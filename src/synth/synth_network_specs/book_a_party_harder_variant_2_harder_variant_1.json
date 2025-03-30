@@ -1,0 +1,356 @@
+{
+    "task": "Plan and execute a themed family reunion in New Zealand with a Hobbiton twist next summer. Secure permits for exclusive use of movie-based locations and arrange for themed catering, costumes, and live musicians. Organize international flights and accommodations, design personalized souvenirs, and ensure an immersive experience with masquerade elements. Additionally, coordinate group activities like guided tours and interactive workshops.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "theme_design_agent",
+                "thematic_element_agent",
+                "costume_design_agent",
+                "fabric_selection_agent",
+                "supplier_management_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "event_location_agent",
+                "hobbiton_location_agent",
+                "location_arrangement_agent",
+                "permit_acquisition_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "entertainment_management_agent",
+                "musicians_booking_agent",
+                "musician_contract_agent",
+                "live_music_experience_agent",
+                "contract_review_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "catering_management_agent",
+                "themed_menu_design_agent",
+                "gourmet_tasting_agent",
+                "final_menu_approval_agent",
+                "dietary_review_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "travel_and_accommodation_agent",
+                "international_flight_agent",
+                "flight_detail_agent",
+                "luxury_stay_agent",
+                "travel_insurance_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "souvenir_design_agent",
+                "artisan_collaboration_agent",
+                "customization_agent",
+                "distribution_management_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "activity_coordination_agent",
+                "tour_organization_agent",
+                "guided_experience_agent",
+                "workshop_finder_agent",
+                "local_guides_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "immersive_experience_agent",
+                "masquerade_design_agent",
+                "interactive_physics_implementation_agent"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "theme_design_agent",
+                "event_location_agent",
+                "entertainment_management_agent",
+                "catering_management_agent",
+                "travel_and_accommodation_agent",
+                "souvenir_design_agent",
+                "activity_coordination_agent",
+                "immersive_experience_agent"
+            ]
+        },
+        {
+            "name": "theme_design_agent",
+            "role": "Develops the overall thematic elements for the reunion, focusing on Hobbiton inspiration.",
+            "tools": [
+                "thematic_element_agent",
+                "costume_design_agent"
+            ]
+        },
+        {
+            "name": "event_location_agent",
+            "role": "Coordinates exclusive use of shooting locations in New Zealand for a Hobbiton-inspired family reunion.",
+            "tools": [
+                "hobbiton_location_agent",
+                "location_arrangement_agent"
+            ]
+        },
+        {
+            "name": "entertainment_management_agent",
+            "role": "Handles entertainment, including live music and performances, to align with the theme.",
+            "tools": [
+                "musicians_booking_agent",
+                "musician_contract_agent"
+            ]
+        },
+        {
+            "name": "catering_management_agent",
+            "role": "Oversees themed catering services, ensuring a gastronomic experience reflective of the event's mood.",
+            "tools": [
+                "themed_menu_design_agent",
+                "gourmet_tasting_agent"
+            ]
+        },
+        {
+            "name": "travel_and_accommodation_agent",
+            "role": "Arranges all travel logistics, including international flights and luxury accommodations.",
+            "tools": [
+                "international_flight_agent",
+                "luxury_stay_agent"
+            ]
+        },
+        {
+            "name": "souvenir_design_agent",
+            "role": "Designs and oversees the production of personalized souvenirs for attendees.",
+            "tools": [
+                "artisan_collaboration_agent",
+                "customization_agent"
+            ]
+        },
+        {
+            "name": "activity_coordination_agent",
+            "role": "Plans group activities including guided tours and workshops in the New Zealand locale.",
+            "tools": [
+                "tour_organization_agent",
+                "workshop_finder_agent"
+            ]
+        },
+        {
+            "name": "immersive_experience_agent",
+            "role": "Ensures an immersive event experience with elements of mystery and role-play.",
+            "tools": [
+                "masquerade_design_agent",
+                "interactive_physics_implementation_agent"
+            ]
+        },
+        {
+            "name": "thematic_element_agent",
+            "role": "Focuses on the creation of thematic decorations and settings, enhancing the Hobbiton theme.",
+            "tools": []
+        },
+        {
+            "name": "costume_design_agent",
+            "role": "Designs costumes for attendees to enhance immersion in the theme.",
+            "tools": [
+                "fabric_selection_agent",
+                "supplier_management_agent"
+            ]
+        },
+        {
+            "name": "hobbiton_location_agent",
+            "role": "Finds and secures locations within Hobbiton for exclusive event use.",
+            "tools": [
+                "permit_acquisition_agent"
+            ]
+        },
+        {
+            "name": "permit_acquisition_agent",
+            "role": "Obtains necessary permits for the exclusive use of film locations.",
+            "tools": []
+        },
+        {
+            "name": "location_arrangement_agent",
+            "role": "Coordinates location arrangement and setup in Hobbiton.",
+            "tools": [
+                "permit_acquisition_agent"
+            ]
+        },
+        {
+            "name": "musicians_booking_agent",
+            "role": "Selects and secures live musicians familiar with folk themes.",
+            "tools": []
+        },
+        {
+            "name": "musician_contract_agent",
+            "role": "Manages contracts and agreements with booked musicians.",
+            "tools": [
+                "live_music_experience_agent"
+            ]
+        },
+        {
+            "name": "live_music_experience_agent",
+            "role": "Ensures the musical performances create an authentic and engaging atmosphere.",
+            "tools": [
+                "contract_review_agent"
+            ]
+        },
+        {
+            "name": "themed_menu_design_agent",
+            "role": "Designs a menu reflective of Middle-earth cuisine using local ingredients.",
+            "tools": []
+        },
+        {
+            "name": "gourmet_tasting_agent",
+            "role": "Facilitates tasting sessions to select the final event menu.",
+            "tools": [
+                "final_menu_approval_agent"
+            ]
+        },
+        {
+            "name": "final_menu_approval_agent",
+            "role": "Makes the final approval of the event menu after all tastings.",
+            "tools": [
+                "dietary_review_agent"
+            ]
+        },
+        {
+            "name": "international_flight_agent",
+            "role": "Coordinates flight booking for all international attendees.",
+            "tools": [
+                "flight_detail_agent"
+            ]
+        },
+        {
+            "name": "flight_detail_agent",
+            "role": "Provides detailed itineraries and flight confirmations.",
+            "tools": []
+        },
+        {
+            "name": "luxury_stay_agent",
+            "role": "Books luxury stays that fit within the thematic realm and budget.",
+            "tools": [
+                "travel_insurance_agent"
+            ]
+        },
+        {
+            "name": "artisan_collaboration_agent",
+            "role": "Works with artisans to create unique, handcrafted souvenirs.",
+            "tools": []
+        },
+        {
+            "name": "customization_agent",
+            "role": "Customizes souvenirs to reflect personal and event-specific details.",
+            "tools": [
+                "distribution_management_agent"
+            ]
+        },
+        {
+            "name": "tour_organization_agent",
+            "role": "Plans and books guided tours, enhancing the Hobbiton experience.",
+            "tools": [
+                "guided_experience_agent"
+            ]
+        },
+        {
+            "name": "guided_experience_agent",
+            "role": "Manages experiences and tour guide assignments.",
+            "tools": []
+        },
+        {
+            "name": "workshop_finder_agent",
+            "role": "Finds workshops that explore local crafts and maker experiences.",
+            "tools": [
+                "local_guides_agent"
+            ]
+        },
+        {
+            "name": "masquerade_design_agent",
+            "role": "Designs and coordinates masquerade activities, adding an element of mystery to the event.",
+            "tools": []
+        },
+        {
+            "name": "fabric_selection_agent",
+            "role": "Chooses fabric and materials appropriate for high-quality, theme-based costumes.",
+            "tools": []
+        },
+        {
+            "name": "supplier_management_agent",
+            "role": "Manages relationships with material suppliers to ensure timely delivery.",
+            "tools": []
+        },
+        {
+            "name": "contract_review_agent",
+            "role": "Reviews contracts for musician agreements and other services.",
+            "tools": []
+        },
+        {
+            "name": "dietary_review_agent",
+            "role": "Analyzes dietary needs and restrictions to ensure all guests' needs are met.",
+            "tools": []
+        },
+        {
+            "name": "travel_insurance_agent",
+            "role": "Secures travel insurance options for international travelers.",
+            "tools": []
+        },
+        {
+            "name": "distribution_management_agent",
+            "role": "Ensures the timely distribution of souvenirs to attendees.",
+            "tools": []
+        },
+        {
+            "name": "local_guides_agent",
+            "role": "Connects with local guides to offer personalized tour experiences.",
+            "tools": []
+        },
+        {
+            "name": "interactive_physics_implementation_agent",
+            "role": "Incorporates technology to create engaging, physics-based interactive displays.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "hobbiton_location_agent",
+            "description": "Finds and secures locations within Hobbiton for exclusive event use.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "availability_dates": {
+                        "type": "array",
+                        "description": "Potential dates for location booking"
+                    },
+                    "requirements": {
+                        "type": "string",
+                        "description": "Specific requirements for the venue use"
+                    }
+                }
+            }
+        },
+        {
+            "name": "souvenir_design_tool",
+            "description": "Generates designs for custom souvenirs based on user input.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "theme": {
+                        "type": "string",
+                        "description": "Overall theme for the design"
+                    },
+                    "attendee_names": {
+                        "type": "array",
+                        "description": "List of attendee names for personalization"
+                    }
+                }
+            }
+        }
+    ]
+}

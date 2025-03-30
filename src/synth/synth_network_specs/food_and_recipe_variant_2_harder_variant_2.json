@@ -1,0 +1,274 @@
+{
+    "task": "Organize a zero-waste outdoor music festival. Include planning for solar-powered stages, biodegradable materials for concession stands, public transport incentives for attendees, eco-friendly artist accommodations, and a comprehensive recycling initiative.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "event_planner_agent",
+                "energy_solution_agent",
+                "renewable_energy_designer_agent",
+                "solar_stage_design_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "supply_chain_agent",
+                "biodegradable_materials_agent",
+                "material_sourcing_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "transportation_coordinator_agent",
+                "public_transport_incentives_agent",
+                "transport_discount_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "accommodation_manager_agent",
+                "sustainable_hotel_network_agent",
+                "sustainable_booking_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "waste_management_lead_agent",
+                "recycling_program_agent",
+                "waste_analysis_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "event_marketing_agent",
+                "social_media_engagement_agent",
+                "engagement_metrics_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The primary coordinator for organizing the zero-waste music festival, overseeing all agents and ensuring sustainability goals are pursued.",
+            "tools": [
+                "event_planner_agent",
+                "supply_chain_agent",
+                "transportation_coordinator_agent",
+                "accommodation_manager_agent",
+                "waste_management_lead_agent",
+                "event_marketing_agent"
+            ]
+        },
+        {
+            "name": "event_planner_agent",
+            "role": "Responsible for the overall layout and execution of the festival, ensuring all components align with the zero-waste objective.",
+            "tools": [
+                "energy_solution_agent",
+                "stage_scheduling_agent",
+                "artist_coordination_agent"
+            ]
+        },
+        {
+            "name": "energy_solution_agent",
+            "role": "Specializes in providing sustainable energy solutions for outdoor events through renewable sources.",
+            "tools": [
+                "renewable_energy_designer_agent"
+            ]
+        },
+        {
+            "name": "renewable_energy_designer_agent",
+            "role": "Designs comprehensive renewable energy plans and passes specifications for implementation.",
+            "tools": [
+                "solar_stage_design_agent"
+            ]
+        },
+        {
+            "name": "solar_stage_design_agent",
+            "role": "Designs and configures solar-powered stages for performances, optimizing energy usage.",
+            "tools": []
+        },
+        {
+            "name": "supply_chain_agent",
+            "role": "Manages procurement and vendor relationships, focusing on sustainable and biodegradable materials.",
+            "tools": [
+                "biodegradable_materials_agent",
+                "local_vendor_support_agent"
+            ]
+        },
+        {
+            "name": "biodegradable_materials_agent",
+            "role": "Sources biodegradable materials for use in concession stands and other festival operations.",
+            "tools": [
+                "material_sourcing_tool"
+            ]
+        },
+        {
+            "name": "transportation_coordinator_agent",
+            "role": "Coordinates transportation options for attendees, promoting public transport and carpooling.",
+            "tools": [
+                "public_transport_incentives_agent"
+            ]
+        },
+        {
+            "name": "public_transport_incentives_agent",
+            "role": "Develops incentives and discount programs to encourage attendees to use public transport.",
+            "tools": [
+                "transport_discount_tool"
+            ]
+        },
+        {
+            "name": "accommodation_manager_agent",
+            "role": "Arranges eco-friendly accommodations for artists and festival staff, emphasizing sustainable practices.",
+            "tools": [
+                "sustainable_hotel_network_agent"
+            ]
+        },
+        {
+            "name": "sustainable_hotel_network_agent",
+            "role": "Connects with a network of hotels and lodgings that follow sustainable practices.",
+            "tools": [
+                "sustainable_booking_tool"
+            ]
+        },
+        {
+            "name": "waste_management_lead_agent",
+            "role": "Oversees waste management and recycling efforts to ensure festival adheres to zero-waste principles.",
+            "tools": [
+                "recycling_program_agent"
+            ]
+        },
+        {
+            "name": "recycling_program_agent",
+            "role": "Implements comprehensive recycling initiatives across the festival grounds.",
+            "tools": [
+                "waste_analysis_tool"
+            ]
+        },
+        {
+            "name": "event_marketing_agent",
+            "role": "Handles marketing and public engagement to boost attendance and awareness of sustainability initiatives.",
+            "tools": [
+                "social_media_engagement_agent"
+            ]
+        },
+        {
+            "name": "social_media_engagement_agent",
+            "role": "Focuses on engaging potential attendees through social media and digital platforms.",
+            "tools": [
+                "engagement_metrics_tool"
+            ]
+        },
+        {
+            "name": "stage_scheduling_agent",
+            "role": "Organizes the performance schedule to maximize efficiency and minimize resource use.",
+            "tools": []
+        },
+        {
+            "name": "artist_coordination_agent",
+            "role": "Liaises with artists to ensure they have all necessary information and resources for eco-friendly participation.",
+            "tools": []
+        },
+        {
+            "name": "local_vendor_support_agent",
+            "role": "Supports local vendors in aligning their offerings with the festival's sustainability criteria.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "material_sourcing_tool",
+            "description": "Tool to identify and secure biodegradable materials for event supports.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "material_type": {
+                        "type": "string",
+                        "description": "Type of material needed for the festival."
+                    },
+                    "quantity": {
+                        "type": "number",
+                        "description": "Quantity of materials required."
+                    }
+                }
+            }
+        },
+        {
+            "name": "transport_discount_tool",
+            "description": "Ensures discounts are applied to public transport options for festival attendees.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "transportation_type": {
+                        "type": "string",
+                        "description": "Type of public transport."
+                    },
+                    "discount_rate": {
+                        "type": "number",
+                        "description": "Discount rate to be applied."
+                    }
+                }
+            }
+        },
+        {
+            "name": "sustainable_booking_tool",
+            "description": "Facilitates booking eco-friendly accommodations with sustainability certifications.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "hotel_location": {
+                        "type": "string",
+                        "description": "Location where accommodations are needed."
+                    },
+                    "number_of_rooms": {
+                        "type": "number",
+                        "description": "Number of rooms required for booking."
+                    }
+                }
+            }
+        },
+        {
+            "name": "waste_analysis_tool",
+            "description": "Analyzes the types of waste generated and suggests recycling strategy improvements.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "waste_types": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Types of waste to analyze."
+                    },
+                    "collection_points": {
+                        "type": "number",
+                        "description": "Number of waste collection points."
+                    }
+                }
+            }
+        },
+        {
+            "name": "engagement_metrics_tool",
+            "description": "Analyzes user engagement metrics across social media platforms.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "platform": {
+                        "type": "string",
+                        "description": "Social media platform being analyzed."
+                    },
+                    "time_frame": {
+                        "type": "string",
+                        "description": "Time frame for engagement analysis."
+                    }
+                }
+            }
+        }
+    ]
+}

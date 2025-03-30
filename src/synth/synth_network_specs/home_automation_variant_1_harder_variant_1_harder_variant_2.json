@@ -1,0 +1,229 @@
+{
+    "task": "Implement a multi-faceted financial advisory system that offers personalized financial planning, live market analysis, tax planning, healthcare cost forecasting, insurance optimization, retirement planning, and real-time crisis management for individuals with diversified financial interests and obligations. The system must be able to handle complex scenarios like sudden market changes, unexpected medical bills, or employment loss, guiding the user through optimal decisions and leveraging AI to predict future financial statuses based on historical data.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "financial_advisor_agent",
+                "personal_planning_agent",
+                "life_event_predictor_agent",
+                "insurance_optimizer_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "financial_advisor_agent",
+                "live_market_analysis_agent",
+                "market_data_collector_agent",
+                "crisis_management_agent",
+                "emergency_fund_planner_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "financial_advisor_agent",
+                "tax_planning_agent",
+                "deduction_optimizer_agent",
+                "historical_data_analyzer_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "financial_advisor_agent",
+                "retirement_planning_agent",
+                "income_forecaster_agent",
+                "sustainable_retirement_plan_agent",
+                "financial_projection_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "financial_advisor_agent",
+                "healthcare_cost_forecaster_agent",
+                "future_expense_simulator_agent",
+                "financial_buffer_strategy_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Primary interaction point for the user, initiating and coordinating the various financial advisory services.",
+            "tools": [
+                "financial_advisor_agent"
+            ]
+        },
+        {
+            "name": "financial_advisor_agent",
+            "role": "Central management agent for comprehensive financial advisory, connecting users to targeted expert agents.",
+            "tools": [
+                "personal_planning_agent",
+                "live_market_analysis_agent",
+                "tax_planning_agent",
+                "retirement_planning_agent",
+                "healthcare_cost_forecaster_agent"
+            ]
+        },
+        {
+            "name": "personal_planning_agent",
+            "role": "Offers personalized financial advice based on life events and insurance needs.",
+            "tools": [
+                "life_event_predictor_agent",
+                "insurance_optimizer_agent"
+            ]
+        },
+        {
+            "name": "life_event_predictor_agent",
+            "role": "Predicts significant life events that could affect financial planning and provides preemptive advice.",
+            "tools": []
+        },
+        {
+            "name": "insurance_optimizer_agent",
+            "role": "Recommends optimal insurance plans by evaluating current market options and personal risk factors.",
+            "tools": []
+        },
+        {
+            "name": "live_market_analysis_agent",
+            "role": "Tracks live market data to provide real-time analysis and recommendations.",
+            "tools": [
+                "market_data_collector_agent",
+                "crisis_management_agent"
+            ]
+        },
+        {
+            "name": "market_data_collector_agent",
+            "role": "Aggregates live market data and sends it to analysis tools for timely financial insights.",
+            "tools": []
+        },
+        {
+            "name": "crisis_management_agent",
+            "role": "Delivers real-time solutions for financial crises, suggesting adjustments and preventive measures.",
+            "tools": [
+                "emergency_fund_planner_agent"
+            ]
+        },
+        {
+            "name": "emergency_fund_planner_agent",
+            "role": "Plans and manages emergency funds to ensure liquidity during financial crises.",
+            "tools": []
+        },
+        {
+            "name": "tax_planning_agent",
+            "role": "Provides tax optimization strategies and considers historical data for best results.",
+            "tools": [
+                "deduction_optimizer_agent",
+                "historical_data_analyzer_tool"
+            ]
+        },
+        {
+            "name": "deduction_optimizer_agent",
+            "role": "Optimizes tax deductions by analyzing eligible expenses within the current fiscal year.",
+            "tools": []
+        },
+        {
+            "name": "retirement_planning_agent",
+            "role": "Develops achievable retirement plans considering future income and lifestyle goals.",
+            "tools": [
+                "income_forecaster_agent",
+                "sustainable_retirement_plan_agent"
+            ]
+        },
+        {
+            "name": "income_forecaster_agent",
+            "role": "Forecasts long-term income scenarios to support sustainable retirement planning.",
+            "tools": []
+        },
+        {
+            "name": "sustainable_retirement_plan_agent",
+            "role": "Creates detailed retirement plans ensuring sustainability based on lifestyle preferences and financial goals.",
+            "tools": [
+                "financial_projection_tool"
+            ]
+        },
+        {
+            "name": "healthcare_cost_forecaster_agent",
+            "role": "Forecasts future healthcare expenses and builds strategies to manage these costs.",
+            "tools": [
+                "future_expense_simulator_agent",
+                "financial_buffer_strategy_agent"
+            ]
+        },
+        {
+            "name": "future_expense_simulator_agent",
+            "role": "Simulates future healthcare expenses based on current health and market trends.",
+            "tools": []
+        },
+        {
+            "name": "financial_buffer_strategy_agent",
+            "role": "Creates strategies to cushion the financial impact of healthcare costs through savings or insurance.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "historical_data_analyzer_tool",
+            "description": "Analyzes historical financial data to project future trends and make informed decisions.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "historical_records": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "year": {
+                                    "type": "string",
+                                    "description": "Year of the financial record"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "description": "Financial data for the year"
+                                }
+                            }
+                        },
+                        "description": "List of historical financial records."
+                    }
+                }
+            }
+        },
+        {
+            "name": "financial_projection_tool",
+            "description": "Provides projections for future financial status based on current data and personalized assumptions.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "investment_portfolio": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "investment_type": {
+                                    "type": "string",
+                                    "description": "Type of investment, e.g., stocks, bonds."
+                                },
+                                "amount": {
+                                    "type": "number",
+                                    "description": "Amount invested in this asset."
+                                }
+                            }
+                        },
+                        "description": "List of investments and their details"
+                    },
+                    "future_goals": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of future financial goals such as buying a house, children's education, etc."
+                    }
+                }
+            }
+        }
+    ]
+}

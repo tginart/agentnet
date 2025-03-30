@@ -1,0 +1,306 @@
+{
+    "task": "Develop a virtual summit on sustainable agricultural practices centered around urban farming initiatives in Tokyo, Japan. The summit should integrate educational sessions, live virtual farm tours, and panel discussions on modern agritech innovations. Arrange digital resources and kits for participants, ensure seamless online access, and provide comprehensive follow-up materials post-summit. Utilize green energy to power online hosting platforms and incorporate real-time translation services for international attendees.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "summit_organizer_agent",
+                "digital_session_manager_agent",
+                "educational_content_creator_agent",
+                "learning_materials_distribution_agent",
+                "interactive_learning_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "summit_organizer_agent",
+                "virtual_tour_coordinator_agent",
+                "urban_farm_connection_agent",
+                "live_farm_interaction_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "summit_organizer_agent",
+                "panel_discussion_manager_agent",
+                "agritech_expert_agent",
+                "session_scheduling_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "summit_organizer_agent",
+                "participant_resources_manager_agent",
+                "digital_kit_development_agent",
+                "resource_distribution_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "summit_organizer_agent",
+                "online_access_infrastructure_agent",
+                "green_energy_provider_agent",
+                "sustainable_hosting_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "summit_organizer_agent",
+                "translation_service_coordinator_agent",
+                "live_translation_tool",
+                "human"
+            ],
+            [
+                "summit_organizer_agent",
+                "panel_discussion_manager_agent",
+                "sustainability_policy_advisor_agent"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Acts as the primary point of contact between the client and the organizing network for the virtual summit.",
+            "tools": [
+                "summit_organizer_agent"
+            ]
+        },
+        {
+            "name": "summit_organizer_agent",
+            "role": "Coordinates all aspects of the virtual summit, ensuring a smooth and effective event delivery.",
+            "tools": [
+                "digital_session_manager_agent",
+                "virtual_tour_coordinator_agent",
+                "panel_discussion_manager_agent",
+                "participant_resources_manager_agent",
+                "online_access_infrastructure_agent",
+                "translation_service_coordinator_agent",
+                "follow_up_materials_agent",
+                "virtual_platform_stability_agent"
+            ]
+        },
+        {
+            "name": "digital_session_manager_agent",
+            "role": "Oversees the creation and management of educational sessions for the summit.",
+            "tools": [
+                "educational_content_creator_agent"
+            ]
+        },
+        {
+            "name": "educational_content_creator_agent",
+            "role": "Develops interactive and educational content tailored to urban farming initiatives.",
+            "tools": [
+                "learning_materials_distribution_agent"
+            ]
+        },
+        {
+            "name": "learning_materials_distribution_agent",
+            "role": "Distributes interactive learning materials developed for the summit.",
+            "tools": [
+                "interactive_learning_tool"
+            ]
+        },
+        {
+            "name": "virtual_tour_coordinator_agent",
+            "role": "Handles the coordination of live virtual tours of urban farms.",
+            "tools": [
+                "urban_farm_connection_agent"
+            ]
+        },
+        {
+            "name": "urban_farm_connection_agent",
+            "role": "Facilitates connections with urban farms to provide engaging live tours.",
+            "tools": [
+                "live_farm_interaction_tool"
+            ]
+        },
+        {
+            "name": "panel_discussion_manager_agent",
+            "role": "Organizes and manages panel discussions involving agritech experts.",
+            "tools": [
+                "agritech_expert_agent",
+                "session_scheduling_tool",
+                "sustainability_policy_advisor_agent"
+            ]
+        },
+        {
+            "name": "participant_resources_manager_agent",
+            "role": "Ensures participants receive necessary digital resources and kits.",
+            "tools": [
+                "digital_kit_development_agent"
+            ]
+        },
+        {
+            "name": "digital_kit_development_agent",
+            "role": "Develops and distributes digital kits and materials for summit attendees.",
+            "tools": [
+                "resource_distribution_tool"
+            ]
+        },
+        {
+            "name": "online_access_infrastructure_agent",
+            "role": "Establishes a reliable online infrastructure for summit access using green energy.",
+            "tools": [
+                "green_energy_provider_agent",
+                "sustainable_hosting_tool"
+            ]
+        },
+        {
+            "name": "green_energy_provider_agent",
+            "role": "Provides sustainable energy solutions for hosting the virtual summit.",
+            "tools": []
+        },
+        {
+            "name": "translation_service_coordinator_agent",
+            "role": "Manages real-time translation services for international participants.",
+            "tools": [
+                "live_translation_tool"
+            ]
+        },
+        {
+            "name": "agritech_expert_agent",
+            "role": "Contributes expertise on agritech innovations during panel discussions.",
+            "tools": []
+        },
+        {
+            "name": "sustainability_policy_advisor_agent",
+            "role": "Offers advice on sustainable practices and policies during summit discussions.",
+            "tools": []
+        },
+        {
+            "name": "follow_up_materials_agent",
+            "role": "Develops and provides follow-up materials to participants after the summit.",
+            "tools": []
+        },
+        {
+            "name": "virtual_platform_stability_agent",
+            "role": "Ensures the stability of the virtual platform for the duration of the summit.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "interactive_learning_tool",
+            "description": "Delivers interactive educational content to participants during the summit.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "session_topic": {
+                        "type": "string",
+                        "description": "Topic of the educational session."
+                    },
+                    "engagement_level": {
+                        "type": "string",
+                        "description": "Desired level of participant engagement."
+                    }
+                }
+            }
+        },
+        {
+            "name": "live_farm_interaction_tool",
+            "description": "Enables live interaction with farm tours during the virtual summit.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "farm_location": {
+                        "type": "string",
+                        "description": "Location of the urban farm for the tour."
+                    },
+                    "interactive_features": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of interactive features to be enabled during the tour."
+                    }
+                }
+            }
+        },
+        {
+            "name": "session_scheduling_tool",
+            "description": "Assists in scheduling and managing times for panel discussions.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "panel_id": {
+                        "type": "string",
+                        "description": "Identifier for the panel discussion."
+                    },
+                    "available_timeslots": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of available timeslots for the panel discussion."
+                    }
+                }
+            }
+        },
+        {
+            "name": "resource_distribution_tool",
+            "description": "Handles the distribution of digital kits and materials to participants.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "kit_type": {
+                        "type": "string",
+                        "description": "Type of digital kit to be distributed."
+                    },
+                    "number_of_kits": {
+                        "type": "number",
+                        "description": "Total number of kits to distribute."
+                    }
+                }
+            }
+        },
+        {
+            "name": "sustainable_hosting_tool",
+            "description": "Facilitates hosting the summit using renewable energy sources.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "energy_type": {
+                        "type": "string",
+                        "description": "Type of green energy used for hosting."
+                    },
+                    "hosting_capacity": {
+                        "type": "string",
+                        "description": "Capacity of the hosting service."
+                    }
+                }
+            }
+        },
+        {
+            "name": "live_translation_tool",
+            "description": "Offers real-time translation services during the virtual summit.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "language_pairs": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "source_language": {
+                                    "type": "string",
+                                    "description": "Source language for translation."
+                                },
+                                "target_language": {
+                                    "type": "string",
+                                    "description": "Target language for translation."
+                                }
+                            }
+                        },
+                        "description": "Pairs of languages available for translation."
+                    }
+                }
+            }
+        }
+    ]
+}

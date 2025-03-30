@@ -1,0 +1,258 @@
+{
+    "task": "Create an immersive three-day thematic experience in Tokyo for 30 C-level executives from various technology firms. The experience should incorporate AI workshops led by industry experts, VR retreats simulating future workplaces, exclusive networking dinners with top CEOs, and VIP studio tours. Each activity should be enabled with language translation services and prepare unique biometric entries for secure access. Special attention should be given to personalizing each executive's itinerary based on their business interests, including arranging one-on-one mentorship sessions with leading Tokyo entrepreneurs. Handcraft digital portfolios as personalized mementos for each participant post-event.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "experience_planning_agent",
+                "itinerary_customization_agent",
+                "business_interest_matcher_agent",
+                "one_on_one_mentor_scheduler",
+                "mentor_selection_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "experience_planning_agent",
+                "ai_and_vr_workshop_planner",
+                "expert_speaker_coordinator",
+                "ai_expert_recruitment_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "security_and_translation_management_agent",
+                "biometric_access_setup_agent",
+                "secure_entry_facilitator"
+            ],
+            [
+                "human",
+                "client_agent",
+                "security_and_translation_management_agent",
+                "language_service_coordinator",
+                "event_translation_team"
+            ],
+            [
+                "human",
+                "client_agent",
+                "itinerary_customization_agent",
+                "networking_dinner_arranger",
+                "private_chef_management_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "cultural_event_manager",
+                "vip_studio_tour_director",
+                "studio_contact_assistant"
+            ],
+            [
+                "human",
+                "client_agent",
+                "gift_and_memento_creator_agent",
+                "digital_portfolio_designer",
+                "graphics_and_content_specialist"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "experience_planning_agent",
+                "security_and_translation_management_agent",
+                "itinerary_customization_agent",
+                "cultural_event_manager",
+                "gift_and_memento_creator_agent"
+            ]
+        },
+        {
+            "name": "experience_planning_agent",
+            "role": "Manages the overall planning and scheduling of immersive experiences and workshops.",
+            "tools": [
+                "itinerary_customization_agent",
+                "ai_and_vr_workshop_planner"
+            ]
+        },
+        {
+            "name": "itinerary_customization_agent",
+            "role": "Customizes itineraries according to the specific interests and needs of each executive.",
+            "tools": [
+                "business_interest_matcher_agent",
+                "networking_dinner_arranger"
+            ]
+        },
+        {
+            "name": "business_interest_matcher_agent",
+            "role": "Matches executives' business interests with suitable activities and mentors.",
+            "tools": [
+                "one_on_one_mentor_scheduler"
+            ]
+        },
+        {
+            "name": "one_on_one_mentor_scheduler",
+            "role": "Schedules personalized mentorship sessions with Tokyo entrepreneurs.",
+            "tools": [
+                "mentor_selection_agent"
+            ]
+        },
+        {
+            "name": "mentor_selection_agent",
+            "role": "Selects and confirms suitable mentors based on executives' profiles.",
+            "tools": []
+        },
+        {
+            "name": "ai_and_vr_workshop_planner",
+            "role": "Plans AI and VR workshops and finds relevant industry experts.",
+            "tools": [
+                "expert_speaker_coordinator"
+            ]
+        },
+        {
+            "name": "expert_speaker_coordinator",
+            "role": "Coordinates with industry experts to lead workshops.",
+            "tools": [
+                "ai_expert_recruitment_agent"
+            ]
+        },
+        {
+            "name": "ai_expert_recruitment_agent",
+            "role": "Recruits and liaises with AI and VR experts for sessions.",
+            "tools": []
+        },
+        {
+            "name": "security_and_translation_management_agent",
+            "role": "Manages security access and provides translation services for participants.",
+            "tools": [
+                "biometric_access_setup_agent",
+                "language_service_coordinator"
+            ]
+        },
+        {
+            "name": "biometric_access_setup_agent",
+            "role": "Sets up secure biometric access points for event locations.",
+            "tools": [
+                "secure_entry_facilitator"
+            ]
+        },
+        {
+            "name": "secure_entry_facilitator",
+            "role": "Ensures biometric devices are accurately configured and functional.",
+            "tools": []
+        },
+        {
+            "name": "language_service_coordinator",
+            "role": "Coordinates real-time translation services for all event activities.",
+            "tools": [
+                "event_translation_team"
+            ]
+        },
+        {
+            "name": "event_translation_team",
+            "role": "Provides live translation during event sessions and activities.",
+            "tools": []
+        },
+        {
+            "name": "networking_dinner_arranger",
+            "role": "Organizes upscale networking dinners for executives.",
+            "tools": [
+                "private_chef_management_agent"
+            ]
+        },
+        {
+            "name": "private_chef_management_agent",
+            "role": "Manages private chefs for exclusive dinners tailored to guests' preferences.",
+            "tools": []
+        },
+        {
+            "name": "cultural_event_manager",
+            "role": "Curates cultural experiences and VIP tours for the retreat.",
+            "tools": [
+                "vip_studio_tour_director"
+            ]
+        },
+        {
+            "name": "vip_studio_tour_director",
+            "role": "Directs VIP access to exclusive studio tours.",
+            "tools": [
+                "studio_contact_assistant"
+            ]
+        },
+        {
+            "name": "studio_contact_assistant",
+            "role": "Liaises with studios to arrange tours and secure permissions.",
+            "tools": []
+        },
+        {
+            "name": "gift_and_memento_creator_agent",
+            "role": "Designs and prepares digital gifts and mementos for participants.",
+            "tools": [
+                "digital_portfolio_designer"
+            ]
+        },
+        {
+            "name": "digital_portfolio_designer",
+            "role": "Creates personalized digital portfolios as mementos for executives.",
+            "tools": [
+                "graphics_and_content_specialist"
+            ]
+        },
+        {
+            "name": "graphics_and_content_specialist",
+            "role": "Designs content and graphics for digital mementos.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "ai_workshop_configurator_tool",
+            "description": "Configures AI workshop programs tailored to executives' expertise levels.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "expert_level": {
+                        "type": "string",
+                        "description": "Level of expertise for the workshop (beginner, intermediate, advanced)."
+                    },
+                    "topics": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "AI-related topics to cover in the workshop."
+                    }
+                }
+            }
+        },
+        {
+            "name": "biometric_access_management_tool",
+            "description": "Configures biometric systems for secure event and accommodation access.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "biometric_types": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Types of biometric data to be used (fingerprint, facial recognition, iris scan)."
+                    },
+                    "access_levels": {
+                        "type": "object",
+                        "description": "Different access levels for participants.",
+                        "properties": {
+                            "standard_access": {
+                                "type": "boolean"
+                            },
+                            "vip_access": {
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

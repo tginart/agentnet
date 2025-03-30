@@ -1,0 +1,235 @@
+{
+    "task": "Plan a weekly grocery shopping trip: 1. Compile a list of recipes for the week, 2. Calculate total nutritional values per day, 3. Compare prices at different supermarkets, 4. Arrange home delivery for perishables, and 5. Find subscription options for frequently used items.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "recipe_planning_agent",
+                "recipe_creator_agent",
+                "recipe_search_agent",
+                "ingredient_optimizer_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "nutrition_analysis_agent",
+                "daily_nutrition_tool",
+                "nutrition_reporting_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "price_comparison_agent",
+                "supermarket_price_agent",
+                "supermarket_scan_tool",
+                "pricing_validation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "delivery_service_agent",
+                "perishables_delivery_agent",
+                "delivery_coordination_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "subscription_finder_agent",
+                "subscription_options_agent",
+                "subscription_analysis_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "recipe_planning_agent",
+                "nutrition_analysis_agent",
+                "price_comparison_agent",
+                "delivery_service_agent",
+                "subscription_finder_agent"
+            ]
+        },
+        {
+            "name": "recipe_planning_agent",
+            "role": "Plans weekly recipes based on dietary preferences and compiles ingredient lists.",
+            "tools": [
+                "recipe_creator_agent"
+            ]
+        },
+        {
+            "name": "recipe_creator_agent",
+            "role": "Utilizes various criteria to create and refine a weekly recipe plan.",
+            "tools": [
+                "recipe_search_agent"
+            ]
+        },
+        {
+            "name": "recipe_search_agent",
+            "role": "Searches for recipes online and compiles them based on provided preferences.",
+            "tools": [
+                "ingredient_optimizer_tool"
+            ]
+        },
+        {
+            "name": "nutrition_analysis_agent",
+            "role": "Analyzes the nutritional information of planned recipes over the week.",
+            "tools": [
+                "daily_nutrition_tool"
+            ]
+        },
+        {
+            "name": "daily_nutrition_tool",
+            "role": "Calculates total nutritional intake for the day based on input recipes.",
+            "tools": [
+                "nutrition_reporting_agent"
+            ]
+        },
+        {
+            "name": "nutrition_reporting_agent",
+            "role": "Compiles and reports detailed nutritional information for user review.",
+            "tools": []
+        },
+        {
+            "name": "price_comparison_agent",
+            "role": "Compares product prices across various supermarkets to find the best deals.",
+            "tools": [
+                "supermarket_price_agent"
+            ]
+        },
+        {
+            "name": "supermarket_price_agent",
+            "role": "Analyzes pricing provided by different supermarkets for the shopping list.",
+            "tools": [
+                "supermarket_scan_tool"
+            ]
+        },
+        {
+            "name": "supermarket_scan_tool",
+            "role": "Scans and retrieves price lists from various supermarkets for comparison.",
+            "tools": [
+                "pricing_validation_agent"
+            ]
+        },
+        {
+            "name": "pricing_validation_agent",
+            "role": "Validates obtained price data to ensure accuracy and relevance.",
+            "tools": []
+        },
+        {
+            "name": "delivery_service_agent",
+            "role": "Arranges delivery services for grocery items to ensure they arrive fresh.",
+            "tools": [
+                "perishables_delivery_agent"
+            ]
+        },
+        {
+            "name": "perishables_delivery_agent",
+            "role": "Coordinates delivery specifically for perishable items requiring special handling.",
+            "tools": [
+                "delivery_coordination_tool"
+            ]
+        },
+        {
+            "name": "subscription_finder_agent",
+            "role": "Finds and recommends subscription options for frequently used grocery items.",
+            "tools": [
+                "subscription_options_agent"
+            ]
+        },
+        {
+            "name": "subscription_options_agent",
+            "role": "Evaluates subscription plans and benefits for recurring grocery items.",
+            "tools": [
+                "subscription_analysis_tool"
+            ]
+        }
+    ],
+    "tools": [
+        {
+            "name": "ingredient_optimizer_tool",
+            "description": "Optimizes ingredient lists to ensure variety and nutritional coverage.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "recipe_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of recipes for the week."
+                    },
+                    "dietary_preferences": {
+                        "type": "string",
+                        "description": "User's dietary preferences or restrictions."
+                    }
+                }
+            }
+        },
+        {
+            "name": "supermarket_scan_tool",
+            "description": "Scans and retrieves price lists from various supermarkets for comparison.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "grocery_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of grocery items to compare prices."
+                    },
+                    "location": {
+                        "type": "string",
+                        "description": "User's location to find local supermarkets."
+                    }
+                }
+            }
+        },
+        {
+            "name": "delivery_coordination_tool",
+            "description": "Coordinates the logistics for timely delivery of perishable items.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "delivery_schedule": {
+                        "type": "string",
+                        "description": "Preferred delivery schedule for perishable items."
+                    },
+                    "special_handling": {
+                        "type": "boolean",
+                        "description": "Whether special handling is required for the items."
+                    }
+                }
+            }
+        },
+        {
+            "name": "subscription_analysis_tool",
+            "description": "Analyzes subscription options for cost-effectiveness and convenience.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "items_for_subscription": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of items considered for subscription."
+                    },
+                    "frequency": {
+                        "type": "string",
+                        "description": "Subscription frequency (e.g., monthly, bi-weekly)."
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,306 @@
+{
+    "task": "Create an immersive digital lifestyle improvement package tailored for a remote worker. The package must address aspects of physical fitness, nutritional balance, mental health, ergonomic workspaces, time-management strategies, and secure data handling. This should integrate seamlessly with digital platforms for progress monitoring and improvements.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "digital_lifestyle_coordinator_agent",
+                "fitness_and_health_program_agent",
+                "custom_workout_developer_agent",
+                "fitness_evaluation_specialist_agent",
+                "fitness_tracking_app_recommender_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "digital_lifestyle_coordinator_agent",
+                "nutrition_advisory_agent",
+                "tailored_diet_plan_agent",
+                "allergy_and_special_diet_checker_agent",
+                "recipe_app_tool_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "digital_lifestyle_coordinator_agent",
+                "mind_health_facilitator_agent",
+                "global_mindfulness_practitioner_agent",
+                "mindfulness_technology_advisor_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "digital_lifestyle_coordinator_agent",
+                "workspace_efficiency_agent",
+                "ergonomic_expert_agent",
+                "ergonomic_equipments_tool",
+                "second_curated_specialist_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "digital_lifestyle_coordinator_agent",
+                "time_and_productivity_master_agent",
+                "time_zone_awareness_agent",
+                "digital_agenda_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "digital_lifestyle_coordinator_agent",
+                "security_and_privacy_consultant_agent",
+                "data_protection_policy_agent",
+                "advanced_encryption_advisory_agent"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The central client agent that communicates with the user and coordinates the setup of the digital lifestyle improvement package.",
+            "tools": [
+                "digital_lifestyle_coordinator_agent"
+            ]
+        },
+        {
+            "name": "digital_lifestyle_coordinator_agent",
+            "role": "Transforms user requirements into integrated coordinated lifestyle services across various domains.",
+            "tools": [
+                "fitness_and_health_program_agent",
+                "nutrition_advisory_agent",
+                "mind_health_facilitator_agent",
+                "workspace_efficiency_agent",
+                "time_and_productivity_master_agent",
+                "security_and_privacy_consultant_agent"
+            ]
+        },
+        {
+            "name": "fitness_and_health_program_agent",
+            "role": "Designs a comprehensive health and fitness program that includes exercise and digital tracking.",
+            "tools": [
+                "custom_workout_developer_agent",
+                "fitness_evaluation_specialist_agent"
+            ]
+        },
+        {
+            "name": "custom_workout_developer_agent",
+            "role": "Develops custom workout plans and integrates them with health monitoring tools.",
+            "tools": [
+                "fitness_tracking_app_recommender_tool"
+            ]
+        },
+        {
+            "name": "fitness_evaluation_specialist_agent",
+            "role": "Reviews and provides feedback on workout effectiveness and fitness progress.",
+            "tools": []
+        },
+        {
+            "name": "nutrition_advisory_agent",
+            "role": "Provides nutritional guidance and personalized meal planning.",
+            "tools": [
+                "tailored_diet_plan_agent",
+                "allergy_and_special_diet_checker_agent"
+            ]
+        },
+        {
+            "name": "tailored_diet_plan_agent",
+            "role": "Creates specialized diet plans with considerations for allergies and specific dietary needs.",
+            "tools": [
+                "recipe_app_tool_agent"
+            ]
+        },
+        {
+            "name": "allergy_and_special_diet_checker_agent",
+            "role": "Verifies diet plans against known allergies and dietary restrictions.",
+            "tools": []
+        },
+        {
+            "name": "mind_health_facilitator_agent",
+            "role": "Focuses on mental well-being and stress management practices.",
+            "tools": [
+                "global_mindfulness_practitioner_agent"
+            ]
+        },
+        {
+            "name": "global_mindfulness_practitioner_agent",
+            "role": "Provides mindfulness and relaxation techniques across various cultural practices.",
+            "tools": [
+                "mindfulness_technology_advisor_tool"
+            ]
+        },
+        {
+            "name": "workspace_efficiency_agent",
+            "role": "Optimizes workspaces for productivity and ergonomic welfare.",
+            "tools": [
+                "ergonomic_expert_agent",
+                "second_curated_specialist_agent"
+            ]
+        },
+        {
+            "name": "ergonomic_expert_agent",
+            "role": "Suggests ergonomic improvements and workspace setups.",
+            "tools": [
+                "ergonomic_equipments_tool"
+            ]
+        },
+        {
+            "name": "second_curated_specialist_agent",
+            "role": "Provides second opinions on workspace enhancements and specific equipment.",
+            "tools": []
+        },
+        {
+            "name": "time_and_productivity_master_agent",
+            "role": "Enhances time management and productivity through tech-aided solutions.",
+            "tools": [
+                "time_zone_awareness_agent"
+            ]
+        },
+        {
+            "name": "time_zone_awareness_agent",
+            "role": "Assists in scheduling and alert management across global time zones.",
+            "tools": [
+                "digital_agenda_tool"
+            ]
+        },
+        {
+            "name": "security_and_privacy_consultant_agent",
+            "role": "Consults on data security protocols and privacy safeguard measures.",
+            "tools": [
+                "data_protection_policy_agent"
+            ]
+        },
+        {
+            "name": "data_protection_policy_agent",
+            "role": "Advises on data protection policies and best practices for digital privacy.",
+            "tools": [
+                "advanced_encryption_advisory_agent"
+            ]
+        },
+        {
+            "name": "advanced_encryption_advisory_agent",
+            "role": "Specializes in encryption techniques and data security methodologies.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "fitness_tracking_app_recommender_tool",
+            "description": "Provides recommendations for fitness tracking apps that align with user fitness plans.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "current_exercise_regimen": {
+                        "type": "string",
+                        "description": "The user\u2019s current exercise routine."
+                    },
+                    "desired_app_features": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Features desired in a fitness app, such as progress tracking or reminders."
+                    }
+                }
+            }
+        },
+        {
+            "name": "recipe_app_tool_agent",
+            "description": "Offers app suggestions to provide recipes suitable for personalized diet plans.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "major_dietary_restrictions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Major dietary restrictions to consider in recipe selection."
+                    },
+                    "cookware_availability": {
+                        "type": "string",
+                        "description": "Available cooking equipment the user owns."
+                    }
+                }
+            }
+        },
+        {
+            "name": "mindfulness_technology_advisor_tool",
+            "description": "Recommends mindfulness apps that suit personal practices and lifestyle choices.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "practiced_techniques": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Mindfulness techniques already practiced by the user."
+                    },
+                    "technology_preferences": {
+                        "type": "string",
+                        "description": "Preferences or restrictions regarding app usage and technology."
+                    }
+                }
+            }
+        },
+        {
+            "name": "ergonomic_equipments_tool",
+            "description": "Recommends ergonomic equipment to optimize workspace based on user needs.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "workspace_dimensions": {
+                        "type": "object",
+                        "properties": {
+                            "width": {
+                                "type": "number",
+                                "description": "Width of the workspace available."
+                            },
+                            "height": {
+                                "type": "number",
+                                "description": "Height of the workspace available."
+                            },
+                            "depth": {
+                                "type": "number",
+                                "description": "Depth of the workspace available."
+                            }
+                        },
+                        "description": "Measurements of the user's workspace."
+                    },
+                    "equipment_preference": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Preferred types of ergonomic equipment."
+                    }
+                }
+            }
+        },
+        {
+            "name": "digital_agenda_tool",
+            "description": "Provides time management and scheduling solutions customized to different time zones.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "main_time_zones": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Primary time zones the user operates within."
+                    },
+                    "notification_preferences": {
+                        "type": "string",
+                        "description": "User preferences for notification timing and method."
+                    }
+                }
+            }
+        }
+    ]
+}

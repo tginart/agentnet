@@ -1,0 +1,310 @@
+{
+    "task": "Coordinate an international hybrid expo: 1. Identify and recruit diverse exhibitors, 2. Develop a seamless virtual and in-person event platform, 3. Manage logistics for both online and on-site setups, 4. Incorporate real-time translation services, 5. Facilitate live streaming and interactive sessions, and 6. Gather and evaluate attendee feedback for event optimization.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "exhibitor_management_agent",
+                "exhibitor_recruitment_agent",
+                "industry_expert_locator_agent",
+                "global_exhibitor_network_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "event_platform_agent",
+                "hybrid_event_design_agent",
+                "integrated_system_agent",
+                "technology_integration_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "logistics_management_agent",
+                "virtual_and_physical_logistics_agent",
+                "resource_planning_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "translation_service_agent",
+                "real_time_translation_agent",
+                "translation_tool",
+                "language_accuracy_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "media_management_agent",
+                "live_streaming_coordinator",
+                "interactive_session_tool",
+                "audience_engagement_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "feedback_evaluation_agent",
+                "data_compilation_agent",
+                "feedback_analysis_tool",
+                "data_insight_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent responsible for orchestrating all operations to coordinate the expo.",
+            "tools": [
+                "exhibitor_management_agent",
+                "event_platform_agent",
+                "logistics_management_agent",
+                "translation_service_agent",
+                "media_management_agent",
+                "feedback_evaluation_agent"
+            ]
+        },
+        {
+            "name": "exhibitor_management_agent",
+            "role": "Oversees the identification and recruitment of potential exhibitors.",
+            "tools": [
+                "exhibitor_recruitment_agent"
+            ]
+        },
+        {
+            "name": "exhibitor_recruitment_agent",
+            "role": "Handles recruitment and registration processes for exhibitors.",
+            "tools": [
+                "industry_expert_locator_agent"
+            ]
+        },
+        {
+            "name": "industry_expert_locator_agent",
+            "role": "Finds and engages industry experts to participate as exhibitors.",
+            "tools": [
+                "global_exhibitor_network_agent"
+            ]
+        },
+        {
+            "name": "global_exhibitor_network_agent",
+            "role": "Connects to a network of potential exhibitors worldwide.",
+            "tools": []
+        },
+        {
+            "name": "event_platform_agent",
+            "role": "Develops and maintains the hybrid event platform.",
+            "tools": [
+                "hybrid_event_design_agent"
+            ]
+        },
+        {
+            "name": "hybrid_event_design_agent",
+            "role": "Designs the architecture for seamless virtual and physical event integration.",
+            "tools": [
+                "integrated_system_agent"
+            ]
+        },
+        {
+            "name": "integrated_system_agent",
+            "role": "Integrates technology systems for hybrid event functionality.",
+            "tools": [
+                "technology_integration_tool"
+            ]
+        },
+        {
+            "name": "logistics_management_agent",
+            "role": "Coordinates logistics for virtual and on-site event components.",
+            "tools": [
+                "virtual_and_physical_logistics_agent"
+            ]
+        },
+        {
+            "name": "virtual_and_physical_logistics_agent",
+            "role": "Manages logistics and resource allocation for both virtual and onsite setups.",
+            "tools": [
+                "resource_planning_tool"
+            ]
+        },
+        {
+            "name": "translation_service_agent",
+            "role": "Facilitates real-time translation services during the expo.",
+            "tools": [
+                "real_time_translation_agent"
+            ]
+        },
+        {
+            "name": "real_time_translation_agent",
+            "role": "Provides live translation services across multiple languages.",
+            "tools": [
+                "translation_tool",
+                "language_accuracy_agent"
+            ]
+        },
+        {
+            "name": "language_accuracy_agent",
+            "role": "Ensures the precision of translations provided during the event.",
+            "tools": []
+        },
+        {
+            "name": "media_management_agent",
+            "role": "Manages media content and live streaming for the event.",
+            "tools": [
+                "live_streaming_coordinator"
+            ]
+        },
+        {
+            "name": "live_streaming_coordinator",
+            "role": "Coordinates live streams and interactive elements of the event.",
+            "tools": [
+                "interactive_session_tool",
+                "audience_engagement_agent"
+            ]
+        },
+        {
+            "name": "audience_engagement_agent",
+            "role": "Enhances participant engagement through interactive sessions.",
+            "tools": []
+        },
+        {
+            "name": "feedback_evaluation_agent",
+            "role": "Evaluates feedback from participants for future event enhancement.",
+            "tools": [
+                "data_compilation_agent"
+            ]
+        },
+        {
+            "name": "data_compilation_agent",
+            "role": "Compiles and organizes feedback data from attendees.",
+            "tools": [
+                "feedback_analysis_tool",
+                "data_insight_agent"
+            ]
+        },
+        {
+            "name": "data_insight_agent",
+            "role": "Derives actionable insights from compiled feedback data.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "technology_integration_tool",
+            "description": "Integrates various tech systems for hybrid event management.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "system_components": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of system components to integrate."
+                    },
+                    "integration_method": {
+                        "type": "string",
+                        "description": "Method to be used for system integration."
+                    }
+                }
+            }
+        },
+        {
+            "name": "resource_planning_tool",
+            "description": "Plans and allocates resources for the expo logistics.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "resource_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Resources to be planned and allocated."
+                    },
+                    "event_phase": {
+                        "type": "string",
+                        "description": "Phase of the event for resource allocation."
+                    }
+                }
+            }
+        },
+        {
+            "name": "translation_tool",
+            "description": "Facilitates real-time language translation.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "language_pairs": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "source_language": {
+                                    "type": "string",
+                                    "description": "Source language for translation."
+                                },
+                                "target_language": {
+                                    "type": "string",
+                                    "description": "Target language for translation."
+                                }
+                            }
+                        },
+                        "description": "Pairs of languages to be translated between."
+                    }
+                }
+            }
+        },
+        {
+            "name": "interactive_session_tool",
+            "description": "Facilitates and manages interactive sessions for the event.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "session_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the interactive session."
+                    },
+                    "participant_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of participants in the session."
+                    },
+                    "engagement_features": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Interactive features to be utilized in the session."
+                    }
+                }
+            }
+        },
+        {
+            "name": "feedback_analysis_tool",
+            "description": "Analyzes feedback data to provide insights for event improvement.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "feedback_entries": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "Collection of feedback entries for analysis."
+                    },
+                    "analysis_criteria": {
+                        "type": "string",
+                        "description": "Criteria for feedback analysis and insights derivation."
+                    }
+                }
+            }
+        }
+    ]
+}

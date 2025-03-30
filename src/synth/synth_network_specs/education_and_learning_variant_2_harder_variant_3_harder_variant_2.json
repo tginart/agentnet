@@ -1,0 +1,190 @@
+{
+    "task": "Coordinate a cross-disciplinary exploration of deep-sea hydrothermal vents, integrating remote-operated submarines for real-time data collection. Ensure adherence to underwater resource extraction laws, foster partnerships with marine bioengineering labs, and optimize data distribution using blockchain technology for transparent shared research.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "project_coordination_agent",
+                "resource_management_agent",
+                "legal_analysis_agent",
+                "compliance_verification_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "project_coordination_agent",
+                "submarine_operations_manager_agent",
+                "real_time_data_processing_agent",
+                "data_security_protocol_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "biotech_collaboration_agent",
+                "marine_laboratory_network_agent",
+                "data_sharing_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "blockchain_infrastructure_agent",
+                "distributed_ledger_agent",
+                "transaction_verification_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "submarine_operations_manager_agent",
+                "equipment_status_monitor_agent",
+                "oceanic_sensor_toolkit",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Primary interface coordinating the mission and managing interactions with specialized agents.",
+            "tools": [
+                "project_coordination_agent",
+                "biotech_collaboration_agent",
+                "blockchain_infrastructure_agent"
+            ]
+        },
+        {
+            "name": "project_coordination_agent",
+            "role": "Leads the deep-sea exploration efforts, ensuring smooth integration of various operational aspects.",
+            "tools": [
+                "resource_management_agent",
+                "submarine_operations_manager_agent"
+            ]
+        },
+        {
+            "name": "resource_management_agent",
+            "role": "Oversees resource allocation and ensures legal compliance regarding underwater resource extraction.",
+            "tools": [
+                "legal_analysis_agent",
+                "compliance_verification_agent"
+            ]
+        },
+        {
+            "name": "submarine_operations_manager_agent",
+            "role": "Directs the activities of remote-operated submarines, coordinating real-time data collection efforts.",
+            "tools": [
+                "real_time_data_processing_agent",
+                "equipment_status_monitor_agent"
+            ]
+        },
+        {
+            "name": "biotech_collaboration_agent",
+            "role": "Facilitates partnerships with marine bioengineering labs for innovative research applications.",
+            "tools": [
+                "marine_laboratory_network_agent",
+                "data_sharing_tool"
+            ]
+        },
+        {
+            "name": "blockchain_infrastructure_agent",
+            "role": "Implements blockchain technology to secure and distribute research data transparently.",
+            "tools": [
+                "distributed_ledger_agent",
+                "transaction_verification_tool"
+            ]
+        },
+        {
+            "name": "legal_analysis_agent",
+            "role": "Analyzes maritime laws related to resource extraction and advises on legal constraints.",
+            "tools": []
+        },
+        {
+            "name": "compliance_verification_agent",
+            "role": "Verifies compliance with international regulations for underwater explorations.",
+            "tools": []
+        },
+        {
+            "name": "real_time_data_processing_agent",
+            "role": "Processes data collected by submarines in real time, ensuring accuracy and reliability.",
+            "tools": [
+                "data_security_protocol_agent"
+            ]
+        },
+        {
+            "name": "equipment_status_monitor_agent",
+            "role": "Monitors the operational status of underwater sensing equipment and submarines.",
+            "tools": [
+                "oceanic_sensor_toolkit"
+            ]
+        },
+        {
+            "name": "marine_laboratory_network_agent",
+            "role": "Connects and coordinates with global marine laboratories on bioengineering projects.",
+            "tools": []
+        },
+        {
+            "name": "data_security_protocol_agent",
+            "role": "Implements security protocols for data collected from submarine operations.",
+            "tools": []
+        },
+        {
+            "name": "distributed_ledger_agent",
+            "role": "Manages the blockchain ledger to ensure data integrity and accessibility for stakeholders.",
+            "tools": []
+        },
+        {
+            "name": "oceanic_sensor_toolkit",
+            "role": "Comprises an array of oceanic sensors designed for deep-sea exploration data capture.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "data_sharing_tool",
+            "description": "Facilitates secure data sharing among partnered bioengineering labs.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "lab_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the bioengineering lab."
+                    },
+                    "data_package": {
+                        "type": "object",
+                        "description": "Data package being shared, including metadata and content."
+                    },
+                    "access_duration": {
+                        "type": "string",
+                        "format": "duration",
+                        "description": "Duration for which the data access is granted."
+                    }
+                }
+            }
+        },
+        {
+            "name": "transaction_verification_tool",
+            "description": "Verifies transactions within the blockchain system to ensure data validity and consistency.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "transaction_id": {
+                        "type": "string",
+                        "description": "Identifier for the blockchain transaction to be verified."
+                    },
+                    "verification_hash": {
+                        "type": "string",
+                        "description": "Hash string for verifying transaction integrity."
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "The timestamp of the transaction."
+                    }
+                }
+            }
+        }
+    ]
+}

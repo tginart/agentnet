@@ -1,0 +1,235 @@
+{
+    "task": "Design a comprehensive wealth management strategy focusing on tax mitigation, ESG-compliant investments, and integration of AI-driven analytics for international market opportunities.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "wealth_management_agent",
+                "tax_mitigation_strategy_agent",
+                "offshore_tax_planning_agent",
+                "international_compliance_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wealth_management_agent",
+                "investment_portfolio_agent",
+                "esg_investment_strategy_agent",
+                "carbon_footprint_evaluation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wealth_management_agent",
+                "ai_market_analysis_agent",
+                "predictive_trends_agent",
+                "international_investment_research_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wealth_management_agent",
+                "global_regulations_agent",
+                "data_sharing_compliance_agent",
+                "client_data_validator",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wealth_management_agent",
+                "investment_portfolio_agent",
+                "diversified_asset_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wealth_management_agent",
+                "financial_risk_management_agent",
+                "stress_test_agent",
+                "risk_reduction_agent"
+            ]
+        ],
+        "edge_checks": [
+            {
+                "check_type": "assertContains",
+                "from": "predictive_trends_agent",
+                "to": "international_investment_research_agent",
+                "type": "trend_analysis_call",
+                "arguments": {
+                    "regions": [
+                        "Asia",
+                        "Europe"
+                    ],
+                    "forecast_period": "2023-2028"
+                }
+            }
+        ]
+    },
+    "agents": [
+        {
+            "name": "offshore_tax_planning_agent",
+            "role": "Specializes in developing offshore tax strategies while ensuring compliance with international laws.",
+            "tools": []
+        },
+        {
+            "name": "carbon_footprint_evaluation_agent",
+            "role": "Assesses the carbon footprint and environmental impact of potential investment options.",
+            "tools": []
+        },
+        {
+            "name": "client_data_validator",
+            "role": "Validates client data to ensure adherence to privacy and data protection laws globally.",
+            "tools": []
+        },
+        {
+            "name": "international_investment_research_agent",
+            "role": "Conducts in-depth research on international investment opportunities and market entry strategies.",
+            "tools": []
+        },
+        {
+            "name": "diversified_asset_agent",
+            "role": "Analyzes and recommends a mix of assets for a diversified portfolio to optimize risk and reward.",
+            "tools": []
+        },
+        {
+            "name": "wealth_management_agent",
+            "role": "Oversees the creation of a holistic wealth management strategy encompassing tax, investment, and AI analytics.",
+            "tools": [
+                "tax_mitigation_strategy_agent",
+                "investment_portfolio_agent",
+                "ai_market_analysis_agent",
+                "global_regulations_agent",
+                "financial_risk_management_agent"
+            ]
+        },
+        {
+            "name": "tax_mitigation_strategy_agent",
+            "role": "Designs strategies to minimize tax liabilities through various legal frameworks and options.",
+            "tools": [
+                "offshore_tax_planning_agent",
+                "international_compliance_agent"
+            ]
+        },
+        {
+            "name": "investment_portfolio_agent",
+            "role": "Manages investment portfolios with a focus on ESG compliance and diversification.",
+            "tools": [
+                "esg_investment_strategy_agent",
+                "diversified_asset_agent"
+            ]
+        },
+        {
+            "name": "ai_market_analysis_agent",
+            "role": "Utilizes AI-driven analytics to detect market trends and opportunities.",
+            "tools": [
+                "predictive_trends_agent"
+            ]
+        },
+        {
+            "name": "predictive_trends_agent",
+            "role": "Forecasts market trends using AI algorithms to advise on future investment opportunities.",
+            "tools": [
+                "international_investment_research_agent"
+            ]
+        },
+        {
+            "name": "esg_investment_strategy_agent",
+            "role": "Focuses on creating investment plans that meet ESG criteria and promote sustainability.",
+            "tools": [
+                "carbon_footprint_evaluation_agent"
+            ]
+        },
+        {
+            "name": "global_regulations_agent",
+            "role": "Advises on regulations related to international market investments and compliance needs.",
+            "tools": [
+                "data_sharing_compliance_agent"
+            ]
+        },
+        {
+            "name": "data_sharing_compliance_agent",
+            "role": "Ensures data sharing across borders complies with international data protection laws.",
+            "tools": [
+                "client_data_validator"
+            ]
+        },
+        {
+            "name": "financial_risk_management_agent",
+            "role": "Manages financial risks associated with investments through stress testing and scenario analysis.",
+            "tools": [
+                "stress_test_agent",
+                "risk_reduction_agent"
+            ]
+        },
+        {
+            "name": "stress_test_agent",
+            "role": "Conducts stress tests on investment portfolios to assess stability under adverse conditions.",
+            "tools": []
+        },
+        {
+            "name": "risk_reduction_agent",
+            "role": "Develops strategies to reduce exposure to financial risks in investment management.",
+            "tools": []
+        },
+        {
+            "name": "international_compliance_agent",
+            "role": "Ensures that tax planning and wealth management strategies comply with international regulations.",
+            "tools": []
+        },
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "wealth_management_agent"
+            ]
+        }
+    ],
+    "tools": [
+        {
+            "name": "trend_analysis_call",
+            "description": "Analyzes market trends across regions and provides future forecasts.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "regions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Regions to analyze for market trends"
+                    },
+                    "forecast_period": {
+                        "type": "string",
+                        "description": "Period for which the forecast is needed"
+                    }
+                }
+            }
+        },
+        {
+            "name": "risk_assessment_model",
+            "description": "Evaluates risk factors for investment strategies under diverse economic conditions.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "economic_factors": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of economic factors to consider in risk assessment"
+                    },
+                    "apply_stress_testing": {
+                        "type": "boolean",
+                        "description": "Indicator to apply stress test scenarios"
+                    }
+                }
+            }
+        }
+    ]
+}

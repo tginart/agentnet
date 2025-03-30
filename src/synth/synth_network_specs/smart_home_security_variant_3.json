@@ -1,0 +1,146 @@
+{
+    "task": "Monitor the smart home's surveillance system for security breaches, analyze unusual motions, update motion sensor sensitivity settings, and generate a daily security activity log.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "surveillance_monitor_agent",
+                "motion_analysis_agent",
+                "pattern_recognition_agent",
+                "emergency_contact_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "sensor_configuration_agent",
+                "sensitivity_adjustment_tool",
+                "notification_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "security_log_agent",
+                "generate_activity_log_tool",
+                "historical_data_insights_agent",
+                "data_optimizer_agent",
+                "device_diagnostics_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Central hub for user interaction and delegation to security management agents.",
+            "tools": [
+                "surveillance_monitor_agent",
+                "sensor_configuration_agent",
+                "security_log_agent"
+            ]
+        },
+        {
+            "name": "surveillance_monitor_agent",
+            "role": "Monitors live feeds from surveillance cameras to identify security breaches.",
+            "tools": [
+                "motion_analysis_agent"
+            ]
+        },
+        {
+            "name": "motion_analysis_agent",
+            "role": "Analyzes detected motions to classify them as normal or suspicious activities.",
+            "tools": [
+                "pattern_recognition_agent",
+                "emergency_contact_agent"
+            ]
+        },
+        {
+            "name": "pattern_recognition_agent",
+            "role": "Uses machine learning to recognize patterns in motion data and identify potential threats.",
+            "tools": []
+        },
+        {
+            "name": "sensor_configuration_agent",
+            "role": "Configures and adjusts settings for motion sensors to ensure accurate detection.",
+            "tools": [
+                "sensitivity_adjustment_tool",
+                "notification_agent"
+            ]
+        },
+        {
+            "name": "security_log_agent",
+            "role": "Compiles and maintains logs of all security activities and events within the home.",
+            "tools": [
+                "generate_activity_log_tool",
+                "historical_data_insights_agent"
+            ]
+        },
+        {
+            "name": "historical_data_insights_agent",
+            "role": "Derives insights from historical security data to suggest improvements.",
+            "tools": [
+                "data_optimizer_agent"
+            ]
+        },
+        {
+            "name": "emergency_contact_agent",
+            "role": "Contacts emergency services in case of confirmed security breaches.",
+            "tools": []
+        },
+        {
+            "name": "notification_agent",
+            "role": "Notifies homeowners of any significant security events through the preferred communication method.",
+            "tools": []
+        },
+        {
+            "name": "data_optimizer_agent",
+            "role": "Optimizes security configurations based on historical data insights.",
+            "tools": [
+                "device_diagnostics_agent"
+            ]
+        },
+        {
+            "name": "device_diagnostics_agent",
+            "role": "Performs diagnostics on all security devices to ensure they're operational.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "sensitivity_adjustment_tool",
+            "description": "Adjusts sensitivity levels of motion sensors to optimize performance.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "sensor_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the sensor to be adjusted."
+                    },
+                    "desired_sensitivity_level": {
+                        "type": "string",
+                        "description": "The new sensitivity level to set (e.g., low, medium, high)."
+                    }
+                }
+            }
+        },
+        {
+            "name": "generate_activity_log_tool",
+            "description": "Generates a detailed log of all security-related activities and events.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "log_date": {
+                        "type": "string",
+                        "description": "The date for which to generate the activity log."
+                    },
+                    "include_summary": {
+                        "type": "boolean",
+                        "description": "Whether to include a summary of key events in the log."
+                    }
+                }
+            }
+        }
+    ]
+}

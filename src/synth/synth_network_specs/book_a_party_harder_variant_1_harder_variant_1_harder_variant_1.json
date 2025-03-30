@@ -1,0 +1,345 @@
+{
+    "task": "Plan an exclusive, multi-day corporate retreat for 50 executives in Kyoto, Japan during cherry blossom season. Secure a luxury ryokan with both traditional and modern amenities, coordinate personalized flight itineraries from various continents, arrange private transportation, and tailor cultural experiences, including geisha performances, zen meditation sessions, and a tea ceremony with a renowned tea master. Ensure all meals accommodate distinct international dietary preferences, and arrange coded RFID tag access for secure accommodations and event entries. Lastly, prepare signature business gift sets for each executive and ensure on-call concierge services throughout the retreat.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "retreat_planning_agent",
+                "accommodation_booking_agent",
+                "ryokan_selection_and_negotiation_agent",
+                "luxury_ryokan_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "transportation_coordinator_agent",
+                "flight_itinerary_design_agent",
+                "global_travel_agent",
+                "flight_reservation_department"
+            ],
+            [
+                "human",
+                "client_agent",
+                "transportation_coordinator_agent",
+                "local_access_facilitator_agent",
+                "private_driver_network"
+            ],
+            [
+                "human",
+                "client_agent",
+                "cultural_experience_coordinator_agent",
+                "traditional_culture_facilitator_agent",
+                "tea_ceremony_master_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "cultural_experience_coordinator_agent",
+                "geisha_performance_manager_agent",
+                "geisha_contact_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "cultural_experience_coordinator_agent",
+                "zen_meditation_coach_agent",
+                "zen_meditation_group_arranger"
+            ],
+            [
+                "human",
+                "client_agent",
+                "culinary_coordinator_agent",
+                "dietary_inclusion_specialist",
+                "meal_planning_and_verification_unit"
+            ],
+            [
+                "human",
+                "client_agent",
+                "security_and_access_management_agent",
+                "RFID_access_coordinator",
+                "secure_entry_systems_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "gift_preparation_and_customization_agent",
+                "executive_gift_set_designer",
+                "customization_specialist"
+            ],
+            [
+                "human",
+                "client_agent",
+                "retreat_planning_agent",
+                "concierge_service_manager_agent",
+                "on_call_concierge_service"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "retreat_planning_agent",
+                "transportation_coordinator_agent",
+                "cultural_experience_coordinator_agent",
+                "culinary_coordinator_agent",
+                "security_and_access_management_agent",
+                "gift_preparation_and_customization_agent"
+            ]
+        },
+        {
+            "name": "retreat_planning_agent",
+            "role": "Coordinates overall retreat planning, including accommodation booking and concierge services.",
+            "tools": [
+                "accommodation_booking_agent",
+                "concierge_service_manager_agent"
+            ]
+        },
+        {
+            "name": "accommodation_booking_agent",
+            "role": "Handles bookings and arrangements for executive accommodations.",
+            "tools": [
+                "ryokan_selection_and_negotiation_agent"
+            ]
+        },
+        {
+            "name": "ryokan_selection_and_negotiation_agent",
+            "role": "Researches and negotiates exclusive bookings with ryokans.",
+            "tools": [
+                "luxury_ryokan_agent"
+            ]
+        },
+        {
+            "name": "luxury_ryokan_agent",
+            "role": "Secures accommodations at a premium ryokan with traditional experiences.",
+            "tools": []
+        },
+        {
+            "name": "transportation_coordinator_agent",
+            "role": "Oversees transportation logistics, including international and local arrangements.",
+            "tools": [
+                "flight_itinerary_design_agent",
+                "local_access_facilitator_agent"
+            ]
+        },
+        {
+            "name": "flight_itinerary_design_agent",
+            "role": "Creates and manages personalized flight itineraries for each executive.",
+            "tools": [
+                "global_travel_agent"
+            ]
+        },
+        {
+            "name": "global_travel_agent",
+            "role": "Facilitates global travel bookings ensuring seamless executive journeys.",
+            "tools": [
+                "flight_reservation_department"
+            ]
+        },
+        {
+            "name": "flight_reservation_department",
+            "role": "Manages global flight reservations with attention to executive comfort and convenience.",
+            "tools": []
+        },
+        {
+            "name": "local_access_facilitator_agent",
+            "role": "Arranges secure local transportation and private driver services.",
+            "tools": [
+                "private_driver_network"
+            ]
+        },
+        {
+            "name": "private_driver_network",
+            "role": "A network of vetted private drivers offering exclusive transport services.",
+            "tools": []
+        },
+        {
+            "name": "cultural_experience_coordinator_agent",
+            "role": "Plans and organizes cultural experiences adapted to the preferences of the executives.",
+            "tools": [
+                "traditional_culture_facilitator_agent",
+                "geisha_performance_manager_agent",
+                "zen_meditation_coach_agent"
+            ]
+        },
+        {
+            "name": "traditional_culture_facilitator_agent",
+            "role": "Coordinates traditional cultural activities and ceremonies.",
+            "tools": [
+                "tea_ceremony_master_agent"
+            ]
+        },
+        {
+            "name": "tea_ceremony_master_agent",
+            "role": "Consults for arranging private and authentic tea ceremonies.",
+            "tools": []
+        },
+        {
+            "name": "geisha_performance_manager_agent",
+            "role": "Organizes exclusive geisha performances, ensuring authenticity and elegance.",
+            "tools": [
+                "geisha_contact_agent"
+            ]
+        },
+        {
+            "name": "geisha_contact_agent",
+            "role": "Connects directly with geisha performers for bookings and arrangements.",
+            "tools": []
+        },
+        {
+            "name": "zen_meditation_coach_agent",
+            "role": "Facilitates zen meditation sessions by coordinating with local masters.",
+            "tools": [
+                "zen_meditation_group_arranger"
+            ]
+        },
+        {
+            "name": "zen_meditation_group_arranger",
+            "role": "Arranges group meditation practices in serene settings.",
+            "tools": []
+        },
+        {
+            "name": "culinary_coordinator_agent",
+            "role": "Focuses on meal planning and execution considering dietary preferences.",
+            "tools": [
+                "dietary_inclusion_specialist"
+            ]
+        },
+        {
+            "name": "dietary_inclusion_specialist",
+            "role": "Customizes meal plans to meet diverse international dietary preferences.",
+            "tools": [
+                "meal_planning_and_verification_unit"
+            ]
+        },
+        {
+            "name": "meal_planning_and_verification_unit",
+            "role": "Verifies meal plans against dietary restrictions and preferences.",
+            "tools": []
+        },
+        {
+            "name": "security_and_access_management_agent",
+            "role": "Manages secure access to accommodations and events using RFID technology.",
+            "tools": [
+                "RFID_access_coordinator"
+            ]
+        },
+        {
+            "name": "RFID_access_coordinator",
+            "role": "Oversees RFID tag distribution and secure access setup.",
+            "tools": [
+                "secure_entry_systems_agent"
+            ]
+        },
+        {
+            "name": "secure_entry_systems_agent",
+            "role": "Implement secure systems to control access to event locations and accommodations.",
+            "tools": []
+        },
+        {
+            "name": "gift_preparation_and_customization_agent",
+            "role": "Responsible for preparing and customizing business gift sets for executives.",
+            "tools": [
+                "executive_gift_set_designer"
+            ]
+        },
+        {
+            "name": "executive_gift_set_designer",
+            "role": "Designs bespoke gift sets tailored to the executives' profiles.",
+            "tools": [
+                "customization_specialist"
+            ]
+        },
+        {
+            "name": "customization_specialist",
+            "role": "Handles personal customization of gifts based on executive preferences.",
+            "tools": []
+        },
+        {
+            "name": "concierge_service_manager_agent",
+            "role": "Coordinates round-the-clock concierge services for executives during the retreat.",
+            "tools": [
+                "on_call_concierge_service"
+            ]
+        },
+        {
+            "name": "on_call_concierge_service",
+            "role": "Provides immediate assistance to executives, ensuring all needs are met.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "personal_flight_planner_tool",
+            "description": "Creates optimized flight plans based on executives' schedules and preferences.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "departure_cities": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of cities from which executives will depart."
+                    },
+                    "arrival_city": {
+                        "type": "string",
+                        "description": "Destination city for the retreat."
+                    },
+                    "preferences": {
+                        "type": "object",
+                        "description": "Specifies seating, airline preferences, and additional requests.",
+                        "properties": {
+                            "preferred_airlines": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "seat_class": {
+                                "type": "string",
+                                "description": "Preferred seat class (economy, business, first)."
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "meal_customization_tool",
+            "description": "Designs meal options considering dietary restrictions and preferences.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "dietary_info": {
+                        "type": "object",
+                        "description": "Contains information about dietary needs.",
+                        "properties": {
+                            "allergies": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "dietary_preferences": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "meal_times": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Meal times to plan for (breakfast, lunch, dinner)."
+                    }
+                }
+            }
+        }
+    ]
+}

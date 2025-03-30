@@ -1,0 +1,311 @@
+{
+    "task": "Plan a multi-continent zero-waste business expo that integrates AR-guided exhibitions, renewable-powered live streaming, eco-friendly transport logistics, green-certified cuisine for all participants, and an advanced environmental impact assessment tool across event activities.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "expo_coordinator_agent",
+                "continent_event_director_agent",
+                "ar_exhibition_technician_agent",
+                "interactive_design_specialist_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "sustainability_expert_agent",
+                "transportation_manager_agent",
+                "green_mobility_coordinator_agent",
+                "hybrid_vehicle_management_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "culinary_services_agent",
+                "sustainable_cuisine_operator_agent",
+                "farm_to_table_supplier_agent",
+                "catering_network_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "digital_media_lead_agent",
+                "live_streaming_engineer_agent",
+                "renewable_energy_station_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "eco_impact_agent",
+                "impact_analysis_system_agent",
+                "environmental_assessment_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "marketing_director_agent",
+                "global_engagement_officer_agent",
+                "audience_outreach_metrics_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "expo_coordinator_agent",
+                "logistics_support_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Coordinator responsible for organizing a multi-continent zero-waste business expo with all associated sustainable activities.",
+            "tools": [
+                "expo_coordinator_agent",
+                "sustainability_expert_agent",
+                "culinary_services_agent",
+                "digital_media_lead_agent",
+                "eco_impact_agent",
+                "marketing_director_agent"
+            ]
+        },
+        {
+            "name": "expo_coordinator_agent",
+            "role": "Leads the planning of the expo, managing regional execution with sustainability standards.",
+            "tools": [
+                "continent_event_director_agent",
+                "global_sustainability_advisor_agent",
+                "logistics_support_agent"
+            ]
+        },
+        {
+            "name": "continent_event_director_agent",
+            "role": "Manages preparations in specific continents, ensuring alignment with global zero-waste goals.",
+            "tools": [
+                "ar_exhibition_technician_agent",
+                "regional_vendor_liaison_agent"
+            ]
+        },
+        {
+            "name": "ar_exhibition_technician_agent",
+            "role": "Sets up and maintains AR-guided exhibitions, ensuring interactive engagement.",
+            "tools": [
+                "interactive_design_specialist_agent"
+            ]
+        },
+        {
+            "name": "interactive_design_specialist_agent",
+            "role": "Develops interactive AR content for enhancing visitor experiences at exhibitions.",
+            "tools": []
+        },
+        {
+            "name": "sustainability_expert_agent",
+            "role": "Ensures sustainable practices are embedded throughout all facets of the expo.",
+            "tools": [
+                "transportation_manager_agent",
+                "waste_reduction_facilitator_agent"
+            ]
+        },
+        {
+            "name": "transportation_manager_agent",
+            "role": "Organizes eco-friendly transportation solutions for participants.",
+            "tools": [
+                "green_mobility_coordinator_agent"
+            ]
+        },
+        {
+            "name": "green_mobility_coordinator_agent",
+            "role": "Administrates hybrid and green vehicle logistics for attendee transport.",
+            "tools": [
+                "hybrid_vehicle_management_tool"
+            ]
+        },
+        {
+            "name": "culinary_services_agent",
+            "role": "Coordinates provision of green-certified cuisine for participants.",
+            "tools": [
+                "sustainable_cuisine_operator_agent"
+            ]
+        },
+        {
+            "name": "sustainable_cuisine_operator_agent",
+            "role": "Facilitates eco-friendly dining options through local, sustainable sources.",
+            "tools": [
+                "farm_to_table_supplier_agent"
+            ]
+        },
+        {
+            "name": "farm_to_table_supplier_agent",
+            "role": "Supplies sustainably sourced, local produce for catering services.",
+            "tools": [
+                "catering_network_tool"
+            ]
+        },
+        {
+            "name": "digital_media_lead_agent",
+            "role": "Manages digital platforms and ensures renewable-powered live streaming.",
+            "tools": [
+                "live_streaming_engineer_agent"
+            ]
+        },
+        {
+            "name": "live_streaming_engineer_agent",
+            "role": "Oversees technical implementation of live streams powered by renewables.",
+            "tools": [
+                "renewable_energy_station_tool"
+            ]
+        },
+        {
+            "name": "eco_impact_agent",
+            "role": "Implements and assesses the environmental impact of the expo operations.",
+            "tools": [
+                "impact_analysis_system_agent"
+            ]
+        },
+        {
+            "name": "impact_analysis_system_agent",
+            "role": "Analyzes data to provide insights on environmental impacts.",
+            "tools": [
+                "environmental_assessment_tool"
+            ]
+        },
+        {
+            "name": "marketing_director_agent",
+            "role": "Develops strategies to enhance global engagement and outreach.",
+            "tools": [
+                "global_engagement_officer_agent"
+            ]
+        },
+        {
+            "name": "global_engagement_officer_agent",
+            "role": "Maximizes global audience interaction and engagement.",
+            "tools": [
+                "audience_outreach_metrics_tool"
+            ]
+        },
+        {
+            "name": "regional_vendor_liaison_agent",
+            "role": "Cooperates with regional vendors to ensure compliance with eco-friendly guidelines.",
+            "tools": []
+        },
+        {
+            "name": "global_sustainability_advisor_agent",
+            "role": "Provides advice on maintaining global sustainability standards across all expo activities.",
+            "tools": []
+        },
+        {
+            "name": "logistics_support_agent",
+            "role": "Offers logistical support, focusing on waste management and material reuse strategies.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "hybrid_vehicle_management_tool",
+            "description": "Manages and tracks hybrid vehicles for eco-friendly transportation during the expo.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "vehicle_count": {
+                        "type": "number",
+                        "description": "Number of hybrid vehicles available."
+                    },
+                    "route_map": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "description": "Routes assigned for vehicle operation."
+                        },
+                        "description": "Details of operational routes for fleet movement."
+                    }
+                }
+            }
+        },
+        {
+            "name": "catering_network_tool",
+            "description": "Connects with a network of local suppliers to ensure sustainably sourced catering options.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "supplier_region": {
+                        "type": "string",
+                        "description": "Region of the supplier."
+                    },
+                    "ingredient_needs": {
+                        "type": "object",
+                        "description": "Required ingredients and quantities.",
+                        "additionalProperties": {
+                            "type": "number"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "renewable_energy_station_tool",
+            "description": "Sets up and manages renewable energy stations for live streaming services.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "station_number": {
+                        "type": "number",
+                        "description": "Number of renewable energy stations required."
+                    },
+                    "power_output": {
+                        "type": "number",
+                        "description": "Expected power output in kW per station."
+                    }
+                }
+            }
+        },
+        {
+            "name": "environmental_assessment_tool",
+            "description": "Evaluates the environmental footprint of expo operations and suggests adjustments.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "activity_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of activities to assess."
+                    },
+                    "segment_emissions": {
+                        "type": "object",
+                        "description": "Emission estimates per segment.",
+                        "additionalProperties": {
+                            "type": "number"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "audience_outreach_metrics_tool",
+            "description": "Analyzes global audience engagement metrics to refine communication strategies.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "platform_channels": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Communication channels under analysis."
+                    },
+                    "time_period_days": {
+                        "type": "number",
+                        "description": "Duration of the analysis period in days."
+                    }
+                }
+            }
+        }
+    ]
+}

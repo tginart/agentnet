@@ -1,0 +1,198 @@
+{
+    "task": "Recommend a weekend entertainment plan including movies to watch, music playlists, and new restaurant suggestions in San Francisco, considering the current weather.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "entertainment_coordinator_agent",
+                "movie_recommender_agent",
+                "movie_database_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "entertainment_coordinator_agent",
+                "music_curator_agent",
+                "streaming_service_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "entertainment_coordinator_agent",
+                "restaurant_recommender_agent",
+                "location_filter_agent",
+                "restaurant_finder_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "entertainment_coordinator_agent",
+                "weather_checker_agent",
+                "weather_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "entertainment_coordinator_agent",
+                "social_media_analysis_agent",
+                "entertainment_news_agent",
+                "movie_recommender_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the tasks to complete the recommendation based on user preferences.",
+            "tools": [
+                "entertainment_coordinator_agent"
+            ]
+        },
+        {
+            "name": "entertainment_coordinator_agent",
+            "role": "Central coordinator that allocates specific recommendation tasks to appropriate sub-agents.",
+            "tools": [
+                "movie_recommender_agent",
+                "music_curator_agent",
+                "restaurant_recommender_agent",
+                "weather_checker_agent",
+                "social_media_analysis_agent",
+                "feedback_collection_agent"
+            ]
+        },
+        {
+            "name": "movie_recommender_agent",
+            "role": "Specializes in suggesting movies based on current trends, user preferences, and available streaming platforms.",
+            "tools": [
+                "movie_database_tool"
+            ]
+        },
+        {
+            "name": "music_curator_agent",
+            "role": "Creates music playlists tailored to the user's tastes and the theme of the weekend activities.",
+            "tools": [
+                "streaming_service_tool"
+            ]
+        },
+        {
+            "name": "restaurant_recommender_agent",
+            "role": "Recommends new and popular restaurants in the specified area considering the current weather and user dietary preferences.",
+            "tools": [
+                "restaurant_finder_tool",
+                "location_filter_agent"
+            ]
+        },
+        {
+            "name": "weather_checker_agent",
+            "role": "Provides real-time weather updates to enhance recommendation accuracy for outdoor plans.",
+            "tools": [
+                "weather_tool"
+            ]
+        },
+        {
+            "name": "social_media_analysis_agent",
+            "role": "Analyzes social media to detect current entertainment trends and popular activities in San Francisco.",
+            "tools": [
+                "entertainment_news_agent"
+            ]
+        },
+        {
+            "name": "feedback_collection_agent",
+            "role": "Collects user feedback post-weekend to refine future recommendations.",
+            "tools": []
+        },
+        {
+            "name": "entertainment_news_agent",
+            "role": "Tracks recent news in the entertainment industry to ensure recommendations include the latest releases.",
+            "tools": []
+        },
+        {
+            "name": "location_filter_agent",
+            "role": "Filters options based on user-specific location and vicinity considerations for selecting restaurants.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "movie_database_tool",
+            "description": "Accesses a comprehensive movie database to retrieve movie details and suggestions based on popularity and user preference.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "genre": {
+                        "type": "string",
+                        "description": "Preferred genre of the movie."
+                    },
+                    "release_date_range": {
+                        "type": "string",
+                        "description": "Range of release dates for the movies to consider."
+                    }
+                }
+            }
+        },
+        {
+            "name": "streaming_service_tool",
+            "description": "Retrieves playlists and music recommendations from popular streaming services.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "mood": {
+                        "type": "string",
+                        "description": "Mood theme for the playlist."
+                    },
+                    "preferred_artists": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of user-preferred artists."
+                    }
+                }
+            }
+        },
+        {
+            "name": "restaurant_finder_tool",
+            "description": "Finds new restaurant openings and suggestions based on current trends and user dietary requirements.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "cuisine_type": {
+                        "type": "string",
+                        "description": "Preferred type of cuisine."
+                    },
+                    "proximity": {
+                        "type": "number",
+                        "description": "Maximum distance from the provided location in miles."
+                    },
+                    "weather_conditions": {
+                        "type": "string",
+                        "description": "Current weather conditions to consider."
+                    }
+                }
+            }
+        },
+        {
+            "name": "weather_tool",
+            "description": "Provides detailed weather forecast data to inform other agents.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {
+                        "type": "string",
+                        "description": "Location for the weather forecast."
+                    },
+                    "date_range": {
+                        "type": "string",
+                        "description": "Date range for the weather to be checked."
+                    }
+                }
+            }
+        }
+    ]
+}

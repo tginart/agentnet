@@ -1,0 +1,294 @@
+{
+    "task": "Create a resilient smart-city infrastructure that enhances urban resilience and sustainability. The system should feature smart grid management, sustainable urban mobility, real-time environmental hazard detection, resilient infrastructure planning, and community engagement platforms.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "energy_management_agent",
+                "smart_grid_coordinator_agent",
+                "load_balancing_agent",
+                "grid_data_analyzer_agent",
+                "grid_anomaly_detector_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "urban_mobility_agent",
+                "sustainable_transportation_agent",
+                "traffic_flow_optimization_agent",
+                "public_transit_optimization_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "hazard_detection_agent",
+                "sensor_network_manager_agent",
+                "data_fusion_center_agent",
+                "hazard_alert_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "infrastructure_planning_agent",
+                "resilience_evaluation_agent",
+                "material_sustainability_analyzer_agent",
+                "infrastructure_simulation_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "community_engagement_agent",
+                "citizen_feedback_agent",
+                "participatory_design_agent",
+                "feedback_analysis_tool",
+                "human"
+            ],
+            [
+                "client_agent",
+                "energy_management_agent",
+                "urban_mobility_agent",
+                "traffic_flow_optimization_agent"
+            ],
+            [
+                "client_agent",
+                "hazard_detection_agent",
+                "infrastructure_planning_agent",
+                "material_sustainability_analyzer_agent"
+            ],
+            [
+                "client_agent",
+                "community_engagement_agent",
+                "renewable_resources_agent",
+                "waste_management_coordinator_agent"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Interacts with users and coordinates with all smart-city development agents to execute tasks.",
+            "tools": [
+                "energy_management_agent",
+                "urban_mobility_agent",
+                "hazard_detection_agent",
+                "infrastructure_planning_agent",
+                "community_engagement_agent"
+            ]
+        },
+        {
+            "name": "energy_management_agent",
+            "role": "Monitors and manages city's energy resources through smart grid innovations.",
+            "tools": [
+                "smart_grid_coordinator_agent",
+                "renewable_resources_agent"
+            ]
+        },
+        {
+            "name": "smart_grid_coordinator_agent",
+            "role": "Ensures efficient energy distribution and handling within the smart grid.",
+            "tools": [
+                "load_balancing_agent"
+            ]
+        },
+        {
+            "name": "load_balancing_agent",
+            "role": "Adjusts electrical loads to balance demand and prevent outages.",
+            "tools": [
+                "grid_data_analyzer_agent"
+            ]
+        },
+        {
+            "name": "grid_data_analyzer_agent",
+            "role": "Analyzes grid data to generate insights for anomaly detection and optimization.",
+            "tools": [
+                "grid_anomaly_detector_tool"
+            ]
+        },
+        {
+            "name": "urban_mobility_agent",
+            "role": "Oversees transportation systems to promote sustainable and efficient urban mobility.",
+            "tools": [
+                "sustainable_transportation_agent",
+                "traffic_flow_optimization_agent"
+            ]
+        },
+        {
+            "name": "sustainable_transportation_agent",
+            "role": "Advances eco-friendly public transit and transportation modes.",
+            "tools": [
+                "public_transit_optimization_tool"
+            ]
+        },
+        {
+            "name": "traffic_flow_optimization_agent",
+            "role": "Optimizes road and traffic systems for minimal congestion and maximal flow.",
+            "tools": []
+        },
+        {
+            "name": "hazard_detection_agent",
+            "role": "Implement environmental sensors that detect potential hazards.",
+            "tools": [
+                "sensor_network_manager_agent"
+            ]
+        },
+        {
+            "name": "sensor_network_manager_agent",
+            "role": "Deploys and manages networks of environmental sensors across the city.",
+            "tools": [
+                "data_fusion_center_agent"
+            ]
+        },
+        {
+            "name": "data_fusion_center_agent",
+            "role": "Integrates data from multiple sensors for comprehensive situational awareness.",
+            "tools": [
+                "hazard_alert_tool"
+            ]
+        },
+        {
+            "name": "infrastructure_planning_agent",
+            "role": "Plans for sustainable and resilient urban infrastructure development.",
+            "tools": [
+                "resilience_evaluation_agent",
+                "material_sustainability_analyzer_agent"
+            ]
+        },
+        {
+            "name": "resilience_evaluation_agent",
+            "role": "Evaluates infrastructure resilience to various environmental and man-made threats.",
+            "tools": [
+                "infrastructure_simulation_tool"
+            ]
+        },
+        {
+            "name": "material_sustainability_analyzer_agent",
+            "role": "Assesses the sustainability and environmental impact of building materials.",
+            "tools": []
+        },
+        {
+            "name": "community_engagement_agent",
+            "role": "Facilitates community interactions and feedback for urban projects.",
+            "tools": [
+                "citizen_feedback_agent",
+                "renewable_resources_agent",
+                "waste_management_coordinator_agent"
+            ]
+        },
+        {
+            "name": "citizen_feedback_agent",
+            "role": "Collects and analyzes feedback from city residents.",
+            "tools": [
+                "participatory_design_agent"
+            ]
+        },
+        {
+            "name": "participatory_design_agent",
+            "role": "Incorporates community feedback into urban planning and design.",
+            "tools": [
+                "feedback_analysis_tool"
+            ]
+        },
+        {
+            "name": "renewable_resources_agent",
+            "role": "Focuses on managing the city's renewable energy resources and energy efficiency.",
+            "tools": []
+        },
+        {
+            "name": "waste_management_coordinator_agent",
+            "role": "Ensures efficient municipal waste collection and recycling efforts.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "grid_anomaly_detector_tool",
+            "description": "Detects anomalies in the grid system to maintain stability.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "grid_segment_id": {
+                        "type": "string",
+                        "description": "Identifier for the grid segment being monitored"
+                    },
+                    "anomaly_threshold": {
+                        "type": "number",
+                        "description": "Threshold value that triggers anomaly detection"
+                    }
+                }
+            }
+        },
+        {
+            "name": "public_transit_optimization_tool",
+            "description": "Optimizes public transit schedules and routes for efficiency.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "transit_line_id": {
+                        "type": "string",
+                        "description": "ID of the public transit line to optimize"
+                    },
+                    "passenger_data": {
+                        "type": "array",
+                        "description": "Passenger use and flow data records"
+                    }
+                }
+            }
+        },
+        {
+            "name": "hazard_alert_tool",
+            "description": "Issues real-time alerts for detected environmental hazards.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "hazard_type": {
+                        "type": "string",
+                        "description": "Type of environmental hazard detected (e.g., flood, pollution)"
+                    },
+                    "affected_area": {
+                        "type": "string",
+                        "description": "Region or area impacted by the hazard"
+                    }
+                }
+            }
+        },
+        {
+            "name": "infrastructure_simulation_tool",
+            "description": "Simulates infrastructure performance under different stress scenarios.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "infrastructure_id": {
+                        "type": "string",
+                        "description": "Identifier for the infrastructure to simulate"
+                    },
+                    "stress_scenarios": {
+                        "type": "array",
+                        "description": "Possible stress scenarios (natural or man-made)"
+                    }
+                }
+            }
+        },
+        {
+            "name": "feedback_analysis_tool",
+            "description": "Analyzes community feedback for urban projects to inform future planning.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "project_id": {
+                        "type": "string",
+                        "description": "Identifier for the urban project receiving feedback"
+                    },
+                    "feedback_entries": {
+                        "type": "array",
+                        "description": "Array containing feedback records from residents"
+                    }
+                }
+            }
+        }
+    ]
+}

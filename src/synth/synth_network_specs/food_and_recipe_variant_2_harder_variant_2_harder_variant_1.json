@@ -1,0 +1,308 @@
+{
+    "task": "Organize a global multi-city zero-waste tech summit that includes VR-powered hybrid sessions, eco-friendly transport solutions, green-certified accommodations, sustainable food sourcing, and a robust digital carbon footprint tracking system across all event operations.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "global_event_lead_agent",
+                "city_event_manager_agent",
+                "local_vr_tech_agent",
+                "vr_infrastructure_specialist_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "sustainability_director_agent",
+                "transportation_innovation_agent",
+                "renewable_transportation_agent",
+                "electric_fleet_management_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "city_event_manager_agent",
+                "green_certified_hotel_agent",
+                "eco_accommodation_logistics_agent",
+                "booking_system_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "sustainability_director_agent",
+                "sustainable_foods_agent",
+                "local_farm_collaborator_agent",
+                "organic_supply_network_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "digital_operations_lead_agent",
+                "carbon_footprint_system_agent",
+                "carbon_analysis_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "marketing_strategy_agent",
+                "global_outreach_specialist_agent",
+                "social_engagement_analysis_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "global_event_lead_agent",
+                "zero_waste_culture_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The orchestrator of the global multi-city zero-waste tech summit, responsible for coordinating all agents and ensuring sustainable practices.",
+            "tools": [
+                "global_event_lead_agent",
+                "sustainability_director_agent",
+                "city_event_manager_agent",
+                "digital_operations_lead_agent",
+                "marketing_strategy_agent"
+            ]
+        },
+        {
+            "name": "global_event_lead_agent",
+            "role": "Oversees the event execution across all participating cities, ensuring each city implements zero-waste practices.",
+            "tools": [
+                "city_event_manager_agent",
+                "global_virtual_integration_agent",
+                "zero_waste_culture_agent"
+            ]
+        },
+        {
+            "name": "city_event_manager_agent",
+            "role": "Manages city-specific planning, including logistics, local vendor engagement, and VR session setup.",
+            "tools": [
+                "local_vr_tech_agent",
+                "green_certified_hotel_agent",
+                "local_logistics_agent"
+            ]
+        },
+        {
+            "name": "local_vr_tech_agent",
+            "role": "Designs and implements VR infrastructure for hybrid event participation at a local level.",
+            "tools": [
+                "vr_infrastructure_specialist_agent"
+            ]
+        },
+        {
+            "name": "vr_infrastructure_specialist_agent",
+            "role": "Builds VR infrastructure suitable for hybrid events in varying environments.",
+            "tools": []
+        },
+        {
+            "name": "sustainability_director_agent",
+            "role": "Ensures all aspects of the tech summit adhere to sustainability and zero-waste goals.",
+            "tools": [
+                "transportation_innovation_agent",
+                "sustainable_foods_agent"
+            ]
+        },
+        {
+            "name": "transportation_innovation_agent",
+            "role": "Develops strategies to integrate eco-friendly transportation solutions.",
+            "tools": [
+                "renewable_transportation_agent"
+            ]
+        },
+        {
+            "name": "renewable_transportation_agent",
+            "role": "Facilitates renewable energy-powered transportation, such as electric shuttles.",
+            "tools": [
+                "electric_fleet_management_tool"
+            ]
+        },
+        {
+            "name": "sustainable_foods_agent",
+            "role": "Sources local, organic, and eco-friendly food options for the summit.",
+            "tools": [
+                "local_farm_collaborator_agent"
+            ]
+        },
+        {
+            "name": "local_farm_collaborator_agent",
+            "role": "Collaborates with local farms to provide organic produce and reduce carbon footprint.",
+            "tools": [
+                "organic_supply_network_tool"
+            ]
+        },
+        {
+            "name": "digital_operations_lead_agent",
+            "role": "Manages digital operations and ensures technology enhances sustainability efforts, including carbon footprint tracking.",
+            "tools": [
+                "carbon_footprint_system_agent"
+            ]
+        },
+        {
+            "name": "carbon_footprint_system_agent",
+            "role": "Implements a system to monitor and track carbon emissions digitally across summit operations.",
+            "tools": [
+                "carbon_analysis_tool"
+            ]
+        },
+        {
+            "name": "marketing_strategy_agent",
+            "role": "Develops and executes marketing strategies to promote the summit and its sustainability initiatives.",
+            "tools": [
+                "global_outreach_specialist_agent"
+            ]
+        },
+        {
+            "name": "global_outreach_specialist_agent",
+            "role": "Focuses on expanding global reach and engagement through digital and social channels.",
+            "tools": [
+                "social_engagement_analysis_tool"
+            ]
+        },
+        {
+            "name": "green_certified_hotel_agent",
+            "role": "Coordinates with green-certified hotels for accommodations, ensuring they meet sustainability criteria.",
+            "tools": [
+                "eco_accommodation_logistics_agent"
+            ]
+        },
+        {
+            "name": "eco_accommodation_logistics_agent",
+            "role": "Manages the logistics of housing guests in eco-friendly accommodations across different cities.",
+            "tools": [
+                "booking_system_tool"
+            ]
+        },
+        {
+            "name": "local_logistics_agent",
+            "role": "Handles logistics within a city, ensuring seamless operations and adherence to zero-waste principles.",
+            "tools": []
+        },
+        {
+            "name": "global_virtual_integration_agent",
+            "role": "Ensures smooth integration of virtual technologies for global participation and interaction.",
+            "tools": []
+        },
+        {
+            "name": "zero_waste_culture_agent",
+            "role": "Promotes awareness and engagement in zero-waste principles among summit attendees.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "electric_fleet_management_tool",
+            "description": "Manages and optimizes the use of electric vehicles for transportation during the summit.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "fleet_size": {
+                        "type": "number",
+                        "description": "Number of electric vehicles available."
+                    },
+                    "charging_stations": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "location": {
+                                    "type": "string",
+                                    "description": "Location of the charging station."
+                                }
+                            }
+                        },
+                        "description": "Details of charging stations associated with the fleet."
+                    }
+                }
+            }
+        },
+        {
+            "name": "organic_supply_network_tool",
+            "description": "Facilitates connecting with local organic food suppliers to ensure eco-friendly catering solutions.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "supplier_family_name": {
+                        "type": "string",
+                        "description": "Last name of the local farming family or cooperative."
+                    },
+                    "produce_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of produce required for the summit."
+                    }
+                }
+            }
+        },
+        {
+            "name": "carbon_analysis_tool",
+            "description": "Calculates and suggests improvements for reducing the summit's carbon footprint.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "operation_areas": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "description": "Specific areas of operation to analyze for carbon emissions."
+                        },
+                        "description": "Focus areas for carbon footprint analysis."
+                    },
+                    "expected_emissions": {
+                        "type": "number",
+                        "description": "Estimated average emissions in metric tons."
+                    }
+                }
+            }
+        },
+        {
+            "name": "booking_system_tool",
+            "description": "Automates booking of green-certified accommodation for summit attendees.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "hotel_certification_level": {
+                        "type": "string",
+                        "description": "Certification level of the hotel (e.g., LEED Gold, Green Globe)."
+                    },
+                    "number_of_rooms": {
+                        "type": "number",
+                        "description": "Number of rooms to reserve."
+                    }
+                }
+            }
+        },
+        {
+            "name": "social_engagement_analysis_tool",
+            "description": "Analyzes engagement metrics to optimize social campaigns for the summit.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "platforms": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of social media platforms being analyzed."
+                    },
+                    "campaign_duration_days": {
+                        "type": "number",
+                        "description": "Duration of the campaign in days."
+                    }
+                }
+            }
+        }
+    ]
+}

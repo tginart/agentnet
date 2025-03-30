@@ -1,0 +1,283 @@
+{
+    "task": "Create a dynamic remote work environment system that optimizes collaborative processes for distributed teams, including timezone management, resource sharing via secure protocols, performance tracking, mental health monitoring, and real-time adaptation to network conditions, while ensuring data privacy and facilitating cross-cultural interactions.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "team_collaboration_facilitator_agent",
+                "timezone_management_agent",
+                "timezone_adjustment_tool",
+                "time_alignment_coordinator_agent",
+                "team_synchronizer_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "team_collaboration_facilitator_agent",
+                "secure_resource_sharing_agent",
+                "secure_transfer_protocol_tool",
+                "access_control_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "team_collaboration_facilitator_agent",
+                "performance_monitoring_agent",
+                "productive_habits_tracker_agent",
+                "habit_analysis_tool",
+                "report_generator_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "team_collaboration_facilitator_agent",
+                "network_adaptation_agent",
+                "real_time_condition_checker_agent",
+                "bandwidth_adjuster_tool",
+                "network_optimization_module_agent",
+                "latency_management_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "team_collaboration_facilitator_agent",
+                "mental_health_monitor_agent",
+                "emotional_support_tool",
+                "mindfulness_integration_agent",
+                "human"
+            ],
+            [
+                "client_agent",
+                "cultural_interaction_facilitator_agent",
+                "cross_cultural_training_tool"
+            ],
+            [
+                "client_agent",
+                "timezone_management_agent",
+                "time_alignment_coordinator_agent",
+                "team_synchronizer_agent"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Serves as the main point of interaction for the user, orchestrating remote work environment optimizations and improvements.",
+            "tools": [
+                "team_collaboration_facilitator_agent",
+                "cultural_interaction_facilitator_agent",
+                "timezone_management_agent"
+            ]
+        },
+        {
+            "name": "team_collaboration_facilitator_agent",
+            "role": "Coordinates resources and tools necessary to facilitate seamless and efficient collaboration among remote team members.",
+            "tools": [
+                "timezone_management_agent",
+                "secure_resource_sharing_agent",
+                "performance_monitoring_agent",
+                "network_adaptation_agent",
+                "mental_health_monitor_agent"
+            ]
+        },
+        {
+            "name": "timezone_management_agent",
+            "role": "Adjusts work schedules and meetings according to team members' time zones to maintain productivity and synchronization.",
+            "tools": [
+                "timezone_adjustment_tool",
+                "time_alignment_coordinator_agent"
+            ]
+        },
+        {
+            "name": "secure_resource_sharing_agent",
+            "role": "Ensures secure and efficient sharing of resources and files using encrypted protocols.",
+            "tools": [
+                "secure_transfer_protocol_tool",
+                "access_control_agent"
+            ]
+        },
+        {
+            "name": "performance_monitoring_agent",
+            "role": "Tracks and evaluates team performance metrics and proposes strategies to improve productivity and engagement.",
+            "tools": [
+                "productive_habits_tracker_agent",
+                "report_generator_agent"
+            ]
+        },
+        {
+            "name": "network_adaptation_agent",
+            "role": "Monitors network conditions and adapts communication protocols for optimal performance, accounting for fluctuations in bandwidth and latency.",
+            "tools": [
+                "real_time_condition_checker_agent",
+                "network_optimization_module_agent",
+                "latency_management_agent"
+            ]
+        },
+        {
+            "name": "mental_health_monitor_agent",
+            "role": "Assesses and supports the mental well-being of remote workers through stress evaluation and mindfulness practices.",
+            "tools": [
+                "emotional_support_tool",
+                "mindfulness_integration_agent",
+                "stress_level_evaluator_agent"
+            ]
+        },
+        {
+            "name": "real_time_condition_checker_agent",
+            "role": "Analyzes real-time network conditions to provide input for dynamic adaptation strategies.",
+            "tools": [
+                "bandwidth_adjuster_tool"
+            ]
+        },
+        {
+            "name": "productive_habits_tracker_agent",
+            "role": "Monitors daily habits of users to locate productivity blockers and promote positive routines.",
+            "tools": [
+                "habit_analysis_tool"
+            ]
+        },
+        {
+            "name": "time_alignment_coordinator_agent",
+            "role": "Works to align team schedules and project timelines across various time zones for optimized collaboration.",
+            "tools": [
+                "team_synchronizer_agent"
+            ]
+        },
+        {
+            "name": "team_synchronizer_agent",
+            "role": "Aligns cross-timezone projects ensuring that all team activities remain within aligned schedules.",
+            "tools": []
+        },
+        {
+            "name": "emotional_support_tool",
+            "role": "Provides resources and strategies to manage stress and emotional health within remote working setups.",
+            "tools": []
+        },
+        {
+            "name": "cultural_interaction_facilitator_agent",
+            "role": "Facilitates training and best practices for effective cross-cultural communication and interaction among diverse teams.",
+            "tools": [
+                "cross_cultural_training_tool"
+            ]
+        },
+        {
+            "name": "stress_level_evaluator_agent",
+            "role": "Analyzes signs of stress and recommends adjustments to work-life balance routines.",
+            "tools": []
+        },
+        {
+            "name": "network_optimization_module_agent",
+            "role": "Implements network optimization strategies, ensuring data reaches team members with minimal lag and maximum reliability.",
+            "tools": []
+        },
+        {
+            "name": "report_generator_agent",
+            "role": "Compiles data on team productivity and generates analysis reports for managerial review.",
+            "tools": []
+        },
+        {
+            "name": "access_control_agent",
+            "role": "Manages and controls access rights to shared resources, ensuring sensitive information is protected.",
+            "tools": []
+        },
+        {
+            "name": "mindfulness_integration_agent",
+            "role": "Integrates mindfulness exercises into the daily routines of team members to promote wellness.",
+            "tools": []
+        },
+        {
+            "name": "latency_management_agent",
+            "role": "Specifically targets latency issues to ensure smooth communication and data transfer within the network adaptation strategies.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "timezone_adjustment_tool",
+            "description": "Adjusts schedules and meetings automatically based on timezone changes and availability.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "current_timezones": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Array of time zones for each team member."
+                    },
+                    "meeting_times": {
+                        "type": "string",
+                        "description": "Current scheduled times for meetings."
+                    }
+                }
+            }
+        },
+        {
+            "name": "secure_transfer_protocol_tool",
+            "description": "Encrypts and securely transfers files between remote team members.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "file_path": {
+                        "type": "string",
+                        "description": "Path of the file to be transferred securely."
+                    },
+                    "recipient_id": {
+                        "type": "string",
+                        "description": "The ID of the recipient who will receive the file."
+                    },
+                    "encryption_level": {
+                        "type": "string",
+                        "description": "Desired encryption level for the file transfer."
+                    }
+                }
+            }
+        },
+        {
+            "name": "habit_analysis_tool",
+            "description": "Analyzes user habits to identify productivity improvements.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "daily_activities": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of recorded daily activities."
+                    },
+                    "focus_blocks": {
+                        "type": "number",
+                        "description": "Number of focused work hours logged."
+                    }
+                }
+            }
+        },
+        {
+            "name": "bandwidth_adjuster_tool",
+            "description": "Adjusts bandwidth usage for optimal network performance based on real-time data.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "current_bandwidth": {
+                        "type": "number",
+                        "description": "Current bandwidth usage in Mbps."
+                    },
+                    "optimal_bandwidth": {
+                        "type": "number",
+                        "description": "Predicted optimal bandwidth required for next period in Mbps."
+                    },
+                    "priority_level": {
+                        "type": "string",
+                        "description": "Priority level for bandwidth allocation."
+                    }
+                }
+            }
+        }
+    ]
+}

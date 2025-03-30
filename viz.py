@@ -1244,43 +1244,74 @@ if __name__ == "__main__":
     parser.add_argument("--log-dir", "-d", default="logs", help="Path to the logs directory (default: logs)")
     parser.add_argument("--spec-dir", "-s", default=None, # Default to None, let the function find it
                         help="Path to the network spec files directory (optional; attempts auto-detection)")
+    # Add flag to launch the network viz app
+    parser.add_argument("--app", "-a", action="store_true", help="Launch the interactive Dash network visualization app.")
+    # Add arguments needed by the network viz app
+    parser.add_argument("--run", "-r", help="Specific run to visualize initially in the app.")
+    parser.add_argument("--port", "-p", type=int, default=8050, help="Port to run the visualization app server on.")
 
     args = parser.parse_args()
 
-    if args.eval:
+    # Determine the effective specs directory
+    effective_specs_dir = find_spec_dir(args.spec_dir)
+
+    # Handle different modes
+    if args.app:
+        # Launch the Dash app
+        try:
+            # Adjust import path based on the new location
+            from src.viz.network_viz_app import create_app
+        except ImportError as e:
+            print(f"Error: Could not import the visualization app: {e}")
+            print("Ensure the app is located at src/viz/network_viz_app.py")
+            sys.exit(1)
+
+        app = create_app(args.log_dir, args.run)
+        if app:
+            print(f"Starting network visualization server on port {args.port}...")
+            print(f"Log directory: {os.path.abspath(args.log_dir)}")
+            if args.run:
+                print(f"Initial run: {args.run}")
+            print(f"Open your browser to http://localhost:{args.port}")
+            # Use host='0.0.0.0' if you want it accessible from other devices on your network
+            app.run(debug=True, port=args.port)
+        else:
+            # create_app might return None if no runs are found
+             print(f"Could not start visualization app. Check log directory: {args.log_dir}")
+             sys.exit(1)
+
+    elif args.eval:
+        # Run evaluation
         eval_all_complete_runs(
             args.log_dir,
-            find_spec_dir(args.spec_dir),
+            effective_specs_dir, # Use the found/validated spec dir
             model_to_evaluate=args.model
         )
         sys.exit(0)
 
-    # Ensure log dir exists or provide a helpful message
-    if not os.path.isdir(args.log_dir):
-        print(f"Error: Log directory '{os.path.abspath(args.log_dir)}' not found.")
-        # Optionally offer to create it?
-        # create = input(f"Create directory '{args.log_dir}'? (y/n): ")
-        # if create.lower() == 'y':
-        #     try:
-        #         os.makedirs(args.log_dir)
-        #         print(f"Created log directory: {args.log_dir}")
-        #     except OSError as e:
-        #         print(f"Error: Could not create log directory '{args.log_dir}'. {e}")
-        #         sys.exit(1)
-        # else:
-        print("Please ensure the log directory exists or specify a correct path using --log-dir.")
-        sys.exit(1)
+    else:
+        # Run the interactive terminal browser (default action)
+        # Ensure log dir exists or provide a helpful message
+        if not os.path.isdir(args.log_dir):
+            print(f"Error: Log directory '{os.path.abspath(args.log_dir)}' not found.")
+            print("Please ensure the log directory exists or specify a correct path using --log-dir.")
+            sys.exit(1)
 
-    print(f"Starting browser in log directory: {os.path.abspath(args.log_dir)}")
-    if args.spec_dir:
-         print(f"Using specified spec directory: {os.path.abspath(args.spec_dir)}")
-    print("Default view: Showing only the most recent run per model-spec pair.") # Inform user of default
+        print(f"Starting interactive browser in log directory: {os.path.abspath(args.log_dir)}")
+        if args.spec_dir:
+             print(f"Using specified spec directory: {os.path.abspath(args.spec_dir)}")
+        elif effective_specs_dir:
+             print(f"Using auto-detected spec directory: {os.path.abspath(effective_specs_dir)}")
+        else:
+             print("No spec directory specified or found.")
 
-    # Pass args directly to the browser function
-    interactive_run_browser(
-        args.log_dir, 
-        args.spec_dir, 
-        only_complete=True
-    )
+        print("Default view: Showing only the most recent run per model-spec pair.") # Inform user of default
+
+        # Pass args directly to the browser function
+        interactive_run_browser(
+            args.log_dir,
+            effective_specs_dir, # Pass the found/validated spec dir
+            only_complete=True
+        )
 
 

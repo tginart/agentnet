@@ -1,0 +1,351 @@
+{
+    "task": "Design an intelligent kitchen management system that supports seamless meal preparation, storage optimization, and advanced dietary monitoring. The system should automate inventory checks, suggest recipes based on available ingredients, manage food spoilage predictions, sync with user dietary goals, and guide through AI cooking sessions to enhance culinary skills.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "kitchen_management_agent",
+                "inventory_monitor_agent",
+                "spoilage_prediction_agent",
+                "risk_management_agent",
+                "spoilage_alert_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "kitchen_management_agent",
+                "recipe_recommendation_agent",
+                "ingredient_matcher_agent",
+                "recipe_optimizer_agent",
+                "recipe_suggestion_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "kitchen_management_agent",
+                "diet_monitoring_agent",
+                "goal_sync_agent",
+                "diet_tracker_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "kitchen_management_agent",
+                "cooking_assistant_agent",
+                "vr_cooking_tutorial_agent",
+                "vr_session_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "kitchen_management_agent",
+                "storage_optimizer_agent",
+                "space_utilization_agent",
+                "storage_layout_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "kitchen_management_agent",
+                "energy_management_agent",
+                "energy_audit_agent",
+                "energy_efficiency_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "kitchen_management_agent",
+                "recipe_recommendation_agent",
+                "recipe_archive_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates other agents to provide a comprehensive kitchen management experience.",
+            "tools": [
+                "kitchen_management_agent"
+            ]
+        },
+        {
+            "name": "kitchen_management_agent",
+            "role": "Oversees all kitchen operations including inventory tracking, recipe suggestions, dietary monitoring, and cooking guidance.",
+            "tools": [
+                "inventory_monitor_agent",
+                "recipe_recommendation_agent",
+                "diet_monitoring_agent",
+                "cooking_assistant_agent",
+                "storage_optimizer_agent",
+                "meal_prep_scheduling_agent",
+                "energy_management_agent"
+            ]
+        },
+        {
+            "name": "inventory_monitor_agent",
+            "role": "Monitors kitchen inventory to ensure optimal stock levels and predict spoilage.",
+            "tools": [
+                "spoilage_prediction_agent"
+            ]
+        },
+        {
+            "name": "spoilage_prediction_agent",
+            "role": "Analyzes inventory data to predict potential spoilage and alert users.",
+            "tools": [
+                "risk_management_agent"
+            ]
+        },
+        {
+            "name": "risk_management_agent",
+            "role": "Manages risks associated with food spoilage by providing actionable insights.",
+            "tools": [
+                "spoilage_alert_tool"
+            ]
+        },
+        {
+            "name": "recipe_recommendation_agent",
+            "role": "Suggests recipes based on the current inventory and user preferences.",
+            "tools": [
+                "ingredient_matcher_agent",
+                "user_taste_profile_agent",
+                "recipe_archive_agent"
+            ]
+        },
+        {
+            "name": "ingredient_matcher_agent",
+            "role": "Matches available ingredients with suitable recipes to minimize waste.",
+            "tools": [
+                "recipe_optimizer_agent"
+            ]
+        },
+        {
+            "name": "recipe_optimizer_agent",
+            "role": "Optimizes recipes for flavor and nutritional value while considering dietary constraints.",
+            "tools": [
+                "recipe_suggestion_tool"
+            ]
+        },
+        {
+            "name": "diet_monitoring_agent",
+            "role": "Tracks user dietary goals and syncs with meal planning and intake.",
+            "tools": [
+                "goal_sync_agent",
+                "nutrition_advisor_agent"
+            ]
+        },
+        {
+            "name": "goal_sync_agent",
+            "role": "Integrates user health and dietary goals into real-time meal suggestions.",
+            "tools": [
+                "diet_tracker_tool"
+            ]
+        },
+        {
+            "name": "cooking_assistant_agent",
+            "role": "Guides users through cooking sessions with advanced tutorials and real-time feedback.",
+            "tools": [
+                "vr_cooking_tutorial_agent"
+            ]
+        },
+        {
+            "name": "vr_cooking_tutorial_agent",
+            "role": "Provides interactive VR cooking tutorials to enhance user skills and confidence.",
+            "tools": [
+                "vr_session_tool"
+            ]
+        },
+        {
+            "name": "storage_optimizer_agent",
+            "role": "Optimizes kitchen storage to maximize space and improve accessibility.",
+            "tools": [
+                "space_utilization_agent"
+            ]
+        },
+        {
+            "name": "space_utilization_agent",
+            "role": "Analyzes and recommends optimal storage layouts based on item usage and frequency.",
+            "tools": [
+                "storage_layout_tool"
+            ]
+        },
+        {
+            "name": "nutrition_advisor_agent",
+            "role": "Provides detailed analysis on nutrition values for each meal to align with health objectives.",
+            "tools": []
+        },
+        {
+            "name": "user_taste_profile_agent",
+            "role": "Records and analyzes user taste preferences to tailor future meal suggestions.",
+            "tools": []
+        },
+        {
+            "name": "meal_prep_scheduling_agent",
+            "role": "Creates efficient meal preparation schedules based on user availability and meal complexity.",
+            "tools": []
+        },
+        {
+            "name": "energy_management_agent",
+            "role": "Manages and optimizes kitchen energy consumption to increase efficiency.",
+            "tools": [
+                "energy_audit_agent"
+            ]
+        },
+        {
+            "name": "energy_audit_agent",
+            "role": "Conducts energy audits for kitchen appliances and usage patterns.",
+            "tools": [
+                "energy_efficiency_tool"
+            ]
+        },
+        {
+            "name": "recipe_archive_agent",
+            "role": "Stores and manages successful recipes for future reference.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "spoilage_alert_tool",
+            "description": "Alerts users of potential food spoilage and suggests actions to prevent waste.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "items_at_risk": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of items at risk of spoilage"
+                    }
+                }
+            }
+        },
+        {
+            "name": "recipe_suggestion_tool",
+            "description": "Provides recipe suggestions based on available ingredients and user preferences.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "available_ingredients": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of ingredients currently in stock"
+                    }
+                }
+            }
+        },
+        {
+            "name": "diet_tracker_tool",
+            "description": "Tracks dietary intake and compares it against user-defined health goals.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "daily_intake": {
+                        "type": "object",
+                        "properties": {
+                            "calories": {
+                                "type": "number",
+                                "description": "Total calories consumed today"
+                            },
+                            "macronutrients": {
+                                "type": "object",
+                                "properties": {
+                                    "protein": {
+                                        "type": "number",
+                                        "description": "Grams of protein consumed"
+                                    },
+                                    "carbs": {
+                                        "type": "number",
+                                        "description": "Grams of carbohydrates consumed"
+                                    },
+                                    "fats": {
+                                        "type": "number",
+                                        "description": "Grams of fats consumed"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "vr_session_tool",
+            "description": "Facilitates VR-based cooking sessions to provide hands-on experience and guidance.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "session_recipe": {
+                        "type": "string",
+                        "description": "The name of the recipe used in the VR session"
+                    },
+                    "difficulty": {
+                        "type": "string",
+                        "description": "Difficulty level of the cooking session"
+                    }
+                }
+            }
+        },
+        {
+            "name": "storage_layout_tool",
+            "description": "Recommends optimal storage arrangements for kitchen items to enhance accessibility.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "current_layout": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Current layout of kitchen storage items"
+                    },
+                    "usage_frequency": {
+                        "type": "object",
+                        "properties": {
+                            "item": {
+                                "type": "string",
+                                "description": "Name of the kitchen item"
+                            },
+                            "frequency": {
+                                "type": "string",
+                                "description": "Usage frequency (e.g., daily, weekly, monthly)"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "energy_efficiency_tool",
+            "description": "Evaluates energy usage of kitchen appliances and suggests optimizations.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "appliance_usage": {
+                        "type": "object",
+                        "properties": {
+                            "device": {
+                                "type": "string",
+                                "description": "Name of the appliance"
+                            },
+                            "usage_hours": {
+                                "type": "number",
+                                "description": "Average daily usage in hours"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,146 @@
+{
+    "task": "Create a personalized wellness plan that includes a daily exercise routine, nutritional advice, and a stress reduction strategy. Ensure the plan is suitable for someone with a busy schedule, includes recommendations for mobile apps to track progress, and provides easy-to-follow meal recipes.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "wellness_advisor_agent",
+                "exercise_plan_agent",
+                "fitness_app_recommendation_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wellness_advisor_agent",
+                "nutrition_plan_agent",
+                "recipe_generator_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wellness_advisor_agent",
+                "stress_management_agent",
+                "meditation_app_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wellness_advisor_agent",
+                "sleep_analysis_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Top-level agent that interacts with the user and manages the process to create a personalized wellness plan.",
+            "tools": [
+                "wellness_advisor_agent"
+            ]
+        },
+        {
+            "name": "wellness_advisor_agent",
+            "role": "Assesses user needs and coordinates among different sub-agents to build a comprehensive wellness plan.",
+            "tools": [
+                "exercise_plan_agent",
+                "nutrition_plan_agent",
+                "stress_management_agent",
+                "sleep_analysis_agent",
+                "dietitian_consultation_agent"
+            ]
+        },
+        {
+            "name": "exercise_plan_agent",
+            "role": "Designs personalized exercise routines based on user's schedule and fitness goals.",
+            "tools": [
+                "fitness_app_recommendation_tool"
+            ]
+        },
+        {
+            "name": "nutrition_plan_agent",
+            "role": "Provides nutritional advice and meal plans tailored to the user's dietary preferences and health goals.",
+            "tools": [
+                "recipe_generator_tool"
+            ]
+        },
+        {
+            "name": "stress_management_agent",
+            "role": "Develops strategies to help the user manage stress, incorporating elements like mindfulness and relaxation techniques.",
+            "tools": [
+                "meditation_app_agent"
+            ]
+        },
+        {
+            "name": "fitness_app_recommendation_tool",
+            "role": "Suggests mobile applications to help track exercise routines and fitness progress.",
+            "tools": []
+        },
+        {
+            "name": "recipe_generator_tool",
+            "role": "Creates easy-to-follow recipes based on nutritional advice, taking into account the user's dietary preferences.",
+            "tools": []
+        },
+        {
+            "name": "meditation_app_agent",
+            "role": "Recommends meditation and relaxation apps to support stress reduction strategies.",
+            "tools": []
+        },
+        {
+            "name": "dietitian_consultation_agent",
+            "role": "Provides expert advice on complex nutritional queries which the nutrition plan agent cannot handle.",
+            "tools": []
+        },
+        {
+            "name": "sleep_analysis_agent",
+            "role": "Analyzes user's sleep patterns and provides recommendations to improve sleep quality.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "fitness_app_recommendation_tool",
+            "description": "Suggests fitness tracking apps based on user preferences and goals.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "user_preferences": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of user preferences for fitness tracking apps, such as features they desire."
+                    },
+                    "fitness_goals": {
+                        "type": "string",
+                        "description": "Description of the user's fitness goals to tailor app recommendations."
+                    }
+                }
+            }
+        },
+        {
+            "name": "recipe_generator_tool",
+            "description": "Creates personalized meal recipes based on dietary and nutritional requirements.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "dietary_preferences": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Dietary preferences or restrictions such as vegetarian, gluten-free, etc."
+                    },
+                    "caloric_needs": {
+                        "type": "number",
+                        "description": "The number of calories the user aims to consume daily."
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,303 @@
+{
+    "task": "Organize a high-profile international summit on sustainable urban development, which includes inviting notable speakers from academia and industry, arranging executive-class travel and accommodation for all delegates, curating a series of workshops and keynotes focused on innovative green technologies, implementing stringent COVID-19 safety logistics, and securing post-summit media partnerships for wide coverage.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "summit_planner_agent",
+                "speaker_recruitment_agent",
+                "academic_network_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "summit_planner_agent",
+                "speaker_recruitment_agent",
+                "industry_influencer_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "summit_planner_agent",
+                "logistics_manager_agent",
+                "flight_services_agent",
+                "executive_travel_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "summit_planner_agent",
+                "logistics_manager_agent",
+                "accommodation_arrangement_agent",
+                "luxury_hotel_booking_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "summit_planner_agent",
+                "session_curator_agent",
+                "workshop_facilitator_agent",
+                "interactive_technology_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "summit_planner_agent",
+                "session_curator_agent",
+                "keynote_organizer_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "summit_planner_agent",
+                "safety_protocol_agent",
+                "covid_measures_verification_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "summit_planner_agent",
+                "media_relations_agent",
+                "international_press_agent",
+                "human"
+            ],
+            [
+                "client_agent",
+                "logistics_manager_agent",
+                "transportation_coordinator_agent",
+                "vip_shuttle_service_agent"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The primary conduit between the human client and the summit planning process, handling requests and delegating tasks to specialized agents.",
+            "tools": [
+                "summit_planner_agent"
+            ]
+        },
+        {
+            "name": "summit_planner_agent",
+            "role": "Manages the overall process of organizing the summit, ensuring every aspect is synchronized and completed efficiently.",
+            "tools": [
+                "speaker_recruitment_agent",
+                "logistics_manager_agent",
+                "session_curator_agent",
+                "safety_protocol_agent",
+                "media_relations_agent"
+            ]
+        },
+        {
+            "name": "speaker_recruitment_agent",
+            "role": "Sources and invites distinguished speakers from academia and industry to the summit.",
+            "tools": [
+                "academic_network_agent",
+                "industry_influencer_agent"
+            ]
+        },
+        {
+            "name": "academic_network_agent",
+            "role": "Connects with university professors and researchers to secure their participation as summit speakers.",
+            "tools": []
+        },
+        {
+            "name": "industry_influencer_agent",
+            "role": "Targets and engages with industry leaders and influencers to speak at the summit.",
+            "tools": []
+        },
+        {
+            "name": "logistics_manager_agent",
+            "role": "Ensures that all physical arrangements for the summit, including travel and accommodation, are squared away.",
+            "tools": [
+                "flight_services_agent",
+                "accommodation_arrangement_agent",
+                "transportation_coordinator_agent"
+            ]
+        },
+        {
+            "name": "flight_services_agent",
+            "role": "Organizes executive-class air travel for summit attendees, focusing on privacy and comfort.",
+            "tools": [
+                "executive_travel_tool"
+            ]
+        },
+        {
+            "name": "accommodation_arrangement_agent",
+            "role": "Books high-end hotels and executive accommodation for summit guests.",
+            "tools": [
+                "luxury_hotel_booking_tool"
+            ]
+        },
+        {
+            "name": "transportation_coordinator_agent",
+            "role": "Plans and secures local transportation solutions, ensuring smooth transit for all guests.",
+            "tools": [
+                "vip_shuttle_service_agent"
+            ]
+        },
+        {
+            "name": "session_curator_agent",
+            "role": "Develops the summit program, including workshops and keynote sessions on green technology and innovation.",
+            "tools": [
+                "workshop_facilitator_agent",
+                "keynote_organizer_agent"
+            ]
+        },
+        {
+            "name": "workshop_facilitator_agent",
+            "role": "Specializes in organizing interactive and educational workshops using cutting-edge technology to enhance engagement.",
+            "tools": [
+                "interactive_technology_tool"
+            ]
+        },
+        {
+            "name": "keynote_organizer_agent",
+            "role": "Ensures the keynote sessions are compelling, coordinating with prominent figures to secure their insights.",
+            "tools": []
+        },
+        {
+            "name": "safety_protocol_agent",
+            "role": "Implements and verifies health and safety protocols to ensure the summit meets current COVID-19 regulations.",
+            "tools": [
+                "covid_measures_verification_tool"
+            ]
+        },
+        {
+            "name": "media_relations_agent",
+            "role": "Strategizes and manages post-summit media coverage to maximize its reach and impact.",
+            "tools": [
+                "international_press_agent"
+            ]
+        },
+        {
+            "name": "international_press_agent",
+            "role": "Secures agreements with press and media outlets across borders to provide coverage and reports on the summit.",
+            "tools": []
+        },
+        {
+            "name": "vip_shuttle_service_agent",
+            "role": "Provides specialized transport services for VIP guests, prioritizing comfort and efficiency.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "executive_travel_tool",
+            "description": "Facilitates booking of executive-class flights and travel arrangements for summit delegates.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "origin": {
+                        "type": "string",
+                        "description": "City where the delegate is departing from."
+                    },
+                    "destination": {
+                        "type": "string",
+                        "description": "City where the summit is taking place."
+                    },
+                    "travel_dates": {
+                        "type": "object",
+                        "properties": {
+                            "departure_date": {
+                                "type": "string",
+                                "description": "Departure date for travel."
+                            },
+                            "return_date": {
+                                "type": "string",
+                                "description": "Return date post-summit."
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "luxury_hotel_booking_tool",
+            "description": "Procures reservations at luxury hotels ensuring premium amenities and convenience for attendees.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "city": {
+                        "type": "string",
+                        "description": "City where accommodation is needed."
+                    },
+                    "duration_nights": {
+                        "type": "number",
+                        "description": "Number of nights for the accommodation stay."
+                    },
+                    "preferences": {
+                        "type": "object",
+                        "description": "Specific guest preferences such as room type, amenities, and services.",
+                        "properties": {
+                            "room_view": {
+                                "type": "string",
+                                "description": "Preferred view from the room."
+                            },
+                            "extra_services": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "description": "List of additional services such as spa, fitness access."
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "interactive_technology_tool",
+            "description": "Integrates interactive technology into summit workshops to enhance participant engagement and learning.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "theme": {
+                        "type": "string",
+                        "description": "The specific theme or topic of the workshop."
+                    },
+                    "estimated_attendance": {
+                        "type": "number",
+                        "description": "Expected number of participants."
+                    },
+                    "equipment_requirements": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of technological equipment needed."
+                    }
+                }
+            }
+        },
+        {
+            "name": "covid_measures_verification_tool",
+            "description": "Evaluates health measures in place to ensure summit compliance with COVID-19 safety regulations.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "venue_capacity": {
+                        "type": "number",
+                        "description": "Maximum capacity of the summit venue."
+                    },
+                    "audience_profile": {
+                        "type": "string",
+                        "description": "Profile of the expected audience demographics."
+                    },
+                    "date": {
+                        "type": "string",
+                        "description": "Date of the summit."
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,267 @@
+{
+    "task": "Execute a hybrid virtual and in-person art exhibition: 1. Curate a diverse selection of artwork from international artists. 2. Develop virtual walkthroughs of the exhibition for online attendees. 3. Implement interactive elements for both virtual and physical visitors. 4. Ensure technological integration with AR devices. 5. Arrange for a series of live panel discussions with artists and curators. 6. Secure partnerships with art galleries and museums. 7. Launch a targeted marketing campaign to draw global audiences. 8. Provide networking opportunities for attendees through digital platforms. 9. Coordinate logistics for international shipping of artwork.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "artwork_curation_agent",
+                "artist_selection_agent",
+                "diversity_engagement_agent",
+                "partnership_agent",
+                "gallery_partnership_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "virtual_exhibit_agent",
+                "walkthrough_development_agent",
+                "ar_integration_agent",
+                "interactive_elements_agent",
+                "experience_optimization_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "panel_discussion_agent",
+                "live_panel_organization_agent",
+                "artist_engagement_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "marketing_campaign_agent",
+                "international_outreach_agent",
+                "digital_promotion_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "networking_agent",
+                "platform_development_agent",
+                "user_engagement_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "logistics_management_agent",
+                "shipping_coordinator_agent",
+                "customs_handling_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "artwork_curation_agent",
+                "virtual_exhibit_agent",
+                "panel_discussion_agent",
+                "marketing_campaign_agent",
+                "networking_agent",
+                "logistics_management_agent"
+            ]
+        },
+        {
+            "name": "artwork_curation_agent",
+            "role": "Curates a diverse selection of artwork from local and international artists.",
+            "tools": [
+                "artist_selection_agent",
+                "partnership_agent"
+            ]
+        },
+        {
+            "name": "artist_selection_agent",
+            "role": "Selects and invites artists to participate in the exhibition.",
+            "tools": [
+                "diversity_engagement_agent"
+            ]
+        },
+        {
+            "name": "diversity_engagement_agent",
+            "role": "Ensures diverse representation among featured artists.",
+            "tools": []
+        },
+        {
+            "name": "partnership_agent",
+            "role": "Secures partnerships with art galleries and museums for exhibition collaboration.",
+            "tools": [
+                "gallery_partnership_agent"
+            ]
+        },
+        {
+            "name": "gallery_partnership_agent",
+            "role": "Engages with galleries to establish mutually beneficial partnerships.",
+            "tools": []
+        },
+        {
+            "name": "virtual_exhibit_agent",
+            "role": "Oversees the development of virtual exhibition experiences.",
+            "tools": [
+                "walkthrough_development_agent",
+                "ar_integration_agent"
+            ]
+        },
+        {
+            "name": "walkthrough_development_agent",
+            "role": "Creates virtual walkthroughs of the exhibition for online visitors.",
+            "tools": []
+        },
+        {
+            "name": "ar_integration_agent",
+            "role": "Ensures compatibility of exhibition with AR devices and platforms.",
+            "tools": [
+                "interactive_elements_agent"
+            ]
+        },
+        {
+            "name": "interactive_elements_agent",
+            "role": "Implements interactive elements to enhance visitor engagement.",
+            "tools": [
+                "experience_optimization_agent"
+            ]
+        },
+        {
+            "name": "experience_optimization_agent",
+            "role": "Optimizes both virtual and physical exhibition experiences for attendees.",
+            "tools": []
+        },
+        {
+            "name": "panel_discussion_agent",
+            "role": "Organizes live panel discussions with artists and curators.",
+            "tools": [
+                "live_panel_organization_agent"
+            ]
+        },
+        {
+            "name": "live_panel_organization_agent",
+            "role": "Coordinates logistics for live panel discussions.",
+            "tools": [
+                "artist_engagement_agent"
+            ]
+        },
+        {
+            "name": "artist_engagement_agent",
+            "role": "Ensures artists are prepared and engaged for panel discussions.",
+            "tools": []
+        },
+        {
+            "name": "marketing_campaign_agent",
+            "role": "Leads a marketing campaign targeted at global art audiences.",
+            "tools": [
+                "international_outreach_agent"
+            ]
+        },
+        {
+            "name": "international_outreach_agent",
+            "role": "Focuses on international outreach to generate global interest.",
+            "tools": [
+                "digital_promotion_agent"
+            ]
+        },
+        {
+            "name": "digital_promotion_agent",
+            "role": "Executes digital marketing strategies to promote the exhibition.",
+            "tools": []
+        },
+        {
+            "name": "networking_agent",
+            "role": "Facilitates networking opportunities for attendees.",
+            "tools": [
+                "platform_development_agent"
+            ]
+        },
+        {
+            "name": "platform_development_agent",
+            "role": "Develops digital platforms for attendee networking and interaction.",
+            "tools": [
+                "user_engagement_agent"
+            ]
+        },
+        {
+            "name": "user_engagement_agent",
+            "role": "Ensures high user engagement through platform features.",
+            "tools": []
+        },
+        {
+            "name": "logistics_management_agent",
+            "role": "Coordinates logistics for the shipping and handling of artwork.",
+            "tools": [
+                "shipping_coordinator_agent"
+            ]
+        },
+        {
+            "name": "shipping_coordinator_agent",
+            "role": "Manages international shipping of artwork.",
+            "tools": [
+                "customs_handling_agent"
+            ]
+        },
+        {
+            "name": "customs_handling_agent",
+            "role": "Handles customs regulations and procedures for international shipments.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "ar_content_creator_tool",
+            "description": "Facilitates the creation and integration of AR content for exhibitions.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "ar_elements": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "3D elements and models for AR integration."
+                    },
+                    "platform_compatibility": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of AR platforms and devices supported."
+                    }
+                }
+            }
+        },
+        {
+            "name": "global_outreach_tool",
+            "description": "Optimizes international outreach strategies and tracks their effectiveness.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "target_countries": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Countries targeted for marketing outreach."
+                    },
+                    "engagement_metrics": {
+                        "type": "object",
+                        "properties": {
+                            "views": {
+                                "type": "number",
+                                "description": "Number of views/engagement in each target region."
+                            },
+                            "participation_rate": {
+                                "type": "number",
+                                "description": "Participation rate from each region."
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

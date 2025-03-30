@@ -1,0 +1,180 @@
+{
+    "task": "Set up a morning routine in my smart home. The routine should include turning on the lights in the kitchen, setting the thermostat to 72 degrees, playing my morning playlist on the living room speaker, and starting the coffee maker at 6:30 AM.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "routine_manager_agent",
+                "lighting_agent",
+                "kitchen_lights_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "routine_manager_agent",
+                "thermostat_agent",
+                "set_temperature_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "routine_manager_agent",
+                "speaker_agent",
+                "playlist_agent",
+                "music_service_agent",
+                "play_playlist_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "routine_manager_agent",
+                "appliance_control_agent",
+                "coffee_maker_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates other agents to complete the task.",
+            "tools": [
+                "routine_manager_agent"
+            ]
+        },
+        {
+            "name": "routine_manager_agent",
+            "role": "Responsible for setting up and managing routines in the smart home. Calls specialized agents for specific tasks.",
+            "tools": [
+                "lighting_agent",
+                "thermostat_agent",
+                "speaker_agent",
+                "appliance_control_agent"
+            ]
+        },
+        {
+            "name": "lighting_agent",
+            "role": "Manages the lighting system in the smart home.",
+            "tools": [
+                "kitchen_lights_tool"
+            ]
+        },
+        {
+            "name": "thermostat_agent",
+            "role": "Controls the smart thermostat, adjusting the temperature as needed.",
+            "tools": [
+                "set_temperature_tool"
+            ]
+        },
+        {
+            "name": "speaker_agent",
+            "role": "Controls audio devices and speakers in the smart home.",
+            "tools": [
+                "playlist_agent"
+            ]
+        },
+        {
+            "name": "playlist_agent",
+            "role": "Manages playlists and music playback on the speaker system.",
+            "tools": [
+                "music_service_agent"
+            ]
+        },
+        {
+            "name": "music_service_agent",
+            "role": "Interfaces with external music services to control playback and access playlists.",
+            "tools": [
+                "play_playlist_tool"
+            ]
+        },
+        {
+            "name": "appliance_control_agent",
+            "role": "Responsible for controlling smart appliances in the home.",
+            "tools": [
+                "coffee_maker_tool"
+            ]
+        },
+        {
+            "name": "kitchen_lights_tool",
+            "role": "Controls the kitchen lights, allowing them to be turned on or off.",
+            "tools": []
+        },
+        {
+            "name": "set_temperature_tool",
+            "role": "Sets the thermostat to a specified temperature.",
+            "tools": []
+        },
+        {
+            "name": "play_playlist_tool",
+            "role": "Plays a specified playlist on the designated speaker.",
+            "tools": []
+        },
+        {
+            "name": "coffee_maker_tool",
+            "role": "Turns on the coffee maker to brew coffee at a scheduled time.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "kitchen_lights_tool",
+            "description": "Turns kitchen lights on or off.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "toggle": {
+                        "type": "boolean",
+                        "description": "True to turn on, False to turn off the kitchen lights"
+                    }
+                }
+            }
+        },
+        {
+            "name": "set_temperature_tool",
+            "description": "Adjusts the smart home thermostat to a specified temperature.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "temperature": {
+                        "type": "number",
+                        "description": "Desired temperature to set on the thermostat"
+                    }
+                }
+            }
+        },
+        {
+            "name": "play_playlist_tool",
+            "description": "Plays a specified music playlist on a given speaker.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "playlist_name": {
+                        "type": "string",
+                        "description": "The name of the playlist to play"
+                    },
+                    "speaker_id": {
+                        "type": "string",
+                        "description": "The ID of the speaker to play the music on"
+                    }
+                }
+            }
+        },
+        {
+            "name": "coffee_maker_tool",
+            "description": "Activates the coffee maker to start brewing at the scheduled time.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "start_time": {
+                        "type": "string",
+                        "description": "The time to start the coffee maker, formatted as HH:MM"
+                    }
+                }
+            }
+        }
+    ]
+}

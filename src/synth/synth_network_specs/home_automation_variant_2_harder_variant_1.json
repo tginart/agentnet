@@ -1,0 +1,297 @@
+{
+    "task": "Develop a comprehensive smart-home maintenance strategy to ensure energy efficiency and security. Integrate smart thermostat settings, routine appliance diagnostics, secure device connectivity, update firmware, and provide reports including energy consumption analytics and alert users of any anomalies.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "strategy_agent",
+                "energy_efficiency_agent",
+                "thermostat_agent",
+                "configure_thermostat_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "strategy_agent",
+                "security_agent",
+                "connectivity_agent",
+                "firmware_update_agent",
+                "update_firmware_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "strategy_agent",
+                "diagnostics_agent",
+                "appliance_agent",
+                "perform_diagnostics_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "strategy_agent",
+                "analytics_agent",
+                "reporting_agent",
+                "generate_reports_tool",
+                "energy_consumption_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "strategy_agent",
+                "alerts_agent",
+                "notification_agent",
+                "send_alerts_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "strategy_agent",
+                "diagnostics_agent",
+                "system_monitor_agent",
+                "backup_manager_agent",
+                "backup_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Main interface between the user and the smart-home maintenance system. Coordinates the various sub-agents to fulfill user requests.",
+            "tools": [
+                "strategy_agent"
+            ]
+        },
+        {
+            "name": "strategy_agent",
+            "role": "Oversees the entire smart-home maintenance strategy, ensuring all aspects of efficiency and security are addressed.",
+            "tools": [
+                "energy_efficiency_agent",
+                "security_agent",
+                "diagnostics_agent",
+                "analytics_agent",
+                "alerts_agent"
+            ]
+        },
+        {
+            "name": "energy_efficiency_agent",
+            "role": "Focuses on optimizing energy consumption throughout the home.",
+            "tools": [
+                "thermostat_agent",
+                "energy_dashboard_agent"
+            ]
+        },
+        {
+            "name": "thermostat_agent",
+            "role": "Configures smart thermostat settings to maintain energy efficiency based on user preferences and usage patterns.",
+            "tools": [
+                "configure_thermostat_tool"
+            ]
+        },
+        {
+            "name": "security_agent",
+            "role": "Ensures that all smart devices in the home are securely connected and protected against unauthorized access.",
+            "tools": [
+                "connectivity_agent",
+                "firmware_update_agent",
+                "firewall_agent"
+            ]
+        },
+        {
+            "name": "connectivity_agent",
+            "role": "Monitors and manages device connectivity, ensuring all devices are securely linked.",
+            "tools": []
+        },
+        {
+            "name": "firmware_update_agent",
+            "role": "Oversees firmware updates for all smart-home devices to enhance security and performance.",
+            "tools": [
+                "update_firmware_tool"
+            ]
+        },
+        {
+            "name": "diagnostics_agent",
+            "role": "Responsible for performing routine diagnostics on various home appliances to preemptively identify issues.",
+            "tools": [
+                "appliance_agent",
+                "system_monitor_agent"
+            ]
+        },
+        {
+            "name": "appliance_agent",
+            "role": "Conducts diagnostics on appliances and returns status reports.",
+            "tools": [
+                "perform_diagnostics_tool"
+            ]
+        },
+        {
+            "name": "system_monitor_agent",
+            "role": "Monitors the overall health and performance of home systems.",
+            "tools": [
+                "backup_manager_agent"
+            ]
+        },
+        {
+            "name": "backup_manager_agent",
+            "role": "Manages backup operations for all smart-home devices and systems.",
+            "tools": [
+                "backup_agent"
+            ]
+        },
+        {
+            "name": "analytics_agent",
+            "role": "Analyzes data from various devices and systems to provide insights and reports.",
+            "tools": [
+                "reporting_agent"
+            ]
+        },
+        {
+            "name": "reporting_agent",
+            "role": "Generates detailed reports on energy consumption and device status for user evaluation.",
+            "tools": [
+                "generate_reports_tool",
+                "energy_consumption_tool"
+            ]
+        },
+        {
+            "name": "alerts_agent",
+            "role": "Monitors home systems for anomalies and coordinates alert notifications.",
+            "tools": [
+                "notification_agent"
+            ]
+        },
+        {
+            "name": "notification_agent",
+            "role": "Sends alerts and notifications to users in case of detected issues or important updates.",
+            "tools": [
+                "send_alerts_tool"
+            ]
+        },
+        {
+            "name": "firewall_agent",
+            "role": "Manages the firewall settings of the home network to protect against external threats.",
+            "tools": []
+        },
+        {
+            "name": "energy_dashboard_agent",
+            "role": "Displays real-time and historical energy usage data to help understand and optimize consumption.",
+            "tools": []
+        },
+        {
+            "name": "backup_agent",
+            "role": "Ensures that data and settings from smart-home devices are backed up securely.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "configure_thermostat_tool",
+            "description": "Configures the smart thermostat to the most efficient settings based on user preferences.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "temperature_setting": {
+                        "type": "number",
+                        "description": "Desired temperature setting"
+                    },
+                    "schedule": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "time": {
+                                    "type": "string",
+                                    "description": "Time of day for setting change"
+                                },
+                                "temperature": {
+                                    "type": "number",
+                                    "description": "Temperature to set at specified time"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "update_firmware_tool",
+            "description": "Updates the firmware of smart devices to ensure the latest security and feature enhancements.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "device_id": {
+                        "type": "string",
+                        "description": "Unique identifier of the device to update"
+                    },
+                    "version": {
+                        "type": "string",
+                        "description": "Target firmware version"
+                    }
+                }
+            }
+        },
+        {
+            "name": "perform_diagnostics_tool",
+            "description": "Executes a diagnostic check on a specific appliance to assess its functionality.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "appliance_id": {
+                        "type": "string",
+                        "description": "Identifier of the appliance"
+                    }
+                }
+            }
+        },
+        {
+            "name": "generate_reports_tool",
+            "description": "Compiles data into comprehensive reports regarding energy use and system status.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "report_type": {
+                        "type": "string",
+                        "description": "Type of report to generate (e.g., 'energy', 'diagnostics')"
+                    }
+                }
+            }
+        },
+        {
+            "name": "energy_consumption_tool",
+            "description": "Evaluates energy consumption data to identify trends and recommend optimizations.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "time_period": {
+                        "type": "string",
+                        "description": "Time period for analysis (e.g., 'monthly', 'yearly')"
+                    }
+                }
+            }
+        },
+        {
+            "name": "send_alerts_tool",
+            "description": "Dispatches alerts to users if anomalies or critical updates are detected.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "alert_type": {
+                        "type": "string",
+                        "description": "Type of alert to send"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Message content of the alert"
+                    }
+                }
+            }
+        }
+    ]
+}

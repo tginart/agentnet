@@ -1,0 +1,306 @@
+{
+    "task": "Develop an Italian wellness and leisure retreat itinerary for a group, incorporating yoga sessions, spa treatments, vineyard tours, nutritional workshops, luxury accommodations, personalized health assessments, and transport arrangements.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "retreat_planner_agent",
+                "wellness_activity_coordinator_agent",
+                "yoga_instructor_agent",
+                "class_scheduling_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "retreat_planner_agent",
+                "spa_treatment_agent",
+                "therapy_selection_agent",
+                "appointment_booking_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "retreat_planner_agent",
+                "culinary_nutrition_agent",
+                "nutritional_workshop_creator_agent",
+                "ingredient_sourcing_agent",
+                "supplier_network_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "retreat_planner_agent",
+                "accommodation_agent",
+                "luxury_accommodation_booking_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "retreat_planner_agent",
+                "vineyard_tour_agent",
+                "local_vineyard_partnership_agent",
+                "tour_booking_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "retreat_planner_agent",
+                "health_assessment_agent",
+                "holistic_health_specialist_agent",
+                "assessment_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "retreat_planner_agent",
+                "transport_facilitator_agent",
+                "luxury_shuttle_service_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Primary interface for organizing the retreat, managing communication with the group and coordinating all aspects of the retreat.",
+            "tools": [
+                "retreat_planner_agent"
+            ]
+        },
+        {
+            "name": "retreat_planner_agent",
+            "role": "Oversees the entire retreat itinerary, ensuring all activities, accommodations, and transport are in sync.",
+            "tools": [
+                "wellness_activity_coordinator_agent",
+                "spa_treatment_agent",
+                "culinary_nutrition_agent",
+                "accommodation_agent",
+                "vineyard_tour_agent",
+                "health_assessment_agent",
+                "transport_facilitator_agent"
+            ]
+        },
+        {
+            "name": "wellness_activity_coordinator_agent",
+            "role": "Arranges physical and mindfulness activities such as yoga and meditation sessions.",
+            "tools": [
+                "yoga_instructor_agent",
+                "class_scheduling_tool"
+            ]
+        },
+        {
+            "name": "spa_treatment_agent",
+            "role": "Manages scheduling and selection of spa and therapeutic treatments.",
+            "tools": [
+                "therapy_selection_agent",
+                "appointment_booking_tool"
+            ]
+        },
+        {
+            "name": "culinary_nutrition_agent",
+            "role": "Organizes nutritional workshops and meal planning sessions.",
+            "tools": [
+                "nutritional_workshop_creator_agent",
+                "ingredient_sourcing_agent"
+            ]
+        },
+        {
+            "name": "accommodation_agent",
+            "role": "Handles the booking of high-end accommodations specific to wellness retreats.",
+            "tools": [
+                "luxury_accommodation_booking_tool"
+            ]
+        },
+        {
+            "name": "vineyard_tour_agent",
+            "role": "Plans and establishes partnerships for vineyard tours and exclusive wine-tasting events.",
+            "tools": [
+                "local_vineyard_partnership_agent",
+                "tour_booking_tool"
+            ]
+        },
+        {
+            "name": "health_assessment_agent",
+            "role": "Coordinates personalized health assessments for each participant.",
+            "tools": [
+                "holistic_health_specialist_agent",
+                "assessment_tool"
+            ]
+        },
+        {
+            "name": "transport_facilitator_agent",
+            "role": "Organizes all transportation needs, including luxury shuttles and private transfers.",
+            "tools": [
+                "luxury_shuttle_service_tool"
+            ]
+        },
+        {
+            "name": "yoga_instructor_agent",
+            "role": "Connects with certified yoga instructors for session facilitation.",
+            "tools": []
+        },
+        {
+            "name": "therapy_selection_agent",
+            "role": "Recommends specific spa treatments and therapies based on participant preferences.",
+            "tools": []
+        },
+        {
+            "name": "nutritional_workshop_creator_agent",
+            "role": "Designs interactive workshops on nutrition and healthy cooking.",
+            "tools": []
+        },
+        {
+            "name": "local_vineyard_partnership_agent",
+            "role": "Establishes connections with local vineyards for exclusive access and tours.",
+            "tools": []
+        },
+        {
+            "name": "holistic_health_specialist_agent",
+            "role": "Provides in-depth health assessments and recommendations for participants.",
+            "tools": []
+        },
+        {
+            "name": "ingredient_sourcing_agent",
+            "role": "Sources and arranges unique, local ingredients for culinary workshops.",
+            "tools": [
+                "supplier_network_agent"
+            ]
+        },
+        {
+            "name": "supplier_network_agent",
+            "role": "Coordinates with local suppliers to provide high-quality ingredients for the retreat's culinary experience.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "class_scheduling_tool",
+            "description": "Schedules yoga and meditation classes, ensuring they align with participant availability.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "class_type": {
+                        "type": "string",
+                        "description": "Type of class, such as yoga or meditation."
+                    },
+                    "participant_count": {
+                        "type": "number",
+                        "description": "Number of participants attending the class."
+                    },
+                    "preferred_days": {
+                        "type": "string",
+                        "description": "Preferred days for the sessions."
+                    }
+                }
+            }
+        },
+        {
+            "name": "appointment_booking_tool",
+            "description": "Books appointments for various spa treatments and therapeutic sessions.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "treatment_type": {
+                        "type": "string",
+                        "description": "Type of treatment or therapy requested."
+                    },
+                    "session_length_hours": {
+                        "type": "number",
+                        "description": "Length of the treatment session in hours."
+                    },
+                    "availability_range": {
+                        "type": "string",
+                        "description": "Date and time availability for booking."
+                    }
+                }
+            }
+        },
+        {
+            "name": "luxury_accommodation_booking_tool",
+            "description": "Arranges bookings for high-end wellness retreat accommodations.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location_preference": {
+                        "type": "string",
+                        "description": "Preferred location for accommodations."
+                    },
+                    "number_of_rooms": {
+                        "type": "number",
+                        "description": "Total number of rooms required."
+                    },
+                    "stay_duration": {
+                        "type": "number",
+                        "description": "Number of nights for the stay."
+                    }
+                }
+            }
+        },
+        {
+            "name": "tour_booking_tool",
+            "description": "Books tours at vineyards along with wine-tasting sessions.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "vineyard_name": {
+                        "type": "string",
+                        "description": "Name of the vineyard for the tour."
+                    },
+                    "tour_date": {
+                        "type": "string",
+                        "description": "Scheduled date for the tour."
+                    },
+                    "group_size": {
+                        "type": "number",
+                        "description": "Number of people in the group."
+                    }
+                }
+            }
+        },
+        {
+            "name": "assessment_tool",
+            "description": "Conducts health assessments and records data relevant to participant wellness.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "assessment_type": {
+                        "type": "string",
+                        "description": "Type of health assessment to be performed."
+                    },
+                    "participant_id": {
+                        "type": "string",
+                        "description": "Unique ID of the participant undergoing assessment."
+                    }
+                }
+            }
+        },
+        {
+            "name": "luxury_shuttle_service_tool",
+            "description": "Arranges luxury shuttle services to transport participants between activities.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "pickup_location": {
+                        "type": "string",
+                        "description": "Location where participants will be picked up."
+                    },
+                    "dropoff_location": {
+                        "type": "string",
+                        "description": "Location where participants will be dropped off."
+                    },
+                    "service_date": {
+                        "type": "string",
+                        "description": "Date on which the shuttle service is required."
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,241 @@
+{
+    "task": "Develop a diversified investment portfolio with a focus on ESG (Environmental, Social, and Governance) criteria, assess potential tax benefits from renewable energy projects, and ensure compliance with data protection standards for international clients.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "portfolio_management_agent",
+                "esg_evaluation_agent",
+                "social_responsibility_assessment_agent",
+                "international_affairs_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "portfolio_management_agent",
+                "investment_strategy_agent",
+                "energy_sector_investment_agent",
+                "green_infrastructure_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "tax_advisory_agent",
+                "renewable_energy_tax_credit_agent",
+                "sustainable_certification_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "compliance_monitoring_agent",
+                "data_protection_laws_agent",
+                "global_data_protection_agent",
+                "client_location_validator",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "portfolio_management_agent",
+                "diversification_analysis_agent",
+                "asset_risk_calculator",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "compliance_monitoring_agent",
+                "local_regulations_agent",
+                "filesystem_agent",
+                "global_data_protection_agent"
+            ]
+        ],
+        "edge_checks": [
+            {
+                "check_type": "assertContains",
+                "from": "renewable_energy_tax_credit_agent",
+                "to": "sustainable_certification_agent",
+                "type": "certification_check",
+                "arguments": {
+                    "projects": [
+                        "solar_farm_01",
+                        "wind_turbine_park_A"
+                    ],
+                    "date_verified": "2023-01-01"
+                }
+            }
+        ]
+    },
+    "agents": [
+        {
+            "name": "social_responsibility_assessment_agent",
+            "role": "Evaluates potential investments for social responsibility aspects following ESG criteria.",
+            "tools": []
+        },
+        {
+            "name": "green_infrastructure_agent",
+            "role": "Provides insights on investing in green infrastructure and projects promoting environmental sustainability.",
+            "tools": []
+        },
+        {
+            "name": "sustainable_certification_agent",
+            "role": "Verifies that renewable energy projects qualify for sustainable certifications needed for tax benefits.",
+            "tools": []
+        },
+        {
+            "name": "client_location_validator",
+            "role": "Validates client locations to ensure compliance with local and international data protection laws.",
+            "tools": []
+        },
+        {
+            "name": "international_affairs_agent",
+            "role": "Handles international relations and compliance aspects in social responsibility initiatives.",
+            "tools": []
+        },
+        {
+            "name": "asset_risk_calculator",
+            "role": "Calculates the risk associated with potential asset investments to guide diversification strategies.",
+            "tools": []
+        },
+        {
+            "name": "portfolio_management_agent",
+            "role": "Oversees the development and management of diversified investment portfolios with an emphasis on ESG.",
+            "tools": [
+                "esg_evaluation_agent",
+                "investment_strategy_agent",
+                "diversification_analysis_agent"
+            ]
+        },
+        {
+            "name": "esg_evaluation_agent",
+            "role": "Evaluates investment options based on ESG criteria, ensuring alignment with ethical standards.",
+            "tools": [
+                "social_responsibility_assessment_agent",
+                "international_affairs_agent"
+            ]
+        },
+        {
+            "name": "investment_strategy_agent",
+            "role": "Formulates strategies for investments in various sectors with a focus on future growth and sustainability.",
+            "tools": [
+                "energy_sector_investment_agent"
+            ]
+        },
+        {
+            "name": "energy_sector_investment_agent",
+            "role": "Focuses on investment opportunities in the energy sector, emphasizing renewable energy sources.",
+            "tools": [
+                "green_infrastructure_agent"
+            ]
+        },
+        {
+            "name": "diversification_analysis_agent",
+            "role": "Analyzes investment portfolios to identify and enhance diversification strategies across asset classes.",
+            "tools": [
+                "asset_risk_calculator"
+            ]
+        },
+        {
+            "name": "tax_advisory_agent",
+            "role": "Provides specialized advice on tax savings and benefits related to investments in renewable energy.",
+            "tools": [
+                "renewable_energy_tax_credit_agent"
+            ]
+        },
+        {
+            "name": "renewable_energy_tax_credit_agent",
+            "role": "Advises on tax credits available for investments in certified renewable energy projects.",
+            "tools": [
+                "sustainable_certification_agent"
+            ]
+        },
+        {
+            "name": "compliance_monitoring_agent",
+            "role": "Ensures that business practices comply with global regulations and data protection standards.",
+            "tools": [
+                "data_protection_laws_agent",
+                "local_regulations_agent"
+            ]
+        },
+        {
+            "name": "data_protection_laws_agent",
+            "role": "Consults on data protection laws across various jurisdictions, focusing on compliance.",
+            "tools": [
+                "global_data_protection_agent",
+                "client_location_validator"
+            ]
+        },
+        {
+            "name": "local_regulations_agent",
+            "role": "Monitors compliance with local regulations, advising on necessary adjustments for adherence.",
+            "tools": [
+                "filesystem_agent"
+            ]
+        },
+        {
+            "name": "global_data_protection_agent",
+            "role": "Ensures compliance with global data protection laws, focusing on international data transfer.",
+            "tools": []
+        },
+        {
+            "name": "filesystem_agent",
+            "role": "Manages and secures the storage of sensitive information, confirming compliance with data protection protocols.",
+            "tools": []
+        },
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "portfolio_management_agent",
+                "tax_advisory_agent",
+                "compliance_monitoring_agent"
+            ]
+        }
+    ],
+    "tools": [
+        {
+            "name": "certification_check",
+            "description": "Checks the certification status of renewable energy projects for tax incentive eligibility.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "projects": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of projects to verify certification status"
+                    },
+                    "date_verified": {
+                        "type": "string",
+                        "description": "Date when certification was last verified"
+                    }
+                }
+            }
+        },
+        {
+            "name": "diversification_tool",
+            "description": "Analyzes diversification strategies across a portfolio to minimize risk and optimize returns.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "asset_classes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Classes of assets included in the portfolio"
+                    },
+                    "current_allocation": {
+                        "type": "object",
+                        "description": "Current allocation percentages across asset classes"
+                    }
+                }
+            }
+        }
+    ]
+}

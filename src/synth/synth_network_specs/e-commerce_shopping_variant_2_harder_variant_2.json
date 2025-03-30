@@ -1,0 +1,284 @@
+{
+    "task": "Coordinate a virtual reality (VR) product launch event: 1. Develop an engaging VR presentation showcasing product features. 2. Organize a live Q&A session with the development team. 3. Create interactive virtual booths for different features. 4. Ensure compatibility with various VR headsets. 5. Provide exclusive early access to attendees. 6. Setup a post-event survey to collect feedback. 7. Develop a digital marketing campaign to promote the event. 8. Arrange partnership opportunities with VR influencers. 9. Ensure seamless attendee registration and support.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "vr_presentation_agent",
+                "content_development_agent",
+                "feature_highlight_agent",
+                "presentation_polishing_agent",
+                "compatibility_check_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "live_interaction_agent",
+                "qa_session_agent",
+                "team_engagement_agent",
+                "participant_feedback_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "virtual_booths_agent",
+                "interactive_feature_agent",
+                "user_experience_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "access_control_agent",
+                "early_access_provision_agent",
+                "security_check_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "marketing_strategy_agent",
+                "digital_campaign_agent",
+                "influencer_partnership_agent",
+                "content_strategy_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "registration_service_agent",
+                "attendee_support_agent",
+                "system_integration_agent",
+                "survey_setup_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "vr_presentation_agent",
+                "live_interaction_agent",
+                "virtual_booths_agent",
+                "access_control_agent",
+                "marketing_strategy_agent",
+                "registration_service_agent"
+            ]
+        },
+        {
+            "name": "vr_presentation_agent",
+            "role": "Coordinates the creation of a VR presentation that effectively showcases product features.",
+            "tools": [
+                "content_development_agent",
+                "compatibility_check_agent"
+            ]
+        },
+        {
+            "name": "content_development_agent",
+            "role": "Creates and curates content to highlight key product features in virtual reality.",
+            "tools": [
+                "feature_highlight_agent"
+            ]
+        },
+        {
+            "name": "feature_highlight_agent",
+            "role": "Selects and emphasizes the most impactful product features.",
+            "tools": [
+                "presentation_polishing_agent"
+            ]
+        },
+        {
+            "name": "presentation_polishing_agent",
+            "role": "Refines the VR presentation for clarity and engagement.",
+            "tools": []
+        },
+        {
+            "name": "compatibility_check_agent",
+            "role": "Ensures the VR presentation is compatible with various headsets and platforms.",
+            "tools": []
+        },
+        {
+            "name": "live_interaction_agent",
+            "role": "Organizes live interactive sessions like Q&A for enhanced audience engagement.",
+            "tools": [
+                "qa_session_agent"
+            ]
+        },
+        {
+            "name": "qa_session_agent",
+            "role": "Facilitates live Q&A sessions including moderating questions and managing the development team engagement.",
+            "tools": [
+                "team_engagement_agent"
+            ]
+        },
+        {
+            "name": "team_engagement_agent",
+            "role": "Ensures the development team is prepared and engaged during the live Q&A.",
+            "tools": [
+                "participant_feedback_agent"
+            ]
+        },
+        {
+            "name": "participant_feedback_agent",
+            "role": "Collects feedback from participants after the Q&A session to improve future interactions.",
+            "tools": []
+        },
+        {
+            "name": "virtual_booths_agent",
+            "role": "Creates virtual booths that showcase different features of the product interactively.",
+            "tools": [
+                "interactive_feature_agent"
+            ]
+        },
+        {
+            "name": "interactive_feature_agent",
+            "role": "Designs interactive elements within virtual booths to captivate attendees.",
+            "tools": [
+                "user_experience_agent"
+            ]
+        },
+        {
+            "name": "user_experience_agent",
+            "role": "Enhances user experience by optimizing interactive booth elements for accessibility and engagement.",
+            "tools": []
+        },
+        {
+            "name": "access_control_agent",
+            "role": "Manages access control for exclusive early access to the VR product launch.",
+            "tools": [
+                "early_access_provision_agent"
+            ]
+        },
+        {
+            "name": "early_access_provision_agent",
+            "role": "Provides early access keys and manages distribution to pre-registered attendees.",
+            "tools": [
+                "security_check_agent"
+            ]
+        },
+        {
+            "name": "security_check_agent",
+            "role": "Conducts security checks to ensure only authorized attendees gain early access.",
+            "tools": []
+        },
+        {
+            "name": "marketing_strategy_agent",
+            "role": "Develops a digital marketing strategy to promote the VR launch event.",
+            "tools": [
+                "digital_campaign_agent"
+            ]
+        },
+        {
+            "name": "digital_campaign_agent",
+            "role": "Executes digital campaigns to raise awareness for the event.",
+            "tools": [
+                "influencer_partnership_agent"
+            ]
+        },
+        {
+            "name": "influencer_partnership_agent",
+            "role": "Engages with VR influencers to expand event reach and credibility.",
+            "tools": [
+                "content_strategy_agent"
+            ]
+        },
+        {
+            "name": "content_strategy_agent",
+            "role": "Develops content strategies for influencer posts and event promotion.",
+            "tools": []
+        },
+        {
+            "name": "registration_service_agent",
+            "role": "Handles event registration and attendee support throughout the event.",
+            "tools": [
+                "attendee_support_agent",
+                "survey_setup_agent"
+            ]
+        },
+        {
+            "name": "attendee_support_agent",
+            "role": "Provides support to attendees during registration and throughout the event.",
+            "tools": [
+                "system_integration_agent"
+            ]
+        },
+        {
+            "name": "system_integration_agent",
+            "role": "Integrates registration systems with event management interfaces for seamless experience.",
+            "tools": []
+        },
+        {
+            "name": "survey_setup_agent",
+            "role": "Sets up post-event surveys to gather attendee feedback for future improvements.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "vr_development_tool",
+            "description": "Enables the creation and customization of virtual reality environments and experiences.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "scene_elements": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Elements of the VR scene such as objects and avatars."
+                    },
+                    "interaction_methods": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of interaction methods available in the VR environment."
+                    }
+                }
+            }
+        },
+        {
+            "name": "campaign_optimization_tool",
+            "description": "Optimizes digital marketing campaigns based on target demographics and engagement metrics.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "audience": {
+                        "type": "object",
+                        "properties": {
+                            "age_range": {
+                                "type": "string",
+                                "description": "Target age range of the audience."
+                            },
+                            "regions": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "description": "Target geographical regions for the campaign."
+                            }
+                        }
+                    },
+                    "engagement_goals": {
+                        "type": "object",
+                        "properties": {
+                            "click_through_rate": {
+                                "type": "number",
+                                "description": "Desired click-through rate for ads."
+                            },
+                            "conversion_rate": {
+                                "type": "number",
+                                "description": "Desired conversion rate of the campaign."
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

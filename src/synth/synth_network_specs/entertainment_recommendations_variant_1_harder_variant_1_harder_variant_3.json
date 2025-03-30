@@ -1,0 +1,201 @@
+{
+    "task": "Create a detailed sustainability plan for retrofitting a city's existing public infrastructure to achieve a 50% reduction in carbon emissions by 2030, comprising the integration of renewable energy sources, smart city technology for efficient resource management, public-private partnerships for innovative funding, and large-scale educational outreach programs to promote ecological awareness.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "sustainability_planner_agent",
+                "renewable_energy_specialist_agent",
+                "solar_grid_integration_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "sustainability_planner_agent",
+                "renewable_energy_specialist_agent",
+                "wind_power_solution_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "sustainability_planner_agent",
+                "smart_technology_coordinator_agent",
+                "iot_implementation_agent",
+                "efficiency_optimizer_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "sustainability_planner_agent",
+                "funding_development_agent",
+                "private_partnerships_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "sustainability_planner_agent",
+                "community_outreach_agent",
+                "educational_program_agent",
+                "media_engagement_agent",
+                "human"
+            ],
+            [
+                "client_agent",
+                "sustainability_planner_agent",
+                "regulatory_compliance_agent",
+                "carbon_emission_tracker_agent",
+                "city_administrator_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The main interface between the user and the operations behind developing the sustainability plan, ensuring all objectives and processes are communicated effectively.",
+            "tools": [
+                "sustainability_planner_agent"
+            ]
+        },
+        {
+            "name": "sustainability_planner_agent",
+            "role": "Develops and manages the overall sustainability strategy, coordinating between various domains to achieve the carbon reduction target.",
+            "tools": [
+                "renewable_energy_specialist_agent",
+                "smart_technology_coordinator_agent",
+                "funding_development_agent",
+                "community_outreach_agent",
+                "regulatory_compliance_agent",
+                "city_administrator_agent"
+            ]
+        },
+        {
+            "name": "renewable_energy_specialist_agent",
+            "role": "Focuses on integrating renewable energy resources within the city's infrastructure to reduce dependency on fossil fuels.",
+            "tools": [
+                "solar_grid_integration_agent",
+                "wind_power_solution_agent"
+            ]
+        },
+        {
+            "name": "solar_grid_integration_agent",
+            "role": "Plans and implements the integration of solar energy into the city's energy grid.",
+            "tools": []
+        },
+        {
+            "name": "wind_power_solution_agent",
+            "role": "Develops wind energy solutions to supplement the city's renewable energy portfolio.",
+            "tools": []
+        },
+        {
+            "name": "smart_technology_coordinator_agent",
+            "role": "Coordinates the deployment of smart city technologies for enhanced resource management and efficiency.",
+            "tools": [
+                "iot_implementation_agent"
+            ]
+        },
+        {
+            "name": "iot_implementation_agent",
+            "role": "Configures and deploys Internet of Things devices to monitor and optimize resource usage.",
+            "tools": [
+                "efficiency_optimizer_agent"
+            ]
+        },
+        {
+            "name": "efficiency_optimizer_agent",
+            "role": "Analyzes and optimizes the use of city resources through IoT data, aiming for enhanced efficiency.",
+            "tools": []
+        },
+        {
+            "name": "funding_development_agent",
+            "role": "Secures and manages funding through innovative public-private partnerships and financial strategies.",
+            "tools": [
+                "private_partnerships_agent"
+            ]
+        },
+        {
+            "name": "private_partnerships_agent",
+            "role": "Cultivates partnerships with private entities to garner investment and support for sustainability projects.",
+            "tools": []
+        },
+        {
+            "name": "community_outreach_agent",
+            "role": "Designs and executes programs to educate the public on sustainable practices and promote community involvement.",
+            "tools": [
+                "educational_program_agent",
+                "media_engagement_agent"
+            ]
+        },
+        {
+            "name": "educational_program_agent",
+            "role": "Develops and manages educational programs aimed at increasing public awareness and engagement in sustainability.",
+            "tools": []
+        },
+        {
+            "name": "media_engagement_agent",
+            "role": "Engages with media channels to amplify the reach and impact of the ecological awareness campaigns.",
+            "tools": []
+        },
+        {
+            "name": "regulatory_compliance_agent",
+            "role": "Ensures the sustainability plan adheres to all necessary regulations and compliance requirements.",
+            "tools": [
+                "carbon_emission_tracker_agent"
+            ]
+        },
+        {
+            "name": "carbon_emission_tracker_agent",
+            "role": "Monitors and reports on the carbon emissions of city infrastructure to ensure reduction targets are met.",
+            "tools": [
+                "emission_data_tool",
+                "carbon_reduction_monitor_tool"
+            ]
+        },
+        {
+            "name": "city_administrator_agent",
+            "role": "Collaborates with city officials to implement strategic plans and ensure smooth operations within city-managed projects.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "emission_data_tool",
+            "description": "Records and assesses carbon emissions across various city sectors to guide sustainability efforts.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "sector": {
+                        "type": "string",
+                        "description": "The city sector for which emissions data is being recorded."
+                    },
+                    "emission_reading": {
+                        "type": "number",
+                        "description": "Current emission level reading."
+                    }
+                }
+            }
+        },
+        {
+            "name": "carbon_reduction_monitor_tool",
+            "description": "Monitors the effectiveness of carbon reduction initiatives and provides real-time feedback.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "initiative_id": {
+                        "type": "string",
+                        "description": "Identifier for the specific carbon reduction initiative."
+                    },
+                    "progress_metric": {
+                        "type": "number",
+                        "description": "Measurement of progress achieved through the initiative."
+                    }
+                }
+            }
+        }
+    ]
+}

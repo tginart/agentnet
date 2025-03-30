@@ -1,0 +1,191 @@
+{
+    "task": "Establish a global marine research project to analyze ocean data collected from autonomous vessels, ensuring compliance with maritime laws and enabling multilingual data reporting to academic circles.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "marine_project_setup_agent",
+                "autonomous_vessel_coordination_agent",
+                "navigation_system_agent",
+                "remote_data_collector_agent",
+                "regulatory_analysis_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "marine_project_setup_agent",
+                "data_analysis_agent",
+                "academic_reporting_agent",
+                "language_optimization_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "technology_support_agent",
+                "satellite_communication_agent",
+                "signal_boost_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "logistics_management_agent",
+                "equipment_tracking_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "technology_support_agent",
+                "data_security_agent",
+                "encryption_service_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Central mediator interfacing with the user to coordinate tasks through a network of specialized agents.",
+            "tools": [
+                "marine_project_setup_agent",
+                "technology_support_agent",
+                "logistics_management_agent"
+            ]
+        },
+        {
+            "name": "marine_project_setup_agent",
+            "role": "Facilitates the inception and management of a marine research project, setting up vessels and ensuring regulatory compliance.",
+            "tools": [
+                "autonomous_vessel_coordination_agent",
+                "data_analysis_agent",
+                "regulatory_analysis_agent"
+            ]
+        },
+        {
+            "name": "technology_support_agent",
+            "role": "Assists with technical aspects of remote data collection and communication for the marine project.",
+            "tools": [
+                "satellite_communication_agent",
+                "data_security_agent"
+            ]
+        },
+        {
+            "name": "logistics_management_agent",
+            "role": "Manages logistics for deploying vessels and equipment worldwide.",
+            "tools": [
+                "equipment_tracking_tool"
+            ]
+        },
+        {
+            "name": "autonomous_vessel_coordination_agent",
+            "role": "Controls and monitors autonomous vessels, ensuring proper navigation and data collection.",
+            "tools": [
+                "navigation_system_agent",
+                "remote_data_collector_agent"
+            ]
+        },
+        {
+            "name": "data_analysis_agent",
+            "role": "Processes and analyzes gathered oceanographic data to extract meaningful scientific insights.",
+            "tools": [
+                "academic_reporting_agent"
+            ]
+        },
+        {
+            "name": "regulatory_analysis_agent",
+            "role": "Evaluates the project's compliance with international maritime laws and standards.",
+            "tools": []
+        },
+        {
+            "name": "navigation_system_agent",
+            "role": "Manages vessel navigation systems, ensuring adherence to pre-defined routes.",
+            "tools": []
+        },
+        {
+            "name": "remote_data_collector_agent",
+            "role": "Collects data remotely from sensors and devices on vessels, transmitting it securely for analysis.",
+            "tools": []
+        },
+        {
+            "name": "academic_reporting_agent",
+            "role": "Compiles and formats findings into reports suitable for academic distribution, managing multilingual accessibility.",
+            "tools": [
+                "language_optimization_agent"
+            ]
+        },
+        {
+            "name": "satellite_communication_agent",
+            "role": "Facilitates satellite communication for real-time data transmission from marine vessels.",
+            "tools": [
+                "signal_boost_tool"
+            ]
+        },
+        {
+            "name": "data_security_agent",
+            "role": "Ensures the security of data during transmission and performs data encryption where necessary.",
+            "tools": [
+                "encryption_service_agent"
+            ]
+        },
+        {
+            "name": "encryption_service_agent",
+            "role": "Encrypts transmitted data to maintain confidentiality and integrity.",
+            "tools": []
+        },
+        {
+            "name": "language_optimization_agent",
+            "role": "Optimizes the language used in reports for clarity and accessibility to a broad scientific audience.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "signal_boost_tool",
+            "description": "Boosts satellite signal strength to ensure reliable communication with ocean vessels.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "vessel_id": {
+                        "type": "string",
+                        "description": "Identifier for the vessel requiring signal boost."
+                    },
+                    "signal_strength": {
+                        "type": "number",
+                        "description": "Desired signal strength level."
+                    },
+                    "boost_duration": {
+                        "type": "string",
+                        "format": "duration",
+                        "description": "The duration for which the signal boost is required."
+                    }
+                }
+            }
+        },
+        {
+            "name": "equipment_tracking_tool",
+            "description": "Tracks the international shipment of research equipment to designated locations.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "tracking_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the shipment."
+                    },
+                    "destination_port": {
+                        "type": "string",
+                        "description": "Final destination port for the equipment."
+                    },
+                    "estimated_arrival": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Estimated arrival time for the shipment."
+                    }
+                }
+            }
+        }
+    ]
+}

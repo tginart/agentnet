@@ -1,0 +1,184 @@
+{
+    "task": "Develop a multi-modal urban mobility platform that enhances user experience and efficiency by integrating bike-sharing, ride-hailing, and public transit services. Implement predictive passenger demand analytics, network resilience strategies in case of disruptions, and real-time service optimization.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "mobility_integration_agent",
+                "bike_sharing_agent",
+                "route_optimization_agent",
+                "real_time_service_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "data_analytics_agent",
+                "predictive_demand_agent",
+                "network_resilience_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "user_experience_agent",
+                "ride_hailing_integration_agent",
+                "customer_feedback_agent",
+                "real_time_service_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "mobility_integration_agent",
+                "transit_service_agent",
+                "network_resilience_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "data_analytics_agent",
+                "predictive_demand_agent",
+                "scenario_analysis_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Top-level agent that interacts with users to gather requirements and coordinates the development of the urban mobility platform.",
+            "tools": [
+                "mobility_integration_agent",
+                "data_analytics_agent",
+                "user_experience_agent"
+            ]
+        },
+        {
+            "name": "mobility_integration_agent",
+            "role": "Responsible for integrating multiple forms of transportation like bike-sharing, ride-hailing, and public transit into a seamless platform.",
+            "tools": [
+                "bike_sharing_agent",
+                "ride_hailing_integration_agent",
+                "transit_service_agent"
+            ]
+        },
+        {
+            "name": "bike_sharing_agent",
+            "role": "Manages the bike-sharing services, optimizing availability and allocation of bikes across the urban area.",
+            "tools": [
+                "route_optimization_agent",
+                "bike_maintenance_agent"
+            ]
+        },
+        {
+            "name": "ride_hailing_integration_agent",
+            "role": "Coordinates ride-hailing services by integrating APIs from various providers and ensuring smooth operations.",
+            "tools": [
+                "customer_feedback_agent"
+            ]
+        },
+        {
+            "name": "transit_service_agent",
+            "role": "Handles interactions and improvements in public transit systems to enhance efficiency.",
+            "tools": [
+                "network_resilience_agent"
+            ]
+        },
+        {
+            "name": "data_analytics_agent",
+            "role": "Analyzes data from various transport services to predict demand and optimize service provision accordingly.",
+            "tools": [
+                "predictive_demand_agent",
+                "scenario_analysis_agent"
+            ]
+        },
+        {
+            "name": "predictive_demand_agent",
+            "role": "Uses machine learning to forecast future passenger demand across different transportation modes.",
+            "tools": []
+        },
+        {
+            "name": "network_resilience_agent",
+            "role": "Develops strategies to ensure network robustness in case of disruptions in urban transportation.",
+            "tools": []
+        },
+        {
+            "name": "route_optimization_agent",
+            "role": "Optimizes routes for all forms of transportation to improve efficiency and reduce travel times.",
+            "tools": [
+                "real_time_service_agent"
+            ]
+        },
+        {
+            "name": "user_experience_agent",
+            "role": "Focuses on improving the user interface and overall experience of the urban mobility platform.",
+            "tools": [
+                "interface_design_agent"
+            ]
+        },
+        {
+            "name": "real_time_service_agent",
+            "role": "Enhances services by providing real-time adjustments to transport schedules and availability based on current conditions.",
+            "tools": []
+        },
+        {
+            "name": "scenario_analysis_agent",
+            "role": "Conducts detailed scenario analyses to evaluate the impact of various operational changes within the transit network.",
+            "tools": []
+        },
+        {
+            "name": "customer_feedback_agent",
+            "role": "Collects and analyzes customer feedback to improve service satisfaction and operational effectiveness.",
+            "tools": []
+        },
+        {
+            "name": "bike_maintenance_agent",
+            "role": "Ensures that all bikes in the sharing network are in good condition and ready for use, performing regular checks and repairs.",
+            "tools": []
+        },
+        {
+            "name": "interface_design_agent",
+            "role": "Designs and updates the user interface of the mobility platform to enhance user engagement and ease of use.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "bike_allocation_tool",
+            "description": "Allocates bikes in a bike-sharing network based on user demand and availability metrics.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "current_demand": {
+                        "type": "number",
+                        "description": "Current demand for bikes in the specified area."
+                    },
+                    "area_id": {
+                        "type": "string",
+                        "description": "Identifier for the area to allocate bikes to."
+                    }
+                }
+            }
+        },
+        {
+            "name": "service_adjustment_tool",
+            "description": "Makes real-time adjustments to service levels and availability.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "service_type": {
+                        "type": "string",
+                        "description": "Type of service to adjust (e.g., bike-sharing, ride-hailing)."
+                    },
+                    "adjustment_factor": {
+                        "type": "number",
+                        "description": "Factor by which the service level should be adjusted."
+                    }
+                }
+            }
+        }
+    ]
+}

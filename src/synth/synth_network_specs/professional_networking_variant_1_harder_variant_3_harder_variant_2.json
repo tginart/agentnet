@@ -1,0 +1,243 @@
+{
+    "task": "Construct a series of regional workshops across five continents focusing on practical applications of AI in sustainability, healthcare, and urban development. Each workshop must leverage local expertise, follow applicable international standards, establish collaborative projects among attendees, and incorporate real-time feedback mechanisms. Coordinate task forces for logistical arrangements, implement synergistic workshops, secure diverse stakeholder engagement, and facilitate an interactive digital platform for post-workshop engagement.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "regional_workshop_director_agent",
+                "local_expertise_integration_agent",
+                "subject_matter_expert_agent",
+                "knowledge_transfer_service",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "standards_compliance_monitor_agent",
+                "international_standard_advisor_agent",
+                "compliance_audit_service",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "collaborative_project_agent",
+                "partnership_facilitation_agent",
+                "industry_partner_outreach_service",
+                "global_collaboration_dashboard",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "logistics_coordination_agent",
+                "event_supply_chain_agent",
+                "material_provision_service",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "digital_engagement_agent",
+                "real_time_feedback_coordinator_agent",
+                "interactive_feedback_collect_service",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "post_workshop_engagement_agent",
+                "online_community_manager_agent",
+                "virtual_networking_hub",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "regional_workshop_director_agent",
+            "role": "Oversees the strategic planning and execution of regional workshops across all continents with a focus on local expertise.",
+            "tools": [
+                "local_expertise_integration_agent"
+            ]
+        },
+        {
+            "name": "local_expertise_integration_agent",
+            "role": "Integrates local experts into workshop panels and sessions to enhance relevance.",
+            "tools": [
+                "subject_matter_expert_agent"
+            ]
+        },
+        {
+            "name": "subject_matter_expert_agent",
+            "role": "Connects with top local experts across different fields to ensure knowledge transfer.",
+            "tools": [
+                "knowledge_transfer_service"
+            ]
+        },
+        {
+            "name": "knowledge_transfer_service",
+            "role": "Facilitates structured knowledge exchange sessions between experts and participants.",
+            "tools": []
+        },
+        {
+            "name": "standards_compliance_monitor_agent",
+            "role": "Ensures all workshops adhere to international standards and regulations.",
+            "tools": [
+                "international_standard_advisor_agent"
+            ]
+        },
+        {
+            "name": "international_standard_advisor_agent",
+            "role": "Provides guidance on ensuring compliance with applicable global standards.",
+            "tools": [
+                "compliance_audit_service"
+            ]
+        },
+        {
+            "name": "compliance_audit_service",
+            "role": "Conducts audits to verify compliance with international standards.",
+            "tools": []
+        },
+        {
+            "name": "collaborative_project_agent",
+            "role": "Fosters the creation of collaborative projects among workshop attendees.",
+            "tools": [
+                "partnership_facilitation_agent"
+            ]
+        },
+        {
+            "name": "partnership_facilitation_agent",
+            "role": "Coordinates with industry partners to facilitate joint projects.",
+            "tools": [
+                "industry_partner_outreach_service"
+            ]
+        },
+        {
+            "name": "industry_partner_outreach_service",
+            "role": "Reaches out to potential industry partners for long-term collaboration.",
+            "tools": [
+                "global_collaboration_dashboard"
+            ]
+        },
+        {
+            "name": "global_collaboration_dashboard",
+            "role": "Centralizes information on all collaborative projects and industry partnerships.",
+            "tools": []
+        },
+        {
+            "name": "logistics_coordination_agent",
+            "role": "Manages logistical needs across regions, including supplies and facilities.",
+            "tools": [
+                "event_supply_chain_agent"
+            ]
+        },
+        {
+            "name": "event_supply_chain_agent",
+            "role": "Ensures all necessary materials and supplies reach event locations timely.",
+            "tools": [
+                "material_provision_service"
+            ]
+        },
+        {
+            "name": "material_provision_service",
+            "role": "Sources and delivers materials required for the workshops.",
+            "tools": []
+        },
+        {
+            "name": "digital_engagement_agent",
+            "role": "Implements digital platforms for real-time feedback and participant interaction.",
+            "tools": [
+                "real_time_feedback_coordinator_agent"
+            ]
+        },
+        {
+            "name": "real_time_feedback_coordinator_agent",
+            "role": "Coordinates the collection of real-time feedback during workshops.",
+            "tools": [
+                "interactive_feedback_collect_service"
+            ]
+        },
+        {
+            "name": "interactive_feedback_collect_service",
+            "role": "Collects and analyzes feedback from participants in a digital format.",
+            "tools": []
+        },
+        {
+            "name": "post_workshop_engagement_agent",
+            "role": "Facilitates continued engagement after the workshops through online platforms.",
+            "tools": [
+                "online_community_manager_agent"
+            ]
+        },
+        {
+            "name": "online_community_manager_agent",
+            "role": "Manages an online community of workshop alumni and participants.",
+            "tools": [
+                "virtual_networking_hub"
+            ]
+        },
+        {
+            "name": "virtual_networking_hub",
+            "role": "Provides a platform for participants to network and collaborate post-event.",
+            "tools": []
+        },
+        {
+            "name": "client_agent",
+            "role": "The central coordinator that manages the entire process of organizing and executing the workshops.",
+            "tools": [
+                "regional_workshop_director_agent",
+                "standards_compliance_monitor_agent",
+                "collaborative_project_agent",
+                "logistics_coordination_agent",
+                "digital_engagement_agent",
+                "post_workshop_engagement_agent"
+            ]
+        }
+    ],
+    "tools": [
+        {
+            "name": "knowledge_transfer_service",
+            "description": "Enables structured knowledge exchange sessions.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "expert_id": {
+                        "type": "string",
+                        "description": "The ID of the expert involved"
+                    },
+                    "topic": {
+                        "type": "string",
+                        "description": "The topic of the knowledge transfer session"
+                    },
+                    "audience_size": {
+                        "type": "number",
+                        "description": "The estimated number of participants"
+                    }
+                }
+            }
+        },
+        {
+            "name": "interactive_feedback_collect_service",
+            "description": "Service for collecting and analyzing workshop feedback.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "session_id": {
+                        "type": "string",
+                        "description": "The ID of the workshop session"
+                    },
+                    "feedback_type": {
+                        "type": "string",
+                        "description": "Type of feedback being collected (e.g., survey, live poll)"
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "description": "The time the feedback is collected"
+                    }
+                }
+            }
+        }
+    ]
+}

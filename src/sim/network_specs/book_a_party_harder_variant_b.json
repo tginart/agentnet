@@ -1,0 +1,230 @@
+{
+    "task": "Coordinate an immersive art residency across three international locations to foster experimental digital art projects. Collaborate with local universities for workshops, secure temporary studio spaces, manage the installation and maintenance of technology infrastructures, organize public exhibitions and create a global artist network. Develop an online platform for virtual showcases and real-time project collaboration.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "university_partnership_agent",
+                "academic_collaboration_agent",
+                "workshop_funding_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "studio_acquisition_agent",
+                "lease_negotiation_agent",
+                "legal_advisory_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "technology_management_agent",
+                "infrastructure_setup_agent",
+                "maintenance_services_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "public_exhibition_coordinator",
+                "venue_booking_agent",
+                "art_installation_services_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "artist_networking_agent",
+                "global_connections_agent",
+                "collaborative_projects_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "online_platform_developer",
+                "virtual_showcase_agent",
+                "real_time_collab_agent",
+                "user_experience_design_agent"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Leads the organization of the global art residency and coordinates tasks across various specialized agents.",
+            "tools": [
+                "university_partnership_agent",
+                "studio_acquisition_agent",
+                "technology_management_agent",
+                "public_exhibition_coordinator",
+                "artist_networking_agent",
+                "online_platform_developer"
+            ]
+        },
+        {
+            "name": "university_partnership_agent",
+            "role": "Establishes partnerships with universities to facilitate artist workshops and lectures.",
+            "tools": [
+                "academic_collaboration_agent"
+            ]
+        },
+        {
+            "name": "academic_collaboration_agent",
+            "role": "Coordinates academic resources and faculty participation for workshops.",
+            "tools": [
+                "workshop_funding_agent"
+            ]
+        },
+        {
+            "name": "workshop_funding_agent",
+            "role": "Secures funding and sponsorships for university-conducted workshops.",
+            "tools": []
+        },
+        {
+            "name": "studio_acquisition_agent",
+            "role": "Finds and secures short-term studio spaces in various location for residency projects.",
+            "tools": [
+                "lease_negotiation_agent"
+            ]
+        },
+        {
+            "name": "lease_negotiation_agent",
+            "role": "Handles negotiation of lease terms and agreements for temporary studio spaces.",
+            "tools": [
+                "legal_advisory_agent"
+            ]
+        },
+        {
+            "name": "legal_advisory_agent",
+            "role": "Provides legal advice on lease agreements and residency contracts.",
+            "tools": []
+        },
+        {
+            "name": "technology_management_agent",
+            "role": "Oversees the setup and maintenance of technological requirements for projects.",
+            "tools": [
+                "infrastructure_setup_agent"
+            ]
+        },
+        {
+            "name": "infrastructure_setup_agent",
+            "role": "Installs necessary technology infrastructure and supports hardware requirements.",
+            "tools": [
+                "maintenance_services_agent"
+            ]
+        },
+        {
+            "name": "maintenance_services_agent",
+            "role": "Provides ongoing maintenance and technical support for technology installations.",
+            "tools": []
+        },
+        {
+            "name": "public_exhibition_coordinator",
+            "role": "Plans and executes public exhibitions at the residency locations.",
+            "tools": [
+                "venue_booking_agent"
+            ]
+        },
+        {
+            "name": "venue_booking_agent",
+            "role": "Books venues for public exhibitions and coordinates logistics.",
+            "tools": [
+                "art_installation_services_agent"
+            ]
+        },
+        {
+            "name": "art_installation_services_agent",
+            "role": "Manages the setup and dismantling of art installations for public viewing.",
+            "tools": []
+        },
+        {
+            "name": "artist_networking_agent",
+            "role": "Forges a network among resident artists and facilitates collaborative initiatives.",
+            "tools": [
+                "global_connections_agent"
+            ]
+        },
+        {
+            "name": "global_connections_agent",
+            "role": "Connects resident artists with international peers and institutions.",
+            "tools": [
+                "collaborative_projects_agent"
+            ]
+        },
+        {
+            "name": "collaborative_projects_agent",
+            "role": "Initiates and supports collaborative art projects among global artists.",
+            "tools": []
+        },
+        {
+            "name": "online_platform_developer",
+            "role": "Develops a virtual platform for showcasing and collaborating on projects.",
+            "tools": [
+                "virtual_showcase_agent"
+            ]
+        },
+        {
+            "name": "virtual_showcase_agent",
+            "role": "Manages virtual exhibits and ensures seamless user experience.",
+            "tools": [
+                "real_time_collab_agent"
+            ]
+        },
+        {
+            "name": "real_time_collab_agent",
+            "role": "Facilitates real-time collaboration tools for artists on the platform.",
+            "tools": [
+                "user_experience_design_agent"
+            ]
+        },
+        {
+            "name": "user_experience_design_agent",
+            "role": "Optimizes the user interface and experience for the online platform.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "infrastructure_setup_agent",
+            "description": "Handles setup and management of necessary technical infrastructure, including internet and digital tools.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location_ids": {
+                        "type": "array",
+                        "description": "List of locations where infrastructure is needed"
+                    },
+                    "tech_needs": {
+                        "type": "object",
+                        "properties": {
+                            "internet": {
+                                "type": "boolean",
+                                "description": "Whether high-speed internet is required"
+                            },
+                            "hardware": {
+                                "type": "array",
+                                "description": "List of hardware needed"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "virtual_showcase_agent",
+            "description": "Oversees the curation and management of virtual showcases for ongoing projects.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "event_schedule": {
+                        "type": "array",
+                        "description": "Scheduled times for virtual exhibits"
+                    },
+                    "artist_participation": {
+                        "type": "array",
+                        "description": "List of artists participating in showcases"
+                    }
+                }
+            }
+        }
+    ]
+}

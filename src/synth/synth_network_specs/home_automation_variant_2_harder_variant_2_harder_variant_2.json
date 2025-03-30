@@ -1,0 +1,370 @@
+{
+    "task": "Design an automated facility management system for a high-tech industrial warehouse. The system should incorporate IoT maintenance scheduling, automated inventory assessments, security drone patrols, real-time worker safety monitoring, HVAC energy optimization, and monthly operational reports. The system must be able to adapt to changes and predict future requirements based on AI-driven analytics.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "facility_management_agent",
+                "maintenance_controller_agent",
+                "iot_sensor_agent",
+                "predictive_maintenance_agent",
+                "diagnostic_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "facility_management_agent",
+                "inventory_management_agent",
+                "inventory_analysis_agent",
+                "automated_counting_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "facility_management_agent",
+                "security_system_agent",
+                "drone_patrol_agent",
+                "drone_navigation_agent",
+                "drone_navigation_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "facility_management_agent",
+                "worker_safety_agent",
+                "health_monitoring_agent",
+                "real_time_risk_assessment_agent",
+                "vital_sign_tracker_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "facility_management_agent",
+                "energy_optimization_agent",
+                "hvac_control_agent",
+                "thermal_efficiency_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "facility_management_agent",
+                "reporting_system_agent",
+                "monthly_operations_report_agent",
+                "compile_operations_report_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "facility_management_agent",
+                "security_system_agent",
+                "intruder_detection_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "facility_management_agent",
+                "maintenance_controller_agent",
+                "system_forecast_agent",
+                "future_requirements_predictor_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "facility_management_agent",
+                "waste_management_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The main interface agent that coordinates user requests and manages interactions within the facility management system.",
+            "tools": [
+                "facility_management_agent"
+            ]
+        },
+        {
+            "name": "facility_management_agent",
+            "role": "Directs all facility management activities, ensuring seamless integration across systems and sub-agents for optimal operation.",
+            "tools": [
+                "maintenance_controller_agent",
+                "inventory_management_agent",
+                "security_system_agent",
+                "worker_safety_agent",
+                "energy_optimization_agent",
+                "reporting_system_agent",
+                "lighting_control_agent",
+                "emergency_response_agent",
+                "waste_management_agent"
+            ]
+        },
+        {
+            "name": "maintenance_controller_agent",
+            "role": "Schedules maintenance tasks using IoT data to prevent equipment downtime.",
+            "tools": [
+                "iot_sensor_agent",
+                "system_forecast_agent"
+            ]
+        },
+        {
+            "name": "iot_sensor_agent",
+            "role": "Collects and analyzes data from IoT devices to inform maintenance decisions.",
+            "tools": [
+                "predictive_maintenance_agent"
+            ]
+        },
+        {
+            "name": "predictive_maintenance_agent",
+            "role": "Uses predictive analysis to optimize maintenance schedules and prevent equipment failure.",
+            "tools": [
+                "diagnostic_tool"
+            ]
+        },
+        {
+            "name": "inventory_management_agent",
+            "role": "Handles inventory assessments to maintain accurate stock levels.",
+            "tools": [
+                "inventory_analysis_agent"
+            ]
+        },
+        {
+            "name": "inventory_analysis_agent",
+            "role": "Automates inventory counts and detects discrepancies.",
+            "tools": [
+                "automated_counting_tool"
+            ]
+        },
+        {
+            "name": "security_system_agent",
+            "role": "Manages security operations to ensure a protected facility environment.",
+            "tools": [
+                "drone_patrol_agent",
+                "intruder_detection_agent"
+            ]
+        },
+        {
+            "name": "drone_patrol_agent",
+            "role": "Deploys and maneuvers drones for automated security patrols.",
+            "tools": [
+                "drone_navigation_agent"
+            ]
+        },
+        {
+            "name": "drone_navigation_agent",
+            "role": "Guides drones using automated navigation for efficient patrolling.",
+            "tools": [
+                "drone_navigation_tool"
+            ]
+        },
+        {
+            "name": "intruder_detection_agent",
+            "role": "Detects unauthorized entries and raises alerts.",
+            "tools": []
+        },
+        {
+            "name": "worker_safety_agent",
+            "role": "Monitors worker safety conditions throughout the facility.",
+            "tools": [
+                "health_monitoring_agent"
+            ]
+        },
+        {
+            "name": "health_monitoring_agent",
+            "role": "Tracks real-time health metrics of workers to ensure safety compliance.",
+            "tools": [
+                "real_time_risk_assessment_agent"
+            ]
+        },
+        {
+            "name": "real_time_risk_assessment_agent",
+            "role": "Assesses risk levels in real-time based on worker health data and environmental conditions.",
+            "tools": [
+                "vital_sign_tracker_tool"
+            ]
+        },
+        {
+            "name": "energy_optimization_agent",
+            "role": "Enhances energy efficiency across HVAC and lighting systems.",
+            "tools": [
+                "hvac_control_agent"
+            ]
+        },
+        {
+            "name": "hvac_control_agent",
+            "role": "Regulates HVAC systems to maximize thermal and energy efficiency.",
+            "tools": [
+                "thermal_efficiency_tool"
+            ]
+        },
+        {
+            "name": "reporting_system_agent",
+            "role": "Produces regular reports summarizing operational performance insights.",
+            "tools": [
+                "monthly_operations_report_agent"
+            ]
+        },
+        {
+            "name": "monthly_operations_report_agent",
+            "role": "Compiles comprehensive reports on facility management metrics on a monthly basis.",
+            "tools": [
+                "compile_operations_report_tool"
+            ]
+        },
+        {
+            "name": "system_forecast_agent",
+            "role": "Predicts future maintenance and operational needs using historical data.",
+            "tools": [
+                "future_requirements_predictor_tool"
+            ]
+        },
+        {
+            "name": "lighting_control_agent",
+            "role": "Optimizes lighting in different zones of the warehouse for energy conservation.",
+            "tools": []
+        },
+        {
+            "name": "waste_management_agent",
+            "role": "Monitors and manages waste disposal and recycling activities within the warehouse.",
+            "tools": []
+        },
+        {
+            "name": "emergency_response_agent",
+            "role": "Coordinates emergency protocols and resources in the event of an incident.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "diagnostic_tool",
+            "description": "Analyzes sensor data to detect equipment health issues.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "sensor_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the sensor collecting data."
+                    },
+                    "check_interval": {
+                        "type": "number",
+                        "description": "Interval in hours for conducting diagnostics."
+                    }
+                }
+            }
+        },
+        {
+            "name": "automated_counting_tool",
+            "description": "Performs automated checks on inventory stock levels using AI algorithms.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location_id": {
+                        "type": "string",
+                        "description": "ID of the warehouse location being assessed."
+                    },
+                    "include_item_details": {
+                        "type": "boolean",
+                        "description": "Whether to include detailed item-level information in the count."
+                    }
+                }
+            }
+        },
+        {
+            "name": "drone_navigation_tool",
+            "description": "Guides drones along pre-determined routes for security sweeps.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "patrol_area": {
+                        "type": "string",
+                        "description": "Designated area for drone patrols."
+                    },
+                    "patrol_frequency": {
+                        "type": "number",
+                        "description": "Frequency of patrols in hours."
+                    }
+                }
+            }
+        },
+        {
+            "name": "vital_sign_tracker_tool",
+            "description": "Monitors vital health signs of workers and evaluates safety risks.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "worker_id": {
+                        "type": "string",
+                        "description": "ID of the worker being monitored."
+                    },
+                    "monitoring_interval": {
+                        "type": "number",
+                        "description": "Interval in minutes for checking vital signs."
+                    }
+                }
+            }
+        },
+        {
+            "name": "thermal_efficiency_tool",
+            "description": "Evaluates thermal efficiency and adjusts settings for optimal performance.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "zone_id": {
+                        "type": "string",
+                        "description": "Identifier of the area under HVAC control."
+                    },
+                    "target_temperature": {
+                        "type": "number",
+                        "description": "Desired temperature setting in Celsius."
+                    }
+                }
+            }
+        },
+        {
+            "name": "compile_operations_report_tool",
+            "description": "Generates monthly reports to overview facility operations and highlight key metrics.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "report_month": {
+                        "type": "string",
+                        "description": "Month for which the report is compiled."
+                    },
+                    "include_sections": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "description": "Sections included in the report (e.g., 'maintenance', 'inventory', 'security')."
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "future_requirements_predictor_tool",
+            "description": "Utilizes AI to forecast future facility management requirements.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "historical_data_window": {
+                        "type": "number",
+                        "description": "Time period in months for analyzing past data."
+                    },
+                    "predictive_accuracy": {
+                        "type": "number",
+                        "description": "Desired level of prediction accuracy as a decimal (0.0 to 1.0)."
+                    }
+                }
+            }
+        }
+    ]
+}

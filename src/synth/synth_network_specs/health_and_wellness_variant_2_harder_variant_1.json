@@ -1,0 +1,241 @@
+{
+    "task": "Design an integrated lifestyle optimization system that customizes fitness regimes with dietary plans, mental wellness schedules, and personal finance management. The system should leverage personal data analytics, adapt to specific user goals, and ensure secure financial planning with potential investments.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "lifestyle_coordinator_agent",
+                "fitness_customization_agent",
+                "personal_data_analytics_tool",
+                "workout_creation_agent",
+                "fitness_journal_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "lifestyle_coordinator_agent",
+                "dietary_planner_agent",
+                "nutrition_insights_agent",
+                "dietary_preferences_tool",
+                "meal_schedule_planner_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "lifestyle_coordinator_agent",
+                "mental_wellness_scheduler_agent",
+                "mindfulness_experience_agent",
+                "guided_meditation_tool",
+                "life_event_integration_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "lifestyle_coordinator_agent",
+                "financial_planner_agent",
+                "secure_financial_analyzer_tool",
+                "investment_advisor_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "lifestyle_coordinator_agent",
+                "financial_planner_agent",
+                "budget_manager_agent",
+                "budget_tracking_tool",
+                "investment_advisor_agent",
+                "investment_analysis_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The main interface agent that communicates with the user and coordinates tasks across various specialized agents.",
+            "tools": [
+                "lifestyle_coordinator_agent"
+            ]
+        },
+        {
+            "name": "lifestyle_coordinator_agent",
+            "role": "Oversees the development of a holistic lifestyle optimization program by integrating fitness, dietary, mental wellness, and financial planning.",
+            "tools": [
+                "fitness_customization_agent",
+                "dietary_planner_agent",
+                "mental_wellness_scheduler_agent",
+                "financial_planner_agent"
+            ]
+        },
+        {
+            "name": "fitness_customization_agent",
+            "role": "Creates personalized fitness routines based on user analytics and specific goals.",
+            "tools": [
+                "personal_data_analytics_tool",
+                "workout_creation_agent"
+            ]
+        },
+        {
+            "name": "workout_creation_agent",
+            "role": "Specializes in designing detailed workout plans and tracking progress.",
+            "tools": [
+                "fitness_journal_tool"
+            ]
+        },
+        {
+            "name": "dietary_planner_agent",
+            "role": "Develops dietary plans tailored to individual nutritional needs and preferences.",
+            "tools": [
+                "nutrition_insights_agent",
+                "meal_schedule_planner_tool"
+            ]
+        },
+        {
+            "name": "nutrition_insights_agent",
+            "role": "Provides analysis on dietary habits and suggests improvements based on user data.",
+            "tools": [
+                "dietary_preferences_tool"
+            ]
+        },
+        {
+            "name": "mental_wellness_scheduler_agent",
+            "role": "Coordinates mental wellness activities such as mindfulness practices and stress management.",
+            "tools": [
+                "mindfulness_experience_agent",
+                "life_event_integration_agent"
+            ]
+        },
+        {
+            "name": "mindfulness_experience_agent",
+            "role": "Customizes mindfulness routines based on user experience and feedback.",
+            "tools": [
+                "guided_meditation_tool"
+            ]
+        },
+        {
+            "name": "financial_planner_agent",
+            "role": "Organizes personal finance management integrating budgeting and investment strategies.",
+            "tools": [
+                "secure_financial_analyzer_tool",
+                "budget_manager_agent",
+                "investment_advisor_agent"
+            ]
+        },
+        {
+            "name": "investment_advisor_agent",
+            "role": "Offers advice on potential investment opportunities and risk management.",
+            "tools": [
+                "investment_analysis_tool"
+            ]
+        },
+        {
+            "name": "budget_manager_agent",
+            "role": "Monitors user expenditures and savings, helping to create effective budgets.",
+            "tools": [
+                "budget_tracking_tool"
+            ]
+        },
+        {
+            "name": "life_event_integration_agent",
+            "role": "Integrates user's life events into mental wellness planning.",
+            "tools": []
+        },
+        {
+            "name": "personal_data_analytics_tool",
+            "role": "Analyzes personal data to tailor fitness activities to user needs.",
+            "tools": []
+        },
+        {
+            "name": "guided_meditation_tool",
+            "role": "Provides meditation sessions customized to the user's mindfulness journey.",
+            "tools": []
+        },
+        {
+            "name": "fitness_journal_tool",
+            "role": "Tracks and logs user fitness milestones and progress.",
+            "tools": []
+        },
+        {
+            "name": "dietary_preferences_tool",
+            "role": "Documents user dietary preferences to inform personalized nutrition plans.",
+            "tools": []
+        },
+        {
+            "name": "meal_schedule_planner_tool",
+            "role": "Plans meal schedules aligning with dietary goals and availability.",
+            "tools": []
+        },
+        {
+            "name": "secure_financial_analyzer_tool",
+            "role": "Performs detailed analysis of user's financial status with a focus on security and opportunities.",
+            "tools": []
+        },
+        {
+            "name": "budget_tracking_tool",
+            "role": "Keeps track of user's spending and savings in real-time.",
+            "tools": []
+        },
+        {
+            "name": "investment_analysis_tool",
+            "role": "Analyzes potential investments based on market data and user risk appetite.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "personal_data_analytics_tool",
+            "description": "Processes personal data to generate insights for fitness customization.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "user_health_data": {
+                        "type": "object",
+                        "description": "A comprehensive log of the user's health data including biometric information."
+                    },
+                    "fitness_goals": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of fitness goals to achieve."
+                    }
+                }
+            }
+        },
+        {
+            "name": "secure_financial_analyzer_tool",
+            "description": "Analyzes financial data and identifies security improvements and investment potentials.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "financial_records": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "account_type": {
+                                    "type": "string",
+                                    "description": "Type of financial account (e.g., savings, investment)."
+                                },
+                                "balance": {
+                                    "type": "number",
+                                    "description": "Current balance of the account."
+                                }
+                            }
+                        },
+                        "description": "Financial records detailing user's accounts and balances."
+                    },
+                    "investment_preferences": {
+                        "type": "string",
+                        "description": "The user's investment risk tolerance and preferences."
+                    }
+                }
+            }
+        }
+    ]
+}

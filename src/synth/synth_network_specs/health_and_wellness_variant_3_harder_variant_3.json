@@ -1,0 +1,212 @@
+{
+    "task": "Develop an adaptive online platform for advanced data science learning featuring personalized curriculum recommendations, real-time problem-solving challenges, expert mentorship, and a gamified progress tracking system. Ensure integration of collaborative projects, continuous evaluation, and innovative research opportunities.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "platform_manager_agent",
+                "curriculum_personalization_agent",
+                "content_recommender_agent",
+                "learning_material_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "platform_manager_agent",
+                "problem_solving_challenge_agent",
+                "challenge_evaluation_agent",
+                "solution_analysis_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "platform_manager_agent",
+                "expert_mentorship_agent",
+                "mentor_matching_agent",
+                "session_schedule_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "platform_manager_agent",
+                "collaborative_project_agent",
+                "parallel_team_agent",
+                "team_resource_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "platform_manager_agent",
+                "gamified_progress_agent",
+                "achievement_tracker_agent",
+                "progress_dashboard_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Primary entry point for users to engage with the adaptive data science learning platform.",
+            "tools": [
+                "platform_manager_agent"
+            ]
+        },
+        {
+            "name": "platform_manager_agent",
+            "role": "Oversees platform functionalities, coordinating various agents for a seamless learning experience.",
+            "tools": [
+                "curriculum_personalization_agent",
+                "problem_solving_challenge_agent",
+                "expert_mentorship_agent",
+                "collaborative_project_agent",
+                "gamified_progress_agent"
+            ]
+        },
+        {
+            "name": "curriculum_personalization_agent",
+            "role": "Designs customized learning paths tailored to individual user's background and learning goals.",
+            "tools": [
+                "content_recommender_agent"
+            ]
+        },
+        {
+            "name": "content_recommender_agent",
+            "role": "Recommends specific learning materials and content to enrich the personalized curriculum.",
+            "tools": [
+                "learning_material_tool"
+            ]
+        },
+        {
+            "name": "problem_solving_challenge_agent",
+            "role": "Facilitates and designs real-time problem-solving challenges to enhance critical thinking skills.",
+            "tools": [
+                "challenge_evaluation_agent"
+            ]
+        },
+        {
+            "name": "challenge_evaluation_agent",
+            "role": "Evaluates solutions submitted for problem-solving challenges, providing constructive feedback.",
+            "tools": [
+                "solution_analysis_tool"
+            ]
+        },
+        {
+            "name": "expert_mentorship_agent",
+            "role": "Connects learners with experienced mentors for personalized guidance and support.",
+            "tools": [
+                "mentor_matching_agent"
+            ]
+        },
+        {
+            "name": "mentor_matching_agent",
+            "role": "Matches learners with suitable mentors based on interests, expertise, and learning requirements.",
+            "tools": [
+                "session_schedule_tool"
+            ]
+        },
+        {
+            "name": "collaborative_project_agent",
+            "role": "Organizes and facilitates team-based projects, leveraging collaboration for innovative learning.",
+            "tools": [
+                "parallel_team_agent"
+            ]
+        },
+        {
+            "name": "parallel_team_agent",
+            "role": "Manages parallel teams working on collaborative projects, ensuring resource availability.",
+            "tools": [
+                "team_resource_tool"
+            ]
+        },
+        {
+            "name": "gamified_progress_agent",
+            "role": "Enhances user engagement through gamified elements in the learning journey.",
+            "tools": [
+                "achievement_tracker_agent"
+            ]
+        },
+        {
+            "name": "achievement_tracker_agent",
+            "role": "Tracks user achievements and milestones, integrating them into a visual progress dashboard.",
+            "tools": [
+                "progress_dashboard_tool"
+            ]
+        },
+        {
+            "name": "solution_analysis_tool",
+            "role": "Analyzes problem-solving solutions for efficiency and correctness, providing insights for improvement.",
+            "tools": []
+        },
+        {
+            "name": "learning_material_tool",
+            "role": "Supplies curated educational content and resources necessary for completing the personalized curriculum.",
+            "tools": []
+        },
+        {
+            "name": "session_schedule_tool",
+            "role": "Schedules and manages mentorship sessions, coordinating between mentors and learners.",
+            "tools": []
+        },
+        {
+            "name": "team_resource_tool",
+            "role": "Provides necessary tools and documents for team projects, ensuring smooth project execution.",
+            "tools": []
+        },
+        {
+            "name": "progress_dashboard_tool",
+            "role": "Displays a comprehensive view of user's progress, achievements, and learning milestones.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "learning_material_tool",
+            "description": "Supplies a wide array of learning resources ranging from videos to research papers for curriculum needs.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "topic_focus": {
+                        "type": "string",
+                        "description": "The subject area focus such as data visualization or machine learning algorithms."
+                    },
+                    "format_preference": {
+                        "type": "string",
+                        "description": "Preferred format for learning materials, like videos, PDFs, or interactive content."
+                    }
+                }
+            }
+        },
+        {
+            "name": "solution_analysis_tool",
+            "description": "Evaluates the efficiency and effectiveness of solutions to provided challenges.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "challenge_id": {
+                        "type": "string",
+                        "description": "ID of the challenge for which the solution is being analyzed."
+                    },
+                    "solution_details": {
+                        "type": "object",
+                        "properties": {
+                            "code_snippet": {
+                                "type": "string",
+                                "description": "Code solution provided by the user."
+                            },
+                            "execution_time": {
+                                "type": "number",
+                                "description": "Time taken to execute the solution in seconds."
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

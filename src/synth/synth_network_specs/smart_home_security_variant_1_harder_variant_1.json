@@ -1,0 +1,269 @@
+{
+    "task": "Oversee and optimize the entire smart greenhouse system. Ensure optimal growth conditions by monitoring temperature, humidity, soil moisture, CO2 levels, and lighting. Adjust systems as required, perform regular equipment checks, generate a daily report on plant health with recommendations, and alert the operator for any anomalies. Integrate weather forecasts to adjust external factors. Ensure that all water and nutrient systems are functioning smoothly and oversee pollination systems as required.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "greenhouse_management_agent",
+                "climate_control_agent",
+                "temperature_control_agent",
+                "temp_history_analyzer_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "greenhouse_management_agent",
+                "climate_control_agent",
+                "humidity_control_agent",
+                "humidity_analysis_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "report_generation_agent",
+                "plant_health_monitor_agent",
+                "disease_detection_agent",
+                "recommendation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "alert_agent",
+                "sms_notification_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "water_nutrient_management_agent",
+                "water_system_agent",
+                "pump_check_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "weather_forecast_agent",
+                "forecast_integration_agent",
+                "climate_impact_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "pollination_management_agent",
+                "manual_pollination_agent",
+                "bee_hive_monitor_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Primary interface for user interactions and task delegation within the greenhouse system.",
+            "tools": [
+                "greenhouse_management_agent",
+                "weather_forecast_agent",
+                "alert_agent",
+                "report_generation_agent",
+                "water_nutrient_management_agent",
+                "pollination_management_agent"
+            ]
+        },
+        {
+            "name": "greenhouse_management_agent",
+            "role": "Coordinates the operations of the greenhouse, oversees climate control and system status checks.",
+            "tools": [
+                "climate_control_agent",
+                "sensor_check_agent"
+            ]
+        },
+        {
+            "name": "climate_control_agent",
+            "role": "Maintains optimal temperature, humidity, and CO2 levels inside the greenhouse.",
+            "tools": [
+                "temperature_control_agent",
+                "humidity_control_agent",
+                "co2_control_agent"
+            ]
+        },
+        {
+            "name": "sensor_check_agent",
+            "role": "Monitors the operational status of all sensors within the greenhouse.",
+            "tools": []
+        },
+        {
+            "name": "temperature_control_agent",
+            "role": "Regulates and adjusts temperature to ensure a conducive environment for plant growth.",
+            "tools": [
+                "temp_history_analyzer_agent"
+            ]
+        },
+        {
+            "name": "humidity_control_agent",
+            "role": "Manages humidity levels to prevent plant dehydration or fungal growth.",
+            "tools": [
+                "humidity_analysis_agent"
+            ]
+        },
+        {
+            "name": "co2_control_agent",
+            "role": "Controls CO2 levels to optimize photosynthesis rates.",
+            "tools": []
+        },
+        {
+            "name": "temp_history_analyzer_agent",
+            "role": "Analyzes historical temperature data to forecast needed adjustments.",
+            "tools": []
+        },
+        {
+            "name": "humidity_analysis_agent",
+            "role": "Analyzes humidity data to identify trends and recommend adjustments.",
+            "tools": []
+        },
+        {
+            "name": "alert_agent",
+            "role": "Notifies greenhouse operator of any system anomalies or urgent tasks.",
+            "tools": [
+                "sms_notification_tool"
+            ]
+        },
+        {
+            "name": "report_generation_agent",
+            "role": "Generates periodic reports on plant health and system performance.",
+            "tools": [
+                "plant_health_monitor_agent",
+                "recommendation_agent"
+            ]
+        },
+        {
+            "name": "plant_health_monitor_agent",
+            "role": "Tracks plant health indicators and analyses growth patterns.",
+            "tools": [
+                "disease_detection_agent"
+            ]
+        },
+        {
+            "name": "disease_detection_agent",
+            "role": "Uses plant health data to identify potential diseases or pest issues.",
+            "tools": []
+        },
+        {
+            "name": "recommendation_agent",
+            "role": "Provides actionable insights based on plant health data and system performance.",
+            "tools": []
+        },
+        {
+            "name": "weather_forecast_agent",
+            "role": "Retrieves and integrates weather forecasts into greenhouse operations.",
+            "tools": [
+                "forecast_integration_agent"
+            ]
+        },
+        {
+            "name": "forecast_integration_agent",
+            "role": "Incorporates weather data to adjust greenhouse settings to ensure optimal conditions.",
+            "tools": [
+                "climate_impact_agent"
+            ]
+        },
+        {
+            "name": "climate_impact_agent",
+            "role": "Assesses the impact of external climate conditions on internal greenhouse settings.",
+            "tools": []
+        },
+        {
+            "name": "water_nutrient_management_agent",
+            "role": "Ensures efficient operation of water and nutrient delivery systems.",
+            "tools": [
+                "water_system_agent",
+                "nutrient_system_agent"
+            ]
+        },
+        {
+            "name": "water_system_agent",
+            "role": "Oversees the irrigation system, maintaining appropriate soil moisture levels.",
+            "tools": [
+                "pump_check_agent"
+            ]
+        },
+        {
+            "name": "pump_check_agent",
+            "role": "Ensures all water pumps are operational and functioning smoothly.",
+            "tools": []
+        },
+        {
+            "name": "nutrient_system_agent",
+            "role": "Monitors and manages the delivery of nutrients to plants.",
+            "tools": []
+        },
+        {
+            "name": "pollination_management_agent",
+            "role": "Ensures proper pollination processes within the greenhouse.",
+            "tools": [
+                "manual_pollination_agent"
+            ]
+        },
+        {
+            "name": "manual_pollination_agent",
+            "role": "Facilitates manual pollination when automated systems are insufficient.",
+            "tools": [
+                "bee_hive_monitor_agent"
+            ]
+        },
+        {
+            "name": "bee_hive_monitor_agent",
+            "role": "Monitors the health and activity of bee hives used in pollination processes.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "sms_notification_tool",
+            "description": "Sends SMS alerts to the greenhouse operator with specific anomaly details.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "recipient_phone": {
+                        "type": "string",
+                        "description": "The phone number for sending the SMS alert."
+                    },
+                    "alert_message": {
+                        "type": "string",
+                        "description": "Detailed message of the issue detected."
+                    },
+                    "priority_level": {
+                        "type": "string",
+                        "description": "The urgency level of the alert."
+                    }
+                }
+            }
+        },
+        {
+            "name": "air_quality_adjustment_tool",
+            "description": "Adjusts internal air quality parameters to ensure optimal plant growth.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "target_co2_level": {
+                        "type": "number",
+                        "description": "The desired CO2 concentration in the greenhouse."
+                    },
+                    "airflow_adjustment": {
+                        "type": "boolean",
+                        "description": "Determines if airflow should be adjusted."
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "description": "The time the adjustment is to be applied."
+                    }
+                }
+            }
+        }
+    ]
+}

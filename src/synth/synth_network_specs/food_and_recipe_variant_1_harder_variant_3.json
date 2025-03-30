@@ -1,0 +1,352 @@
+{
+    "task": "Create an itinerary for a sustainable road trip from Milan to Rome that features electric vehicle charging stops, organic farm visits, cultural heritage sites, detailed waste reduction tips, a camping equipment rental, a local sustainable shopping guide, and nutrition advice from local ingredients.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "road_trip_planning_agent",
+                "route_management_agent",
+                "charging_station_locator_agent",
+                "ev_charging_navigation_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "road_trip_planning_agent",
+                "agritourism_agent",
+                "local_farm_stay_planning_agent",
+                "organic_farm_visits_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "road_trip_planning_agent",
+                "cultural_heritage_agent",
+                "heritage_sites_recommender_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "road_trip_planning_agent",
+                "sustainability_guide_agent",
+                "waste_reduction_tips_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "road_trip_planning_agent",
+                "equipment_rental_agent",
+                "camping_rental_service_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "road_trip_planning_agent",
+                "local_shopping_guide_agent",
+                "regional_product_suggestions_agent",
+                "sustainable_shopping_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "road_trip_planning_agent",
+                "nutrition_advise_agent",
+                "local_ingredients_nutrition_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "road_trip_planning_agent",
+                "route_management_agent",
+                "charging_station_locator_agent",
+                "ev_charging_navigation_tool",
+                "agritourism_agent",
+                "local_farm_stay_planning_agent",
+                "organic_farm_visits_tool",
+                "sustainability_guide_agent",
+                "waste_reduction_tips_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to plan a sustainable road trip.",
+            "tools": [
+                "road_trip_planning_agent"
+            ]
+        },
+        {
+            "name": "road_trip_planning_agent",
+            "role": "Agent responsible for planning the sustainable road trip itinerary, including routing, stops, and guides.",
+            "tools": [
+                "route_management_agent",
+                "agritourism_agent",
+                "cultural_heritage_agent",
+                "sustainability_guide_agent",
+                "equipment_rental_agent",
+                "local_shopping_guide_agent",
+                "nutrition_advise_agent"
+            ]
+        },
+        {
+            "name": "route_management_agent",
+            "role": "Agent dedicated to managing travel routes and ensuring compatibility with sustainable travel goals.",
+            "tools": [
+                "charging_station_locator_agent"
+            ]
+        },
+        {
+            "name": "charging_station_locator_agent",
+            "role": "Agent tasked with locating EV charging stations along the route.",
+            "tools": [
+                "ev_charging_navigation_tool"
+            ]
+        },
+        {
+            "name": "agritourism_agent",
+            "role": "Agent organizing visits to local organic farms for learning and experiences.",
+            "tools": [
+                "local_farm_stay_planning_agent"
+            ]
+        },
+        {
+            "name": "local_farm_stay_planning_agent",
+            "role": "Agent specializing in planning and booking farm stays and tours.",
+            "tools": [
+                "organic_farm_visits_tool"
+            ]
+        },
+        {
+            "name": "cultural_heritage_agent",
+            "role": "Agent that provides information on cultural heritage sites to visit.",
+            "tools": [
+                "heritage_sites_recommender_tool"
+            ]
+        },
+        {
+            "name": "sustainability_guide_agent",
+            "role": "Agent offering a guide to reduce waste and promote sustainability during the trip.",
+            "tools": [
+                "waste_reduction_tips_tool"
+            ]
+        },
+        {
+            "name": "equipment_rental_agent",
+            "role": "Agent enabling rental of camping equipment and other essentials.",
+            "tools": [
+                "camping_rental_service_tool"
+            ]
+        },
+        {
+            "name": "local_shopping_guide_agent",
+            "role": "Agent suggesting sustainable shopping locations for local products.",
+            "tools": [
+                "regional_product_suggestions_agent"
+            ]
+        },
+        {
+            "name": "regional_product_suggestions_agent",
+            "role": "Agent that specializes in recommending regional products with sustainable sources.",
+            "tools": [
+                "sustainable_shopping_tool"
+            ]
+        },
+        {
+            "name": "nutrition_advise_agent",
+            "role": "Agent providing nutrition advice based on local, sustainable ingredients available.",
+            "tools": [
+                "local_ingredients_nutrition_tool"
+            ]
+        },
+        {
+            "name": "ev_charging_navigation_tool",
+            "role": "Tool for navigating to electric vehicle charging stations efficiently.",
+            "tools": []
+        },
+        {
+            "name": "organic_farm_visits_tool",
+            "role": "Tool for planning and booking visits to organic farms.",
+            "tools": []
+        },
+        {
+            "name": "heritage_sites_recommender_tool",
+            "role": "Tool to recommend visits to cultural and historical heritage sites.",
+            "tools": []
+        },
+        {
+            "name": "waste_reduction_tips_tool",
+            "role": "Tool providing actionable tips for reducing waste during travel.",
+            "tools": []
+        },
+        {
+            "name": "camping_rental_service_tool",
+            "role": "Tool offering rental services for camping and outdoor equipment.",
+            "tools": []
+        },
+        {
+            "name": "sustainable_shopping_tool",
+            "role": "Tool that suggests locations for purchasing sustainable, local products.",
+            "tools": []
+        },
+        {
+            "name": "local_ingredients_nutrition_tool",
+            "role": "Tool providing nutritional advice on meals using local ingredients.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "ev_charging_navigation_tool",
+            "description": "Tool to assist in routing via available EV charging stations.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "route": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of waypoints on the road trip."
+                    },
+                    "vehicle_range": {
+                        "type": "number",
+                        "description": "Maximum vehicle range on a full charge (km)."
+                    }
+                }
+            }
+        },
+        {
+            "name": "organic_farm_visits_tool",
+            "description": "Tool for scheduling visits to organic farms along the route.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "farms_options": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Array of available farm alternatives."
+                    },
+                    "visit_dates": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "date"
+                        },
+                        "description": "Dates for visiting the farms."
+                    }
+                }
+            }
+        },
+        {
+            "name": "heritage_sites_recommender_tool",
+            "description": "Tool to suggest cultural heritage sites based on user interests.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "interests": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "User's interests for cultural sites."
+                    },
+                    "time_available": {
+                        "type": "number",
+                        "description": "Total available time for visiting sites (hours)."
+                    }
+                }
+            }
+        },
+        {
+            "name": "waste_reduction_tips_tool",
+            "description": "Tool for offering suggestions on reducing waste in various aspects of travel.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "itinerary_stages": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Stages of the itinerary where waste reduction tips are needed."
+                    }
+                }
+            }
+        },
+        {
+            "name": "camping_rental_service_tool",
+            "description": "Tool for renting camping equipment and other outdoor gear.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "equipment_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of equipment required for the trip."
+                    },
+                    "rental_period": {
+                        "type": "string",
+                        "description": "Duration for renting the equipment."
+                    }
+                }
+            }
+        },
+        {
+            "name": "sustainable_shopping_tool",
+            "description": "Tool suggesting places for sustainable shopping along the travel route.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "shopping_needs": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of items needed for sustainable shopping."
+                    },
+                    "locations_proximity": {
+                        "type": "number",
+                        "description": "Maximum distance from travel route (km)."
+                    }
+                }
+            }
+        },
+        {
+            "name": "local_ingredients_nutrition_tool",
+            "description": "Tool providing nutritional information and advice using local ingredients.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "ingredients": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of local ingredients."
+                    },
+                    "dietary_preferences": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "User's dietary preferences."
+                    }
+                }
+            }
+        }
+    ]
+}

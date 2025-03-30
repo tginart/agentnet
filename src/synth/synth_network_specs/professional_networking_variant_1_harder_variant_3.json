@@ -1,0 +1,222 @@
+{
+    "task": "I am organizing an international conference on cutting-edge AI technologies. The event requires managing international data privacy compliance, coordinating a hackathon event, securing media coverage, and establishing partnerships with tech firms. Help oversee the end-to-end logistics, compliance, and promotional strategies to create a high-impact event.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "compliance_management_agent",
+                "international_policy_agent",
+                "data_privacy_audit_agent",
+                "legal_review_service",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "event_activities_agent",
+                "hackathon_coordinator_agent",
+                "judge_recruitment_agent",
+                "participant_management_service",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "media_relations_agent",
+                "press_release_agent",
+                "journalist_outreach_service",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "partnership_management_agent",
+                "tech_firm_outreach_agent",
+                "negotiation_service",
+                "custom_partnership_dashboard",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "event_execution_agent",
+                "venue_and_logistics_agent",
+                "onsite_technical_team_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "compliance_management_agent",
+            "role": "Ensures all aspects of the conference comply with international data privacy laws and regulations.",
+            "tools": [
+                "international_policy_agent"
+            ]
+        },
+        {
+            "name": "international_policy_agent",
+            "role": "Researches and updates policies relating to international data privacy for event compliance.",
+            "tools": [
+                "data_privacy_audit_agent"
+            ]
+        },
+        {
+            "name": "data_privacy_audit_agent",
+            "role": "Conducts audits on data handling practices to ensure compliance with privacy standards.",
+            "tools": [
+                "legal_review_service"
+            ]
+        },
+        {
+            "name": "legal_review_service",
+            "role": "Provides a legal review on compliance reports and outlines necessary actions.",
+            "tools": []
+        },
+        {
+            "name": "event_activities_agent",
+            "role": "Manages and organizes activities related to the event, such as contests and sessions.",
+            "tools": [
+                "hackathon_coordinator_agent"
+            ]
+        },
+        {
+            "name": "hackathon_coordinator_agent",
+            "role": "Organizes and manages all aspects of the hackathon event, including logistics and teams.",
+            "tools": [
+                "judge_recruitment_agent"
+            ]
+        },
+        {
+            "name": "judge_recruitment_agent",
+            "role": "Identifies and recruits qualified judges for the hackathon event.",
+            "tools": [
+                "participant_management_service"
+            ]
+        },
+        {
+            "name": "participant_management_service",
+            "role": "Manages registration and communication with hackathon participants.",
+            "tools": []
+        },
+        {
+            "name": "media_relations_agent",
+            "role": "Handles media communications to secure and enhance media coverage for the event.",
+            "tools": [
+                "press_release_agent"
+            ]
+        },
+        {
+            "name": "press_release_agent",
+            "role": "Drafts and distributes press releases to various media outlets.",
+            "tools": [
+                "journalist_outreach_service"
+            ]
+        },
+        {
+            "name": "journalist_outreach_service",
+            "role": "Connects with journalists and media houses to ensure coverage of the conference.",
+            "tools": []
+        },
+        {
+            "name": "partnership_management_agent",
+            "role": "Establishes and manages partnerships with technology firms.",
+            "tools": [
+                "tech_firm_outreach_agent"
+            ]
+        },
+        {
+            "name": "tech_firm_outreach_agent",
+            "role": "Targets and establishes communications with relevant tech firms for partnership opportunities.",
+            "tools": [
+                "negotiation_service"
+            ]
+        },
+        {
+            "name": "negotiation_service",
+            "role": "Facilitates negotiations with tech firms, ensuring beneficial partnerships.",
+            "tools": [
+                "custom_partnership_dashboard"
+            ]
+        },
+        {
+            "name": "custom_partnership_dashboard",
+            "role": "Provides an interface for managing and monitoring partnership agreements.",
+            "tools": []
+        },
+        {
+            "name": "event_execution_agent",
+            "role": "Oversees the logistical execution of the conference, ensuring seamless operation.",
+            "tools": [
+                "venue_and_logistics_agent"
+            ]
+        },
+        {
+            "name": "venue_and_logistics_agent",
+            "role": "Arranges logistics related to venue setup and operational requirements.",
+            "tools": [
+                "onsite_technical_team_agent"
+            ]
+        },
+        {
+            "name": "onsite_technical_team_agent",
+            "role": "Provides technical support covering audiovisual equipment and network needs.",
+            "tools": []
+        },
+        {
+            "name": "client_agent",
+            "role": "Coordinates and guides all tasks to ensure the successful realization of conference objectives.",
+            "tools": [
+                "compliance_management_agent",
+                "event_activities_agent",
+                "media_relations_agent",
+                "partnership_management_agent",
+                "event_execution_agent"
+            ]
+        }
+    ],
+    "tools": [
+        {
+            "name": "legal_review_service",
+            "description": "Service for legally reviewing data privacy compliance reports for the conference.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "report_id": {
+                        "type": "string",
+                        "description": "ID of the compliance report"
+                    },
+                    "legal_entities": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of legal entities involved"
+                    }
+                }
+            }
+        },
+        {
+            "name": "custom_partnership_dashboard",
+            "description": "Dashboard for managing and tracking partnership agreements.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "partnership_id": {
+                        "type": "string",
+                        "description": "Unique ID for the partnership agreement"
+                    },
+                    "status_update": {
+                        "type": "string",
+                        "description": "Latest status update for the partnership"
+                    },
+                    "contact_person": {
+                        "type": "string",
+                        "description": "Primary contact for the partnership"
+                    }
+                }
+            }
+        }
+    ]
+}

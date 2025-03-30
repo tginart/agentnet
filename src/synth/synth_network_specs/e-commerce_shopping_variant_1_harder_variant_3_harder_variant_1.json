@@ -1,0 +1,266 @@
+{
+    "task": "Organize and execute a week-long international scientific expedition to the Amazon Rainforest: 1. Secure travel logistics including flights and local transport, 2. Coordinate with local authorities and scientific institutions, 3. Arrange expedition permits and legal documentation, 4. Design comprehensive research plans for biodiversity monitoring, 5. Set up remote communication systems and emergency protocols, 6. Source eco-friendly field equipment and supplies, 7. Develop a cultural exchange program with indigenous communities, 8. Implement a sustainable waste management strategy throughout the expedition.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "expedition_planning_agent",
+                "travel_logistics_agent",
+                "flight_booking_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "expedition_planning_agent",
+                "travel_logistics_agent",
+                "local_transport_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "expedition_planning_agent",
+                "local_authorities_coordination_agent",
+                "permit_issuance_agent",
+                "legal_documentation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "expedition_planning_agent",
+                "research_design_agent",
+                "biodiversity_monitoring_agent",
+                "data_collection_protocols_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "expedition_planning_agent",
+                "communication_setup_agent",
+                "satellite_phone_arrangement_agent",
+                "emergency_protocols_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "expedition_planning_agent",
+                "equipment_sourcing_agent",
+                "eco_supply_chain_verification_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "expedition_planning_agent",
+                "cultural_exchange_agent",
+                "indigenous_community_coordination_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "expedition_planning_agent",
+                "waste_management_agent",
+                "sustainable_disposal_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "expedition_planning_agent",
+                "local_authorities_coordination_agent",
+                "scientific_institutions_engagement_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "expedition_planning_agent"
+            ]
+        },
+        {
+            "name": "expedition_planning_agent",
+            "role": "Coordinates the planning and execution of the scientific expedition encompassing all logistical, legal, and cultural aspects.",
+            "tools": [
+                "travel_logistics_agent",
+                "local_authorities_coordination_agent",
+                "research_design_agent",
+                "communication_setup_agent",
+                "equipment_sourcing_agent",
+                "cultural_exchange_agent",
+                "waste_management_agent"
+            ]
+        },
+        {
+            "name": "travel_logistics_agent",
+            "role": "Manages travel logistics for the expedition including flights and local transport.",
+            "tools": [
+                "flight_booking_agent",
+                "local_transport_agent"
+            ]
+        },
+        {
+            "name": "flight_booking_agent",
+            "role": "Books international and domestic flights for the expedition team.",
+            "tools": []
+        },
+        {
+            "name": "local_transport_agent",
+            "role": "Arranges ground transportation in the Amazon region.",
+            "tools": []
+        },
+        {
+            "name": "local_authorities_coordination_agent",
+            "role": "Engages with local authorities to ensure compliance with regulations and secure necessary permissions.",
+            "tools": [
+                "permit_issuance_agent",
+                "scientific_institutions_engagement_agent"
+            ]
+        },
+        {
+            "name": "permit_issuance_agent",
+            "role": "Handles the issuance of exploration permits necessary for legal expedition activities.",
+            "tools": [
+                "legal_documentation_agent"
+            ]
+        },
+        {
+            "name": "legal_documentation_agent",
+            "role": "Prepares and processes legal documents required for the expedition.",
+            "tools": []
+        },
+        {
+            "name": "research_design_agent",
+            "role": "Develops research plans and methodologies for biodiversity monitoring and assessments.",
+            "tools": [
+                "biodiversity_monitoring_agent"
+            ]
+        },
+        {
+            "name": "biodiversity_monitoring_agent",
+            "role": "Oversees the implementation of biodiversity monitoring programs.",
+            "tools": [
+                "data_collection_protocols_agent"
+            ]
+        },
+        {
+            "name": "data_collection_protocols_agent",
+            "role": "Establishes protocols for collecting and processing environmental data.",
+            "tools": []
+        },
+        {
+            "name": "communication_setup_agent",
+            "role": "Sets up communication systems including remote connectivity and emergency signals.",
+            "tools": [
+                "satellite_phone_arrangement_agent",
+                "emergency_protocols_agent"
+            ]
+        },
+        {
+            "name": "satellite_phone_arrangement_agent",
+            "role": "Secures satellite phones for consistent communication during the expedition.",
+            "tools": []
+        },
+        {
+            "name": "emergency_protocols_agent",
+            "role": "Develops emergency response protocols to ensure safety of the expedition team.",
+            "tools": []
+        },
+        {
+            "name": "equipment_sourcing_agent",
+            "role": "Procures equipment and supplies required for field activities, ensuring eco-conscious sourcing.",
+            "tools": [
+                "eco_supply_chain_verification_agent"
+            ]
+        },
+        {
+            "name": "eco_supply_chain_verification_agent",
+            "role": "Verifies the sustainability and ethical standards of the supply chain.",
+            "tools": []
+        },
+        {
+            "name": "cultural_exchange_agent",
+            "role": "Plans cultural exchange activities with indigenous communities to promote mutual learning.",
+            "tools": [
+                "indigenous_community_coordination_agent"
+            ]
+        },
+        {
+            "name": "indigenous_community_coordination_agent",
+            "role": "Engages with indigenous leaders to establish a respectful exchange program.",
+            "tools": []
+        },
+        {
+            "name": "waste_management_agent",
+            "role": "Develops strategies for handling waste generated during the expedition sustainably.",
+            "tools": [
+                "sustainable_disposal_agent"
+            ]
+        },
+        {
+            "name": "sustainable_disposal_agent",
+            "role": "Implements waste disposal and recycling procedures.",
+            "tools": []
+        },
+        {
+            "name": "scientific_institutions_engagement_agent",
+            "role": "Liaises with scientific institutions for collaboration and data sharing.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "biodiversity_sdk",
+            "description": "A tool for collecting and analyzing biodiversity data in field settings.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {
+                        "type": "string",
+                        "description": "The specific site within the Amazon where data will be collected."
+                    },
+                    "parameters": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of biodiversity parameters to measure (e.g., species count, canopy coverage)."
+                    }
+                }
+            }
+        },
+        {
+            "name": "satellite_communication_tool",
+            "description": "Tool to setup and manage satellite communication systems.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "device_count": {
+                        "type": "number",
+                        "description": "The number of satellite communication devices required."
+                    },
+                    "region_coverage": {
+                        "type": "string",
+                        "description": "The geographical area to ensure coverage."
+                    },
+                    "emergency_frequencies": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of emergency frequencies for critical communications."
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,197 @@
+{
+    "task": "Design a comprehensive urban transport optimization plan that integrates existing public transit systems with sustainable and smart technology solutions. The plan should cover smart traffic management, real-time passenger information, electrification of fleets, and a community engagement framework. Additionally, include AI-driven predictive analytics for route planning and carbon footprint assessment.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "urban_planner_agent",
+                "smart_traffic_agent",
+                "traffic_control_tool",
+                "traffic_sensor_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "sustainability_coordinator_agent",
+                "ai_sustainability_agent",
+                "electrification_agent",
+                "smart_charging_agent",
+                "grid_integration_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "community_engagement_agent",
+                "citizen_feedback_agent",
+                "carbon_footprint_assessor_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "urban_planner_agent",
+                "real_time_info_agent",
+                "digital_interface_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Primary interface for users to initiate urban transportation projects and establish overall goals and requirements for the plan.",
+            "tools": [
+                "urban_planner_agent",
+                "sustainability_coordinator_agent",
+                "community_engagement_agent",
+                "data_analytics_agent"
+            ]
+        },
+        {
+            "name": "urban_planner_agent",
+            "role": "Responsible for the strategic planning and design of urban transit systems, integrating sustainable technologies.",
+            "tools": [
+                "smart_traffic_agent",
+                "real_time_info_agent",
+                "data_analytics_agent"
+            ]
+        },
+        {
+            "name": "smart_traffic_agent",
+            "role": "Implements smart traffic management systems to optimize flow and reduce congestion using AI and IoT devices.",
+            "tools": [
+                "traffic_control_tool",
+                "traffic_sensor_agent"
+            ]
+        },
+        {
+            "name": "sustainability_coordinator_agent",
+            "role": "Focuses on eco-friendly integration into urban transport plans, including electrification and renewable energy solutions.",
+            "tools": [
+                "electrification_agent",
+                "carbon_footprint_assessor_agent",
+                "grid_integration_agent",
+                "ai_sustainability_agent"
+            ]
+        },
+        {
+            "name": "community_engagement_agent",
+            "role": "Coordinates community involvement and feedback collection to ensure public needs are met in transport planning.",
+            "tools": [
+                "citizen_feedback_agent"
+            ]
+        },
+        {
+            "name": "real_time_info_agent",
+            "role": "Provides real-time updates and information to passengers on transport schedules and routes using digital platforms.",
+            "tools": [
+                "digital_interface_agent"
+            ]
+        },
+        {
+            "name": "ai_route_planner_agent",
+            "role": "Utilizes AI-driven predictive analytics for planning optimal transport routes and schedules.",
+            "tools": [
+                "predictive_analysis_agent"
+            ]
+        },
+        {
+            "name": "carbon_footprint_assessor_agent",
+            "role": "Calculates and analyzes the carbon impact of proposed transportation solutions.",
+            "tools": []
+        },
+        {
+            "name": "electrification_agent",
+            "role": "Manages the transition of public and private transport fleets to electric power.",
+            "tools": [
+                "smart_charging_agent"
+            ]
+        },
+        {
+            "name": "traffic_sensor_agent",
+            "role": "Deploys and manages IoT sensor networks to monitor and report traffic conditions in real-time.",
+            "tools": []
+        },
+        {
+            "name": "citizen_feedback_agent",
+            "role": "Gathers and processes feedback from city residents about transportation system proposals and implementations.",
+            "tools": []
+        },
+        {
+            "name": "grid_integration_agent",
+            "role": "Ensures the transport electrification plans are compatible with current energy grid capacity and future upgrades.",
+            "tools": []
+        },
+        {
+            "name": "data_analytics_agent",
+            "role": "Applies data analytics to interpret complex datasets, facilitating informed decision making in urban planning.",
+            "tools": [
+                "ai_route_planner_agent",
+                "predictive_analysis_agent"
+            ]
+        },
+        {
+            "name": "digital_interface_agent",
+            "role": "Develops and maintains digital platforms for passenger interaction and information dissemination.",
+            "tools": []
+        },
+        {
+            "name": "ai_sustainability_agent",
+            "role": "Leverages AI models to predict long-term sustainability impacts of transport infrastructure.",
+            "tools": []
+        },
+        {
+            "name": "smart_charging_agent",
+            "role": "Oversees the integration of smart charging infrastructure for electric vehicles in the public transit network.",
+            "tools": []
+        },
+        {
+            "name": "predictive_analysis_agent",
+            "role": "Conducts forecasts and scenario analyses to evaluate potential outcomes of different urban transport strategies.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "real_time_info_tool",
+            "description": "Transmits live transport updates to digital signage and mobile apps.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "route_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the transit route."
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "description": "Current timestamp for synchronization."
+                    }
+                }
+            }
+        },
+        {
+            "name": "traffic_control_tool",
+            "description": "Adjusts traffic signals dynamically based on sensor inputs to improve flow.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "intersection_id": {
+                        "type": "string",
+                        "description": "Identifier for specific intersection."
+                    },
+                    "traffic_density": {
+                        "type": "number",
+                        "description": "Current traffic density at the intersection."
+                    },
+                    "priority_level": {
+                        "type": "string",
+                        "description": "Emergency priority level, if applicable."
+                    }
+                }
+            }
+        }
+    ]
+}

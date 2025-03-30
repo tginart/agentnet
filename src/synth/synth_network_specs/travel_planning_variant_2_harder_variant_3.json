@@ -1,0 +1,285 @@
+{
+    "task": "Design a high-tech wellness retreat in Iceland with a focus on digital detox and renewable energy experiences. The plan must include: 1. Coordinating renewable energy-powered accommodations and transportation. 2. Developing an itinerary with tech-free wellness activities and natural explorations. 3. Introducing digital detox workshops and immersive Icelandic cultural experiences. 4. Engaging local experts for geology tours and renewable energy plant visits. 5. Ensuring compliance with Icelandic environmental tourism standards. 6. Planning a menu with local and organic foods. 7. Checking affordability to keep costs under $8,000 per guest.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "itinerary_designer_agent",
+                "wellness_coordinator",
+                "tech_free_experience_leader",
+                "mindfulness_facilitator_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "itinerary_designer_agent",
+                "cultural_interpreter",
+                "icelandic_culture_facilitator",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "itinerary_designer_agent",
+                "natural_exploration_guide",
+                "geo_expert_agent",
+                "renewable_energy_tour_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "logistics_manager_agent",
+                "renewable_transport_coordinator",
+                "energy_efficiency_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "logistics_manager_agent",
+                "eco_lodge_finder",
+                "green_credential_checker",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "culinary_expert_agent",
+                "menu_curator",
+                "organic_food_source_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "regulatory_compliance_agent",
+                "icelandic_lawyer",
+                "environmental_policy_advisor",
+                "environmental_standard_verifier",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "financial_consultant_agent",
+                "expense_projection_tool"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Main interface for planning the high-tech wellness retreat, orchestrates all aspects of the itinerary.",
+            "tools": [
+                "itinerary_designer_agent",
+                "logistics_manager_agent",
+                "culinary_expert_agent",
+                "regulatory_compliance_agent",
+                "financial_consultant_agent"
+            ]
+        },
+        {
+            "name": "itinerary_designer_agent",
+            "role": "Crafts a detailed itinerary blending wellness activities, digital detox, and cultural immersion.",
+            "tools": [
+                "wellness_coordinator",
+                "cultural_interpreter",
+                "natural_exploration_guide"
+            ]
+        },
+        {
+            "name": "wellness_coordinator",
+            "role": "Specializes in organizing tech-free wellness sessions.",
+            "tools": [
+                "tech_free_experience_leader"
+            ]
+        },
+        {
+            "name": "tech_free_experience_leader",
+            "role": "Guides participants through tech-free experiences, enhancing mindfulness and disconnection from digital environments.",
+            "tools": [
+                "mindfulness_facilitator_agent"
+            ]
+        },
+        {
+            "name": "mindfulness_facilitator_agent",
+            "role": "Facilitates activities to enhance mindfulness during digital detox sessions.",
+            "tools": []
+        },
+        {
+            "name": "cultural_interpreter",
+            "role": "Arranges interactions with local culture and traditions.",
+            "tools": [
+                "icelandic_culture_facilitator"
+            ]
+        },
+        {
+            "name": "icelandic_culture_facilitator",
+            "role": "Facilitates immersive experiences in Icelandic culture, including language and arts.",
+            "tools": []
+        },
+        {
+            "name": "natural_exploration_guide",
+            "role": "Leads outdoor exploration activities, focusing on natural wonders of Iceland.",
+            "tools": [
+                "geo_expert_agent"
+            ]
+        },
+        {
+            "name": "geo_expert_agent",
+            "role": "Provides geological insights and tours of Iceland's natural sites, including geothermal areas.",
+            "tools": [
+                "renewable_energy_tour_agent"
+            ]
+        },
+        {
+            "name": "renewable_energy_tour_agent",
+            "role": "Conducts tours of renewable energy plants and educates guests on sustainable technologies.",
+            "tools": []
+        },
+        {
+            "name": "logistics_manager_agent",
+            "role": "Synchronizes transportation and accommodation logistics using renewable energy sources.",
+            "tools": [
+                "renewable_transport_coordinator",
+                "eco_lodge_finder"
+            ]
+        },
+        {
+            "name": "renewable_transport_coordinator",
+            "role": "Oversees transportation arrangements powered by renewable energy.",
+            "tools": [
+                "energy_efficiency_tool"
+            ]
+        },
+        {
+            "name": "eco_lodge_finder",
+            "role": "Secures eco-friendly accommodations with renewable energy credentials.",
+            "tools": [
+                "green_credential_checker"
+            ]
+        },
+        {
+            "name": "green_credential_checker",
+            "role": "Verifies the green credentials of selected accommodations.",
+            "tools": []
+        },
+        {
+            "name": "culinary_expert_agent",
+            "role": "Develops a food plan that prioritizes local, organic options.",
+            "tools": [
+                "menu_curator"
+            ]
+        },
+        {
+            "name": "menu_curator",
+            "role": "Crafts a menu that highlights Icelandic ingredients with an emphasis on organic sourcing.",
+            "tools": [
+                "organic_food_source_tool"
+            ]
+        },
+        {
+            "name": "regulatory_compliance_agent",
+            "role": "Ensures the retreat adheres to Iceland's tourism and environmental regulations.",
+            "tools": [
+                "icelandic_lawyer"
+            ]
+        },
+        {
+            "name": "icelandic_lawyer",
+            "role": "Provides legal insights and ensures compliance with Icelandic regulations.",
+            "tools": [
+                "environmental_policy_advisor"
+            ]
+        },
+        {
+            "name": "environmental_policy_advisor",
+            "role": "Ensures adherence to environmental standards and provides strategic guidance.",
+            "tools": [
+                "environmental_standard_verifier"
+            ]
+        },
+        {
+            "name": "environmental_standard_verifier",
+            "role": "Validates compliance with Icelandic environmental standards.",
+            "tools": []
+        },
+        {
+            "name": "financial_consultant_agent",
+            "role": "Analyzes and structures the financial plan to ensure budget constraints are respected.",
+            "tools": [
+                "expense_projection_tool"
+            ]
+        }
+    ],
+    "tools": [
+        {
+            "name": "energy_efficiency_tool",
+            "description": "Calculates energy requirements and aids in optimizing transportation energy efficiency.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "vehicle_type": {
+                        "type": "string",
+                        "description": "Type of vehicle chosen for transport."
+                    },
+                    "distance_km": {
+                        "type": "number",
+                        "description": "Total travel distance in kilometers."
+                    },
+                    "passenger_count": {
+                        "type": "number",
+                        "description": "Number of passengers being transported."
+                    }
+                }
+            }
+        },
+        {
+            "name": "organic_food_source_tool",
+            "description": "Identifies sources for organic food ingredients for meal planning.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "ingredient_name": {
+                        "type": "string",
+                        "description": "Name of the food ingredient."
+                    },
+                    "quantity_required": {
+                        "type": "number",
+                        "description": "Quantity needed in kilograms."
+                    },
+                    "preferred_locale": {
+                        "type": "string",
+                        "description": "Preferred locale for sourcing ingredients."
+                    }
+                }
+            }
+        },
+        {
+            "name": "expense_projection_tool",
+            "description": "Estimates overall retreat costs and aligns expenses with budget targets.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "participant_count": {
+                        "type": "number",
+                        "description": "Total number of participants in the retreat."
+                    },
+                    "duration_days": {
+                        "type": "number",
+                        "description": "Daily duration of the retreat."
+                    },
+                    "accommodation_cost": {
+                        "type": "number",
+                        "description": "Per participant cost for accommodation."
+                    },
+                    "workshops_cost": {
+                        "type": "number",
+                        "description": "Cost of workshops and activities per participant."
+                    }
+                }
+            }
+        }
+    ]
+}

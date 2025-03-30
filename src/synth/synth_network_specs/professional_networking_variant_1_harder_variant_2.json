@@ -1,0 +1,230 @@
+{
+    "task": "I am organizing an international symposium on renewable energy technologies, requiring collaboration with research institutions, coordination of academic paper submissions, securing grants and sponsorships, and engaging in innovative marketing strategies that include podcasts and webinars to ensure a broad global reach. Assist in managing these aspects and maintain effective communication across interdisciplinary teams.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "institution_collaboration_agent",
+                "university_outreach_agent",
+                "virtual_meetup_service",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "academic_submission_agent",
+                "paper_review_panel_agent",
+                "review_management_agent",
+                "plagiarism_check_service",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "funding_management_agent",
+                "grant_proposal_development_agent",
+                "grant_application_service",
+                "grant_submission_service",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "promotion_agent",
+                "podcast_generation_agent",
+                "content_creation_agent",
+                "audio_recording_service",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "webinar_execution_agent",
+                "webinar_optimization_agent",
+                "remote_hosting_service",
+                "registration_management_service",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "institution_collaboration_agent",
+            "role": "Collaborates with various research institutions to form partnerships for symposium participation.",
+            "tools": [
+                "university_outreach_agent",
+                "virtual_meetup_service"
+            ]
+        },
+        {
+            "name": "university_outreach_agent",
+            "role": "Specifically targets universities for engaging academic professionals and researchers in the event.",
+            "tools": []
+        },
+        {
+            "name": "academic_submission_agent",
+            "role": "Manages the submission process for academic papers, ensuring timely reviews and notifications.",
+            "tools": [
+                "paper_review_panel_agent"
+            ]
+        },
+        {
+            "name": "paper_review_panel_agent",
+            "role": "Oversees the peer review process of submitted papers to maintain academic rigor.",
+            "tools": [
+                "review_management_agent"
+            ]
+        },
+        {
+            "name": "review_management_agent",
+            "role": "Coordinates the assignment and tracking of paper reviews.",
+            "tools": [
+                "plagiarism_check_service"
+            ]
+        },
+        {
+            "name": "plagiarism_check_service",
+            "role": "A service for checking academic integrity in submitted papers.",
+            "tools": []
+        },
+        {
+            "name": "funding_management_agent",
+            "role": "Handles the creation and management of funding opportunities for the symposium.",
+            "tools": [
+                "grant_proposal_development_agent"
+            ]
+        },
+        {
+            "name": "grant_proposal_development_agent",
+            "role": "Develops comprehensive grant proposals tailored to funding opportunities.",
+            "tools": [
+                "grant_application_service"
+            ]
+        },
+        {
+            "name": "grant_application_service",
+            "role": "Prepares and submits applications for grants and sponsorships.",
+            "tools": [
+                "grant_submission_service"
+            ]
+        },
+        {
+            "name": "grant_submission_service",
+            "role": "Facilitates the electronic submission of detailed grant proposals.",
+            "tools": []
+        },
+        {
+            "name": "promotion_agent",
+            "role": "Designs and executes the marketing strategies, including digital media and traditional outreach.",
+            "tools": [
+                "podcast_generation_agent"
+            ]
+        },
+        {
+            "name": "podcast_generation_agent",
+            "role": "Creates engaging podcast content relevant to the symposium theme.",
+            "tools": [
+                "content_creation_agent"
+            ]
+        },
+        {
+            "name": "content_creation_agent",
+            "role": "Develops and structures content for podcasts.",
+            "tools": [
+                "audio_recording_service"
+            ]
+        },
+        {
+            "name": "audio_recording_service",
+            "role": "Service for recording high-quality audio for podcasts.",
+            "tools": []
+        },
+        {
+            "name": "webinar_execution_agent",
+            "role": "Plans and hosts webinars to engage the target audience on a global scale.",
+            "tools": [
+                "webinar_optimization_agent"
+            ]
+        },
+        {
+            "name": "webinar_optimization_agent",
+            "role": "Optimizes webinar delivery and interaction with audience.",
+            "tools": [
+                "remote_hosting_service",
+                "registration_management_service"
+            ]
+        },
+        {
+            "name": "remote_hosting_service",
+            "role": "Hosts webinars remotely, ensuring a smooth viewer experience.",
+            "tools": []
+        },
+        {
+            "name": "registration_management_service",
+            "role": "Manages participant registration and access to webinars.",
+            "tools": []
+        },
+        {
+            "name": "client_agent",
+            "role": "Orchestrates all tasks and agents to ensure successful completion of the symposium goals.",
+            "tools": [
+                "institution_collaboration_agent",
+                "academic_submission_agent",
+                "funding_management_agent",
+                "promotion_agent",
+                "webinar_execution_agent"
+            ]
+        }
+    ],
+    "tools": [
+        {
+            "name": "virtual_meetup_service",
+            "description": "Facilitates virtual meetings with potential institutional partners.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "participant_emails": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of email addresses of participants"
+                    },
+                    "meeting_time": {
+                        "type": "string",
+                        "description": "Scheduled time for the virtual meeting"
+                    },
+                    "platform": {
+                        "type": "string",
+                        "description": "Preferred virtual meeting platform"
+                    }
+                }
+            }
+        },
+        {
+            "name": "audio_recording_service",
+            "description": "Service used for recording high-quality audio for podcasts.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "session_title": {
+                        "type": "string",
+                        "description": "Title of the podcast session"
+                    },
+                    "duration_minutes": {
+                        "type": "number",
+                        "description": "Duration of recording in minutes"
+                    },
+                    "speakers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of speaker names"
+                    }
+                }
+            }
+        }
+    ]
+}

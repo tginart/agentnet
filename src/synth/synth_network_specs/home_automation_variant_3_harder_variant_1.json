@@ -1,0 +1,220 @@
+{
+    "task": "Conduct a detailed annual maintenance and optimization of a smart farm, including optimizing irrigation schedules based on weather forecasts, analyzing soil data for crop planning, monitoring and adjusting livestock conditions, enhancing solar energy utilization, and providing a comprehensive sustainability report.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "farm_management_agent",
+                "irrigation_planner_agent",
+                "weather_forecast_agent",
+                "weather_data_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "farm_management_agent",
+                "soil_analysis_agent",
+                "crop_advisor_agent",
+                "soil_data_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "farm_management_agent",
+                "livestock_monitor_agent",
+                "livestock_health_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "farm_management_agent",
+                "energy_optimizer_agent",
+                "solar_efficiency_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "farm_management_agent",
+                "sustainability_report_agent",
+                "reporting_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "dashboard_agent",
+                "irrigation_planner_agent",
+                "weather_forecast_agent",
+                "weather_data_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "dashboard_agent",
+                "soil_analysis_agent",
+                "crop_advisor_agent",
+                "machine_learning_tool",
+                "soil_data_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "dashboard_agent",
+                "energy_optimizer_agent",
+                "solar_monitor_agent",
+                "solar_efficiency_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Top-level orchestrator agent that communicates with the user and coordinates the various processes across the smart farm.",
+            "tools": [
+                "farm_management_agent",
+                "dashboard_agent"
+            ]
+        },
+        {
+            "name": "farm_management_agent",
+            "role": "Oversees all farm operations and ensures optimal performance across all sectors including irrigation, crop planning, livestock, energy, and reporting.",
+            "tools": [
+                "irrigation_planner_agent",
+                "soil_analysis_agent",
+                "livestock_monitor_agent",
+                "energy_optimizer_agent",
+                "sustainability_report_agent"
+            ]
+        },
+        {
+            "name": "irrigation_planner_agent",
+            "role": "Plans and optimizes irrigation schedules based on weather patterns and soil moisture content.",
+            "tools": [
+                "weather_forecast_agent"
+            ]
+        },
+        {
+            "name": "weather_forecast_agent",
+            "role": "Provides weather forecasts and data crucial for optimizing farm operations like irrigation.",
+            "tools": [
+                "weather_data_tool"
+            ]
+        },
+        {
+            "name": "soil_analysis_agent",
+            "role": "Analyzes soil quality and fertility to recommend optimal crop planning and rotation strategies.",
+            "tools": [
+                "crop_advisor_agent",
+                "soil_data_tool"
+            ]
+        },
+        {
+            "name": "crop_advisor_agent",
+            "role": "Advises on crop selection and rotation using soil data and machine learning insights.",
+            "tools": [
+                "machine_learning_tool"
+            ]
+        },
+        {
+            "name": "livestock_monitor_agent",
+            "role": "Monitors health and productivity of livestock and makes adjustments to feeding and care routines.",
+            "tools": [
+                "livestock_health_tool"
+            ]
+        },
+        {
+            "name": "energy_optimizer_agent",
+            "role": "Enhances the farm\u2019s solar energy utilization by optimizing energy storage and usage patterns.",
+            "tools": [
+                "solar_efficiency_tool",
+                "solar_monitor_agent"
+            ]
+        },
+        {
+            "name": "solar_monitor_agent",
+            "role": "Monitors solar panel efficiency and identifies opportunities for increasing energy capture.",
+            "tools": []
+        },
+        {
+            "name": "sustainability_report_agent",
+            "role": "Compiles a detailed sustainability report covering all aspects of farm efficiency, resource usage, and environmental impact.",
+            "tools": [
+                "reporting_tool"
+            ]
+        },
+        {
+            "name": "dashboard_agent",
+            "role": "Provides a comprehensive dashboard view of all farm activities, facilitating quick decision-making.",
+            "tools": [
+                "irrigation_planner_agent",
+                "soil_analysis_agent",
+                "energy_optimizer_agent"
+            ]
+        },
+        {
+            "name": "machine_learning_tool",
+            "role": "Uses advanced algorithms to predict crop yields and optimize planning decisions based on historical data.",
+            "tools": []
+        },
+        {
+            "name": "weather_data_tool",
+            "role": "Gathers and processes weather-related information necessary for various farm operations.",
+            "tools": []
+        },
+        {
+            "name": "soil_data_tool",
+            "role": "Analyzes soil conditions to aid in crop planning and optimization.",
+            "tools": []
+        },
+        {
+            "name": "livestock_health_tool",
+            "role": "Tracks livestock health metrics and suggests treatment or dietary changes when necessary.",
+            "tools": []
+        },
+        {
+            "name": "solar_efficiency_tool",
+            "role": "Analyzes solar panel output and optimizes settings for maximum efficiency.",
+            "tools": []
+        },
+        {
+            "name": "reporting_tool",
+            "role": "Generates comprehensive reports detailing farm performance and sustainability metrics.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "weather_data_tool",
+            "description": "Processes and provides comprehensive weather data for agricultural purposes.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {
+                        "type": "string",
+                        "description": "Location for which weather data is needed."
+                    }
+                }
+            }
+        },
+        {
+            "name": "soil_data_tool",
+            "description": "Analyzes soil conditions to aid in crop planning and optimization.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "field_id": {
+                        "type": "number",
+                        "description": "Identifier for the specific field to analyze."
+                    },
+                    "sample_date": {
+                        "type": "string",
+                        "description": "Date of the soil sampling in ISO format."
+                    }
+                }
+            }
+        }
+    ]
+}

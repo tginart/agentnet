@@ -1,0 +1,236 @@
+{
+    "task": "Establish an adaptive and self-optimizing smart-home system focusing on energy conservation and user security. Implement intelligent lighting controls, predictive energy usage forecasting, anomaly detection in appliance performance, and secure access management with periodic safety audits.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "optimization_strategy_agent",
+                "lighting_control_agent",
+                "intelligent_lighting_agent",
+                "light_sensor_agent",
+                "adjust_lighting_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "optimization_strategy_agent",
+                "energy_forecasting_agent",
+                "usage_pattern_analyzer_agent",
+                "climate_data_agent",
+                "forecasting_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "optimization_strategy_agent",
+                "anomaly_detection_agent",
+                "appliance_monitor_agent",
+                "smart_meter_agent",
+                "detect_anomalies_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "optimization_strategy_agent",
+                "access_management_agent",
+                "secure_access_agent",
+                "home_safety_agent",
+                "audit_safety_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Coordinates user commands with the adaptive smart-home system, managing requests across multiple functions.",
+            "tools": [
+                "optimization_strategy_agent"
+            ]
+        },
+        {
+            "name": "optimization_strategy_agent",
+            "role": "Develops and enacts strategies to maximize energy efficiency and security in the smart-home.",
+            "tools": [
+                "lighting_control_agent",
+                "energy_forecasting_agent",
+                "anomaly_detection_agent",
+                "access_management_agent",
+                "hvac_efficiency_agent",
+                "backup_agent"
+            ]
+        },
+        {
+            "name": "lighting_control_agent",
+            "role": "Manages the smart lighting system to optimize energy consumption according to user preferences.",
+            "tools": [
+                "intelligent_lighting_agent"
+            ]
+        },
+        {
+            "name": "intelligent_lighting_agent",
+            "role": "Monitors and adjusts lighting levels dynamically based on occupancy and ambient conditions.",
+            "tools": [
+                "light_sensor_agent"
+            ]
+        },
+        {
+            "name": "light_sensor_agent",
+            "role": "Provides real-time ambient light measurements to assist in intelligent lighting adjustments.",
+            "tools": [
+                "adjust_lighting_tool"
+            ]
+        },
+        {
+            "name": "energy_forecasting_agent",
+            "role": "Forecasts future energy demand based on historical usage and predictive algorithms.",
+            "tools": [
+                "usage_pattern_analyzer_agent"
+            ]
+        },
+        {
+            "name": "usage_pattern_analyzer_agent",
+            "role": "Analyzes historical user activity and energy usage data to predict future consumption trends.",
+            "tools": [
+                "climate_data_agent"
+            ]
+        },
+        {
+            "name": "climate_data_agent",
+            "role": "Collects and analyzes external climate data to improve energy forecasting.",
+            "tools": [
+                "forecasting_tool"
+            ]
+        },
+        {
+            "name": "anomaly_detection_agent",
+            "role": "Identifies and reports abnormal performance in appliances and systems, suggesting problem-solving measures.",
+            "tools": [
+                "appliance_monitor_agent",
+                "performance_tracker_agent"
+            ]
+        },
+        {
+            "name": "appliance_monitor_agent",
+            "role": "Keeps track of appliance performance metrics to ensure efficient operation and identification of issues.",
+            "tools": [
+                "smart_meter_agent"
+            ]
+        },
+        {
+            "name": "smart_meter_agent",
+            "role": "Gathers data from the home's smart meter to aid in energy analytics.",
+            "tools": [
+                "detect_anomalies_tool"
+            ]
+        },
+        {
+            "name": "access_management_agent",
+            "role": "Oversees secure management of entries and exits within the smart-home, with a focus on safety compliance.",
+            "tools": [
+                "secure_access_agent",
+                "energy_storage_agent"
+            ]
+        },
+        {
+            "name": "secure_access_agent",
+            "role": "Conducts audits and implements measures to protect the home against unauthorized access.",
+            "tools": [
+                "home_safety_agent"
+            ]
+        },
+        {
+            "name": "home_safety_agent",
+            "role": "Monitors safety systems within the home to ensure all protocols are up to date.",
+            "tools": [
+                "audit_safety_tool"
+            ]
+        },
+        {
+            "name": "hvac_efficiency_agent",
+            "role": "Optimizes HVAC systems for cost-effective temperature control.",
+            "tools": []
+        },
+        {
+            "name": "performance_tracker_agent",
+            "role": "Monitors performance metrics of various systems to ensure optimal operation.",
+            "tools": []
+        },
+        {
+            "name": "backup_agent",
+            "role": "Ensures all critical systems and data are backed up regularly to prevent data loss.",
+            "tools": []
+        },
+        {
+            "name": "energy_storage_agent",
+            "role": "Manages the storage and utilization of captured energy for efficient use.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "adjust_lighting_tool",
+            "description": "Dynamically adjusts lighting levels based on current home activity and ambient light conditions.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "room_id": {
+                        "type": "string",
+                        "description": "Identifier for the room where the lighting is adjusted"
+                    },
+                    "brightness_level": {
+                        "type": "number",
+                        "description": "Desired brightness level"
+                    }
+                }
+            }
+        },
+        {
+            "name": "forecasting_tool",
+            "description": "Generates forecasts of future energy demand based on usage trends.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "time_horizon": {
+                        "type": "number",
+                        "description": "Time period in days for which the forecast is generated"
+                    }
+                }
+            }
+        },
+        {
+            "name": "detect_anomalies_tool",
+            "description": "Identifies anomalies in appliance performance by analyzing operational data.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "appliance_id": {
+                        "type": "string",
+                        "description": "Identifier for the appliance being monitored"
+                    },
+                    "threshold": {
+                        "type": "number",
+                        "description": "Performance threshold that triggers anomaly alerts"
+                    }
+                }
+            }
+        },
+        {
+            "name": "audit_safety_tool",
+            "description": "Conducts safety audits to ensure secure access and compliance with safety protocols.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "audit_frequency": {
+                        "type": "string",
+                        "description": "Frequency at which the safety audits are conducted (e.g., weekly, monthly)"
+                    }
+                }
+            }
+        }
+    ]
+}

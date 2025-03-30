@@ -1,0 +1,204 @@
+{
+    "task": "Create a dynamic self-paced learning system to master complex data science concepts with a focus on interactive simulations, code experimentation, peer discussions, and personalized feedback. Incorporate features for assessing conceptual understanding, practical skills application, and fostering innovation in solution design.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "learning_system_coordinator_agent",
+                "interactive_simulation_agent",
+                "simulation_feedback_agent",
+                "real_time_analysis_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "learning_system_coordinator_agent",
+                "code_experimentation_agent",
+                "code_revision_agent",
+                "experiment_dataset_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "learning_system_coordinator_agent",
+                "discussion_forum_agent",
+                "peer_interaction_agent",
+                "group_mentorship_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "learning_system_coordinator_agent",
+                "personal_feedback_agent",
+                "skill_assessment_tool",
+                "progress_analysis_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "learning_system_coordinator_agent",
+                "innovation_lab_agent",
+                "idea_submission_tool",
+                "peer_review_board_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Primary interaction point for users to access the self-paced learning system for mastering data science.",
+            "tools": [
+                "learning_system_coordinator_agent"
+            ]
+        },
+        {
+            "name": "learning_system_coordinator_agent",
+            "role": "Manages the overall flow and engagement in the learning system, connecting users to the appropriate resources and activities.",
+            "tools": [
+                "interactive_simulation_agent",
+                "code_experimentation_agent",
+                "discussion_forum_agent",
+                "personal_feedback_agent",
+                "innovation_lab_agent"
+            ]
+        },
+        {
+            "name": "interactive_simulation_agent",
+            "role": "Facilitates hands-on learning through interactive simulations, enhancing conceptual understanding.",
+            "tools": [
+                "simulation_feedback_agent"
+            ]
+        },
+        {
+            "name": "simulation_feedback_agent",
+            "role": "Provides feedback on user's performance and interaction with simulations, suggesting areas for improvement.",
+            "tools": [
+                "real_time_analysis_tool"
+            ]
+        },
+        {
+            "name": "code_experimentation_agent",
+            "role": "Supports experimentation with coding projects, providing immediate execution environments and support.",
+            "tools": [
+                "code_revision_agent"
+            ]
+        },
+        {
+            "name": "code_revision_agent",
+            "role": "Assists users in refining their code by identifying errors and optimizing solutions.",
+            "tools": [
+                "experiment_dataset_tool"
+            ]
+        },
+        {
+            "name": "discussion_forum_agent",
+            "role": "Facilitates peer discussions and collaborations, fostering a community of learning.",
+            "tools": [
+                "peer_interaction_agent"
+            ]
+        },
+        {
+            "name": "peer_interaction_agent",
+            "role": "Engages learners in productive interactions and discussions, managing group dynamics.",
+            "tools": [
+                "group_mentorship_agent"
+            ]
+        },
+        {
+            "name": "personal_feedback_agent",
+            "role": "Delivers personalized feedback based on the user's learning path and assessment results.",
+            "tools": [
+                "skill_assessment_tool",
+                "progress_analysis_agent"
+            ]
+        },
+        {
+            "name": "innovation_lab_agent",
+            "role": "Encourages users to design and submit innovative solutions, providing a platform to showcase creativity.",
+            "tools": [
+                "idea_submission_tool",
+                "peer_review_board_agent"
+            ]
+        },
+        {
+            "name": "progress_analysis_agent",
+            "role": "Analyzes the overall progress of users, generating reports on skill improvements and learning trends.",
+            "tools": []
+        },
+        {
+            "name": "group_mentorship_agent",
+            "role": "Links learners with mentors for enhanced guidance and support in projects and discussions.",
+            "tools": []
+        },
+        {
+            "name": "real_time_analysis_tool",
+            "role": "Analyzes simulation interactions in real-time, offering immediate usable feedback for improvement.",
+            "tools": []
+        },
+        {
+            "name": "experiment_dataset_tool",
+            "role": "Provides datasets for users to experiment and practice coding against specific data science scenarios.",
+            "tools": []
+        },
+        {
+            "name": "skill_assessment_tool",
+            "role": "Conducts assessments to gauge user understanding and application skills within the learning modules.",
+            "tools": []
+        },
+        {
+            "name": "idea_submission_tool",
+            "role": "Allows users to formally submit their innovative ideas for peer and mentor review.",
+            "tools": []
+        },
+        {
+            "name": "peer_review_board_agent",
+            "role": "Reviews and provides feedback on submitted ideas, encouraging improvements and creativity.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "real_time_analysis_tool",
+            "description": "Provides instant feedback on simulation interactions to enhance learning outcomes.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "simulation_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the simulation session."
+                    },
+                    "interaction_log": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Detailed log of interactions during the simulation."
+                    }
+                }
+            }
+        },
+        {
+            "name": "experiment_dataset_tool",
+            "description": "Supplies datasets for coding experiments, tailored to different data science problems.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "experiment_topic": {
+                        "type": "string",
+                        "description": "Specific topic or problem domain for the experiment."
+                    },
+                    "dataset_size": {
+                        "type": "number",
+                        "description": "Preferred size of the dataset in megabytes."
+                    }
+                }
+            }
+        }
+    ]
+}

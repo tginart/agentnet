@@ -1,0 +1,305 @@
+{
+    "task": "Organize an international scientific symposium: 1. Curate specialized sessions with leading experts, 2. Develop a multilingual virtual venue, 3. Coordinate different time zones for global attendees, 4. Implement AI-driven networking features, 5. Manage abstract submissions and reviews, and 6. Collect real-time feedback to improve attendee engagement.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "session_curator_agent",
+                "expert_panel_agent",
+                "scientific_field_specialist_agent",
+                "network_expert_locator_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "venue_development_agent",
+                "multilingual_interface_agent",
+                "virtual_environment_tool",
+                "interface_translation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "timezone_coordinator_agent",
+                "international_attendee_scheduler_agent",
+                "time_optimization_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "networking_feature_agent",
+                "ai_matchmaking_agent",
+                "participant_engagement_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "submission_management_agent",
+                "abstract_review_agent",
+                "review_algorithm_tool",
+                "scientific_review_validation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "feedback_collection_agent",
+                "real_time_feedback_processor",
+                "engagement_analytics_tool",
+                "improvement_suggestion_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level agent managing operations to organize the scientific symposium.",
+            "tools": [
+                "session_curator_agent",
+                "venue_development_agent",
+                "timezone_coordinator_agent",
+                "networking_feature_agent",
+                "submission_management_agent",
+                "feedback_collection_agent"
+            ]
+        },
+        {
+            "name": "session_curator_agent",
+            "role": "Curates and organizes specialized sessions with experts.",
+            "tools": [
+                "expert_panel_agent"
+            ]
+        },
+        {
+            "name": "expert_panel_agent",
+            "role": "Assembles panels of experts in various scientific fields for sessions.",
+            "tools": [
+                "scientific_field_specialist_agent"
+            ]
+        },
+        {
+            "name": "scientific_field_specialist_agent",
+            "role": "Specializes in connecting with experts in designated scientific fields.",
+            "tools": [
+                "network_expert_locator_agent"
+            ]
+        },
+        {
+            "name": "network_expert_locator_agent",
+            "role": "Locates experts through professional networks and databases.",
+            "tools": []
+        },
+        {
+            "name": "venue_development_agent",
+            "role": "Develops a virtual venue that supports multiple languages.",
+            "tools": [
+                "multilingual_interface_agent"
+            ]
+        },
+        {
+            "name": "multilingual_interface_agent",
+            "role": "Ensures the virtual venue supports multiple languages effectively.",
+            "tools": [
+                "virtual_environment_tool",
+                "interface_translation_agent"
+            ]
+        },
+        {
+            "name": "interface_translation_agent",
+            "role": "Provides translation services for the venue interface.",
+            "tools": []
+        },
+        {
+            "name": "timezone_coordinator_agent",
+            "role": "Coordinates event timing for global attendees.",
+            "tools": [
+                "international_attendee_scheduler_agent"
+            ]
+        },
+        {
+            "name": "international_attendee_scheduler_agent",
+            "role": "Schedules sessions accommodating international time zones.",
+            "tools": [
+                "time_optimization_tool"
+            ]
+        },
+        {
+            "name": "networking_feature_agent",
+            "role": "Implements AI-driven networking features for attendees.",
+            "tools": [
+                "ai_matchmaking_agent"
+            ]
+        },
+        {
+            "name": "ai_matchmaking_agent",
+            "role": "Matches attendees based on interests and professional backgrounds.",
+            "tools": [
+                "participant_engagement_tool"
+            ]
+        },
+        {
+            "name": "submission_management_agent",
+            "role": "Handles abstract submission and review processes.",
+            "tools": [
+                "abstract_review_agent"
+            ]
+        },
+        {
+            "name": "abstract_review_agent",
+            "role": "Manages the review of submitted abstracts using automated systems.",
+            "tools": [
+                "review_algorithm_tool",
+                "scientific_review_validation_agent"
+            ]
+        },
+        {
+            "name": "scientific_review_validation_agent",
+            "role": "Validates the quality and integrity of symposium abstract reviews.",
+            "tools": []
+        },
+        {
+            "name": "feedback_collection_agent",
+            "role": "Collects feedback from attendees during the symposium.",
+            "tools": [
+                "real_time_feedback_processor"
+            ]
+        },
+        {
+            "name": "real_time_feedback_processor",
+            "role": "Processes feedback in real time for immediate improvements.",
+            "tools": [
+                "engagement_analytics_tool",
+                "improvement_suggestion_agent"
+            ]
+        },
+        {
+            "name": "improvement_suggestion_agent",
+            "role": "Provides actionable suggestions for enhancing attendee engagement.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "virtual_environment_tool",
+            "description": "Facilitates the development and management of a virtual symposium venue.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "language_support": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Languages supported by the virtual venue."
+                    },
+                    "venue_features": {
+                        "type": "string",
+                        "description": "Features included in the virtual environment."
+                    }
+                }
+            }
+        },
+        {
+            "name": "time_optimization_tool",
+            "description": "Optimizes event schedules for global time zones.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "timezone_data": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "region": {
+                                    "type": "string",
+                                    "description": "Region or continent."
+                                },
+                                "offset": {
+                                    "type": "number",
+                                    "description": "Time zone offset from UTC."
+                                }
+                            }
+                        },
+                        "description": "Data on time zones relevant to the event."
+                    },
+                    "schedule_constraints": {
+                        "type": "string",
+                        "description": "Constraints for session scheduling."
+                    }
+                }
+            }
+        },
+        {
+            "name": "participant_engagement_tool",
+            "description": "Enhances participant engagement through AI-driven matchmaking.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "participant_profiles": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "interests": {
+                                    "type": "string",
+                                    "description": "Participant interests."
+                                },
+                                "profession": {
+                                    "type": "string",
+                                    "description": "Participant's professional background."
+                                }
+                            }
+                        },
+                        "description": "Profiles of attendees for matchmaking."
+                    }
+                }
+            }
+        },
+        {
+            "name": "review_algorithm_tool",
+            "description": "Automates the review process for symposium abstract submissions.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "abstract_data": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "Abstracts submitted for review."
+                    },
+                    "review_criteria": {
+                        "type": "string",
+                        "description": "Criteria used for abstract evaluation."
+                    }
+                }
+            }
+        },
+        {
+            "name": "engagement_analytics_tool",
+            "description": "Analyzes real-time feedback to improve engagement.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "feedback_stream": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        },
+                        "description": "Real-time feedback data."
+                    },
+                    "analytic_methods": {
+                        "type": "string",
+                        "description": "Methods used for feedback analysis."
+                    }
+                }
+            }
+        }
+    ]
+}

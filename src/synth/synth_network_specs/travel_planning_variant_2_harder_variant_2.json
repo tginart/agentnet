@@ -1,0 +1,274 @@
+{
+    "task": "Arrange a luxury wilderness retreat in the Canadian Rockies focused on mindfulness and resilience training. The plan should include: 1. Organizing transportation that minimizes carbon footprint. 2. Booking high-end, eco-certified lodges. 3. Designing a curriculum of mindfulness, resilience, and survival skills workshops. 4. Arranging outdoor team-building activities. 5. Ensuring compliance with Canadian wilderness safety and environmental regulations. 6. Creating a gourmet meal plan with locally sourced ingredients. 7. Conduct a financial analysis to maintain the budget under $10,000 per participant.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "curriculum_agent",
+                "mindfulness_expert_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "curriculum_agent",
+                "resilience_coach_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "curriculum_agent",
+                "survival_skills_instructor_agent",
+                "field_practice_coordinator",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "outdoor_activity_agent",
+                "team_building_facilitator",
+                "risk_management_officer",
+                "safety_protocol_evaluator",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "logistics_agent",
+                "gourmet_chef_agent",
+                "local_food_supplier_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "logistics_agent",
+                "eco_transport_manager",
+                "carbon_footprint_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "logistics_agent",
+                "luxury_lodge_selector",
+                "environmental_certification_checker",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "regulations_officer",
+                "canadian_wilderness_policy_advisor",
+                "permits_acquisition_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "budgeting_agent",
+                "expense_tracking_tool"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Primary liaison for planning the luxury wilderness retreat, coordinating other agents.",
+            "tools": [
+                "curriculum_agent",
+                "outdoor_activity_agent",
+                "logistics_agent",
+                "regulations_officer",
+                "budgeting_agent"
+            ]
+        },
+        {
+            "name": "curriculum_agent",
+            "role": "Develops the educational aspects of the retreat, focusing on mindfulness and resilience.",
+            "tools": [
+                "mindfulness_expert_agent",
+                "resilience_coach_agent",
+                "survival_skills_instructor_agent"
+            ]
+        },
+        {
+            "name": "mindfulness_expert_agent",
+            "role": "Provides guidance on mindfulness practices to be included in the curriculum.",
+            "tools": []
+        },
+        {
+            "name": "resilience_coach_agent",
+            "role": "Develops strategies and sessions focused on building personal resilience.",
+            "tools": []
+        },
+        {
+            "name": "survival_skills_instructor_agent",
+            "role": "Prepares a course in survival skills essential for wilderness settings.",
+            "tools": [
+                "field_practice_coordinator"
+            ]
+        },
+        {
+            "name": "field_practice_coordinator",
+            "role": "Coordinates on-site survival skills training sessions.",
+            "tools": []
+        },
+        {
+            "name": "outdoor_activity_agent",
+            "role": "Organizes and manages outdoor team-building activities.",
+            "tools": [
+                "team_building_facilitator"
+            ]
+        },
+        {
+            "name": "team_building_facilitator",
+            "role": "Leads and facilitates effective team-building sessions.",
+            "tools": [
+                "risk_management_officer"
+            ]
+        },
+        {
+            "name": "risk_management_officer",
+            "role": "Oversees risk management and safety protocols for outdoor activities.",
+            "tools": [
+                "safety_protocol_evaluator"
+            ]
+        },
+        {
+            "name": "safety_protocol_evaluator",
+            "role": "Evaluates and ensures all safety protocols are adhered to.",
+            "tools": []
+        },
+        {
+            "name": "logistics_agent",
+            "role": "Manages the logistical aspects such as transportation and accommodation booking.",
+            "tools": [
+                "gourmet_chef_agent",
+                "eco_transport_manager",
+                "luxury_lodge_selector"
+            ]
+        },
+        {
+            "name": "gourmet_chef_agent",
+            "role": "Designs a meal plan focusing on gourmet, local cuisine.",
+            "tools": [
+                "local_food_supplier_tool"
+            ]
+        },
+        {
+            "name": "eco_transport_manager",
+            "role": "Ensures transportation arrangements are environmentally friendly.",
+            "tools": [
+                "carbon_footprint_tool"
+            ]
+        },
+        {
+            "name": "luxury_lodge_selector",
+            "role": "Selects accommodation with a focus on luxury and eco-certification.",
+            "tools": [
+                "environmental_certification_checker"
+            ]
+        },
+        {
+            "name": "environmental_certification_checker",
+            "role": "Verifies the environmental certifications of luxury lodges.",
+            "tools": []
+        },
+        {
+            "name": "regulations_officer",
+            "role": "Ensures compliance with local safety and environmental regulations.",
+            "tools": [
+                "canadian_wilderness_policy_advisor"
+            ]
+        },
+        {
+            "name": "canadian_wilderness_policy_advisor",
+            "role": "Provides advice on Canadian wilderness safety policies.",
+            "tools": [
+                "permits_acquisition_agent"
+            ]
+        },
+        {
+            "name": "permits_acquisition_agent",
+            "role": "Handles the application and acquisition of necessary permits.",
+            "tools": []
+        },
+        {
+            "name": "budgeting_agent",
+            "role": "Coordinates financial planning and ensures adherence to budget limits.",
+            "tools": [
+                "expense_tracking_tool"
+            ]
+        }
+    ],
+    "tools": [
+        {
+            "name": "local_food_supplier_tool",
+            "description": "Sources local and seasonal ingredients for gourmet meal planning.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "ingredient": {
+                        "type": "string",
+                        "description": "Type of ingredient required."
+                    },
+                    "amount": {
+                        "type": "number",
+                        "description": "Amount needed in kilograms."
+                    },
+                    "seasonal_preference": {
+                        "type": "boolean",
+                        "description": "Prefer seasonal ingredients."
+                    }
+                }
+            }
+        },
+        {
+            "name": "carbon_footprint_tool",
+            "description": "Calculates and aids in minimizing carbon footprints for travel arrangements.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "total_km": {
+                        "type": "number",
+                        "description": "Total kilometers traveled."
+                    },
+                    "transport_mode": {
+                        "type": "string",
+                        "description": "Mode of transportation (e.g., car, bus, plane)."
+                    },
+                    "passengers": {
+                        "type": "number",
+                        "description": "Number of passengers."
+                    }
+                }
+            }
+        },
+        {
+            "name": "expense_tracking_tool",
+            "description": "Tracks expenses and ensures they align with budgetary constraints.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "duration": {
+                        "type": "number",
+                        "description": "Total duration of the retreat in days."
+                    },
+                    "cost_per_night": {
+                        "type": "number",
+                        "description": "Cost per night for accommodation."
+                    },
+                    "activity_budget": {
+                        "type": "number",
+                        "description": "Allocated budget for activities."
+                    },
+                    "meal_budget_per_day": {
+                        "type": "number",
+                        "description": "Daily budget for all meals."
+                    }
+                }
+            }
+        }
+    ]
+}

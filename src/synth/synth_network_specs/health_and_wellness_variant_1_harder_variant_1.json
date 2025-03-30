@@ -1,0 +1,266 @@
+{
+    "task": "Design and generate a comprehensive, personalized lifestyle plan focusing on enhancing physical health, mental well-being, and productivity for a remote worker. The plan must include a tailored exercise routine, nutritional guidelines featuring quick-to-prepare recipes considering possible allergies, daily mindfulness exercises, and efficient workspace management strategies, with regular progress monitoring facilitated by recommended digital tools.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "lifestyle_coordinator_agent",
+                "health_and_fitness_strategy_agent",
+                "custom_exercise_program_agent",
+                "exercise_impact_analysis_agent",
+                "mobile_fitness_tool_suggester",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "lifestyle_coordinator_agent",
+                "nutritional_strategy_agent",
+                "meal_planner_agent",
+                "dietary_alert_checker",
+                "recipe_app_recommendation_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "lifestyle_coordinator_agent",
+                "productivity_and_wellbeing_agent",
+                "workspace_optimization_expert_agent",
+                "ergonomics_tool_recommendation_agent",
+                "online_productivity_tools_recommendation_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "lifestyle_coordinator_agent",
+                "mental_health_advocate_agent",
+                "daily_mindfulness_activity_designer",
+                "mindfulness_app_advisor_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "lifestyle_coordinator_agent",
+                "progress_monitoring_advisor_agent",
+                "mid_term_evaluation_agent",
+                "data_analytics_support_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and coordinates with various specialists to develop a personalized lifestyle plan.",
+            "tools": [
+                "lifestyle_coordinator_agent"
+            ]
+        },
+        {
+            "name": "lifestyle_coordinator_agent",
+            "role": "Coordinates the different aspects required to build a comprehensive lifestyle plan, liaising with agents responsible for health, nutrition, mental well-being, and productivity.",
+            "tools": [
+                "health_and_fitness_strategy_agent",
+                "nutritional_strategy_agent",
+                "productivity_and_wellbeing_agent",
+                "mental_health_advocate_agent",
+                "progress_monitoring_advisor_agent"
+            ]
+        },
+        {
+            "name": "health_and_fitness_strategy_agent",
+            "role": "Develops fitness strategies and exercise routines tailored to individual needs and goals.",
+            "tools": [
+                "custom_exercise_program_agent",
+                "exercise_impact_analysis_agent"
+            ]
+        },
+        {
+            "name": "custom_exercise_program_agent",
+            "role": "Creates customized exercise programs aligned with the individual's goals and physical capacity.",
+            "tools": [
+                "mobile_fitness_tool_suggester"
+            ]
+        },
+        {
+            "name": "exercise_impact_analysis_agent",
+            "role": "Analyzes the effectiveness of exercise plans and suggests improvements.",
+            "tools": []
+        },
+        {
+            "name": "nutritional_strategy_agent",
+            "role": "Offers tailored nutritional guidelines based on individual dietary needs and preferences.",
+            "tools": [
+                "meal_planner_agent",
+                "dietary_alert_checker"
+            ]
+        },
+        {
+            "name": "meal_planner_agent",
+            "role": "Generates meal plans considering dietary preferences and allergens.",
+            "tools": [
+                "recipe_app_recommendation_tool"
+            ]
+        },
+        {
+            "name": "dietary_alert_checker",
+            "role": "Checks meal plans for potential allergen alerts and dietary restrictions.",
+            "tools": []
+        },
+        {
+            "name": "productivity_and_wellbeing_agent",
+            "role": "Enhances productivity and well-being by optimizing workspaces and daily schedules.",
+            "tools": [
+                "workspace_optimization_expert_agent",
+                "ergonomics_tool_recommendation_agent"
+            ]
+        },
+        {
+            "name": "workspace_optimization_expert_agent",
+            "role": "Provides strategies for creating an efficient and ergonomic work-from-home environment.",
+            "tools": [
+                "online_productivity_tools_recommendation_tool"
+            ]
+        },
+        {
+            "name": "mental_health_advocate_agent",
+            "role": "Focuses on mental health by designing daily mindfulness and relaxation activities.",
+            "tools": [
+                "daily_mindfulness_activity_designer"
+            ]
+        },
+        {
+            "name": "daily_mindfulness_activity_designer",
+            "role": "Designs daily mindfulness exercises suited to individual lifestyles.",
+            "tools": [
+                "mindfulness_app_advisor_tool"
+            ]
+        },
+        {
+            "name": "progress_monitoring_advisor_agent",
+            "role": "Tracks and evaluates the progress of the lifestyle plan implementation.",
+            "tools": [
+                "mid_term_evaluation_agent",
+                "data_analytics_support_agent"
+            ]
+        },
+        {
+            "name": "mobile_fitness_tool_suggester",
+            "role": "Proposes mobile applications that align with exercise routines and goals.",
+            "tools": []
+        },
+        {
+            "name": "recipe_app_recommendation_tool",
+            "role": "Recommends cooking apps to assist with meal preparation following dietary guidelines.",
+            "tools": []
+        },
+        {
+            "name": "ergonomics_tool_recommendation_agent",
+            "role": "Suggests ergonomic tools to improve workspace efficiency and comfort.",
+            "tools": []
+        },
+        {
+            "name": "online_productivity_tools_recommendation_tool",
+            "role": "Advises on digital tools that enhance productivity remotely.",
+            "tools": []
+        },
+        {
+            "name": "mindfulness_app_advisor_tool",
+            "role": "Recommends mindfulness applications compatible with the user's lifestyle.",
+            "tools": []
+        },
+        {
+            "name": "mid_term_evaluation_agent",
+            "role": "Conducts mid-term evaluations of the lifestyle plan progress.",
+            "tools": []
+        },
+        {
+            "name": "data_analytics_support_agent",
+            "role": "Analyzes user data to support lifestyle plan modifications.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "mobile_fitness_tool_suggester",
+            "description": "Advises on fitness tracking mobile applications tailored to personal fitness plans and objectives.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "existing_exercise_routine": {
+                        "type": "string",
+                        "description": "The current exercise routine followed by the user."
+                    },
+                    "desired_features": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of desired app features like analytics, personal coaching, etc."
+                    }
+                }
+            }
+        },
+        {
+            "name": "recipe_app_recommendation_tool",
+            "description": "Provides suggestions for mobile applications that offer recipe collections based on dietary needs.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "dietary_restrictions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Dietary restrictions or preferences like vegan, low-carb, etc."
+                    },
+                    "cooking_skill_level": {
+                        "type": "string",
+                        "description": "The user's cooking skill level, such as beginner, intermediate, or advanced."
+                    }
+                }
+            }
+        },
+        {
+            "name": "mindfulness_app_advisor_tool",
+            "description": "Provides suggestions for mindfulness and meditation mobile applications.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "user_stress_levels": {
+                        "type": "number",
+                        "description": "The user's current stress level on a scale of 1 to 10."
+                    },
+                    "mindfulness_preference": {
+                        "type": "string",
+                        "description": "User's preferred types of mindfulness practices, such as yoga, meditation, etc."
+                    }
+                }
+            }
+        },
+        {
+            "name": "online_productivity_tools_recommendation_tool",
+            "description": "Advises on digital tools that enhance remote work productivity.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "working_hours": {
+                        "type": "string",
+                        "description": "The user's typical working hours."
+                    },
+                    "productivity_challenges": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Common productivity challenges faced by the user, such as distractions, time management, etc."
+                    }
+                }
+            }
+        }
+    ]
+}

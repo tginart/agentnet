@@ -1,0 +1,388 @@
+{
+    "task": "Organize a sustainable and educational week-long vacation for an environmentally conscious family in Tokyo, Japan. The itinerary should incorporate eco-friendly accommodations, immersive cultural experiences, hands-on workshops on local crafts, organic dining options, guided tours highlighting sustainability initiatives, and relaxed family bonding activities. Ensure detailed weather forecasts, local insider tips, and tailored travel advisories are included.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "vacation_planner_agent",
+                "accommodation_specialist_agent",
+                "eco_accommodation_database_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "vacation_planner_agent",
+                "cultural_experience_agent",
+                "tradition_exploration_agent",
+                "hands_on_workshop_agent",
+                "local_crafts_database_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "vacation_planner_agent",
+                "sustainable_dining_agent",
+                "organic_dining_option_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "vacation_planner_agent",
+                "guided_tour_agent",
+                "tour_schedule_optimizer_agent",
+                "sustainability_initiatives_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "vacation_planner_agent",
+                "local_guide_agent",
+                "tokyo_insider_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "vacation_planner_agent",
+                "weather_advisory_agent",
+                "climate_forecast_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "vacation_planner_agent",
+                "travel_advisor_agent",
+                "safety_and_regulations_agent",
+                "international_travel_advice_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "vacation_planner_agent",
+                "family_bonding_agent",
+                "leisure_planner_agent",
+                "relaxation_activities_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "vacation_planner_agent",
+                "feedback_management_agent",
+                "feedback_aggregation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "vacation_planner_agent",
+                "cultural_experience_agent",
+                "art_insight_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "vacation_planner_agent",
+                "child_friendly_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "vacation_planner_agent",
+                "local_culture_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The primary interface for the user that orchestrates all agents to create a comprehensive vacation itinerary.",
+            "tools": [
+                "vacation_planner_agent"
+            ]
+        },
+        {
+            "name": "vacation_planner_agent",
+            "role": "Central agent responsible for coordinating the entire vacation planning process, integrating various thematic agents to compile a full itinerary.",
+            "tools": [
+                "accommodation_specialist_agent",
+                "cultural_experience_agent",
+                "sustainable_dining_agent",
+                "guided_tour_agent",
+                "local_guide_agent",
+                "weather_advisory_agent",
+                "travel_advisor_agent",
+                "family_bonding_agent",
+                "feedback_management_agent",
+                "child_friendly_agent",
+                "local_culture_agent"
+            ]
+        },
+        {
+            "name": "accommodation_specialist_agent",
+            "role": "Focuses on finding eco-friendly accommodations that align with sustainable practices for the family.",
+            "tools": [
+                "eco_accommodation_database_tool"
+            ]
+        },
+        {
+            "name": "cultural_experience_agent",
+            "role": "Curates cultural experiences that are immersive and educational for the family.",
+            "tools": [
+                "tradition_exploration_agent",
+                "art_insight_agent"
+            ]
+        },
+        {
+            "name": "tradition_exploration_agent",
+            "role": "Explores traditional cultural elements and organizes workshops.",
+            "tools": [
+                "hands_on_workshop_agent"
+            ]
+        },
+        {
+            "name": "hands_on_workshop_agent",
+            "role": "Specializes in organizing workshops on local crafts and skills in Tokyo.",
+            "tools": [
+                "local_crafts_database_tool"
+            ]
+        },
+        {
+            "name": "sustainable_dining_agent",
+            "role": "Identifies organic and sustainable dining options within the travel itinerary.",
+            "tools": [
+                "organic_dining_option_tool"
+            ]
+        },
+        {
+            "name": "guided_tour_agent",
+            "role": "Arranges tours focused on sustainability initiatives around Tokyo.",
+            "tools": [
+                "tour_schedule_optimizer_agent"
+            ]
+        },
+        {
+            "name": "tour_schedule_optimizer_agent",
+            "role": "Optimizes the scheduling of tours to maximize educational impact and convenience.",
+            "tools": [
+                "sustainability_initiatives_tool"
+            ]
+        },
+        {
+            "name": "local_guide_agent",
+            "role": "Provides insider tips and recommendations on secret spots and must-see locations in Tokyo.",
+            "tools": [
+                "tokyo_insider_tool"
+            ]
+        },
+        {
+            "name": "weather_advisory_agent",
+            "role": "Delivers detailed and accurate weather forecasts to help in planning the itinerary.",
+            "tools": [
+                "climate_forecast_tool"
+            ]
+        },
+        {
+            "name": "travel_advisor_agent",
+            "role": "Advises on general travel requirements and regulations.",
+            "tools": [
+                "safety_and_regulations_agent"
+            ]
+        },
+        {
+            "name": "safety_and_regulations_agent",
+            "role": "Ensures the family is aware of all safety protocols and travel regulations.",
+            "tools": [
+                "international_travel_advice_tool"
+            ]
+        },
+        {
+            "name": "family_bonding_agent",
+            "role": "Plans leisure activities for family bonding and relaxation during the vacation.",
+            "tools": [
+                "leisure_planner_agent"
+            ]
+        },
+        {
+            "name": "leisure_planner_agent",
+            "role": "Designs and recommends relaxation activities suitable for family bonding.",
+            "tools": [
+                "relaxation_activities_tool"
+            ]
+        },
+        {
+            "name": "feedback_management_agent",
+            "role": "Manages feedback collection and analysis processes to improve vacation planning.",
+            "tools": [
+                "feedback_aggregation_agent"
+            ]
+        },
+        {
+            "name": "feedback_aggregation_agent",
+            "role": "Collects feedback post-trip to enhance future itineraries.",
+            "tools": []
+        },
+        {
+            "name": "art_insight_agent",
+            "role": "Provides insights into local art scenes and recommends inclusive art events.",
+            "tools": []
+        },
+        {
+            "name": "child_friendly_agent",
+            "role": "Focuses on activities and locations that are particularly engaging for children.",
+            "tools": []
+        },
+        {
+            "name": "local_culture_agent",
+            "role": "Offers in-depth knowledge about the local culture and customs in Tokyo.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "eco_accommodation_database_tool",
+            "description": "Provides a database of eco-friendly accommodations in Tokyo.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "accommodation_type": {
+                        "type": "string",
+                        "description": "Type of accommodation, e.g., hotel, hostel."
+                    },
+                    "budget_range": {
+                        "type": "string",
+                        "description": "Budget range for accommodation."
+                    }
+                }
+            }
+        },
+        {
+            "name": "local_crafts_database_tool",
+            "description": "Lists workshops available for local crafts and skills in Tokyo.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "craft_type": {
+                        "type": "string",
+                        "description": "Type of craft interested in learning or participating."
+                    },
+                    "duration": {
+                        "type": "string",
+                        "description": "Duration of the workshop desired."
+                    }
+                }
+            }
+        },
+        {
+            "name": "organic_dining_option_tool",
+            "description": "Offers a list of organic dining options available in Tokyo.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "cuisine_preference": {
+                        "type": "string",
+                        "description": "Preferred cuisine type."
+                    },
+                    "price_range": {
+                        "type": "string",
+                        "description": "Price range for the dining options."
+                    }
+                }
+            }
+        },
+        {
+            "name": "sustainability_initiatives_tool",
+            "description": "Provides a schedule of sustainability-focused tours and activities.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "initiative_type": {
+                        "type": "string",
+                        "description": "Type of sustainability initiative, e.g., recycling, conservation."
+                    },
+                    "available_dates": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of available dates for the tours."
+                    }
+                }
+            }
+        },
+        {
+            "name": "tokyo_insider_tool",
+            "description": "Gives insider tips and hidden gems in Tokyo.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "interest_area": {
+                        "type": "string",
+                        "description": "Specific area of interest for insider tips."
+                    }
+                }
+            }
+        },
+        {
+            "name": "climate_forecast_tool",
+            "description": "Provides real-time and detailed weather forecasts.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "latitude": {
+                        "type": "number",
+                        "description": "Latitude for weather forecast location."
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "description": "Longitude for weather forecast location."
+                    }
+                }
+            }
+        },
+        {
+            "name": "international_travel_advice_tool",
+            "description": "Delivers up-to-date advice on international travel requirements and safety.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "destination_country": {
+                        "type": "string",
+                        "description": "Country of the travel destination needing advice."
+                    },
+                    "departure_date": {
+                        "type": "string",
+                        "description": "Date of departure for travel."
+                    }
+                }
+            }
+        },
+        {
+            "name": "relaxation_activities_tool",
+            "description": "Suggests family-friendly relaxation activities.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "activity_type": {
+                        "type": "string",
+                        "description": "Type of relaxation activity preferred."
+                    },
+                    "time_slot": {
+                        "type": "string",
+                        "description": "Preferred time slot for the activity."
+                    }
+                }
+            }
+        }
+    ]
+}

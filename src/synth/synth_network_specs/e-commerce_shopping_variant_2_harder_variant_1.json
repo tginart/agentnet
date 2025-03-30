@@ -1,0 +1,355 @@
+{
+    "task": "Organize an international tech conference: 1. Secure a venue with a capacity of at least 1,000 people. 2. Plan a diverse schedule of speakers, panels, and workshops. 3. Ensure accessibility for all attendees. 4. Arrange for live streaming of keynotes. 5. Provide catering services for breakfast, lunch, and dinner. 6. Set up a mobile app for the event to provide real-time updates and networking opportunities. 7. Source sponsors and manage sponsorships. 8. Develop an international marketing strategy to attract a global audience. 9. Handle visas and travel arrangements for international speakers.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "venue_selection_agent",
+                "venue_capacity_agent",
+                "capacity_requirements_check_agent",
+                "accessibility_agent",
+                "compliance_check_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "schedule_planning_agent",
+                "speaker_selection_agent",
+                "diversity_inclusion_agent",
+                "expert_panel_formation_agent",
+                "panel_logistics_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "streaming_service_agent",
+                "video_streaming_partner_agent",
+                "stream_quality_assurance_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "catering_service_agent",
+                "menu_customization_agent",
+                "dietary_restrictions_agent",
+                "supplier_recommendation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "app_development_agent",
+                "feature_planning_agent",
+                "backend_integration_agent",
+                "user_interface_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "sponsorship_management_agent",
+                "sponsor_engagement_agent",
+                "contract_negotiation_agent",
+                "sponsorship_compliance_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "international_marketing_agent",
+                "digital_campaign_agent",
+                "regional_outreach_agent",
+                "social_media_strategy_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "visa_arrangement_agent",
+                "travel_accommodation_agent",
+                "logistics_agent",
+                "secure_documentation_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "venue_selection_agent",
+                "schedule_planning_agent",
+                "streaming_service_agent",
+                "catering_service_agent",
+                "app_development_agent",
+                "sponsorship_management_agent",
+                "international_marketing_agent",
+                "visa_arrangement_agent"
+            ]
+        },
+        {
+            "name": "venue_selection_agent",
+            "role": "Selects and secures a venue that meets the event requirements, including capacity and location.",
+            "tools": [
+                "venue_capacity_agent",
+                "accessibility_agent"
+            ]
+        },
+        {
+            "name": "venue_capacity_agent",
+            "role": "Ensures that the selected venue can accommodate at least 1,000 attendees.",
+            "tools": [
+                "capacity_requirements_check_agent"
+            ]
+        },
+        {
+            "name": "capacity_requirements_check_agent",
+            "role": "Checks that all capacity requirements are strictly followed and reported.",
+            "tools": []
+        },
+        {
+            "name": "accessibility_agent",
+            "role": "Checks venue for comprehensive accessibility to ensure inclusion for all attendees.",
+            "tools": [
+                "compliance_check_agent"
+            ]
+        },
+        {
+            "name": "compliance_check_agent",
+            "role": "Validates compliance with accessibility and other regional regulations.",
+            "tools": []
+        },
+        {
+            "name": "schedule_planning_agent",
+            "role": "Plans the event schedule with a diverse lineup of speakers, panels, and workshops.",
+            "tools": [
+                "speaker_selection_agent",
+                "expert_panel_formation_agent"
+            ]
+        },
+        {
+            "name": "speaker_selection_agent",
+            "role": "Handles speaker invitation and scheduling for the conference.",
+            "tools": [
+                "diversity_inclusion_agent"
+            ]
+        },
+        {
+            "name": "diversity_inclusion_agent",
+            "role": "Ensures diversity and inclusion in the selection of event speakers and topics.",
+            "tools": []
+        },
+        {
+            "name": "expert_panel_formation_agent",
+            "role": "Organizes expert panels based on speaker expertise and audience interests.",
+            "tools": [
+                "panel_logistics_agent"
+            ]
+        },
+        {
+            "name": "panel_logistics_agent",
+            "role": "Manages logistics for panel discussions including timing and equipment.",
+            "tools": []
+        },
+        {
+            "name": "streaming_service_agent",
+            "role": "Arranges live streaming services for keynotes and major sessions.",
+            "tools": [
+                "video_streaming_partner_agent"
+            ]
+        },
+        {
+            "name": "video_streaming_partner_agent",
+            "role": "Coordinates with streaming partners to facilitate high-quality video streaming.",
+            "tools": [
+                "stream_quality_assurance_agent"
+            ]
+        },
+        {
+            "name": "stream_quality_assurance_agent",
+            "role": "Monitors and assures the quality of live stream broadcasts.",
+            "tools": []
+        },
+        {
+            "name": "catering_service_agent",
+            "role": "Manages catering for the event to cover all meals and dietary restrictions.",
+            "tools": [
+                "menu_customization_agent"
+            ]
+        },
+        {
+            "name": "menu_customization_agent",
+            "role": "Customizes the menu according to event needs and attendee preferences.",
+            "tools": [
+                "dietary_restrictions_agent"
+            ]
+        },
+        {
+            "name": "dietary_restrictions_agent",
+            "role": "Ensures all dietary restrictions and needs are respected.",
+            "tools": [
+                "supplier_recommendation_agent"
+            ]
+        },
+        {
+            "name": "supplier_recommendation_agent",
+            "role": "Recommends trusted local suppliers for catering services.",
+            "tools": []
+        },
+        {
+            "name": "app_development_agent",
+            "role": "Develops a mobile app for the conference, integrating features like updates and networking.",
+            "tools": [
+                "feature_planning_agent"
+            ]
+        },
+        {
+            "name": "feature_planning_agent",
+            "role": "Plans and prioritizes features for the conference app.",
+            "tools": [
+                "backend_integration_agent"
+            ]
+        },
+        {
+            "name": "backend_integration_agent",
+            "role": "Handles backend integration for app services such as notifications and updates.",
+            "tools": [
+                "user_interface_agent"
+            ]
+        },
+        {
+            "name": "user_interface_agent",
+            "role": "Designs the app user interface for accessibility and ease of use.",
+            "tools": []
+        },
+        {
+            "name": "sponsorship_management_agent",
+            "role": "Manages sponsorship processes, engagement, and negotiations.",
+            "tools": [
+                "sponsor_engagement_agent"
+            ]
+        },
+        {
+            "name": "sponsor_engagement_agent",
+            "role": "Engages potential sponsors and explains sponsorship opportunities.",
+            "tools": [
+                "contract_negotiation_agent"
+            ]
+        },
+        {
+            "name": "contract_negotiation_agent",
+            "role": "Negotiates sponsorship agreements and conducts contract reviews.",
+            "tools": [
+                "sponsorship_compliance_agent"
+            ]
+        },
+        {
+            "name": "sponsorship_compliance_agent",
+            "role": "Ensures all sponsorships comply with legal and ethical guidelines.",
+            "tools": []
+        },
+        {
+            "name": "international_marketing_agent",
+            "role": "Crafts and executes an international marketing strategy.",
+            "tools": [
+                "digital_campaign_agent"
+            ]
+        },
+        {
+            "name": "digital_campaign_agent",
+            "role": "Develops digital advertising campaigns to boost event visibility.",
+            "tools": [
+                "regional_outreach_agent"
+            ]
+        },
+        {
+            "name": "regional_outreach_agent",
+            "role": "Focuses on outreach in specific regions to attract diverse attendees.",
+            "tools": [
+                "social_media_strategy_agent"
+            ]
+        },
+        {
+            "name": "social_media_strategy_agent",
+            "role": "Creates a social media strategy to engage global audiences.",
+            "tools": []
+        },
+        {
+            "name": "visa_arrangement_agent",
+            "role": "Handles visa processes and travel logistics for international speakers.",
+            "tools": [
+                "travel_accommodation_agent"
+            ]
+        },
+        {
+            "name": "travel_accommodation_agent",
+            "role": "Arranges travel and accommodation for event speakers and VIPs.",
+            "tools": [
+                "logistics_agent"
+            ]
+        },
+        {
+            "name": "logistics_agent",
+            "role": "Manages overall logistics including transport, accommodations, and on-site setups.",
+            "tools": [
+                "secure_documentation_agent"
+            ]
+        },
+        {
+            "name": "secure_documentation_agent",
+            "role": "Ensures all travel documents and visas are processed securely.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "event_management_tool",
+            "description": "Helps manage various aspects of event planning such as scheduling, task assignments, and tracking.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "event_name": {
+                        "type": "string",
+                        "description": "Name of the event."
+                    },
+                    "tasks": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "task_description": {
+                                    "type": "string"
+                                },
+                                "deadline": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "virtual_venue_tool",
+            "description": "Assesses and books virtual venues including live streaming capacities and interactive features.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "venue_type": {
+                        "type": "string",
+                        "description": "Type of venue 'physical', 'virtual', or 'hybrid'."
+                    },
+                    "audience_capacity": {
+                        "type": "number",
+                        "description": "Maximum number of attendees possible."
+                    }
+                }
+            }
+        }
+    ]
+}

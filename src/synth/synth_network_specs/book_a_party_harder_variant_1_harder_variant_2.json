@@ -1,0 +1,301 @@
+{
+    "task": "Coordinate a multi-day educational retreat for a group of scholars at an eco-friendly resort in Bali. Arrange for eco-friendly transportation options, mapping of daily educational sessions on local culture and environmental conservation. Plan excursions including a guided rainforest tour, a visit to a turtle conservation center, and a local crafts workshop. Handle special accommodations for accessibility needs, create custom learning materials, and provide sustainable dining options.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "retreat_coordination_agent",
+                "resort_booking_agent",
+                "sustainability_resort_specialist",
+                "eco_resort_contact_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "transportation_agent",
+                "eco_transport_service",
+                "local_transfer_booking",
+                "electric_vehicle_rental_service"
+            ],
+            [
+                "human",
+                "client_agent",
+                "educational_content_agent",
+                "session_plan_generator",
+                "cultural_expert_agent",
+                "learning_material_designer"
+            ],
+            [
+                "human",
+                "client_agent",
+                "excursion_planning_agent",
+                "excursion_schedule_coordinator",
+                "guide_booking_service",
+                "local_tour_guide_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "accessibility_services_agent",
+                "accommodation_accessibility_exit",
+                "special_needs_consultant"
+            ],
+            [
+                "human",
+                "client_agent",
+                "culinary_experience_agent",
+                "sustainable_dining_planner",
+                "supply_chain_inspector"
+            ],
+            [
+                "human",
+                "client_agent",
+                "logistics_and_budget_agent",
+                "budget_monitor_agent",
+                "expense_tracking_service",
+                "payment_verification_unit"
+            ],
+            [
+                "human",
+                "client_agent",
+                "educational_content_agent",
+                "content_personalization_agent",
+                "interactive_presentation_designer"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "retreat_coordination_agent",
+                "transportation_agent",
+                "educational_content_agent",
+                "excursion_planning_agent",
+                "accessibility_services_agent",
+                "culinary_experience_agent",
+                "logistics_and_budget_agent"
+            ]
+        },
+        {
+            "name": "retreat_coordination_agent",
+            "role": "Oversees the coordination of the entire retreat, focusing on venue and schedule.",
+            "tools": [
+                "resort_booking_agent"
+            ]
+        },
+        {
+            "name": "resort_booking_agent",
+            "role": "Responsible for investigating and securing booking at suitable eco-friendly resorts.",
+            "tools": [
+                "sustainability_resort_specialist"
+            ]
+        },
+        {
+            "name": "sustainability_resort_specialist",
+            "role": "Specializes in finding and validating eco-friendly accommodations.",
+            "tools": [
+                "eco_resort_contact_agent"
+            ]
+        },
+        {
+            "name": "transportation_agent",
+            "role": "Manages all transport-related logistics with a focus on eco-friendly solutions.",
+            "tools": [
+                "eco_transport_service"
+            ]
+        },
+        {
+            "name": "eco_transport_service",
+            "role": "Arranges eco-friendly transportation options locally.",
+            "tools": [
+                "local_transfer_booking",
+                "electric_vehicle_rental_service"
+            ]
+        },
+        {
+            "name": "educational_content_agent",
+            "role": "Develops educational content and plans sessions for the retreat.",
+            "tools": [
+                "session_plan_generator",
+                "content_personalization_agent"
+            ]
+        },
+        {
+            "name": "session_plan_generator",
+            "role": "Creates daily educational session plans on local culture and conservation.",
+            "tools": [
+                "cultural_expert_agent"
+            ]
+        },
+        {
+            "name": "cultural_expert_agent",
+            "role": "Provides expertise in local Balinese culture and ecosystems, incorporating this knowledge into sessions.",
+            "tools": [
+                "learning_material_designer"
+            ]
+        },
+        {
+            "name": "excursion_planning_agent",
+            "role": "Organizes and schedules excursions and local tours.",
+            "tools": [
+                "excursion_schedule_coordinator"
+            ]
+        },
+        {
+            "name": "excursion_schedule_coordinator",
+            "role": "Coordinates detailed schedules for each planned excursion.",
+            "tools": [
+                "guide_booking_service"
+            ]
+        },
+        {
+            "name": "guide_booking_service",
+            "role": "Books knowledgeable local tour guides for all excursions.",
+            "tools": [
+                "local_tour_guide_agent"
+            ]
+        },
+        {
+            "name": "accessibility_services_agent",
+            "role": "Ensures all facilities and events are accessible to those with special needs.",
+            "tools": [
+                "accommodation_accessibility_exit"
+            ]
+        },
+        {
+            "name": "accommodation_accessibility_exit",
+            "role": "Works specifically on making accommodations accessible.",
+            "tools": [
+                "special_needs_consultant"
+            ]
+        },
+        {
+            "name": "culinary_experience_agent",
+            "role": "Curates dining experiences focusing on sustainability.",
+            "tools": [
+                "sustainable_dining_planner"
+            ]
+        },
+        {
+            "name": "sustainable_dining_planner",
+            "role": "Plans and ensures all meals meet sustainable and dietary needs.",
+            "tools": [
+                "supply_chain_inspector"
+            ]
+        },
+        {
+            "name": "logistics_and_budget_agent",
+            "role": "Monitors budget and manages logistics to ensure efficient operation.",
+            "tools": [
+                "budget_monitor_agent"
+            ]
+        },
+        {
+            "name": "budget_monitor_agent",
+            "role": "Keeps track of all expenses and aligns them with the retreat budget.",
+            "tools": [
+                "expense_tracking_service",
+                "payment_verification_unit"
+            ]
+        },
+        {
+            "name": "eco_resort_contact_agent",
+            "role": "Directly contacts eco-resorts to confirm availability and negotiate terms.",
+            "tools": []
+        },
+        {
+            "name": "local_transfer_booking",
+            "role": "Coordinates local eco-friendly transport bookings.",
+            "tools": []
+        },
+        {
+            "name": "electric_vehicle_rental_service",
+            "role": "Manages the rental and logistics of electric vehicles for the retreat.",
+            "tools": []
+        },
+        {
+            "name": "learning_material_designer",
+            "role": "Designs and customizes learning materials for retreat sessions.",
+            "tools": []
+        },
+        {
+            "name": "local_tour_guide_agent",
+            "role": "A local guide responsible for conducting tours and excursions.",
+            "tools": []
+        },
+        {
+            "name": "special_needs_consultant",
+            "role": "Advises on and implements accessibility arrangements for attendees with special needs.",
+            "tools": []
+        },
+        {
+            "name": "supply_chain_inspector",
+            "role": "Ensures that all dining supplies adhere to sustainability standards.",
+            "tools": []
+        },
+        {
+            "name": "expense_tracking_service",
+            "role": "Tracks all incurred expenses throughout the retreat.",
+            "tools": []
+        },
+        {
+            "name": "payment_verification_unit",
+            "role": "Verifies and processes payments for various services during the retreat.",
+            "tools": []
+        },
+        {
+            "name": "content_personalization_agent",
+            "role": "Tailors educational content to specific participant needs.",
+            "tools": [
+                "interactive_presentation_designer"
+            ]
+        },
+        {
+            "name": "interactive_presentation_designer",
+            "role": "Creates interactive presentations to enhance learning experiences.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "custom_sustainability_checklist_tool",
+            "description": "Generates checklists for sustainable practices specific to the event.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "event_scope": {
+                        "type": "string",
+                        "description": "The scope or category of the event, such as 'Dining' or 'Transport'"
+                    },
+                    "targets": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Specific sustainability targets to address"
+                    }
+                }
+            }
+        },
+        {
+            "name": "eco_activity_builder_tool",
+            "description": "Develops eco-friendly activities considering local culture and resources.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {
+                        "type": "string",
+                        "description": "Location to tailor eco-friendly activities"
+                    },
+                    "participant_count": {
+                        "type": "number",
+                        "description": "The number of participants for the activity"
+                    }
+                }
+            }
+        }
+    ]
+}

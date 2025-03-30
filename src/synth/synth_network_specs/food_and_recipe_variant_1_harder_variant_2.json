@@ -1,0 +1,331 @@
+{
+    "task": "Organize a zero-waste vacation to Italy that includes permaculture farm stays, eco-sightseeing, public transport options, a carbon offset plan, local waste management practices education, emergency contacts, and a digital zero-waste travel diary integration.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "vacation_planning_agent",
+                "eco_accommodation_agent",
+                "sustainable_lodging_strategy_agent",
+                "permaculture_farm_stays_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "vacation_planning_agent",
+                "eco_tourism_agent",
+                "zero_waste_sightseeing_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "vacation_planning_agent",
+                "public_transport_agent",
+                "sustainable_transport_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "vacation_planning_agent",
+                "carbon_offset_agent",
+                "carbon_credits_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "vacation_planning_agent",
+                "local_education_agent",
+                "waste_management_tips_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "vacation_planning_agent",
+                "emergency_support_agent",
+                "emergency_contact_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "vacation_planning_agent",
+                "digital_diary_agent",
+                "diary_management_subagent",
+                "synchronization_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "vacation_planning_agent",
+                "eco_accommodation_agent",
+                "sustainable_lodging_strategy_agent",
+                "permaculture_farm_stays_tool",
+                "eco_tourism_agent",
+                "zero_waste_sightseeing_tool",
+                "carbon_offset_agent",
+                "carbon_credits_tool",
+                "local_education_agent",
+                "waste_management_tips_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete a zero-waste vacation plan.",
+            "tools": [
+                "vacation_planning_agent"
+            ]
+        },
+        {
+            "name": "vacation_planning_agent",
+            "role": "Agent responsible for assembling the zero-waste vacation encompassing accommodation, activities, and educational elements.",
+            "tools": [
+                "eco_accommodation_agent",
+                "eco_tourism_agent",
+                "public_transport_agent",
+                "carbon_offset_agent",
+                "local_education_agent",
+                "emergency_support_agent",
+                "digital_diary_agent"
+            ]
+        },
+        {
+            "name": "eco_accommodation_agent",
+            "role": "Agent finding sustainable accommodations such as permaculture farms with zero-waste practices.",
+            "tools": [
+                "sustainable_lodging_strategy_agent"
+            ]
+        },
+        {
+            "name": "sustainable_lodging_strategy_agent",
+            "role": "Agent tasked with strategizing sustainable and eco-friendly lodging options.",
+            "tools": [
+                "permaculture_farm_stays_tool"
+            ]
+        },
+        {
+            "name": "eco_tourism_agent",
+            "role": "Agent that organizes sightseeing tours following zero-waste principles.",
+            "tools": [
+                "zero_waste_sightseeing_tool"
+            ]
+        },
+        {
+            "name": "public_transport_agent",
+            "role": "Agent promoting the use of sustainable public transport options.",
+            "tools": [
+                "sustainable_transport_tool"
+            ]
+        },
+        {
+            "name": "carbon_offset_agent",
+            "role": "Agent providing carbon offset opportunities to balance the trip's emissions.",
+            "tools": [
+                "carbon_credits_tool"
+            ]
+        },
+        {
+            "name": "local_education_agent",
+            "role": "Agent offering education on local waste management practices and sustainability.",
+            "tools": [
+                "waste_management_tips_tool"
+            ]
+        },
+        {
+            "name": "emergency_support_agent",
+            "role": "Agent supplying emergency contacts and support during the vacation.",
+            "tools": [
+                "emergency_contact_tool"
+            ]
+        },
+        {
+            "name": "digital_diary_agent",
+            "role": "Agent handling the integration with a digital diary for tracking zero-waste practices.",
+            "tools": [
+                "diary_management_subagent"
+            ]
+        },
+        {
+            "name": "diary_management_subagent",
+            "role": "Subagent responsible for managing the diary synchronization and updates.",
+            "tools": [
+                "synchronization_tool"
+            ]
+        },
+        {
+            "name": "permaculture_farm_stays_tool",
+            "role": "Tool for finding permaculture farms and eco-lodges that practice zero-waste living.",
+            "tools": []
+        },
+        {
+            "name": "zero_waste_sightseeing_tool",
+            "role": "Tool for organizing zero-waste sightseeing and educational tours.",
+            "tools": []
+        },
+        {
+            "name": "sustainable_transport_tool",
+            "role": "Tool recommending public transportation options with the lowest environmental impact.",
+            "tools": []
+        },
+        {
+            "name": "carbon_credits_tool",
+            "role": "Tool for purchasing carbon credits as a means to offset travel emissions.",
+            "tools": []
+        },
+        {
+            "name": "waste_management_tips_tool",
+            "role": "Tool providing tips and guidelines on local waste management to tourists.",
+            "tools": []
+        },
+        {
+            "name": "emergency_contact_tool",
+            "role": "Tool providing relevant emergency contact information.",
+            "tools": []
+        },
+        {
+            "name": "synchronization_tool",
+            "role": "Tool for synchronizing travel details with a digital zero-waste travel diary.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "permaculture_farm_stays_tool",
+            "description": "Tool to locate eco-friendly permaculture farms that offer accommodation.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "region": {
+                        "type": "string",
+                        "description": "Region in Italy to find farm stays."
+                    },
+                    "budget_range": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "Min and max budget range for stays."
+                    }
+                }
+            }
+        },
+        {
+            "name": "zero_waste_sightseeing_tool",
+            "description": "Tool for planning sightseeing activities that adhere to zero-waste principles.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "locations": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of locations of interest."
+                    },
+                    "duration": {
+                        "type": "number",
+                        "description": "Duration of stay in days."
+                    }
+                }
+            }
+        },
+        {
+            "name": "sustainable_transport_tool",
+            "description": "Tool to recommend eco-friendly public transport options.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "departure": {
+                        "type": "string",
+                        "description": "Departure city."
+                    },
+                    "arrival": {
+                        "type": "string",
+                        "description": "Arrival city."
+                    },
+                    "travel_date": {
+                        "type": "string",
+                        "format": "date",
+                        "description": "Date of travel."
+                    }
+                }
+            }
+        },
+        {
+            "name": "carbon_credits_tool",
+            "description": "Tool for calculating and purchasing carbon credits.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "trip_mileage": {
+                        "type": "number",
+                        "description": "Total mileage of the trip to offset."
+                    },
+                    "activities": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of activities included."
+                    }
+                }
+            }
+        },
+        {
+            "name": "waste_management_tips_tool",
+            "description": "Tool providing educational resources on local waste management practices.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "city": {
+                        "type": "string",
+                        "description": "City for which to provide tips."
+                    }
+                }
+            }
+        },
+        {
+            "name": "emergency_contact_tool",
+            "description": "Tool giving detailed emergency contact information.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "country": {
+                        "type": "string",
+                        "description": "Country where emergency services are required."
+                    },
+                    "language_preference": {
+                        "type": "string",
+                        "description": "Preferred language for assistance."
+                    }
+                }
+            }
+        },
+        {
+            "name": "synchronization_tool",
+            "description": "Tool to sync travel activities and notes with a digital diary.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "diary_name": {
+                        "type": "string",
+                        "description": "Name of the digital diary."
+                    },
+                    "sync_frequency": {
+                        "type": "string",
+                        "description": "Frequency of synchronization (daily, weekly, etc.)."
+                    }
+                }
+            }
+        }
+    ]
+}

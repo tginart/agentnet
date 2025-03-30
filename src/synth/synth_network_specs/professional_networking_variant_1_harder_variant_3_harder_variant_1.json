@@ -1,0 +1,248 @@
+{
+    "task": "Organize and execute a global, multi-city AI symposium focusing on emerging ethical considerations, advancements in quantum machine learning, and international hardware collaborations. Coordinate between different local teams in various cities, ensure compliance with regional laws, engage notable speakers, and arrange simultaneous broadcasting across different platforms. Ensure that each city's event aligns with the overall symposium while adapting to local culture and challenges.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "city_event_management_agent",
+                "local_compliance_agent",
+                "regional_policy_advisor_agent",
+                "compliance_review_service",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "city_event_management_agent",
+                "local_partnership_building_agent",
+                "international_relations_agent",
+                "tech_firm_negotiation_service",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "event_broadcast_coordination_agent",
+                "online_platform_agent",
+                "streaming_setup_agent",
+                "network_infrastructure_service",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "speaker_engagement_agent",
+                "global_expert_outreach_agent",
+                "notable_speaker_arrangement_service",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "logistics_management_agent",
+                "venue_preparation_agent",
+                "audio_visual_team_agent",
+                "technical_support_service",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "city_event_management_agent",
+                "local_cultural_adaptation_agent",
+                "event_localization_service",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "city_event_management_agent",
+            "role": "Coordinates the multifaceted aspects of each local city's events, ensuring alignment with the global symposium.",
+            "tools": [
+                "local_compliance_agent",
+                "local_partnership_building_agent",
+                "local_cultural_adaptation_agent"
+            ]
+        },
+        {
+            "name": "local_compliance_agent",
+            "role": "Ensures compliance with the specific legal and policy requirements in the city's region.",
+            "tools": [
+                "regional_policy_advisor_agent"
+            ]
+        },
+        {
+            "name": "regional_policy_advisor_agent",
+            "role": "Advises on local policies and regulations to ensure compliance within the event host region.",
+            "tools": [
+                "compliance_review_service"
+            ]
+        },
+        {
+            "name": "compliance_review_service",
+            "role": "Reviews legal compliance documentation and policies for regional adherence and suggests necessary changes.",
+            "tools": []
+        },
+        {
+            "name": "local_partnership_building_agent",
+            "role": "Builds and manages partnerships with local entities to enhance event reach and effectiveness.",
+            "tools": [
+                "international_relations_agent"
+            ]
+        },
+        {
+            "name": "international_relations_agent",
+            "role": "Facilitates connections with international tech firms for strategic event partnerships.",
+            "tools": [
+                "tech_firm_negotiation_service"
+            ]
+        },
+        {
+            "name": "tech_firm_negotiation_service",
+            "role": "Handles negotiations with tech firms to establish mutually beneficial partnership terms.",
+            "tools": []
+        },
+        {
+            "name": "local_cultural_adaptation_agent",
+            "role": "Adapts the event structure to fit local cultural norms while maintaining global alignment.",
+            "tools": [
+                "event_localization_service"
+            ]
+        },
+        {
+            "name": "event_localization_service",
+            "role": "Provides services for customizing the event to align with local culture and preferences.",
+            "tools": []
+        },
+        {
+            "name": "event_broadcast_coordination_agent",
+            "role": "Coordinates the broadcast of the symposium across multiple platforms globally.",
+            "tools": [
+                "online_platform_agent"
+            ]
+        },
+        {
+            "name": "online_platform_agent",
+            "role": "Manages the distribution of the event across digital channels and streaming platforms.",
+            "tools": [
+                "streaming_setup_agent"
+            ]
+        },
+        {
+            "name": "streaming_setup_agent",
+            "role": "Sets up the technical aspects of the streaming services, ensuring smooth broadcasting.",
+            "tools": [
+                "network_infrastructure_service"
+            ]
+        },
+        {
+            "name": "network_infrastructure_service",
+            "role": "Provides necessary network support and infrastructure for online event streaming.",
+            "tools": []
+        },
+        {
+            "name": "speaker_engagement_agent",
+            "role": "Manages communication and logistics for engaging symposium speakers globally.",
+            "tools": [
+                "global_expert_outreach_agent"
+            ]
+        },
+        {
+            "name": "global_expert_outreach_agent",
+            "role": "Reaches out to global experts and thought leaders to participate as speakers.",
+            "tools": [
+                "notable_speaker_arrangement_service"
+            ]
+        },
+        {
+            "name": "notable_speaker_arrangement_service",
+            "role": "Arranges speaking slots and preparations for high-profile speakers.",
+            "tools": []
+        },
+        {
+            "name": "logistics_management_agent",
+            "role": "Oversees the physical logistical components of the event, ensuring optimal performance.",
+            "tools": [
+                "venue_preparation_agent"
+            ]
+        },
+        {
+            "name": "venue_preparation_agent",
+            "role": "Prepares the event venue including layout, seating arrangements, and staging.",
+            "tools": [
+                "audio_visual_team_agent"
+            ]
+        },
+        {
+            "name": "audio_visual_team_agent",
+            "role": "Handles all audio-visual equipment and setup for the event.",
+            "tools": [
+                "technical_support_service"
+            ]
+        },
+        {
+            "name": "technical_support_service",
+            "role": "Provides technical support and troubleshooting for venue equipment.",
+            "tools": []
+        },
+        {
+            "name": "client_agent",
+            "role": "Orchestrates the entire symposium management by dispatching tasks to relevant agents according to the event plan.",
+            "tools": [
+                "city_event_management_agent",
+                "event_broadcast_coordination_agent",
+                "speaker_engagement_agent",
+                "logistics_management_agent"
+            ]
+        }
+    ],
+    "tools": [
+        {
+            "name": "compliance_review_service",
+            "description": "Conducts an in-depth review of legal compliance documentation.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "document_id": {
+                        "type": "string",
+                        "description": "The ID of the document to review"
+                    },
+                    "region": {
+                        "type": "string",
+                        "description": "The region for which the compliance is being reviewed"
+                    },
+                    "stakeholders": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of stakeholders involved in compliance"
+                    }
+                }
+            }
+        },
+        {
+            "name": "notable_speaker_arrangement_service",
+            "description": "Arranges and confirms details for speakers at the symposium.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "speaker_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the speaker"
+                    },
+                    "session_topic": {
+                        "type": "string",
+                        "description": "The topic the speaker will address"
+                    },
+                    "time_slot": {
+                        "type": "string",
+                        "description": "Scheduled speaking time"
+                    }
+                }
+            }
+        }
+    ]
+}

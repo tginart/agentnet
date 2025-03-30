@@ -1,0 +1,225 @@
+{
+    "task": "Coordinate a family reunion cruise in Greece for 50 people. Book a private yacht for one week in June, secure a chef for in-ship meals, arrange guided tours at three islands, and ensure travel insurance is covered. Set up a video call with family members to discuss the itinerary.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "yacht_booking_agent",
+                "private_yacht_agent",
+                "reservation_management_agent",
+                "insurance_coordination_agent",
+                "legal_review_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "catering_services_agent",
+                "ship_chef_agent",
+                "ingredient_sourcing_agent",
+                "meal_planning_agent",
+                "dietary_analysis_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "guided_tours_agent",
+                "island_tours_agent",
+                "local_guide_recruitment_agent",
+                "tour_schedule_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "communication_agent",
+                "family_video_call_agent",
+                "itinerary_discussion_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "insurance_management_agent",
+                "policy_selection_agent",
+                "coverage_analysis_agent"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": [
+                "yacht_booking_agent",
+                "catering_services_agent",
+                "guided_tours_agent",
+                "communication_agent",
+                "insurance_management_agent"
+            ]
+        },
+        {
+            "name": "yacht_booking_agent",
+            "role": "Handles booking of private yachts for the cruise, ensuring exclusivity and comfort.",
+            "tools": [
+                "private_yacht_agent",
+                "reservation_management_agent"
+            ]
+        },
+        {
+            "name": "catering_services_agent",
+            "role": "Coordinates onboard catering services and meal preparation.",
+            "tools": [
+                "ship_chef_agent"
+            ]
+        },
+        {
+            "name": "guided_tours_agent",
+            "role": "Arranges guided tours at various islands included in the cruise itinerary.",
+            "tools": [
+                "island_tours_agent"
+            ]
+        },
+        {
+            "name": "communication_agent",
+            "role": "Facilitates communication with family members and organizes video calls to discuss plans.",
+            "tools": [
+                "family_video_call_agent"
+            ]
+        },
+        {
+            "name": "insurance_management_agent",
+            "role": "Oversees the arrangement of travel insurance for all family members.",
+            "tools": [
+                "policy_selection_agent"
+            ]
+        },
+        {
+            "name": "private_yacht_agent",
+            "role": "Sources and secures a suitable private yacht for the family cruise.",
+            "tools": []
+        },
+        {
+            "name": "reservation_management_agent",
+            "role": "Confirms reservations and handles booking logistics for the yacht.",
+            "tools": [
+                "insurance_coordination_agent"
+            ]
+        },
+        {
+            "name": "ship_chef_agent",
+            "role": "Hires and manages the onboard chef responsible for meal services during the cruise.",
+            "tools": [
+                "ingredient_sourcing_agent"
+            ]
+        },
+        {
+            "name": "ingredient_sourcing_agent",
+            "role": "Finds and orders high-quality ingredients needed for onboard meal preparation.",
+            "tools": [
+                "meal_planning_agent"
+            ]
+        },
+        {
+            "name": "island_tours_agent",
+            "role": "Plans and organizes tours to various islands, handling guide bookings and schedules.",
+            "tools": [
+                "local_guide_recruitment_agent"
+            ]
+        },
+        {
+            "name": "family_video_call_agent",
+            "role": "Sets up a digital meeting platform for family discussions.",
+            "tools": [
+                "itinerary_discussion_agent"
+            ]
+        },
+        {
+            "name": "policy_selection_agent",
+            "role": "Selects the best insurance policies fitting the family's needs for the cruise.",
+            "tools": [
+                "coverage_analysis_agent"
+            ]
+        },
+        {
+            "name": "insurance_coordination_agent",
+            "role": "Coordinates insurance requirements specifically for yacht bookings.",
+            "tools": [
+                "legal_review_agent"
+            ]
+        },
+        {
+            "name": "meal_planning_agent",
+            "role": "Designs meal plans according to dietary preferences and availability of ingredients.",
+            "tools": [
+                "dietary_analysis_agent"
+            ]
+        },
+        {
+            "name": "local_guide_recruitment_agent",
+            "role": "Recruits local guides for detailed island tours.",
+            "tools": [
+                "tour_schedule_agent"
+            ]
+        },
+        {
+            "name": "itinerary_discussion_agent",
+            "role": "Facilitates discussion on the proposed itinerary during family video calls.",
+            "tools": []
+        },
+        {
+            "name": "coverage_analysis_agent",
+            "role": "Analyzes insurance coverage to ensure it meets all necessary requirements.",
+            "tools": []
+        },
+        {
+            "name": "legal_review_agent",
+            "role": "Reviews legal documents and contracts related to yacht booking and insurance.",
+            "tools": []
+        },
+        {
+            "name": "dietary_analysis_agent",
+            "role": "Analyzes dietary preferences and restrictions for the family members.",
+            "tools": []
+        },
+        {
+            "name": "tour_schedule_agent",
+            "role": "Develops detailed schedules for island tours, optimizing for time and interest.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "meal_planning_agent",
+            "description": "Designs customized meal plans including dietary restrictions and gourmet options.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "dietary_preferences": {
+                        "type": "array",
+                        "description": "List of dietary preferences to be accommodated"
+                    },
+                    "ingredient_list": {
+                        "type": "array",
+                        "description": "List of available ingredients"
+                    }
+                }
+            }
+        },
+        {
+            "name": "tour_schedule_agent",
+            "description": "Creates and updates tour schedules for island visits, including time allocations.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "island_names": {
+                        "type": "array",
+                        "description": "List of islands to visit during the tour"
+                    },
+                    "duration_per_island": {
+                        "type": "number",
+                        "description": "Duration of stay per island in hours"
+                    }
+                }
+            }
+        }
+    ]
+}

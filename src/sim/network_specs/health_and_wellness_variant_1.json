@@ -1,0 +1,435 @@
+{
+    "task": "I want to improve my cardiovascular health by developing a personalized exercise plan and tracking it. Ensure it is suitable for my current fitness level and includes dietary recommendations. Confirm my weekly schedule and check for any contraindications with my current medications.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "health_assessment_agent",
+                "fitness_plan_agent",
+                "exercise_library_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "health_assessment_agent",
+                "nutritional_plan_agent",
+                "dietary_recommendation_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "health_assessment_agent",
+                "medication_check_agent",
+                "contraindication_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "scheduler_agent",
+                "calendar_sync_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "health_assessment_agent",
+                "remote_consultation_agent",
+                "telehealth_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "progress_monitoring_agent",
+                "progress_tracking_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "goal_setting_agent",
+                "goal_definition_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "health_assessment_agent",
+                "fitness_plan_agent",
+                "exercise_plan_optimization_agent",
+                "exercise_optimization_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that interacts with the user to ascertain health goals and coordinates all other agents to complete the assigned health and wellness task.",
+            "tools": [
+                "health_assessment_agent",
+                "scheduler_agent",
+                "progress_monitoring_agent",
+                "goal_setting_agent",
+                "mindfulness_coach_agent",
+                "sleep_tracking_agent"
+            ]
+        },
+        {
+            "name": "health_assessment_agent",
+            "role": "Gathers user's health information, current fitness level, dietary habits, and medication use, then delegates to specialized agents for further action.",
+            "tools": [
+                "fitness_plan_agent",
+                "nutritional_plan_agent",
+                "medication_check_agent",
+                "remote_consultation_agent",
+                "health_data_analysis_agent"
+            ]
+        },
+        {
+            "name": "fitness_plan_agent",
+            "role": "Develops a personalized fitness plan based on the user's health assessment and goals.",
+            "tools": [
+                "exercise_library_tool",
+                "exercise_plan_optimization_agent"
+            ]
+        },
+        {
+            "name": "exercise_plan_optimization_agent",
+            "role": "Optimizes the exercise plan for efficiency and effectiveness using advanced algorithms and user feedback.",
+            "tools": [
+                "exercise_optimization_tool"
+            ]
+        },
+        {
+            "name": "nutritional_plan_agent",
+            "role": "Designs a nutritional plan aligned with the user's health goals, considering dietary preferences and restrictions.",
+            "tools": [
+                "dietary_recommendation_tool"
+            ]
+        },
+        {
+            "name": "medication_check_agent",
+            "role": "Checks the user's current medication for any contraindications or interactions with the proposed health and fitness plan.",
+            "tools": [
+                "contraindication_tool"
+            ]
+        },
+        {
+            "name": "scheduler_agent",
+            "role": "Integrates the user's exercise and dietary plan into their personal schedule.",
+            "tools": [
+                "calendar_sync_tool"
+            ]
+        },
+        {
+            "name": "remote_consultation_agent",
+            "role": "Provides an option for remote consultation with a healthcare professional to review the user's health plan.",
+            "tools": [
+                "telehealth_tool"
+            ]
+        },
+        {
+            "name": "progress_monitoring_agent",
+            "role": "Monitors the user's progress on their health goals and provides feedback and adjustments as needed.",
+            "tools": [
+                "progress_tracking_tool"
+            ]
+        },
+        {
+            "name": "health_data_analysis_agent",
+            "role": "Analyzes health data collected from various sources to provide insights and trends.",
+            "tools": [
+                "data_analysis_tool"
+            ]
+        },
+        {
+            "name": "goal_setting_agent",
+            "role": "Assists in defining specific, measurable health and wellness goals based on user input and health data.",
+            "tools": [
+                "goal_definition_tool"
+            ]
+        },
+        {
+            "name": "mindfulness_coach_agent",
+            "role": "Provides guidance and resources for mindfulness and stress management practices.",
+            "tools": []
+        },
+        {
+            "name": "sleep_tracking_agent",
+            "role": "Offers insights and recommendations for improving sleep quality.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "exercise_library_tool",
+            "description": "Provides a set of suitable exercises based on intensity, target muscle group, and cardiovascular benefit.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "current_fitness_level": {
+                        "type": "string",
+                        "description": "The current fitness level of the user (beginner, intermediate, advanced)."
+                    },
+                    "goal_criteria": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of fitness goals (e.g., improved endurance, muscle strength)."
+                    },
+                    "available_equipment": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of available exercise equipment the user can access."
+                    }
+                },
+                "required": [
+                    "current_fitness_level",
+                    "goal_criteria"
+                ]
+            }
+        },
+        {
+            "name": "dietary_recommendation_tool",
+            "description": "Suggests meal plans and nutritional intake based on personal health data and fitness goals.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "dietary_restrictions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Personal dietary restrictions or allergies."
+                    },
+                    "caloric_needs": {
+                        "type": "number",
+                        "description": "Estimated daily caloric needs based on fitness goals."
+                    },
+                    "meal_preference": {
+                        "type": "string",
+                        "description": "Preference for meal type (e.g., vegan, vegetarian, omnivore)."
+                    }
+                },
+                "required": [
+                    "caloric_needs"
+                ]
+            }
+        },
+        {
+            "name": "contraindication_tool",
+            "description": "Assesses potential contraindications between planned activities and user's medications.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "medication_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of all current medications being taken by the user."
+                    },
+                    "planned_activities": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of planned exercises or dietary changes."
+                    }
+                },
+                "required": [
+                    "medication_list",
+                    "planned_activities"
+                ]
+            }
+        },
+        {
+            "name": "calendar_sync_tool",
+            "description": "Synchronizes the user's health and wellness plans with their personal calendar to facilitate adherence.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "exercise_schedule": {
+                        "type": "object",
+                        "properties": {
+                            "days_of_week": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "description": "Days of the week the exercises are scheduled."
+                            },
+                            "time_slots": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "description": "Available time slots for each exercise day."
+                            }
+                        },
+                        "required": [
+                            "days_of_week",
+                            "time_slots"
+                        ]
+                    },
+                    "meal_plan_slots": {
+                        "type": "object",
+                        "properties": {
+                            "meal_times": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "description": "Preferred times for meals."
+                            }
+                        }
+                    }
+                },
+                "required": [
+                    "exercise_schedule"
+                ]
+            }
+        },
+        {
+            "name": "telehealth_tool",
+            "description": "Enables a remote health consultation with a certified healthcare professional.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "consultation_type": {
+                        "type": "string",
+                        "description": "The type of consultation required (video, phone)."
+                    },
+                    "availability": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "User's availability for the consultation."
+                    },
+                    "preferences": {
+                        "type": "object",
+                        "properties": {
+                            "preferred_doctor": {
+                                "type": "string",
+                                "description": "Name of the preferred doctor, if any."
+                            }
+                        }
+                    }
+                },
+                "required": [
+                    "consultation_type",
+                    "availability"
+                ]
+            }
+        },
+        {
+            "name": "progress_tracking_tool",
+            "description": "Tracks the progress of the user's health goals and provides periodic updates.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "metrics": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Health metrics to track (e.g., weight, blood pressure)."
+                    },
+                    "update_frequency": {
+                        "type": "string",
+                        "description": "How often updates are provided (e.g., daily, weekly)."
+                    }
+                },
+                "required": [
+                    "metrics",
+                    "update_frequency"
+                ]
+            }
+        },
+        {
+            "name": "data_analysis_tool",
+            "description": "Analyzes historical health data to identify trends and offer actionable insights.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "data_points": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        },
+                        "description": "List of quantitative data points for analysis."
+                    },
+                    "analysis_criteria": {
+                        "type": "string",
+                        "description": "Criteria to base the analysis on (e.g., improvement trend)."
+                    }
+                },
+                "required": [
+                    "data_points",
+                    "analysis_criteria"
+                ]
+            }
+        },
+        {
+            "name": "goal_definition_tool",
+            "description": "Helps set and define health and wellness goals based on analysis and user input.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "goal_type": {
+                        "type": "string",
+                        "description": "Type of health goal (e.g., weight loss, increased stamina)."
+                    },
+                    "time_frame": {
+                        "type": "string",
+                        "description": "The time frame for achieving the goal (e.g., 3 months)."
+                    },
+                    "motivation_factors": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "User-defined motivation factors for the goal."
+                    }
+                },
+                "required": [
+                    "goal_type",
+                    "time_frame"
+                ]
+            }
+        },
+        {
+            "name": "exercise_optimization_tool",
+            "description": "Optimizes the suggested exercise plan for maximum benefit and efficiency.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "current_routine": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of current exercises in the user's routine."
+                    },
+                    "optimization_criteria": {
+                        "type": "string",
+                        "description": "Criteria for optimizing exercises (e.g., time-efficiency)."
+                    }
+                },
+                "required": [
+                    "current_routine",
+                    "optimization_criteria"
+                ]
+            }
+        }
+    ]
+}

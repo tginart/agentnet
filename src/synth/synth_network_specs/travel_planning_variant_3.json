@@ -1,0 +1,252 @@
+{
+    "task": "Plan a luxury honeymoon trip to Japan. The plan should include: 1. First-class flight bookings. 2. A romantic itinerary including traditional tea ceremonies and private hot springs. 3. Luxury hotel reservations and Michelin-starred dining experiences. 4. Language support with a translation service. 5. Total budget limit of $15,000.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "luxury_travel_agent",
+                "flight_booking_agent",
+                "premium_flight_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "luxury_travel_agent",
+                "luxury_itinerary_agent",
+                "romance_activity_agent",
+                "romance_activity_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "luxury_travel_agent",
+                "dining_experience_agent",
+                "michelin_explorer_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "hospitality_agent",
+                "luxury_hotel_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "communication_agent",
+                "language_support_agent",
+                "translation_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "luxury_travel_agent",
+                "concierge_service_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "budget_controller_agent",
+                "expense_analysis_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The principal agent that interacts with the user to organize the luxurious honeymoon trip.",
+            "tools": [
+                "luxury_travel_agent",
+                "hospitality_agent",
+                "communication_agent",
+                "budget_controller_agent"
+            ]
+        },
+        {
+            "name": "luxury_travel_agent",
+            "role": "Specializes in coordinating high-end travel experiences and itineraries.",
+            "tools": [
+                "flight_booking_agent",
+                "luxury_itinerary_agent",
+                "dining_experience_agent",
+                "concierge_service_agent"
+            ]
+        },
+        {
+            "name": "flight_booking_agent",
+            "role": "Handles first-class flight reservations to Japan.",
+            "tools": [
+                "premium_flight_tool"
+            ]
+        },
+        {
+            "name": "luxury_itinerary_agent",
+            "role": "Crafts romantic travel itineraries showcasing unique cultural experiences.",
+            "tools": [
+                "romance_activity_agent"
+            ]
+        },
+        {
+            "name": "romance_activity_agent",
+            "role": "Plans specific romantic activities tailored to the couple's preferences.",
+            "tools": [
+                "romance_activity_tool"
+            ]
+        },
+        {
+            "name": "dining_experience_agent",
+            "role": "Organizes dining experiences at Michelin-starred restaurants.",
+            "tools": [
+                "michelin_explorer_tool"
+            ]
+        },
+        {
+            "name": "hospitality_agent",
+            "role": "Arranges stays at luxury hotels providing premium services.",
+            "tools": [
+                "luxury_hotel_agent"
+            ]
+        },
+        {
+            "name": "luxury_hotel_agent",
+            "role": "Responsible for booking high-end accommodation options.",
+            "tools": []
+        },
+        {
+            "name": "communication_agent",
+            "role": "Facilitates communication support, ensuring language barriers are removed.",
+            "tools": [
+                "language_support_agent"
+            ]
+        },
+        {
+            "name": "language_support_agent",
+            "role": "Provides translation services and language guidance.",
+            "tools": [
+                "translation_tool"
+            ]
+        },
+        {
+            "name": "budget_controller_agent",
+            "role": "Manages and verifies the budget does not exceed the set limit.",
+            "tools": [
+                "expense_analysis_tool"
+            ]
+        },
+        {
+            "name": "concierge_service_agent",
+            "role": "Offers additional services like booking private transport and arranging event tickets.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "premium_flight_tool",
+            "description": "Searches and books first-class flights, providing details such as availability and amenities.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "departure_airport": {
+                        "type": "string",
+                        "description": "The airport to depart from."
+                    },
+                    "arrival_airport": {
+                        "type": "string",
+                        "description": "The destination airport in Japan."
+                    },
+                    "travel_dates": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Preferred dates of travel."
+                    }
+                }
+            }
+        },
+        {
+            "name": "romance_activity_tool",
+            "description": "Plans romantic activities such as tea ceremonies and private hot springs based on user's preferences.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "interest_tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Tags indicating types of romantic experiences sought."
+                    },
+                    "region": {
+                        "type": "string",
+                        "description": "Specific area or region in Japan for activities."
+                    }
+                }
+            }
+        },
+        {
+            "name": "michelin_explorer_tool",
+            "description": "Identifies and books Michelin-starred dining experiences.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "cuisine_type": {
+                        "type": "string",
+                        "description": "Type of cuisine preferred."
+                    },
+                    "location": {
+                        "type": "string",
+                        "description": "Desired location for dining."
+                    }
+                }
+            }
+        },
+        {
+            "name": "translation_tool",
+            "description": "Facilitates real-time translation to aid communication with locals.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "language_pair": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Languages for translation (e.g., English to Japanese)."
+                    }
+                }
+            }
+        },
+        {
+            "name": "expense_analysis_tool",
+            "description": "Analyzes costs and provides detailed breakdowns to ensure financial limits are respected.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "planned_activities": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of planned activities with cost estimates."
+                    },
+                    "accommodation_costs": {
+                        "type": "number",
+                        "description": "Total anticipated spending on hotels."
+                    },
+                    "flight_expenses": {
+                        "type": "number",
+                        "description": "Costs associated with flight bookings."
+                    }
+                }
+            }
+        }
+    ]
+}

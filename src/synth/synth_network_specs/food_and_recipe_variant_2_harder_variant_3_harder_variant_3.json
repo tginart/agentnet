@@ -1,0 +1,255 @@
+{
+    "task": "Organize an international VR symposium focusing on innovations in carbon capture technologies. This includes conducting VR demonstrations of cutting-edge carbon capture projects, establishing partnerships with industry leaders, coordinating international speakers and their presentations, implementing metrics for evaluating symposium impact, and developing a digital repository for symposium resources.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "vr_demonstration_planner_agent",
+                "project_showcase_coordinator_agent",
+                "interactive_vr_presentation_agent",
+                "vr_simulation_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "partnership_coordinator_agent",
+                "industry_leader_engagement_agent",
+                "business_agreement_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "speaker_manager_agent",
+                "international_speaker_coordinator_agent",
+                "presentation_schedule_manager_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "impact_evaluation_agent",
+                "metric_development_specialist_agent",
+                "impact_analysis_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "digital_repository_developer_agent",
+                "resource_curation_specialist_agent",
+                "document_storage_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "external_relations_agent",
+                "media_outreach_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Main coordinator for the VR symposium on carbon capture technologies, managing organizational activities and goals.",
+            "tools": [
+                "vr_demonstration_planner_agent",
+                "partnership_coordinator_agent",
+                "speaker_manager_agent",
+                "impact_evaluation_agent",
+                "digital_repository_developer_agent",
+                "external_relations_agent"
+            ]
+        },
+        {
+            "name": "vr_demonstration_planner_agent",
+            "role": "Plans and organizes VR demonstrations for showcasing carbon capture technologies.",
+            "tools": [
+                "project_showcase_coordinator_agent"
+            ]
+        },
+        {
+            "name": "project_showcase_coordinator_agent",
+            "role": "Coordinates the presentation of VR showcases and ensures interactivity.",
+            "tools": [
+                "interactive_vr_presentation_agent"
+            ]
+        },
+        {
+            "name": "interactive_vr_presentation_agent",
+            "role": "Designs interactive elements for VR presentations to engage the audience.",
+            "tools": [
+                "vr_simulation_tool"
+            ]
+        },
+        {
+            "name": "partnership_coordinator_agent",
+            "role": "Builds relationships with industry leaders and negotiates symposium partnerships.",
+            "tools": [
+                "industry_leader_engagement_agent"
+            ]
+        },
+        {
+            "name": "industry_leader_engagement_agent",
+            "role": "Engages potential industry partners for collaboration and sponsorship.",
+            "tools": [
+                "business_agreement_tool"
+            ]
+        },
+        {
+            "name": "speaker_manager_agent",
+            "role": "Manages speaker invitations and coordinates their presentation submissions.",
+            "tools": [
+                "international_speaker_coordinator_agent"
+            ]
+        },
+        {
+            "name": "international_speaker_coordinator_agent",
+            "role": "Handles logistics for international speakers, including scheduling and resource allocation.",
+            "tools": [
+                "presentation_schedule_manager_agent"
+            ]
+        },
+        {
+            "name": "presentation_schedule_manager_agent",
+            "role": "Schedules all presentations, ensuring avoidance of conflicts and maximizing audience engagement.",
+            "tools": [
+                "translation_services_agent"
+            ]
+        },
+        {
+            "name": "impact_evaluation_agent",
+            "role": "Develops and implements metrics to evaluate the symposium's impact and success.",
+            "tools": [
+                "metric_development_specialist_agent"
+            ]
+        },
+        {
+            "name": "metric_development_specialist_agent",
+            "role": "Specializes in creating effective metrics for impact evaluation.",
+            "tools": [
+                "impact_analysis_tool"
+            ]
+        },
+        {
+            "name": "digital_repository_developer_agent",
+            "role": "Creates and manages a digital repository for all symposium presentations and resources.",
+            "tools": [
+                "resource_curation_specialist_agent"
+            ]
+        },
+        {
+            "name": "resource_curation_specialist_agent",
+            "role": "Curates resources for the repository, ensuring data organization and accessibility.",
+            "tools": [
+                "document_storage_tool"
+            ]
+        },
+        {
+            "name": "external_relations_agent",
+            "role": "Handles communication with external media and PR for the symposium.",
+            "tools": [
+                "media_outreach_agent",
+                "public_sensor_agent",
+                "logistics_support_agent"
+            ]
+        },
+        {
+            "name": "media_outreach_agent",
+            "role": "Contacts and engages with media outlets to publicize the symposium.",
+            "tools": []
+        },
+        {
+            "name": "public_sensor_agent",
+            "role": "Analyzes public sentiment and feedback regarding the symposium coverage.",
+            "tools": []
+        },
+        {
+            "name": "translation_services_agent",
+            "role": "Provides translation services for international attendees, ensuring accessibility.",
+            "tools": []
+        },
+        {
+            "name": "logistics_support_agent",
+            "role": "Assists with logistical coordination and support throughout the symposium.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "vr_simulation_tool",
+            "description": "Creates VR simulations to dynamically present carbon capture projects.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "project_data": {
+                        "type": "string",
+                        "description": "Data and specifications of the carbon capture project."
+                    },
+                    "interaction_mode": {
+                        "type": "string",
+                        "description": "Mode of interaction for the VR demonstration."
+                    }
+                }
+            }
+        },
+        {
+            "name": "business_agreement_tool",
+            "description": "Facilitates drafting and formalizing agreements with industry partners.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "partner_name": {
+                        "type": "string",
+                        "description": "Name of the industry partner."
+                    },
+                    "agreement_terms": {
+                        "type": "string",
+                        "description": "Terms of the business agreement."
+                    }
+                }
+            }
+        },
+        {
+            "name": "impact_analysis_tool",
+            "description": "Analyzes symposium data to evaluate its impact and reach.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "metric_inputs": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of input metrics for analysis."
+                    },
+                    "analysis_type": {
+                        "type": "string",
+                        "description": "Type of analysis to perform, e.g., qualitative or quantitative."
+                    }
+                }
+            }
+        },
+        {
+            "name": "document_storage_tool",
+            "description": "Stores and organizes digital documents and presentations from the symposium.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "document_name": {
+                        "type": "string",
+                        "description": "Name of the document to be stored."
+                    },
+                    "access_level": {
+                        "type": "string",
+                        "description": "Access level of the document."
+                    }
+                }
+            }
+        }
+    ]
+}

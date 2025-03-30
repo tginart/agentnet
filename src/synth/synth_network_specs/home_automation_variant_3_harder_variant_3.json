@@ -1,0 +1,260 @@
+{
+    "task": "Develop an advanced smart farming automation system, enabling precise crop yield predictions, real-time pest monitoring, automated water management, strategic energy distribution, and AI-driven resource allocation with a focus on maximizing profits and sustainability.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "automation_control_agent",
+                "yield_prediction_agent",
+                "data_analytics_agent",
+                "predictive_algorithm_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "automation_control_agent",
+                "pest_monitoring_agent",
+                "sensor_network_agent",
+                "pest_identification_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "automation_control_agent",
+                "water_management_agent",
+                "irrigation_controller_agent",
+                "real_time_monitoring_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "automation_control_agent",
+                "energy_distribution_agent",
+                "grid_optimizer_agent",
+                "energy_allocation_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "resource_allocation_strategist",
+                "ai_resource_optimizer_agent",
+                "profitability_analysis_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "management_dashboard_agent",
+                "pest_monitoring_agent",
+                "sensor_network_agent",
+                "pest_identification_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "management_dashboard_agent",
+                "water_management_agent",
+                "irrigation_controller_agent",
+                "real_time_monitoring_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "management_dashboard_agent",
+                "energy_distribution_agent",
+                "grid_optimizer_agent",
+                "energy_allocation_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Primary agent that interfaces with the user to manage smart farming automation processes.",
+            "tools": [
+                "automation_control_agent",
+                "management_dashboard_agent"
+            ]
+        },
+        {
+            "name": "automation_control_agent",
+            "role": "Oversees and synchronizes all automated farming activities, ensuring coherent operation.",
+            "tools": [
+                "yield_prediction_agent",
+                "pest_monitoring_agent",
+                "water_management_agent",
+                "energy_distribution_agent",
+                "resource_allocation_strategist"
+            ]
+        },
+        {
+            "name": "yield_prediction_agent",
+            "role": "Utilizes advanced models to predict crop yields based on environmental and agricultural data.",
+            "tools": [
+                "data_analytics_agent"
+            ]
+        },
+        {
+            "name": "data_analytics_agent",
+            "role": "Processes and analyzes extensive datasets to support yield predictions and agricultural insights.",
+            "tools": [
+                "predictive_algorithm_tool"
+            ]
+        },
+        {
+            "name": "pest_monitoring_agent",
+            "role": "Monitors pest activity through a network of sensors, enabling proactive management.",
+            "tools": [
+                "sensor_network_agent"
+            ]
+        },
+        {
+            "name": "sensor_network_agent",
+            "role": "Deploys sensor networks across the farm to collect real-time data on pest presence and activity.",
+            "tools": [
+                "pest_identification_tool"
+            ]
+        },
+        {
+            "name": "water_management_agent",
+            "role": "Automates water usage across the farm, optimizing for efficiency and cost-effectiveness.",
+            "tools": [
+                "irrigation_controller_agent"
+            ]
+        },
+        {
+            "name": "irrigation_controller_agent",
+            "role": "Controls irrigation systems with precision to maintain optimal soil moisture levels.",
+            "tools": [
+                "real_time_monitoring_tool"
+            ]
+        },
+        {
+            "name": "energy_distribution_agent",
+            "role": "Manages energy resources across the farm to ensure optimal use of renewable and non-renewable sources.",
+            "tools": [
+                "grid_optimizer_agent"
+            ]
+        },
+        {
+            "name": "grid_optimizer_agent",
+            "role": "Optimizes the distribution of energy on the farm, integrating various sources and storage options.",
+            "tools": [
+                "energy_allocation_tool"
+            ]
+        },
+        {
+            "name": "resource_allocation_strategist",
+            "role": "Strategically allocates farm resources to maximize ROI and sustainability.",
+            "tools": [
+                "ai_resource_optimizer_agent"
+            ]
+        },
+        {
+            "name": "ai_resource_optimizer_agent",
+            "role": "Uses AI to optimize allocation of farm resources with a focus on profit maximization.",
+            "tools": [
+                "profitability_analysis_tool"
+            ]
+        },
+        {
+            "name": "management_dashboard_agent",
+            "role": "Provides a centralized platform for monitoring and managing all farm activities.",
+            "tools": [
+                "pest_monitoring_agent",
+                "water_management_agent",
+                "energy_distribution_agent"
+            ]
+        },
+        {
+            "name": "predictive_algorithm_tool",
+            "role": "Implements advanced algorithms to forecast agricultural outcomes.",
+            "tools": []
+        },
+        {
+            "name": "pest_identification_tool",
+            "role": "Identifies pest species and suggests mitigation measures.",
+            "tools": []
+        },
+        {
+            "name": "real_time_monitoring_tool",
+            "role": "Enables real-time tracking and monitoring of irrigation and soil conditions.",
+            "tools": []
+        },
+        {
+            "name": "energy_allocation_tool",
+            "role": "Analyzes energy needs and distributes resources efficiently among farm systems.",
+            "tools": []
+        },
+        {
+            "name": "profitability_analysis_tool",
+            "role": "Analyzes profitability data to inform resource allocations and strategies.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "predictive_algorithm_tool",
+            "description": "Employs machine learning algorithms to predict future crop yields based on current data.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "crop_type": {
+                        "type": "string",
+                        "description": "The type of crop for which to predict yields."
+                    },
+                    "historical_data": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "season": {
+                                    "type": "string",
+                                    "description": "The growing season identifier."
+                                },
+                                "yield": {
+                                    "type": "number",
+                                    "description": "Recorded yield for that season."
+                                }
+                            }
+                        },
+                        "description": "Array of historical yield data."
+                    }
+                }
+            }
+        },
+        {
+            "name": "pest_identification_tool",
+            "description": "Analyzes sensor data to identify pest species and outbreaks.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "sensor_data": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "sensor_id": {
+                                    "type": "string",
+                                    "description": "Unique identifier for the sensor collecting data."
+                                },
+                                "timestamp": {
+                                    "type": "string",
+                                    "description": "Time at which readings were taken."
+                                },
+                                "pest_signs": {
+                                    "type": "string",
+                                    "description": "Observed signs indicative of pest activity."
+                                }
+                            }
+                        },
+                        "description": "Array of data points from pest monitoring sensors."
+                    }
+                }
+            }
+        }
+    ]
+}

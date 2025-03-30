@@ -1,0 +1,264 @@
+{
+    "task": "Plan and execute an elaborate virtual family reunion event with the following criteria: 1. Create a theme-based event with digital decorations and virtual interactions. 2. Organize a multi-day itinerary including virtual games, workshops, and cooking sessions. 3. Set up a virtual photo booth with sharing capabilities. 4. Manage guest invitations and RSVPs with automatic timezone adjustments. 5. Arrange for digital gift giveaways to attendees, ensuring diverse options. 6. Monitor live participation metrics and feedback. 7. Ensure the total budget remains within $5,000.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "theme_design_agent",
+                "digital_decoration_agent",
+                "interaction_agent",
+                "virtual_collaboration_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "itinerary_planning_agent",
+                "virtual_activities_agent",
+                "game_design_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "virtual_photo_agent",
+                "photo_sharing_agent",
+                "social_media_integration_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "invitation_management_agent",
+                "rsvp_handling_agent",
+                "timezone_adjustment_agent",
+                "email_alerts_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "gift_distribution_agent",
+                "digital_gift_catalogue_agent",
+                "gift_selection_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "participant_monitoring_agent",
+                "feedback_collection_agent",
+                "data_analytics_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Top-level agent orchestrating the virtual family reunion planning, interacting with users, and delegating tasks to specialized agents.",
+            "tools": [
+                "theme_design_agent",
+                "itinerary_planning_agent",
+                "virtual_photo_agent",
+                "invitation_management_agent",
+                "gift_distribution_agent",
+                "participant_monitoring_agent"
+            ]
+        },
+        {
+            "name": "theme_design_agent",
+            "role": "Responsible for creating a cohesive theme for the virtual reunion, including digital decorations and interactive elements.",
+            "tools": [
+                "digital_decoration_agent",
+                "interaction_agent"
+            ]
+        },
+        {
+            "name": "itinerary_planning_agent",
+            "role": "Designs the multi-day itinerary for the event, ensuring a variety of engaging virtual activities.",
+            "tools": [
+                "virtual_activities_agent"
+            ]
+        },
+        {
+            "name": "virtual_photo_agent",
+            "role": "Sets up a virtual photo booth and manages photo sharing options with attendees.",
+            "tools": [
+                "photo_sharing_agent"
+            ]
+        },
+        {
+            "name": "invitation_management_agent",
+            "role": "Handles the creation and scheduling of virtual invitations, managing RSVPs and timezone adjustments.",
+            "tools": [
+                "rsvp_handling_agent"
+            ]
+        },
+        {
+            "name": "gift_distribution_agent",
+            "role": "Coordinates digital gift giveaways, ensuring a personalized experience for each attendee.",
+            "tools": [
+                "digital_gift_catalogue_agent"
+            ]
+        },
+        {
+            "name": "participant_monitoring_agent",
+            "role": "Monitors live participation, gathers feedback, and analyzes data to enhance the virtual experience.",
+            "tools": [
+                "feedback_collection_agent"
+            ]
+        },
+        {
+            "name": "digital_decoration_agent",
+            "role": "Creates and implements digital decorations suited to the event\u2019s theme, enhancing visual appeal.",
+            "tools": []
+        },
+        {
+            "name": "interaction_agent",
+            "role": "Designs interactive elements that encourage engagement during the virtual event sessions.",
+            "tools": [
+                "virtual_collaboration_agent"
+            ]
+        },
+        {
+            "name": "virtual_collaboration_agent",
+            "role": "Facilitates synchronous and asynchronous interactions between participants using virtual platforms.",
+            "tools": []
+        },
+        {
+            "name": "virtual_activities_agent",
+            "role": "Curates virtual activities such as games and workshops tailored to diverse age groups.",
+            "tools": [
+                "game_design_agent"
+            ]
+        },
+        {
+            "name": "game_design_agent",
+            "role": "Develops custom virtual games that participants can enjoy during the event.",
+            "tools": []
+        },
+        {
+            "name": "photo_sharing_agent",
+            "role": "Enables attendees to share photos taken at the virtual photo booth across multiple platforms.",
+            "tools": [
+                "social_media_integration_agent"
+            ]
+        },
+        {
+            "name": "social_media_integration_agent",
+            "role": "Integrates photo sharing capabilities with popular social media platforms to boost event engagement.",
+            "tools": []
+        },
+        {
+            "name": "rsvp_handling_agent",
+            "role": "Manages RSVPs, confirming attendee participation and updating status in real-time.",
+            "tools": [
+                "timezone_adjustment_agent"
+            ]
+        },
+        {
+            "name": "timezone_adjustment_agent",
+            "role": "Automatically adjusts event timings in invitations to match recipients' local timezones.",
+            "tools": [
+                "email_alerts_agent"
+            ]
+        },
+        {
+            "name": "email_alerts_agent",
+            "role": "Sends alerts and reminders to participants ahead of event activities.",
+            "tools": []
+        },
+        {
+            "name": "digital_gift_catalogue_agent",
+            "role": "Maintains a catalogue of suitable digital gifts and manages distribution.",
+            "tools": [
+                "gift_selection_agent"
+            ]
+        },
+        {
+            "name": "gift_selection_agent",
+            "role": "Assists in selecting the appropriate digital gifts for attendees based on preferences.",
+            "tools": []
+        },
+        {
+            "name": "feedback_collection_agent",
+            "role": "Gathers feedback from attendees about their event experience to improve future events.",
+            "tools": [
+                "data_analytics_agent"
+            ]
+        },
+        {
+            "name": "data_analytics_agent",
+            "role": "Analyzes feedback and participation data to provide actionable insights.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "virtual_platform_tool",
+            "description": "Supports the virtual hosting of events, including breakout rooms, games, and live streams.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "event_name": {
+                        "type": "string",
+                        "description": "The name of the virtual event."
+                    },
+                    "participant_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "participant_name": {
+                                    "type": "string",
+                                    "description": "Name of the participant."
+                                },
+                                "timezone": {
+                                    "type": "string",
+                                    "description": "Timezone of the participant."
+                                }
+                            }
+                        },
+                        "description": "List of participants registered for the event."
+                    }
+                }
+            }
+        },
+        {
+            "name": "gift_distribution_tool",
+            "description": "Automates the distribution of digital gifts to all event participants.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "gift_list": {
+                        "type": "array",
+                        "description": "A list of gifts selected for distribution.",
+                        "items": {
+                            "type": "string",
+                            "description": "Identifier for the digital gift."
+                        }
+                    },
+                    "recipients": {
+                        "type": "array",
+                        "description": "List of event participants to receive gifts.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "participant_name": {
+                                    "type": "string",
+                                    "description": "Name of the participant."
+                                },
+                                "contact": {
+                                    "type": "string",
+                                    "description": "Email or other digital contact means."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

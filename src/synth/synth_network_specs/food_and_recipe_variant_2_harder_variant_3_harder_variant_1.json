@@ -1,0 +1,243 @@
+{
+    "task": "Organize and execute a fully immersive virtual reality (VR) conference focused on advancements in sustainable architecture. This includes developing comprehensive VR tours of eco-friendly buildings, implementing carbon offset solutions for digital energy consumption, arranging keynote speeches from influential architects, coordinating international time-zone schedules, and creating a post-conference interactive feedback system.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "vr_experience_coordinator_agent",
+                "architectural_design_agent",
+                "eco_building_vr_tour_specialist_agent",
+                "3d_modeling_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "sustainability_strategy_agent",
+                "carbon_offset_manager_agent",
+                "renewable_energy_calculator_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "speaker_management_agent",
+                "keynote_speaker_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "time_zone_coordinator_agent",
+                "global_schedule_optimization_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "feedback_system_developer_agent",
+                "interactive_feedback_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "vr_technology_specialist_agent",
+                "immersive_hardware_setup_agent",
+                "vr_hardware_specification_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Top-level coordinator orchestrating the comprehensive virtual reality conference focusing on sustainable architecture.",
+            "tools": [
+                "vr_experience_coordinator_agent",
+                "sustainability_strategy_agent",
+                "speaker_management_agent",
+                "time_zone_coordinator_agent",
+                "feedback_system_developer_agent",
+                "vr_technology_specialist_agent"
+            ]
+        },
+        {
+            "name": "vr_experience_coordinator_agent",
+            "role": "Coordinates the creation and execution of immersive VR experiences showcasing sustainable architecture.",
+            "tools": [
+                "architectural_design_agent"
+            ]
+        },
+        {
+            "name": "architectural_design_agent",
+            "role": "Provides expert input on architectural designs suitable for VR modeling, focusing on eco-friendly structures.",
+            "tools": [
+                "eco_building_vr_tour_specialist_agent"
+            ]
+        },
+        {
+            "name": "eco_building_vr_tour_specialist_agent",
+            "role": "Specializes in converting architectural designs into VR tours, emphasizing eco-friendly and sustainable practices.",
+            "tools": [
+                "3d_modeling_agent"
+            ]
+        },
+        {
+            "name": "3d_modeling_agent",
+            "role": "Creates detailed 3D models for VR tours based on architectural designs.",
+            "tools": []
+        },
+        {
+            "name": "sustainability_strategy_agent",
+            "role": "Develops strategies to ensure the conference minimizes digital carbon footprint, applying innovative carbon offset solutions.",
+            "tools": [
+                "carbon_offset_manager_agent"
+            ]
+        },
+        {
+            "name": "carbon_offset_manager_agent",
+            "role": "Manages the implementation of carbon offset solutions for the virtual conference platform.",
+            "tools": [
+                "renewable_energy_calculator_agent"
+            ]
+        },
+        {
+            "name": "renewable_energy_calculator_agent",
+            "role": "Calculates potential renewable energy savings and offset capabilities for the conference.",
+            "tools": []
+        },
+        {
+            "name": "speaker_management_agent",
+            "role": "Coordinates invitations and scheduling for keynote speakers at the conference.",
+            "tools": [
+                "keynote_speaker_agent"
+            ]
+        },
+        {
+            "name": "keynote_speaker_agent",
+            "role": "Manages communications and arrangements with booked keynote speakers.",
+            "tools": []
+        },
+        {
+            "name": "time_zone_coordinator_agent",
+            "role": "Ensures conference schedules are optimized across different international time zones.",
+            "tools": [
+                "global_schedule_optimization_agent"
+            ]
+        },
+        {
+            "name": "global_schedule_optimization_agent",
+            "role": "Specializes in creating optimized schedules accommodating global participants.",
+            "tools": []
+        },
+        {
+            "name": "feedback_system_developer_agent",
+            "role": "Builds and maintains the interactive post-conference feedback system to gather participant insights.",
+            "tools": [
+                "interactive_feedback_agent"
+            ]
+        },
+        {
+            "name": "interactive_feedback_agent",
+            "role": "Facilitates the collection of attendee feedback in an interactive manner post-conference.",
+            "tools": []
+        },
+        {
+            "name": "vr_technology_specialist_agent",
+            "role": "Manages VR technology requirements and troubleshooting for the conference.",
+            "tools": [
+                "immersive_hardware_setup_agent"
+            ]
+        },
+        {
+            "name": "immersive_hardware_setup_agent",
+            "role": "Handles setup and integration of necessary VR hardware for an immersive conference experience.",
+            "tools": [
+                "vr_hardware_specification_agent"
+            ]
+        },
+        {
+            "name": "vr_hardware_specification_agent",
+            "role": "Provides specifications and recommendations for VR hardware setups.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "3d_modeling_tool",
+            "description": "Creates 3D models for VR tours.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "design_files": {
+                        "type": "string",
+                        "description": "Path to the architectural design files."
+                    },
+                    "output_format": {
+                        "type": "string",
+                        "description": "Desired output format for the 3D models."
+                    }
+                }
+            }
+        },
+        {
+            "name": "renewable_energy_calculator_tool",
+            "description": "Calculates renewable energy savings.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "conference_duration": {
+                        "type": "number",
+                        "description": "Total duration of the conference in hours."
+                    },
+                    "average_bandwidth": {
+                        "type": "number",
+                        "description": "Average bandwidth used during the conference."
+                    }
+                }
+            }
+        },
+        {
+            "name": "interactive_feedback_tool",
+            "description": "Collects feedback in an interactive manner.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "feedback_methods": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Methods for feedback collection."
+                    },
+                    "language_support": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Languages supported for feedback."
+                    }
+                }
+            }
+        },
+        {
+            "name": "vr_hardware_specification_tool",
+            "description": "Provides VR hardware specifications.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "hardware_type": {
+                        "type": "string",
+                        "description": "Type of VR hardware required."
+                    },
+                    "compatibility_check": {
+                        "type": "boolean",
+                        "description": "Flag for compatibility check."
+                    }
+                }
+            }
+        }
+    ]
+}

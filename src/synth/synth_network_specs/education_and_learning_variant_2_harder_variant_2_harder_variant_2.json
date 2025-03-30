@@ -1,0 +1,252 @@
+{
+    "task": "Design and implement an autonomous multi-modal transportation network for a metropolitan area, integrating self-driving fleets, shared electric bicycles, and smart payment systems, while ensuring data-driven optimization for route efficiency, user safety, and legal compliance across different jurisdictions.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "transportation_network_agent",
+                "fleet_management_agent",
+                "autonomous_vehicle_control_agent",
+                "system_diagnostics_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "transportation_network_agent",
+                "shared_bicycle_system_agent",
+                "geofencing_control_agent",
+                "user_feedback_collection_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "payment_system_integration_agent",
+                "secure_transaction_agent",
+                "fraud_detection_agent",
+                "compliance_monitoring_agent",
+                "legal_audit_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "data_analytics_agent",
+                "route_optimization_agent",
+                "real_time_traffic_analysis_agent",
+                "predictive_maintenance_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "user_interface_agent",
+                "mobile_application_development_agent",
+                "cross_platform_support_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "regulatory_compliance_agent",
+                "jurisdictional_legal_analysis_agent",
+                "standard_conformance_check_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Primary interface with the user; organizes the integration and function of transportation framework components.",
+            "tools": [
+                "transportation_network_agent",
+                "payment_system_integration_agent",
+                "data_analytics_agent",
+                "user_interface_agent",
+                "regulatory_compliance_agent"
+            ]
+        },
+        {
+            "name": "transportation_network_agent",
+            "role": "Develops and oversees the integrated transportation network, coordinating autonomous vehicles and bicycles.",
+            "tools": [
+                "fleet_management_agent",
+                "shared_bicycle_system_agent"
+            ]
+        },
+        {
+            "name": "fleet_management_agent",
+            "role": "Manages autonomous self-driving fleets, ensuring route efficiency and safety.",
+            "tools": [
+                "autonomous_vehicle_control_agent"
+            ]
+        },
+        {
+            "name": "autonomous_vehicle_control_agent",
+            "role": "Controls and optimizes the operation of autonomous vehicles within the network.",
+            "tools": [
+                "system_diagnostics_tool"
+            ]
+        },
+        {
+            "name": "shared_bicycle_system_agent",
+            "role": "Oversees operation and user management of shared electric bicycle systems.",
+            "tools": [
+                "geofencing_control_agent",
+                "user_feedback_collection_agent"
+            ]
+        },
+        {
+            "name": "geofencing_control_agent",
+            "role": "Implements geofencing technology to manage bicycle usage zones.",
+            "tools": []
+        },
+        {
+            "name": "user_feedback_collection_agent",
+            "role": "Collects and processes user feedback to improve system usage and satisfaction.",
+            "tools": []
+        },
+        {
+            "name": "payment_system_integration_agent",
+            "role": "Ensures seamless integration and operation of smart payment systems.",
+            "tools": [
+                "secure_transaction_agent"
+            ]
+        },
+        {
+            "name": "secure_transaction_agent",
+            "role": "Manages secure and efficient financial transactions in payment systems.",
+            "tools": [
+                "fraud_detection_agent"
+            ]
+        },
+        {
+            "name": "fraud_detection_agent",
+            "role": "Monitors transaction patterns to detect and prevent fraudulent activities.",
+            "tools": [
+                "compliance_monitoring_agent"
+            ]
+        },
+        {
+            "name": "compliance_monitoring_agent",
+            "role": "Tracks system compliance with financial regulations and standards.",
+            "tools": [
+                "legal_audit_tool"
+            ]
+        },
+        {
+            "name": "data_analytics_agent",
+            "role": "Analyzes data from the transportation network to enhance operational efficiency.",
+            "tools": [
+                "route_optimization_agent"
+            ]
+        },
+        {
+            "name": "route_optimization_agent",
+            "role": "Calculates optimal routes to improve transport efficiency and reduce congestion.",
+            "tools": [
+                "real_time_traffic_analysis_agent"
+            ]
+        },
+        {
+            "name": "real_time_traffic_analysis_agent",
+            "role": "Provides up-to-date traffic analysis for route optimization and decision making.",
+            "tools": [
+                "predictive_maintenance_agent"
+            ]
+        },
+        {
+            "name": "predictive_maintenance_agent",
+            "role": "Predicts and schedules maintenance for vehicles based on usage data.",
+            "tools": []
+        },
+        {
+            "name": "user_interface_agent",
+            "role": "Designs and enhances user-facing applications for easy interaction with the network.",
+            "tools": [
+                "mobile_application_development_agent"
+            ]
+        },
+        {
+            "name": "mobile_application_development_agent",
+            "role": "Develops user-friendly mobile applications across multiple platforms.",
+            "tools": [
+                "cross_platform_support_agent"
+            ]
+        },
+        {
+            "name": "cross_platform_support_agent",
+            "role": "Ensures compatibility and consistent performance across different device platforms.",
+            "tools": []
+        },
+        {
+            "name": "regulatory_compliance_agent",
+            "role": "Monitors and ensures adherence to legal and regulatory requirements across jurisdictions.",
+            "tools": [
+                "jurisdictional_legal_analysis_agent"
+            ]
+        },
+        {
+            "name": "jurisdictional_legal_analysis_agent",
+            "role": "Analyzes legal differences across regions to maintain network compliance.",
+            "tools": [
+                "standard_conformance_check_agent"
+            ]
+        },
+        {
+            "name": "standard_conformance_check_agent",
+            "role": "Verifies that network operations conform to existing legal standards.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "system_diagnostics_tool",
+            "description": "Analyzes and reports the health status of autonomous vehicles.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "vehicle_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the vehicle under inspection."
+                    },
+                    "diagnostic_level": {
+                        "type": "string",
+                        "description": "Specifies the depth of diagnostics to be performed, e.g., 'basic', 'detailed'."
+                    },
+                    "include_historical_data": {
+                        "type": "boolean",
+                        "description": "Whether to include historical usage data in diagnostics."
+                    }
+                }
+            }
+        },
+        {
+            "name": "legal_audit_tool",
+            "description": "Conducts audits for compliance with transportation-related legal frameworks.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "region": {
+                        "type": "string",
+                        "description": "The legal jurisdiction the audit is to be conducted in."
+                    },
+                    "audit_scope": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Specific areas of compliance to audit against."
+                    },
+                    "include_recent_legislation": {
+                        "type": "boolean",
+                        "description": "Whether to factor in the most recent legislative changes."
+                    }
+                }
+            }
+        }
+    ]
+}

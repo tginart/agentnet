@@ -1,0 +1,200 @@
+{
+    "task": "Coordinate the remote setup of a laboratory research project involving international collaborators, ensuring compliance with diverse international regulations, the integration of IoT devices for data collection, and virtual team orientation with advanced language translation and interpretation tools.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "project_management_agent",
+                "collaborator_coordination_agent",
+                "compliance_international_agent",
+                "regulation_database_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "project_management_agent",
+                "iot_integration_agent",
+                "device_provisioning_agent",
+                "data_security_agent",
+                "network_configuration_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "language_services_agent",
+                "advanced_translation_agent",
+                "virtual_conference_agent",
+                "sound_system_management_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "project_management_agent",
+                "logistics_agent",
+                "shipment_tracking_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "language_services_agent",
+                "interpretation_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Central orchestrator interfacing with the user to manage and execute tasks through specialized agents.",
+            "tools": [
+                "project_management_agent",
+                "language_services_agent",
+                "collaborator_coordination_agent"
+            ]
+        },
+        {
+            "name": "project_management_agent",
+            "role": "Oversees the research project setup, coordinating logistics, task assignments, and ensuring overall progress.",
+            "tools": [
+                "iot_integration_agent",
+                "logistics_agent",
+                "compliance_international_agent"
+            ]
+        },
+        {
+            "name": "language_services_agent",
+            "role": "Facilitates communication in multiple languages through specialized translation and interpretation services.",
+            "tools": [
+                "advanced_translation_agent",
+                "interpretation_agent"
+            ]
+        },
+        {
+            "name": "collaborator_coordination_agent",
+            "role": "Manages relationship and coordination with international collaborators, ensuring smooth integration and communication.",
+            "tools": [
+                "virtual_conference_agent",
+                "compliance_international_agent"
+            ]
+        },
+        {
+            "name": "iot_integration_agent",
+            "role": "Integrates IoT devices for data collection, handling their provisioning, configuration, and security.",
+            "tools": [
+                "device_provisioning_agent",
+                "data_security_agent"
+            ]
+        },
+        {
+            "name": "interpretation_agent",
+            "role": "Provides real-time language interpretation services for virtual meetings and collaborations.",
+            "tools": []
+        },
+        {
+            "name": "advanced_translation_agent",
+            "role": "Specializes in translating complex scholarly articles and technical documents into multiple languages.",
+            "tools": []
+        },
+        {
+            "name": "virtual_conference_agent",
+            "role": "Sets up and manages virtual conferences, ensuring seamless communication among all participants.",
+            "tools": [
+                "sound_system_management_agent"
+            ]
+        },
+        {
+            "name": "compliance_international_agent",
+            "role": "Ensures that the project complies with various international regulations across different jurisdictions.",
+            "tools": [
+                "regulation_database_agent"
+            ]
+        },
+        {
+            "name": "regulation_database_agent",
+            "role": "Consults a comprehensive database of international regulations relevant to scientific research and collaborations.",
+            "tools": []
+        },
+        {
+            "name": "device_provisioning_agent",
+            "role": "Handles the ordering, configuration, and delivery of IoT devices necessary for the research project.",
+            "tools": [
+                "network_configuration_agent"
+            ]
+        },
+        {
+            "name": "data_security_agent",
+            "role": "Ensures data collected from IoT devices is secure and complies with data protection standards.",
+            "tools": []
+        },
+        {
+            "name": "logistics_agent",
+            "role": "Manages the physical and digital logistics needed for project setup, including equipment shipment.",
+            "tools": [
+                "shipment_tracking_tool"
+            ]
+        },
+        {
+            "name": "sound_system_management_agent",
+            "role": "Ensures high-quality sound management for virtual conferences, addressing any technical issues.",
+            "tools": []
+        },
+        {
+            "name": "network_configuration_agent",
+            "role": "Configures secure network access for IoT devices, ensuring connectivity and compliance with security protocols.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "shipment_tracking_tool",
+            "description": "Tracks the status and location of equipment shipments for the project, providing real-time updates.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "shipment_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the shipment."
+                    },
+                    "destination_country": {
+                        "type": "string",
+                        "description": "Country where the shipment is headed."
+                    }
+                }
+            }
+        },
+        {
+            "name": "video_call_setup_tool",
+            "description": "Facilitates the setup of secure video calls with advanced language support options.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "conference_id": {
+                        "type": "string",
+                        "description": "The unique identifier for the video conference session."
+                    },
+                    "participants": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of participant identifiers."
+                    },
+                    "language_support": {
+                        "type": "boolean",
+                        "description": "Whether language support is required for the call."
+                    },
+                    "scheduled_time": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Scheduled time for the video call."
+                    }
+                }
+            }
+        }
+    ]
+}

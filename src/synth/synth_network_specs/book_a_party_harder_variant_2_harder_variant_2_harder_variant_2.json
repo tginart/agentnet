@@ -1,0 +1,240 @@
+{
+    "task": "Create a digital self-care and mindfulness retreat series that integrates AI-driven personalized wellness routines, virtual meditation spaces, sustainable lifestyle workshops, and AI-powered adaptive relaxation techniques. The program must include developing interactive storylines, managing regional cuisine-based cooking classes, facilitating expert talks on sustainable habits, structuring a virtual community platform for participants, and generating personalized wellness reports. Additionally, ensure global distribution of eco-friendly wellness packages, monitor participant progress through adaptive AI, and incorporate multilingual support for global accessibility.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "program_development_agent",
+                "interactive_media_designer_agent",
+                "storyline_creation_agent",
+                "user_experience_research_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "culinary_event_management_agent",
+                "regional_cuisine_tutor_agent",
+                "interactive_cooking_experience_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "sustainability_education_agent",
+                "expert_talks_coordinator_agent",
+                "global_sustainability_expert_agent",
+                "webinar_organization_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "virtual_community_platform_agent",
+                "participant_engagement_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wellness_package_distribution_agent",
+                "sustainable_packaging_design_agent",
+                "global_shipping_coordinator_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "ai_adaptive_relaxation_agent",
+                "progress_monitoring_agent",
+                "real-time_feedback_system_agent"
+            ],
+            [
+                "human",
+                "client_agent",
+                "program_development_agent",
+                "virtual_space_designer_agent",
+                "meditation_environment_creator_agent"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that interacts with the user and delegates tasks to other agents.",
+            "tools": [
+                "program_development_agent",
+                "culinary_event_management_agent",
+                "sustainability_education_agent",
+                "virtual_community_platform_agent",
+                "wellness_package_distribution_agent",
+                "ai_adaptive_relaxation_agent"
+            ]
+        },
+        {
+            "name": "program_development_agent",
+            "role": "Leads the development of the retreat series, focusing on interactive content and immersive experiences.",
+            "tools": [
+                "interactive_media_designer_agent",
+                "virtual_space_designer_agent"
+            ]
+        },
+        {
+            "name": "interactive_media_designer_agent",
+            "role": "Designs interactive media content that enhances participant engagement.",
+            "tools": [
+                "storyline_creation_agent"
+            ]
+        },
+        {
+            "name": "storyline_creation_agent",
+            "role": "Crafts narratives that guide participants through the retreat experience.",
+            "tools": [
+                "user_experience_research_agent"
+            ]
+        },
+        {
+            "name": "user_experience_research_agent",
+            "role": "Conducts research to ensure the retreat aligns with participant needs and expectations.",
+            "tools": []
+        },
+        {
+            "name": "virtual_space_designer_agent",
+            "role": "Creates digital environments for meditation and relaxation sessions.",
+            "tools": [
+                "meditation_environment_creator_agent"
+            ]
+        },
+        {
+            "name": "meditation_environment_creator_agent",
+            "role": "Specializes in designing tranquil spaces that facilitate meditation practices.",
+            "tools": []
+        },
+        {
+            "name": "culinary_event_management_agent",
+            "role": "Organizes and manages regional cuisine-based cooking classes.",
+            "tools": [
+                "regional_cuisine_tutor_agent"
+            ]
+        },
+        {
+            "name": "regional_cuisine_tutor_agent",
+            "role": "Provides expertise on regional cuisines and leads interactive cooking sessions.",
+            "tools": [
+                "interactive_cooking_experience_agent"
+            ]
+        },
+        {
+            "name": "interactive_cooking_experience_agent",
+            "role": "Facilitates real-time cooking classes for a hands-on culinary experience.",
+            "tools": []
+        },
+        {
+            "name": "sustainability_education_agent",
+            "role": "Coordinates educational content on sustainable living practices.",
+            "tools": [
+                "expert_talks_coordinator_agent"
+            ]
+        },
+        {
+            "name": "expert_talks_coordinator_agent",
+            "role": "Organizes expert talks and seminars on sustainability.",
+            "tools": [
+                "global_sustainability_expert_agent"
+            ]
+        },
+        {
+            "name": "global_sustainability_expert_agent",
+            "role": "Collaborates with global experts to provide insights on sustainability.",
+            "tools": [
+                "webinar_organization_agent"
+            ]
+        },
+        {
+            "name": "webinar_organization_agent",
+            "role": "Handles logistics for online webinars and seminars.",
+            "tools": []
+        },
+        {
+            "name": "virtual_community_platform_agent",
+            "role": "Develops and maintains an online platform to facilitate community interaction.",
+            "tools": [
+                "participant_engagement_agent"
+            ]
+        },
+        {
+            "name": "participant_engagement_agent",
+            "role": "Promotes interaction and community building among participants.",
+            "tools": []
+        },
+        {
+            "name": "wellness_package_distribution_agent",
+            "role": "Responsible for the global distribution of eco-friendly wellness packages.",
+            "tools": [
+                "sustainable_packaging_design_agent",
+                "global_shipping_coordinator_agent"
+            ]
+        },
+        {
+            "name": "sustainable_packaging_design_agent",
+            "role": "Designs environmentally friendly packaging solutions.",
+            "tools": []
+        },
+        {
+            "name": "global_shipping_coordinator_agent",
+            "role": "Coordinates international shipping logistics.",
+            "tools": []
+        },
+        {
+            "name": "ai_adaptive_relaxation_agent",
+            "role": "Implements AI-driven adaptive relaxation techniques and personalizes routines.",
+            "tools": [
+                "progress_monitoring_agent"
+            ]
+        },
+        {
+            "name": "progress_monitoring_agent",
+            "role": "Tracks participant progress and adjusts programs based on real-time data.",
+            "tools": [
+                "real-time_feedback_system_agent"
+            ]
+        },
+        {
+            "name": "real-time_feedback_system_agent",
+            "role": "Collects real-time feedback for continuous improvement of the program.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "interactive_cooking_experience_agent",
+            "description": "Facilitates live, interactive cooking sessions with participants around the world.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "recipe_details": {
+                        "type": "string",
+                        "description": "Details of the recipes to be used during the session"
+                    },
+                    "participant_count": {
+                        "type": "number",
+                        "description": "Number of participants in the session"
+                    }
+                }
+            }
+        },
+        {
+            "name": "real-time_feedback_system_agent",
+            "description": "Collects and processes real-time feedback from participants to enhance retreat sessions.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "feedback_data": {
+                        "type": "array",
+                        "description": "Collected feedback from participants"
+                    },
+                    "adjustment_suggestions": {
+                        "type": "array",
+                        "description": "Automated suggestions for program adjustments"
+                    }
+                }
+            }
+        }
+    ]
+}

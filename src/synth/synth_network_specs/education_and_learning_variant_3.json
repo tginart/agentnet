@@ -1,0 +1,158 @@
+{
+    "task": "Organize a virtual hackathon for high school students focusing on AI and robotics, incorporating peer mentoring, expert webinars, and project evaluations.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "hackathon_organizer_agent",
+                "webinar_coordinator_agent",
+                "webinar_management_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "project_mentor_agent",
+                "peer_mentoring_agent",
+                "project_evaluation_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "logistics_agent",
+                "schedule_manager_agent",
+                "resource_allocator_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "hackathon_organizer_agent",
+                "sponsorship_agent",
+                "financial_management_agent",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Main interface that interacts with the human user to coordinate the virtual hackathon and manage related tasks.",
+            "tools": [
+                "hackathon_organizer_agent",
+                "project_mentor_agent",
+                "logistics_agent"
+            ]
+        },
+        {
+            "name": "hackathon_organizer_agent",
+            "role": "Responsible for the overall planning and execution of the hackathon, ensuring all parts work together smoothly.",
+            "tools": [
+                "webinar_coordinator_agent",
+                "sponsorship_agent",
+                "project_evaluation_agent"
+            ]
+        },
+        {
+            "name": "webinar_coordinator_agent",
+            "role": "Organizes and schedules expert webinars during the hackathon, connecting industry leaders with students.",
+            "tools": [
+                "webinar_management_tool"
+            ]
+        },
+        {
+            "name": "project_mentor_agent",
+            "role": "Connects students participating in the hackathon with appropriate mentors for their project topics.",
+            "tools": [
+                "peer_mentoring_agent",
+                "expert_mentoring_tool"
+            ]
+        },
+        {
+            "name": "peer_mentoring_agent",
+            "role": "Facilitates peer mentoring sessions where students can collaborate and learn from each other.",
+            "tools": []
+        },
+        {
+            "name": "project_evaluation_agent",
+            "role": "Evaluates the submissions from the hackathon participants and provides structured feedback and scores.",
+            "tools": []
+        },
+        {
+            "name": "logistics_agent",
+            "role": "Ensures logistical details such as scheduling, resources, and technology are in place for the hackathon.",
+            "tools": [
+                "schedule_manager_agent",
+                "resource_allocator_agent"
+            ]
+        },
+        {
+            "name": "schedule_manager_agent",
+            "role": "Plans the detailed schedule of the hackathon, accommodating all events, sessions, and breaks.",
+            "tools": []
+        },
+        {
+            "name": "resource_allocator_agent",
+            "role": "Allocates digital resources and tools necessary for the hackathon participants and organizers.",
+            "tools": []
+        },
+        {
+            "name": "sponsorship_agent",
+            "role": "Secures partnerships and sponsorships to support the hackathon financially and with resources.",
+            "tools": [
+                "financial_management_agent"
+            ]
+        },
+        {
+            "name": "financial_management_agent",
+            "role": "Manages the financial aspects of the hackathon, including budget allocation and expense tracking.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "expert_mentoring_tool",
+            "description": "Facilitates connections between hackathon participants and industry experts for mentorship and guidance.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "participant_id": {
+                        "type": "string",
+                        "description": "ID of the participant seeking expert mentoring."
+                    },
+                    "expertise_area": {
+                        "type": "string",
+                        "description": "The area of expertise required for mentoring."
+                    },
+                    "session_length": {
+                        "type": "number",
+                        "description": "Duration of the mentoring session in minutes."
+                    }
+                }
+            }
+        },
+        {
+            "name": "webinar_management_tool",
+            "description": "Organizes and manages webinar sessions, handling registrations and notifications.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "webinar_title": {
+                        "type": "string",
+                        "description": "The title of the webinar session."
+                    },
+                    "speaker_name": {
+                        "type": "string",
+                        "description": "Name of the speaker hosting the webinar."
+                    },
+                    "time_slot": {
+                        "type": "string",
+                        "description": "Scheduled time for the webinar session."
+                    }
+                }
+            }
+        }
+    ]
+}

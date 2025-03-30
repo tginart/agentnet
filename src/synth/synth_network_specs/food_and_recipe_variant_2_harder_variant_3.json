@@ -1,0 +1,262 @@
+{
+    "task": "Develop and manage a carbon-neutral arts and crafts fair. Include planning for eco-friendly exhibit materials, renewable energy sources for power needs, electric shuttle services for visitors, sustainable artist residencies, and efficient waste recycling stations.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "fair_planner_agent",
+                "eco_exhibit_specialist_agent",
+                "sustainable_material_specialist_agent",
+                "renewable_resources_database_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "energy_management_agent",
+                "renewable_energy_source_agent",
+                "wind_energy_consultant_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "transportation_management_agent",
+                "electric_shuttle_service_agent",
+                "charging_infrastructure_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "resident_artist_coordinator_agent",
+                "sustainable_accommodation_advisor_agent",
+                "green_lodging_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "waste_management_coordinator_agent",
+                "recycling_station_manager_agent",
+                "waste_monitoring_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "marketing_outreach_agent",
+                "community_engagement_agent",
+                "feedback_collection_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The main coordinator of the carbon-neutral arts and crafts fair, ensuring all departments work efficiently towards a sustainable event.",
+            "tools": [
+                "fair_planner_agent",
+                "energy_management_agent",
+                "transportation_management_agent",
+                "resident_artist_coordinator_agent",
+                "waste_management_coordinator_agent",
+                "marketing_outreach_agent"
+            ]
+        },
+        {
+            "name": "fair_planner_agent",
+            "role": "Oversees the planning and execution of the arts and crafts fair, focusing on sustainable practices.",
+            "tools": [
+                "eco_exhibit_specialist_agent",
+                "exhibit_timeline_manager_agent"
+            ]
+        },
+        {
+            "name": "eco_exhibit_specialist_agent",
+            "role": "Specializes in designing exhibits using eco-friendly materials and techniques.",
+            "tools": [
+                "sustainable_material_specialist_agent"
+            ]
+        },
+        {
+            "name": "sustainable_material_specialist_agent",
+            "role": "Experts in sourcing and using sustainable materials for all exhibits.",
+            "tools": [
+                "renewable_resources_database_agent",
+                "local_artisan_collaboration_agent"
+            ]
+        },
+        {
+            "name": "renewable_resources_database_agent",
+            "role": "Provides a database of vendors and materials focused on sustainable resources.",
+            "tools": []
+        },
+        {
+            "name": "energy_management_agent",
+            "role": "In charge of managing energy needs and implementing renewable solutions for the fair.",
+            "tools": [
+                "renewable_energy_source_agent"
+            ]
+        },
+        {
+            "name": "renewable_energy_source_agent",
+            "role": "Sources and manages renewable energy supplies, such as solar or wind power.",
+            "tools": [
+                "wind_energy_consultant_agent"
+            ]
+        },
+        {
+            "name": "wind_energy_consultant_agent",
+            "role": "Consults on the deployment and optimization of wind energy solutions.",
+            "tools": []
+        },
+        {
+            "name": "transportation_management_agent",
+            "role": "Facilitates transportation logistics for visitors, promoting the use of electric shuttle services.",
+            "tools": [
+                "electric_shuttle_service_agent"
+            ]
+        },
+        {
+            "name": "electric_shuttle_service_agent",
+            "role": "Manages the fleet of electric shuttles and charging infrastructure.",
+            "tools": [
+                "charging_infrastructure_tool"
+            ]
+        },
+        {
+            "name": "resident_artist_coordinator_agent",
+            "role": "Coordinates residencies for artists, ensuring sustainable accommodation practices.",
+            "tools": [
+                "sustainable_accommodation_advisor_agent"
+            ]
+        },
+        {
+            "name": "sustainable_accommodation_advisor_agent",
+            "role": "Advises on the selection of sustainable accommodations for resident artists.",
+            "tools": [
+                "green_lodging_tool"
+            ]
+        },
+        {
+            "name": "waste_management_coordinator_agent",
+            "role": "Oversees waste management, including recycling and disposal strategies.",
+            "tools": [
+                "recycling_station_manager_agent"
+            ]
+        },
+        {
+            "name": "recycling_station_manager_agent",
+            "role": "Handles the setup and operation of on-site recycling stations.",
+            "tools": [
+                "waste_monitoring_tool"
+            ]
+        },
+        {
+            "name": "marketing_outreach_agent",
+            "role": "Responsible for promoting the fair and enhancing community involvement.",
+            "tools": [
+                "community_engagement_agent"
+            ]
+        },
+        {
+            "name": "community_engagement_agent",
+            "role": "Focuses on engaging the local community and gathering feedback for improvements.",
+            "tools": [
+                "feedback_collection_tool"
+            ]
+        },
+        {
+            "name": "exhibit_timeline_manager_agent",
+            "role": "Manages the timeline for setting up and maintaining exhibits.",
+            "tools": []
+        },
+        {
+            "name": "local_artisan_collaboration_agent",
+            "role": "Encourages collaboration with local artisans to source unique eco-friendly creations.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "charging_infrastructure_tool",
+            "description": "Plans and optimizes charging stations for electric shuttles.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "station_locations": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Locations for charging stations."
+                    },
+                    "estimated_traffic": {
+                        "type": "number",
+                        "description": "Estimated traffic footfall near stations."
+                    }
+                }
+            }
+        },
+        {
+            "name": "green_lodging_tool",
+            "description": "Facilitates finding and securing eco-friendly lodging options.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "lodging_type": {
+                        "type": "string",
+                        "description": "Type of lodging required (e.g., hotel, hostel)."
+                    },
+                    "availability_dates": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Dates for required accommodation."
+                    }
+                }
+            }
+        },
+        {
+            "name": "waste_monitoring_tool",
+            "description": "Monitors waste levels and recycling efficiency at the fair.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "station_ids": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Identifiers for each monitoring station."
+                    },
+                    "monitoring_frequency": {
+                        "type": "number",
+                        "description": "Frequency of waste monitoring in hours."
+                    }
+                }
+            }
+        },
+        {
+            "name": "feedback_collection_tool",
+            "description": "Collects feedback from visitors and stakeholders to improve the fair.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "feedback_type": {
+                        "type": "string",
+                        "description": "Type of feedback to collect (e.g., visitor, vendor)."
+                    },
+                    "collection_method": {
+                        "type": "string",
+                        "description": "Method for collecting feedback (e.g., survey, interview)."
+                    }
+                }
+            }
+        }
+    ]
+}

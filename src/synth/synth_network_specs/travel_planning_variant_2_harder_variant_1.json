@@ -1,0 +1,287 @@
+{
+    "task": "Plan a luxury wellness and adventure retreat in the Swiss Alps. The itinerary must include: 1. Booking eco-friendly transportation from major airports. 2. Selecting sustainable 5-star accommodations. 3. Creating a detailed schedule with yoga, meditation, and personal growth workshops. 4. Planning optional extreme sport activities with safety plans. 5. Ensure compliance with Swiss wellness and tourism regulations. 6. Preparing a healthy gourmet menu with local ingredients. 7. Budget analysis to keep total costs under $15,000 per person.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "wellness_agent",
+                "yoga_workshops_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wellness_agent",
+                "meditation_sessions_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "wellness_agent",
+                "personal_growth_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "adventure_agent",
+                "extreme_sports_agent",
+                "safety_expert_agent",
+                "safety_planning_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "culinary_agent",
+                "menu_planning_agent",
+                "local_ingredient_sourcing_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "culinary_agent",
+                "menu_planning_agent",
+                "green_gourmet_chef_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "sustainability_agent",
+                "eco_transportation_planner",
+                "carbon_offset_tool"
+            ],
+            [
+                "human",
+                "client_agent",
+                "sustainability_agent",
+                "luxury_accommodation_finder",
+                "green_certification_verifier",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "regulation_compliance_agent",
+                "swiss_authority_contact_agent",
+                "tourism_permit_acquisition_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "financial_planner_agent",
+                "cost_analysis_tool"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The central agent for orchestrating the planning of the luxury wellness and adventure retreat in the Swiss Alps, directly interacting with the user.",
+            "tools": [
+                "wellness_agent",
+                "adventure_agent",
+                "culinary_agent",
+                "sustainability_agent",
+                "regulation_compliance_agent",
+                "financial_planner_agent"
+            ]
+        },
+        {
+            "name": "wellness_agent",
+            "role": "Focuses on organizing various wellness activities including yoga, meditation, and personal growth workshops.",
+            "tools": [
+                "yoga_workshops_agent",
+                "meditation_sessions_agent",
+                "personal_growth_agent"
+            ]
+        },
+        {
+            "name": "yoga_workshops_agent",
+            "role": "Plans and organizes yoga workshops suitable for all skill levels during the retreat.",
+            "tools": []
+        },
+        {
+            "name": "meditation_sessions_agent",
+            "role": "Organizes guided meditation sessions aiming to enhance the mental well-being of the participants.",
+            "tools": []
+        },
+        {
+            "name": "personal_growth_agent",
+            "role": "Facilitates workshops focused on personal development and growth.",
+            "tools": []
+        },
+        {
+            "name": "adventure_agent",
+            "role": "Creates a schedule for optional extreme sports activities with appropriate safety measures.",
+            "tools": [
+                "extreme_sports_agent"
+            ]
+        },
+        {
+            "name": "extreme_sports_agent",
+            "role": "Focuses on planning extreme sports activities, ensuring fun and excitement while maintaining safety standards.",
+            "tools": [
+                "safety_expert_agent"
+            ]
+        },
+        {
+            "name": "safety_expert_agent",
+            "role": "Consults on safety measures and develops comprehensive safety plans.",
+            "tools": [
+                "safety_planning_agent"
+            ]
+        },
+        {
+            "name": "safety_planning_agent",
+            "role": "Implements detailed safety and risk management plans for the adventure activities.",
+            "tools": []
+        },
+        {
+            "name": "culinary_agent",
+            "role": "Designs a gourmet menu using healthy and local ingredients.",
+            "tools": [
+                "menu_planning_agent"
+            ]
+        },
+        {
+            "name": "menu_planning_agent",
+            "role": "Crafts detailed meal plans focusing on local, healthy ingredients for a gourmet dining experience.",
+            "tools": [
+                "local_ingredient_sourcing_tool",
+                "green_gourmet_chef_agent"
+            ]
+        },
+        {
+            "name": "green_gourmet_chef_agent",
+            "role": "Provides expertise in creating green, gourmet-level dishes with locally sourced ingredients.",
+            "tools": []
+        },
+        {
+            "name": "sustainability_agent",
+            "role": "Ensures eco-friendliness in transport and accommodation selection.",
+            "tools": [
+                "eco_transportation_planner",
+                "luxury_accommodation_finder"
+            ]
+        },
+        {
+            "name": "eco_transportation_planner",
+            "role": "Arranges eco-friendly transportation options from major airports.",
+            "tools": [
+                "carbon_offset_tool"
+            ]
+        },
+        {
+            "name": "luxury_accommodation_finder",
+            "role": "Finds luxurious accommodations that adhere to sustainability standards.",
+            "tools": [
+                "green_certification_verifier"
+            ]
+        },
+        {
+            "name": "green_certification_verifier",
+            "role": "Validates the green certification of selected accommodations.",
+            "tools": []
+        },
+        {
+            "name": "regulation_compliance_agent",
+            "role": "Ensures compliance with Swiss wellness and tourism regulations.",
+            "tools": [
+                "swiss_authority_contact_agent"
+            ]
+        },
+        {
+            "name": "swiss_authority_contact_agent",
+            "role": "Contacts Swiss authorities to clarify regulatory requirements and ensures compliance.",
+            "tools": [
+                "tourism_permit_acquisition_agent"
+            ]
+        },
+        {
+            "name": "tourism_permit_acquisition_agent",
+            "role": "Handles acquiring necessary permits to operate tourism activities in Switzerland.",
+            "tools": []
+        },
+        {
+            "name": "financial_planner_agent",
+            "role": "Analyzes and plans the financial aspects of the retreat to meet the budget goals.",
+            "tools": [
+                "cost_analysis_tool"
+            ]
+        }
+    ],
+    "tools": [
+        {
+            "name": "local_ingredient_sourcing_tool",
+            "description": "Assists in sourcing local ingredients for culinary planning.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "ingredient_type": {
+                        "type": "string",
+                        "description": "Type of ingredient needed for the menu."
+                    },
+                    "quantity": {
+                        "type": "number",
+                        "description": "Quantity of the ingredient required."
+                    },
+                    "seasonal": {
+                        "type": "boolean",
+                        "description": "Whether the ingredient needs to be in season."
+                    }
+                }
+            }
+        },
+        {
+            "name": "carbon_offset_tool",
+            "description": "Calculates and manages carbon offsets for transportation plans.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "distance": {
+                        "type": "number",
+                        "description": "Total distance of travel in kilometers."
+                    },
+                    "transport_type": {
+                        "type": "string",
+                        "description": "Mode of transport used."
+                    },
+                    "passenger_count": {
+                        "type": "number",
+                        "description": "Number of passengers for the transport."
+                    }
+                }
+            }
+        },
+        {
+            "name": "cost_analysis_tool",
+            "description": "Evaluates cost estimations for the luxury retreat, ensuring adherence to budget constraints.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "total_days": {
+                        "type": "number",
+                        "description": "Total number of retreat days."
+                    },
+                    "accommodation_cost_per_person": {
+                        "type": "number",
+                        "description": "Average accommodation cost per person per night."
+                    },
+                    "activity_cost": {
+                        "type": "number",
+                        "description": "Total estimated cost of activities for the retreat."
+                    },
+                    "meals_cost": {
+                        "type": "number",
+                        "description": "Total expected cost for meals per person."
+                    }
+                }
+            }
+        }
+    ]
+}
