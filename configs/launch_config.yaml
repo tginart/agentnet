@@ -1,0 +1,28 @@
+# Sample launch configuration for agents-as-tools
+
+# Models to use in the simulation
+models:
+  - gpt-4o-mini
+  - gpt-4o
+
+# Network specs to run (these should match filenames in sim/network_specs/)
+# Do not include the .json extension, it will be added by run.py if needed
+networks:
+  - test
+  - file_my_taxes
+  - book_a_party
+  - check_credit_score
+  - sf_weather
+  - tahoe_weekend
+  # Add more network specs as needed
+
+# Maximum total number of concurrent jobs
+global_max: 4
+
+# Per-model concurrency limits
+# Any model not listed here will use the global_max value
+per_model_max:
+  claude-3-5-sonnet-20240620: 1
+  claude-3-5-haiku-20241022: 2
+  gpt-4o: 1
+  gpt-4o-mini: 5
