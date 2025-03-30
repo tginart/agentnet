@@ -21,10 +21,9 @@ DEFAULT_CLIENT_AGENT_PROMPT = "\n\nAs the top-level client agent, you are respon
 
 @dataclass
 class SamplingParams:
-    model: str = "claude-3-5-sonnet-20240620"
+    model: str = ""
     temperature: float = 0.0
     top_p: float = 1.0
-    top_k: int = 50
     max_tokens: int = 2048
     rate_limit_wait_time: int = 60
     max_retries: int = 3 # global max retries
@@ -33,10 +32,15 @@ class SamplingParams:
 class AgentSimulator:
     def __init__(self, agent: Agent,
                  sampling_params: SamplingParams = SamplingParams(),
-                 model: str = "claude-3-5-sonnet-20240620"):
+                model: Optional[str] = None):
         self.agent = agent
         self.prompt = DEFAULT_PROMPT(agent)
-        self.model = model
+        if model:
+            self.model = model
+        else:
+            self.model = sampling_params.model
+        if self.model == "":
+            raise ValueError("model must be specified")
         self.sampling_params = sampling_params
         self.messages = [
             {"role": "system", "content": self.prompt},
@@ -55,18 +59,18 @@ class AgentSimulator:
         # breakpoint() # -- uncomment helpful for debugging
         try:
             return await acompletion(
-                model=self.sampling_params.model,
+                model=self.model,
                 messages=self.messages,
                 temperature=self.sampling_params.temperature,
                 tools=[tool.json() for tool in self.agent.tools] if allow_tool_calls else [],
                 top_p=self.sampling_params.top_p,
-                top_k=self.sampling_params.top_k,
                 max_tokens=self.sampling_params.max_tokens,
             )
         except Exception as e:
             print(f"Error simulating agent: {e}")
             # if error is a "rate_limit_error" then we should wait and retry
-            if "rate_limit_error" in str(e) and self.max_retries > 0:
+            # sometimes anthropic also returns an "overloaded_error"
+            if ("rate_limit_error" in str(e) or 'overloaded_error' in str(e)) and self.max_retries > 0:
                 self.max_retries -= 1
                 await asyncio.sleep(self.sampling_params.rate_limit_wait_time)
                 return await self.simulate(None, allow_tool_calls=allow_tool_calls)

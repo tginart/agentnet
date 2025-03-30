@@ -8,7 +8,6 @@ import argparse
 import yaml
 import shutil
 import glob
-from tabulate import tabulate
 import re
 from typing import Dict, List, Optional, Tuple, Any
 
@@ -17,14 +16,26 @@ class NetworkLogger:
         # Create a timestamp for the run
         self.timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
         
-        # Create a unique run directory using timestamp and spec name
-        run_name = f"{self.timestamp}"
+        # Create a unique run directory using timestamp, spec name, and model name
+        run_name_parts = [self.timestamp]
         if spec_name:
             # Extract basename without extension if spec_name is a path
             if '/' in spec_name:
-                spec_name = os.path.basename(spec_name)
-            spec_name = os.path.splitext(spec_name)[0]
-            run_name += f"_{spec_name}"
+                spec_name_base = os.path.basename(spec_name)
+            else:
+                spec_name_base = spec_name
+            spec_name_base = os.path.splitext(spec_name_base)[0]
+            run_name_parts.append(spec_name_base)
+        
+        # Extract model name from config if available
+        if run_config and 'model' in run_config:
+            model_name = str(run_config['model']) # Ensure it's a string
+            # Basic sanitization for directory name (replace non-alphanumeric except _-)
+            model_name = re.sub(r'[^\w\\-]+', '_', model_name) 
+            run_name_parts.append(model_name)
+
+        # Join parts to create the run name
+        run_name = "_".join(run_name_parts)
         
         # Create full run directory path
         self.run_dir = os.path.join(log_dir, run_name)
@@ -33,12 +44,20 @@ class NetworkLogger:
         # Set paths for log files
         self.log_file = os.path.join(self.run_dir, f"agent_network.log")
         self.network_file = os.path.join(self.run_dir, f"network.json")
+
+        self.spec_name_file = os.path.join(self.run_dir, "spec_path.txt")
         
         # Save run configuration if provided
         if run_config:
             self.save_config(run_config)
+
+        # Save spec name if provided
+        if spec_name:
+            with open(self.spec_name_file, "w") as f:
+                f.write(spec_name)
             
         # Copy the spec file if provided and exists
+        # Use the original spec_name path here, not the potentially modified base name
         if spec_name and os.path.exists(spec_name):
             spec_dest = os.path.join(self.run_dir, "spec.json")
             shutil.copy2(spec_name, spec_dest)
@@ -423,377 +442,104 @@ def verify_edge_check(log_data, check):
             if msg_type == 'tool_call' and 'arguments' in log:
                 args_match = True
                 for key, expected_value in expected_args.items():
+                    # Ensure the key exists in log arguments and the value matches exactly
                     if key not in log['arguments'] or log['arguments'][key] != expected_value:
                         args_match = False
                         break
                 
+                # Also ensure no extra arguments exist in the log unless expected_args is empty
+                if expected_args and len(log['arguments']) != len(expected_args):
+                     # If expected_args is defined, we expect an exact match of keys
+                     pass # Allow extra args as per user request: "additional fields or subfields do NOT prevent a match"
+
                 if args_match:
                     return True, f"Found matching tool call from {from_node} to {to_node} with expected arguments"
             
             # Check content for other message types
-            elif 'content' in log and log['content'] == check.get('content', ''):
+            elif 'content' in log and 'content' in check and log['content'] == check.get('content'):
+                 # Check if content field exists in the check before comparing
                 return True, f"Found matching message from {from_node} to {to_node} with expected content"
-    
+
+        # If loop finishes without returning True, no exact match was found
+        return False, f"No exact match found for the specified criteria"
+
     # For contains check
     elif check_type == 'contains':
+        expected_content = check.get('content') # Get expected content once
         for log in edge_logs:
             if msg_type == 'tool_call' and 'arguments' in log:
-                args_match = True
-                for key, expected_value in expected_args.items():
-                    if key not in log['arguments'] or expected_value not in str(log['arguments'][key]):
-                        args_match = False
+                args_contain = True
+                for key, expected_value_part in expected_args.items():
+                    if key not in log['arguments'] or str(expected_value_part) not in str(log['arguments'][key]):
+                        args_contain = False
                         break
                 
-                if args_match:
+                if args_contain:
                     return True, f"Found tool call containing expected arguments pattern"
             
-            elif 'content' in log and check.get('content', '') in log['content']:
+            elif 'content' in log and expected_content is not None and expected_content in log['content']:
                 return True, f"Found message containing expected content pattern"
     
-    # For exists check (just checks if the edge exists)
+    # For exists check (just checks if the edge exists with the type filter)
     elif check_type == 'exists':
-        return True, f"Edge {from_node} → {to_node} exists"
-    
-    return False, f"No matching logs found for the specified criteria"
+        # We already filtered by type, so if edge_logs is not empty, it exists.
+        if edge_logs:
+            return True, f"Edge {from_node} → {to_node} with type {msg_type or 'any'} exists"
+        else:
+             # This case should technically be caught earlier if no logs are found at all
+             # but adding it here for clarity if the edge exists but not with the specified type.
+             return False, f"Edge {from_node} → {to_node} exists, but no logs match type {msg_type}"
 
-def visualize_network_ascii(log_file):
-    """
-    Visualize the network in ASCII/terminal format and allow interactive walkthrough of paths.
-    
-    Args:
-        log_file: Path to the network log JSON file or directory containing network.json
-    """
-    # If log_file is a directory, look for network.json file inside it
-    if os.path.isdir(log_file):
-        network_file = os.path.join(log_file, "network.json")
-    else:
-        network_file = log_file
-        
-    if not os.path.exists(network_file):
-        raise FileNotFoundError(f"Network log file not found: {network_file}")
-    
-    with open(network_file, 'r') as f:
-        data = json.load(f)
-    
-    # Create a graph from the data
-    G = nx.DiGraph()
-    
-    # Add nodes with their types
-    node_types = {}
-    for node in data['nodes']:
-        node_id = node['id']
-        node_type = node['type']
-        G.add_node(node_id)
-        node_types[node_id] = node_type
-    
-    # Add edges
-    for edge in data['edges']:
-        G.add_edge(edge['from'], edge['to'])
-    
-    # Get sequence logs and edge logs for reference
-    sequence_log = data['sequence_log']
-    
-    # Node symbols based on type
-    type_symbols = {
-        "human": "👤",
-        "agent": "🤖",
-        "tool": "🔧",
-        "unknown": "❓"
-    }
-    
-    # ASCII art for node connections
-    ascii_art = {
-        "horizontal": "───",
-        "vertical": "│",
-        "corner_top_right": "┐",
-        "corner_top_left": "┌",
-        "corner_bottom_right": "┘",
-        "corner_bottom_left": "└",
-        "t_right": "├",
-        "t_left": "┤",
-        "t_up": "┴",
-        "t_down": "┬",
-        "cross": "┼"
-    }
-    
-    def print_graph_overview():
-        """Print an overview of the graph structure"""
-        print("\n=== Network Graph Overview ===")
-        print(f"Total nodes: {G.number_of_nodes()}")
-        print(f"Total edges: {G.number_of_edges()}")
-        print("\nNodes:")
-        for node, node_type in node_types.items():
-            symbol = type_symbols.get(node_type, "❓")
-            print(f"  {symbol} {node} ({node_type})")
-        
-        print("\nConnections:")
-        for u, v in G.edges():
-            u_symbol = type_symbols.get(node_types.get(u, "unknown"), "❓")
-            v_symbol = type_symbols.get(node_types.get(v, "unknown"), "❓")
-            print(f"  {u_symbol} {u} → {v_symbol} {v}")
-    
-    def draw_ascii_path(path):
-        """Draw an ASCII representation of the path"""
-        if not path or len(path) < 2:
-            print("No valid path to display")
-            return
-        
-        path_str = ""
-        for i, node in enumerate(path):
-            node_symbol = type_symbols.get(node_types.get(node, "unknown"), "❓")
-            if i < len(path) - 1:
-                path_str += f"{node_symbol} {node} {ascii_art['horizontal']}> "
-            else:
-                path_str += f"{node_symbol} {node}"
-        
-        print("\nPath:")
-        print(path_str)
-    
-    def display_message_on_path(current_node, next_node):
-        """Display messages exchanged between current_node and next_node"""
-        # Get the edge key format
-        edge_key = f"{current_node}→{next_node}"
-        
-        # Find messages on this edge
-        edge_logs = data['edge_logs'].get(edge_key, [])
-        
-        if not edge_logs:
-            print(f"\nNo messages found between {current_node} and {next_node}")
-            return
-        
-        print(f"\n=== Messages from {current_node} to {next_node} ===")
+    # For assertNotEqual check
+    elif check_type == 'assertNotEqual':
+        match_found = False
+        violating_log_step = None
+        expected_content = check.get('content') # Get expected content once
+
         for log in edge_logs:
-            msg_type = log.get('type', 'unknown')
-            step = log.get('step', '?')
-            timestamp = log.get('timestamp', '?')
-            
-            # Format content based on message type
-            if msg_type == 'tool_call':
-                content = json.dumps(log.get('arguments', {}), indent=2)
-                print(f"\n[Step {step}] {msg_type.upper()} at {timestamp}")
-                print(f"Arguments: {content}")
-            elif msg_type == 'tool_result':
-                content = log.get('content', '')
-                print(f"\n[Step {step}] {msg_type.upper()} at {timestamp}")
-                print(f"Result: {content[:200]}{'...' if len(content) > 200 else ''}")
-            else:
-                content = log.get('content', '')
-                print(f"\n[Step {step}] {msg_type.upper()} at {timestamp}")
-                print(f"Content: {content[:200]}{'...' if len(content) > 200 else ''}")
-            
-            # Option to view full content
-            if len(str(content)) > 200:
-                choice = input("\nView full content? (y/n): ")
-                if choice.lower() == 'y':
-                    if msg_type == 'tool_call':
-                        print(json.dumps(log.get('arguments', {}), indent=2))
-                    else:
-                        print(log.get('content', ''))
-    
-    def interactive_path_walk():
-        """Allow user to interactively walk through paths in the graph"""
-        current_node = None
-        visited_path = []
-        
-        # Start with human node if available, otherwise let user choose
-        if "human" in G.nodes():
-            current_node = "human"
-            visited_path.append(current_node)
-        else:
-            nodes = list(G.nodes())
-            print("\nChoose a starting node:")
-            for i, node in enumerate(nodes):
-                node_symbol = type_symbols.get(node_types.get(node, "unknown"), "❓")
-                print(f"{i+1}. {node_symbol} {node}")
-            
-            while current_node is None:
-                try:
-                    choice = int(input("\nEnter node number: "))
-                    if 1 <= choice <= len(nodes):
-                        current_node = nodes[choice-1]
-                        visited_path.append(current_node)
-                    else:
-                        print("Invalid choice. Try again.")
-                except ValueError:
-                    print("Please enter a number.")
-        
-        while True:
-            print("\n" + "=" * 50)
-            print(f"Current node: {type_symbols.get(node_types.get(current_node, 'unknown'), '❓')} {current_node}")
-            
-            # Draw the current path
-            draw_ascii_path(visited_path)
-            
-            # Get neighbors
-            successors = list(G.successors(current_node))
-            predecessors = list(G.predecessors(current_node))
-            
-            # Show options
-            print("\nOptions:")
-            print("0. Exit walk")
-            print("1. View node details")
-            
-            # Forward connections
-            for i, succ in enumerate(successors):
-                node_symbol = type_symbols.get(node_types.get(succ, "unknown"), "❓")
-                print(f"{i+2}. Go to {node_symbol} {succ}")
-            
-            # Backward connections (if not already included in options)
-            back_start_idx = len(successors) + 2
-            for i, pred in enumerate(predecessors):
-                if pred not in successors:  # Avoid duplicates
-                    node_symbol = type_symbols.get(node_types.get(pred, "unknown"), "❓")
-                    print(f"{i+back_start_idx}. Go back to {node_symbol} {pred}")
-            
-            # Go back in visited path
-            if len(visited_path) > 1:
-                print(f"{len(successors) + len(predecessors) + 2}. Go back to previous node in path")
-            
-            # Get user choice
-            try:
-                choice = int(input("\nEnter your choice: "))
-                
-                if choice == 0:
-                    break
-                elif choice == 1:
-                    # View node details
-                    print(f"\n=== Node: {current_node} ===")
-                    print(f"Type: {node_types.get(current_node, 'unknown')}")
-                    print(f"In-degree: {G.in_degree(current_node)}")
-                    print(f"Out-degree: {G.out_degree(current_node)}")
-                    
-                    # Show logs involving this node
-                    node_logs = data.get('node_logs', {}).get(current_node, [])
-                    print(f"\nActivity log ({len(node_logs)} entries):")
-                    for i, log in enumerate(sorted(node_logs, key=lambda x: x.get('step', 0))):
-                        step = log.get('step', '?')
-                        log_type = log.get('type', 'unknown')
-                        from_node = log.get('from', '?')
-                        to_node = log.get('to', '?')
-                        print(f"{i+1}. [Step {step}] {log_type} | {from_node} → {to_node}")
-                    
-                    # Option to view a specific log entry
-                    if node_logs:
-                        log_choice = input("\nView log entry (number) or press Enter to continue: ")
-                        if log_choice.strip() and log_choice.isdigit():
-                            log_idx = int(log_choice) - 1
-                            if 0 <= log_idx < len(node_logs):
-                                log = sorted(node_logs, key=lambda x: x.get('step', 0))[log_idx]
-                                print("\n" + "=" * 40)
-                                print(f"Step: {log.get('step')}")
-                                print(f"Type: {log.get('type')}")
-                                print(f"From: {log.get('from')} → To: {log.get('to')}")
-                                if 'content' in log:
-                                    print(f"Content: {log.get('content')}")
-                                elif 'arguments' in log:
-                                    print(f"Arguments: {json.dumps(log.get('arguments'), indent=2)}")
-                                print("=" * 40)
-                                input("Press Enter to continue...")
-                
-                elif 2 <= choice < back_start_idx:
-                    # Go to successor
-                    succ_idx = choice - 2
-                    if 0 <= succ_idx < len(successors):
-                        next_node = successors[succ_idx]
-                        # Show messages on this path
-                        display_message_on_path(current_node, next_node)
-                        input("\nPress Enter to continue to next node...")
-                        current_node = next_node
-                        visited_path.append(current_node)
-                
-                elif back_start_idx <= choice < len(successors) + len(predecessors) + 2:
-                    # Go to predecessor
-                    pred_idx = choice - back_start_idx
-                    if 0 <= pred_idx < len(predecessors):
-                        if predecessors[pred_idx] not in successors:  # Skip if already in successors
-                            next_node = predecessors[pred_idx]
-                            # Show messages on this path
-                            display_message_on_path(next_node, current_node)
-                            input("\nPress Enter to continue to next node...")
-                            current_node = next_node
-                            visited_path.append(current_node)
-                
-                elif choice == len(successors) + len(predecessors) + 2 and len(visited_path) > 1:
-                    # Go back in path
-                    visited_path.pop()  # Remove current node
-                    current_node = visited_path[-1]  # Go to previous node
-                
+            log_matches_criteria = True # Assume this log matches unless proven otherwise
+
+            # Check arguments if specified
+            if expected_args:
+                if not (log.get('type') == 'tool_call' and 'arguments' in log):
+                    log_matches_criteria = False # Log type/structure doesn't match expectation
                 else:
-                    print("Invalid choice. Try again.")
-            
-            except ValueError:
-                print("Please enter a number.")
-    
-    # Main visualization function
-    print("\n" + "=" * 60)
-    print("ASCII Network Visualization and Interactive Path Walker")
-    print("=" * 60)
-    
-    while True:
-        print("\nMain Menu:")
-        print("1. View network overview")
-        print("2. Start interactive path walk")
-        print("3. View sequence of events")
-        print("4. Exit")
-        
-        choice = input("\nEnter your choice: ")
-        
-        if choice == '1':
-            print_graph_overview()
-        elif choice == '2':
-            interactive_path_walk()
-        elif choice == '3':
-            # Display the sequence of events
-            print("\n=== Sequence of Events ===")
-            for i, log in enumerate(sequence_log):
-                step = log.get('step', '?')
-                log_type = log.get('type', 'unknown')
-                from_node = log.get('from', '?')
-                to_node = log.get('to', '?')
-                from_symbol = type_symbols.get(node_types.get(from_node, "unknown"), "❓")
-                to_symbol = type_symbols.get(node_types.get(to_node, "unknown"), "❓")
-                
-                print(f"{i+1}. [Step {step}] {log_type.upper()}")
-                print(f"   {from_symbol} {from_node} → {to_symbol} {to_node}")
-                
-                # Show brief content summary based on type
-                if log_type == 'tool_call':
-                    args = log.get('arguments', {})
-                    args_str = ", ".join([f"{k}: {str(v)[:30]}" for k, v in args.items()])
-                    print(f"   Args: {args_str}")
-                elif log_type in ['message', 'response', 'tool_result']:
-                    content = log.get('content', '')
-                    print(f"   Content: {content[:50]}{'...' if len(content) > 50 else ''}")
-                
-                # Add a separator between entries
-                print()
-            
-            # Option to view full details of an entry
-            view_choice = input("\nView full entry details (enter number) or press Enter to return: ")
-            if view_choice.strip() and view_choice.isdigit():
-                entry_idx = int(view_choice) - 1
-                if 0 <= entry_idx < len(sequence_log):
-                    log = sequence_log[entry_idx]
-                    print("\n" + "=" * 60)
-                    print(f"Step: {log.get('step')}")
-                    print(f"Timestamp: {log.get('timestamp')}")
-                    print(f"Type: {log.get('type')}")
-                    print(f"From: {log.get('from')} → To: {log.get('to')}")
-                    
-                    if 'content' in log:
-                        print("\nContent:")
-                        print(log.get('content'))
-                    elif 'arguments' in log:
-                        print("\nArguments:")
-                        print(json.dumps(log.get('arguments'), indent=2))
-                    
-                    print("=" * 60)
-                    input("Press Enter to continue...")
-        
-        elif choice == '4':
-            break
+                    log_args = log['arguments']
+                    for key, expected_value in expected_args.items():
+                        if key not in log_args or log_args[key] != expected_value:
+                            log_matches_criteria = False # Argument mismatch
+                            break
+                    # We don't check for extra arguments, only that the specified ones match
+
+            # Check content if specified and arguments (if checked) matched
+            if log_matches_criteria and expected_content is not None:
+                if 'content' not in log or log['content'] != expected_content:
+                    log_matches_criteria = False # Content mismatch
+
+            # If this log matches all specified criteria, then assertNotEqual fails
+            if log_matches_criteria:
+                match_found = True
+                violating_log_step = log.get('step')
+                break # Found one violating log, no need to check further
+
+        if match_found:
+            # A log matching the criteria was found, violating the assertNotEqual condition
+            details = f"Found matching log entry (step {violating_log_step}) violating assertNotEqual for {from_node} → {to_node}"
+            if msg_type: details += f" with type {msg_type}"
+            if expected_args: details += f" and args {expected_args}"
+            if expected_content is not None: details += f" and content '{expected_content}'"
+            return False, details
         else:
-            print("Invalid choice. Try again.")
+            # No log matching the exact criteria was found, assertNotEqual condition satisfied
+            details = f"No log entries found matching the specified criteria for {from_node} → {to_node}"
+            if msg_type: details += f" with type {msg_type}"
+            if expected_args: details += f" and args {expected_args}"
+            if expected_content is not None: details += f" and content '{expected_content}'"
+            details += ". assertNotEqual satisfied."
+            return True, details
+
+    # Default case if check_type is unknown
+    return False, f"Unknown check_type: {check_type}"
 
 def get_run_info(run_dir: str) -> Dict[str, Any]:
     """
@@ -809,49 +555,70 @@ def get_run_info(run_dir: str) -> Dict[str, Any]:
         "path": run_dir,
         "name": os.path.basename(run_dir),
         "timestamp": None,
-        "spec_name": None,
+        "spec_name": None, # Default to None
+        "model_from_dir": None, # Track model parsed from directory name
         "num_nodes": None,
         "num_edges": None,
         "task": None,
         "has_result": False,
         "duration": None,
-        "model": None
+        "model": None # Final model name (prefer config, fallback to dir)
     }
     
-    # Extract timestamp and spec name from directory name using regex
+    # --- Start: Added logic to read spec_path.txt ---
+    spec_path_file = os.path.join(run_dir, "spec_path.txt")
+    if os.path.exists(spec_path_file):
+        try:
+            with open(spec_path_file, 'r') as f:
+                original_spec_path = f.readline().strip()
+                if original_spec_path:
+                    spec_filename = os.path.basename(original_spec_path)
+                    spec_name_base, _ = os.path.splitext(spec_filename)
+                    info["spec_name"] = spec_name_base # Set spec_name from file content
+        except Exception as e:
+            # Log or print warning if needed
+            # print(f"Warning: Could not read or parse spec_path.txt in {run_dir}: {e}")
+            pass # Continue even if file reading fails
+    # --- End: Added logic ---
+
+    # Extract timestamp, spec name (if not already found), and model name from directory name using regex
     name = info["name"]
     
-    # Try different patterns in order of specificity
-    
-    # Pattern 1: YYYYMMDD_HHMMSS_spec_name or YYYYMMDD_HHMMSS_numeric_spec_name
-    pattern1 = re.compile(r'^(\d{8}_\d{6})_(?:\d+_)?(.+)$')
-    match = pattern1.match(name)
+    # Regex to capture TIMESTAMP_SPEC_MODEL or TIMESTAMP_SPEC
+    # Group 1: Timestamp (YYYYMMDD_HHMMSS)
+    # Group 2: Spec Name (must contain at least one char, non-underscore)
+    # Group 3: Model Name (optional, captures everything after the last underscore)
+    pattern_datetime = re.compile(r'^(\d{8}_\d{6})_([^_]+?)(?:_(.+))?$')
+    match = pattern_datetime.match(name)
     
     if match:
-        # Extract timestamp and spec name
-        timestamp_str = match.group(1)
-        spec_name = match.group(2)
-        
+        timestamp_str, spec_name_part, model_name_part = match.groups()
         try:
             info["timestamp"] = datetime.datetime.strptime(timestamp_str, "%Y%m%d_%H%M%S")
-            info["spec_name"] = spec_name
+            # Only set spec_name from dir if not already set from spec_path.txt
+            if info["spec_name"] is None:
+                 info["spec_name"] = spec_name_part
+            info["model_from_dir"] = model_name_part # Can be None if not present
         except ValueError:
-            pass
+            pass # Ignore if timestamp parsing fails
     else:
-        # Pattern 2: YYYYMMDD_spec_name (date only)
-        pattern2 = re.compile(r'^(\d{8})_(?:\d+_)?(.+)$')
-        match = pattern2.match(name)
-        
+        # Fallback: Regex for DATE_SPEC_MODEL or DATE_SPEC
+        # Group 1: Timestamp (YYYYMMDD)
+        # Group 2: Spec Name
+        # Group 3: Model Name (optional)
+        pattern_date = re.compile(r'^(\d{8})_([^_]+?)(?:_(.+))?$')
+        match = pattern_date.match(name)
         if match:
-            date_str = match.group(1)
-            spec_name = match.group(2)
-            
+            date_str, spec_name_part, model_name_part = match.groups()
             try:
                 info["timestamp"] = datetime.datetime.strptime(date_str, "%Y%m%d")
-                info["spec_name"] = spec_name
+                # Only set spec_name from dir if not already set from spec_path.txt
+                if info["spec_name"] is None:
+                    info["spec_name"] = spec_name_part
+                info["model_from_dir"] = model_name_part
             except ValueError:
-                pass
-    
+                 pass # Ignore if date parsing fails
+
     # Check for network.json
     network_file = os.path.join(run_dir, "network.json")
     if os.path.exists(network_file):
@@ -873,9 +640,15 @@ def get_run_info(run_dir: str) -> Dict[str, Any]:
                 config_data = yaml.safe_load(f)
                 if 'model' in config_data:
                     info["model"] = config_data['model']
-        except:
-            pass
+        except Exception as e: # Broad exception catch
+             # Log or print warning if needed
+             # print(f"Warning: Could not read or parse config file {config_file}: {e}")
+             pass
     
+    # If model wasn't found in config, use the one parsed from the directory name as fallback
+    if info["model"] is None and info["model_from_dir"] is not None:
+         info["model"] = info["model_from_dir"]
+
     # Check for task_result.yaml
     task_result_file = os.path.join(run_dir, "task_result.yaml")
     if os.path.exists(task_result_file):
@@ -907,6 +680,10 @@ def get_run_info(run_dir: str) -> Dict[str, Any]:
         except:
             pass
     
+    # Clean up temporary field
+    if "model_from_dir" in info:
+        del info["model_from_dir"]
+        
     return info
 
 def list_runs(log_dir: str = "logs", only_complete: bool = True) -> List[Dict[str, Any]]:
@@ -1006,6 +783,85 @@ def list_specs(specs_dir: str = None) -> List[Dict[str, Any]]:
     
     return specs
 
+def batch_verify_runs(
+    log_dir: str,
+    specs_dir: str,
+    filters: Optional[Dict[str, Any]] = None,
+    only_complete: bool = True
+) -> List[Dict[str, Any]]:
+    """
+    Run network trajectory verification for a batch of runs filtered by specified criteria.
+
+    Args:
+        log_dir: Path to the main directory containing run logs.
+        specs_dir: Path to the directory containing specification files.
+        filters: Dictionary specifying filters (e.g., {"model": "model_name", "spec_name": "spec_name"}).
+        only_complete: If True, only process runs that have a network.json file.
+
+    Returns:
+        List of dictionaries, each containing run info, spec path, verification result, and status.
+    """
+    runs_info = list_runs(log_dir, only_complete=only_complete)
+    filtered_runs = []
+
+    if filters:
+        for run in runs_info:
+            match = True
+            for key, value in filters.items():
+                if key not in run or run[key] != value:
+                    # Basic exact match, could be extended for pattern matching etc.
+                    match = False
+                    break
+            if match:
+                filtered_runs.append(run)
+    else:
+        # If no filters, process all listed runs
+        filtered_runs = runs_info
+
+    batch_results = []
+    for run in filtered_runs:
+        result_entry = {
+            "run_info": run,
+            "spec_path": None,
+            "verification_result": None,
+            "status": "Unknown"
+        }
+
+        spec_match = None
+        if run.get("spec_name"):
+            spec_match = find_matching_spec(run["spec_name"], specs_dir)
+        
+        if not spec_match:
+            result_entry["status"] = "No Matching Spec Found"
+            batch_results.append(result_entry)
+            continue
+
+        result_entry["spec_path"] = spec_match
+        
+        # Ensure the run path exists and network.json is present for verification
+        network_file = os.path.join(run['path'], "network.json")
+        if not os.path.exists(network_file):
+             result_entry["status"] = "Network Log Missing"
+             batch_results.append(result_entry)
+             continue
+
+        try:
+            verification_output = verify_network_trajectory(run['path'], spec_match)
+            result_entry["verification_result"] = verification_output
+            if verification_output.get('all_passed', False):
+                result_entry["status"] = "Verified - Passed"
+            else:
+                result_entry["status"] = "Verified - Failed"
+        except FileNotFoundError as e:
+             result_entry["status"] = f"Verification Error: {e}"
+        except Exception as e:
+            result_entry["status"] = f"Verification Error: Unexpected error - {e}"
+            # Optionally log the full error traceback here
+        
+        batch_results.append(result_entry)
+
+    return batch_results
+
 def find_matching_spec(spec_name: str, specs_dir: str = None) -> Optional[str]:
     """
     Find a spec file that matches the given name.
@@ -1031,424 +887,263 @@ def find_matching_spec(spec_name: str, specs_dir: str = None) -> Optional[str]:
     
     return None
 
-def interactive_run_browser(log_dir: str = "logs", specs_dir: str = None, only_complete: bool = True):
+def compute_completion_rate(verification_results: Dict[str, Any]) -> float:
     """
-    Interactive terminal-based browser for past runs.
-    
+    Compute the completion rate from verification results.
+
+    This is defined as the percentage of subpaths in the specification that were
+    found in the run's trajectory.
+
     Args:
-        log_dir: Path to the logs directory
-        specs_dir: Path to the specs directory (optional)
-        only_complete: If True, only show complete runs initially
+        verification_results: The dictionary returned by verify_network_trajectory.
+
+    Returns:
+        float: The completion rate (0.0 to 1.0).
     """
-    if specs_dir is None:
-        # Try to find the specs directory relative to this file
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        specs_dir = os.path.join(script_dir, "network_specs")
+    subpath_checks = verification_results.get('subpath_checks', [])
+    if not subpath_checks:
+        return 1.0  # No subpaths to check, so 100% complete by definition
+
+    passed_count = sum(1 for check in subpath_checks if check['passed'])
+    return passed_count / len(subpath_checks)
+
+def compute_veracity_rate(verification_results: Dict[str, Any]) -> float:
+    """
+    Compute the veracity rate from verification results.
+
+    This is defined as the percentage of edge checks specified in the verification
+    that passed during the run.
+
+    Args:
+        verification_results: The dictionary returned by verify_network_trajectory.
+
+    Returns:
+        float: The veracity rate (0.0 to 1.0).
+    """
+    edge_checks_results = verification_results.get('edge_checks', [])
+    if not edge_checks_results:
+        return 1.0 # No edge checks to verify, so 100% veracious by definition
+
+    passed_count = sum(1 for result in edge_checks_results if result['passed'])
+    return passed_count / len(edge_checks_results)
+
+def compute_efficiency(log_data: Dict[str, Any], verification_results: Dict[str, Any]) -> float:
+    """
+    Compute the efficiency of a given run based on verification results.
+
+    This is defined as the fraction of total steps (edges traversed in sequence_log)
+    that contributed to a *passed* specified subpath or edge check. A step is
+    considered contributing if it forms part of a successfully verified subpath
+    or corresponds to a successfully verified edge check.
+
+    Args:
+        log_data: The network log JSON data (output of loading network.json).
+        verification_results: The dictionary returned by verify_network_trajectory.
+
+    Returns:
+        float: The efficiency score (0.0 to 1.0). Returns 0.0 if there are no steps.
+    """
+    sequence_log = log_data.get('sequence_log', [])
+    total_steps = len(sequence_log)
+
+    if total_steps == 0:
+        return 0.0 # No steps taken, efficiency is 0
+
+    contributing_steps = set() # Use a set to avoid double-counting steps
+
+    # 1. Identify steps contributing to passed subpaths
+    #    This requires re-checking subpaths and mapping found subsequences back to steps.
+    #    For simplicity, we'll approximate this by marking steps involved in *any* edge
+    #    that is part of *any* specified subpath, if that subpath check passed overall.
+    #    A more precise implementation would track the specific indices used in the subsequence match.
+    actual_path = []
+    step_edge_map = {} # Map step index to (from_node, to_node)
+    for i, entry in enumerate(sequence_log):
+        from_node = entry.get('from')
+        to_node = entry.get('to')
+        step_edge_map[i] = (from_node, to_node)
+        # Build actual path for subpath checking (simplified version used in verification)
+        if not actual_path or actual_path[-1] != from_node:
+            actual_path.append(from_node)
+        if not actual_path or actual_path[-1] != to_node:
+             actual_path.append(to_node)
+
+    passed_subpath_checks = [check for check in verification_results.get('subpath_checks', []) if check['passed']]
+    for check in passed_subpath_checks:
+        subpath = check['subpath']
+        # Simplified: Mark all steps whose edge exists within the passed subpath transitions
+        subpath_edges = set(zip(subpath[:-1], subpath[1:]))
+        for step_index, (from_node, to_node) in step_edge_map.items():
+            if (from_node, to_node) in subpath_edges:
+                contributing_steps.add(step_index) # Add step index
+
+    # 2. Identify steps contributing to passed edge checks
+    passed_edge_checks_results = [res for res in verification_results.get('edge_checks', []) if res['passed']]
+    edge_logs_by_key = log_data.get('edge_logs', {})
+
+    for result in passed_edge_checks_results:
+        check_details = result['check']
+        from_node = check_details.get('from')
+        to_node = check_details.get('to')
+        edge_key = f"{from_node}→{to_node}"
+
+        # Find the steps associated with this edge that match the check criteria
+        # This requires revisiting the logic within verify_edge_check, which is complex.
+        # Approximation: Add *all* steps associated with the edge if the check passed.
+        # This overestimates efficiency if only *some* logs on an edge satisfied the check.
+        logs_for_edge = edge_logs_by_key.get(edge_key, [])
+        for log_entry in logs_for_edge:
+            # We need the step index. Assuming 'step' in log_entry corresponds to sequence_log index + 1
+            step_index = log_entry.get('step')
+            if step_index is not None:
+                 # Ensure the log entry *actually* matches the passed check criteria (simplified check here)
+                 # We'll assume if the overall check passed, any log entry for that edge contributes
+                 # Correct implementation needs to re-evaluate the check per log entry.
+                 contributing_steps.add(step_index - 1) # Step is 1-based, index is 0-based
+
+    # Calculate efficiency
+    num_contributing_steps = len(contributing_steps)
+    efficiency = num_contributing_steps / total_steps if total_steps > 0 else 0.0
+
+    return efficiency
+
+def compute_eval(run_name: str, log_dir: str = "logs", specs_dir: str = None) -> Dict[str, Any]:
+    """
+    Computes completion rate, veracity rate, and efficiency for a given run.
+
+    Args:
+        run_name: The name of the run directory (e.g., '20231027_120000_spec_model').
+        log_dir: The base directory where run logs are stored.
+        specs_dir: The directory where spec files are stored. If None, attempts default.
+
+    Returns:
+        A dictionary containing the status and computed metrics:
+        {
+            "status": "success" | "error",
+            "error_message": str | None,
+            "completion_rate": float | None,
+            "veracity_rate": float | None,
+            "efficiency": float | None
+        }
+    """
+    results = {
+        "status": "error",
+        "error_message": None,
+        "completion_rate": None,
+        "veracity_rate": None,
+        "efficiency": None
+    }
+
+    run_dir = os.path.join(log_dir, run_name)
+    if not os.path.isdir(run_dir):
+        results["error_message"] = f"Run directory not found: {run_dir}"
+        return results
+
+    # Get run info to find the associated spec name
+    try:
+        run_info = get_run_info(run_dir)
+        spec_name = run_info.get("spec_name")
+        if not spec_name:
+            results["error_message"] = f"Could not determine spec name for run: {run_name}"
+            return results
+    except Exception as e:
+        results["error_message"] = f"Error getting run info for {run_name}: {e}"
+        return results
+
+    # Find the matching spec file
+    try:
+        spec_path = find_matching_spec(spec_name, specs_dir)
+        if not spec_path or not os.path.exists(spec_path):
+            results["error_message"] = f"Matching spec file not found for spec name: {spec_name}"
+            return results
+    except Exception as e:
+        results["error_message"] = f"Error finding spec file for {spec_name}: {e}"
+        return results
+
+    # Define network log file path
+    network_file = os.path.join(run_dir, "network.json")
+    if not os.path.exists(network_file):
+        results["error_message"] = f"Network log file not found: {network_file}"
+        return results
+
+    # Load log data
+    try:
+        with open(network_file, 'r') as f:
+            log_data = json.load(f)
+    except json.JSONDecodeError as e:
+        results["error_message"] = f"Error decoding JSON from {network_file}: {e}"
+        return results
+    except Exception as e:
+        results["error_message"] = f"Error reading network log {network_file}: {e}"
+        return results
+
+    # Perform verification
+    try:
+        verification_results = verify_network_trajectory(run_dir, spec_path)
+    except Exception as e:
+        results["error_message"] = f"Error during verification for run {run_name}: {e}"
+        return results
+
+    # Compute metrics
+    try:
+        results["completion_rate"] = compute_completion_rate(verification_results)
+        results["veracity_rate"] = compute_veracity_rate(verification_results)
+        results["efficiency"] = compute_efficiency(log_data, verification_results)
+        results["status"] = "success"
+    except Exception as e:
+        # If computation fails after successful verification
+        results["error_message"] = f"Error computing metrics for run {run_name}: {e}"
+        # Keep status as error, metrics might be partially computed or None
+
+    return results
+
+if __name__ == "__main__":
+    import sys
+    import argparse
     
-    # Get list of runs based on filter setting
-    runs = list_runs(log_dir, only_complete=only_complete)
+    parser = argparse.ArgumentParser(description="Network Graph Analysis and Verification Tool")
     
-    if not runs:
-        if only_complete:
-            print(f"No complete runs found in {log_dir}. Checking for incomplete runs...")
-            only_complete = False
-            runs = list_runs(log_dir, only_complete=False)
-            if runs:
-                print(f"Found {len(runs)} incomplete runs.")
-            else:
-                print(f"No runs found in {log_dir}")
-                sys.exit(1)
-        else:
-            print(f"No runs found in {log_dir}")
-            sys.exit(1)
+    parser.add_argument("--log-file", "-l", help="Path to the network log JSON file or run directory")
+    parser.add_argument("--log-dir", "-d", default="logs", help="Path to the logs directory")
+    parser.add_argument("--verify", "-v", help="Path to the specification JSON file for verification")
+    parser.add_argument("--spec-dir", "-s", help="Path to the directory containing network spec files")
+    parser.add_argument("--analyze", "-a", action="store_true", help="Analyze the network graph")
     
-    selected_run = None
-    page = 0
-    page_size = 10
+    args = parser.parse_args()
     
-    def batch_operations():
-        """Handle batch operations on filtered runs"""
-        filtered_runs = runs  # Start with all runs
-        current_filters = []  # Track active filters
-        
-        while True:
-            os.system('cls' if os.name == 'nt' else 'clear')
-            print("\n" + "=" * 80)
-            print(" " * 25 + "BATCH OPERATIONS")
-            print("=" * 80)
-            
-            # Get unique values for filtering
-            models = sorted(list(set(run["model"] for run in runs if run["model"])))
-            specs = sorted(list(set(run["spec_name"] for run in runs if run["spec_name"])))
-            
-            # Show current filters if any
-            if current_filters:
-                print("\nActive Filters:")
-                for f in current_filters:
-                    print(f"  • {f}")
-            else:
-                print("\nNo active filters - showing all runs")
-            print(f"Selected runs: {len(filtered_runs)}")
-            
-            # Show available filters
-            print("\nAvailable Filters:")
-            print("\nModels:")
-            for i, model in enumerate(models):
-                print(f"  {i+1}. {model}")
-            
-            print("\nSpecs:")
-            for i, spec in enumerate(specs):
-                print(f"  {i+1}. {spec}")
-            
-            print("\nFilter Options:")
-            print("  1. Filter by model")
-            print("  2. Filter by spec")
-            print("  3. Clear filters")
-            print("  4. Show current selection")
-            print("  5. Run verification on selection")
-            print("  6. Run analysis on selection")
-            print("  7. Back to main menu")
-            
-            choice = input("\nEnter your choice: ").strip()
-            
-            if choice == '1':
-                print("\nSelect model (enter number):")
-                for i, model in enumerate(models):
-                    print(f"  {i+1}. {model}")
-                model_choice = input("\nEnter model number: ").strip()
-                if model_choice.isdigit() and 0 < int(model_choice) <= len(models):
-                    selected_model = models[int(model_choice)-1]
-                    filtered_runs = [run for run in runs if run["model"] == selected_model]
-                    current_filters = [f"Model: {selected_model}"]
-                    print(f"\nSelected {len(filtered_runs)} runs with model {selected_model}")
-                    input("\nPress Enter to continue...")
-            
-            elif choice == '2':
-                print("\nSelect spec (enter number):")
-                for i, spec in enumerate(specs):
-                    print(f"  {i+1}. {spec}")
-                spec_choice = input("\nEnter spec number: ").strip()
-                if spec_choice.isdigit() and 0 < int(spec_choice) <= len(specs):
-                    selected_spec = specs[int(spec_choice)-1]
-                    filtered_runs = [run for run in runs if run["spec_name"] == selected_spec]
-                    current_filters = [f"Spec: {selected_spec}"]
-                    print(f"\nSelected {len(filtered_runs)} runs with spec {selected_spec}")
-                    input("\nPress Enter to continue...")
-            
-            elif choice == '3':
-                filtered_runs = runs
-                current_filters = []
-                print("\nFilters cleared.")
-                input("Press Enter to continue...")
-            
-            elif choice == '4':
-                print(f"\nCurrent selection: {len(filtered_runs)} runs")
-                if current_filters:
-                    print("Active filters:")
-                    for f in current_filters:
-                        print(f"  • {f}")
-                else:
-                    print("No active filters - showing all runs")
+    # --- Keep the logic for direct operations ---
+    operation_performed = False
+    if args.log_file:
+        if args.verify:
+            operation_performed = True
+            print(f"Verifying network trajectory from {args.log_file} against spec {args.verify}")
+            try:
+                results = verify_network_trajectory(args.log_file, args.verify)
+                # Print results
+                print("\n=== Verification Results ===")
+                print(f"Overall Result: {'Passed' if results['all_passed'] else 'Failed'}")
                 
-                # Create table data
-                headers = ["#", "Date", "Spec", "Model", "Task", "Nodes", "Edges", "Duration", "Status"]
-                table_data = []
+                print("\nSubpath Checks:")
+                for i, check in enumerate(results['subpath_checks']):
+                    status = "✅" if check['passed'] else "❌"
+                    print(f"{status} {check['details']}")
+                    print(f"    Path: {' → '.join(check['subpath'])}")
                 
-                for i, run in enumerate(filtered_runs):
-                    # Format timestamp
-                    date_str = run["timestamp"].strftime("%Y-%m-%d %H:%M") if run["timestamp"] else "Unknown"
-                    
-                    # Format duration
-                    if run["duration"] is not None:
-                        if run["duration"] < 60:
-                            duration_str = f"{run['duration']:.1f}s"
-                        elif run["duration"] < 3600:
-                            duration_str = f"{run['duration']/60:.1f}m"
-                        else:
-                            duration_str = f"{run['duration']/3600:.1f}h"
-                    else:
-                        duration_str = "N/A"
-                    
-                    # Format task (truncate if too long)
-                    task = run["task"] if run["task"] else "N/A"
-                    if task and len(task) > 30:
-                        task = task[:27] + "..."
-                    
-                    # Format spec name (truncate if too long)
-                    spec_name = run["spec_name"] or "Unknown"
-                    if len(spec_name) > 15:
-                        spec_name = spec_name[:12] + "..."
-                    
-                    # Format model (truncate if too long)
-                    model = run["model"] if run["model"] else "N/A"
-                    if model and len(model) > 15:
-                        if "-" in model:
-                            parts = model.split("-")
-                            if len(parts) > 3:
-                                model = "-".join(parts[:-1])
-                        else:
-                            model = model[:12] + "..."
-                    
-                    # Determine run status
-                    network_file = os.path.join(run["path"], "network.json")
-                    status = "✅" if os.path.exists(network_file) else "❌"
-                    
-                    # Add row to table with consistent width formatting
-                    table_data.append([
-                        f"{i + 1:2d}",
-                        f"{date_str:16}",
-                        f"{spec_name:12}",
-                        f"{model:12}",
-                        f"{task:30}",
-                        f"{str(run['num_nodes'] or 'N/A'):5}",
-                        f"{str(run['num_edges'] or 'N/A'):5}",
-                        f"{duration_str:6}",
-                        f"{status:4}"
-                    ])
-                
-                # Display table with grid format and proper column alignment
-                print('\n')
-                print(tabulate(table_data, headers=headers, tablefmt="simple", 
-                             colalign=("right","left","left","left","left","right","right","right","center")))
-                
-                input("\nPress Enter to continue...")
-            
-            elif choice == '5':  # Run verification on selection
-                if not filtered_runs:
-                    print("\nNo runs selected!")
-                    input("Press Enter to continue...")
-                    continue
-                
-                print(f"\nRunning verification on {len(filtered_runs)} runs...")
-                for run in filtered_runs:
-                    spec_match = find_matching_spec(run["spec_name"], specs_dir) if run["spec_name"] else None
-                    if spec_match:
-                        print(f"\nVerifying {run['name']}...")
-                        try:
-                            results = verify_network_trajectory(run['path'], spec_match)
-                            print(f"Result: {'✅ Passed' if results['all_passed'] else '❌ Failed'}")
-                            
-                            # Show detailed results
-                            if not results['all_passed']:
-                                print("\nFailed checks:")
-                                for check in results['subpath_checks']:
-                                    if not check['passed']:
-                                        print(f"  ❌ {check['details']}")
-                                for check in results['edge_checks']:
-                                    if not check['passed']:
-                                        print(f"  ❌ {check['details']}")
-                        except Exception as e:
-                            print(f"Error: {e}")
-                    else:
-                        print(f"No matching spec found for {run['name']}")
-                input("\nPress Enter to continue...")
-            
-            elif choice == '6':  # Run analysis on selection
-                if not filtered_runs:
-                    print("\nNo runs selected!")
-                    input("Press Enter to continue...")
-                    continue
-                
-                print(f"\nRunning analysis on {len(filtered_runs)} runs...")
-                for run in filtered_runs:
-                    print(f"\nAnalyzing {run['name']}...")
-                    try:
-                        analysis = analyze_network_logs(run['path'])
-                        print(f"Nodes: {analysis['num_nodes']}, Edges: {analysis['num_edges']}")
-                        print("Top central nodes:")
-                        for node, centrality in analysis['central_nodes'][:3]:
-                            print(f"  {node}: {centrality:.4f}")
-                        
-                        # Show node degrees
-                        print("\nNode degrees:")
-                        sorted_degrees = sorted(analysis['node_degrees'].items(), 
-                                             key=lambda x: x[1], reverse=True)[:5]
-                        for node, degree in sorted_degrees:
-                            print(f"  {node}: {degree}")
-                    except Exception as e:
-                        print(f"Error: {e}")
-                input("\nPress Enter to continue...")
-            
-            elif choice == '7':
-                break
-            
-            else:
-                print("\nInvalid choice")
-                input("Press Enter to continue...")
-    
-    while True:
-        if selected_run is None:
-            # Display list of runs
-            os.system('cls' if os.name == 'nt' else 'clear')
-            
-            print("\n" + "=" * 80)
-            print(" " * 25 + "AGENT NETWORK ANALYSIS TOOL")
-            print("=" * 80)
-            
-            filter_status = "Showing complete runs only" if only_complete else "Showing all runs (including incomplete)"
-            print(f"\n{filter_status} - {len(runs)} runs found")
-            
-            total_pages = (len(runs) + page_size - 1) // page_size
-            start_idx = page * page_size
-            end_idx = min(start_idx + page_size, len(runs))
-            
-            # Create table data
-            headers = ["#", "Date", "Spec", "Model", "Task", "Nodes", "Edges", "Duration", "Status"]
-            table_data = []
-            
-            for i, run in enumerate(runs[start_idx:end_idx]):
-                # Format timestamp
-                date_str = run["timestamp"].strftime("%Y-%m-%d %H:%M") if run["timestamp"] else "Unknown"
-                
-                # Format duration
-                if run["duration"] is not None:
-                    if run["duration"] < 60:
-                        duration_str = f"{run['duration']:.1f}s"
-                    elif run["duration"] < 3600:
-                        duration_str = f"{run['duration']/60:.1f}m"
-                    else:
-                        duration_str = f"{run['duration']/3600:.1f}h"
-                else:
-                    duration_str = "N/A"
-                
-                # Format task (truncate if too long)
-                task = run["task"] if run["task"] else "N/A"
-                if task and len(task) > 30:
-                    task = task[:27] + "..."
-                
-                # Format spec name (truncate if too long)
-                spec_name = run["spec_name"] or "Unknown"
-                if len(spec_name) > 15:
-                    spec_name = spec_name[:12] + "..."
-                
-                # Format model (truncate if too long)
-                model = run["model"] if run["model"] else "N/A"
-                if model and len(model) > 15:
-                    # Extract the model name from the full string if it's too long
-                    if "-" in model:
-                        # Try to get just the base model name (e.g., "claude-3-opus" from "claude-3-opus-20240229")
-                        parts = model.split("-")
-                        if len(parts) > 3:
-                            # Keep only the first parts that define the model type
-                            model = "-".join(parts[:-1])
-                    else:
-                        model = model[:12] + "..."
-                
-                # Determine run status
-                network_file = os.path.join(run["path"], "network.json")
-                status = "✅" if os.path.exists(network_file) else "❌"
-                
-                # Add row to table with consistent width formatting
-                table_data.append([
-                    f"{start_idx + i + 1:2d}",  # Reduced width for #
-                    f"{date_str:16}",
-                    f"{spec_name:12}",  # Reduced width for spec
-                    f"{model:12}",      # Reduced width for model
-                    f"{task:30}",
-                    f"{str(run['num_nodes'] or 'N/A'):5}",  # Reduced width for nodes
-                    f"{str(run['num_edges'] or 'N/A'):5}",  # Reduced width for edges
-                    f"{duration_str:6}",  # Reduced width for duration
-                    f"{status:4}"        # Centered status with fixed width
-                ])
-            
-            # Display table with grid format and proper column alignment
-            print('\n')
-            print(tabulate(table_data, headers=headers, tablefmt="simple", 
-                         colalign=("right","left","left","left","left","right","right","right","center")))
-            
-            print('\n')
-            
-            # Display pagination info
-            if total_pages > 1:
-                print(f"\nPage {page+1}/{total_pages} - Showing runs {start_idx+1}-{end_idx} of {len(runs)}")
-            
-            # Display menu
-            print("\nOptions:")
-            print("  [number] - Select run by number")
-            if page > 0:
-                print("  p - Previous page")
-            if page < total_pages - 1:
-                print("  n - Next page")
-            print("  f - Toggle filter: " + ("Show all runs" if only_complete else "Show complete runs only"))
-            print("  b - Batch operations")
-            print("  r - Refresh run list")
-            print("  q - Quit")
-            
-            choice = input("\nEnter your choice: ").strip().lower()
-            
-            if choice == 'q':
-                break
-            elif choice == 'p' and page > 0:
-                page -= 1
-            elif choice == 'n' and page < total_pages - 1:
-                page += 1
-            elif choice == 'f':
-                # Toggle filter between complete and all runs
-                only_complete = not only_complete
-                runs = list_runs(log_dir, only_complete=only_complete)
-                page = 0
-            elif choice == 'b':
-                batch_operations()
-            elif choice == 'r':
-                runs = list_runs(log_dir, only_complete=only_complete)
-                page = 0
-            elif choice.isdigit():
-                run_idx = int(choice) - 1
-                if 0 <= run_idx < len(runs):
-                    selected_run = runs[run_idx]
-                else:
-                    print(f"Invalid run number: {choice}")
-                    input("Press Enter to continue...")
-            else:
-                print(f"Invalid choice: {choice}")
-                input("Press Enter to continue...")
-        
-        else:
-            # Display selected run details and options
-            os.system('cls' if os.name == 'nt' else 'clear')
-            
-            run = selected_run
-            print("\n" + "=" * 80)
-            print(f" RUN: {run['name']}")
-            print("=" * 80)
-            
-            # Basic info
-            print("\nBasic Information:")
-            print(f"  Date: {run['timestamp'].strftime('%Y-%m-%d %H:%M:%S') if run['timestamp'] else 'Unknown'}")
-            print(f"  Spec: {run['spec_name'] or 'Unknown'}")
-            print(f"  Model: {run['model'] or 'Unknown'}")
-            print(f"  Task: {run['task'] or 'Unknown'}")
-            print(f"  Nodes: {run['num_nodes'] or 'N/A'}")
-            print(f"  Edges: {run['num_edges'] or 'N/A'}")
-            if run["duration"] is not None:
-                print(f"  Duration: {run['duration']:.2f} seconds")
-            
-            # Check for spec match
-            spec_match = None
-            if run["spec_name"]:
-                spec_match = find_matching_spec(run["spec_name"], specs_dir)
-            
-            # Display menu
-            print("\nOptions:")
-            print("  a - Analyze network")
-            print("  v - Visualize network")
-            if spec_match:
-                print("  s - View spec details")
-                print("  t - Verify trajectory against spec")
-            print("  b - Back to run list")
-            print("  q - Quit")
-            
-            choice = input("\nEnter your choice: ").strip().lower()
-            
-            if choice == 'q':
-                break
-            elif choice == 'b':
-                selected_run = None
-            elif choice == 'a':
-                # Analyze network
-                print(f"\nAnalyzing network from {run['path']}...")
-                analysis = analyze_network_logs(run['path'])
-                
+                print("\nEdge Checks:")
+                for i, check in enumerate(results['edge_checks']):
+                    status = "✅" if check['passed'] else "❌"
+                    check_info = check['check']
+                    print(f"{status} From: {check_info['from']} → To: {check_info['to']}, Type: {check_info.get('type', 'any')}")
+                    print(f"    Details: {check['details']}")
+            except Exception as e:
+                print(f"Error during verification: {e}")
+
+        if args.analyze:
+            operation_performed = True
+            print(f"Analyzing network from {args.log_file}")
+            try:
+                analysis = analyze_network_logs(args.log_file)
+                # Print analysis results
                 print("\n=== Network Analysis ===")
                 print(f"Number of nodes: {analysis['num_nodes']}")
                 print(f"Number of edges: {analysis['num_edges']}")
@@ -1459,132 +1154,14 @@ def interactive_run_browser(log_dir: str = "logs", specs_dir: str = None, only_c
                 print("\nCentral nodes:")
                 for node, centrality in analysis['central_nodes']:
                     print(f"  {node}: {centrality:.4f}")
-                
-                input("\nPress Enter to continue...")
-            
-            elif choice == 'v':
-                # Visualize network
-                print(f"\nVisualizing network from {run['path']}...")
-                input("Press Enter to start visualization...")
-                visualize_network_ascii(run['path'])
-            
-            elif choice == 's' and spec_match:
-                # View spec details
-                try:
-                    with open(spec_match, 'r') as f:
-                        spec_data = json.load(f)
-                    
-                    print(f"\n=== Spec: {os.path.basename(spec_match)} ===")
-                    print(f"Task: {spec_data.get('task', 'N/A')}")
-                    print(f"Number of agents: {len(spec_data.get('agents', []))}")
-                    print(f"Number of connections: {len(spec_data.get('connections', []))}")
-                    
-                    print("\nAgents:")
-                    for agent in spec_data.get('agents', []):
-                        print(f"  - {agent.get('name', 'Unnamed')} ({agent.get('role', 'No role')})")
-                    
-                    input("\nPress Enter to continue...")
-                except Exception as e:
-                    print(f"Error reading spec file: {e}")
-                    input("\nPress Enter to continue...")
-            
-            elif choice == 't' and spec_match:
-                # Verify trajectory against spec
-                print(f"\nVerifying network trajectory from {run['path']} against spec {spec_match}")
-                try:
-                    results = verify_network_trajectory(run['path'], spec_match)
-                    
-                    print("\n=== Verification Results ===")
-                    print(f"Overall Result: {'Passed' if results['all_passed'] else 'Failed'}")
-                    
-                    print("\nSubpath Checks:")
-                    for i, check in enumerate(results['subpath_checks']):
-                        status = "✅" if check['passed'] else "❌"
-                        print(f"{status} {check['details']}")
-                        print(f"    Path: {' → '.join(check['subpath'])}")
-                    
-                    print("\nEdge Checks:")
-                    for i, check in enumerate(results['edge_checks']):
-                        status = "✅" if check['passed'] else "❌"
-                        check_info = check['check']
-                        print(f"{status} From: {check_info['from']} → To: {check_info['to']}, Type: {check_info.get('type', 'any')}")
-                        print(f"    Details: {check['details']}")
-                    
-                    input("\nPress Enter to continue...")
-                except Exception as e:
-                    print(f"Error verifying trajectory: {e}")
-                    input("\nPress Enter to continue...")
-            
-            else:
-                print(f"Invalid choice: {choice}")
-                input("Press Enter to continue...")
+            except Exception as e:
+                print(f"Error during analysis: {e}")
 
-if __name__ == "__main__":
-    import sys
-    import argparse
-    
-    parser = argparse.ArgumentParser(description="Network Graph Analysis and Visualization Tool")
-    
-    # Adjust arguments so all are optional
-    parser.add_argument("--log-file", "-l", help="Path to the network log JSON file or run directory")
-    parser.add_argument("--log-dir", "-d", default="../../logs", help="Path to the logs directory")
-    parser.add_argument("--verify", "-v", help="Path to the specification JSON file for verification")
-    parser.add_argument("--spec-dir", "-s", help="Path to the directory containing network spec files")
-    parser.add_argument("--visualize", "-vis", action="store_true", help="Visualize the network graph")
-    parser.add_argument("--analyze", "-a", action="store_true", help="Analyze the network graph")
-    parser.add_argument("--interactive", "-i", action="store_true", help="Use interactive browser (default if no other options specified)")
-    parser.add_argument("--all-runs", action="store_true", help="Include incomplete runs in the browser")
-    
-    args = parser.parse_args()
-    
-    # If a specific log file is provided, use it for analysis, verification, or visualization
-    if args.log_file:
-        if args.verify:
-            print(f"Verifying network trajectory from {args.log_file} against spec {args.verify}")
-            results = verify_network_trajectory(args.log_file, args.verify)
-            
-            # Print results
-            print("\n=== Verification Results ===")
-            print(f"Overall Result: {'Passed' if results['all_passed'] else 'Failed'}")
-            
-            print("\nSubpath Checks:")
-            for i, check in enumerate(results['subpath_checks']):
-                status = "✅" if check['passed'] else "❌"
-                print(f"{status} {check['details']}")
-                print(f"    Path: {' → '.join(check['subpath'])}")
-            
-            print("\nEdge Checks:")
-            for i, check in enumerate(results['edge_checks']):
-                status = "✅" if check['passed'] else "❌"
-                check_info = check['check']
-                print(f"{status} From: {check_info['from']} → To: {check_info['to']}, Type: {check_info.get('type', 'any')}")
-                print(f"    Details: {check['details']}")
-        
-        if args.analyze or (not args.verify and not args.visualize and not args.interactive):
-            print(f"Analyzing network from {args.log_file}")
-            analysis = analyze_network_logs(args.log_file)
-            
-            # Print analysis results
-            print("\n=== Network Analysis ===")
-            print(f"Number of nodes: {analysis['num_nodes']}")
-            print(f"Number of edges: {analysis['num_edges']}")
-            print("\nNode degrees:")
-            for node, degree in analysis['node_degrees'].items():
-                print(f"  {node}: {degree}")
-            
-            print("\nCentral nodes:")
-            for node, centrality in analysis['central_nodes']:
-                print(f"  {node}: {centrality:.4f}")
-        
-        if args.visualize or (not args.verify and not args.analyze and not args.interactive):
-            print(f"Visualizing network from {args.log_file}")
-            visualize_network_ascii(args.log_file)
-    
-    # If no specific log file or we're in interactive mode, use the browser
-    elif args.interactive or not (args.verify or args.analyze or args.visualize):
-        # If interactive browser is manually requested or no other options are specified
-        # Initialize with complete runs only unless --all-runs is specified
-        only_complete = not args.all_runs
-        if args.all_runs:
-            print("Including all runs (complete and incomplete)")
-        interactive_run_browser(args.log_dir, args.spec_dir, only_complete=only_complete) 
+        if not operation_performed:
+             print(f"No operation (analyze, verify) specified for log file: {args.log_file}")
+             print("Use --analyze or --verify <spec_file>.")
+
+    elif not args.log_file:
+         # If no log file and no interactive mode, show help
+         parser.print_help()
+         sys.exit(1) 

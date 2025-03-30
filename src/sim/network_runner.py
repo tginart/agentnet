@@ -47,7 +47,7 @@ class RunConfig:
     temperature: float = 0.0
     top_p: float = 1.0
     stdout: bool = False
-    model: str = "claude-3-5-sonnet-20240620"
+    model: str = ""
     universal_simulator_model: str = "gpt-4o"
     summary_message: str = "This is a system message. You have exceeded the maximum number of tool calling steps. Summarize your work thus far and report back to your invoker."
     human_role_message: str = "The human user. This is the task message you sent to your top-level client agent: {task_message}\n\nPlease simulate the human user's response to the client agent's response. You are lazy and refuse to do any work but you are fairly flexible in terms of accepting the client agent's ideas.\n\nIf you deem the task complete, please respond with 'TASK COMPLETE'. It is very important that you respond with 'TASK COMPLETE' if you deem the task complete. If you do not respond with 'TASK COMPLETE', the client agent will continue to work on the task."
