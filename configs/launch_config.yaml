@@ -2,18 +2,25 @@
 
 # Models to use in the simulation
 models:
-  - gpt-4o-mini
-  - gpt-4o
+  - openrouter/x-ai/grok-2-1212
+  #- gpt-4o-mini
+  #- gpt-4o
+  #- claude-3-5-sonnet-20240620
+  #- claude-3-5-haiku-20241022
+  #- openrouter/deepseek/deepseek-chat-v3-0324
 
 # Network specs to run (these should match filenames in sim/network_specs/)
 # Do not include the .json extension, it will be added by run.py if needed
 networks:
-  - test
-  - file_my_taxes
   - book_a_party
   - check_credit_score
+  - find_an_apartment
+  - file_my_taxes
+  - travel_planning_variant_2
+  - health_and_wellness_variant_1
   - sf_weather
   - tahoe_weekend
+  - test
   # Add more network specs as needed
 
 # Maximum total number of concurrent jobs

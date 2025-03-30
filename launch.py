@@ -61,15 +61,46 @@ async def run_job(model: str, network_spec: str, logging_run: bool) -> Tuple[str
 # --- Relaunch Helper ---
 
 def check_if_completed(model: str, network: str, log_base_dir: str = "logs") -> bool:
-    """Checks if a job log directory and network.json exist."""
-    # Construct path robustly, handling potential slashes in names if necessary
-    # For simplicity, assuming model/network names are valid directory names for now.
-    run_dir = os.path.join(log_base_dir, model, network)
-    network_file = os.path.join(run_dir, "network.json")
-    is_completed = os.path.isfile(network_file)
-    # Add a print statement for debugging/visibility when checking
-    # print(f"[DEBUG] Checking completion for {model}/{network}: Path='{network_file}', Exists={is_completed}")
-    return is_completed
+    """Checks if a completed log directory exists for the given model and network.
+
+    Scans the log_base_dir for subdirectories matching the pattern
+    YYYYMMDD_HHMMSS_NETWORK_MODEL and checks for 'network.json' inside.
+    """
+    if not os.path.isdir(log_base_dir):
+        # print(f"[DEBUG] Log directory '{log_base_dir}' does not exist. Assuming no jobs completed.")
+        return False # Log directory doesn't exist, so no jobs are completed
+
+    try:
+        for entry in os.listdir(log_base_dir):
+            full_path = os.path.join(log_base_dir, entry)
+            if os.path.isdir(full_path):
+                # Parse the directory name: YYYYMMDD_HHMMSS_NETWORK_MODEL
+                parts = entry.split('_')
+                if len(parts) >= 3:
+                    # Assume timestamp is first 2 parts (YYYYMMDD, HHMMSS)
+                    # Assume model is the last part
+                    # Network is everything in between
+                    dir_model = parts[-1]
+                    # Handle cases where network name might have underscores
+                    dir_network = '_'.join(parts[2:-1])
+
+                    # print(f"[DEBUG] Checking dir: {entry} -> Extracted Network='{dir_network}', Model='{dir_model}'")
+
+                    if dir_network == network and dir_model == model:
+                        # Found a potential match, check for network.json
+                        network_file = os.path.join(full_path, "network.json")
+                        if os.path.isfile(network_file):
+                            # print(f"[DEBUG] Found completed job: {entry} (network.json exists)")
+                            return True # Found a completed job for this combo
+    except OSError as e:
+        print(f"[LAUNCHER] Warning: Error scanning log directory '{log_base_dir}': {e}")
+        # Decide how to handle: assume not completed or raise error?
+        # For relaunch, safer to assume not completed if we can't check.
+        return False
+
+    # If loop completes without finding a match
+    # print(f"[DEBUG] No completed job found for {model}/{network} in {log_base_dir}")
+    return False
 
 async def manager(jobs: List[Tuple[str, str]], global_limit: int, per_model_limits: Dict[str, int], logging_run: bool):
     """Manages the concurrent execution of jobs respecting limits."""
@@ -81,66 +112,119 @@ async def manager(jobs: List[Tuple[str, str]], global_limit: int, per_model_limi
     while pending_jobs or running_tasks:
         # --- Check for completed tasks ---
         finished_tasks = {task for task in running_tasks if task.done()}
+        any_task_finished = bool(finished_tasks) # Track if any task finished this cycle
         for task in finished_tasks:
             model = running_tasks.pop(task) # Remove and get model
             running_per_model[model] -= 1
             try:
-                _, network, success = await task # Get result
+                # Ensure await task happens before accessing results to handle exceptions
+                task_result = await task
+                _, network, success = task_result # Get result
                 results.append((model, network, success))
-                print(f"[MANAGER] Completed: {model}/{network}. Remaining: {len(pending_jobs)} pending, {len(running_tasks)} running.")
+                print(f"[MANAGER] Completed: {model}/{network}. Success: {success}. Remaining: {len(pending_jobs)} pending, {len(running_tasks)} running.")
             except Exception as e:
-                print(f"[MANAGER] ERROR in task for model {model}: {e}")
-                # Decide how to handle errors - maybe add to results as failure
-                results.append((model, "unknown_network_due_to_error", False))
+                # Attempt to find the network associated with the failed task if possible
+                # This might require storing the (model, network) tuple with the task
+                # For now, mark network as unknown
+                network_name = "unknown_network_due_to_error" 
+                results.append((model, network_name, False))
+                print(f"[MANAGER] ERROR in completed task for model {model} (Network: {network_name}): {e}")
 
 
         # --- Try to launch new tasks ---
-        while pending_jobs and len(running_tasks) < global_limit:
-            model_to_run, network_to_run = pending_jobs[0] # Peek
+        launched_a_job_in_this_cycle = False
+        keep_trying_to_launch = True # Flag to control the inner launch loop
+        while keep_trying_to_launch and pending_jobs and len(running_tasks) < global_limit:
+            keep_trying_to_launch = False # Assume we won't find a job to launch in this pass
             
-            # Check per-model limit (use global if specific model not in per_model_limits)
-            model_limit = per_model_limits.get(model_to_run, global_limit)
-            
-            if running_per_model[model_to_run] < model_limit:
-                # Limits allow, launch the job
-                model, network = pending_jobs.popleft() # Actually remove job
+            found_job_to_launch_at_index = -1
+            # Find the *first* index in the current deque that can be launched
+            for i in range(len(pending_jobs)):
+                model_to_run, _ = pending_jobs[i] # Only need model to check limit
+                model_limit = per_model_limits.get(model_to_run, global_limit)
                 
+                # Check if the model is under its specific limit
+                if running_per_model[model_to_run] < model_limit:
+                    # Found a runnable job!
+                    found_job_to_launch_at_index = i
+                    break # Stop searching, we'll launch this one
+
+            if found_job_to_launch_at_index != -1:
+                # A job can be launched. Rotate deque to bring it to the front.
+                pending_jobs.rotate(-found_job_to_launch_at_index)
+                model, network = pending_jobs.popleft() # Pop the runnable job
+                
+                # Launch the job
                 task = asyncio.create_task(run_job(model, network, logging_run))
                 running_tasks[task] = model # Track task and its model
                 running_per_model[model] += 1
                 print(f"[MANAGER] Launched: {model}/{network}. Running: {len(running_tasks)} total, {running_per_model[model]} for {model}. Pending: {len(pending_jobs)}.")
-            else:
-                # Cannot launch this job due to per-model limit, try next (if any) or wait
-                # If we checked the first pending job and couldn't run it, we probably can't run others of the same model either.
-                # Need to wait for a slot for this model to free up.
-                break 
+                
+                launched_a_job_in_this_cycle = True # Mark that we launched something overall
+                keep_trying_to_launch = True # Since we launched one, try immediately for another
+            
+            # If found_job_to_launch_at_index remains -1, no runnable job was found in the deque
+            # keep_trying_to_launch stays False, and the inner while loop terminates.
 
         # --- Wait if needed ---
-        if pending_jobs and len(running_tasks) >= global_limit:
-            # Global limit reached, must wait for *any* task to finish
-            if running_tasks:
-                _, pending = await asyncio.wait(running_tasks.keys(), return_when=asyncio.FIRST_COMPLETED)
-        elif pending_jobs and any(running_per_model[pending_jobs[0][0]] >= per_model_limits.get(pending_jobs[0][0], global_limit) for i in range(len(pending_jobs)) if i==0):
-             # Cannot launch the next job due to per-model limit, wait for a relevant task to finish
-             model_to_wait_for = pending_jobs[0][0]
-             tasks_for_model = {task for task, model in running_tasks.items() if model == model_to_wait_for}
-             if tasks_for_model:
-                 _, pending = await asyncio.wait(tasks_for_model, return_when=asyncio.FIRST_COMPLETED)
-             elif not running_tasks: # Should not happen if pending_jobs is not empty, but safety check
-                 await asyncio.sleep(0.1) # Avoid busy loop if something is weird
-             else: # No running tasks for the model needed, but global limit not hit -> wait for any task
-                 _, pending = await asyncio.wait(running_tasks.keys(), return_when=asyncio.FIRST_COMPLETED)
+        needs_to_wait = False
+        # Condition 1: Jobs pending, but we made no progress (didn't launch, and nothing finished)
+        if pending_jobs and not launched_a_job_in_this_cycle and not any_task_finished:
+             needs_to_wait = True
+        # Condition 2: No jobs pending, but tasks are still running
+        elif not pending_jobs and running_tasks:
+             needs_to_wait = True
+        # Condition 3: Safety check - pending jobs but no running tasks (should ideally not happen)
+        elif pending_jobs and not running_tasks:
+             needs_to_wait = True
+             print("[MANAGER] Warning: Pending jobs but no running tasks. Waiting.")
 
-        else:
-            # No jobs pending, just wait for remaining running tasks
-            if running_tasks:
-                 _, pending = await asyncio.wait(running_tasks.keys(), return_when=asyncio.FIRST_COMPLETED)
-            else:
-                 # All done
-                 break
 
-        # Small sleep to prevent potential busy-looping in edge cases and allow event loop to cycle
-        await asyncio.sleep(0.05) 
+        if needs_to_wait and running_tasks:
+             wait_tasks = running_tasks.keys() # Default: wait for any task if unsure
+
+             # If global limit isn't hit, try to wait more specifically
+             if len(running_tasks) < global_limit:
+                  # Blocked by per-model limits. Find relevant tasks to wait for.
+                  blocking_models = set()
+                  tasks_for_blocking_models = set()
+
+                  # Identify models that are at their limit AND needed by pending jobs
+                  for i in range(len(pending_jobs)):
+                       model_to_run, _ = pending_jobs[i]
+                       model_limit = per_model_limits.get(model_to_run, global_limit)
+                       if running_per_model[model_to_run] >= model_limit:
+                           blocking_models.add(model_to_run)
+                  
+                  # Collect running tasks associated with these blocking models
+                  if blocking_models:
+                      tasks_for_blocking_models = {
+                          task for task, model in running_tasks.items() if model in blocking_models
+                      }
+                  
+                  # Only wait for specific tasks if we found relevant ones
+                  if tasks_for_blocking_models:
+                       wait_tasks = tasks_for_blocking_models
+                       print(f"[MANAGER] Blocked by per-model limits ({blocking_models}). Waiting for one of {len(wait_tasks)} relevant tasks.")
+                  else:
+                       # This case might occur if a model limit is blocking, but the last task for that model *just* finished
+                       # Or if limits/counts are somehow inconsistent. Waiting for any task is safer fallback.
+                       print(f"[MANAGER] Blocked, but no specific running tasks found for blocking models ({blocking_models}). Waiting for any task.")
+
+             else:
+                  # Global limit reached or exceeded, wait for any task.
+                  print(f"[MANAGER] Global limit ({global_limit}) reached. Waiting for any task.")
+
+             # Perform the wait
+             _, pending = await asyncio.wait(wait_tasks, return_when=asyncio.FIRST_COMPLETED)
+
+        elif not running_tasks and not pending_jobs:
+             # All done! Exit the main loop.
+             break
+        
+        # Small sleep to prevent potential high CPU usage in edge cases or if waiting without tasks
+        if not any_task_finished and not launched_a_job_in_this_cycle:
+             await asyncio.sleep(0.05) 
 
 
     print("\n[LAUNCHER] All jobs completed.")

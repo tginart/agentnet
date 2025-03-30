@@ -67,6 +67,11 @@ def eval_all_complete_runs(log_dir: str, specs_dir: str,
     # save run_eval_results to json file
     with open('run_eval_results.json', 'w') as f:
         json.dump(run_eval_results, f, indent=4)
+
+    print("\nEvaluating on the following environments:")
+    for spec_name in specs_for_all_models:
+        print(f"--- {spec_name} ---")
+    print('\n')
         
     for model_name in model_names:
         # print(f"Evaluating model: {model_name}")
@@ -476,17 +481,28 @@ def interactive_run_browser(log_dir: str = "logs", specs_dir: str = None, only_c
     show_all_runs_mode = False # Start in 'most recent only' mode
 
     # --- Helper function to get and filter runs --- 
-    def _get_filtered_runs(current_log_dir: str, show_all: bool) -> List[Dict]:
-        """Fetches and filters runs based on the mode."""
+    def _get_filtered_runs(current_log_dir: str, show_all: bool, model_filter: str = None, task_filter: str = None) -> List[Dict]:
+        """Fetches and filters runs based on the mode and optional filters."""
         print("\nFetching run list...")
-        all_complete_runs = list_runs(current_log_dir, only_complete=True)
+        all_runs_before_filtering = list_runs(current_log_dir, only_complete=True) # Fetch all first
+        filtered_runs = all_runs_before_filtering
         
-        if not show_all and all_complete_runs:
+        # Apply model filter if specified
+        if model_filter:
+            filtered_runs = [run for run in filtered_runs if run.get('model') == model_filter]
+            print(f"Applied model filter: {model_filter} ({len(filtered_runs)} runs)")
+        
+        # Apply task filter if specified (now uses exact match)
+        if task_filter:
+            filtered_runs = [run for run in filtered_runs if run.get('task') == task_filter]
+            print(f"Applied task filter: {task_filter} ({len(filtered_runs)} runs)")
+        
+        if not show_all and filtered_runs:
             print("Filtering for most recent run per model-spec pair...")
             most_recent_runs_dict = {}
-            all_complete_runs.sort(key=lambda r: r.get('timestamp', datetime.datetime.min), reverse=True)
+            filtered_runs.sort(key=lambda r: r.get('timestamp', datetime.datetime.min), reverse=True)
             
-            for run in all_complete_runs:
+            for run in filtered_runs:
                 if not run.get('timestamp'): continue
                 model = run.get('model', 'Unknown')
                 spec_name = run.get('spec_name', 'Unknown')
@@ -494,21 +510,23 @@ def interactive_run_browser(log_dir: str = "logs", specs_dir: str = None, only_c
                 if key not in most_recent_runs_dict:
                     most_recent_runs_dict[key] = run
             
-            filtered_runs = sorted(list(most_recent_runs_dict.values()), key=lambda r: r.get('timestamp', datetime.datetime.min), reverse=True)
-            print(f"Displaying {len(filtered_runs)} most recent runs.")
-            return filtered_runs
+            most_recent_filtered = sorted(list(most_recent_runs_dict.values()), key=lambda r: r.get('timestamp', datetime.datetime.min), reverse=True)
+            print(f"Displaying {len(most_recent_filtered)} most recent runs.")
+            return most_recent_filtered
         else:
-            # Return all complete runs if show_all is True or no runs found initially
-            print(f"Displaying {len(all_complete_runs)} complete runs.")
-            return all_complete_runs
+            # Return all filtered runs if show_all is True or no runs found initially
+            print(f"Displaying {len(filtered_runs)} filtered runs.")
+            return filtered_runs
     # --- End Helper ---    
 
     # Get initial list of runs based on the default mode
-    runs = _get_filtered_runs(log_dir, show_all_runs_mode)
+    runs = _get_filtered_runs(log_dir, show_all_runs_mode, None, None)
 
     selected_run = None
     page = 0
     page_size = 10
+    current_model_filter = None
+    current_task_filter = None
     
     # --- Batch Operations Helper ---
     # (Moved from network_analysis.py)
@@ -790,6 +808,14 @@ def interactive_run_browser(log_dir: str = "logs", specs_dir: str = None, only_c
                 # Update filter description based on internal state
                 filter_desc = "all complete runs" if show_all_runs_mode else "most recent run per model-spec pair (default)"
                 print(f"\nShowing {filter_desc} - {len(runs)} runs found")
+                
+                # Display active filters if any
+                if current_model_filter or current_task_filter:
+                    print("\nActive filters:")
+                    if current_model_filter:
+                        print(f"  • Model = '{current_model_filter}'")
+                    if current_task_filter:
+                        print(f"  • Task = '{current_task_filter}'")
 
                 total_pages = (len(runs) + page_size - 1) // page_size
                 page = max(0, min(page, total_pages - 1)) # Ensure page is valid
@@ -855,6 +881,9 @@ def interactive_run_browser(log_dir: str = "logs", specs_dir: str = None, only_c
                 if page < total_pages - 1: print("  n - Next page")
                 # Add toggle option
                 print("  f - Toggle view: " + ("Show most recent only" if show_all_runs_mode else "Show all runs"))
+                print("  m - Filter by model")
+                print("  t - Filter by task")
+                print("  c - Clear all filters")
                 print("  b - Batch operations")
                 print("  r - Refresh run list")
                 print("  q - Quit")
@@ -871,16 +900,82 @@ def interactive_run_browser(log_dir: str = "logs", specs_dir: str = None, only_c
                 batch_operations() # Enter the batch submenu
             elif choice == 'r':
                  # Refresh using the helper function and current mode
-                 runs = _get_filtered_runs(log_dir, show_all_runs_mode)
+                 runs = _get_filtered_runs(log_dir, show_all_runs_mode, current_model_filter, current_task_filter)
                  page = 0
                  selected_run = None
             elif choice == 'f': # Toggle display mode
                  show_all_runs_mode = not show_all_runs_mode
                  print(f"\nSwitching view to show {'all complete runs' if show_all_runs_mode else 'most recent run per model-spec pair'}...")
-                 runs = _get_filtered_runs(log_dir, show_all_runs_mode)
+                 runs = _get_filtered_runs(log_dir, show_all_runs_mode, current_model_filter, current_task_filter)
                  page = 0
                  selected_run = None
                  input("Press Enter...") # Pause to show the message
+            elif choice == 'm': # Filter by model
+                # Get unique models from current runs list
+                all_models = sorted(list(set(run.get("model", "Unknown") for run in runs if run.get("model"))))
+                if not all_models:
+                    print("\nNo models found in the run data to filter by.")
+                    input("Press Enter...")
+                    continue
+                
+                print("\nSelect model to filter by (or enter 'clear' to clear model filter):")
+                for i, model in enumerate(all_models):
+                    print(f"  {i+1}. {model}")
+                model_choice = input("Enter model number: ").strip()
+                
+                if model_choice.lower() == 'clear':
+                    current_model_filter = None
+                    print("\nCleared model filter.")
+                elif model_choice.isdigit() and 0 < int(model_choice) <= len(all_models):
+                    current_model_filter = all_models[int(model_choice)-1]
+                    print(f"\nFiltering by model: {current_model_filter}")
+                else:
+                    print("\nInvalid model selection.")
+                
+                # Refresh with new filter
+                runs = _get_filtered_runs(log_dir, show_all_runs_mode, current_model_filter, current_task_filter)
+                page = 0
+                input("Press Enter...")
+            elif choice == 't': # Filter by task
+                # Get unique tasks from current runs list
+                # Use original list_runs result for task options, but filter the currently displayed 'runs'
+                all_tasks = sorted(list(set(run.get("task", "Unknown") for run in _get_filtered_runs(log_dir, show_all_runs_mode, current_model_filter, None) if run.get("task")))) # Get tasks based on current model filter
+                
+                if not all_tasks:
+                    print("\nNo tasks found in the current run selection to filter by.")
+                    input("Press Enter...")
+                    continue
+                    
+                print("\nSelect task to filter by (or enter 'clear' to clear task filter):")
+                for i, task in enumerate(all_tasks):
+                    # Truncate long tasks for display in the list
+                    display_task = (task[:60] + "...") if len(task) > 63 else task
+                    print(f"  {i+1}. {display_task}")
+                task_choice = input("Enter task number: ").strip()
+                
+                if task_choice.lower() == 'clear':
+                    current_task_filter = None
+                    print("\nCleared task filter.")
+                elif task_choice.isdigit() and 0 < int(task_choice) <= len(all_tasks):
+                    current_task_filter = all_tasks[int(task_choice)-1]
+                    print(f"\nFiltering by task: {current_task_filter}")
+                else:
+                    print("\nInvalid task selection.")
+                
+                # Refresh with new filter
+                runs = _get_filtered_runs(log_dir, show_all_runs_mode, current_model_filter, current_task_filter)
+                page = 0
+                input("Press Enter...")
+            elif choice == 'c': # Clear all filters
+                if current_model_filter or current_task_filter:
+                    current_model_filter = None
+                    current_task_filter = None
+                    print("\nCleared all filters.")
+                    runs = _get_filtered_runs(log_dir, show_all_runs_mode, None, None)
+                    page = 0
+                else:
+                    print("\nNo active filters to clear.")
+                input("Press Enter...")
             elif choice.isdigit() and runs:
                 try:
                     run_idx = int(choice) - 1
@@ -896,7 +991,7 @@ def interactive_run_browser(log_dir: str = "logs", specs_dir: str = None, only_c
                 except ValueError:
                      print(f"Invalid input: {choice}")
                      input("Press Enter...")
-            elif not runs and choice in ['p','n','b'] or (choice.isdigit() and not runs):
+            elif not runs and choice in ['p','n','b','m','t','c'] or (choice.isdigit() and not runs):
                  print("Option unavailable: No runs loaded.")
                  input("Press Enter...")
             else:

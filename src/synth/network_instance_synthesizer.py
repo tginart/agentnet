@@ -32,7 +32,7 @@ THEMES = [
     "Smart Home Security"
 ]
 
-THEMES = ["Travel Planning"]
+THEMES = ["Health and Wellness"]
 
 # Default model to use for generating network specs
 DEFAULT_MODEL = "gpt-4o"
@@ -44,6 +44,12 @@ MIN_LEAF_AGENTS = 2 # Minimum number of agents with no tools/other agents assign
 
 # Directory with existing network specs
 EXISTING_SPECS_DIR = Path(__file__).parent.parent / "sim/network_specs"
+
+EXAMPLE_SPECS_TO_USE = [
+    'test',
+    'file_my_taxes',
+    'find_an_apartment',
+]
 
 # Directory to save generated network specs
 OUTPUT_DIR = Path(__file__).parent / "synth_network_specs"
@@ -72,6 +78,7 @@ This is a simple example. Your task is to create a MORE COMPLEX, DETAILED, and R
 4. Realistic parameters in input schemas
 5. Deep agent hierarchies where some agents call other agents
 """
+
 
 MAIN_PROMPT_TEMPLATE = lambda theme, variant_id, example_specs_text: f"""
 Create a detailed and complex agent network specification JSON for a {theme} theme (variant {variant_id}).
@@ -113,10 +120,12 @@ The JSON should have the following structure:
     ]
 }}
 
-IMPORTANT REQUIREMENTS:
+"""
+
+REQUIREMENTS_PROMPT = """IMPORTANT REQUIREMENTS:
 
 0. The JSON should match the examples. The first top-level key should be "task".
-1. The "task" should be a specific, detailed natural language request related to {theme}
+1. The "task" should be a specific, detailed natural language request. You should use it to guide the creation of the network specification and importantly guide the necessary subpaths.
 2. Include at LEAST {MIN_AGENTS} agents with clear, specialized roles and responsibilities
 3. Include at LEAST {MIN_TOOLS} tools with appropriate, detailed input schemas
 4. Include at LEAST {MIN_LEAF_AGENTS} leaf agents (agents with an empty `tools` list or no `tools` key).
@@ -200,6 +209,17 @@ Remember to follow all the same requirements regarding depth, complexity, and st
 Return only the JSON object, properly formatted.
 """
 
+DIFFICULTY_BOOSTING_PROMPT = lambda example_spec: f"""
+Here is a valid network specification:
+
+```json
+{json.dumps(example_spec, indent=2)}
+```
+
+Please make it more complex and detailed.
+
+"""
+
 class NetworkSpecSynthesizer:
     def __init__(self, model: str = DEFAULT_MODEL):
         self.model = model
@@ -213,13 +233,20 @@ class NetworkSpecSynthesizer:
             print(f"Warning: Example specs directory {EXISTING_SPECS_DIR} does not exist")
             return example_specs
         
-        for file_path in EXISTING_SPECS_DIR.glob("*.json"):
-            try:
-                with open(file_path, "r") as f:
-                    spec = json.load(f)
-                    example_specs.append(spec)
-            except Exception as e:
-                print(f"Error loading example spec {file_path}: {e}")
+        # Create a mapping of filenames to their full paths
+        file_map = {f.stem: f for f in EXISTING_SPECS_DIR.glob("*.json")}
+        
+        # Load specs in the order specified in EXAMPLE_SPECS_TO_USE
+        for spec_name in EXAMPLE_SPECS_TO_USE:
+            if spec_name in file_map:
+                try:
+                    with open(file_map[spec_name], "r") as f:
+                        spec = json.load(f)
+                        example_specs.append(spec)
+                except Exception as e:
+                    print(f"Error loading example spec {spec_name}: {e}")
+            else:
+                print(f"Warning: Example spec {spec_name} not found in {EXISTING_SPECS_DIR}")
         
         return example_specs
         
@@ -235,7 +262,7 @@ class NetworkSpecSynthesizer:
                 all_example_texts.append(EXAMPLE_SPEC_TEMPLATE(example_spec))
             example_specs_text = "\\n\\n---\\n\\n".join(all_example_texts) # Join examples with a separator
         
-        initial_prompt = MAIN_PROMPT_TEMPLATE(theme, 1, example_specs_text)
+        initial_prompt = MAIN_PROMPT_TEMPLATE(theme, 1, example_specs_text) + REQUIREMENTS_PROMPT.format(MIN_AGENTS=MIN_AGENTS, MIN_TOOLS=MIN_TOOLS, MIN_LEAF_AGENTS=MIN_LEAF_AGENTS, REQUIRED_DEPTH=REQUIRED_DEPTH)
         
         # Initialize conversation messages
         messages = [
