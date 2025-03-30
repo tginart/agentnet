@@ -1,5 +1,5 @@
 import dash
-from dash import html, dcc, Input, Output, State, callback
+from dash import html, dcc, Input, Output, State, callback, ALL
 import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
 import networkx as nx
@@ -140,10 +140,18 @@ def get_node_positions(G):
     return nx.spring_layout(G, seed=42)
 
 
-def create_network_animation(G, node_types, sequence_log, pos=None):
-    """Create a network animation from the sequence log"""
+def create_network_animation(G, node_types, sequence_log, pos=None, highlight_subpath_nodes=None):
+    """Create a network animation from the sequence log, optionally highlighting a subpath."""
     if pos is None:
         pos = get_node_positions(G)
+        
+    highlight_nodes = set(highlight_subpath_nodes) if highlight_subpath_nodes else set()
+    # Determine highlight edges based on highlight_nodes
+    highlight_edges = set()
+    if highlight_nodes:
+        for u, v in G.edges():
+            if u in highlight_nodes and v in highlight_nodes:
+                highlight_edges.add((u, v))
 
     # Determine the set of nodes active in the sequence log
     nodes_in_sequence = set()
@@ -154,12 +162,14 @@ def create_network_animation(G, node_types, sequence_log, pos=None):
             if entry.get('to'):
                 nodes_in_sequence.add(entry['to'])
     
-    # Create node traces
+    # Create BASE node trace properties
     node_x = []
     node_y = []
     node_text = []
-    node_color = []
-    node_size = []
+    base_node_color = []
+    base_node_size = []
+    base_node_border_color = []
+    base_node_border_width = []
     
     for node in G.nodes():
         x, y = pos[node]
@@ -167,67 +177,90 @@ def create_network_animation(G, node_types, sequence_log, pos=None):
         node_y.append(y)
         node_text.append(f"Node: {node}<br>Type: {node_types.get(node, 'unknown')}")
         
-        # Set node color and size based on type AND activity
+        # Determine BASE style properties
         node_type = node_types.get(node)
-        if node not in nodes_in_sequence:
-             # Static color/size for inactive nodes
-            node_color.append("gray")
-            node_size.append(8)
+        is_active = node in nodes_in_sequence
+        is_highlighted = node in highlight_nodes
+
+        # Base Color (based on activity)
+        if not is_active:
+            color = "gray"
+            size = 8
         else:
             # Type-based color/size for active nodes
             if node_type == "human":
-                node_color.append("blue")
-                node_size.append(15)
+                color = "blue"
+                size = 15
             elif node_type == "agent":
-                node_color.append("green")
-                node_size.append(12)
+                color = "green"
+                size = 12
             elif node_type == "tool":
-                node_color.append("red")
-                node_size.append(10)
+                color = "red"
+                size = 10
             else:
-                node_color.append("darkgray") # Slightly different gray for active-unknown
-                node_size.append(8)
+                color = "darkgray"
+                size = 8
+        
+        # Base Border (based on highlight)
+        if is_highlighted:
+            border_color = "purple"
+            border_width = 2
+            size += 2 # Slightly larger if highlighted
+        else:
+            border_color = "#888"
+            border_width = 1
+            
+        base_node_color.append(color)
+        base_node_size.append(size)
+        base_node_border_color.append(border_color)
+        base_node_border_width.append(border_width)
     
+    # Create BASE node trace object
     node_trace = go.Scatter(
         x=node_x, y=node_y,
         mode='markers',
         hoverinfo='text',
         text=node_text,
         marker=dict(
-            color=node_color,
-            size=node_size,
-            line=dict(width=1, color='#888')
+            color=base_node_color,
+            size=base_node_size,
+            line=dict(width=base_node_border_width, color=base_node_border_color)
         ),
         name='Nodes'
     )
     
-    # Create edge traces
+    # Create BASE edge traces
     edge_traces = []
-    for edge in G.edges(data=True): # Get edge data attribute
+    for edge in G.edges(data=True): 
         u, v, data = edge
+        edge_tuple = (u, v)
         x0, y0 = pos[u]
         x1, y1 = pos[v]
-        edge_source = data.get('edge_source', 'network') # Default to network if somehow missing
+        edge_source = data.get('edge_source', 'network')
         
-        # Style based on edge source (dash/width/opacity), color is uniform
-        base_edge_color = '#888' # Uniform base color
-        if edge_source == 'spec':
-            line_style = dict(width=0.8, color=base_edge_color, dash='dot') # Thinner, dotted for spec-only
+        # Style based on edge source AND highlight
+        base_edge_color = '#888'
+        is_highlighted_edge = edge_tuple in highlight_edges
+
+        if is_highlighted_edge:
+            line_style = dict(width=1.5, color="purple", dash='solid') # Highlighted edges solid purple
+            edge_opacity = 0.7
+        elif edge_source == 'spec':
+            line_style = dict(width=0.8, color=base_edge_color, dash='dot') 
             edge_opacity = 0.4
-        else: # 'network'
-            line_style = dict(width=1, color=base_edge_color, dash='solid') # Solid for network
+        else: # 'network' (not highlighted)
+            line_style = dict(width=1, color=base_edge_color, dash='solid')
             edge_opacity = 0.5
 
-        # Create arrow shape for directed edge
         edge_trace = go.Scatter(
             x=[x0, x1, None], 
             y=[y0, y1, None],
             mode='lines',
-            line=line_style, # Use conditional style
+            line=line_style,
             hoverinfo='text',
-            text=f"{u} → {v}<br>(Source: {edge_source})", # Add source info to hover
+            text=f"{u} → {v}<br>(Source: {edge_source}){ '<br>HIGHLIGHTED' if is_highlighted_edge else ''}",
             name=f"{u} → {v}",
-            opacity=edge_opacity # Use conditional opacity
+            opacity=edge_opacity
         )
         edge_traces.append(edge_trace)
     
@@ -271,33 +304,53 @@ def create_network_animation(G, node_types, sequence_log, pos=None):
         if G.has_edge(from_node, to_node): 
             active_edges.add(current_edge_tuple)
         
-        # Create updated node colors and sizes for the frame
+        # Create updated node properties for the frame
         frame_node_colors = []
         frame_node_sizes = []
-        frame_node_text = []  # Add step info to node text
+        frame_node_border_colors = []
+        frame_node_border_widths = []
+        frame_node_text = []
         
         for node in G.nodes():
-             # Determine base color/size based on whether node has EVER been active
+             # Determine BASE color/size/border for this frame (based on CUMULATIVE activity & highlight)
             node_type = node_types.get(node)
             is_ever_active = node in cumulative_active_nodes
+            is_highlighted = node in highlight_nodes
             
+            # Base Color for frame (based on cumulative activity)
             if not is_ever_active:
-                base_color = "gray"
-                base_size = 8
+                current_base_color = "gray"
+                current_base_size = 8
             else:
-                if node_type == "human":
-                    base_color = "blue"
-                    base_size = 15
-                elif node_type == "agent":
-                    base_color = "green"
-                    base_size = 12
-                elif node_type == "tool":
-                    base_color = "red"
-                    base_size = 10
-                else:
-                    base_color = "darkgray"
-                    base_size = 8
+                if node_type == "human": current_base_color, current_base_size = "blue", 15
+                elif node_type == "agent": current_base_color, current_base_size = "green", 12
+                elif node_type == "tool": current_base_color, current_base_size = "red", 10
+                else: current_base_color, current_base_size = "darkgray", 8
+            
+            # Base Border for frame (based on highlight)
+            if is_highlighted:
+                current_border_color = "purple"
+                current_border_width = 2
+                current_base_size += 2 # Slightly larger if highlighted
+            else:
+                current_border_color = "#888"
+                current_border_width = 1
 
+            # Apply ACTIVE step highlighting (overrides color, modifies size)
+            frame_color = current_base_color
+            frame_size = current_base_size
+            if node == from_node:
+                frame_color = "orange" 
+                frame_size = current_base_size * 1.5
+            elif node == to_node:
+                frame_color = "yellow"
+                frame_size = current_base_size * 1.5
+
+            frame_node_colors.append(frame_color)
+            frame_node_sizes.append(frame_size)
+            frame_node_border_colors.append(current_border_color) # Border is independent of active step color
+            frame_node_border_widths.append(current_border_width)
+            
             # Add step info to node text
             node_info = f"Node: {node}<br>Type: {node_types.get(node, 'unknown')}"
             if node == from_node or node == to_node: # Currently active in this step
@@ -305,18 +358,6 @@ def create_network_animation(G, node_types, sequence_log, pos=None):
             elif is_ever_active: # Previously active
                 pass # No need to add extra text
             frame_node_text.append(node_info)
-            
-            # Apply highlighting for current step
-            if node == from_node:
-                frame_node_colors.append("orange")
-                frame_node_sizes.append(base_size * 1.5)
-            elif node == to_node:
-                frame_node_colors.append("yellow")
-                frame_node_sizes.append(base_size * 1.5)
-            else:
-                # Use the determined base color/size
-                frame_node_colors.append(base_color)
-                frame_node_sizes.append(base_size)
         
         # Create updated edge colors and widths for the frame
         frame_edge_traces = []
@@ -328,10 +369,10 @@ def create_network_animation(G, node_types, sequence_log, pos=None):
             x1, y1 = pos[v]
             
             # Create edge text with step info
-            edge_info = f"{u} → {v}<br>(Source: {edge_source})"
+            edge_info = f"{u} → {v}<br>(Source: {edge_source}){ '<br>HIGHLIGHTED' if edge_tuple in highlight_edges else ''}"
             
-            # Define base style for this edge (used when inactive or previously active)
-            base_edge_color = '#888' # Uniform base color
+            # Define base style for this edge 
+            base_edge_color = '#888' 
             if edge_source == 'spec':
                 base_line_style = dict(width=0.8, color=base_edge_color, dash='dot')
                 base_opacity = 0.4
@@ -346,7 +387,8 @@ def create_network_animation(G, node_types, sequence_log, pos=None):
                 frame_opacity = 1.0
                 edge_info += f"<br>Active in Step {i+1}"
             elif edge_tuple in active_edges: # Previously active (must be network if in active_edges)
-                 frame_line_style = base_line_style # Use network base style
+                 # Revert to base style (purple if highlighted, grey otherwise)
+                 frame_line_style = base_line_style 
                  frame_opacity = base_opacity 
             else:
                  # Inactive edge (spec or network)
@@ -377,7 +419,7 @@ def create_network_animation(G, node_types, sequence_log, pos=None):
             marker=dict(
                 color=frame_node_colors,
                 size=frame_node_sizes,
-                line=dict(width=1, color='#888')
+                line=dict(width=frame_node_border_widths, color=frame_node_border_colors) # Use frame border properties
             ),
             text=frame_node_text,
             hoverinfo='text',
@@ -502,10 +544,13 @@ def create_subpath_list(spec_data):
     items = []
     
     for i, subpath in enumerate(subpaths):
+        # Use pattern-matching ID for clientside callback input
+        item_id = {'type': 'subpath-item', 'index': i}
         items.append(html.Li([
             html.Span(f"Subpath {i+1}: "),
             html.Span(" → ".join(subpath))
-        ], id=f"subpath-{i}", className="subpath-item"))
+        # Use the dictionary ID, add className for styling/selection
+        ], id=item_id, className="subpath-item", n_clicks=0)) 
     
     return html.Ul(items, className="list-group")
 
@@ -583,6 +628,8 @@ def create_app(log_dir="logs", initial_run=None):
     
     # Create app layout
     app.layout = html.Div([
+        # Store for selected subpath ID
+        dcc.Store(id='selected-subpath-store', data=None),
         dbc.Container([
             dbc.Row([
                 dbc.Col([
@@ -938,37 +985,92 @@ def create_app(log_dir="logs", initial_run=None):
     @app.callback(
         Output("network-graph", "figure", allow_duplicate=True),
         [Input("highlight-subpath-btn", "n_clicks")],
-        [State("run-selector", "value")],
+        [State("run-selector", "value"),
+         State('selected-subpath-store', 'data')],
         prevent_initial_call=True
     )
-    def highlight_subpath(n_clicks, selected_run):
-        if not n_clicks or not selected_run:
+    def highlight_subpath(n_clicks, selected_run, selected_subpath_data):
+        # selected_subpath_data is likely a JSON string like '{"type":"subpath-item","index":2}'
+        if not n_clicks or not selected_run or not selected_subpath_data:
             return dash.no_update
         
-        # This is a placeholder - you would need to get the selected subpath
-        # and highlight it in the graph. For now, we'll just return the current graph.
-        return dash.no_update
+        subpath_dict = None
+        if isinstance(selected_subpath_data, str):
+            try:
+                # Parse the JSON string from the store
+                subpath_dict = json.loads(selected_subpath_data)
+            except json.JSONDecodeError:
+                print(f"Error decoding subpath data from store: {selected_subpath_data}")
+                return dash.no_update
+        elif isinstance(selected_subpath_data, dict):
+             # It might already be a dict on initial load or if client-side fails?
+             subpath_dict = selected_subpath_data
+        else:
+            print(f"Unexpected subpath data type: {type(selected_subpath_data)}")
+            return dash.no_update
+            
+        subpath_index = subpath_dict.get('index')
+        if subpath_index is None:
+            print(f"Could not find 'index' in subpath data: {subpath_dict}")
+            return dash.no_update
+            
+        # Load data to get subpath definition and graph
+        network_data = load_network_data(selected_run)
+        spec_data = load_spec_data(selected_run)
+        
+        highlight_nodes_list = []
+        try:
+            # Get the actual node list for the selected subpath index
+            if spec_data and 'verification' in spec_data and 'subpaths' in spec_data['verification']:
+                subpaths = spec_data['verification']['subpaths']
+                if 0 <= subpath_index < len(subpaths):
+                    highlight_nodes_list = subpaths[subpath_index]
+                else:
+                    print(f"Warning: Selected subpath index {subpath_index} out of bounds.")
+            else:
+                print("Warning: Could not find subpaths in spec_data.")
+        except Exception as e:
+            print(f"Error retrieving subpath nodes: {e}")
+            return dash.no_update
+
+        if not highlight_nodes_list:
+             return dash.no_update # No nodes found for path
+
+        # Regenerate graph and figure with highlight info
+        G, node_types = create_network_graph(network_data, spec_data)
+        pos = get_node_positions(G)
+        sequence_log = network_data.get('sequence_log', [])
+        
+        # Pass the list of nodes to highlight
+        fig = create_network_animation(G, node_types, sequence_log, pos, highlight_subpath_nodes=highlight_nodes_list)
+        
+        return fig
     
     @app.callback(
-        Output("network-graph", "figure", allow_duplicate=True),
+        [Output("network-graph", "figure", allow_duplicate=True),
+         Output('selected-subpath-store', 'data', allow_duplicate=True)],
         [Input("reset-view-btn", "n_clicks")],
         [State("run-selector", "value")],
         prevent_initial_call=True
     )
     def reset_view(n_clicks, selected_run):
         if not n_clicks or not selected_run:
-            return dash.no_update
+            # Also return no_update for the store
+            return dash.no_update, dash.no_update
         
-        # Reload the network graph
+        # Reload the network graph without highlight info
         network_data = load_network_data(selected_run)
         spec_data = load_spec_data(selected_run)
         G, node_types = create_network_graph(network_data, spec_data)
         pos = get_node_positions(G)
         sequence_log = network_data.get('sequence_log', [])
         
-        return create_network_animation(G, node_types, sequence_log, pos)
+        fig = create_network_animation(G, node_types, sequence_log, pos) # No highlight args
+        
+        # Return the default figure and None to clear the selected subpath store
+        return fig, None
     
-    # Add custom CSS
+    # Add custom CSS including selection style
     app.index_string = """
     <!DOCTYPE html>
     <html>
@@ -998,6 +1100,21 @@ def create_app(log_dir="logs", initial_run=None):
                 .active-row {
                     background-color: #e6f7ff !important;
                 }
+                .subpath-item {
+                    cursor: pointer;
+                    padding: 5px;
+                    border-radius: 3px;
+                    margin-bottom: 2px; /* Add some space */
+                }
+                .subpath-item:hover {
+                    background-color: #eee;
+                }
+                .selected-subpath {
+                    font-weight: bold;
+                    text-decoration: underline;
+                    color: #0d6efd; /* Bootstrap primary blue */
+                    background-color: #e7f1ff; /* Light blue background */
+                }
             </style>
         </head>
         <body>
@@ -1011,6 +1128,53 @@ def create_app(log_dir="logs", initial_run=None):
     </html>
     """
     
+    # CLIENT-SIDE CALLBACK FOR SUBPATH SELECTION
+    app.clientside_callback(
+        """
+        function(clicked_id, current_selection) {
+            const triggered = dash_clientside.callback_context.triggered;
+            // console.log("Clientside triggered:", triggered);
+            // console.log("Clicked ID:", clicked_id, "Current Selection:", current_selection);
+            
+            if (!triggered || triggered.length === 0 || !triggered[0].prop_id.includes('.n_clicks')) {
+                // Initial load or trigger wasn't a click on a subpath item
+                // We still need to style based on the initial store value if any
+                document.querySelectorAll('.subpath-item').forEach(item => {
+                    if (item.id === current_selection) {
+                        item.classList.add('selected-subpath');
+                    } else {
+                        item.classList.remove('selected-subpath');
+                    }
+                });
+                return current_selection || dash_clientside.no_update; 
+            }
+
+            const new_selection_id = triggered[0].prop_id.split('.')[0];
+            let new_store_value = new_selection_id;
+
+            // Toggle selection: if clicking the already selected item, deselect it
+            if (new_selection_id === current_selection) {
+                new_store_value = null;
+            }
+
+            // Update class names
+            document.querySelectorAll('.subpath-item').forEach(item => {
+                if (item.id === new_store_value) {
+                    item.classList.add('selected-subpath');
+                } else {
+                    item.classList.remove('selected-subpath');
+                }
+            });
+            
+            // console.log("New store value:", new_store_value);
+            return new_store_value;
+        }
+        """,
+        Output('selected-subpath-store', 'data'),
+        [Input({'type': 'subpath-item', 'index': ALL}, 'n_clicks')], # Use pattern matching input
+        [State('selected-subpath-store', 'data')]
+    )
+
     return app
 
 
