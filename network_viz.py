@@ -492,14 +492,29 @@ def create_network_animation(G, node_types, sequence_log, pos=None, highlight_su
     return fig
 
 
-def create_sequence_log_table(sequence_log):
-    """Create a table from the sequence log with expandable rows."""
-    table_rows = [] # Changed name from 'rows' to avoid confusion
+def create_sequence_log_table(sequence_log_with_indices):
+    """Create a table from the sequence log (with original indices) with expandable rows."""
+    table_rows = [] 
     
     # Truncation length
     TRUNCATE_LEN = 100
 
-    for i, entry in enumerate(sequence_log):
+    # Handle both list of entries and list of (index, entry) tuples
+    # Check the type of the first element to determine format
+    if sequence_log_with_indices and isinstance(sequence_log_with_indices[0], tuple):
+        log_iterable = sequence_log_with_indices
+        using_indices = True
+    else:
+        # Wrap the original list with indices if not already provided
+        log_iterable = enumerate(sequence_log_with_indices)
+        using_indices = False
+
+    for item in log_iterable:
+        if using_indices:
+            original_index, entry = item
+        else:
+            original_index, entry = item # item is (index, entry) from enumerate
+
         timestamp = entry.get('timestamp', '').split('T')[1].split('.')[0] if 'timestamp' in entry else ''
         from_node = entry.get('from', '')
         to_node = entry.get('to', '')
@@ -520,18 +535,20 @@ def create_sequence_log_table(sequence_log):
             truncated_content = truncated_content[:TRUNCATE_LEN] + "..."
             is_truncated = True
             
-        row_id = {'type': 'log-row', 'index': i}
-        collapse_id = {'type': 'log-collapse', 'index': i}
+        # Use original_index for IDs
+        row_id = {'type': 'log-row', 'index': original_index}
+        collapse_id = {'type': 'log-collapse', 'index': original_index}
 
         # Create the main row with truncated content
+        # Use original_index + 1 for displayed step number
         main_row = html.Tr([
-            html.Td(i+1),
+            html.Td(original_index + 1), 
             html.Td(timestamp),
             html.Td(from_node),
             html.Td(to_node),
             html.Td(msg_type),
             html.Td(truncated_content, className="log-content-truncated")
-        ], id=row_id, className="log-row", n_clicks=0) # Add n_clicks to make it clickable
+        ], id=row_id, className="log-row", n_clicks=0)
         
         # Create the collapsible row with full content (only if truncated)
         if is_truncated:
@@ -544,11 +561,11 @@ def create_sequence_log_table(sequence_log):
                         ], className="log-content-expanded-container")
                     ], id=collapse_id, is_open=False)
                 ])
-            ], className="log-row-expanded") # Add class for potential styling
+            ], className="log-row-expanded")
             table_rows.append(main_row)
             table_rows.append(collapsible_row)
         else:
-             table_rows.append(main_row) # No need for collapsible row if not truncated
+             table_rows.append(main_row)
 
     return html.Table([
         html.Thead(
@@ -561,7 +578,6 @@ def create_sequence_log_table(sequence_log):
                 html.Th("Content")
             ])
         ),
-        # Pass the list of Tr elements directly
         html.Tbody(table_rows, id="log-table-body") 
     ], className="table table-striped table-hover")
 
@@ -704,16 +720,16 @@ def create_app(log_dir="logs", initial_run=None):
                                             },
                                             style={'height': '600px'}
                                         ),
-                                        # Controls no longer need conditional wrapper
-                                        dbc.Checklist(
-                                            options=[
-                                                {"label": "Auto-update message details during animation", "value": 1}
-                                            ],
-                                            value=[1],
-                                            id="auto-update-toggle",
-                                            switch=True,
-                                            className="mt-2"
-                                        ),
+                                        # Remove the auto-update toggle as its callback is being removed
+                                        # dbc.Checklist(
+                                        #     options=[
+                                        #         {"label": "Auto-update message details during animation", "value": 1}
+                                        #     ],
+                                        #     value=[1],
+                                        #     id="auto-update-toggle",
+                                        #     switch=True,
+                                        #     className="mt-2"
+                                        # ),
                                         current_step_div
                                     ])
                                 ]
@@ -736,16 +752,16 @@ def create_app(log_dir="logs", initial_run=None):
                         ])
                     ], className="mb-4"),
                     
-                    # Message details section
-                    dbc.Card([
-                        dbc.CardHeader([
-                            "Current Message Details",
-                            html.Span(id="message-details-step", className="float-right")
-                        ]),
-                        dbc.CardBody([
-                            html.Div(id="message-details", className="message-container")
-                        ])
-                    ])
+                    # REMOVE Message details section
+                    # dbc.Card([
+                    #     dbc.CardHeader([
+                    #         "Current Message Details",
+                    #         html.Span(id="message-details-step", className="float-right")
+                    #     ]),
+                    #     dbc.CardBody([
+                    #         html.Div(id="message-details", className="message-container")
+                    #     ])
+                    # ])
                 ], width=4)
             ], className="mb-4"),
             
@@ -757,17 +773,21 @@ def create_app(log_dir="logs", initial_run=None):
                             # Add Filter Controls Row
                             dbc.Row([
                                 dbc.Col([
+                                    dbc.Label("Step #:"),
+                                    dbc.Input(id='filter-step-num', type='number', placeholder="Go to step...", min=1, step=1)
+                                ], width=2), # Adjust width
+                                dbc.Col([
                                     dbc.Label("From Node:"),
-                                    dcc.Dropdown(id='filter-from-node', multi=True, placeholder="Filter by source...")
-                                ], width=4),
+                                    dcc.Dropdown(id='filter-from-node', multi=True, placeholder="Filter...")
+                                ], width=3), # Adjust width
                                 dbc.Col([
                                     dbc.Label("To Node:"),
-                                    dcc.Dropdown(id='filter-to-node', multi=True, placeholder="Filter by target...")
-                                ], width=4),
+                                    dcc.Dropdown(id='filter-to-node', multi=True, placeholder="Filter...")
+                                ], width=3), # Adjust width
                                 dbc.Col([
                                     dbc.Label("Message Type:"),
-                                    dcc.Dropdown(id='filter-msg-type', multi=True, placeholder="Filter by type...")
-                                ], width=4)
+                                    dcc.Dropdown(id='filter-msg-type', multi=True, placeholder="Filter...")
+                                ], width=4) # Adjust width
                             ], className="mb-3"),
                             # Existing Table Div
                             html.Div(
@@ -911,143 +931,6 @@ def create_app(log_dir="logs", initial_run=None):
         return not animation_state.get('playing', False)
     
     @app.callback(
-        [Output("message-details", "children"),
-         Output("message-details-step", "children")],
-        [Input("network-graph", "clickData"),
-         Input("log-table-body", "n_clicks"),
-         Input("current-step", "children")],
-        [State("run-selector", "value"),
-         State("auto-update-toggle", "value")]
-    )
-    def update_message_details(clickData, n_clicks, current_step, selected_run, auto_update):
-        ctx = dash.callback_context
-        trigger_id = ctx.triggered[0]['prop_id'].split('.')[0] if ctx.triggered else None
-        
-        if not selected_run:
-            return html.Div("Select a run to view details"), ""
-        
-        network_data = load_network_data(selected_run)
-        sequence_log = network_data.get('sequence_log', [])
-        
-        # Update based on current step (from slider/animation) if auto-update is enabled AND sequence log exists
-        if trigger_id == "current-step" and current_step and auto_update and 1 in auto_update:
-            try:
-                step_index = int(current_step) - 1  # Convert from 1-based step to 0-based index
-                if 0 <= step_index < len(sequence_log):
-                    log_entry = sequence_log[step_index]
-                    from_node = log_entry.get('from', '')
-                    to_node = log_entry.get('to', '')
-                    msg_type = log_entry.get('type', '')
-                    timestamp = log_entry.get('timestamp', '').split('T')[1].split('.')[0] if 'timestamp' in log_entry else ''
-                    
-                    content = [
-                        html.H5(f"Message: {from_node} → {to_node}"),
-                        html.H6(f"Type: {msg_type}"),
-                        html.P(f"Time: {timestamp}"),
-                        html.Hr(),
-                    ]
-                    
-                    # Format content based on message type
-                    if msg_type == 'tool_call' and 'arguments' in log_entry:
-                        msg_content = json.dumps(log_entry.get('arguments', {}), indent=2)
-                        content.append(html.H6("Arguments:"))
-                        content.append(html.Pre(msg_content, style={'white-space': 'pre-wrap'}))
-                    else:
-                        msg_content = log_entry.get('content', '')
-                        content.append(html.H6("Content:"))
-                        content.append(html.Div(msg_content, style={'white-space': 'pre-wrap'}))
-                    
-                    return html.Div(content), f"Step {step_index + 1}"
-            except Exception as e:
-                print(f"Error updating message details: {e}")
-                pass
-        
-        # Handle node/edge clicks
-        if trigger_id == "network-graph" and clickData:
-            point = clickData['points'][0]
-            curve_number = point['curveNumber']
-            
-            if curve_number == 0:  # Node click
-                node_text = point['text']
-                node_id = node_text.split('<br>')[0].replace('Node: ', '')
-                
-                # Get node logs
-                node_logs = network_data.get('node_logs', {}).get(node_id, [])
-                
-                content = [
-                    html.H5(f"Node: {node_id}"),
-                    html.Hr(),
-                    html.H6(f"Activity ({len(node_logs)} events):"),
-                    html.Ul([
-                        html.Li(f"Step {log.get('step')}: {log.get('type')} - {log.get('from')} → {log.get('to')}")
-                        for log in sorted(node_logs, key=lambda x: x.get('step', 0))[:10]
-                    ])
-                ]
-                
-                if len(node_logs) > 10:
-                    content.append(html.P(f"... and {len(node_logs) - 10} more events"))
-                
-                return html.Div(content), f"Node Info"
-                
-            else:  # Edge click
-                edge_text = point['text']
-                if not edge_text or '→' not in edge_text:
-                    return html.Div("Click on a node or edge for details"), ""
-                    
-                from_node, to_node = edge_text.split('→')[0].strip(), edge_text.split('→')[1].strip().split('<br>')[0].strip()
-                
-                # Get edge logs
-                edge_key = f"{from_node}→{to_node}"
-                edge_logs = network_data.get('edge_logs', {}).get(edge_key, [])
-                
-                if not edge_logs:
-                    return html.Div(f"No messages found between {from_node} and {to_node}"), "Edge Info"
-                
-                content = [
-                    html.H5(f"Edge: {from_node} → {to_node}"),
-                    html.Hr(),
-                    html.H6(f"Messages ({len(edge_logs)} total):"),
-                ]
-                
-                for i, log in enumerate(sorted(edge_logs, key=lambda x: x.get('step', 0))[:5]):
-                    msg_type = log.get('type', '')
-                    step_num = log.get('step', '?')
-                    
-                    if msg_type == 'tool_call' and 'arguments' in log:
-                        msg_content = str(log.get('arguments', {}))
-                    else:
-                        msg_content = log.get('content', '')
-                    
-                    if len(msg_content) > 200:
-                        msg_content = msg_content[:200] + "..."
-                    
-                    content.append(html.Div([
-                        html.Strong(f"Step {step_num}: {msg_type}"),
-                        html.P(msg_content)
-                    ], className="message-item", id=f"edge-message-{step_num}"))
-                
-                if len(edge_logs) > 5:
-                    content.append(html.P(f"... and {len(edge_logs) - 5} more messages"))
-                
-                return html.Div(content), f"Edge Info"
-        
-        # Handle log table row clicks
-        if trigger_id == "log-table-body" and n_clicks:
-            # Note: This would require additional work to capture which row was clicked
-            # For now, we'll focus on the graph clicks and auto-updates
-            pass
-        
-        # Simplify default message logic
-        if trigger_id != "network-graph" and trigger_id != "log-table-body" and trigger_id != "current-step":
-            return html.Div("Select a run or interact with the graph."), ""
-        elif trigger_id == "network-graph" or trigger_id == "log-table-body" or trigger_id == "current-step":
-             # Let the specific handlers return content or fall through
-             pass
-
-        # Fallback default if node/edge/log click didn't return anything
-        return html.Div("Select a run or interact with the graph."), ""
-    
-    @app.callback(
         Output("network-graph", "figure", allow_duplicate=True),
         [Input("highlight-subpath-btn", "n_clicks")],
         [State("run-selector", "value"),
@@ -1140,63 +1023,80 @@ def create_app(log_dir="logs", initial_run=None):
         Output("sequence-log-table", "children", allow_duplicate=True),
         [Input("filter-from-node", "value"),
          Input("filter-to-node", "value"),
-         Input("filter-msg-type", "value")],
+         Input("filter-msg-type", "value"),
+         Input("filter-step-num", "value")],
         [State("run-selector", "value")],
         prevent_initial_call=True
     )
-    def filter_log_table(selected_from, selected_to, selected_types, selected_run):
+    def filter_log_table(selected_from, selected_to, selected_types, step_num, selected_run):
         if not selected_run:
             return dash.no_update
             
         network_data = load_network_data(selected_run)
         sequence_log = network_data.get('sequence_log', [])
         
-        if not selected_from and not selected_to and not selected_types:
+        # Check if any filters are active
+        filters_active = selected_from or selected_to or selected_types or step_num is not None
+        
+        if not filters_active:
             # No filters applied, return the original table
             return create_sequence_log_table(sequence_log)
         
         filtered_log = []
-        for entry in sequence_log:
+        for i, entry in enumerate(sequence_log):
+            # Check step number first (most specific)
+            original_step_num = i + 1 # Original 1-based step number
+            if step_num is not None and original_step_num != step_num:
+                continue # Skip if step number doesn't match
+                
+            # Check other filters if step number matched or wasn't specified
             match_from = not selected_from or entry.get('from') in selected_from
             match_to = not selected_to or entry.get('to') in selected_to
             match_type = not selected_types or entry.get('type') in selected_types
             
             if match_from and match_to and match_type:
-                filtered_log.append(entry)
+                # Append tuple: (original_index, entry)
+                filtered_log.append((i, entry))
                 
+        # If filtering by step number and nothing else, the result should be max 1 row
+        # If other filters are active, result could be 0 or 1 row.
+        
         return create_sequence_log_table(filtered_log)
 
-    # Callback to handle log row expansion
+    # Callback to handle log row expansion and toggle collapse
     @app.callback(
-        Output('expanded-log-row-store', 'data'),
+        [Output('expanded-log-row-store', 'data'),
+         Output({'type': 'log-collapse', 'index': ALL}, 'is_open')], # Add output for collapse state
         Input({'type': 'log-row', 'index': ALL}, 'n_clicks'),
-        [State('expanded-log-row-store', 'data')],
+        [State('expanded-log-row-store', 'data'),
+         State({'type': 'log-collapse', 'index': ALL}, 'id')], # Get IDs of ALL potential collapse components
         prevent_initial_call=True,
     )
-    def update_expanded_log_row(n_clicks, current_expanded_index):
+    def update_expanded_log_row(n_clicks, current_expanded_index, collapse_ids):
         ctx = dash.callback_context
-        if not ctx.triggered_id:
-            return dash.no_update
-
-        clicked_index = ctx.triggered_id['index']
+        triggered_id = ctx.triggered_id
         
-        # Toggle: if clicking the already expanded row, collapse it (set store to None)
-        if clicked_index == current_expanded_index:
-            return None
-        else:
-            # Otherwise, expand the clicked row
-            return clicked_index
-            
-    # Callback to toggle the collapse component based on the store
-    @app.callback(
-        Output({'type': 'log-collapse', 'index': MATCH}, 'is_open'),
-        Input('expanded-log-row-store', 'data'),
-        [State({'type': 'log-collapse', 'index': MATCH}, 'id')],
-        prevent_initial_call=True,
-    )
-    def toggle_log_collapse(expanded_index, collapse_id):
-        return expanded_index == collapse_id['index']
+        # Filter out None clicks (can happen on initial load or if n_clicks isn't set)
+        valid_clicks = [click for click in n_clicks if click is not None]
+        if not triggered_id or not valid_clicks:
+            # No row clicked yet, ensure all are collapsed
+            initial_states = [False] * len(collapse_ids)
+            return current_expanded_index if current_expanded_index is not None else None, initial_states
 
+        clicked_index = triggered_id['index']
+        
+        # Determine the new state for the store
+        new_expanded_index = None
+        if clicked_index != current_expanded_index:
+            new_expanded_index = clicked_index # Expand the new one
+        # If clicked == current, new_expanded_index remains None (collapse)
+            
+        # Determine the is_open state for ALL collapse components
+        # Important: The order of collapse_ids corresponds to the order of Outputs for the ALL pattern
+        is_open_states = [new_expanded_index == comp_id['index'] for comp_id in collapse_ids]
+        
+        return new_expanded_index, is_open_states
+            
     # Add custom CSS including selection style AND subpath scrolling
     app.index_string = """
     <!DOCTYPE html>
