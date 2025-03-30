@@ -469,7 +469,15 @@ def create_network_animation(G, node_types, sequence_log, pos=None, highlight_su
             dict(
                 label="Play",
                 method="animate",
-                args=[None, dict(frame=dict(duration=1000, redraw=True), fromcurrent=True)]
+                # Pass arguments including dynamic duration from the slider
+                args=[None, {
+                    "frame": {"duration": 1000, "redraw": True}, # Default duration here is less critical
+                    "fromcurrent": True,
+                    "mode": "immediate", # Ensure immediate start
+                    # Reference the slider value using Plotly.js syntax if possible, 
+                    # or handle via callback (more robust)
+                    # Let's handle via callback for robustness
+                }]
             ),
             dict(
                 label="Pause",
@@ -735,7 +743,25 @@ def create_app(log_dir="logs", initial_run=None):
                                 ]
                             )
                         ])
-                    ])
+                    ]),
+                    # Add Speed Slider Row below the graph card
+                    dbc.Row([
+                        dbc.Col([
+                            html.Div([
+                                dbc.Label("Animation Speed (ms/step):", html_for="speed-slider", style={'margin-right': '10px'}),
+                                html.Div(id="speed-slider-output", style={'display': 'inline-block', 'width': '50px', 'font-weight': 'bold'})
+                            ], style={'display': 'inline-block'}),
+                            dcc.Slider(
+                                id='speed-slider',
+                                min=100,      # 100ms (fast)
+                                max=2000,     # 2000ms (2 seconds, slow)
+                                step=100,     # Steps of 100ms
+                                value=1000,   # Default to 1000ms (1 second)
+                                marks={i: f'{i}ms' for i in range(100, 2001, 300)}, # Optional marks
+                                tooltip={"placement": "bottom", "always_visible": False}
+                            )
+                        ], width=12)
+                    ], className="mt-2 mb-4") # Add some margin
                 ], width=8),
                 
                 # Right side: Controls and information
@@ -1097,6 +1123,41 @@ def create_app(log_dir="logs", initial_run=None):
         
         return new_expanded_index, is_open_states
             
+    # Callback to update animation speed display and potentially figure arguments
+    @app.callback(
+        [Output('speed-slider-output', 'children'),
+         Output('network-graph', 'figure', allow_duplicate=True)],
+        [Input('speed-slider', 'value'),
+         Input('network-graph', 'figure')], # Trigger when figure updates (e.g., on run change)
+        prevent_initial_call=True
+    )
+    def update_animation_speed(slider_value, current_figure):
+        if not slider_value or not current_figure:
+            return dash.no_update, dash.no_update
+
+        # Update the speed display
+        speed_text = f"{slider_value}"
+        
+        # Update the play button's arguments in the figure layout
+        # Be careful modifying the figure dict directly
+        new_figure = go.Figure(current_figure) # Create a copy to modify
+        
+        if new_figure.layout.updatemenus:
+             # Find the play button (assuming it's the first button in the first menu)
+             try:
+                 play_button_args = new_figure.layout.updatemenus[0].buttons[0].args
+                 if len(play_button_args) > 1 and isinstance(play_button_args[1], dict):
+                     play_button_args[1]['frame']['duration'] = slider_value
+                 else:
+                     # Initialize args structure if needed (shouldn't be necessary based on previous edit)
+                      play_button_args = [None, {"frame": {"duration": slider_value, "redraw": True}, "fromcurrent": True, "mode": "immediate"}]
+                      new_figure.layout.updatemenus[0].buttons[0].args = play_button_args
+             except (IndexError, KeyError, AttributeError) as e:
+                  print(f"Error updating play button args: {e}. Skipping figure update.")
+                  return speed_text, dash.no_update # Only update text if figure structure is unexpected
+
+        return speed_text, new_figure
+
     # Add custom CSS including selection style AND subpath scrolling
     app.index_string = """
     <!DOCTYPE html>
