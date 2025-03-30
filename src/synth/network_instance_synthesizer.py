@@ -218,7 +218,7 @@ Return only the JSON object, properly formatted.
 """
 
 DIFFICULTY_BOOSTING_PROMPT = lambda example_spec: f"""
-Here is a valid network specification:
+You are given a valid network specification:
 
 ```json
 {json.dumps(example_spec, indent=2)}
@@ -226,6 +226,8 @@ Here is a valid network specification:
 
 Please make it more complex and DIFFICULT. You should make the task request more intricate and specific.
 Based on the more complex task, you can add new agents and subpaths to the verification!
+
+Do not remove any agents or tools. But you can add many new agents to make it more complex.
 
 The verification subpaths should make sense from the perspective of the task, but should be tricky and subtle.
 
@@ -235,11 +237,6 @@ You can hide hints in the role of certain agents, such as this find_an_apartment
 
 Finally, don't worry so much about adding tools. You can add more agents, including leaf agents, and that will make the network more complex.
 
-
-EXAMPLE:
-```json
-{json.dumps(EXAMPLE_TAXES_SPEC, indent=2)}
-```
 Return only the JSON object, properly formatted.
 """
 
@@ -379,6 +376,7 @@ class NetworkSpecSynthesizer:
         """Generate valid JSON, retrying if there are parsing errors."""
         
         for attempt in range(MAX_FIX_ATTEMPTS):
+            breakpoint()
             response = await acompletion(
                 model=self.model,
                 response_format={ "type": "json_object" },
@@ -612,7 +610,7 @@ class NetworkSpecSynthesizer:
         
         return str(filepath)
 
-    async def generate_harder_variants(self, input_spec_path: str, num_variants: int = 3) -> List[Dict[str, Any]]:
+    async def generate_harder_variants(self, input_spec_path: str, num_variants: int = 3, include_harder_requirements: bool = False) -> List[Dict[str, Any]]:
         """Generate harder variants of an existing network specification.
         
         Args:
@@ -655,17 +653,21 @@ class NetworkSpecSynthesizer:
             return []
 
         # Format the requirements prompt with difficulty boost values
-        harder_requirements = REQUIREMENTS_PROMPT.format(
-            MIN_AGENTS=MIN_AGENTS_DIFFICULTY_BOOST,
-            MIN_TOOLS=MIN_TOOLS_DIFFICULTY_BOOST,
-            MIN_LEAF_AGENTS=MIN_LEAF_AGENTS_DIFFICULTY_BOOST,
-            REQUIRED_DEPTH=REQUIRED_DEPTH_DIFFICULTY_BOOST
-        )
+        if include_harder_requirements:
+            harder_requirements = REQUIREMENTS_PROMPT.format(
+                MIN_AGENTS=MIN_AGENTS_DIFFICULTY_BOOST,
+                MIN_TOOLS=MIN_TOOLS_DIFFICULTY_BOOST,
+                MIN_LEAF_AGENTS=MIN_LEAF_AGENTS_DIFFICULTY_BOOST,
+                REQUIRED_DEPTH=REQUIRED_DEPTH_DIFFICULTY_BOOST
+            )
+        else:
+            harder_requirements = ""
 
         # Initialize conversation messages
         messages = [
             {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": DIFFICULTY_BOOSTING_PROMPT(input_spec) + '\n\n' + harder_requirements}
+            {"role": "user", "content": DIFFICULTY_BOOSTING_PROMPT(input_spec) + '\n\n' + harder_requirements
+             }
         ]
 
         variants = []
@@ -717,6 +719,7 @@ async def main():
     parser = argparse.ArgumentParser(description='Generate network specifications')
     parser.add_argument('--input-spec', type=str, help='Path to input spec to generate harder variants from')
     parser.add_argument('--num-variants', type=int, default=3, help='Number of harder variants to generate (default: 3)')
+    parser.add_argument('--include-harder-requirements', type=bool, default=False, help='Include harder requirements in the prompt (default: False)')
     args = parser.parse_args()
     
     synthesizer = NetworkSpecSynthesizer()
@@ -724,7 +727,7 @@ async def main():
     
     if args.input_spec:
         print(f"Generating harder variants from spec: {args.input_spec}")
-        variants = await synthesizer.generate_harder_variants(args.input_spec, args.num_variants)
+        variants = await synthesizer.generate_harder_variants(args.input_spec, args.num_variants, args.include_harder_requirements)
         print(f"  Generated {len(variants)} harder variants")
     else:
         for theme in THEMES:

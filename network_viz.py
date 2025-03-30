@@ -12,17 +12,36 @@ import argparse
 
 
 def load_network_data(log_file_path):
-    """Load network data from a network.json file"""
+    """Load network data from a network.json file. Raises FileNotFoundError if not found."""
     if os.path.isdir(log_file_path):
         network_file = os.path.join(log_file_path, "network.json")
     else:
         network_file = log_file_path
         
     if not os.path.exists(network_file):
+        # Raise error if file not found
         raise FileNotFoundError(f"Network log file not found: {network_file}")
+        # return {"nodes": [], "edges": [], "sequence_log": [], "node_logs": {}, "edge_logs": {}}
     
-    with open(network_file, 'r') as f:
-        data = json.load(f)
+    try:
+        with open(network_file, 'r') as f:
+            data = json.load(f)
+    except json.JSONDecodeError as e:
+        # Still handle potential JSON errors
+        print(f"Error decoding JSON from {network_file}: {e}")
+        # Or re-raise a different error type if preferred
+        raise ValueError(f"Error decoding JSON from {network_file}") from e 
+        # return {"nodes": [], "edges": [], "sequence_log": [], "node_logs": {}, "edge_logs": {}}
+    # except Exception as e:
+    #     print(f"Error loading network data from {network_file}: {e}")
+    #     return {"nodes": [], "edges": [], "sequence_log": [], "node_logs": {}, "edge_logs": {}}
+    
+    # Ensure essential keys exist, provide defaults if not (still useful)
+    data.setdefault("nodes", [])
+    data.setdefault("edges", [])
+    data.setdefault("sequence_log", [])
+    data.setdefault("node_logs", {})
+    data.setdefault("edge_logs", {})
     
     return data
 
@@ -44,22 +63,75 @@ def load_spec_data(log_file_path):
     return data
 
 
-def create_network_graph(network_data):
-    """Create a NetworkX graph from the network data"""
+def create_network_graph(network_data, spec_data):
+    """Create a NetworkX graph incorporating nodes and edges from spec and network data."""
     G = nx.DiGraph()
-    
-    # Add nodes with their types
     node_types = {}
+
+    # 1. Add nodes from spec_data if available
+    if spec_data:
+        # Add agents from spec
+        if 'agents' in spec_data and isinstance(spec_data['agents'], list):
+            for agent_spec in spec_data['agents']:
+                if isinstance(agent_spec, dict) and 'name' in agent_spec:
+                    node_id = agent_spec['name']
+                    if node_id not in G:
+                        G.add_node(node_id, type='agent')
+                        node_types[node_id] = 'agent'
+
+        # Add tools from spec
+        if 'tools' in spec_data and isinstance(spec_data['tools'], list):
+            for tool_spec in spec_data['tools']:
+                 if isinstance(tool_spec, dict) and 'name' in tool_spec:
+                    node_id = tool_spec['name']
+                    if node_id not in G:
+                        G.add_node(node_id, type='tool')
+                        node_types[node_id] = 'tool'
+
+        # Potentially add human node if defined in spec (adjust based on actual spec format)
+        # Example: if spec_data.get('human_in_the_loop'):
+        #     human_id = "User" # Or get ID from spec
+        #     if human_id not in G:
+        #         G.add_node(human_id, type='human')
+        #         node_types[human_id] = 'human'
+
+    # 2. Add/update nodes from network_data (network_data assumed to exist)
     for node in network_data['nodes']:
         node_id = node['id']
         node_type = node['type']
-        G.add_node(node_id, type=node_type)
+        if node_id not in G:
+            G.add_node(node_id, type=node_type)
+        # Update node type based on network data (it might be more specific or correct)
+        G.nodes[node_id]['type'] = node_type
         node_types[node_id] = node_type
-    
-    # Add edges
-    for edge in network_data['edges']:
-        G.add_edge(edge['from'], edge['to'])
-    
+
+    # 3. Add potential edges from spec_data (agent -> tool connections)
+    if spec_data and 'agents' in spec_data and isinstance(spec_data['agents'], list):
+        for agent_spec in spec_data['agents']:
+            if isinstance(agent_spec, dict) and 'name' in agent_spec and 'tools' in agent_spec:
+                agent_id = agent_spec['name']
+                if agent_id in G and isinstance(agent_spec['tools'], list):
+                    for tool_name in agent_spec['tools']:
+                        # Ensure the tool node also exists in the graph
+                        if tool_name in G:
+                            # Add edge with 'spec' source attribute
+                            G.add_edge(agent_id, tool_name, edge_source='spec')
+                        else:
+                            print(f"Warning: Tool '{tool_name}' listed for agent '{agent_id}' not found as a node. Skipping spec edge.")
+            
+
+    # 4. Add actual communication edges from network_data
+    for edge_data in network_data['edges']:
+        from_node = edge_data['from']
+        to_node = edge_data['to']
+        # Ensure nodes exist before adding edge
+        if from_node in G and to_node in G:
+            # Add edge, potentially overwriting/updating 'spec' edge
+            # Mark source as 'network' - this takes precedence if also in spec
+            G.add_edge(from_node, to_node, edge_source='network') 
+        else:
+            print(f"Warning: Skipping edge from {from_node} to {to_node} because one or both nodes not found in graph.")
+
     return G, node_types
 
 
@@ -72,6 +144,15 @@ def create_network_animation(G, node_types, sequence_log, pos=None):
     """Create a network animation from the sequence log"""
     if pos is None:
         pos = get_node_positions(G)
+
+    # Determine the set of nodes active in the sequence log
+    nodes_in_sequence = set()
+    if sequence_log:
+        for entry in sequence_log:
+            if entry.get('from'):
+                nodes_in_sequence.add(entry['from'])
+            if entry.get('to'):
+                nodes_in_sequence.add(entry['to'])
     
     # Create node traces
     node_x = []
@@ -86,19 +167,26 @@ def create_network_animation(G, node_types, sequence_log, pos=None):
         node_y.append(y)
         node_text.append(f"Node: {node}<br>Type: {node_types.get(node, 'unknown')}")
         
-        # Set node color based on type
-        if node_types.get(node) == "human":
-            node_color.append("blue")
-            node_size.append(15)
-        elif node_types.get(node) == "agent":
-            node_color.append("green")
-            node_size.append(12)
-        elif node_types.get(node) == "tool":
-            node_color.append("red")
-            node_size.append(10)
-        else:
+        # Set node color and size based on type AND activity
+        node_type = node_types.get(node)
+        if node not in nodes_in_sequence:
+             # Static color/size for inactive nodes
             node_color.append("gray")
             node_size.append(8)
+        else:
+            # Type-based color/size for active nodes
+            if node_type == "human":
+                node_color.append("blue")
+                node_size.append(15)
+            elif node_type == "agent":
+                node_color.append("green")
+                node_size.append(12)
+            elif node_type == "tool":
+                node_color.append("red")
+                node_size.append(10)
+            else:
+                node_color.append("darkgray") # Slightly different gray for active-unknown
+                node_size.append(8)
     
     node_trace = go.Scatter(
         x=node_x, y=node_y,
@@ -115,24 +203,35 @@ def create_network_animation(G, node_types, sequence_log, pos=None):
     
     # Create edge traces
     edge_traces = []
-    for edge in G.edges():
-        x0, y0 = pos[edge[0]]
-        x1, y1 = pos[edge[1]]
+    for edge in G.edges(data=True): # Get edge data attribute
+        u, v, data = edge
+        x0, y0 = pos[u]
+        x1, y1 = pos[v]
+        edge_source = data.get('edge_source', 'network') # Default to network if somehow missing
         
+        # Style based on edge source (dash/width/opacity), color is uniform
+        base_edge_color = '#888' # Uniform base color
+        if edge_source == 'spec':
+            line_style = dict(width=0.8, color=base_edge_color, dash='dot') # Thinner, dotted for spec-only
+            edge_opacity = 0.4
+        else: # 'network'
+            line_style = dict(width=1, color=base_edge_color, dash='solid') # Solid for network
+            edge_opacity = 0.5
+
         # Create arrow shape for directed edge
         edge_trace = go.Scatter(
             x=[x0, x1, None], 
             y=[y0, y1, None],
             mode='lines',
-            line=dict(width=1, color='#888', dash='solid'),
+            line=line_style, # Use conditional style
             hoverinfo='text',
-            text=f"{edge[0]} → {edge[1]}",
-            name=f"{edge[0]} → {edge[1]}",
-            opacity=0.5
+            text=f"{u} → {v}<br>(Source: {edge_source})", # Add source info to hover
+            name=f"{u} → {v}",
+            opacity=edge_opacity # Use conditional opacity
         )
         edge_traces.append(edge_trace)
     
-    # Create the figure
+    # Create the base figure (always contains nodes and static edges)
     fig = go.Figure(
         data=[node_trace] + edge_traces,
         layout=go.Layout(
@@ -145,108 +244,129 @@ def create_network_animation(G, node_types, sequence_log, pos=None):
             margin=dict(b=20, l=5, r=5, t=40),
             xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
             yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-            height=600
+            height=600,
+            # Sliders and updatemenus will be added below, remove initial empty lists
+            # sliders=[], 
+            # updatemenus=[] 
         )
     )
     
-    # Create animation frames
+    # Create animation frames (assuming sequence_log exists)
     frames = []
     active_edges = set()
-    active_nodes = set()
+    # Keep track of nodes active *up to this frame* for correct base coloring on revert
+    cumulative_active_nodes = set() 
     
     for i, entry in enumerate(sequence_log):
         from_node = entry.get('from')
         to_node = entry.get('to')
+        current_edge_tuple = (from_node, to_node)
         msg_type = entry.get('type')
         
-        # Add nodes to active set
-        active_nodes.add(from_node)
-        active_nodes.add(to_node)
+        # Update cumulative active nodes
+        if from_node: cumulative_active_nodes.add(from_node)
+        if to_node: cumulative_active_nodes.add(to_node)
         
-        # Add edge to active set
-        active_edges.add((from_node, to_node))
+        # Add edge to active set for this frame's highlighting
+        if G.has_edge(from_node, to_node): 
+            active_edges.add(current_edge_tuple)
         
-        # Create updated node colors and sizes
+        # Create updated node colors and sizes for the frame
         frame_node_colors = []
         frame_node_sizes = []
         frame_node_text = []  # Add step info to node text
         
         for node in G.nodes():
-            # Base colors and sizes
-            if node_types.get(node) == "human":
-                base_color = "blue"
-                base_size = 15
-            elif node_types.get(node) == "agent":
-                base_color = "green"
-                base_size = 12
-            elif node_types.get(node) == "tool":
-                base_color = "red"
-                base_size = 10
-            else:
+             # Determine base color/size based on whether node has EVER been active
+            node_type = node_types.get(node)
+            is_ever_active = node in cumulative_active_nodes
+            
+            if not is_ever_active:
                 base_color = "gray"
                 base_size = 8
-            
+            else:
+                if node_type == "human":
+                    base_color = "blue"
+                    base_size = 15
+                elif node_type == "agent":
+                    base_color = "green"
+                    base_size = 12
+                elif node_type == "tool":
+                    base_color = "red"
+                    base_size = 10
+                else:
+                    base_color = "darkgray"
+                    base_size = 8
+
             # Add step info to node text
             node_info = f"Node: {node}<br>Type: {node_types.get(node, 'unknown')}"
-            if node in active_nodes:
-                if node == from_node or node == to_node:
-                    # Add current step info
-                    node_info += f"<br>Active in Step {i+1}"
+            if node == from_node or node == to_node: # Currently active in this step
+                node_info += f"<br>Active in Step {i+1}"
+            elif is_ever_active: # Previously active
+                pass # No need to add extra text
             frame_node_text.append(node_info)
             
-            # Highlight active nodes
-            if node in active_nodes:
-                if node == from_node:
-                    # Sender node
-                    frame_node_colors.append("orange")
-                    frame_node_sizes.append(base_size * 1.5)
-                elif node == to_node:
-                    # Receiver node
-                    frame_node_colors.append("yellow")
-                    frame_node_sizes.append(base_size * 1.5)
-                else:
-                    # Previously active node
-                    frame_node_colors.append(base_color)
-                    frame_node_sizes.append(base_size)
+            # Apply highlighting for current step
+            if node == from_node:
+                frame_node_colors.append("orange")
+                frame_node_sizes.append(base_size * 1.5)
+            elif node == to_node:
+                frame_node_colors.append("yellow")
+                frame_node_sizes.append(base_size * 1.5)
             else:
+                # Use the determined base color/size
                 frame_node_colors.append(base_color)
                 frame_node_sizes.append(base_size)
         
-        # Create updated edge colors and widths
+        # Create updated edge colors and widths for the frame
         frame_edge_traces = []
-        for edge in G.edges():
-            x0, y0 = pos[edge[0]]
-            x1, y1 = pos[edge[1]]
+        for edge_tuple in G.edges(): # Iterate through graph edges (u, v)
+            u, v = edge_tuple
+            edge_data = G.get_edge_data(u, v)
+            edge_source = edge_data.get('edge_source', 'network')
+            x0, y0 = pos[u]
+            x1, y1 = pos[v]
             
             # Create edge text with step info
-            edge_info = f"{edge[0]} → {edge[1]}"
+            edge_info = f"{u} → {v}<br>(Source: {edge_source})"
             
-            if edge == (from_node, to_node):
+            # Define base style for this edge (used when inactive or previously active)
+            base_edge_color = '#888' # Uniform base color
+            if edge_source == 'spec':
+                base_line_style = dict(width=0.8, color=base_edge_color, dash='dot')
+                base_opacity = 0.4
+            else: # network
+                base_line_style = dict(width=1.0, color=base_edge_color, dash='solid')
+                base_opacity = 0.8 # Make previously active network edges slightly more prominent than base
+
+            # Apply highlighting/styling for the frame
+            if edge_tuple == current_edge_tuple:
                 # Currently active edge
-                edge_color = "yellow"
-                edge_width = 3
-                edge_opacity = 1.0
+                frame_line_style = dict(width=3, color='yellow', dash='solid')
+                frame_opacity = 1.0
                 edge_info += f"<br>Active in Step {i+1}"
-            elif edge in active_edges:
-                # Previously active edge
-                edge_color = "#888"
-                edge_width = 1.5
-                edge_opacity = 0.8
+            elif edge_tuple in active_edges: # Previously active (must be network if in active_edges)
+                 frame_line_style = base_line_style # Use network base style
+                 frame_opacity = base_opacity 
             else:
-                # Inactive edge
-                edge_color = "#888"
-                edge_width = 1
-                edge_opacity = 0.3
-            
+                 # Inactive edge (spec or network)
+                 # Use base style but dim opacity slightly more
+                 if edge_source == 'spec':
+                     frame_line_style = dict(width=0.8, color=base_edge_color, dash='dot')
+                     frame_opacity = 0.3 # Dimmer spec
+                 else:
+                     frame_line_style = dict(width=1.0, color=base_edge_color, dash='solid')
+                     frame_opacity = 0.4 # Dimmer inactive network
+               
             edge_trace = go.Scatter(
                 x=[x0, x1, None], 
                 y=[y0, y1, None],
                 mode='lines',
-                line=dict(width=edge_width, color=edge_color),
-                opacity=edge_opacity,
+                line=frame_line_style,
+                opacity=frame_opacity,
                 hoverinfo='text',
                 text=edge_info,
-                customdata=[f"step-{i+1}"]  # Store step number as custom data in array format
+                customdata=[f"step-{i+1}"] 
             )
             frame_edge_traces.append(edge_trace)
         
@@ -261,7 +381,7 @@ def create_network_animation(G, node_types, sequence_log, pos=None):
             ),
             text=frame_node_text,
             hoverinfo='text',
-            customdata=[f"step-{i+1}"]  # Store step number as custom data in array format
+            customdata=[f"step-{i+1}"]
         )
         
         # Create the frame
@@ -275,7 +395,7 @@ def create_network_animation(G, node_types, sequence_log, pos=None):
     # Add frames to figure
     fig.frames = frames
     
-    # Add slider
+    # Add slider (assuming sequence_log exists)
     sliders = [dict(
         active=0,
         steps=[dict(
@@ -300,33 +420,32 @@ def create_network_animation(G, node_types, sequence_log, pos=None):
         len=1.0
     )]
     
-    fig.update_layout(sliders=sliders)
+    # Add play/pause buttons (assuming sequence_log exists)
+    updatemenus = [dict(
+        type="buttons",
+        buttons=[
+            dict(
+                label="Play",
+                method="animate",
+                args=[None, dict(frame=dict(duration=1000, redraw=True), fromcurrent=True)]
+            ),
+            dict(
+                label="Pause",
+                method="animate",
+                args=[[None], dict(frame=dict(duration=0, redraw=True), mode="immediate")]
+            )
+        ],
+        direction="left",
+        pad=dict(r=10, t=10),
+        showactive=False,
+        x=0.1,
+        xanchor="right",
+        y=0,
+        yanchor="top"
+    )]
     
-    # Add play/pause buttons
-    fig.update_layout(
-        updatemenus=[dict(
-            type="buttons",
-            buttons=[
-                dict(
-                    label="Play",
-                    method="animate",
-                    args=[None, dict(frame=dict(duration=1000, redraw=True), fromcurrent=True)]
-                ),
-                dict(
-                    label="Pause",
-                    method="animate",
-                    args=[[None], dict(frame=dict(duration=0, redraw=True), mode="immediate")]
-                )
-            ],
-            direction="left",
-            pad=dict(r=10, t=10),
-            showactive=False,
-            x=0.1,
-            xanchor="right",
-            y=0,
-            yanchor="top"
-        )]
-    )
+    # Update layout with animation controls
+    fig.update_layout(sliders=sliders, updatemenus=updatemenus)
     
     return fig
 
@@ -398,7 +517,10 @@ def list_run_dirs(log_dir="logs"):
     
     run_dirs = []
     for d in sorted(glob.glob(os.path.join(log_dir, "*")), reverse=True):
-        if os.path.isdir(d) and os.path.exists(os.path.join(d, "network.json")):
+        network_file = os.path.join(d, "network.json")
+        spec_file = os.path.join(d, "spec.json")
+        # Check for BOTH spec.json and network.json existence
+        if os.path.isdir(d) and os.path.exists(spec_file) and os.path.exists(network_file):
             run_name = os.path.basename(d)
             # Try to parse timestamp and create a nice display name
             try:
@@ -438,9 +560,10 @@ def create_app(log_dir="logs", initial_run=None):
     # Load initial data
     network_data = load_network_data(initial_run)
     spec_data = load_spec_data(initial_run)
-    G, node_types = create_network_graph(network_data)
+    G, node_types = create_network_graph(network_data, spec_data)
     pos = get_node_positions(G)
     sequence_log = network_data.get('sequence_log', [])
+    initial_figure = create_network_animation(G, node_types, sequence_log, pos)
     
     # Initialize app
     app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
@@ -493,7 +616,7 @@ def create_app(log_dir="logs", initial_run=None):
                                     html.Div([
                                         dcc.Graph(
                                             id="network-graph",
-                                            figure=create_network_animation(G, node_types, sequence_log, pos),
+                                            figure=initial_figure, # Use pre-created figure
                                             config={
                                                 'displayModeBar': True,
                                                 'scrollZoom': True,
@@ -501,7 +624,7 @@ def create_app(log_dir="logs", initial_run=None):
                                             },
                                             style={'height': '600px'}
                                         ),
-                                        # Add a button to toggle auto-update of message details
+                                        # Controls no longer need conditional wrapper
                                         dbc.Checklist(
                                             options=[
                                                 {"label": "Auto-update message details during animation", "value": 1}
@@ -580,10 +703,10 @@ def create_app(log_dir="logs", initial_run=None):
         if not selected_run:
             return dash.no_update, dash.no_update, dash.no_update, dash.no_update
         
-        # Load data for selected run
+        # Load data (guaranteed to work if run is listed)
         network_data = load_network_data(selected_run)
         spec_data = load_spec_data(selected_run)
-        G, node_types = create_network_graph(network_data)
+        G, node_types = create_network_graph(network_data, spec_data)
         pos = get_node_positions(G)
         sequence_log = network_data.get('sequence_log', [])
         
@@ -612,11 +735,11 @@ def create_app(log_dir="logs", initial_run=None):
     )
     def update_current_step(clickData, relayoutData, n_intervals, animation_state, selected_run, current_step):
         ctx = dash.callback_context
-        trigger_id = ctx.triggered[0]['prop_id'].split('.')[0] if ctx.triggered else None
-        
-        if not selected_run:
+        if not ctx.triggered or not selected_run:
             return dash.no_update
         
+        trigger_id = ctx.triggered[0]['prop_id'].split('.')[0]
+
         network_data = load_network_data(selected_run)
         max_steps = len(network_data.get('sequence_log', []))
         
@@ -660,9 +783,12 @@ def create_app(log_dir="logs", initial_run=None):
     @app.callback(
         Output("animation-interval", "disabled"),
         [Input("network-graph", "relayoutData")],
-        [State("animation-state", "data")]
+        [State("animation-state", "data"), State("run-selector", "value")]
     )
-    def toggle_animation(relayoutData, animation_state):
+    def toggle_animation(relayoutData, animation_state, selected_run):
+        if not selected_run:
+            return True
+        
         if not relayoutData:
             return not animation_state.get('playing', False)
         
@@ -691,7 +817,7 @@ def create_app(log_dir="logs", initial_run=None):
         network_data = load_network_data(selected_run)
         sequence_log = network_data.get('sequence_log', [])
         
-        # Update based on current step (from slider/animation) if auto-update is enabled
+        # Update based on current step (from slider/animation) if auto-update is enabled AND sequence log exists
         if trigger_id == "current-step" and current_step and auto_update and 1 in auto_update:
             try:
                 step_index = int(current_step) - 1  # Convert from 1-based step to 0-based index
@@ -799,8 +925,15 @@ def create_app(log_dir="logs", initial_run=None):
             # For now, we'll focus on the graph clicks and auto-updates
             pass
         
-        # Default message
-        return html.Div("Click on a node or edge to see details"), ""
+        # Simplify default message logic
+        if trigger_id != "network-graph" and trigger_id != "log-table-body" and trigger_id != "current-step":
+            return html.Div("Select a run or interact with the graph."), ""
+        elif trigger_id == "network-graph" or trigger_id == "log-table-body" or trigger_id == "current-step":
+             # Let the specific handlers return content or fall through
+             pass
+
+        # Fallback default if node/edge/log click didn't return anything
+        return html.Div("Select a run or interact with the graph."), ""
     
     @app.callback(
         Output("network-graph", "figure", allow_duplicate=True),
@@ -828,7 +961,8 @@ def create_app(log_dir="logs", initial_run=None):
         
         # Reload the network graph
         network_data = load_network_data(selected_run)
-        G, node_types = create_network_graph(network_data)
+        spec_data = load_spec_data(selected_run)
+        G, node_types = create_network_graph(network_data, spec_data)
         pos = get_node_positions(G)
         sequence_log = network_data.get('sequence_log', [])
         
