@@ -8,6 +8,14 @@ from tabulate import tabulate
 from typing import Dict, List, Optional, Any 
 from collections import defaultdict
 
+# Add plotly imports
+try:
+    import plotly.graph_objects as go
+    import plotly.express as px
+    PLOTLY_AVAILABLE = True
+except ImportError:
+    PLOTLY_AVAILABLE = False
+
 # Adjust path to import from src/sim
 try:
     # This assumes viz.py is in the root directory
@@ -26,6 +34,8 @@ except ImportError as e:
 def eval_all_complete_runs(log_dir: str, specs_dir: str, 
     include_all_specs: Optional[bool] = False, # default is to only include specs present for all models
     model_to_evaluate: Optional[str] = None, # default is to evaluate all models
+    plot: Optional[bool] = False, # default is to not generate plot
+    pretty: Optional[bool] = False, # default is to not pretty print tables
     ):
     '''
     Evaluate all complete runs in the given log directory.
@@ -72,6 +82,15 @@ def eval_all_complete_runs(log_dir: str, specs_dir: str,
     for spec_name in specs_for_all_models:
         print(f"--- {spec_name} ---")
     print('\n')
+    
+    # Prepare data for plotting and tables
+    models_to_plot = []
+    completion_rates = []
+    veracity_rates = []
+    efficiency_rates = []
+    
+    # For pretty table
+    table_data = []
         
     for model_name in model_names:
         # print(f"Evaluating model: {model_name}")
@@ -88,14 +107,90 @@ def eval_all_complete_runs(log_dir: str, specs_dir: str,
                 avg_efficiency.append(run_eval_result['efficiency'])
 
 
-        avg_completion_rate = sum(avg_completion_rate) / len(avg_completion_rate)
-        avg_veracity_rate = sum(avg_veracity_rate) / len(avg_veracity_rate)
-        avg_efficiency = sum(avg_efficiency) / len(avg_efficiency)
+        avg_completion_rate_val = sum(avg_completion_rate) / len(avg_completion_rate)
+        avg_veracity_rate_val = sum(avg_veracity_rate) / len(avg_veracity_rate)
+        avg_efficiency_val = sum(avg_efficiency) / len(avg_efficiency)
 
-        print(f"Model: {model_name}")
-        print(f"  Completion rate: {avg_completion_rate}")
-        print(f"  Veracity rate: {avg_veracity_rate}")
-        print(f"  Efficiency: {avg_efficiency}")
+        # Add to tabulate data
+        table_data.append([
+            model_name,
+            f"{avg_completion_rate_val:.4f}",
+            f"{avg_veracity_rate_val:.4f}",
+            f"{avg_efficiency_val:.4f}"
+        ])
+        
+        # Print results based on pretty flag
+        if not pretty:
+            print(f"Model: {model_name}")
+            print(f"  Completion rate: {avg_completion_rate_val}")
+            print(f"  Veracity rate: {avg_veracity_rate_val}")
+            print(f"  Efficiency: {avg_efficiency_val}")
+        
+        # Add to plotting data structures
+        models_to_plot.append(model_name)
+        completion_rates.append(avg_completion_rate_val)
+        veracity_rates.append(avg_veracity_rate_val)
+        efficiency_rates.append(avg_efficiency_val)
+    
+    # Pretty print as table if requested
+    if pretty and table_data:
+        # Sort table data alphabetically by model name
+        table_data.sort(key=lambda x: x[0])
+        
+        # Print pretty table
+        headers = ["Model", "Completion Rate", "Veracity Rate", "Efficiency"]
+        print(tabulate(table_data, headers=headers, tablefmt="fancy_grid"))
+        print()
+    
+    # Generate plot if requested
+    if plot:
+        if not PLOTLY_AVAILABLE:
+            print("\nWarning: Plotly is not available. Cannot generate plot.")
+            print("To install plotly, run: pip install plotly")
+            return
+        
+        if not models_to_plot:
+            print("\nNo models to plot. Skipping plot generation.")
+            return
+            
+        # Sort the data alphabetically by model name
+        plot_data = sorted(zip(models_to_plot, completion_rates, veracity_rates, efficiency_rates), key=lambda x: x[0])
+        
+        # Unpack the sorted data
+        models_to_plot = [data[0] for data in plot_data]
+        completion_rates = [data[1] for data in plot_data]
+        veracity_rates = [data[2] for data in plot_data]
+        efficiency_rates = [data[3] for data in plot_data]
+            
+        # Create a grouped bar chart
+        fig = go.Figure(data=[
+            go.Bar(name='Completion Rate', x=models_to_plot, y=completion_rates),
+            go.Bar(name='Veracity Rate', x=models_to_plot, y=veracity_rates),
+            go.Bar(name='Efficiency', x=models_to_plot, y=efficiency_rates)
+        ])
+        
+        # Update layout
+        fig.update_layout(
+            title='Model Evaluation Results',
+            xaxis_title='Models',
+            yaxis_title='Score',
+            yaxis=dict(range=[0, 1]),
+            barmode='group',
+            legend_title='Metrics'
+        )
+        
+        # Save and open the plot
+        html_file = 'eval_results_plot.html'
+        fig.write_html(html_file)
+        print(f"\nPlot saved to {html_file}")
+        
+        # Try to open the browser
+        try:
+            import webbrowser
+            webbrowser.open('file://' + os.path.realpath(html_file))
+            print("Opening plot in web browser...")
+        except:
+            print(f"Failed to open browser. Please open {html_file} manually.")
 
 
 def visualize_network_ascii(log_file):
@@ -1249,6 +1344,10 @@ if __name__ == "__main__":
     # Add arguments needed by the network viz app
     parser.add_argument("--run", "-r", help="Specific run to visualize initially in the app.")
     parser.add_argument("--port", "-p", type=int, default=8050, help="Port to run the visualization app server on.")
+    # Add plot flag
+    parser.add_argument("--plot", action="store_true", help="Generate a Plotly plot of evaluation results")
+    # Add pretty flag for tabulate output
+    parser.add_argument("--pretty", action="store_true", help="Pretty-print evaluation results using tabulate")
 
     args = parser.parse_args()
 
@@ -1285,7 +1384,9 @@ if __name__ == "__main__":
         eval_all_complete_runs(
             args.log_dir,
             effective_specs_dir, # Use the found/validated spec dir
-            model_to_evaluate=args.model
+            model_to_evaluate=args.model,
+            plot=args.plot,  # Pass the plot flag to the evaluation function
+            pretty=args.pretty  # Pass the pretty flag to the evaluation function
         )
         sys.exit(0)
 

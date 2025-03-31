@@ -227,7 +227,7 @@ You are given a valid network specification:
 Please make it more complex and DIFFICULT. You should make the task request more intricate and specific.
 Based on the more complex task, you can add new agents and subpaths to the verification!
 
-Do not remove any agents or tools. But you can add many new agents to make it more complex.
+Do not remove any agents or tools. But you can add many new agents to make it more complex. REUSE AS MUCH OF THE ORIGINAL SPEC AS POSSIBLE.
 
 The verification subpaths should make sense from the perspective of the task, but should be tricky and subtle.
 
@@ -376,7 +376,7 @@ class NetworkSpecSynthesizer:
         """Generate valid JSON, retrying if there are parsing errors."""
         
         for attempt in range(MAX_FIX_ATTEMPTS):
-            breakpoint()
+            # breakpoint()
             response = await acompletion(
                 model=self.model,
                 response_format={ "type": "json_object" },
