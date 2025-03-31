@@ -78,9 +78,11 @@ def eval_all_complete_runs(log_dir: str, specs_dir: str,
             key = (run['model'], run['spec_name'])
             if key not in most_recent_runs or (run.get('timestamp') and most_recent_runs[key].get('timestamp') and run['timestamp'] > most_recent_runs[key]['timestamp']):
                 most_recent_runs[key] = run
-                
-            run_eval_results[run['name']] = compute_eval(run['name'], log_dir, specs_dir)
-            run_eval_results[run['name']]['model'] = run['model']
+    
+    # Only compute eval for the most recent runs
+    for key, run in most_recent_runs.items():
+        run_eval_results[run['name']] = compute_eval(run['name'], log_dir, specs_dir)
+        run_eval_results[run['name']]['model'] = run['model']
 
 
     # save run_eval_results to json file
@@ -117,8 +119,11 @@ def eval_all_complete_runs(log_dir: str, specs_dir: str,
         avg_completion_rate = []
         avg_veracity_rate = []
         avg_efficiency = []
-        for run_name, run_eval_result in run_eval_results.items():
-            if run_eval_result['model'] == model_name:
+        
+        # Only use runs from most_recent_runs for this model
+        for (run_model, _), run in most_recent_runs.items():
+            if run_model == model_name:
+                run_eval_result = run_eval_results[run['name']]
                 avg_completion_rate.append(run_eval_result['completion_rate'])
                 avg_veracity_rate.append(run_eval_result['veracity_rate'])
                 avg_efficiency.append(run_eval_result['efficiency'])

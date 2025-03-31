@@ -325,7 +325,7 @@ Generally speaking, this is just a proof-of-concept right now. There are many po
 
 
 ## Results 
-- As of (3/30/25)
+- As of (3/31/25)
 
 **Disclaimer**: These results are completely preliminary and a significant fraction of the network specs currently used are fairly toy. **While I believe the overall structure and methodology is sound** I think higher-quality and higher-volume network specs are needed in order to draw stronger conclusions.
 
@@ -333,19 +333,19 @@ Generally speaking, this is just a proof-of-concept right now. There are many po
 ╒═══════════════════════════════════╤═══════════════════╤═════════════════╤══════════════╕
 │ Model                             │   Completion Rate │   Veracity Rate │   Efficiency │
 ╞═══════════════════════════════════╪═══════════════════╪═════════════════╪══════════════╡
-│ claude-3-5-haiku-20241022         │            0.7154 │          0.4167 │       0.2914 │
+│ claude-3-5-haiku-20241022         │            0.7053 │          0.3846 │       0.307  │
 ├───────────────────────────────────┼───────────────────┼─────────────────┼──────────────┤
-│ claude-3-5-sonnet-20240620        │            0.6857 │          0.4167 │       0.3131 │
+│ claude-3-5-sonnet-20240620        │            0.6629 │          0.3846 │       0.2854 │
 ├───────────────────────────────────┼───────────────────┼─────────────────┼──────────────┤
-│ gpt-4o                            │            0.5558 │          0.3214 │       0.3307 │
+│ gpt-4o                            │            0.5418 │          0.2308 │       0.3148 │
 ├───────────────────────────────────┼───────────────────┼─────────────────┼──────────────┤
-│ gpt-4o-mini                       │            0.4633 │          0.3214 │       0.2792 │
+│ gpt-4o-mini                       │            0.4209 │          0.2308 │       0.2568 │
 ├───────────────────────────────────┼───────────────────┼─────────────────┼──────────────┤
-│ deepseek/deepseek-chat-v3-0324    │            0.5125 │          0.3158 │       0.2896 │
+│ deepseek/deepseek-chat-v3-0324    │            0.3579 │          0.2308 │       0.1791 │
 ├───────────────────────────────────┼───────────────────┼─────────────────┼──────────────┤
-│ meta-llama/llama-3.3-70b-instruct │            0.5894 │          0.3333 │       0.339  │
+│ meta-llama/llama-3.3-70b-instruct │            0.687  │          0.3846 │       0.3378 │
 ├───────────────────────────────────┼───────────────────┼─────────────────┼──────────────┤
-│ x-ai/grok-2-1212                  │            0.4617 │          0.3243 │       0.2379 │
+│ x-ai/grok-2-1212                  │            0.3526 │          0.2308 │       0.1825 │
 ╘═══════════════════════════════════╧═══════════════════╧═════════════════╧══════════════╛
 ```
 
