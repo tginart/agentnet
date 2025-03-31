@@ -247,7 +247,6 @@ agentnet/
 │   ├── launch/           # Predefined launch configurations
 │   ├── launch_config.yaml  # Default config for batch simulations
 │   └── run_config.yaml   # Default config for individual simulations
-├── example_dotenv.txt    # Template for .env file with API keys
 ├── launch.py             # Script for running multiple simulations in parallel
 ├── logs/                 # Directory for simulation logs and results
 ├── requirements.txt      # Python dependencies
@@ -260,7 +259,6 @@ agentnet/
 │   │   ├── network_initalizer.py   # Network initialization
 │   │   ├── network_runner.py       # Execution of agent networks
 │   │   ├── network_specs/          # Predefined network specifications
-│   │   ├── network_specs_generated/ # Generated network specifications
 │   │   ├── tool_exec.py            # Tool execution logic
 │   │   └── universal_api.py        # Universal API for agent communication
 │   ├── synth/            # Network specification synthesis
