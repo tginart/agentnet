@@ -1,0 +1,45 @@
+2025-03-30 01:35:44,048 - agent_network - INFO - Initialized logging to directory: logs/20250330_013544_sf_weather_openrouter_deepseek_deepseek-chat-v3-0324
+2025-03-30 01:35:44,048 - agent_network - INFO - [MESSAGE] From: human | To: client_agent | Content: Get a weather forecast for San Francisco...
+2025-03-30 01:35:46,340 - agent_network - INFO - [TOOL_CALL] From: client_agent | To: weather_agent | Args: {'message': 'Get a weather forecast for San Francisco'}
+2025-03-30 01:35:46,340 - agent_network - INFO - [MESSAGE] From: client_agent | To: weather_agent | Content: Get a weather forecast for San Francisco...
+2025-03-30 01:35:47,811 - agent_network - INFO - [TOOL_CALL] From: weather_agent | To: get_geocode | Args: {'location': 'San Francisco'}
+2025-03-30 01:35:48,544 - agent_network - INFO - [TOOL_RESULT] From: get_geocode | To: weather_agent | Result: ```json
+{
+  "location": "San Francisco",
+  "latitude": 37.7749,
+  "longitude": -122.4194
+}
+```...
+2025-03-30 01:35:50,151 - agent_network - INFO - [TOOL_CALL] From: weather_agent | To: get_forecast | Args: {'latitude': 37.7749, 'longitude': -122.4194}
+2025-03-30 01:35:50,411 - agent_network - INFO - [TOOL_RESULT] From: get_forecast | To: weather_agent | Result: 
+Overnight:
+Temperature: 49°F
+Wind: 14 to 20 mph SSE
+Forecast: Rain. Cloudy, with a low around 49. South southeast wind 14 to 20 mph, with gusts as high as 26 mph. Chance of precipitation is 90%. New ...
+2025-03-30 01:35:59,867 - agent_network - INFO - [RESPONSE] From: weather_agent | To: client_agent | Content: Here's the weather forecast for San Francisco:
+
+### Overnight:
+- **Temperature:** 49°F  
+- **Wind:** 14 to 20 mph SSE  
+- **Forecast:** Rain. Cloudy, with a low around 49. Chance of precipitation is 9...
+2025-03-30 01:35:59,867 - agent_network - INFO - [TOOL_RESULT] From: weather_agent | To: client_agent | Result: Here's the weather forecast for San Francisco:
+
+### Overnight:
+- **Temperature:** 49°F  
+- **Wind:** 14 to 20 mph SSE  
+- **Forecast:** Rain. Cloudy, with a low around 49. Chance of precipitation is 9...
+2025-03-30 01:36:09,522 - agent_network - INFO - [RESPONSE] From: client_agent | To: human | Content: Here's the weather forecast for San Francisco:
+
+### Overnight:
+- **Temperature:** 49°F  
+- **Wind:** 14 to 20 mph SSE  
+- **Forecast:** Rain. Cloudy, with a low around 49. Chance of precipitation is 9...
+2025-03-30 01:36:09,522 - agent_network - INFO - [MESSAGE] From: client_agent | To: human | Content: Here's the weather forecast for San Francisco:
+
+### Overnight:
+- **Temperature:** 49°F  
+- **Wind:** 14 to 20 mph SSE  
+- **Forecast:** Rain. Cloudy, with a low around 49. Chance of precipitation is 9...
+2025-03-30 01:36:10,237 - agent_network - INFO - [MESSAGE] From: human | To: client_agent | Content: TASK COMPLETE...
+2025-03-30 01:36:10,237 - agent_network - INFO - Network structure saved to logs/20250330_013544_sf_weather_openrouter_deepseek_deepseek-chat-v3-0324/network.json
+2025-03-30 01:36:10,238 - agent_network - INFO - Task and result saved to logs/20250330_013544_sf_weather_openrouter_deepseek_deepseek-chat-v3-0324/task_result.yaml

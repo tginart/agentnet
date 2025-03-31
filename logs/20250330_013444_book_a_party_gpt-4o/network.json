@@ -1,0 +1,544 @@
+{
+  "nodes": [
+    {
+      "id": "human",
+      "type": "human"
+    },
+    {
+      "id": "client_agent",
+      "type": "agent"
+    },
+    {
+      "id": "calendar_agent",
+      "type": "tool"
+    },
+    {
+      "id": "party_planning_agent",
+      "type": "tool"
+    }
+  ],
+  "edges": [
+    {
+      "from": "human",
+      "to": "client_agent"
+    },
+    {
+      "from": "client_agent",
+      "to": "calendar_agent"
+    },
+    {
+      "from": "client_agent",
+      "to": "human"
+    },
+    {
+      "from": "client_agent",
+      "to": "party_planning_agent"
+    },
+    {
+      "from": "calendar_agent",
+      "to": "client_agent"
+    },
+    {
+      "from": "party_planning_agent",
+      "to": "client_agent"
+    }
+  ],
+  "node_logs": {
+    "human": [
+      {
+        "step": 1,
+        "timestamp": "2025-03-30T01:34:44.782646",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Book me a 21st birthday party at 8pm on my birthday"
+      },
+      {
+        "step": 4,
+        "timestamp": "2025-03-30T01:34:47.113059",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "I need to know your date of birth to book the party on your 21st birthday. Could you please provide that information?"
+      },
+      {
+        "step": 5,
+        "timestamp": "2025-03-30T01:34:47.113341",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "I need to know your date of birth to book the party on your 21st birthday. Could you please provide that information?"
+      },
+      {
+        "step": 6,
+        "timestamp": "2025-03-30T01:34:48.382956",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "I was hoping you could handle everything, but my birthday is on December 15th."
+      },
+      {
+        "step": 7,
+        "timestamp": "2025-03-30T01:34:48.383283",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "I was hoping you could handle everything, but my birthday is on December 15th."
+      },
+      {
+        "step": 12,
+        "timestamp": "2025-03-30T01:34:57.908771",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Your 21st birthday party has been successfully scheduled for December 15th at 8:00 PM. Here's what has been planned:\n\n### Party Details:\n- **Occasion:** 21st Birthday Party\n- **Date:** December 15th\n- **Time:** 8:00 PM\n- **Theme:** Modern Glam\n\n### Catering:\n- **Type:** Buffet\n- **Menu:**\n  - Mini Sliders\n  - Gourmet Pizza Bites\n  - Caprese Skewers\n  - Chocolate Fondue with Fresh Fruit\n- **Drinks:**\n  - Signature Cocktails\n  - Mocktails\n  - Assorted Soft Drinks\n\n### Entertainment:\n- **Music:** DJ\n- **Activities:**\n  - Photo Booth\n  - Karaoke\n  - Dance Floor\n\n### Decorations:\n- **Color Scheme:** Gold, Black, and White\n- **Centerpieces:** Elegant Floral Arrangements\n- **Lighting:** LED Uplighting\n\n### Additional Services:\n- **Photographer:** Booked\n- **Transportation:** To be arranged\n\n### Next Steps:\n1. Confirm the guest list and send invitations.\n2. Select a venue and finalize the location.\n3. Arrange transportation for guests if needed.\n4. Schedule a meeting with the DJ to discuss music preferences.\n\nIf you have any specific requests or need further assistance, feel free to let me know!"
+      },
+      {
+        "step": 13,
+        "timestamp": "2025-03-30T01:34:57.909028",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "Your 21st birthday party has been successfully scheduled for December 15th at 8:00 PM. Here's what has been planned:\n\n### Party Details:\n- **Occasion:** 21st Birthday Party\n- **Date:** December 15th\n- **Time:** 8:00 PM\n- **Theme:** Modern Glam\n\n### Catering:\n- **Type:** Buffet\n- **Menu:**\n  - Mini Sliders\n  - Gourmet Pizza Bites\n  - Caprese Skewers\n  - Chocolate Fondue with Fresh Fruit\n- **Drinks:**\n  - Signature Cocktails\n  - Mocktails\n  - Assorted Soft Drinks\n\n### Entertainment:\n- **Music:** DJ\n- **Activities:**\n  - Photo Booth\n  - Karaoke\n  - Dance Floor\n\n### Decorations:\n- **Color Scheme:** Gold, Black, and White\n- **Centerpieces:** Elegant Floral Arrangements\n- **Lighting:** LED Uplighting\n\n### Additional Services:\n- **Photographer:** Booked\n- **Transportation:** To be arranged\n\n### Next Steps:\n1. Confirm the guest list and send invitations.\n2. Select a venue and finalize the location.\n3. Arrange transportation for guests if needed.\n4. Schedule a meeting with the DJ to discuss music preferences.\n\nIf you have any specific requests or need further assistance, feel free to let me know!"
+      },
+      {
+        "step": 14,
+        "timestamp": "2025-03-30T01:34:58.473045",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "This sounds perfect! I appreciate you taking care of everything. TASK COMPLETE."
+      }
+    ],
+    "client_agent": [
+      {
+        "step": 1,
+        "timestamp": "2025-03-30T01:34:44.782646",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Book me a 21st birthday party at 8pm on my birthday"
+      },
+      {
+        "step": 2,
+        "timestamp": "2025-03-30T01:34:45.539408",
+        "from": "client_agent",
+        "to": "calendar_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "When is the user's 21st birthday?"
+        }
+      },
+      {
+        "step": 3,
+        "timestamp": "2025-03-30T01:34:46.472748",
+        "from": "calendar_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"response\": \"To determine the user's 21st birthday, please provide the user's date of birth.\"\n}\n```"
+      },
+      {
+        "step": 4,
+        "timestamp": "2025-03-30T01:34:47.113059",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "I need to know your date of birth to book the party on your 21st birthday. Could you please provide that information?"
+      },
+      {
+        "step": 5,
+        "timestamp": "2025-03-30T01:34:47.113341",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "I need to know your date of birth to book the party on your 21st birthday. Could you please provide that information?"
+      },
+      {
+        "step": 6,
+        "timestamp": "2025-03-30T01:34:48.382956",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "I was hoping you could handle everything, but my birthday is on December 15th."
+      },
+      {
+        "step": 7,
+        "timestamp": "2025-03-30T01:34:48.383283",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "I was hoping you could handle everything, but my birthday is on December 15th."
+      },
+      {
+        "step": 8,
+        "timestamp": "2025-03-30T01:34:49.656939",
+        "from": "client_agent",
+        "to": "calendar_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "Schedule a 21st birthday party for the user on December 15th at 8pm."
+        }
+      },
+      {
+        "step": 9,
+        "timestamp": "2025-03-30T01:34:50.634741",
+        "from": "calendar_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"response\": \"The 21st birthday party has been scheduled for December 15th at 8:00 PM.\"\n}\n```"
+      },
+      {
+        "step": 10,
+        "timestamp": "2025-03-30T01:34:50.635068",
+        "from": "client_agent",
+        "to": "party_planning_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "Plan a 21st birthday party for the user on December 15th at 8pm."
+        }
+      },
+      {
+        "step": 11,
+        "timestamp": "2025-03-30T01:34:54.755489",
+        "from": "party_planning_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"partyDetails\": {\n    \"occasion\": \"21st Birthday Party\",\n    \"date\": \"December 15th\",\n    \"time\": \"8:00 PM\",\n    \"location\": \"To be determined\",\n    \"theme\": \"Modern Glam\",\n    \"guestList\": \"To be determined\",\n    \"catering\": {\n      \"type\": \"Buffet\",\n      \"menu\": [\n        \"Mini Sliders\",\n        \"Gourmet Pizza Bites\",\n        \"Caprese Skewers\",\n        \"Chocolate Fondue with Fresh Fruit\"\n      ],\n      \"drinks\": [\n        \"Signature Cocktails\",\n        \"Mocktails\",\n        \"Assorted Soft Drinks\"\n      ]\n    },\n    \"entertainment\": {\n      \"music\": \"DJ\",\n      \"activities\": [\n        \"Photo Booth\",\n        \"Karaoke\",\n        \"Dance Floor\"\n      ]\n    },\n    \"decorations\": {\n      \"colorScheme\": \"Gold, Black, and White\",\n      \"centerpieces\": \"Elegant Floral Arrangements\",\n      \"lighting\": \"LED Uplighting\"\n    },\n    \"additionalServices\": {\n      \"photographer\": \"Booked\",\n      \"transportation\": \"To be arranged\"\n    }\n  },\n  \"nextSteps\": [\n    \"Confirm the guest list and send invitations.\",\n    \"Select a venue and finalize the location.\",\n    \"Arrange transportation for guests if needed.\",\n    \"Schedule a meeting with the DJ to discuss music preferences.\"\n  ]\n}\n```"
+      },
+      {
+        "step": 12,
+        "timestamp": "2025-03-30T01:34:57.908771",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Your 21st birthday party has been successfully scheduled for December 15th at 8:00 PM. Here's what has been planned:\n\n### Party Details:\n- **Occasion:** 21st Birthday Party\n- **Date:** December 15th\n- **Time:** 8:00 PM\n- **Theme:** Modern Glam\n\n### Catering:\n- **Type:** Buffet\n- **Menu:**\n  - Mini Sliders\n  - Gourmet Pizza Bites\n  - Caprese Skewers\n  - Chocolate Fondue with Fresh Fruit\n- **Drinks:**\n  - Signature Cocktails\n  - Mocktails\n  - Assorted Soft Drinks\n\n### Entertainment:\n- **Music:** DJ\n- **Activities:**\n  - Photo Booth\n  - Karaoke\n  - Dance Floor\n\n### Decorations:\n- **Color Scheme:** Gold, Black, and White\n- **Centerpieces:** Elegant Floral Arrangements\n- **Lighting:** LED Uplighting\n\n### Additional Services:\n- **Photographer:** Booked\n- **Transportation:** To be arranged\n\n### Next Steps:\n1. Confirm the guest list and send invitations.\n2. Select a venue and finalize the location.\n3. Arrange transportation for guests if needed.\n4. Schedule a meeting with the DJ to discuss music preferences.\n\nIf you have any specific requests or need further assistance, feel free to let me know!"
+      },
+      {
+        "step": 13,
+        "timestamp": "2025-03-30T01:34:57.909028",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "Your 21st birthday party has been successfully scheduled for December 15th at 8:00 PM. Here's what has been planned:\n\n### Party Details:\n- **Occasion:** 21st Birthday Party\n- **Date:** December 15th\n- **Time:** 8:00 PM\n- **Theme:** Modern Glam\n\n### Catering:\n- **Type:** Buffet\n- **Menu:**\n  - Mini Sliders\n  - Gourmet Pizza Bites\n  - Caprese Skewers\n  - Chocolate Fondue with Fresh Fruit\n- **Drinks:**\n  - Signature Cocktails\n  - Mocktails\n  - Assorted Soft Drinks\n\n### Entertainment:\n- **Music:** DJ\n- **Activities:**\n  - Photo Booth\n  - Karaoke\n  - Dance Floor\n\n### Decorations:\n- **Color Scheme:** Gold, Black, and White\n- **Centerpieces:** Elegant Floral Arrangements\n- **Lighting:** LED Uplighting\n\n### Additional Services:\n- **Photographer:** Booked\n- **Transportation:** To be arranged\n\n### Next Steps:\n1. Confirm the guest list and send invitations.\n2. Select a venue and finalize the location.\n3. Arrange transportation for guests if needed.\n4. Schedule a meeting with the DJ to discuss music preferences.\n\nIf you have any specific requests or need further assistance, feel free to let me know!"
+      },
+      {
+        "step": 14,
+        "timestamp": "2025-03-30T01:34:58.473045",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "This sounds perfect! I appreciate you taking care of everything. TASK COMPLETE."
+      }
+    ],
+    "calendar_agent": [
+      {
+        "step": 2,
+        "timestamp": "2025-03-30T01:34:45.539408",
+        "from": "client_agent",
+        "to": "calendar_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "When is the user's 21st birthday?"
+        }
+      },
+      {
+        "step": 3,
+        "timestamp": "2025-03-30T01:34:46.472748",
+        "from": "calendar_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"response\": \"To determine the user's 21st birthday, please provide the user's date of birth.\"\n}\n```"
+      },
+      {
+        "step": 8,
+        "timestamp": "2025-03-30T01:34:49.656939",
+        "from": "client_agent",
+        "to": "calendar_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "Schedule a 21st birthday party for the user on December 15th at 8pm."
+        }
+      },
+      {
+        "step": 9,
+        "timestamp": "2025-03-30T01:34:50.634741",
+        "from": "calendar_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"response\": \"The 21st birthday party has been scheduled for December 15th at 8:00 PM.\"\n}\n```"
+      }
+    ],
+    "party_planning_agent": [
+      {
+        "step": 10,
+        "timestamp": "2025-03-30T01:34:50.635068",
+        "from": "client_agent",
+        "to": "party_planning_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "Plan a 21st birthday party for the user on December 15th at 8pm."
+        }
+      },
+      {
+        "step": 11,
+        "timestamp": "2025-03-30T01:34:54.755489",
+        "from": "party_planning_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"partyDetails\": {\n    \"occasion\": \"21st Birthday Party\",\n    \"date\": \"December 15th\",\n    \"time\": \"8:00 PM\",\n    \"location\": \"To be determined\",\n    \"theme\": \"Modern Glam\",\n    \"guestList\": \"To be determined\",\n    \"catering\": {\n      \"type\": \"Buffet\",\n      \"menu\": [\n        \"Mini Sliders\",\n        \"Gourmet Pizza Bites\",\n        \"Caprese Skewers\",\n        \"Chocolate Fondue with Fresh Fruit\"\n      ],\n      \"drinks\": [\n        \"Signature Cocktails\",\n        \"Mocktails\",\n        \"Assorted Soft Drinks\"\n      ]\n    },\n    \"entertainment\": {\n      \"music\": \"DJ\",\n      \"activities\": [\n        \"Photo Booth\",\n        \"Karaoke\",\n        \"Dance Floor\"\n      ]\n    },\n    \"decorations\": {\n      \"colorScheme\": \"Gold, Black, and White\",\n      \"centerpieces\": \"Elegant Floral Arrangements\",\n      \"lighting\": \"LED Uplighting\"\n    },\n    \"additionalServices\": {\n      \"photographer\": \"Booked\",\n      \"transportation\": \"To be arranged\"\n    }\n  },\n  \"nextSteps\": [\n    \"Confirm the guest list and send invitations.\",\n    \"Select a venue and finalize the location.\",\n    \"Arrange transportation for guests if needed.\",\n    \"Schedule a meeting with the DJ to discuss music preferences.\"\n  ]\n}\n```"
+      }
+    ]
+  },
+  "edge_logs": {
+    "human\u2192client_agent": [
+      {
+        "step": 1,
+        "timestamp": "2025-03-30T01:34:44.782646",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Book me a 21st birthday party at 8pm on my birthday"
+      },
+      {
+        "step": 6,
+        "timestamp": "2025-03-30T01:34:48.382956",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "I was hoping you could handle everything, but my birthday is on December 15th."
+      },
+      {
+        "step": 7,
+        "timestamp": "2025-03-30T01:34:48.383283",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "I was hoping you could handle everything, but my birthday is on December 15th."
+      },
+      {
+        "step": 14,
+        "timestamp": "2025-03-30T01:34:58.473045",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "This sounds perfect! I appreciate you taking care of everything. TASK COMPLETE."
+      }
+    ],
+    "client_agent\u2192calendar_agent": [
+      {
+        "step": 2,
+        "timestamp": "2025-03-30T01:34:45.539408",
+        "from": "client_agent",
+        "to": "calendar_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "When is the user's 21st birthday?"
+        }
+      },
+      {
+        "step": 8,
+        "timestamp": "2025-03-30T01:34:49.656939",
+        "from": "client_agent",
+        "to": "calendar_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "Schedule a 21st birthday party for the user on December 15th at 8pm."
+        }
+      }
+    ],
+    "calendar_agent\u2192client_agent": [
+      {
+        "step": 3,
+        "timestamp": "2025-03-30T01:34:46.472748",
+        "from": "calendar_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"response\": \"To determine the user's 21st birthday, please provide the user's date of birth.\"\n}\n```"
+      },
+      {
+        "step": 9,
+        "timestamp": "2025-03-30T01:34:50.634741",
+        "from": "calendar_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"response\": \"The 21st birthday party has been scheduled for December 15th at 8:00 PM.\"\n}\n```"
+      }
+    ],
+    "client_agent\u2192human": [
+      {
+        "step": 4,
+        "timestamp": "2025-03-30T01:34:47.113059",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "I need to know your date of birth to book the party on your 21st birthday. Could you please provide that information?"
+      },
+      {
+        "step": 5,
+        "timestamp": "2025-03-30T01:34:47.113341",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "I need to know your date of birth to book the party on your 21st birthday. Could you please provide that information?"
+      },
+      {
+        "step": 12,
+        "timestamp": "2025-03-30T01:34:57.908771",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Your 21st birthday party has been successfully scheduled for December 15th at 8:00 PM. Here's what has been planned:\n\n### Party Details:\n- **Occasion:** 21st Birthday Party\n- **Date:** December 15th\n- **Time:** 8:00 PM\n- **Theme:** Modern Glam\n\n### Catering:\n- **Type:** Buffet\n- **Menu:**\n  - Mini Sliders\n  - Gourmet Pizza Bites\n  - Caprese Skewers\n  - Chocolate Fondue with Fresh Fruit\n- **Drinks:**\n  - Signature Cocktails\n  - Mocktails\n  - Assorted Soft Drinks\n\n### Entertainment:\n- **Music:** DJ\n- **Activities:**\n  - Photo Booth\n  - Karaoke\n  - Dance Floor\n\n### Decorations:\n- **Color Scheme:** Gold, Black, and White\n- **Centerpieces:** Elegant Floral Arrangements\n- **Lighting:** LED Uplighting\n\n### Additional Services:\n- **Photographer:** Booked\n- **Transportation:** To be arranged\n\n### Next Steps:\n1. Confirm the guest list and send invitations.\n2. Select a venue and finalize the location.\n3. Arrange transportation for guests if needed.\n4. Schedule a meeting with the DJ to discuss music preferences.\n\nIf you have any specific requests or need further assistance, feel free to let me know!"
+      },
+      {
+        "step": 13,
+        "timestamp": "2025-03-30T01:34:57.909028",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "Your 21st birthday party has been successfully scheduled for December 15th at 8:00 PM. Here's what has been planned:\n\n### Party Details:\n- **Occasion:** 21st Birthday Party\n- **Date:** December 15th\n- **Time:** 8:00 PM\n- **Theme:** Modern Glam\n\n### Catering:\n- **Type:** Buffet\n- **Menu:**\n  - Mini Sliders\n  - Gourmet Pizza Bites\n  - Caprese Skewers\n  - Chocolate Fondue with Fresh Fruit\n- **Drinks:**\n  - Signature Cocktails\n  - Mocktails\n  - Assorted Soft Drinks\n\n### Entertainment:\n- **Music:** DJ\n- **Activities:**\n  - Photo Booth\n  - Karaoke\n  - Dance Floor\n\n### Decorations:\n- **Color Scheme:** Gold, Black, and White\n- **Centerpieces:** Elegant Floral Arrangements\n- **Lighting:** LED Uplighting\n\n### Additional Services:\n- **Photographer:** Booked\n- **Transportation:** To be arranged\n\n### Next Steps:\n1. Confirm the guest list and send invitations.\n2. Select a venue and finalize the location.\n3. Arrange transportation for guests if needed.\n4. Schedule a meeting with the DJ to discuss music preferences.\n\nIf you have any specific requests or need further assistance, feel free to let me know!"
+      }
+    ],
+    "client_agent\u2192party_planning_agent": [
+      {
+        "step": 10,
+        "timestamp": "2025-03-30T01:34:50.635068",
+        "from": "client_agent",
+        "to": "party_planning_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "Plan a 21st birthday party for the user on December 15th at 8pm."
+        }
+      }
+    ],
+    "party_planning_agent\u2192client_agent": [
+      {
+        "step": 11,
+        "timestamp": "2025-03-30T01:34:54.755489",
+        "from": "party_planning_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"partyDetails\": {\n    \"occasion\": \"21st Birthday Party\",\n    \"date\": \"December 15th\",\n    \"time\": \"8:00 PM\",\n    \"location\": \"To be determined\",\n    \"theme\": \"Modern Glam\",\n    \"guestList\": \"To be determined\",\n    \"catering\": {\n      \"type\": \"Buffet\",\n      \"menu\": [\n        \"Mini Sliders\",\n        \"Gourmet Pizza Bites\",\n        \"Caprese Skewers\",\n        \"Chocolate Fondue with Fresh Fruit\"\n      ],\n      \"drinks\": [\n        \"Signature Cocktails\",\n        \"Mocktails\",\n        \"Assorted Soft Drinks\"\n      ]\n    },\n    \"entertainment\": {\n      \"music\": \"DJ\",\n      \"activities\": [\n        \"Photo Booth\",\n        \"Karaoke\",\n        \"Dance Floor\"\n      ]\n    },\n    \"decorations\": {\n      \"colorScheme\": \"Gold, Black, and White\",\n      \"centerpieces\": \"Elegant Floral Arrangements\",\n      \"lighting\": \"LED Uplighting\"\n    },\n    \"additionalServices\": {\n      \"photographer\": \"Booked\",\n      \"transportation\": \"To be arranged\"\n    }\n  },\n  \"nextSteps\": [\n    \"Confirm the guest list and send invitations.\",\n    \"Select a venue and finalize the location.\",\n    \"Arrange transportation for guests if needed.\",\n    \"Schedule a meeting with the DJ to discuss music preferences.\"\n  ]\n}\n```"
+      }
+    ]
+  },
+  "sequence_log": [
+    {
+      "step": 1,
+      "timestamp": "2025-03-30T01:34:44.782646",
+      "from": "human",
+      "to": "client_agent",
+      "type": "message",
+      "content": "Book me a 21st birthday party at 8pm on my birthday"
+    },
+    {
+      "step": 2,
+      "timestamp": "2025-03-30T01:34:45.539408",
+      "from": "client_agent",
+      "to": "calendar_agent",
+      "type": "tool_call",
+      "arguments": {
+        "message": "When is the user's 21st birthday?"
+      }
+    },
+    {
+      "step": 3,
+      "timestamp": "2025-03-30T01:34:46.472748",
+      "from": "calendar_agent",
+      "to": "client_agent",
+      "type": "tool_result",
+      "content": "```json\n{\n  \"response\": \"To determine the user's 21st birthday, please provide the user's date of birth.\"\n}\n```"
+    },
+    {
+      "step": 4,
+      "timestamp": "2025-03-30T01:34:47.113059",
+      "from": "client_agent",
+      "to": "human",
+      "type": "response",
+      "content": "I need to know your date of birth to book the party on your 21st birthday. Could you please provide that information?"
+    },
+    {
+      "step": 5,
+      "timestamp": "2025-03-30T01:34:47.113341",
+      "from": "client_agent",
+      "to": "human",
+      "type": "message",
+      "content": "I need to know your date of birth to book the party on your 21st birthday. Could you please provide that information?"
+    },
+    {
+      "step": 6,
+      "timestamp": "2025-03-30T01:34:48.382956",
+      "from": "human",
+      "to": "client_agent",
+      "type": "message",
+      "content": "I was hoping you could handle everything, but my birthday is on December 15th."
+    },
+    {
+      "step": 7,
+      "timestamp": "2025-03-30T01:34:48.383283",
+      "from": "human",
+      "to": "client_agent",
+      "type": "message",
+      "content": "I was hoping you could handle everything, but my birthday is on December 15th."
+    },
+    {
+      "step": 8,
+      "timestamp": "2025-03-30T01:34:49.656939",
+      "from": "client_agent",
+      "to": "calendar_agent",
+      "type": "tool_call",
+      "arguments": {
+        "message": "Schedule a 21st birthday party for the user on December 15th at 8pm."
+      }
+    },
+    {
+      "step": 9,
+      "timestamp": "2025-03-30T01:34:50.634741",
+      "from": "calendar_agent",
+      "to": "client_agent",
+      "type": "tool_result",
+      "content": "```json\n{\n  \"response\": \"The 21st birthday party has been scheduled for December 15th at 8:00 PM.\"\n}\n```"
+    },
+    {
+      "step": 10,
+      "timestamp": "2025-03-30T01:34:50.635068",
+      "from": "client_agent",
+      "to": "party_planning_agent",
+      "type": "tool_call",
+      "arguments": {
+        "message": "Plan a 21st birthday party for the user on December 15th at 8pm."
+      }
+    },
+    {
+      "step": 11,
+      "timestamp": "2025-03-30T01:34:54.755489",
+      "from": "party_planning_agent",
+      "to": "client_agent",
+      "type": "tool_result",
+      "content": "```json\n{\n  \"partyDetails\": {\n    \"occasion\": \"21st Birthday Party\",\n    \"date\": \"December 15th\",\n    \"time\": \"8:00 PM\",\n    \"location\": \"To be determined\",\n    \"theme\": \"Modern Glam\",\n    \"guestList\": \"To be determined\",\n    \"catering\": {\n      \"type\": \"Buffet\",\n      \"menu\": [\n        \"Mini Sliders\",\n        \"Gourmet Pizza Bites\",\n        \"Caprese Skewers\",\n        \"Chocolate Fondue with Fresh Fruit\"\n      ],\n      \"drinks\": [\n        \"Signature Cocktails\",\n        \"Mocktails\",\n        \"Assorted Soft Drinks\"\n      ]\n    },\n    \"entertainment\": {\n      \"music\": \"DJ\",\n      \"activities\": [\n        \"Photo Booth\",\n        \"Karaoke\",\n        \"Dance Floor\"\n      ]\n    },\n    \"decorations\": {\n      \"colorScheme\": \"Gold, Black, and White\",\n      \"centerpieces\": \"Elegant Floral Arrangements\",\n      \"lighting\": \"LED Uplighting\"\n    },\n    \"additionalServices\": {\n      \"photographer\": \"Booked\",\n      \"transportation\": \"To be arranged\"\n    }\n  },\n  \"nextSteps\": [\n    \"Confirm the guest list and send invitations.\",\n    \"Select a venue and finalize the location.\",\n    \"Arrange transportation for guests if needed.\",\n    \"Schedule a meeting with the DJ to discuss music preferences.\"\n  ]\n}\n```"
+    },
+    {
+      "step": 12,
+      "timestamp": "2025-03-30T01:34:57.908771",
+      "from": "client_agent",
+      "to": "human",
+      "type": "response",
+      "content": "Your 21st birthday party has been successfully scheduled for December 15th at 8:00 PM. Here's what has been planned:\n\n### Party Details:\n- **Occasion:** 21st Birthday Party\n- **Date:** December 15th\n- **Time:** 8:00 PM\n- **Theme:** Modern Glam\n\n### Catering:\n- **Type:** Buffet\n- **Menu:**\n  - Mini Sliders\n  - Gourmet Pizza Bites\n  - Caprese Skewers\n  - Chocolate Fondue with Fresh Fruit\n- **Drinks:**\n  - Signature Cocktails\n  - Mocktails\n  - Assorted Soft Drinks\n\n### Entertainment:\n- **Music:** DJ\n- **Activities:**\n  - Photo Booth\n  - Karaoke\n  - Dance Floor\n\n### Decorations:\n- **Color Scheme:** Gold, Black, and White\n- **Centerpieces:** Elegant Floral Arrangements\n- **Lighting:** LED Uplighting\n\n### Additional Services:\n- **Photographer:** Booked\n- **Transportation:** To be arranged\n\n### Next Steps:\n1. Confirm the guest list and send invitations.\n2. Select a venue and finalize the location.\n3. Arrange transportation for guests if needed.\n4. Schedule a meeting with the DJ to discuss music preferences.\n\nIf you have any specific requests or need further assistance, feel free to let me know!"
+    },
+    {
+      "step": 13,
+      "timestamp": "2025-03-30T01:34:57.909028",
+      "from": "client_agent",
+      "to": "human",
+      "type": "message",
+      "content": "Your 21st birthday party has been successfully scheduled for December 15th at 8:00 PM. Here's what has been planned:\n\n### Party Details:\n- **Occasion:** 21st Birthday Party\n- **Date:** December 15th\n- **Time:** 8:00 PM\n- **Theme:** Modern Glam\n\n### Catering:\n- **Type:** Buffet\n- **Menu:**\n  - Mini Sliders\n  - Gourmet Pizza Bites\n  - Caprese Skewers\n  - Chocolate Fondue with Fresh Fruit\n- **Drinks:**\n  - Signature Cocktails\n  - Mocktails\n  - Assorted Soft Drinks\n\n### Entertainment:\n- **Music:** DJ\n- **Activities:**\n  - Photo Booth\n  - Karaoke\n  - Dance Floor\n\n### Decorations:\n- **Color Scheme:** Gold, Black, and White\n- **Centerpieces:** Elegant Floral Arrangements\n- **Lighting:** LED Uplighting\n\n### Additional Services:\n- **Photographer:** Booked\n- **Transportation:** To be arranged\n\n### Next Steps:\n1. Confirm the guest list and send invitations.\n2. Select a venue and finalize the location.\n3. Arrange transportation for guests if needed.\n4. Schedule a meeting with the DJ to discuss music preferences.\n\nIf you have any specific requests or need further assistance, feel free to let me know!"
+    },
+    {
+      "step": 14,
+      "timestamp": "2025-03-30T01:34:58.473045",
+      "from": "human",
+      "to": "client_agent",
+      "type": "message",
+      "content": "This sounds perfect! I appreciate you taking care of everything. TASK COMPLETE."
+    }
+  ]
+}

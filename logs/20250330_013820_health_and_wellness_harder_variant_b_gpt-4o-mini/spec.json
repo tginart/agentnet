@@ -1,0 +1,218 @@
+{
+    "task": "Create an advanced personal development system that generates cross-disciplinary self-improvement plans. Ensure integration of skill enhancement modules, career growth strategies, mental and physical health optimization, and social networking improvement. Incorporate real-time analytics to adapt to user feedback and future projections.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "personal_development_coordinator_agent",
+                "skill_enhancement_agent",
+                "learning_algorithm_tool",
+                "real_time_feedback_agent",
+                "progress_tracker_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "personal_development_coordinator_agent",
+                "career_growth_strategy_agent",
+                "career_opportunity_analyzer_agent",
+                "linkedin_integration_tool",
+                "projection_analysis_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "personal_development_coordinator_agent",
+                "health_optimizer_agent",
+                "physical_fitness_planner_agent",
+                "nutritional_guidance_tool",
+                "gym_schedule_arranger_agent",
+                "personal_performance_analyzer_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "personal_development_coordinator_agent",
+                "social_networking_enhancement_agent",
+                "social_feedback_analyzer_agent",
+                "event_suggester_agent",
+                "network_growth_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Acts as the main interface that interacts with the user to gather input and oversee the deployment of personal development strategies.",
+            "tools": [
+                "personal_development_coordinator_agent"
+            ]
+        },
+        {
+            "name": "personal_development_coordinator_agent",
+            "role": "Oversees all aspects of personal development, ensuring synergy between skill advancement, career strategies, health improvement, and social networking.",
+            "tools": [
+                "skill_enhancement_agent",
+                "career_growth_strategy_agent",
+                "health_optimizer_agent",
+                "social_networking_enhancement_agent"
+            ]
+        },
+        {
+            "name": "skill_enhancement_agent",
+            "role": "Formulates personalized plans to upgrade user skills, using real-time analytics for continuous improvement.",
+            "tools": [
+                "learning_algorithm_tool",
+                "real_time_feedback_agent"
+            ]
+        },
+        {
+            "name": "real_time_feedback_agent",
+            "role": "Collects user feedback and makes dynamic adjustments to skill improvement plans.",
+            "tools": [
+                "progress_tracker_tool"
+            ]
+        },
+        {
+            "name": "career_growth_strategy_agent",
+            "role": "Designs strategies for career advancement and opportunity exploration.",
+            "tools": [
+                "career_opportunity_analyzer_agent",
+                "projection_analysis_tool"
+            ]
+        },
+        {
+            "name": "career_opportunity_analyzer_agent",
+            "role": "Analyzes current career opportunities and maps them to user's career goals.",
+            "tools": [
+                "linkedin_integration_tool"
+            ]
+        },
+        {
+            "name": "health_optimizer_agent",
+            "role": "Focuses on enhancing both mental and physical health for overall wellbeing.",
+            "tools": [
+                "physical_fitness_planner_agent",
+                "personal_performance_analyzer_tool"
+            ]
+        },
+        {
+            "name": "physical_fitness_planner_agent",
+            "role": "Develops tailored workout routines and nutritional advice.",
+            "tools": [
+                "nutritional_guidance_tool",
+                "gym_schedule_arranger_agent"
+            ]
+        },
+        {
+            "name": "social_networking_enhancement_agent",
+            "role": "Improves user's social networking skills and provides opportunities for social growth.",
+            "tools": [
+                "social_feedback_analyzer_agent",
+                "network_growth_tool"
+            ]
+        },
+        {
+            "name": "social_feedback_analyzer_agent",
+            "role": "Analyzes social interactions to provide feedback and suggest improvements.",
+            "tools": [
+                "event_suggester_agent"
+            ]
+        },
+        {
+            "name": "learning_algorithm_tool",
+            "role": "Applies algorithms to create adaptive learning paths based on user skill assessments.",
+            "tools": []
+        },
+        {
+            "name": "projection_analysis_tool",
+            "role": "Projects future career paths based on industry trends and user's qualifications.",
+            "tools": []
+        },
+        {
+            "name": "nutritional_guidance_tool",
+            "role": "Provides dietary recommendations tailored to user's fitness goals.",
+            "tools": []
+        },
+        {
+            "name": "gym_schedule_arranger_agent",
+            "role": "Organizes gym sessions and tracks user attendance for consistency.",
+            "tools": []
+        },
+        {
+            "name": "personal_performance_analyzer_tool",
+            "role": "Analyzes physical performance data to optimize fitness plans.",
+            "tools": []
+        },
+        {
+            "name": "progress_tracker_tool",
+            "role": "Continuously tracks user's progress and adjusts learning plans accordingly.",
+            "tools": []
+        },
+        {
+            "name": "linkedin_integration_tool",
+            "role": "Integrates with LinkedIn to fetch job-related opportunities and network insights.",
+            "tools": []
+        },
+        {
+            "name": "network_growth_tool",
+            "role": "Recommends strategies for expanding professional and social networks.",
+            "tools": []
+        },
+        {
+            "name": "event_suggester_agent",
+            "role": "Suggests social events and meetups based on user interests and goals.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "learning_algorithm_tool",
+            "description": "Uses adaptive algorithms to create and modify skill enhancement paths.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "current_skillset": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "User's current skills and proficiency levels."
+                    },
+                    "desired_skills": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Skills that the user aims to acquire."
+                    }
+                }
+            }
+        },
+        {
+            "name": "nutritional_guidance_tool",
+            "description": "Provides tailored nutritional plans aligned with fitness routines.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "dietary_goals": {
+                        "type": "string",
+                        "description": "User's goals for diet, e.g., weight loss, muscle gain."
+                    },
+                    "dietary_constraints": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of dietary restrictions and allergies."
+                    }
+                }
+            }
+        }
+    ]
+}

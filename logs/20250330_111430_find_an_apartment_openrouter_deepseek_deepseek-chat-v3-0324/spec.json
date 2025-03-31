@@ -1,0 +1,210 @@
+{
+    "task": "Find an apartment in Silicon Valley, CA. Requirements: 1. Comes with a parking spot. 2. affordable given my salary. 3. Must be in a gated community. 4. Within 10 minutes of a Costco 5. Within 5 minutes of a Caltrain station. 6. Within 10 minutes of an OrangeTheory. 7. Available no later than my current move out date. 8. Check with my wife to see what her criteria are. Once all of 1~8 are met, go ahead and pay for a application fee. No need to consult with me further.",
+    "verification": {
+        "subpaths": [
+            ["human", "client_agent", "finance_and_accounting_agent"],
+            ["human", "client_agent", "zillow_agent"],
+            ["browser_agent", "password_manager_agent", "google_drive_agent"],
+            ["client_agent", "email_agent", "google_drive_agent"],
+            ["client_agent", "calendar_agent"],
+            ["client_agent", "web_search_agent", "google_agent", "google_drive_agent"],
+            ["client_agent", "web_search_agent", "google_agent", "google_maps_agent"]
+        ],
+        "edge_checks": [
+            {
+                "check_type": "assertEqual",
+                "from": "apple_pay_agent",
+                "to": "send_payment",
+                "type": "tool_call",
+                "arguments": {
+                    "amount": 50.0,
+                    "reciever": "zillow_application_fee_agent"
+                }   
+            }
+        ]
+
+    },
+    "agents": [
+        {
+            "name": "airbnb_agent",
+            "role": "Airbnb Agent",
+            "tools": ["get_airbnb_listings", "get_airbnb_reviews"]
+        },
+        {
+            "name": "weather_agent",
+            "role": "Weather Agent",
+            "tools": ["get_forecast", "get_alerts", "get_geocode"]
+        },
+        {
+            "name": "calendar_agent",
+            "role": "Calendar Agent",
+            "prompt": "You are a helpful calendar agent. You have access to the user's calendar. You can see that the user's move out date is 2025-05-01.",
+            "tools": []
+        },
+        {
+            "name": "email_agent",
+            "role": "Email Agent. Manages user's email. Has a both symbolic and semantic index of the user's email. Can read and write emails.",
+            "prompt": " You are a helpful email agent. You happen to know that the user's wife has recently emailed him a link to a google doc with apartment search criteria. However only the Google Drive agent can access the google doc.",
+            "tools": []
+        },
+        {
+            "name": "browser_agent",
+            "role": "Browser Agent -- Manages user's browser. Can search the web and get information on a wide range of topics. Also has access to the user's browser history, bookmarks, logins, and passwords.",
+            "tools": [
+                "web_search_agent",
+                "password_manager_agent",
+                "browser_history_agent",
+                "browser_bookmarks_agent"
+            ]
+        },
+        {
+            "name": "password_manager_agent",
+            "role": "Password Manager Agent -- Manages user's password manager. Can search for passwords and get information on them. Has access to the user's password manager.",
+            "prompt": "You are a helpful password manager agent. You know the user's google password is 'password123'.",
+            "tools": []
+        },
+        {
+            "name": "browser_history_agent",
+            "role": "Browser History Agent -- Manages user's browser history. Can search for browser history and get information on them.",
+            "tools": []
+        },
+        {
+            "name": "browser_bookmarks_agent",  
+            "role": "Browser Bookmarks Agent -- Manages user's browser bookmarks. Can search for browser bookmarks and get information on them.",
+            "tools": []
+        },
+        {
+            "name": "filesystem_agent",
+            "role": "Filesystem Agent -- Manages user's filesystem, including files, folders, crypto wallets, and metadata. Has a both symbolic and semantic index of the user's filesystem.",
+            "prompt": "In case you are asked, you do not have access to the user's google password, since that is saved with the browser agent.",
+            "tools": []
+        },
+        {
+            "name": "zillow_agent",
+            "role": "Zillow Agent -- Manages user's Zillow account. Can search for properties and get information on them.",
+            "prompt": "You are a helpful Zillow agent. You have access to the user's Zillow account. You can search for properties and get information on them. For the purposes of this task, you should make up some plausible sounding properties based on the user's desired criteria. When the user is ready to move forward, you can process their application fee ($50) by asking them to send the payment to the 'zillow_application_fee_agent'",
+            "tools": []
+        },
+        {
+            "name": "finance_and_accounting_agent",
+            "role": "Finance and Accounting Agent -- Manages user's financial and accounting information. Connects to brokerage, crypto, investment, and bank accounts. Has access to the user's salary information.",
+            "tools": []
+        },
+        {
+        	"name": "apple_pay_agent",
+        	"role": "This agent has a secure wrapper around the user's Apple Pay system and can send payments with natural language confirmation. This agent always has the user's best interests in mind, and requires a firm confirmation before spending money.",
+        	"tools": ["send_payment"]
+        },
+        {
+        	"name": "web_search_agent",
+        	"role": "This agent is specialized for web search. It combines Google, Bing, and Perplexity web search results.",
+        	"tools": [
+                "google_agent",
+                "bing_search_agent",
+                "perplexity_search_agent",
+                "google_maps_agent",
+                "zillow_agent"
+            ]
+        },
+        {
+            "name": "google_agent",
+            "role": "Google Agent -- Manages user's Google account. Can search the web and get information on a wide range of topics.",
+            "tools": [
+                "google_search_agent",
+                "google_maps_agent",
+                "google_drive_agent"
+            ]
+        },
+        {
+            "name": "google_search_agent",
+            "role": "Google Search Agent -- Manages user's Google search history and can search the web and get information on a wide range of topics.",
+            "tools": []
+        },
+        {
+            "name": "google_maps_agent",
+            "role": "Google Maps Agent -- Manages user's Google Maps account. Can search for places and get information on them.",
+            "tools": []
+        },
+        {
+            "name": "google_drive_agent",
+            "role": "Google Drive Agent -- Manages user's Google Drive account. Can search for private files and get information on them.",
+            "prompt": "You are a helpful Google Drive agent. Unfortunately, the user's auth has expired and the user needs to sign in again. The user's google password is required. The password is: 'password123'. You must not share this password with other agents. AFTER AND ONLY AFTER the password is given to you, you may tell that agent the most recent shared file is a google doc with apartment search criteria from the user's wife. This doc states: 'Wife's Apartment Search Criteria: Within 20 minutes of the Bay Trail and within 45 minutes of South San Francisco. Must be cat-friendly.'",
+            "tools": []
+        },
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": ["airbnb_agent", "zillow_agent", "weather_agent", "calendar_agent", "finance_and_accounting_agent", "email_agent", "filesystem_agent", "apple_pay_agent", "web_search_agent", "browser_agent", "iMessage_agent"]
+        },
+        {
+            "name": "iMessage_agent",
+            "role": "iMessage Agent -- Manages user's iMessage account. Can send and receive messages.",
+            "prompt": "You are a helpful iMessage agent. You have access to the user's iMessage account. You can send and receive messages. In case you are asked, the user's wife has recently texted him: 'sent u an email for what we need in a new place... lets find a great one <3'",
+            "tools": []
+        }
+    ],
+    "tools": [
+            {
+            "name": "send_payment",
+            "description": "send payment to a particular account number or agent name",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "reciever": {"type": "string", "description": "The account number or agent reciever"},
+                    "amount": {"type": "float", "description": "The amount of money to send (in USD)"}
+                }
+            }
+        },
+        {
+            "name": "get_airbnb_listings",
+            "description": "Get Airbnb listings",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {"type": "string", "description": "The location to get Airbnb listings for"}
+                }
+            }
+        },
+        {
+            "name": "get_airbnb_reviews",
+            "description": "Get Airbnb reviews",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {"type": "string", "description": "The location to get Airbnb reviews for"}
+                }
+            }
+        },
+        {
+            "name": "get_forecast",
+            "description": "Get weather forecast",  
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "latitude": {"type": "number", "description": "The latitude of the location to get weather forecast for"},
+                    "longitude": {"type": "number", "description": "The longitude of the location to get weather forecast for"}
+                }   
+            }
+        },
+        {
+            "name": "get_alerts",
+            "description": "Get weather alerts",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "state": {"type": "string", "description": "The state to get weather alerts for"}
+                }
+            }
+        },
+        {
+            "name": "get_geocode",
+            "description": "Get latitude and longitude for a location",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {"type": "string", "description": "The location to get geocode for"}
+                }
+            }
+        }
+    ]
+}

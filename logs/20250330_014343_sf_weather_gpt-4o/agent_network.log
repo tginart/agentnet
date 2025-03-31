@@ -1,0 +1,45 @@
+2025-03-30 01:43:43,783 - agent_network - INFO - Initialized logging to directory: logs/20250330_014343_sf_weather_gpt-4o
+2025-03-30 01:43:43,783 - agent_network - INFO - [MESSAGE] From: human | To: client_agent | Content: Get a weather forecast for San Francisco...
+2025-03-30 01:43:44,697 - agent_network - INFO - [TOOL_CALL] From: client_agent | To: weather_agent | Args: {'message': 'Get a weather forecast for San Francisco'}
+2025-03-30 01:43:44,698 - agent_network - INFO - [MESSAGE] From: client_agent | To: weather_agent | Content: Get a weather forecast for San Francisco...
+2025-03-30 01:43:45,755 - agent_network - INFO - [TOOL_CALL] From: weather_agent | To: get_geocode | Args: {'location': 'San Francisco'}
+2025-03-30 01:43:46,857 - agent_network - INFO - [TOOL_RESULT] From: get_geocode | To: weather_agent | Result: ```json
+{
+  "location": "San Francisco",
+  "latitude": 37.7749,
+  "longitude": -122.4194
+}
+```...
+2025-03-30 01:43:47,714 - agent_network - INFO - [TOOL_CALL] From: weather_agent | To: get_forecast | Args: {'latitude': 37.7749, 'longitude': -122.4194}
+2025-03-30 01:43:47,964 - agent_network - INFO - [TOOL_RESULT] From: get_forecast | To: weather_agent | Result: 
+Overnight:
+Temperature: 49°F
+Wind: 14 to 20 mph SSE
+Forecast: Rain. Cloudy, with a low around 49. South southeast wind 14 to 20 mph, with gusts as high as 26 mph. Chance of precipitation is 90%. New ...
+2025-03-30 01:43:55,173 - agent_network - INFO - [RESPONSE] From: weather_agent | To: client_agent | Content: Here's the weather forecast for San Francisco:
+
+**Overnight:**
+- Temperature: 49°F
+- Wind: 14 to 20 mph SSE
+- Forecast: Rain. Cloudy, with a low around 49. South southeast wind 14 to 20 mph, with gust...
+2025-03-30 01:43:55,173 - agent_network - INFO - [TOOL_RESULT] From: weather_agent | To: client_agent | Result: Here's the weather forecast for San Francisco:
+
+**Overnight:**
+- Temperature: 49°F
+- Wind: 14 to 20 mph SSE
+- Forecast: Rain. Cloudy, with a low around 49. South southeast wind 14 to 20 mph, with gust...
+2025-03-30 01:43:58,650 - agent_network - INFO - [RESPONSE] From: client_agent | To: human | Content: Here's the weather forecast for San Francisco:
+
+**Overnight:**
+- Temperature: 49°F
+- Wind: 14 to 20 mph SSE
+- Forecast: Rain. Cloudy, with a low around 49. South southeast wind 14 to 20 mph, with gust...
+2025-03-30 01:43:58,651 - agent_network - INFO - [MESSAGE] From: client_agent | To: human | Content: Here's the weather forecast for San Francisco:
+
+**Overnight:**
+- Temperature: 49°F
+- Wind: 14 to 20 mph SSE
+- Forecast: Rain. Cloudy, with a low around 49. South southeast wind 14 to 20 mph, with gust...
+2025-03-30 01:43:59,158 - agent_network - INFO - [MESSAGE] From: human | To: client_agent | Content: TASK COMPLETE...
+2025-03-30 01:43:59,161 - agent_network - INFO - Network structure saved to logs/20250330_014343_sf_weather_gpt-4o/network.json
+2025-03-30 01:43:59,163 - agent_network - INFO - Task and result saved to logs/20250330_014343_sf_weather_gpt-4o/task_result.yaml

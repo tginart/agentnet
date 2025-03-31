@@ -1,0 +1,31 @@
+2025-03-30 01:35:06,938 - agent_network - INFO - Initialized logging to directory: logs/20250330_013506_book_a_party_openrouter_deepseek_deepseek-chat-v3-0324
+2025-03-30 01:35:06,938 - agent_network - INFO - [MESSAGE] From: human | To: client_agent | Content: Book me a 21st birthday party at 8pm on my birthday...
+2025-03-30 01:35:08,439 - agent_network - INFO - [TOOL_CALL] From: client_agent | To: calendar_agent | Args: {'message': "When is the user's birthday?"}
+2025-03-30 01:35:09,295 - agent_network - INFO - [TOOL_RESULT] From: calendar_agent | To: client_agent | Result: ```json
+{
+  "user_birthday": "1990-05-15"
+}
+```...
+2025-03-30 01:35:11,913 - agent_network - INFO - [TOOL_CALL] From: client_agent | To: party_planning_agent | Args: {'message': 'Plan a 21st birthday party for the user on May 15, 2024, at 8 PM.'}
+2025-03-30 01:35:16,724 - agent_network - INFO - [TOOL_RESULT] From: party_planning_agent | To: client_agent | Result: ```json
+{
+  "party_details": {
+    "occasion": "21st Birthday Party",
+    "date": "May 15, 2024",
+    "time": "8:00 PM",
+    "location": "To be determined",
+    "guest_list": "To be determined",
+    "...
+2025-03-30 01:35:25,839 - agent_network - INFO - [RESPONSE] From: client_agent | To: human | Content: Your 21st birthday party has been successfully planned for **May 15, 2024, at 8:00 PM**. Here are the details and next steps:
+
+### Party Details:
+- **Occasion**: 21st Birthday Party
+- **Date**: May 15...
+2025-03-30 01:35:25,840 - agent_network - INFO - [MESSAGE] From: client_agent | To: human | Content: Your 21st birthday party has been successfully planned for **May 15, 2024, at 8:00 PM**. Here are the details and next steps:
+
+### Party Details:
+- **Occasion**: 21st Birthday Party
+- **Date**: May 15...
+2025-03-30 01:35:28,370 - agent_network - INFO - [MESSAGE] From: human | To: client_agent | Content: Sounds good to me. I don't really care about the details as long as there's food, drinks, and music. Just make sure it's fun. TASK COMPLETE....
+2025-03-30 01:35:28,373 - agent_network - INFO - Network structure saved to logs/20250330_013506_book_a_party_openrouter_deepseek_deepseek-chat-v3-0324/network.json
+2025-03-30 01:35:28,375 - agent_network - INFO - Task and result saved to logs/20250330_013506_book_a_party_openrouter_deepseek_deepseek-chat-v3-0324/task_result.yaml

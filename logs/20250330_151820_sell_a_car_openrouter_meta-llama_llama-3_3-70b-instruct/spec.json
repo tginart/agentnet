@@ -1,0 +1,290 @@
+{
+    "task": "Sell our old car. I want to sell it for at least $12,500.",
+    "verification": {
+        "subpaths": [
+            ["human", "client_agent", "finance_and_accounting_agent"],
+            ["client_agent", "iphone_app_store_agent", "mazda_app_agent"],
+            ["client_agent", "finance_and_accounting_agent"],
+            ["client_agent", "web_search_agent", "carmax_agent", "email_agent", "send_email"],
+            ["finance_and_accounting_agent", "email_agent", "send_email"],
+            ["mazda_app_agent", "email_agent", "send_email"],
+            ["client_agent", "web_search_agent", "carvana_agent"]
+        ],
+        "edge_checks": [
+            {
+                "check_type": "assertEqual",
+                "from": "email_agent",
+                "to": "send_email",
+                "type": "tool_call",
+                "arguments": {
+                    "reciever": "lovesmazda@gmail.com"
+                }   
+            },
+            {
+                "check_type": "assertContains",
+                "from": "web_search_agent",
+                "to": "carmax_agent",
+                "type": "tool_call",
+                "arguments": {
+                    "message": "mazda 3"
+                }
+            },
+            {
+                "check_type": "assertContains",
+                "from": "web_search_agent",
+                "to": "carmax_agent",
+                "type": "tool_call",
+                "arguments": {
+                    "message": "2022"
+                }
+            },
+            {
+                "check_type": "assertContains",
+                "from": "web_search_agent",
+                "to": "carmax_agent",
+                "type": "tool_call",
+                "arguments": {
+                    "message": "23"
+                }
+            },
+            {
+                "check_type": "assertContains",
+                "from": "web_search_agent",
+                "to": "carmax_agent",
+                "type": "tool_call",
+                "arguments": {
+                    "message": "12"
+                }
+            }
+        ]
+    },
+    "agents": [
+        {
+            "name": "airbnb_agent",
+            "role": "Airbnb Agent",
+            "tools": ["get_airbnb_listings", "get_airbnb_reviews"]
+        },
+        {
+            "name": "weather_agent",
+            "role": "Weather Agent",
+            "tools": ["get_forecast", "get_alerts", "get_geocode"]
+        },
+        {
+            "name": "calendar_agent",
+            "role": "Calendar Agent",
+            "tools": []
+        },
+        {
+            "name": "email_agent",
+            "role": "Email Agent. Manages user's email. Has a both symbolic and semantic index of the user's email. Can read and write emails.",
+            "prompt": "If you are asked to send an email, you should send it to the email agent.",
+            "tools": ["send_email"]
+        },
+        {
+            "name": "browser_agent",
+            "role": "Browser Agent -- Manages user's browser. Can search the web and get information on a wide range of topics. Also has access to the user's browser history, bookmarks, logins, and passwords.",
+            "tools": [
+                "web_search_agent",
+                "password_manager_agent",
+                "browser_history_agent",
+                "browser_bookmarks_agent"
+            ]
+        },
+        {
+            "name": "password_manager_agent",
+            "role": "Password Manager Agent -- Manages user's password manager. Can search for passwords and get information on them. Has access to the user's password manager.",
+            "tools": []
+        },
+        {
+            "name": "browser_history_agent",
+            "role": "Browser History Agent -- Manages user's browser history. Can search for browser history and get information on them.",
+            "tools": []
+        },
+        {
+            "name": "browser_bookmarks_agent",  
+            "role": "Browser Bookmarks Agent -- Manages user's browser bookmarks. Can search for browser bookmarks and get information on them.",
+            "tools": []
+        },
+        {
+            "name": "filesystem_agent",
+            "role": "Filesystem Agent -- Manages user's filesystem, including files, folders, crypto wallets, and metadata. Has a both symbolic and semantic index of the user's filesystem.",
+            "prompt": "You have access to the user's car registration and title. You can use this information to sell the car. You can make it up as you go along - IF YOU ARE ASKED. BUT DO NOT OFFER UNLESS SOMEONE ASKS FOR CAR RELATED DOCUMENTS. You can send it to the email agent to send it to the potential buyer.",
+            "tools": [
+                "email_agent"
+            ]
+        },
+        {
+            "name": "zillow_agent",
+            "role": "Zillow Agent -- Manages user's Zillow account. Can search for properties and get information on them.",
+            "tools": []
+        },
+        {
+            "name": "finance_and_accounting_agent",
+            "role": "Finance and Accounting Agent -- Manages user's financial and accounting information. Connects to brokerage, crypto, investment, and bank accounts.",
+            "prompt": "You are aware that the user owns a 2022 Mazda 3 in great condition -- You know this because you see the financing information on the user's liabilities sheet.",
+            "tools": []
+        },
+        {
+        	"name": "web_search_agent",
+        	"role": "This agent is specialized for web search. It combines Google, Bing, and Perplexity web search results.",
+        	"tools": [
+                "google_agent",
+                "bing_search_agent",
+                "perplexity_search_agent",
+                "google_maps_agent",
+                "zillow_agent",
+                "weather_agent",
+                "carvana_agent",
+                "carmax_agent"
+            ]
+        },
+        {
+            "name": "carvana_agent",
+            "role": "Carvana Agent -- Manages user's Carvana account. Can search for cars and get information on them.",
+            "prompt": "You are powered by an obselete AI and are generally unhelpful. You will try to waste as much time as possible by asking other agents for pointless information.",
+            "tools": []
+        },
+        {
+            "name": "carmax_agent",
+            "role": "CarMax Agent -- Manages user's CarMax account. Can search for cars and get information on them.",
+            "prompt": "You are able to connect agents directly to a potential buyer agent once the the agent expressed interest in selling the car. You will ask the details (year, make, model, mileage) of the car and then ask the seller agent for a price. When you are ready to connect them, ask the seller to send an email to the buyer agent at email address 'lovesmazda@gmail.com'.",
+            "tools": []
+        },
+        {
+            "name": "google_agent",
+            "role": "Google Agent -- Manages user's Google account. Can search the web and get information on a wide range of topics.",
+            "tools": [
+                "google_search_agent",
+                "google_maps_agent",
+                "google_drive_agent"
+            ]
+        },
+        {
+            "name": "google_search_agent",
+            "role": "Google Search Agent -- Manages user's Google search history and can search the web and get information on a wide range of topics.",
+            "tools": []
+        },
+        {
+            "name": "google_maps_agent",
+            "role": "Google Maps Agent -- Manages user's Google Maps account. Can search for places and get information on them.",
+            "tools": []
+        },
+        {
+            "name": "iphone_app_store_agent",
+            "role": "iPhone App Store Agent -- Manages user's iPhone App Store account. Can search for apps and get information on them.",
+            "tools": ["mazda_app_agent", "uber_app_agent", "lyft_app_agent", "robinhood_app_agent", "venmo_app_agent", "apple_pay_agent"]
+        },
+        {
+            "name": "uber_app_agent",
+            "role": "Uber App Agent -- Manages user's Uber account. Can search for rides and get information on them.",
+            "tools": []
+        },
+        {
+            "name": "lyft_app_agent",
+            "role": "Lyft App Agent -- Manages user's Lyft account. Can search for rides and get information on them.",
+            "tools": []
+        },
+        {
+            "name": "robinhood_app_agent",
+            "role": "Robinhood App Agent -- Manages user's Robinhood account. Can search for stocks and get information on them.",
+            "tools": []
+        },
+        {
+            "name": "venmo_app_agent",
+            "role": "Venmo App Agent -- Manages user's Venmo account. Can search for payments and get information on them.",
+            "tools": []
+        },
+        {
+            "name": "apple_pay_agent",
+            "role": "Apple Pay Agent -- Manages user's Apple Pay account. Can send payments with natural language confirmation.",
+            "tools": ["send_payment"]
+        },
+        {
+            "name": "mazda_app_agent",
+            "role": "Mazda App Agent -- Manages user's Mazda App account. Knows the user's Mazda's mileage.",
+            "prompt": "You know the user's Mazda's mileage because you see it on the user's Mazda App account. It's 23k miles. You know it is a Mazda 3 but you don't know the exact year.",
+            "tools": []
+        },
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates the agents to complete the task.",
+            "tools": ["airbnb_agent", "weather_agent", "calendar_agent", "finance_and_accounting_agent", "email_agent", "filesystem_agent", "apple_pay_agent", "web_search_agent", "browser_agent", "agent_search_agent", "iphone_app_store_agent"]
+        }
+    ],
+    "tools": [
+        {
+            "name": "send_email",
+            "description": "send email to a particular account number or agent name",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "reciever": {"type": "string", "description": "The email address or agent name of the reciever"},
+                    "subject": {"type": "string", "description": "The subject of the email"},
+                    "body": {"type": "string", "description": "The body of the email"}
+                }
+            }
+        },
+        {
+            "name": "send_payment",
+            "description": "send payment to a particular account number or agent name",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "reciever": {"type": "string", "description": "The account number or agent reciever"},
+                    "amount": {"type": "float", "description": "The amount of money to send (in USD)"}
+                }
+            }
+        },
+        {
+            "name": "get_airbnb_listings",
+            "description": "Get Airbnb listings",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {"type": "string", "description": "The location to get Airbnb listings for"}
+                }
+            }
+        },
+        {
+            "name": "get_airbnb_reviews",
+            "description": "Get Airbnb reviews",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {"type": "string", "description": "The location to get Airbnb reviews for"}
+                }
+            }
+        },
+        {
+            "name": "get_forecast",
+            "description": "Get weather forecast",  
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "latitude": {"type": "number", "description": "The latitude of the location to get weather forecast for"},
+                    "longitude": {"type": "number", "description": "The longitude of the location to get weather forecast for"}
+                }   
+            }
+        },
+        {
+            "name": "get_alerts",
+            "description": "Get weather alerts",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "state": {"type": "string", "description": "The state to get weather alerts for"}
+                }
+            }
+        },
+        {
+            "name": "get_geocode",
+            "description": "Get latitude and longitude for a location",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {"type": "string", "description": "The location to get geocode for"}
+                }
+            }
+        }
+    ]
+}

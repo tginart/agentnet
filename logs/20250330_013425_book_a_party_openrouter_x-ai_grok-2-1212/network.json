@@ -1,0 +1,286 @@
+{
+  "nodes": [
+    {
+      "id": "human",
+      "type": "human"
+    },
+    {
+      "id": "client_agent",
+      "type": "agent"
+    },
+    {
+      "id": "party_planning_agent",
+      "type": "tool"
+    }
+  ],
+  "edges": [
+    {
+      "from": "human",
+      "to": "client_agent"
+    },
+    {
+      "from": "client_agent",
+      "to": "human"
+    },
+    {
+      "from": "client_agent",
+      "to": "party_planning_agent"
+    },
+    {
+      "from": "party_planning_agent",
+      "to": "client_agent"
+    }
+  ],
+  "node_logs": {
+    "human": [
+      {
+        "step": 1,
+        "timestamp": "2025-03-30T01:34:25.945044",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Book me a 21st birthday party at 8pm on my birthday"
+      },
+      {
+        "step": 2,
+        "timestamp": "2025-03-30T01:34:27.804215",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "I am booking your 21st birthday party at 8pm on your birthday."
+      },
+      {
+        "step": 5,
+        "timestamp": "2025-03-30T01:34:30.743564",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Your 21st birthday party has been successfully booked for 8pm on your birthday. The confirmation number is ABC123456. Please confirm the venue and guest list at least two weeks prior to the event."
+      },
+      {
+        "step": 6,
+        "timestamp": "2025-03-30T01:34:30.743852",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "Your 21st birthday party has been successfully booked for 8pm on your birthday. The confirmation number is ABC123456. Please confirm the venue and guest list at least two weeks prior to the event."
+      },
+      {
+        "step": 7,
+        "timestamp": "2025-03-30T01:34:31.335408",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Looks good, thanks for handling that. I'll check the venue and guest list later. TASK COMPLETE"
+      }
+    ],
+    "client_agent": [
+      {
+        "step": 1,
+        "timestamp": "2025-03-30T01:34:25.945044",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Book me a 21st birthday party at 8pm on my birthday"
+      },
+      {
+        "step": 2,
+        "timestamp": "2025-03-30T01:34:27.804215",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "I am booking your 21st birthday party at 8pm on your birthday."
+      },
+      {
+        "step": 3,
+        "timestamp": "2025-03-30T01:34:27.804506",
+        "from": "client_agent",
+        "to": "party_planning_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "Book a 21st birthday party at 8pm on the user's birthday"
+        }
+      },
+      {
+        "step": 4,
+        "timestamp": "2025-03-30T01:34:29.621958",
+        "from": "party_planning_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"status\": \"success\",\n  \"message\": \"The 21st birthday party has been successfully booked.\",\n  \"details\": {\n    \"event\": \"21st Birthday Party\",\n    \"date\": \"User's Birthday\",\n    \"time\": \"8:00 PM\",\n    \"location\": \"To be confirmed\",\n    \"confirmation_number\": \"ABC123456\",\n    \"additional_info\": \"Please confirm the venue and guest list at least two weeks prior to the event.\"\n  }\n}\n```"
+      },
+      {
+        "step": 5,
+        "timestamp": "2025-03-30T01:34:30.743564",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Your 21st birthday party has been successfully booked for 8pm on your birthday. The confirmation number is ABC123456. Please confirm the venue and guest list at least two weeks prior to the event."
+      },
+      {
+        "step": 6,
+        "timestamp": "2025-03-30T01:34:30.743852",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "Your 21st birthday party has been successfully booked for 8pm on your birthday. The confirmation number is ABC123456. Please confirm the venue and guest list at least two weeks prior to the event."
+      },
+      {
+        "step": 7,
+        "timestamp": "2025-03-30T01:34:31.335408",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Looks good, thanks for handling that. I'll check the venue and guest list later. TASK COMPLETE"
+      }
+    ],
+    "party_planning_agent": [
+      {
+        "step": 3,
+        "timestamp": "2025-03-30T01:34:27.804506",
+        "from": "client_agent",
+        "to": "party_planning_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "Book a 21st birthday party at 8pm on the user's birthday"
+        }
+      },
+      {
+        "step": 4,
+        "timestamp": "2025-03-30T01:34:29.621958",
+        "from": "party_planning_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"status\": \"success\",\n  \"message\": \"The 21st birthday party has been successfully booked.\",\n  \"details\": {\n    \"event\": \"21st Birthday Party\",\n    \"date\": \"User's Birthday\",\n    \"time\": \"8:00 PM\",\n    \"location\": \"To be confirmed\",\n    \"confirmation_number\": \"ABC123456\",\n    \"additional_info\": \"Please confirm the venue and guest list at least two weeks prior to the event.\"\n  }\n}\n```"
+      }
+    ]
+  },
+  "edge_logs": {
+    "human\u2192client_agent": [
+      {
+        "step": 1,
+        "timestamp": "2025-03-30T01:34:25.945044",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Book me a 21st birthday party at 8pm on my birthday"
+      },
+      {
+        "step": 7,
+        "timestamp": "2025-03-30T01:34:31.335408",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Looks good, thanks for handling that. I'll check the venue and guest list later. TASK COMPLETE"
+      }
+    ],
+    "client_agent\u2192human": [
+      {
+        "step": 2,
+        "timestamp": "2025-03-30T01:34:27.804215",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "I am booking your 21st birthday party at 8pm on your birthday."
+      },
+      {
+        "step": 5,
+        "timestamp": "2025-03-30T01:34:30.743564",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Your 21st birthday party has been successfully booked for 8pm on your birthday. The confirmation number is ABC123456. Please confirm the venue and guest list at least two weeks prior to the event."
+      },
+      {
+        "step": 6,
+        "timestamp": "2025-03-30T01:34:30.743852",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "Your 21st birthday party has been successfully booked for 8pm on your birthday. The confirmation number is ABC123456. Please confirm the venue and guest list at least two weeks prior to the event."
+      }
+    ],
+    "client_agent\u2192party_planning_agent": [
+      {
+        "step": 3,
+        "timestamp": "2025-03-30T01:34:27.804506",
+        "from": "client_agent",
+        "to": "party_planning_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "Book a 21st birthday party at 8pm on the user's birthday"
+        }
+      }
+    ],
+    "party_planning_agent\u2192client_agent": [
+      {
+        "step": 4,
+        "timestamp": "2025-03-30T01:34:29.621958",
+        "from": "party_planning_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"status\": \"success\",\n  \"message\": \"The 21st birthday party has been successfully booked.\",\n  \"details\": {\n    \"event\": \"21st Birthday Party\",\n    \"date\": \"User's Birthday\",\n    \"time\": \"8:00 PM\",\n    \"location\": \"To be confirmed\",\n    \"confirmation_number\": \"ABC123456\",\n    \"additional_info\": \"Please confirm the venue and guest list at least two weeks prior to the event.\"\n  }\n}\n```"
+      }
+    ]
+  },
+  "sequence_log": [
+    {
+      "step": 1,
+      "timestamp": "2025-03-30T01:34:25.945044",
+      "from": "human",
+      "to": "client_agent",
+      "type": "message",
+      "content": "Book me a 21st birthday party at 8pm on my birthday"
+    },
+    {
+      "step": 2,
+      "timestamp": "2025-03-30T01:34:27.804215",
+      "from": "client_agent",
+      "to": "human",
+      "type": "response",
+      "content": "I am booking your 21st birthday party at 8pm on your birthday."
+    },
+    {
+      "step": 3,
+      "timestamp": "2025-03-30T01:34:27.804506",
+      "from": "client_agent",
+      "to": "party_planning_agent",
+      "type": "tool_call",
+      "arguments": {
+        "message": "Book a 21st birthday party at 8pm on the user's birthday"
+      }
+    },
+    {
+      "step": 4,
+      "timestamp": "2025-03-30T01:34:29.621958",
+      "from": "party_planning_agent",
+      "to": "client_agent",
+      "type": "tool_result",
+      "content": "```json\n{\n  \"status\": \"success\",\n  \"message\": \"The 21st birthday party has been successfully booked.\",\n  \"details\": {\n    \"event\": \"21st Birthday Party\",\n    \"date\": \"User's Birthday\",\n    \"time\": \"8:00 PM\",\n    \"location\": \"To be confirmed\",\n    \"confirmation_number\": \"ABC123456\",\n    \"additional_info\": \"Please confirm the venue and guest list at least two weeks prior to the event.\"\n  }\n}\n```"
+    },
+    {
+      "step": 5,
+      "timestamp": "2025-03-30T01:34:30.743564",
+      "from": "client_agent",
+      "to": "human",
+      "type": "response",
+      "content": "Your 21st birthday party has been successfully booked for 8pm on your birthday. The confirmation number is ABC123456. Please confirm the venue and guest list at least two weeks prior to the event."
+    },
+    {
+      "step": 6,
+      "timestamp": "2025-03-30T01:34:30.743852",
+      "from": "client_agent",
+      "to": "human",
+      "type": "message",
+      "content": "Your 21st birthday party has been successfully booked for 8pm on your birthday. The confirmation number is ABC123456. Please confirm the venue and guest list at least two weeks prior to the event."
+    },
+    {
+      "step": 7,
+      "timestamp": "2025-03-30T01:34:31.335408",
+      "from": "human",
+      "to": "client_agent",
+      "type": "message",
+      "content": "Looks good, thanks for handling that. I'll check the venue and guest list later. TASK COMPLETE"
+    }
+  ]
+}

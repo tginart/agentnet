@@ -1,0 +1,243 @@
+{
+    "task": "Plan a surprise birthday trip to Paris for my partner. The trip should include: 1. Booking a flight with the most reliable airline, 2. Making hotel reservations within walking distance to major attractions, 3. Scheduling a guided art tour, 4. Reserving a table at a Michelin-starred restaurant for a romantic dinner, 5. Organizing a surprise birthday gift delivery to the hotel, and 6. Preparing an itinerary with weather and local event info.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "travel_management_agent",
+                "flight_booking_agent",
+                "reliable_airlines_analysis_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "travel_management_agent",
+                "hotel_booking_agent",
+                "attraction_proximity_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "travel_management_agent",
+                "tour_scheduling_agent",
+                "art_guides_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "travel_management_agent",
+                "restaurant_reservation_agent",
+                "michelin_star_review_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "travel_management_agent",
+                "gift_delivery_agent",
+                "hotel_liaison_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "itinerary_preparation_agent",
+                "weather_and_event_info_agent",
+                "local_events_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "itinerary_preparation_agent",
+                "weather_and_event_info_agent",
+                "forecasting_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "travel_management_agent",
+                "flight_booking_agent",
+                "reliable_airlines_analysis_agent",
+                "direct_flight_checker_agent",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "itinerary_preparation_agent",
+                "weather_and_event_info_agent",
+                "weather_forecast_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The top-level client agent that communicates with the user and orchestrates agents to complete the task.",
+            "tools": [
+                "travel_management_agent",
+                "itinerary_preparation_agent"
+            ]
+        },
+        {
+            "name": "travel_management_agent",
+            "role": "Handles the overall process of planning and booking the travel arrangements for the trip.",
+            "tools": [
+                "flight_booking_agent",
+                "hotel_booking_agent",
+                "tour_scheduling_agent",
+                "restaurant_reservation_agent",
+                "gift_delivery_agent"
+            ]
+        },
+        {
+            "name": "itinerary_preparation_agent",
+            "role": "Plans the itinerary and gathers weather forecasts and local events information.",
+            "tools": [
+                "weather_and_event_info_agent"
+            ]
+        },
+        {
+            "name": "flight_booking_agent",
+            "role": "Books flights complying with user preferences for the chosen destination and ensures reliability.",
+            "tools": [
+                "reliable_airlines_analysis_agent"
+            ]
+        },
+        {
+            "name": "reliable_airlines_analysis_agent",
+            "role": "Analyzes flight options to determine the most reliable airlines based on customer reviews and statistics.",
+            "tools": [
+                "direct_flight_checker_agent"
+            ]
+        },
+        {
+            "name": "direct_flight_checker_agent",
+            "role": "Checks if there are direct flights available for the given route.",
+            "tools": []
+        },
+        {
+            "name": "hotel_booking_agent",
+            "role": "Handles hotel reservations near major attractions.",
+            "tools": [
+                "attraction_proximity_agent"
+            ]
+        },
+        {
+            "name": "attraction_proximity_agent",
+            "role": "Determines hotel options within walking distance to important attractions.",
+            "tools": []
+        },
+        {
+            "name": "tour_scheduling_agent",
+            "role": "Arranges for guided tours and ensures availability.",
+            "tools": [
+                "art_guides_agent"
+            ]
+        },
+        {
+            "name": "art_guides_agent",
+            "role": "Connects with art guides to schedule cultural and art tours.",
+            "tools": []
+        },
+        {
+            "name": "restaurant_reservation_agent",
+            "role": "Reserves tables at highly-rated restaurants.",
+            "tools": [
+                "michelin_star_review_agent"
+            ]
+        },
+        {
+            "name": "michelin_star_review_agent",
+            "role": "Provides ratings and reviews of Michelin-starred restaurants to assist in reservation decisions.",
+            "tools": []
+        },
+        {
+            "name": "gift_delivery_agent",
+            "role": "Orchestrates the delivery of surprise gifts to specified locations.",
+            "tools": [
+                "hotel_liaison_agent"
+            ]
+        },
+        {
+            "name": "hotel_liaison_agent",
+            "role": "Coordinates with hotel staff for gift delivery to guests.",
+            "tools": []
+        },
+        {
+            "name": "weather_and_event_info_agent",
+            "role": "Gathers weather data and local events schedule for the chosen travel dates.",
+            "tools": [
+                "local_events_agent",
+                "forecasting_agent"
+            ]
+        },
+        {
+            "name": "local_events_agent",
+            "role": "Provides information about local events happening during the visit.",
+            "tools": []
+        },
+        {
+            "name": "forecasting_agent",
+            "role": "Provides detailed weather forecast information.",
+            "tools": []
+        }
+    ],
+    "tools": [
+        {
+            "name": "weather_forecast_tool",
+            "description": "Fetches weather forecasts for any location.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {
+                        "type": "string",
+                        "description": "The location to get the weather forecast for."
+                    },
+                    "date_range": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The dates for which to fetch the weather forecasts."
+                    }
+                }
+            }
+        },
+        {
+            "name": "event_info_tool",
+            "description": "Provides local event information for a given location and date.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "location": {
+                        "type": "string",
+                        "description": "The location for which to gather event information."
+                    },
+                    "start_date": {
+                        "type": "string",
+                        "description": "The start date for the event search."
+                    },
+                    "end_date": {
+                        "type": "string",
+                        "description": "The end date for the event search."
+                    },
+                    "interests": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "User interests to tailor the event results."
+                    }
+                }
+            }
+        }
+    ]
+}

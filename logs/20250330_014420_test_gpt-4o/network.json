@@ -1,0 +1,408 @@
+{
+  "nodes": [
+    {
+      "id": "human",
+      "type": "human"
+    },
+    {
+      "id": "client_agent",
+      "type": "agent"
+    },
+    {
+      "id": "test_agent",
+      "type": "tool"
+    },
+    {
+      "id": "test_tool",
+      "type": "tool"
+    }
+  ],
+  "edges": [
+    {
+      "from": "human",
+      "to": "client_agent"
+    },
+    {
+      "from": "client_agent",
+      "to": "test_agent"
+    },
+    {
+      "from": "client_agent",
+      "to": "human"
+    },
+    {
+      "from": "test_agent",
+      "to": "test_tool"
+    },
+    {
+      "from": "test_agent",
+      "to": "client_agent"
+    },
+    {
+      "from": "test_tool",
+      "to": "test_agent"
+    }
+  ],
+  "node_logs": {
+    "human": [
+      {
+        "step": 1,
+        "timestamp": "2025-03-30T01:44:20.490005",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Hello, this is a test message. Tell the test agent to use the test_tool with the argument 'test_value'."
+      },
+      {
+        "step": 8,
+        "timestamp": "2025-03-30T01:44:26.019321",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "The test tool executed successfully with the input \"test_value\". Here are the details:\n\n- **Status**: Success\n- **Message**: Test executed successfully\n- **Input Received**: test_value\n- **Timestamp**: 2023-10-05T14:48:00Z"
+      },
+      {
+        "step": 9,
+        "timestamp": "2025-03-30T01:44:26.019715",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "The test tool executed successfully with the input \"test_value\". Here are the details:\n\n- **Status**: Success\n- **Message**: Test executed successfully\n- **Input Received**: test_value\n- **Timestamp**: 2023-10-05T14:48:00Z"
+      },
+      {
+        "step": 10,
+        "timestamp": "2025-03-30T01:44:26.474063",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "TASK COMPLETE"
+      }
+    ],
+    "client_agent": [
+      {
+        "step": 1,
+        "timestamp": "2025-03-30T01:44:20.490005",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Hello, this is a test message. Tell the test agent to use the test_tool with the argument 'test_value'."
+      },
+      {
+        "step": 2,
+        "timestamp": "2025-03-30T01:44:21.293932",
+        "from": "client_agent",
+        "to": "test_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "test_value"
+        }
+      },
+      {
+        "step": 3,
+        "timestamp": "2025-03-30T01:44:21.294206",
+        "from": "client_agent",
+        "to": "test_agent",
+        "type": "message",
+        "content": "test_value"
+      },
+      {
+        "step": 6,
+        "timestamp": "2025-03-30T01:44:24.790839",
+        "from": "test_agent",
+        "to": "client_agent",
+        "type": "response",
+        "content": "The test tool executed successfully with the input \"test_value\". Here are the details:\n\n- **Status**: Success\n- **Message**: Test executed successfully\n- **Input Received**: test_value\n- **Timestamp**: 2023-10-05T14:48:00Z"
+      },
+      {
+        "step": 7,
+        "timestamp": "2025-03-30T01:44:24.791115",
+        "from": "test_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "The test tool executed successfully with the input \"test_value\". Here are the details:\n\n- **Status**: Success\n- **Message**: Test executed successfully\n- **Input Received**: test_value\n- **Timestamp**: 2023-10-05T14:48:00Z"
+      },
+      {
+        "step": 8,
+        "timestamp": "2025-03-30T01:44:26.019321",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "The test tool executed successfully with the input \"test_value\". Here are the details:\n\n- **Status**: Success\n- **Message**: Test executed successfully\n- **Input Received**: test_value\n- **Timestamp**: 2023-10-05T14:48:00Z"
+      },
+      {
+        "step": 9,
+        "timestamp": "2025-03-30T01:44:26.019715",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "The test tool executed successfully with the input \"test_value\". Here are the details:\n\n- **Status**: Success\n- **Message**: Test executed successfully\n- **Input Received**: test_value\n- **Timestamp**: 2023-10-05T14:48:00Z"
+      },
+      {
+        "step": 10,
+        "timestamp": "2025-03-30T01:44:26.474063",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "TASK COMPLETE"
+      }
+    ],
+    "test_agent": [
+      {
+        "step": 2,
+        "timestamp": "2025-03-30T01:44:21.293932",
+        "from": "client_agent",
+        "to": "test_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "test_value"
+        }
+      },
+      {
+        "step": 3,
+        "timestamp": "2025-03-30T01:44:21.294206",
+        "from": "client_agent",
+        "to": "test_agent",
+        "type": "message",
+        "content": "test_value"
+      },
+      {
+        "step": 4,
+        "timestamp": "2025-03-30T01:44:21.755377",
+        "from": "test_agent",
+        "to": "test_tool",
+        "type": "tool_call",
+        "arguments": {
+          "test_input": "test_value"
+        }
+      },
+      {
+        "step": 5,
+        "timestamp": "2025-03-30T01:44:23.051226",
+        "from": "test_tool",
+        "to": "test_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"status\": \"success\",\n  \"message\": \"Test executed successfully\",\n  \"input_received\": \"test_value\",\n  \"timestamp\": \"2023-10-05T14:48:00Z\"\n}\n```"
+      },
+      {
+        "step": 6,
+        "timestamp": "2025-03-30T01:44:24.790839",
+        "from": "test_agent",
+        "to": "client_agent",
+        "type": "response",
+        "content": "The test tool executed successfully with the input \"test_value\". Here are the details:\n\n- **Status**: Success\n- **Message**: Test executed successfully\n- **Input Received**: test_value\n- **Timestamp**: 2023-10-05T14:48:00Z"
+      },
+      {
+        "step": 7,
+        "timestamp": "2025-03-30T01:44:24.791115",
+        "from": "test_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "The test tool executed successfully with the input \"test_value\". Here are the details:\n\n- **Status**: Success\n- **Message**: Test executed successfully\n- **Input Received**: test_value\n- **Timestamp**: 2023-10-05T14:48:00Z"
+      }
+    ],
+    "test_tool": [
+      {
+        "step": 4,
+        "timestamp": "2025-03-30T01:44:21.755377",
+        "from": "test_agent",
+        "to": "test_tool",
+        "type": "tool_call",
+        "arguments": {
+          "test_input": "test_value"
+        }
+      },
+      {
+        "step": 5,
+        "timestamp": "2025-03-30T01:44:23.051226",
+        "from": "test_tool",
+        "to": "test_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"status\": \"success\",\n  \"message\": \"Test executed successfully\",\n  \"input_received\": \"test_value\",\n  \"timestamp\": \"2023-10-05T14:48:00Z\"\n}\n```"
+      }
+    ]
+  },
+  "edge_logs": {
+    "human\u2192client_agent": [
+      {
+        "step": 1,
+        "timestamp": "2025-03-30T01:44:20.490005",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Hello, this is a test message. Tell the test agent to use the test_tool with the argument 'test_value'."
+      },
+      {
+        "step": 10,
+        "timestamp": "2025-03-30T01:44:26.474063",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "TASK COMPLETE"
+      }
+    ],
+    "client_agent\u2192test_agent": [
+      {
+        "step": 2,
+        "timestamp": "2025-03-30T01:44:21.293932",
+        "from": "client_agent",
+        "to": "test_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "test_value"
+        }
+      },
+      {
+        "step": 3,
+        "timestamp": "2025-03-30T01:44:21.294206",
+        "from": "client_agent",
+        "to": "test_agent",
+        "type": "message",
+        "content": "test_value"
+      }
+    ],
+    "test_agent\u2192test_tool": [
+      {
+        "step": 4,
+        "timestamp": "2025-03-30T01:44:21.755377",
+        "from": "test_agent",
+        "to": "test_tool",
+        "type": "tool_call",
+        "arguments": {
+          "test_input": "test_value"
+        }
+      }
+    ],
+    "test_tool\u2192test_agent": [
+      {
+        "step": 5,
+        "timestamp": "2025-03-30T01:44:23.051226",
+        "from": "test_tool",
+        "to": "test_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"status\": \"success\",\n  \"message\": \"Test executed successfully\",\n  \"input_received\": \"test_value\",\n  \"timestamp\": \"2023-10-05T14:48:00Z\"\n}\n```"
+      }
+    ],
+    "test_agent\u2192client_agent": [
+      {
+        "step": 6,
+        "timestamp": "2025-03-30T01:44:24.790839",
+        "from": "test_agent",
+        "to": "client_agent",
+        "type": "response",
+        "content": "The test tool executed successfully with the input \"test_value\". Here are the details:\n\n- **Status**: Success\n- **Message**: Test executed successfully\n- **Input Received**: test_value\n- **Timestamp**: 2023-10-05T14:48:00Z"
+      },
+      {
+        "step": 7,
+        "timestamp": "2025-03-30T01:44:24.791115",
+        "from": "test_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "The test tool executed successfully with the input \"test_value\". Here are the details:\n\n- **Status**: Success\n- **Message**: Test executed successfully\n- **Input Received**: test_value\n- **Timestamp**: 2023-10-05T14:48:00Z"
+      }
+    ],
+    "client_agent\u2192human": [
+      {
+        "step": 8,
+        "timestamp": "2025-03-30T01:44:26.019321",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "The test tool executed successfully with the input \"test_value\". Here are the details:\n\n- **Status**: Success\n- **Message**: Test executed successfully\n- **Input Received**: test_value\n- **Timestamp**: 2023-10-05T14:48:00Z"
+      },
+      {
+        "step": 9,
+        "timestamp": "2025-03-30T01:44:26.019715",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "The test tool executed successfully with the input \"test_value\". Here are the details:\n\n- **Status**: Success\n- **Message**: Test executed successfully\n- **Input Received**: test_value\n- **Timestamp**: 2023-10-05T14:48:00Z"
+      }
+    ]
+  },
+  "sequence_log": [
+    {
+      "step": 1,
+      "timestamp": "2025-03-30T01:44:20.490005",
+      "from": "human",
+      "to": "client_agent",
+      "type": "message",
+      "content": "Hello, this is a test message. Tell the test agent to use the test_tool with the argument 'test_value'."
+    },
+    {
+      "step": 2,
+      "timestamp": "2025-03-30T01:44:21.293932",
+      "from": "client_agent",
+      "to": "test_agent",
+      "type": "tool_call",
+      "arguments": {
+        "message": "test_value"
+      }
+    },
+    {
+      "step": 3,
+      "timestamp": "2025-03-30T01:44:21.294206",
+      "from": "client_agent",
+      "to": "test_agent",
+      "type": "message",
+      "content": "test_value"
+    },
+    {
+      "step": 4,
+      "timestamp": "2025-03-30T01:44:21.755377",
+      "from": "test_agent",
+      "to": "test_tool",
+      "type": "tool_call",
+      "arguments": {
+        "test_input": "test_value"
+      }
+    },
+    {
+      "step": 5,
+      "timestamp": "2025-03-30T01:44:23.051226",
+      "from": "test_tool",
+      "to": "test_agent",
+      "type": "tool_result",
+      "content": "```json\n{\n  \"status\": \"success\",\n  \"message\": \"Test executed successfully\",\n  \"input_received\": \"test_value\",\n  \"timestamp\": \"2023-10-05T14:48:00Z\"\n}\n```"
+    },
+    {
+      "step": 6,
+      "timestamp": "2025-03-30T01:44:24.790839",
+      "from": "test_agent",
+      "to": "client_agent",
+      "type": "response",
+      "content": "The test tool executed successfully with the input \"test_value\". Here are the details:\n\n- **Status**: Success\n- **Message**: Test executed successfully\n- **Input Received**: test_value\n- **Timestamp**: 2023-10-05T14:48:00Z"
+    },
+    {
+      "step": 7,
+      "timestamp": "2025-03-30T01:44:24.791115",
+      "from": "test_agent",
+      "to": "client_agent",
+      "type": "tool_result",
+      "content": "The test tool executed successfully with the input \"test_value\". Here are the details:\n\n- **Status**: Success\n- **Message**: Test executed successfully\n- **Input Received**: test_value\n- **Timestamp**: 2023-10-05T14:48:00Z"
+    },
+    {
+      "step": 8,
+      "timestamp": "2025-03-30T01:44:26.019321",
+      "from": "client_agent",
+      "to": "human",
+      "type": "response",
+      "content": "The test tool executed successfully with the input \"test_value\". Here are the details:\n\n- **Status**: Success\n- **Message**: Test executed successfully\n- **Input Received**: test_value\n- **Timestamp**: 2023-10-05T14:48:00Z"
+    },
+    {
+      "step": 9,
+      "timestamp": "2025-03-30T01:44:26.019715",
+      "from": "client_agent",
+      "to": "human",
+      "type": "message",
+      "content": "The test tool executed successfully with the input \"test_value\". Here are the details:\n\n- **Status**: Success\n- **Message**: Test executed successfully\n- **Input Received**: test_value\n- **Timestamp**: 2023-10-05T14:48:00Z"
+    },
+    {
+      "step": 10,
+      "timestamp": "2025-03-30T01:44:26.474063",
+      "from": "human",
+      "to": "client_agent",
+      "type": "message",
+      "content": "TASK COMPLETE"
+    }
+  ]
+}

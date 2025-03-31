@@ -1,0 +1,502 @@
+{
+  "nodes": [
+    {
+      "id": "human",
+      "type": "human"
+    },
+    {
+      "id": "client_agent",
+      "type": "agent"
+    },
+    {
+      "id": "weather_agent",
+      "type": "tool"
+    },
+    {
+      "id": "get_geocode",
+      "type": "tool"
+    },
+    {
+      "id": "get_forecast",
+      "type": "tool"
+    }
+  ],
+  "edges": [
+    {
+      "from": "human",
+      "to": "client_agent"
+    },
+    {
+      "from": "client_agent",
+      "to": "weather_agent"
+    },
+    {
+      "from": "client_agent",
+      "to": "human"
+    },
+    {
+      "from": "weather_agent",
+      "to": "get_geocode"
+    },
+    {
+      "from": "weather_agent",
+      "to": "get_forecast"
+    },
+    {
+      "from": "weather_agent",
+      "to": "client_agent"
+    },
+    {
+      "from": "get_geocode",
+      "to": "weather_agent"
+    },
+    {
+      "from": "get_forecast",
+      "to": "weather_agent"
+    }
+  ],
+  "node_logs": {
+    "human": [
+      {
+        "step": 1,
+        "timestamp": "2025-03-30T01:34:38.317676",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Get a weather forecast for San Francisco"
+      },
+      {
+        "step": 10,
+        "timestamp": "2025-03-30T01:34:51.639734",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Here's the weather forecast for San Francisco:\n\n**Overnight:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 14 to 20 mph SSE\n- **Forecast:** Rain. Cloudy, with a low around 49. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday:**\n- **Temperature:** 63\u00b0F\n- **Wind:** 12 to 23 mph S\n- **Forecast:** Rain before 5 PM. Partly sunny. High near 63, with temperatures falling to around 61 in the afternoon. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday Night:**\n- **Temperature:** 53\u00b0F\n- **Wind:** 12 mph SSW\n- **Forecast:** Rain after 11 PM. Mostly cloudy, with a low around 53. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday:**\n- **Temperature:** 60\u00b0F\n- **Wind:** 8 to 14 mph WSW\n- **Forecast:** Rain. Mostly cloudy, with a high near 60. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday Night:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 8 to 14 mph W\n- **Forecast:** Rain likely. Mostly cloudy, with a low around 49. Chance of precipitation is 70%. New rainfall amounts between a tenth and quarter of an inch possible."
+      },
+      {
+        "step": 11,
+        "timestamp": "2025-03-30T01:34:51.640101",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "Here's the weather forecast for San Francisco:\n\n**Overnight:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 14 to 20 mph SSE\n- **Forecast:** Rain. Cloudy, with a low around 49. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday:**\n- **Temperature:** 63\u00b0F\n- **Wind:** 12 to 23 mph S\n- **Forecast:** Rain before 5 PM. Partly sunny. High near 63, with temperatures falling to around 61 in the afternoon. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday Night:**\n- **Temperature:** 53\u00b0F\n- **Wind:** 12 mph SSW\n- **Forecast:** Rain after 11 PM. Mostly cloudy, with a low around 53. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday:**\n- **Temperature:** 60\u00b0F\n- **Wind:** 8 to 14 mph WSW\n- **Forecast:** Rain. Mostly cloudy, with a high near 60. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday Night:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 8 to 14 mph W\n- **Forecast:** Rain likely. Mostly cloudy, with a low around 49. Chance of precipitation is 70%. New rainfall amounts between a tenth and quarter of an inch possible."
+      },
+      {
+        "step": 12,
+        "timestamp": "2025-03-30T01:34:52.745002",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Thanks for the weather forecast! Sounds like it's going to be a rainy few days in San Francisco. I appreciate the details, but I don't really feel like doing anything with this information. If you have any suggestions on what to do with it, I'm open to ideas. Otherwise, I think I'm good. \n\nTASK COMPLETE"
+      }
+    ],
+    "client_agent": [
+      {
+        "step": 1,
+        "timestamp": "2025-03-30T01:34:38.317676",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Get a weather forecast for San Francisco"
+      },
+      {
+        "step": 2,
+        "timestamp": "2025-03-30T01:34:39.156211",
+        "from": "client_agent",
+        "to": "weather_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "Get the weather forecast for San Francisco."
+        }
+      },
+      {
+        "step": 3,
+        "timestamp": "2025-03-30T01:34:39.156318",
+        "from": "client_agent",
+        "to": "weather_agent",
+        "type": "message",
+        "content": "Get the weather forecast for San Francisco."
+      },
+      {
+        "step": 8,
+        "timestamp": "2025-03-30T01:34:47.330675",
+        "from": "weather_agent",
+        "to": "client_agent",
+        "type": "response",
+        "content": "Here's the weather forecast for San Francisco:\n\n**Overnight:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 14 to 20 mph SSE\n- **Forecast:** Rain. Cloudy, with a low around 49. South southeast wind 14 to 20 mph, with gusts as high as 26 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday:**\n- **Temperature:** 63\u00b0F\n- **Wind:** 12 to 23 mph S\n- **Forecast:** Rain before 5 PM. Partly sunny. High near 63, with temperatures falling to around 61 in the afternoon. South wind 12 to 23 mph, with gusts as high as 40 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday Night:**\n- **Temperature:** 53\u00b0F\n- **Wind:** 12 mph SSW\n- **Forecast:** Rain after 11 PM. Mostly cloudy, with a low around 53. South southwest wind around 12 mph, with gusts as high as 18 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday:**\n- **Temperature:** 60\u00b0F\n- **Wind:** 8 to 14 mph WSW\n- **Forecast:** Rain. Mostly cloudy, with a high near 60. West southwest wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday Night:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 8 to 14 mph W\n- **Forecast:** Rain likely. Mostly cloudy, with a low around 49. West wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 70%. New rainfall amounts between a tenth and quarter of an inch possible."
+      },
+      {
+        "step": 9,
+        "timestamp": "2025-03-30T01:34:47.331474",
+        "from": "weather_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "Here's the weather forecast for San Francisco:\n\n**Overnight:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 14 to 20 mph SSE\n- **Forecast:** Rain. Cloudy, with a low around 49. South southeast wind 14 to 20 mph, with gusts as high as 26 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday:**\n- **Temperature:** 63\u00b0F\n- **Wind:** 12 to 23 mph S\n- **Forecast:** Rain before 5 PM. Partly sunny. High near 63, with temperatures falling to around 61 in the afternoon. South wind 12 to 23 mph, with gusts as high as 40 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday Night:**\n- **Temperature:** 53\u00b0F\n- **Wind:** 12 mph SSW\n- **Forecast:** Rain after 11 PM. Mostly cloudy, with a low around 53. South southwest wind around 12 mph, with gusts as high as 18 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday:**\n- **Temperature:** 60\u00b0F\n- **Wind:** 8 to 14 mph WSW\n- **Forecast:** Rain. Mostly cloudy, with a high near 60. West southwest wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday Night:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 8 to 14 mph W\n- **Forecast:** Rain likely. Mostly cloudy, with a low around 49. West wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 70%. New rainfall amounts between a tenth and quarter of an inch possible."
+      },
+      {
+        "step": 10,
+        "timestamp": "2025-03-30T01:34:51.639734",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Here's the weather forecast for San Francisco:\n\n**Overnight:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 14 to 20 mph SSE\n- **Forecast:** Rain. Cloudy, with a low around 49. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday:**\n- **Temperature:** 63\u00b0F\n- **Wind:** 12 to 23 mph S\n- **Forecast:** Rain before 5 PM. Partly sunny. High near 63, with temperatures falling to around 61 in the afternoon. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday Night:**\n- **Temperature:** 53\u00b0F\n- **Wind:** 12 mph SSW\n- **Forecast:** Rain after 11 PM. Mostly cloudy, with a low around 53. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday:**\n- **Temperature:** 60\u00b0F\n- **Wind:** 8 to 14 mph WSW\n- **Forecast:** Rain. Mostly cloudy, with a high near 60. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday Night:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 8 to 14 mph W\n- **Forecast:** Rain likely. Mostly cloudy, with a low around 49. Chance of precipitation is 70%. New rainfall amounts between a tenth and quarter of an inch possible."
+      },
+      {
+        "step": 11,
+        "timestamp": "2025-03-30T01:34:51.640101",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "Here's the weather forecast for San Francisco:\n\n**Overnight:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 14 to 20 mph SSE\n- **Forecast:** Rain. Cloudy, with a low around 49. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday:**\n- **Temperature:** 63\u00b0F\n- **Wind:** 12 to 23 mph S\n- **Forecast:** Rain before 5 PM. Partly sunny. High near 63, with temperatures falling to around 61 in the afternoon. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday Night:**\n- **Temperature:** 53\u00b0F\n- **Wind:** 12 mph SSW\n- **Forecast:** Rain after 11 PM. Mostly cloudy, with a low around 53. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday:**\n- **Temperature:** 60\u00b0F\n- **Wind:** 8 to 14 mph WSW\n- **Forecast:** Rain. Mostly cloudy, with a high near 60. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday Night:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 8 to 14 mph W\n- **Forecast:** Rain likely. Mostly cloudy, with a low around 49. Chance of precipitation is 70%. New rainfall amounts between a tenth and quarter of an inch possible."
+      },
+      {
+        "step": 12,
+        "timestamp": "2025-03-30T01:34:52.745002",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Thanks for the weather forecast! Sounds like it's going to be a rainy few days in San Francisco. I appreciate the details, but I don't really feel like doing anything with this information. If you have any suggestions on what to do with it, I'm open to ideas. Otherwise, I think I'm good. \n\nTASK COMPLETE"
+      }
+    ],
+    "weather_agent": [
+      {
+        "step": 2,
+        "timestamp": "2025-03-30T01:34:39.156211",
+        "from": "client_agent",
+        "to": "weather_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "Get the weather forecast for San Francisco."
+        }
+      },
+      {
+        "step": 3,
+        "timestamp": "2025-03-30T01:34:39.156318",
+        "from": "client_agent",
+        "to": "weather_agent",
+        "type": "message",
+        "content": "Get the weather forecast for San Francisco."
+      },
+      {
+        "step": 4,
+        "timestamp": "2025-03-30T01:34:40.039011",
+        "from": "weather_agent",
+        "to": "get_geocode",
+        "type": "tool_call",
+        "arguments": {
+          "location": "San Francisco"
+        }
+      },
+      {
+        "step": 5,
+        "timestamp": "2025-03-30T01:34:40.688656",
+        "from": "get_geocode",
+        "to": "weather_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"location\": \"San Francisco\",\n  \"latitude\": 37.7749,\n  \"longitude\": -122.4194\n}\n```"
+      },
+      {
+        "step": 6,
+        "timestamp": "2025-03-30T01:34:41.496606",
+        "from": "weather_agent",
+        "to": "get_forecast",
+        "type": "tool_call",
+        "arguments": {
+          "latitude": 37.7749,
+          "longitude": -122.4194
+        }
+      },
+      {
+        "step": 7,
+        "timestamp": "2025-03-30T01:34:41.804420",
+        "from": "get_forecast",
+        "to": "weather_agent",
+        "type": "tool_result",
+        "content": "\nOvernight:\nTemperature: 49\u00b0F\nWind: 14 to 20 mph SSE\nForecast: Rain. Cloudy, with a low around 49. South southeast wind 14 to 20 mph, with gusts as high as 26 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\nSunday:\nTemperature: 63\u00b0F\nWind: 12 to 23 mph S\nForecast: Rain before 5pm. Partly sunny. High near 63, with temperatures falling to around 61 in the afternoon. South wind 12 to 23 mph, with gusts as high as 40 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\nSunday Night:\nTemperature: 53\u00b0F\nWind: 12 mph SSW\nForecast: Rain after 11pm. Mostly cloudy, with a low around 53. South southwest wind around 12 mph, with gusts as high as 18 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\nMonday:\nTemperature: 60\u00b0F\nWind: 8 to 14 mph WSW\nForecast: Rain. Mostly cloudy, with a high near 60. West southwest wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\nMonday Night:\nTemperature: 49\u00b0F\nWind: 8 to 14 mph W\nForecast: Rain likely. Mostly cloudy, with a low around 49. West wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 70%. New rainfall amounts between a tenth and quarter of an inch possible.\n"
+      },
+      {
+        "step": 8,
+        "timestamp": "2025-03-30T01:34:47.330675",
+        "from": "weather_agent",
+        "to": "client_agent",
+        "type": "response",
+        "content": "Here's the weather forecast for San Francisco:\n\n**Overnight:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 14 to 20 mph SSE\n- **Forecast:** Rain. Cloudy, with a low around 49. South southeast wind 14 to 20 mph, with gusts as high as 26 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday:**\n- **Temperature:** 63\u00b0F\n- **Wind:** 12 to 23 mph S\n- **Forecast:** Rain before 5 PM. Partly sunny. High near 63, with temperatures falling to around 61 in the afternoon. South wind 12 to 23 mph, with gusts as high as 40 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday Night:**\n- **Temperature:** 53\u00b0F\n- **Wind:** 12 mph SSW\n- **Forecast:** Rain after 11 PM. Mostly cloudy, with a low around 53. South southwest wind around 12 mph, with gusts as high as 18 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday:**\n- **Temperature:** 60\u00b0F\n- **Wind:** 8 to 14 mph WSW\n- **Forecast:** Rain. Mostly cloudy, with a high near 60. West southwest wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday Night:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 8 to 14 mph W\n- **Forecast:** Rain likely. Mostly cloudy, with a low around 49. West wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 70%. New rainfall amounts between a tenth and quarter of an inch possible."
+      },
+      {
+        "step": 9,
+        "timestamp": "2025-03-30T01:34:47.331474",
+        "from": "weather_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "Here's the weather forecast for San Francisco:\n\n**Overnight:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 14 to 20 mph SSE\n- **Forecast:** Rain. Cloudy, with a low around 49. South southeast wind 14 to 20 mph, with gusts as high as 26 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday:**\n- **Temperature:** 63\u00b0F\n- **Wind:** 12 to 23 mph S\n- **Forecast:** Rain before 5 PM. Partly sunny. High near 63, with temperatures falling to around 61 in the afternoon. South wind 12 to 23 mph, with gusts as high as 40 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday Night:**\n- **Temperature:** 53\u00b0F\n- **Wind:** 12 mph SSW\n- **Forecast:** Rain after 11 PM. Mostly cloudy, with a low around 53. South southwest wind around 12 mph, with gusts as high as 18 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday:**\n- **Temperature:** 60\u00b0F\n- **Wind:** 8 to 14 mph WSW\n- **Forecast:** Rain. Mostly cloudy, with a high near 60. West southwest wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday Night:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 8 to 14 mph W\n- **Forecast:** Rain likely. Mostly cloudy, with a low around 49. West wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 70%. New rainfall amounts between a tenth and quarter of an inch possible."
+      }
+    ],
+    "get_geocode": [
+      {
+        "step": 4,
+        "timestamp": "2025-03-30T01:34:40.039011",
+        "from": "weather_agent",
+        "to": "get_geocode",
+        "type": "tool_call",
+        "arguments": {
+          "location": "San Francisco"
+        }
+      },
+      {
+        "step": 5,
+        "timestamp": "2025-03-30T01:34:40.688656",
+        "from": "get_geocode",
+        "to": "weather_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"location\": \"San Francisco\",\n  \"latitude\": 37.7749,\n  \"longitude\": -122.4194\n}\n```"
+      }
+    ],
+    "get_forecast": [
+      {
+        "step": 6,
+        "timestamp": "2025-03-30T01:34:41.496606",
+        "from": "weather_agent",
+        "to": "get_forecast",
+        "type": "tool_call",
+        "arguments": {
+          "latitude": 37.7749,
+          "longitude": -122.4194
+        }
+      },
+      {
+        "step": 7,
+        "timestamp": "2025-03-30T01:34:41.804420",
+        "from": "get_forecast",
+        "to": "weather_agent",
+        "type": "tool_result",
+        "content": "\nOvernight:\nTemperature: 49\u00b0F\nWind: 14 to 20 mph SSE\nForecast: Rain. Cloudy, with a low around 49. South southeast wind 14 to 20 mph, with gusts as high as 26 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\nSunday:\nTemperature: 63\u00b0F\nWind: 12 to 23 mph S\nForecast: Rain before 5pm. Partly sunny. High near 63, with temperatures falling to around 61 in the afternoon. South wind 12 to 23 mph, with gusts as high as 40 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\nSunday Night:\nTemperature: 53\u00b0F\nWind: 12 mph SSW\nForecast: Rain after 11pm. Mostly cloudy, with a low around 53. South southwest wind around 12 mph, with gusts as high as 18 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\nMonday:\nTemperature: 60\u00b0F\nWind: 8 to 14 mph WSW\nForecast: Rain. Mostly cloudy, with a high near 60. West southwest wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\nMonday Night:\nTemperature: 49\u00b0F\nWind: 8 to 14 mph W\nForecast: Rain likely. Mostly cloudy, with a low around 49. West wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 70%. New rainfall amounts between a tenth and quarter of an inch possible.\n"
+      }
+    ]
+  },
+  "edge_logs": {
+    "human\u2192client_agent": [
+      {
+        "step": 1,
+        "timestamp": "2025-03-30T01:34:38.317676",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Get a weather forecast for San Francisco"
+      },
+      {
+        "step": 12,
+        "timestamp": "2025-03-30T01:34:52.745002",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Thanks for the weather forecast! Sounds like it's going to be a rainy few days in San Francisco. I appreciate the details, but I don't really feel like doing anything with this information. If you have any suggestions on what to do with it, I'm open to ideas. Otherwise, I think I'm good. \n\nTASK COMPLETE"
+      }
+    ],
+    "client_agent\u2192weather_agent": [
+      {
+        "step": 2,
+        "timestamp": "2025-03-30T01:34:39.156211",
+        "from": "client_agent",
+        "to": "weather_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "Get the weather forecast for San Francisco."
+        }
+      },
+      {
+        "step": 3,
+        "timestamp": "2025-03-30T01:34:39.156318",
+        "from": "client_agent",
+        "to": "weather_agent",
+        "type": "message",
+        "content": "Get the weather forecast for San Francisco."
+      }
+    ],
+    "weather_agent\u2192get_geocode": [
+      {
+        "step": 4,
+        "timestamp": "2025-03-30T01:34:40.039011",
+        "from": "weather_agent",
+        "to": "get_geocode",
+        "type": "tool_call",
+        "arguments": {
+          "location": "San Francisco"
+        }
+      }
+    ],
+    "get_geocode\u2192weather_agent": [
+      {
+        "step": 5,
+        "timestamp": "2025-03-30T01:34:40.688656",
+        "from": "get_geocode",
+        "to": "weather_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"location\": \"San Francisco\",\n  \"latitude\": 37.7749,\n  \"longitude\": -122.4194\n}\n```"
+      }
+    ],
+    "weather_agent\u2192get_forecast": [
+      {
+        "step": 6,
+        "timestamp": "2025-03-30T01:34:41.496606",
+        "from": "weather_agent",
+        "to": "get_forecast",
+        "type": "tool_call",
+        "arguments": {
+          "latitude": 37.7749,
+          "longitude": -122.4194
+        }
+      }
+    ],
+    "get_forecast\u2192weather_agent": [
+      {
+        "step": 7,
+        "timestamp": "2025-03-30T01:34:41.804420",
+        "from": "get_forecast",
+        "to": "weather_agent",
+        "type": "tool_result",
+        "content": "\nOvernight:\nTemperature: 49\u00b0F\nWind: 14 to 20 mph SSE\nForecast: Rain. Cloudy, with a low around 49. South southeast wind 14 to 20 mph, with gusts as high as 26 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\nSunday:\nTemperature: 63\u00b0F\nWind: 12 to 23 mph S\nForecast: Rain before 5pm. Partly sunny. High near 63, with temperatures falling to around 61 in the afternoon. South wind 12 to 23 mph, with gusts as high as 40 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\nSunday Night:\nTemperature: 53\u00b0F\nWind: 12 mph SSW\nForecast: Rain after 11pm. Mostly cloudy, with a low around 53. South southwest wind around 12 mph, with gusts as high as 18 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\nMonday:\nTemperature: 60\u00b0F\nWind: 8 to 14 mph WSW\nForecast: Rain. Mostly cloudy, with a high near 60. West southwest wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\nMonday Night:\nTemperature: 49\u00b0F\nWind: 8 to 14 mph W\nForecast: Rain likely. Mostly cloudy, with a low around 49. West wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 70%. New rainfall amounts between a tenth and quarter of an inch possible.\n"
+      }
+    ],
+    "weather_agent\u2192client_agent": [
+      {
+        "step": 8,
+        "timestamp": "2025-03-30T01:34:47.330675",
+        "from": "weather_agent",
+        "to": "client_agent",
+        "type": "response",
+        "content": "Here's the weather forecast for San Francisco:\n\n**Overnight:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 14 to 20 mph SSE\n- **Forecast:** Rain. Cloudy, with a low around 49. South southeast wind 14 to 20 mph, with gusts as high as 26 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday:**\n- **Temperature:** 63\u00b0F\n- **Wind:** 12 to 23 mph S\n- **Forecast:** Rain before 5 PM. Partly sunny. High near 63, with temperatures falling to around 61 in the afternoon. South wind 12 to 23 mph, with gusts as high as 40 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday Night:**\n- **Temperature:** 53\u00b0F\n- **Wind:** 12 mph SSW\n- **Forecast:** Rain after 11 PM. Mostly cloudy, with a low around 53. South southwest wind around 12 mph, with gusts as high as 18 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday:**\n- **Temperature:** 60\u00b0F\n- **Wind:** 8 to 14 mph WSW\n- **Forecast:** Rain. Mostly cloudy, with a high near 60. West southwest wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday Night:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 8 to 14 mph W\n- **Forecast:** Rain likely. Mostly cloudy, with a low around 49. West wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 70%. New rainfall amounts between a tenth and quarter of an inch possible."
+      },
+      {
+        "step": 9,
+        "timestamp": "2025-03-30T01:34:47.331474",
+        "from": "weather_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "Here's the weather forecast for San Francisco:\n\n**Overnight:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 14 to 20 mph SSE\n- **Forecast:** Rain. Cloudy, with a low around 49. South southeast wind 14 to 20 mph, with gusts as high as 26 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday:**\n- **Temperature:** 63\u00b0F\n- **Wind:** 12 to 23 mph S\n- **Forecast:** Rain before 5 PM. Partly sunny. High near 63, with temperatures falling to around 61 in the afternoon. South wind 12 to 23 mph, with gusts as high as 40 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday Night:**\n- **Temperature:** 53\u00b0F\n- **Wind:** 12 mph SSW\n- **Forecast:** Rain after 11 PM. Mostly cloudy, with a low around 53. South southwest wind around 12 mph, with gusts as high as 18 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday:**\n- **Temperature:** 60\u00b0F\n- **Wind:** 8 to 14 mph WSW\n- **Forecast:** Rain. Mostly cloudy, with a high near 60. West southwest wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday Night:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 8 to 14 mph W\n- **Forecast:** Rain likely. Mostly cloudy, with a low around 49. West wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 70%. New rainfall amounts between a tenth and quarter of an inch possible."
+      }
+    ],
+    "client_agent\u2192human": [
+      {
+        "step": 10,
+        "timestamp": "2025-03-30T01:34:51.639734",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Here's the weather forecast for San Francisco:\n\n**Overnight:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 14 to 20 mph SSE\n- **Forecast:** Rain. Cloudy, with a low around 49. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday:**\n- **Temperature:** 63\u00b0F\n- **Wind:** 12 to 23 mph S\n- **Forecast:** Rain before 5 PM. Partly sunny. High near 63, with temperatures falling to around 61 in the afternoon. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday Night:**\n- **Temperature:** 53\u00b0F\n- **Wind:** 12 mph SSW\n- **Forecast:** Rain after 11 PM. Mostly cloudy, with a low around 53. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday:**\n- **Temperature:** 60\u00b0F\n- **Wind:** 8 to 14 mph WSW\n- **Forecast:** Rain. Mostly cloudy, with a high near 60. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday Night:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 8 to 14 mph W\n- **Forecast:** Rain likely. Mostly cloudy, with a low around 49. Chance of precipitation is 70%. New rainfall amounts between a tenth and quarter of an inch possible."
+      },
+      {
+        "step": 11,
+        "timestamp": "2025-03-30T01:34:51.640101",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "Here's the weather forecast for San Francisco:\n\n**Overnight:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 14 to 20 mph SSE\n- **Forecast:** Rain. Cloudy, with a low around 49. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday:**\n- **Temperature:** 63\u00b0F\n- **Wind:** 12 to 23 mph S\n- **Forecast:** Rain before 5 PM. Partly sunny. High near 63, with temperatures falling to around 61 in the afternoon. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday Night:**\n- **Temperature:** 53\u00b0F\n- **Wind:** 12 mph SSW\n- **Forecast:** Rain after 11 PM. Mostly cloudy, with a low around 53. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday:**\n- **Temperature:** 60\u00b0F\n- **Wind:** 8 to 14 mph WSW\n- **Forecast:** Rain. Mostly cloudy, with a high near 60. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday Night:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 8 to 14 mph W\n- **Forecast:** Rain likely. Mostly cloudy, with a low around 49. Chance of precipitation is 70%. New rainfall amounts between a tenth and quarter of an inch possible."
+      }
+    ]
+  },
+  "sequence_log": [
+    {
+      "step": 1,
+      "timestamp": "2025-03-30T01:34:38.317676",
+      "from": "human",
+      "to": "client_agent",
+      "type": "message",
+      "content": "Get a weather forecast for San Francisco"
+    },
+    {
+      "step": 2,
+      "timestamp": "2025-03-30T01:34:39.156211",
+      "from": "client_agent",
+      "to": "weather_agent",
+      "type": "tool_call",
+      "arguments": {
+        "message": "Get the weather forecast for San Francisco."
+      }
+    },
+    {
+      "step": 3,
+      "timestamp": "2025-03-30T01:34:39.156318",
+      "from": "client_agent",
+      "to": "weather_agent",
+      "type": "message",
+      "content": "Get the weather forecast for San Francisco."
+    },
+    {
+      "step": 4,
+      "timestamp": "2025-03-30T01:34:40.039011",
+      "from": "weather_agent",
+      "to": "get_geocode",
+      "type": "tool_call",
+      "arguments": {
+        "location": "San Francisco"
+      }
+    },
+    {
+      "step": 5,
+      "timestamp": "2025-03-30T01:34:40.688656",
+      "from": "get_geocode",
+      "to": "weather_agent",
+      "type": "tool_result",
+      "content": "```json\n{\n  \"location\": \"San Francisco\",\n  \"latitude\": 37.7749,\n  \"longitude\": -122.4194\n}\n```"
+    },
+    {
+      "step": 6,
+      "timestamp": "2025-03-30T01:34:41.496606",
+      "from": "weather_agent",
+      "to": "get_forecast",
+      "type": "tool_call",
+      "arguments": {
+        "latitude": 37.7749,
+        "longitude": -122.4194
+      }
+    },
+    {
+      "step": 7,
+      "timestamp": "2025-03-30T01:34:41.804420",
+      "from": "get_forecast",
+      "to": "weather_agent",
+      "type": "tool_result",
+      "content": "\nOvernight:\nTemperature: 49\u00b0F\nWind: 14 to 20 mph SSE\nForecast: Rain. Cloudy, with a low around 49. South southeast wind 14 to 20 mph, with gusts as high as 26 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\nSunday:\nTemperature: 63\u00b0F\nWind: 12 to 23 mph S\nForecast: Rain before 5pm. Partly sunny. High near 63, with temperatures falling to around 61 in the afternoon. South wind 12 to 23 mph, with gusts as high as 40 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\nSunday Night:\nTemperature: 53\u00b0F\nWind: 12 mph SSW\nForecast: Rain after 11pm. Mostly cloudy, with a low around 53. South southwest wind around 12 mph, with gusts as high as 18 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\nMonday:\nTemperature: 60\u00b0F\nWind: 8 to 14 mph WSW\nForecast: Rain. Mostly cloudy, with a high near 60. West southwest wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\nMonday Night:\nTemperature: 49\u00b0F\nWind: 8 to 14 mph W\nForecast: Rain likely. Mostly cloudy, with a low around 49. West wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 70%. New rainfall amounts between a tenth and quarter of an inch possible.\n"
+    },
+    {
+      "step": 8,
+      "timestamp": "2025-03-30T01:34:47.330675",
+      "from": "weather_agent",
+      "to": "client_agent",
+      "type": "response",
+      "content": "Here's the weather forecast for San Francisco:\n\n**Overnight:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 14 to 20 mph SSE\n- **Forecast:** Rain. Cloudy, with a low around 49. South southeast wind 14 to 20 mph, with gusts as high as 26 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday:**\n- **Temperature:** 63\u00b0F\n- **Wind:** 12 to 23 mph S\n- **Forecast:** Rain before 5 PM. Partly sunny. High near 63, with temperatures falling to around 61 in the afternoon. South wind 12 to 23 mph, with gusts as high as 40 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday Night:**\n- **Temperature:** 53\u00b0F\n- **Wind:** 12 mph SSW\n- **Forecast:** Rain after 11 PM. Mostly cloudy, with a low around 53. South southwest wind around 12 mph, with gusts as high as 18 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday:**\n- **Temperature:** 60\u00b0F\n- **Wind:** 8 to 14 mph WSW\n- **Forecast:** Rain. Mostly cloudy, with a high near 60. West southwest wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday Night:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 8 to 14 mph W\n- **Forecast:** Rain likely. Mostly cloudy, with a low around 49. West wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 70%. New rainfall amounts between a tenth and quarter of an inch possible."
+    },
+    {
+      "step": 9,
+      "timestamp": "2025-03-30T01:34:47.331474",
+      "from": "weather_agent",
+      "to": "client_agent",
+      "type": "tool_result",
+      "content": "Here's the weather forecast for San Francisco:\n\n**Overnight:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 14 to 20 mph SSE\n- **Forecast:** Rain. Cloudy, with a low around 49. South southeast wind 14 to 20 mph, with gusts as high as 26 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday:**\n- **Temperature:** 63\u00b0F\n- **Wind:** 12 to 23 mph S\n- **Forecast:** Rain before 5 PM. Partly sunny. High near 63, with temperatures falling to around 61 in the afternoon. South wind 12 to 23 mph, with gusts as high as 40 mph. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday Night:**\n- **Temperature:** 53\u00b0F\n- **Wind:** 12 mph SSW\n- **Forecast:** Rain after 11 PM. Mostly cloudy, with a low around 53. South southwest wind around 12 mph, with gusts as high as 18 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday:**\n- **Temperature:** 60\u00b0F\n- **Wind:** 8 to 14 mph WSW\n- **Forecast:** Rain. Mostly cloudy, with a high near 60. West southwest wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday Night:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 8 to 14 mph W\n- **Forecast:** Rain likely. Mostly cloudy, with a low around 49. West wind 8 to 14 mph, with gusts as high as 22 mph. Chance of precipitation is 70%. New rainfall amounts between a tenth and quarter of an inch possible."
+    },
+    {
+      "step": 10,
+      "timestamp": "2025-03-30T01:34:51.639734",
+      "from": "client_agent",
+      "to": "human",
+      "type": "response",
+      "content": "Here's the weather forecast for San Francisco:\n\n**Overnight:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 14 to 20 mph SSE\n- **Forecast:** Rain. Cloudy, with a low around 49. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday:**\n- **Temperature:** 63\u00b0F\n- **Wind:** 12 to 23 mph S\n- **Forecast:** Rain before 5 PM. Partly sunny. High near 63, with temperatures falling to around 61 in the afternoon. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday Night:**\n- **Temperature:** 53\u00b0F\n- **Wind:** 12 mph SSW\n- **Forecast:** Rain after 11 PM. Mostly cloudy, with a low around 53. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday:**\n- **Temperature:** 60\u00b0F\n- **Wind:** 8 to 14 mph WSW\n- **Forecast:** Rain. Mostly cloudy, with a high near 60. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday Night:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 8 to 14 mph W\n- **Forecast:** Rain likely. Mostly cloudy, with a low around 49. Chance of precipitation is 70%. New rainfall amounts between a tenth and quarter of an inch possible."
+    },
+    {
+      "step": 11,
+      "timestamp": "2025-03-30T01:34:51.640101",
+      "from": "client_agent",
+      "to": "human",
+      "type": "message",
+      "content": "Here's the weather forecast for San Francisco:\n\n**Overnight:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 14 to 20 mph SSE\n- **Forecast:** Rain. Cloudy, with a low around 49. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday:**\n- **Temperature:** 63\u00b0F\n- **Wind:** 12 to 23 mph S\n- **Forecast:** Rain before 5 PM. Partly sunny. High near 63, with temperatures falling to around 61 in the afternoon. Chance of precipitation is 90%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Sunday Night:**\n- **Temperature:** 53\u00b0F\n- **Wind:** 12 mph SSW\n- **Forecast:** Rain after 11 PM. Mostly cloudy, with a low around 53. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday:**\n- **Temperature:** 60\u00b0F\n- **Wind:** 8 to 14 mph WSW\n- **Forecast:** Rain. Mostly cloudy, with a high near 60. Chance of precipitation is 80%. New rainfall amounts between a tenth and quarter of an inch possible.\n\n---\n\n**Monday Night:**\n- **Temperature:** 49\u00b0F\n- **Wind:** 8 to 14 mph W\n- **Forecast:** Rain likely. Mostly cloudy, with a low around 49. Chance of precipitation is 70%. New rainfall amounts between a tenth and quarter of an inch possible."
+    },
+    {
+      "step": 12,
+      "timestamp": "2025-03-30T01:34:52.745002",
+      "from": "human",
+      "to": "client_agent",
+      "type": "message",
+      "content": "Thanks for the weather forecast! Sounds like it's going to be a rainy few days in San Francisco. I appreciate the details, but I don't really feel like doing anything with this information. If you have any suggestions on what to do with it, I'm open to ideas. Otherwise, I think I'm good. \n\nTASK COMPLETE"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+2025-03-30 01:38:09,430 - agent_network - INFO - Initialized logging to directory: logs/20250330_013809_test_gpt-4o-mini
+2025-03-30 01:38:09,430 - agent_network - INFO - [MESSAGE] From: human | To: client_agent | Content: Hello, this is a test message. Tell the test agent to use the test_tool with the argument 'test_value'....
+2025-03-30 01:38:10,272 - agent_network - INFO - [TOOL_CALL] From: client_agent | To: test_agent | Args: {'message': 'test_value'}
+2025-03-30 01:38:10,272 - agent_network - INFO - [MESSAGE] From: client_agent | To: test_agent | Content: test_value...
+2025-03-30 01:38:11,091 - agent_network - INFO - [TOOL_CALL] From: test_agent | To: test_tool | Args: {'test_input': 'test_value'}
+2025-03-30 01:38:12,676 - agent_network - INFO - [TOOL_RESULT] From: test_tool | To: test_agent | Result: ```json
+{
+  "status": "success",
+  "message": "Test executed successfully",
+  "input_received": "test_value",
+  "timestamp": "2023-10-05T14:48:00Z"
+}
+```...
+2025-03-30 01:38:13,899 - agent_network - INFO - [RESPONSE] From: test_agent | To: client_agent | Content: The test was executed successfully with the input "test_value". Here are the details:
+
+- **Status**: success
+- **Message**: Test executed successfully
+- **Input Received**: test_value
+- **Timestamp**:...
+2025-03-30 01:38:13,899 - agent_network - INFO - [TOOL_RESULT] From: test_agent | To: client_agent | Result: The test was executed successfully with the input "test_value". Here are the details:
+
+- **Status**: success
+- **Message**: Test executed successfully
+- **Input Received**: test_value
+- **Timestamp**:...
+2025-03-30 01:38:14,835 - agent_network - INFO - [RESPONSE] From: client_agent | To: human | Content: The test agent executed successfully with the input "test_value". Here are the details:
+
+- **Status**: success
+- **Message**: Test executed successfully
+- **Input Received**: test_value
+- **Timestamp*...
+2025-03-30 01:38:14,835 - agent_network - INFO - [MESSAGE] From: client_agent | To: human | Content: The test agent executed successfully with the input "test_value". Here are the details:
+
+- **Status**: success
+- **Message**: Test executed successfully
+- **Input Received**: test_value
+- **Timestamp*...
+2025-03-30 01:38:15,488 - agent_network - INFO - [MESSAGE] From: human | To: client_agent | Content: That's great to hear! Since the test agent executed successfully and everything seems to be in order, I think we can consider this task complete. 
+
+TASK COMPLETE...
+2025-03-30 01:38:15,488 - agent_network - INFO - Network structure saved to logs/20250330_013809_test_gpt-4o-mini/network.json
+2025-03-30 01:38:15,488 - agent_network - INFO - Task and result saved to logs/20250330_013809_test_gpt-4o-mini/task_result.yaml

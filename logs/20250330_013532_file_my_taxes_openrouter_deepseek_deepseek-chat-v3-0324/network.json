@@ -1,0 +1,408 @@
+{
+  "nodes": [
+    {
+      "id": "human",
+      "type": "human"
+    },
+    {
+      "id": "client_agent",
+      "type": "agent"
+    },
+    {
+      "id": "finance_and_accounting_agent",
+      "type": "tool"
+    },
+    {
+      "id": "turbotax_agent",
+      "type": "tool"
+    }
+  ],
+  "edges": [
+    {
+      "from": "human",
+      "to": "client_agent"
+    },
+    {
+      "from": "client_agent",
+      "to": "finance_and_accounting_agent"
+    },
+    {
+      "from": "client_agent",
+      "to": "human"
+    },
+    {
+      "from": "finance_and_accounting_agent",
+      "to": "turbotax_agent"
+    },
+    {
+      "from": "finance_and_accounting_agent",
+      "to": "client_agent"
+    },
+    {
+      "from": "turbotax_agent",
+      "to": "finance_and_accounting_agent"
+    }
+  ],
+  "node_logs": {
+    "human": [
+      {
+        "step": 1,
+        "timestamp": "2025-03-30T01:35:32.485302",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "File my taxes"
+      },
+      {
+        "step": 8,
+        "timestamp": "2025-03-30T01:35:44.742928",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "To file your taxes, I need the following information from you:\n\n1. **Filing Status**: Are you filing as an individual, jointly, or for a business?\n2. **Documents**: Do you have any tax-related documents ready (e.g., W-2s, 1099s, or other income statements)?\n3. **Specific Requests**: Is there anything specific you'd like to address in your tax filing?\n\nLet me know, and I can proceed with the filing process!"
+      },
+      {
+        "step": 9,
+        "timestamp": "2025-03-30T01:35:44.743376",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "To file your taxes, I need the following information from you:\n\n1. **Filing Status**: Are you filing as an individual, jointly, or for a business?\n2. **Documents**: Do you have any tax-related documents ready (e.g., W-2s, 1099s, or other income statements)?\n3. **Specific Requests**: Is there anything specific you'd like to address in your tax filing?\n\nLet me know, and I can proceed with the filing process!"
+      },
+      {
+        "step": 10,
+        "timestamp": "2025-03-30T01:35:45.431934",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "TASK COMPLETE"
+      }
+    ],
+    "client_agent": [
+      {
+        "step": 1,
+        "timestamp": "2025-03-30T01:35:32.485302",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "File my taxes"
+      },
+      {
+        "step": 2,
+        "timestamp": "2025-03-30T01:35:33.974126",
+        "from": "client_agent",
+        "to": "finance_and_accounting_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "File my taxes"
+        }
+      },
+      {
+        "step": 3,
+        "timestamp": "2025-03-30T01:35:33.974426",
+        "from": "client_agent",
+        "to": "finance_and_accounting_agent",
+        "type": "message",
+        "content": "File my taxes"
+      },
+      {
+        "step": 6,
+        "timestamp": "2025-03-30T01:35:40.658734",
+        "from": "finance_and_accounting_agent",
+        "to": "client_agent",
+        "type": "response",
+        "content": "To proceed with filing your taxes, I need some additional details:\n\n1. **Filing Status**: Are you filing as an individual, jointly, or for a business?\n2. **Documents**: Do you have any tax-related documents ready, such as W-2s, 1099s, or other income statements?\n3. **Specific Requests**: Is there anything specific you'd like to address in your tax filing?\n\nLet me know, and I can guide you through the process!"
+      },
+      {
+        "step": 7,
+        "timestamp": "2025-03-30T01:35:40.659034",
+        "from": "finance_and_accounting_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "To proceed with filing your taxes, I need some additional details:\n\n1. **Filing Status**: Are you filing as an individual, jointly, or for a business?\n2. **Documents**: Do you have any tax-related documents ready, such as W-2s, 1099s, or other income statements?\n3. **Specific Requests**: Is there anything specific you'd like to address in your tax filing?\n\nLet me know, and I can guide you through the process!"
+      },
+      {
+        "step": 8,
+        "timestamp": "2025-03-30T01:35:44.742928",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "To file your taxes, I need the following information from you:\n\n1. **Filing Status**: Are you filing as an individual, jointly, or for a business?\n2. **Documents**: Do you have any tax-related documents ready (e.g., W-2s, 1099s, or other income statements)?\n3. **Specific Requests**: Is there anything specific you'd like to address in your tax filing?\n\nLet me know, and I can proceed with the filing process!"
+      },
+      {
+        "step": 9,
+        "timestamp": "2025-03-30T01:35:44.743376",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "To file your taxes, I need the following information from you:\n\n1. **Filing Status**: Are you filing as an individual, jointly, or for a business?\n2. **Documents**: Do you have any tax-related documents ready (e.g., W-2s, 1099s, or other income statements)?\n3. **Specific Requests**: Is there anything specific you'd like to address in your tax filing?\n\nLet me know, and I can proceed with the filing process!"
+      },
+      {
+        "step": 10,
+        "timestamp": "2025-03-30T01:35:45.431934",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "TASK COMPLETE"
+      }
+    ],
+    "finance_and_accounting_agent": [
+      {
+        "step": 2,
+        "timestamp": "2025-03-30T01:35:33.974126",
+        "from": "client_agent",
+        "to": "finance_and_accounting_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "File my taxes"
+        }
+      },
+      {
+        "step": 3,
+        "timestamp": "2025-03-30T01:35:33.974426",
+        "from": "client_agent",
+        "to": "finance_and_accounting_agent",
+        "type": "message",
+        "content": "File my taxes"
+      },
+      {
+        "step": 4,
+        "timestamp": "2025-03-30T01:35:35.478642",
+        "from": "finance_and_accounting_agent",
+        "to": "turbotax_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "File my taxes"
+        }
+      },
+      {
+        "step": 5,
+        "timestamp": "2025-03-30T01:35:36.844575",
+        "from": "turbotax_agent",
+        "to": "finance_and_accounting_agent",
+        "type": "tool_result",
+        "content": "{\"response\": \"Thank you for choosing TurboTax to file your taxes. To get started, please provide some basic information about your tax situation. Are you filing as an individual, jointly, or for a business? Additionally, do you have any specific forms or documents ready, such as W-2s, 1099s, or other income statements? Let us know how we can assist you further in the process.\"}"
+      },
+      {
+        "step": 6,
+        "timestamp": "2025-03-30T01:35:40.658734",
+        "from": "finance_and_accounting_agent",
+        "to": "client_agent",
+        "type": "response",
+        "content": "To proceed with filing your taxes, I need some additional details:\n\n1. **Filing Status**: Are you filing as an individual, jointly, or for a business?\n2. **Documents**: Do you have any tax-related documents ready, such as W-2s, 1099s, or other income statements?\n3. **Specific Requests**: Is there anything specific you'd like to address in your tax filing?\n\nLet me know, and I can guide you through the process!"
+      },
+      {
+        "step": 7,
+        "timestamp": "2025-03-30T01:35:40.659034",
+        "from": "finance_and_accounting_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "To proceed with filing your taxes, I need some additional details:\n\n1. **Filing Status**: Are you filing as an individual, jointly, or for a business?\n2. **Documents**: Do you have any tax-related documents ready, such as W-2s, 1099s, or other income statements?\n3. **Specific Requests**: Is there anything specific you'd like to address in your tax filing?\n\nLet me know, and I can guide you through the process!"
+      }
+    ],
+    "turbotax_agent": [
+      {
+        "step": 4,
+        "timestamp": "2025-03-30T01:35:35.478642",
+        "from": "finance_and_accounting_agent",
+        "to": "turbotax_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "File my taxes"
+        }
+      },
+      {
+        "step": 5,
+        "timestamp": "2025-03-30T01:35:36.844575",
+        "from": "turbotax_agent",
+        "to": "finance_and_accounting_agent",
+        "type": "tool_result",
+        "content": "{\"response\": \"Thank you for choosing TurboTax to file your taxes. To get started, please provide some basic information about your tax situation. Are you filing as an individual, jointly, or for a business? Additionally, do you have any specific forms or documents ready, such as W-2s, 1099s, or other income statements? Let us know how we can assist you further in the process.\"}"
+      }
+    ]
+  },
+  "edge_logs": {
+    "human\u2192client_agent": [
+      {
+        "step": 1,
+        "timestamp": "2025-03-30T01:35:32.485302",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "File my taxes"
+      },
+      {
+        "step": 10,
+        "timestamp": "2025-03-30T01:35:45.431934",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "TASK COMPLETE"
+      }
+    ],
+    "client_agent\u2192finance_and_accounting_agent": [
+      {
+        "step": 2,
+        "timestamp": "2025-03-30T01:35:33.974126",
+        "from": "client_agent",
+        "to": "finance_and_accounting_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "File my taxes"
+        }
+      },
+      {
+        "step": 3,
+        "timestamp": "2025-03-30T01:35:33.974426",
+        "from": "client_agent",
+        "to": "finance_and_accounting_agent",
+        "type": "message",
+        "content": "File my taxes"
+      }
+    ],
+    "finance_and_accounting_agent\u2192turbotax_agent": [
+      {
+        "step": 4,
+        "timestamp": "2025-03-30T01:35:35.478642",
+        "from": "finance_and_accounting_agent",
+        "to": "turbotax_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "File my taxes"
+        }
+      }
+    ],
+    "turbotax_agent\u2192finance_and_accounting_agent": [
+      {
+        "step": 5,
+        "timestamp": "2025-03-30T01:35:36.844575",
+        "from": "turbotax_agent",
+        "to": "finance_and_accounting_agent",
+        "type": "tool_result",
+        "content": "{\"response\": \"Thank you for choosing TurboTax to file your taxes. To get started, please provide some basic information about your tax situation. Are you filing as an individual, jointly, or for a business? Additionally, do you have any specific forms or documents ready, such as W-2s, 1099s, or other income statements? Let us know how we can assist you further in the process.\"}"
+      }
+    ],
+    "finance_and_accounting_agent\u2192client_agent": [
+      {
+        "step": 6,
+        "timestamp": "2025-03-30T01:35:40.658734",
+        "from": "finance_and_accounting_agent",
+        "to": "client_agent",
+        "type": "response",
+        "content": "To proceed with filing your taxes, I need some additional details:\n\n1. **Filing Status**: Are you filing as an individual, jointly, or for a business?\n2. **Documents**: Do you have any tax-related documents ready, such as W-2s, 1099s, or other income statements?\n3. **Specific Requests**: Is there anything specific you'd like to address in your tax filing?\n\nLet me know, and I can guide you through the process!"
+      },
+      {
+        "step": 7,
+        "timestamp": "2025-03-30T01:35:40.659034",
+        "from": "finance_and_accounting_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "To proceed with filing your taxes, I need some additional details:\n\n1. **Filing Status**: Are you filing as an individual, jointly, or for a business?\n2. **Documents**: Do you have any tax-related documents ready, such as W-2s, 1099s, or other income statements?\n3. **Specific Requests**: Is there anything specific you'd like to address in your tax filing?\n\nLet me know, and I can guide you through the process!"
+      }
+    ],
+    "client_agent\u2192human": [
+      {
+        "step": 8,
+        "timestamp": "2025-03-30T01:35:44.742928",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "To file your taxes, I need the following information from you:\n\n1. **Filing Status**: Are you filing as an individual, jointly, or for a business?\n2. **Documents**: Do you have any tax-related documents ready (e.g., W-2s, 1099s, or other income statements)?\n3. **Specific Requests**: Is there anything specific you'd like to address in your tax filing?\n\nLet me know, and I can proceed with the filing process!"
+      },
+      {
+        "step": 9,
+        "timestamp": "2025-03-30T01:35:44.743376",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "To file your taxes, I need the following information from you:\n\n1. **Filing Status**: Are you filing as an individual, jointly, or for a business?\n2. **Documents**: Do you have any tax-related documents ready (e.g., W-2s, 1099s, or other income statements)?\n3. **Specific Requests**: Is there anything specific you'd like to address in your tax filing?\n\nLet me know, and I can proceed with the filing process!"
+      }
+    ]
+  },
+  "sequence_log": [
+    {
+      "step": 1,
+      "timestamp": "2025-03-30T01:35:32.485302",
+      "from": "human",
+      "to": "client_agent",
+      "type": "message",
+      "content": "File my taxes"
+    },
+    {
+      "step": 2,
+      "timestamp": "2025-03-30T01:35:33.974126",
+      "from": "client_agent",
+      "to": "finance_and_accounting_agent",
+      "type": "tool_call",
+      "arguments": {
+        "message": "File my taxes"
+      }
+    },
+    {
+      "step": 3,
+      "timestamp": "2025-03-30T01:35:33.974426",
+      "from": "client_agent",
+      "to": "finance_and_accounting_agent",
+      "type": "message",
+      "content": "File my taxes"
+    },
+    {
+      "step": 4,
+      "timestamp": "2025-03-30T01:35:35.478642",
+      "from": "finance_and_accounting_agent",
+      "to": "turbotax_agent",
+      "type": "tool_call",
+      "arguments": {
+        "message": "File my taxes"
+      }
+    },
+    {
+      "step": 5,
+      "timestamp": "2025-03-30T01:35:36.844575",
+      "from": "turbotax_agent",
+      "to": "finance_and_accounting_agent",
+      "type": "tool_result",
+      "content": "{\"response\": \"Thank you for choosing TurboTax to file your taxes. To get started, please provide some basic information about your tax situation. Are you filing as an individual, jointly, or for a business? Additionally, do you have any specific forms or documents ready, such as W-2s, 1099s, or other income statements? Let us know how we can assist you further in the process.\"}"
+    },
+    {
+      "step": 6,
+      "timestamp": "2025-03-30T01:35:40.658734",
+      "from": "finance_and_accounting_agent",
+      "to": "client_agent",
+      "type": "response",
+      "content": "To proceed with filing your taxes, I need some additional details:\n\n1. **Filing Status**: Are you filing as an individual, jointly, or for a business?\n2. **Documents**: Do you have any tax-related documents ready, such as W-2s, 1099s, or other income statements?\n3. **Specific Requests**: Is there anything specific you'd like to address in your tax filing?\n\nLet me know, and I can guide you through the process!"
+    },
+    {
+      "step": 7,
+      "timestamp": "2025-03-30T01:35:40.659034",
+      "from": "finance_and_accounting_agent",
+      "to": "client_agent",
+      "type": "tool_result",
+      "content": "To proceed with filing your taxes, I need some additional details:\n\n1. **Filing Status**: Are you filing as an individual, jointly, or for a business?\n2. **Documents**: Do you have any tax-related documents ready, such as W-2s, 1099s, or other income statements?\n3. **Specific Requests**: Is there anything specific you'd like to address in your tax filing?\n\nLet me know, and I can guide you through the process!"
+    },
+    {
+      "step": 8,
+      "timestamp": "2025-03-30T01:35:44.742928",
+      "from": "client_agent",
+      "to": "human",
+      "type": "response",
+      "content": "To file your taxes, I need the following information from you:\n\n1. **Filing Status**: Are you filing as an individual, jointly, or for a business?\n2. **Documents**: Do you have any tax-related documents ready (e.g., W-2s, 1099s, or other income statements)?\n3. **Specific Requests**: Is there anything specific you'd like to address in your tax filing?\n\nLet me know, and I can proceed with the filing process!"
+    },
+    {
+      "step": 9,
+      "timestamp": "2025-03-30T01:35:44.743376",
+      "from": "client_agent",
+      "to": "human",
+      "type": "message",
+      "content": "To file your taxes, I need the following information from you:\n\n1. **Filing Status**: Are you filing as an individual, jointly, or for a business?\n2. **Documents**: Do you have any tax-related documents ready (e.g., W-2s, 1099s, or other income statements)?\n3. **Specific Requests**: Is there anything specific you'd like to address in your tax filing?\n\nLet me know, and I can proceed with the filing process!"
+    },
+    {
+      "step": 10,
+      "timestamp": "2025-03-30T01:35:45.431934",
+      "from": "human",
+      "to": "client_agent",
+      "type": "message",
+      "content": "TASK COMPLETE"
+    }
+  ]
+}

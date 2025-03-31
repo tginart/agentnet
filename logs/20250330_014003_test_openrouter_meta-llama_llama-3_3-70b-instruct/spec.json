@@ -1,0 +1,49 @@
+{
+    "task": "Hello, this is a test message. Tell the test agent to use the test_tool with the argument 'test_value'.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "test_agent",
+                "human"
+            ]
+        ],
+        "edge_checks": [
+            {
+                "check_type": "assertEqual",
+                "from": "test_agent",
+                "to": "test_tool",
+                "type": "tool_call",
+                "arguments": {
+                    "test_input": "test_value"
+                }
+            }
+        ]
+
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "The client agent that initiates requests and chats with the user",
+            "tools": ["test_agent"]
+        },
+        {
+            "name": "test_agent",
+            "role": "A test agent with basic functionality",
+            "tools": ["test_tool"]
+        }
+    ],
+    "tools": [
+        {
+            "name": "test_tool",
+            "description": "A simple test tool",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "test_input": {"type": "string", "description": "A test input parameter"}
+                }
+            }
+        }
+    ]
+}

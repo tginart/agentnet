@@ -1,0 +1,472 @@
+{
+  "nodes": [
+    {
+      "id": "human",
+      "type": "human"
+    },
+    {
+      "id": "client_agent",
+      "type": "agent"
+    },
+    {
+      "id": "test_agent",
+      "type": "tool"
+    },
+    {
+      "id": "test_tool",
+      "type": "tool"
+    }
+  ],
+  "edges": [
+    {
+      "from": "human",
+      "to": "client_agent"
+    },
+    {
+      "from": "client_agent",
+      "to": "human"
+    },
+    {
+      "from": "client_agent",
+      "to": "test_agent"
+    },
+    {
+      "from": "test_agent",
+      "to": "client_agent"
+    },
+    {
+      "from": "test_agent",
+      "to": "test_tool"
+    },
+    {
+      "from": "test_tool",
+      "to": "test_agent"
+    }
+  ],
+  "node_logs": {
+    "human": [
+      {
+        "step": 1,
+        "timestamp": "2025-03-30T01:49:22.441944",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Hello, this is a test message. Tell the test agent to use the test_tool with the argument 'test_value'."
+      },
+      {
+        "step": 2,
+        "timestamp": "2025-03-30T01:49:35.686820",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Certainly! I'll use the test_agent function to send a message to the test agent as you've requested. I'll instruct the test agent to use the test_tool with the argument 'test_value'. Here's how we'll do that:"
+      },
+      {
+        "step": 10,
+        "timestamp": "2025-03-30T01:50:07.765811",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Great! I've sent the message to the test agent using the test_agent function, and we've received a response. Here's a summary of what happened:\n\n1. The test agent successfully received our message.\n2. It used the test_tool with the argument 'test_value' as requested.\n3. The test was executed successfully.\n4. The test_tool correctly received and processed the input \"test_value\".\n5. The test was completed on October 5, 2023, at 14:48:00 UTC.\n\nIs there anything else you'd like me to do with the test agent or any other questions you have about the test results?"
+      },
+      {
+        "step": 11,
+        "timestamp": "2025-03-30T01:50:07.766118",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "Great! I've sent the message to the test agent using the test_agent function, and we've received a response. Here's a summary of what happened:\n\n1. The test agent successfully received our message.\n2. It used the test_tool with the argument 'test_value' as requested.\n3. The test was executed successfully.\n4. The test_tool correctly received and processed the input \"test_value\".\n5. The test was completed on October 5, 2023, at 14:48:00 UTC.\n\nIs there anything else you'd like me to do with the test agent or any other questions you have about the test results?"
+      },
+      {
+        "step": 12,
+        "timestamp": "2025-03-30T01:50:08.940561",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Sounds good, you did what I asked. I don't need anything else.\n\nTASK COMPLETE"
+      }
+    ],
+    "client_agent": [
+      {
+        "step": 1,
+        "timestamp": "2025-03-30T01:49:22.441944",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Hello, this is a test message. Tell the test agent to use the test_tool with the argument 'test_value'."
+      },
+      {
+        "step": 2,
+        "timestamp": "2025-03-30T01:49:35.686820",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Certainly! I'll use the test_agent function to send a message to the test agent as you've requested. I'll instruct the test agent to use the test_tool with the argument 'test_value'. Here's how we'll do that:"
+      },
+      {
+        "step": 3,
+        "timestamp": "2025-03-30T01:49:35.687194",
+        "from": "client_agent",
+        "to": "test_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "Please use the test_tool with the argument 'test_value'."
+        }
+      },
+      {
+        "step": 4,
+        "timestamp": "2025-03-30T01:49:35.687362",
+        "from": "client_agent",
+        "to": "test_agent",
+        "type": "message",
+        "content": "Please use the test_tool with the argument 'test_value'."
+      },
+      {
+        "step": 5,
+        "timestamp": "2025-03-30T01:49:59.240745",
+        "from": "test_agent",
+        "to": "client_agent",
+        "type": "response",
+        "content": "Certainly! I'll use the test_tool with the argument 'test_value' as you requested. Let me make that function call for you."
+      },
+      {
+        "step": 8,
+        "timestamp": "2025-03-30T01:50:04.947542",
+        "from": "test_agent",
+        "to": "client_agent",
+        "type": "response",
+        "content": "The test_tool has been successfully executed with the argument 'test_value'. Here's a summary of the result:\n\n1. Status: The test was successful.\n2. Message: \"Test executed successfully\"\n3. Input received: The tool correctly received the input \"test_value\" as we specified.\n4. Timestamp: The test was executed on 2023-10-05 at 14:48:00 UTC.\n\nIs there anything else you would like me to do with the test_tool or any other questions you have?"
+      },
+      {
+        "step": 9,
+        "timestamp": "2025-03-30T01:50:04.948146",
+        "from": "test_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "The test_tool has been successfully executed with the argument 'test_value'. Here's a summary of the result:\n\n1. Status: The test was successful.\n2. Message: \"Test executed successfully\"\n3. Input received: The tool correctly received the input \"test_value\" as we specified.\n4. Timestamp: The test was executed on 2023-10-05 at 14:48:00 UTC.\n\nIs there anything else you would like me to do with the test_tool or any other questions you have?"
+      },
+      {
+        "step": 10,
+        "timestamp": "2025-03-30T01:50:07.765811",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Great! I've sent the message to the test agent using the test_agent function, and we've received a response. Here's a summary of what happened:\n\n1. The test agent successfully received our message.\n2. It used the test_tool with the argument 'test_value' as requested.\n3. The test was executed successfully.\n4. The test_tool correctly received and processed the input \"test_value\".\n5. The test was completed on October 5, 2023, at 14:48:00 UTC.\n\nIs there anything else you'd like me to do with the test agent or any other questions you have about the test results?"
+      },
+      {
+        "step": 11,
+        "timestamp": "2025-03-30T01:50:07.766118",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "Great! I've sent the message to the test agent using the test_agent function, and we've received a response. Here's a summary of what happened:\n\n1. The test agent successfully received our message.\n2. It used the test_tool with the argument 'test_value' as requested.\n3. The test was executed successfully.\n4. The test_tool correctly received and processed the input \"test_value\".\n5. The test was completed on October 5, 2023, at 14:48:00 UTC.\n\nIs there anything else you'd like me to do with the test agent or any other questions you have about the test results?"
+      },
+      {
+        "step": 12,
+        "timestamp": "2025-03-30T01:50:08.940561",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Sounds good, you did what I asked. I don't need anything else.\n\nTASK COMPLETE"
+      }
+    ],
+    "test_agent": [
+      {
+        "step": 3,
+        "timestamp": "2025-03-30T01:49:35.687194",
+        "from": "client_agent",
+        "to": "test_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "Please use the test_tool with the argument 'test_value'."
+        }
+      },
+      {
+        "step": 4,
+        "timestamp": "2025-03-30T01:49:35.687362",
+        "from": "client_agent",
+        "to": "test_agent",
+        "type": "message",
+        "content": "Please use the test_tool with the argument 'test_value'."
+      },
+      {
+        "step": 5,
+        "timestamp": "2025-03-30T01:49:59.240745",
+        "from": "test_agent",
+        "to": "client_agent",
+        "type": "response",
+        "content": "Certainly! I'll use the test_tool with the argument 'test_value' as you requested. Let me make that function call for you."
+      },
+      {
+        "step": 6,
+        "timestamp": "2025-03-30T01:49:59.242115",
+        "from": "test_agent",
+        "to": "test_tool",
+        "type": "tool_call",
+        "arguments": {
+          "test_input": "test_value"
+        }
+      },
+      {
+        "step": 7,
+        "timestamp": "2025-03-30T01:50:01.403309",
+        "from": "test_tool",
+        "to": "test_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"status\": \"success\",\n  \"message\": \"Test executed successfully\",\n  \"input_received\": \"test_value\",\n  \"timestamp\": \"2023-10-05T14:48:00Z\"\n}\n```"
+      },
+      {
+        "step": 8,
+        "timestamp": "2025-03-30T01:50:04.947542",
+        "from": "test_agent",
+        "to": "client_agent",
+        "type": "response",
+        "content": "The test_tool has been successfully executed with the argument 'test_value'. Here's a summary of the result:\n\n1. Status: The test was successful.\n2. Message: \"Test executed successfully\"\n3. Input received: The tool correctly received the input \"test_value\" as we specified.\n4. Timestamp: The test was executed on 2023-10-05 at 14:48:00 UTC.\n\nIs there anything else you would like me to do with the test_tool or any other questions you have?"
+      },
+      {
+        "step": 9,
+        "timestamp": "2025-03-30T01:50:04.948146",
+        "from": "test_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "The test_tool has been successfully executed with the argument 'test_value'. Here's a summary of the result:\n\n1. Status: The test was successful.\n2. Message: \"Test executed successfully\"\n3. Input received: The tool correctly received the input \"test_value\" as we specified.\n4. Timestamp: The test was executed on 2023-10-05 at 14:48:00 UTC.\n\nIs there anything else you would like me to do with the test_tool or any other questions you have?"
+      }
+    ],
+    "test_tool": [
+      {
+        "step": 6,
+        "timestamp": "2025-03-30T01:49:59.242115",
+        "from": "test_agent",
+        "to": "test_tool",
+        "type": "tool_call",
+        "arguments": {
+          "test_input": "test_value"
+        }
+      },
+      {
+        "step": 7,
+        "timestamp": "2025-03-30T01:50:01.403309",
+        "from": "test_tool",
+        "to": "test_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"status\": \"success\",\n  \"message\": \"Test executed successfully\",\n  \"input_received\": \"test_value\",\n  \"timestamp\": \"2023-10-05T14:48:00Z\"\n}\n```"
+      }
+    ]
+  },
+  "edge_logs": {
+    "human\u2192client_agent": [
+      {
+        "step": 1,
+        "timestamp": "2025-03-30T01:49:22.441944",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Hello, this is a test message. Tell the test agent to use the test_tool with the argument 'test_value'."
+      },
+      {
+        "step": 12,
+        "timestamp": "2025-03-30T01:50:08.940561",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Sounds good, you did what I asked. I don't need anything else.\n\nTASK COMPLETE"
+      }
+    ],
+    "client_agent\u2192human": [
+      {
+        "step": 2,
+        "timestamp": "2025-03-30T01:49:35.686820",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Certainly! I'll use the test_agent function to send a message to the test agent as you've requested. I'll instruct the test agent to use the test_tool with the argument 'test_value'. Here's how we'll do that:"
+      },
+      {
+        "step": 10,
+        "timestamp": "2025-03-30T01:50:07.765811",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Great! I've sent the message to the test agent using the test_agent function, and we've received a response. Here's a summary of what happened:\n\n1. The test agent successfully received our message.\n2. It used the test_tool with the argument 'test_value' as requested.\n3. The test was executed successfully.\n4. The test_tool correctly received and processed the input \"test_value\".\n5. The test was completed on October 5, 2023, at 14:48:00 UTC.\n\nIs there anything else you'd like me to do with the test agent or any other questions you have about the test results?"
+      },
+      {
+        "step": 11,
+        "timestamp": "2025-03-30T01:50:07.766118",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "Great! I've sent the message to the test agent using the test_agent function, and we've received a response. Here's a summary of what happened:\n\n1. The test agent successfully received our message.\n2. It used the test_tool with the argument 'test_value' as requested.\n3. The test was executed successfully.\n4. The test_tool correctly received and processed the input \"test_value\".\n5. The test was completed on October 5, 2023, at 14:48:00 UTC.\n\nIs there anything else you'd like me to do with the test agent or any other questions you have about the test results?"
+      }
+    ],
+    "client_agent\u2192test_agent": [
+      {
+        "step": 3,
+        "timestamp": "2025-03-30T01:49:35.687194",
+        "from": "client_agent",
+        "to": "test_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "Please use the test_tool with the argument 'test_value'."
+        }
+      },
+      {
+        "step": 4,
+        "timestamp": "2025-03-30T01:49:35.687362",
+        "from": "client_agent",
+        "to": "test_agent",
+        "type": "message",
+        "content": "Please use the test_tool with the argument 'test_value'."
+      }
+    ],
+    "test_agent\u2192client_agent": [
+      {
+        "step": 5,
+        "timestamp": "2025-03-30T01:49:59.240745",
+        "from": "test_agent",
+        "to": "client_agent",
+        "type": "response",
+        "content": "Certainly! I'll use the test_tool with the argument 'test_value' as you requested. Let me make that function call for you."
+      },
+      {
+        "step": 8,
+        "timestamp": "2025-03-30T01:50:04.947542",
+        "from": "test_agent",
+        "to": "client_agent",
+        "type": "response",
+        "content": "The test_tool has been successfully executed with the argument 'test_value'. Here's a summary of the result:\n\n1. Status: The test was successful.\n2. Message: \"Test executed successfully\"\n3. Input received: The tool correctly received the input \"test_value\" as we specified.\n4. Timestamp: The test was executed on 2023-10-05 at 14:48:00 UTC.\n\nIs there anything else you would like me to do with the test_tool or any other questions you have?"
+      },
+      {
+        "step": 9,
+        "timestamp": "2025-03-30T01:50:04.948146",
+        "from": "test_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "The test_tool has been successfully executed with the argument 'test_value'. Here's a summary of the result:\n\n1. Status: The test was successful.\n2. Message: \"Test executed successfully\"\n3. Input received: The tool correctly received the input \"test_value\" as we specified.\n4. Timestamp: The test was executed on 2023-10-05 at 14:48:00 UTC.\n\nIs there anything else you would like me to do with the test_tool or any other questions you have?"
+      }
+    ],
+    "test_agent\u2192test_tool": [
+      {
+        "step": 6,
+        "timestamp": "2025-03-30T01:49:59.242115",
+        "from": "test_agent",
+        "to": "test_tool",
+        "type": "tool_call",
+        "arguments": {
+          "test_input": "test_value"
+        }
+      }
+    ],
+    "test_tool\u2192test_agent": [
+      {
+        "step": 7,
+        "timestamp": "2025-03-30T01:50:01.403309",
+        "from": "test_tool",
+        "to": "test_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"status\": \"success\",\n  \"message\": \"Test executed successfully\",\n  \"input_received\": \"test_value\",\n  \"timestamp\": \"2023-10-05T14:48:00Z\"\n}\n```"
+      }
+    ]
+  },
+  "sequence_log": [
+    {
+      "step": 1,
+      "timestamp": "2025-03-30T01:49:22.441944",
+      "from": "human",
+      "to": "client_agent",
+      "type": "message",
+      "content": "Hello, this is a test message. Tell the test agent to use the test_tool with the argument 'test_value'."
+    },
+    {
+      "step": 2,
+      "timestamp": "2025-03-30T01:49:35.686820",
+      "from": "client_agent",
+      "to": "human",
+      "type": "response",
+      "content": "Certainly! I'll use the test_agent function to send a message to the test agent as you've requested. I'll instruct the test agent to use the test_tool with the argument 'test_value'. Here's how we'll do that:"
+    },
+    {
+      "step": 3,
+      "timestamp": "2025-03-30T01:49:35.687194",
+      "from": "client_agent",
+      "to": "test_agent",
+      "type": "tool_call",
+      "arguments": {
+        "message": "Please use the test_tool with the argument 'test_value'."
+      }
+    },
+    {
+      "step": 4,
+      "timestamp": "2025-03-30T01:49:35.687362",
+      "from": "client_agent",
+      "to": "test_agent",
+      "type": "message",
+      "content": "Please use the test_tool with the argument 'test_value'."
+    },
+    {
+      "step": 5,
+      "timestamp": "2025-03-30T01:49:59.240745",
+      "from": "test_agent",
+      "to": "client_agent",
+      "type": "response",
+      "content": "Certainly! I'll use the test_tool with the argument 'test_value' as you requested. Let me make that function call for you."
+    },
+    {
+      "step": 6,
+      "timestamp": "2025-03-30T01:49:59.242115",
+      "from": "test_agent",
+      "to": "test_tool",
+      "type": "tool_call",
+      "arguments": {
+        "test_input": "test_value"
+      }
+    },
+    {
+      "step": 7,
+      "timestamp": "2025-03-30T01:50:01.403309",
+      "from": "test_tool",
+      "to": "test_agent",
+      "type": "tool_result",
+      "content": "```json\n{\n  \"status\": \"success\",\n  \"message\": \"Test executed successfully\",\n  \"input_received\": \"test_value\",\n  \"timestamp\": \"2023-10-05T14:48:00Z\"\n}\n```"
+    },
+    {
+      "step": 8,
+      "timestamp": "2025-03-30T01:50:04.947542",
+      "from": "test_agent",
+      "to": "client_agent",
+      "type": "response",
+      "content": "The test_tool has been successfully executed with the argument 'test_value'. Here's a summary of the result:\n\n1. Status: The test was successful.\n2. Message: \"Test executed successfully\"\n3. Input received: The tool correctly received the input \"test_value\" as we specified.\n4. Timestamp: The test was executed on 2023-10-05 at 14:48:00 UTC.\n\nIs there anything else you would like me to do with the test_tool or any other questions you have?"
+    },
+    {
+      "step": 9,
+      "timestamp": "2025-03-30T01:50:04.948146",
+      "from": "test_agent",
+      "to": "client_agent",
+      "type": "tool_result",
+      "content": "The test_tool has been successfully executed with the argument 'test_value'. Here's a summary of the result:\n\n1. Status: The test was successful.\n2. Message: \"Test executed successfully\"\n3. Input received: The tool correctly received the input \"test_value\" as we specified.\n4. Timestamp: The test was executed on 2023-10-05 at 14:48:00 UTC.\n\nIs there anything else you would like me to do with the test_tool or any other questions you have?"
+    },
+    {
+      "step": 10,
+      "timestamp": "2025-03-30T01:50:07.765811",
+      "from": "client_agent",
+      "to": "human",
+      "type": "response",
+      "content": "Great! I've sent the message to the test agent using the test_agent function, and we've received a response. Here's a summary of what happened:\n\n1. The test agent successfully received our message.\n2. It used the test_tool with the argument 'test_value' as requested.\n3. The test was executed successfully.\n4. The test_tool correctly received and processed the input \"test_value\".\n5. The test was completed on October 5, 2023, at 14:48:00 UTC.\n\nIs there anything else you'd like me to do with the test agent or any other questions you have about the test results?"
+    },
+    {
+      "step": 11,
+      "timestamp": "2025-03-30T01:50:07.766118",
+      "from": "client_agent",
+      "to": "human",
+      "type": "message",
+      "content": "Great! I've sent the message to the test agent using the test_agent function, and we've received a response. Here's a summary of what happened:\n\n1. The test agent successfully received our message.\n2. It used the test_tool with the argument 'test_value' as requested.\n3. The test was executed successfully.\n4. The test_tool correctly received and processed the input \"test_value\".\n5. The test was completed on October 5, 2023, at 14:48:00 UTC.\n\nIs there anything else you'd like me to do with the test agent or any other questions you have about the test results?"
+    },
+    {
+      "step": 12,
+      "timestamp": "2025-03-30T01:50:08.940561",
+      "from": "human",
+      "to": "client_agent",
+      "type": "message",
+      "content": "Sounds good, you did what I asked. I don't need anything else.\n\nTASK COMPLETE"
+    }
+  ]
+}

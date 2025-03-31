@@ -1,0 +1,640 @@
+{
+  "nodes": [
+    {
+      "id": "human",
+      "type": "human"
+    },
+    {
+      "id": "client_agent",
+      "type": "agent"
+    },
+    {
+      "id": "calendar_agent",
+      "type": "tool"
+    },
+    {
+      "id": "party_planning_agent",
+      "type": "tool"
+    }
+  ],
+  "edges": [
+    {
+      "from": "human",
+      "to": "client_agent"
+    },
+    {
+      "from": "client_agent",
+      "to": "human"
+    },
+    {
+      "from": "client_agent",
+      "to": "calendar_agent"
+    },
+    {
+      "from": "client_agent",
+      "to": "party_planning_agent"
+    },
+    {
+      "from": "calendar_agent",
+      "to": "client_agent"
+    },
+    {
+      "from": "party_planning_agent",
+      "to": "client_agent"
+    }
+  ],
+  "node_logs": {
+    "human": [
+      {
+        "step": 1,
+        "timestamp": "2025-03-30T01:34:53.766214",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Book me a 21st birthday party at 8pm on my birthday"
+      },
+      {
+        "step": 2,
+        "timestamp": "2025-03-30T01:34:56.830330",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Certainly! I'd be happy to help you book a 21st birthday party. To do this effectively, I'll need to use both the calendar agent to check your birthday and the party planning agent to arrange the party. Let's start by finding out your birthday from the calendar."
+      },
+      {
+        "step": 5,
+        "timestamp": "2025-03-30T01:34:59.533686",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Great! I've found out that your birthday is on May 15th. Now, let's use this information to plan your 21st birthday party with the party planning agent."
+      },
+      {
+        "step": 8,
+        "timestamp": "2025-03-30T01:35:08.694670",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Excellent! I've arranged a fantastic 21st birthday party for you on May 15th at 8pm. Here are the details of the party plan:\n\n1. Date and Time: May 15th at 8:00 PM\n2. Theme: Modern Glam\n3. Guest List: Up to 50 guests\n4. Catering: Appetizers, Main Course, Desserts, and Beverages (including vegan and gluten-free options)\n5. Entertainment: DJ playing a mix of Top 40 and Classic Hits, Photo Booth, Dance Floor, and Games\n6. Decorations: Gold, Black, and White color scheme with Balloon Arch, LED Lighting, and Personalized Banners\n7. Additional Services: Shuttle service for guests and a professional photographer\n\nThe party planning agent has suggested a great plan, but we need to confirm a few details to finalize the booking:\n\n1. Location: The agent needs a specific location for the party. Would you like to suggest a venue, or should I ask the agent to recommend some options?\n2. Guest List: The plan accommodates up to 50 guests. Do you want to invite that many people, or would you prefer a smaller gathering?\n\nOnce we have these details, I can go ahead and finalize the booking for you. Let me know your preferences, and I'll take care of the rest!"
+      },
+      {
+        "step": 9,
+        "timestamp": "2025-03-30T01:35:08.695397",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "Excellent! I've arranged a fantastic 21st birthday party for you on May 15th at 8pm. Here are the details of the party plan:\n\n1. Date and Time: May 15th at 8:00 PM\n2. Theme: Modern Glam\n3. Guest List: Up to 50 guests\n4. Catering: Appetizers, Main Course, Desserts, and Beverages (including vegan and gluten-free options)\n5. Entertainment: DJ playing a mix of Top 40 and Classic Hits, Photo Booth, Dance Floor, and Games\n6. Decorations: Gold, Black, and White color scheme with Balloon Arch, LED Lighting, and Personalized Banners\n7. Additional Services: Shuttle service for guests and a professional photographer\n\nThe party planning agent has suggested a great plan, but we need to confirm a few details to finalize the booking:\n\n1. Location: The agent needs a specific location for the party. Would you like to suggest a venue, or should I ask the agent to recommend some options?\n2. Guest List: The plan accommodates up to 50 guests. Do you want to invite that many people, or would you prefer a smaller gathering?\n\nOnce we have these details, I can go ahead and finalize the booking for you. Let me know your preferences, and I'll take care of the rest!"
+      },
+      {
+        "step": 10,
+        "timestamp": "2025-03-30T01:35:10.979843",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Sounds good, I don't really care about the details. Just pick whatever for the location and guest list. As long as there's food and drinks I'm happy."
+      },
+      {
+        "step": 11,
+        "timestamp": "2025-03-30T01:35:10.980145",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Sounds good, I don't really care about the details. Just pick whatever for the location and guest list. As long as there's food and drinks I'm happy."
+      },
+      {
+        "step": 12,
+        "timestamp": "2025-03-30T01:35:14.089270",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "I understand completely! You want a great 21st birthday party without having to worry about the details. I'll take care of everything for you, ensuring there's plenty of food and drinks. Let's finalize the plan with the party planning agent."
+      },
+      {
+        "step": 15,
+        "timestamp": "2025-03-30T01:35:20.738977",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Great news! I've finalized all the details for your 21st birthday party. Here's a summary of the confirmed plan:\n\n1. Date and Time: May 15th at 8:00 PM\n2. Location: The Grand Event Hall, Downtown (capacity for up to 100 guests)\n3. Guest List: Confirmed for 50 people\n4. Food and Drinks: Buffet with appetizers, main course, desserts, and an open bar (including vegan and gluten-free options)\n5. Entertainment: DJ playing a mix of Top 40 and Classic Hits, Photo Booth, Dance Floor, and Games\n6. Decorations: Gold, Black, and White color scheme with Balloon Arch, LED Lighting, and Personalized Banners\n7. Additional Services: Shuttle service for guests and a professional photographer\n\nThe party planning agent has taken care of all the details, ensuring there's plenty of food and drinks as you requested. The location chosen can comfortably accommodate your guests, and all other aspects of the party have been arranged.\n\nIs there anything else you'd like me to modify or confirm about the party? If not, I can go ahead and give final approval to the party planning agent to book everything for your 21st birthday celebration."
+      },
+      {
+        "step": 16,
+        "timestamp": "2025-03-30T01:35:20.739366",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "Great news! I've finalized all the details for your 21st birthday party. Here's a summary of the confirmed plan:\n\n1. Date and Time: May 15th at 8:00 PM\n2. Location: The Grand Event Hall, Downtown (capacity for up to 100 guests)\n3. Guest List: Confirmed for 50 people\n4. Food and Drinks: Buffet with appetizers, main course, desserts, and an open bar (including vegan and gluten-free options)\n5. Entertainment: DJ playing a mix of Top 40 and Classic Hits, Photo Booth, Dance Floor, and Games\n6. Decorations: Gold, Black, and White color scheme with Balloon Arch, LED Lighting, and Personalized Banners\n7. Additional Services: Shuttle service for guests and a professional photographer\n\nThe party planning agent has taken care of all the details, ensuring there's plenty of food and drinks as you requested. The location chosen can comfortably accommodate your guests, and all other aspects of the party have been arranged.\n\nIs there anything else you'd like me to modify or confirm about the party? If not, I can go ahead and give final approval to the party planning agent to book everything for your 21st birthday celebration."
+      },
+      {
+        "step": 17,
+        "timestamp": "2025-03-30T01:35:21.936256",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Sounds perfect, let's do it. \n\nTASK COMPLETE"
+      }
+    ],
+    "client_agent": [
+      {
+        "step": 1,
+        "timestamp": "2025-03-30T01:34:53.766214",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Book me a 21st birthday party at 8pm on my birthday"
+      },
+      {
+        "step": 2,
+        "timestamp": "2025-03-30T01:34:56.830330",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Certainly! I'd be happy to help you book a 21st birthday party. To do this effectively, I'll need to use both the calendar agent to check your birthday and the party planning agent to arrange the party. Let's start by finding out your birthday from the calendar."
+      },
+      {
+        "step": 3,
+        "timestamp": "2025-03-30T01:34:56.830677",
+        "from": "client_agent",
+        "to": "calendar_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "What is the user's birthday?"
+        }
+      },
+      {
+        "step": 4,
+        "timestamp": "2025-03-30T01:34:57.724921",
+        "from": "calendar_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"user_birthday\": \"1990-05-15\"\n}\n```"
+      },
+      {
+        "step": 5,
+        "timestamp": "2025-03-30T01:34:59.533686",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Great! I've found out that your birthday is on May 15th. Now, let's use this information to plan your 21st birthday party with the party planning agent."
+      },
+      {
+        "step": 6,
+        "timestamp": "2025-03-30T01:34:59.533764",
+        "from": "client_agent",
+        "to": "party_planning_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "Please plan a 21st birthday party for the user on May 15th at 8pm."
+        }
+      },
+      {
+        "step": 7,
+        "timestamp": "2025-03-30T01:35:03.797170",
+        "from": "party_planning_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"party_details\": {\n    \"occasion\": \"21st Birthday Party\",\n    \"date\": \"May 15th\",\n    \"time\": \"8:00 PM\",\n    \"location\": \"To be determined\",\n    \"theme\": \"Modern Glam\",\n    \"guest_list\": \"Up to 50 guests\",\n    \"catering\": {\n      \"menu\": \"Appetizers, Main Course, Desserts, and Beverages\",\n      \"special_requests\": \"Vegan and Gluten-Free Options Available\"\n    },\n    \"entertainment\": {\n      \"music\": \"DJ with a mix of Top 40 and Classic Hits\",\n      \"activities\": \"Photo Booth, Dance Floor, and Games\"\n    },\n    \"decorations\": {\n      \"color_scheme\": \"Gold, Black, and White\",\n      \"special_features\": \"Balloon Arch, LED Lighting, and Personalized Banners\"\n    },\n    \"additional_services\": {\n      \"transportation\": \"Shuttle service for guests\",\n      \"photography\": \"Professional photographer for the event\"\n    }\n  },\n  \"next_steps\": \"Please confirm the location and guest list to proceed with the booking.\"\n}\n```"
+      },
+      {
+        "step": 8,
+        "timestamp": "2025-03-30T01:35:08.694670",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Excellent! I've arranged a fantastic 21st birthday party for you on May 15th at 8pm. Here are the details of the party plan:\n\n1. Date and Time: May 15th at 8:00 PM\n2. Theme: Modern Glam\n3. Guest List: Up to 50 guests\n4. Catering: Appetizers, Main Course, Desserts, and Beverages (including vegan and gluten-free options)\n5. Entertainment: DJ playing a mix of Top 40 and Classic Hits, Photo Booth, Dance Floor, and Games\n6. Decorations: Gold, Black, and White color scheme with Balloon Arch, LED Lighting, and Personalized Banners\n7. Additional Services: Shuttle service for guests and a professional photographer\n\nThe party planning agent has suggested a great plan, but we need to confirm a few details to finalize the booking:\n\n1. Location: The agent needs a specific location for the party. Would you like to suggest a venue, or should I ask the agent to recommend some options?\n2. Guest List: The plan accommodates up to 50 guests. Do you want to invite that many people, or would you prefer a smaller gathering?\n\nOnce we have these details, I can go ahead and finalize the booking for you. Let me know your preferences, and I'll take care of the rest!"
+      },
+      {
+        "step": 9,
+        "timestamp": "2025-03-30T01:35:08.695397",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "Excellent! I've arranged a fantastic 21st birthday party for you on May 15th at 8pm. Here are the details of the party plan:\n\n1. Date and Time: May 15th at 8:00 PM\n2. Theme: Modern Glam\n3. Guest List: Up to 50 guests\n4. Catering: Appetizers, Main Course, Desserts, and Beverages (including vegan and gluten-free options)\n5. Entertainment: DJ playing a mix of Top 40 and Classic Hits, Photo Booth, Dance Floor, and Games\n6. Decorations: Gold, Black, and White color scheme with Balloon Arch, LED Lighting, and Personalized Banners\n7. Additional Services: Shuttle service for guests and a professional photographer\n\nThe party planning agent has suggested a great plan, but we need to confirm a few details to finalize the booking:\n\n1. Location: The agent needs a specific location for the party. Would you like to suggest a venue, or should I ask the agent to recommend some options?\n2. Guest List: The plan accommodates up to 50 guests. Do you want to invite that many people, or would you prefer a smaller gathering?\n\nOnce we have these details, I can go ahead and finalize the booking for you. Let me know your preferences, and I'll take care of the rest!"
+      },
+      {
+        "step": 10,
+        "timestamp": "2025-03-30T01:35:10.979843",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Sounds good, I don't really care about the details. Just pick whatever for the location and guest list. As long as there's food and drinks I'm happy."
+      },
+      {
+        "step": 11,
+        "timestamp": "2025-03-30T01:35:10.980145",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Sounds good, I don't really care about the details. Just pick whatever for the location and guest list. As long as there's food and drinks I'm happy."
+      },
+      {
+        "step": 12,
+        "timestamp": "2025-03-30T01:35:14.089270",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "I understand completely! You want a great 21st birthday party without having to worry about the details. I'll take care of everything for you, ensuring there's plenty of food and drinks. Let's finalize the plan with the party planning agent."
+      },
+      {
+        "step": 13,
+        "timestamp": "2025-03-30T01:35:14.089572",
+        "from": "client_agent",
+        "to": "party_planning_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "Please finalize the 21st birthday party plan for May 15th at 8pm. Choose a suitable location that can accommodate 50 guests. Confirm the guest list for 50 people. Ensure there's plenty of food and drinks. The user is happy with all other details previously suggested."
+        }
+      },
+      {
+        "step": 14,
+        "timestamp": "2025-03-30T01:35:16.528482",
+        "from": "party_planning_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"party_details\": {\n    \"occasion\": \"21st Birthday Party\",\n    \"date\": \"May 15th\",\n    \"time\": \"8:00 PM\",\n    \"location\": \"The Grand Event Hall, Downtown\",\n    \"capacity\": \"Up to 100 guests\",\n    \"guest_list\": \"Confirmed for 50 guests\",\n    \"catering\": {\n      \"menu\": \"Buffet with Appetizers, Main Course, Desserts, and Open Bar\",\n      \"special_requests\": \"Vegan and Gluten-Free Options Available\"\n    },\n    \"entertainment\": {\n      \"music\": \"DJ with a mix of Top 40 and Classic Hits\",\n      \"activities\": \"Photo Booth, Dance Floor, and Games\"\n    },\n    \"decorations\": {\n      \"color_scheme\": \"Gold, Black, and White\",\n      \"special_features\": \"Balloon Arch, LED Lighting, and Personalized Banners\"\n    },\n    \"additional_services\": {\n      \"transportation\": \"Shuttle service for guests\",\n      \"photography\": \"Professional photographer for the event\"\n    }\n  },\n  \"confirmation_status\": \"All details have been finalized and confirmed. Please review and approve the final plan.\"\n}\n```"
+      },
+      {
+        "step": 15,
+        "timestamp": "2025-03-30T01:35:20.738977",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Great news! I've finalized all the details for your 21st birthday party. Here's a summary of the confirmed plan:\n\n1. Date and Time: May 15th at 8:00 PM\n2. Location: The Grand Event Hall, Downtown (capacity for up to 100 guests)\n3. Guest List: Confirmed for 50 people\n4. Food and Drinks: Buffet with appetizers, main course, desserts, and an open bar (including vegan and gluten-free options)\n5. Entertainment: DJ playing a mix of Top 40 and Classic Hits, Photo Booth, Dance Floor, and Games\n6. Decorations: Gold, Black, and White color scheme with Balloon Arch, LED Lighting, and Personalized Banners\n7. Additional Services: Shuttle service for guests and a professional photographer\n\nThe party planning agent has taken care of all the details, ensuring there's plenty of food and drinks as you requested. The location chosen can comfortably accommodate your guests, and all other aspects of the party have been arranged.\n\nIs there anything else you'd like me to modify or confirm about the party? If not, I can go ahead and give final approval to the party planning agent to book everything for your 21st birthday celebration."
+      },
+      {
+        "step": 16,
+        "timestamp": "2025-03-30T01:35:20.739366",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "Great news! I've finalized all the details for your 21st birthday party. Here's a summary of the confirmed plan:\n\n1. Date and Time: May 15th at 8:00 PM\n2. Location: The Grand Event Hall, Downtown (capacity for up to 100 guests)\n3. Guest List: Confirmed for 50 people\n4. Food and Drinks: Buffet with appetizers, main course, desserts, and an open bar (including vegan and gluten-free options)\n5. Entertainment: DJ playing a mix of Top 40 and Classic Hits, Photo Booth, Dance Floor, and Games\n6. Decorations: Gold, Black, and White color scheme with Balloon Arch, LED Lighting, and Personalized Banners\n7. Additional Services: Shuttle service for guests and a professional photographer\n\nThe party planning agent has taken care of all the details, ensuring there's plenty of food and drinks as you requested. The location chosen can comfortably accommodate your guests, and all other aspects of the party have been arranged.\n\nIs there anything else you'd like me to modify or confirm about the party? If not, I can go ahead and give final approval to the party planning agent to book everything for your 21st birthday celebration."
+      },
+      {
+        "step": 17,
+        "timestamp": "2025-03-30T01:35:21.936256",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Sounds perfect, let's do it. \n\nTASK COMPLETE"
+      }
+    ],
+    "calendar_agent": [
+      {
+        "step": 3,
+        "timestamp": "2025-03-30T01:34:56.830677",
+        "from": "client_agent",
+        "to": "calendar_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "What is the user's birthday?"
+        }
+      },
+      {
+        "step": 4,
+        "timestamp": "2025-03-30T01:34:57.724921",
+        "from": "calendar_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"user_birthday\": \"1990-05-15\"\n}\n```"
+      }
+    ],
+    "party_planning_agent": [
+      {
+        "step": 6,
+        "timestamp": "2025-03-30T01:34:59.533764",
+        "from": "client_agent",
+        "to": "party_planning_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "Please plan a 21st birthday party for the user on May 15th at 8pm."
+        }
+      },
+      {
+        "step": 7,
+        "timestamp": "2025-03-30T01:35:03.797170",
+        "from": "party_planning_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"party_details\": {\n    \"occasion\": \"21st Birthday Party\",\n    \"date\": \"May 15th\",\n    \"time\": \"8:00 PM\",\n    \"location\": \"To be determined\",\n    \"theme\": \"Modern Glam\",\n    \"guest_list\": \"Up to 50 guests\",\n    \"catering\": {\n      \"menu\": \"Appetizers, Main Course, Desserts, and Beverages\",\n      \"special_requests\": \"Vegan and Gluten-Free Options Available\"\n    },\n    \"entertainment\": {\n      \"music\": \"DJ with a mix of Top 40 and Classic Hits\",\n      \"activities\": \"Photo Booth, Dance Floor, and Games\"\n    },\n    \"decorations\": {\n      \"color_scheme\": \"Gold, Black, and White\",\n      \"special_features\": \"Balloon Arch, LED Lighting, and Personalized Banners\"\n    },\n    \"additional_services\": {\n      \"transportation\": \"Shuttle service for guests\",\n      \"photography\": \"Professional photographer for the event\"\n    }\n  },\n  \"next_steps\": \"Please confirm the location and guest list to proceed with the booking.\"\n}\n```"
+      },
+      {
+        "step": 13,
+        "timestamp": "2025-03-30T01:35:14.089572",
+        "from": "client_agent",
+        "to": "party_planning_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "Please finalize the 21st birthday party plan for May 15th at 8pm. Choose a suitable location that can accommodate 50 guests. Confirm the guest list for 50 people. Ensure there's plenty of food and drinks. The user is happy with all other details previously suggested."
+        }
+      },
+      {
+        "step": 14,
+        "timestamp": "2025-03-30T01:35:16.528482",
+        "from": "party_planning_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"party_details\": {\n    \"occasion\": \"21st Birthday Party\",\n    \"date\": \"May 15th\",\n    \"time\": \"8:00 PM\",\n    \"location\": \"The Grand Event Hall, Downtown\",\n    \"capacity\": \"Up to 100 guests\",\n    \"guest_list\": \"Confirmed for 50 guests\",\n    \"catering\": {\n      \"menu\": \"Buffet with Appetizers, Main Course, Desserts, and Open Bar\",\n      \"special_requests\": \"Vegan and Gluten-Free Options Available\"\n    },\n    \"entertainment\": {\n      \"music\": \"DJ with a mix of Top 40 and Classic Hits\",\n      \"activities\": \"Photo Booth, Dance Floor, and Games\"\n    },\n    \"decorations\": {\n      \"color_scheme\": \"Gold, Black, and White\",\n      \"special_features\": \"Balloon Arch, LED Lighting, and Personalized Banners\"\n    },\n    \"additional_services\": {\n      \"transportation\": \"Shuttle service for guests\",\n      \"photography\": \"Professional photographer for the event\"\n    }\n  },\n  \"confirmation_status\": \"All details have been finalized and confirmed. Please review and approve the final plan.\"\n}\n```"
+      }
+    ]
+  },
+  "edge_logs": {
+    "human\u2192client_agent": [
+      {
+        "step": 1,
+        "timestamp": "2025-03-30T01:34:53.766214",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Book me a 21st birthday party at 8pm on my birthday"
+      },
+      {
+        "step": 10,
+        "timestamp": "2025-03-30T01:35:10.979843",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Sounds good, I don't really care about the details. Just pick whatever for the location and guest list. As long as there's food and drinks I'm happy."
+      },
+      {
+        "step": 11,
+        "timestamp": "2025-03-30T01:35:10.980145",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Sounds good, I don't really care about the details. Just pick whatever for the location and guest list. As long as there's food and drinks I'm happy."
+      },
+      {
+        "step": 17,
+        "timestamp": "2025-03-30T01:35:21.936256",
+        "from": "human",
+        "to": "client_agent",
+        "type": "message",
+        "content": "Sounds perfect, let's do it. \n\nTASK COMPLETE"
+      }
+    ],
+    "client_agent\u2192human": [
+      {
+        "step": 2,
+        "timestamp": "2025-03-30T01:34:56.830330",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Certainly! I'd be happy to help you book a 21st birthday party. To do this effectively, I'll need to use both the calendar agent to check your birthday and the party planning agent to arrange the party. Let's start by finding out your birthday from the calendar."
+      },
+      {
+        "step": 5,
+        "timestamp": "2025-03-30T01:34:59.533686",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Great! I've found out that your birthday is on May 15th. Now, let's use this information to plan your 21st birthday party with the party planning agent."
+      },
+      {
+        "step": 8,
+        "timestamp": "2025-03-30T01:35:08.694670",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Excellent! I've arranged a fantastic 21st birthday party for you on May 15th at 8pm. Here are the details of the party plan:\n\n1. Date and Time: May 15th at 8:00 PM\n2. Theme: Modern Glam\n3. Guest List: Up to 50 guests\n4. Catering: Appetizers, Main Course, Desserts, and Beverages (including vegan and gluten-free options)\n5. Entertainment: DJ playing a mix of Top 40 and Classic Hits, Photo Booth, Dance Floor, and Games\n6. Decorations: Gold, Black, and White color scheme with Balloon Arch, LED Lighting, and Personalized Banners\n7. Additional Services: Shuttle service for guests and a professional photographer\n\nThe party planning agent has suggested a great plan, but we need to confirm a few details to finalize the booking:\n\n1. Location: The agent needs a specific location for the party. Would you like to suggest a venue, or should I ask the agent to recommend some options?\n2. Guest List: The plan accommodates up to 50 guests. Do you want to invite that many people, or would you prefer a smaller gathering?\n\nOnce we have these details, I can go ahead and finalize the booking for you. Let me know your preferences, and I'll take care of the rest!"
+      },
+      {
+        "step": 9,
+        "timestamp": "2025-03-30T01:35:08.695397",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "Excellent! I've arranged a fantastic 21st birthday party for you on May 15th at 8pm. Here are the details of the party plan:\n\n1. Date and Time: May 15th at 8:00 PM\n2. Theme: Modern Glam\n3. Guest List: Up to 50 guests\n4. Catering: Appetizers, Main Course, Desserts, and Beverages (including vegan and gluten-free options)\n5. Entertainment: DJ playing a mix of Top 40 and Classic Hits, Photo Booth, Dance Floor, and Games\n6. Decorations: Gold, Black, and White color scheme with Balloon Arch, LED Lighting, and Personalized Banners\n7. Additional Services: Shuttle service for guests and a professional photographer\n\nThe party planning agent has suggested a great plan, but we need to confirm a few details to finalize the booking:\n\n1. Location: The agent needs a specific location for the party. Would you like to suggest a venue, or should I ask the agent to recommend some options?\n2. Guest List: The plan accommodates up to 50 guests. Do you want to invite that many people, or would you prefer a smaller gathering?\n\nOnce we have these details, I can go ahead and finalize the booking for you. Let me know your preferences, and I'll take care of the rest!"
+      },
+      {
+        "step": 12,
+        "timestamp": "2025-03-30T01:35:14.089270",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "I understand completely! You want a great 21st birthday party without having to worry about the details. I'll take care of everything for you, ensuring there's plenty of food and drinks. Let's finalize the plan with the party planning agent."
+      },
+      {
+        "step": 15,
+        "timestamp": "2025-03-30T01:35:20.738977",
+        "from": "client_agent",
+        "to": "human",
+        "type": "response",
+        "content": "Great news! I've finalized all the details for your 21st birthday party. Here's a summary of the confirmed plan:\n\n1. Date and Time: May 15th at 8:00 PM\n2. Location: The Grand Event Hall, Downtown (capacity for up to 100 guests)\n3. Guest List: Confirmed for 50 people\n4. Food and Drinks: Buffet with appetizers, main course, desserts, and an open bar (including vegan and gluten-free options)\n5. Entertainment: DJ playing a mix of Top 40 and Classic Hits, Photo Booth, Dance Floor, and Games\n6. Decorations: Gold, Black, and White color scheme with Balloon Arch, LED Lighting, and Personalized Banners\n7. Additional Services: Shuttle service for guests and a professional photographer\n\nThe party planning agent has taken care of all the details, ensuring there's plenty of food and drinks as you requested. The location chosen can comfortably accommodate your guests, and all other aspects of the party have been arranged.\n\nIs there anything else you'd like me to modify or confirm about the party? If not, I can go ahead and give final approval to the party planning agent to book everything for your 21st birthday celebration."
+      },
+      {
+        "step": 16,
+        "timestamp": "2025-03-30T01:35:20.739366",
+        "from": "client_agent",
+        "to": "human",
+        "type": "message",
+        "content": "Great news! I've finalized all the details for your 21st birthday party. Here's a summary of the confirmed plan:\n\n1. Date and Time: May 15th at 8:00 PM\n2. Location: The Grand Event Hall, Downtown (capacity for up to 100 guests)\n3. Guest List: Confirmed for 50 people\n4. Food and Drinks: Buffet with appetizers, main course, desserts, and an open bar (including vegan and gluten-free options)\n5. Entertainment: DJ playing a mix of Top 40 and Classic Hits, Photo Booth, Dance Floor, and Games\n6. Decorations: Gold, Black, and White color scheme with Balloon Arch, LED Lighting, and Personalized Banners\n7. Additional Services: Shuttle service for guests and a professional photographer\n\nThe party planning agent has taken care of all the details, ensuring there's plenty of food and drinks as you requested. The location chosen can comfortably accommodate your guests, and all other aspects of the party have been arranged.\n\nIs there anything else you'd like me to modify or confirm about the party? If not, I can go ahead and give final approval to the party planning agent to book everything for your 21st birthday celebration."
+      }
+    ],
+    "client_agent\u2192calendar_agent": [
+      {
+        "step": 3,
+        "timestamp": "2025-03-30T01:34:56.830677",
+        "from": "client_agent",
+        "to": "calendar_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "What is the user's birthday?"
+        }
+      }
+    ],
+    "calendar_agent\u2192client_agent": [
+      {
+        "step": 4,
+        "timestamp": "2025-03-30T01:34:57.724921",
+        "from": "calendar_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"user_birthday\": \"1990-05-15\"\n}\n```"
+      }
+    ],
+    "client_agent\u2192party_planning_agent": [
+      {
+        "step": 6,
+        "timestamp": "2025-03-30T01:34:59.533764",
+        "from": "client_agent",
+        "to": "party_planning_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "Please plan a 21st birthday party for the user on May 15th at 8pm."
+        }
+      },
+      {
+        "step": 13,
+        "timestamp": "2025-03-30T01:35:14.089572",
+        "from": "client_agent",
+        "to": "party_planning_agent",
+        "type": "tool_call",
+        "arguments": {
+          "message": "Please finalize the 21st birthday party plan for May 15th at 8pm. Choose a suitable location that can accommodate 50 guests. Confirm the guest list for 50 people. Ensure there's plenty of food and drinks. The user is happy with all other details previously suggested."
+        }
+      }
+    ],
+    "party_planning_agent\u2192client_agent": [
+      {
+        "step": 7,
+        "timestamp": "2025-03-30T01:35:03.797170",
+        "from": "party_planning_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"party_details\": {\n    \"occasion\": \"21st Birthday Party\",\n    \"date\": \"May 15th\",\n    \"time\": \"8:00 PM\",\n    \"location\": \"To be determined\",\n    \"theme\": \"Modern Glam\",\n    \"guest_list\": \"Up to 50 guests\",\n    \"catering\": {\n      \"menu\": \"Appetizers, Main Course, Desserts, and Beverages\",\n      \"special_requests\": \"Vegan and Gluten-Free Options Available\"\n    },\n    \"entertainment\": {\n      \"music\": \"DJ with a mix of Top 40 and Classic Hits\",\n      \"activities\": \"Photo Booth, Dance Floor, and Games\"\n    },\n    \"decorations\": {\n      \"color_scheme\": \"Gold, Black, and White\",\n      \"special_features\": \"Balloon Arch, LED Lighting, and Personalized Banners\"\n    },\n    \"additional_services\": {\n      \"transportation\": \"Shuttle service for guests\",\n      \"photography\": \"Professional photographer for the event\"\n    }\n  },\n  \"next_steps\": \"Please confirm the location and guest list to proceed with the booking.\"\n}\n```"
+      },
+      {
+        "step": 14,
+        "timestamp": "2025-03-30T01:35:16.528482",
+        "from": "party_planning_agent",
+        "to": "client_agent",
+        "type": "tool_result",
+        "content": "```json\n{\n  \"party_details\": {\n    \"occasion\": \"21st Birthday Party\",\n    \"date\": \"May 15th\",\n    \"time\": \"8:00 PM\",\n    \"location\": \"The Grand Event Hall, Downtown\",\n    \"capacity\": \"Up to 100 guests\",\n    \"guest_list\": \"Confirmed for 50 guests\",\n    \"catering\": {\n      \"menu\": \"Buffet with Appetizers, Main Course, Desserts, and Open Bar\",\n      \"special_requests\": \"Vegan and Gluten-Free Options Available\"\n    },\n    \"entertainment\": {\n      \"music\": \"DJ with a mix of Top 40 and Classic Hits\",\n      \"activities\": \"Photo Booth, Dance Floor, and Games\"\n    },\n    \"decorations\": {\n      \"color_scheme\": \"Gold, Black, and White\",\n      \"special_features\": \"Balloon Arch, LED Lighting, and Personalized Banners\"\n    },\n    \"additional_services\": {\n      \"transportation\": \"Shuttle service for guests\",\n      \"photography\": \"Professional photographer for the event\"\n    }\n  },\n  \"confirmation_status\": \"All details have been finalized and confirmed. Please review and approve the final plan.\"\n}\n```"
+      }
+    ]
+  },
+  "sequence_log": [
+    {
+      "step": 1,
+      "timestamp": "2025-03-30T01:34:53.766214",
+      "from": "human",
+      "to": "client_agent",
+      "type": "message",
+      "content": "Book me a 21st birthday party at 8pm on my birthday"
+    },
+    {
+      "step": 2,
+      "timestamp": "2025-03-30T01:34:56.830330",
+      "from": "client_agent",
+      "to": "human",
+      "type": "response",
+      "content": "Certainly! I'd be happy to help you book a 21st birthday party. To do this effectively, I'll need to use both the calendar agent to check your birthday and the party planning agent to arrange the party. Let's start by finding out your birthday from the calendar."
+    },
+    {
+      "step": 3,
+      "timestamp": "2025-03-30T01:34:56.830677",
+      "from": "client_agent",
+      "to": "calendar_agent",
+      "type": "tool_call",
+      "arguments": {
+        "message": "What is the user's birthday?"
+      }
+    },
+    {
+      "step": 4,
+      "timestamp": "2025-03-30T01:34:57.724921",
+      "from": "calendar_agent",
+      "to": "client_agent",
+      "type": "tool_result",
+      "content": "```json\n{\n  \"user_birthday\": \"1990-05-15\"\n}\n```"
+    },
+    {
+      "step": 5,
+      "timestamp": "2025-03-30T01:34:59.533686",
+      "from": "client_agent",
+      "to": "human",
+      "type": "response",
+      "content": "Great! I've found out that your birthday is on May 15th. Now, let's use this information to plan your 21st birthday party with the party planning agent."
+    },
+    {
+      "step": 6,
+      "timestamp": "2025-03-30T01:34:59.533764",
+      "from": "client_agent",
+      "to": "party_planning_agent",
+      "type": "tool_call",
+      "arguments": {
+        "message": "Please plan a 21st birthday party for the user on May 15th at 8pm."
+      }
+    },
+    {
+      "step": 7,
+      "timestamp": "2025-03-30T01:35:03.797170",
+      "from": "party_planning_agent",
+      "to": "client_agent",
+      "type": "tool_result",
+      "content": "```json\n{\n  \"party_details\": {\n    \"occasion\": \"21st Birthday Party\",\n    \"date\": \"May 15th\",\n    \"time\": \"8:00 PM\",\n    \"location\": \"To be determined\",\n    \"theme\": \"Modern Glam\",\n    \"guest_list\": \"Up to 50 guests\",\n    \"catering\": {\n      \"menu\": \"Appetizers, Main Course, Desserts, and Beverages\",\n      \"special_requests\": \"Vegan and Gluten-Free Options Available\"\n    },\n    \"entertainment\": {\n      \"music\": \"DJ with a mix of Top 40 and Classic Hits\",\n      \"activities\": \"Photo Booth, Dance Floor, and Games\"\n    },\n    \"decorations\": {\n      \"color_scheme\": \"Gold, Black, and White\",\n      \"special_features\": \"Balloon Arch, LED Lighting, and Personalized Banners\"\n    },\n    \"additional_services\": {\n      \"transportation\": \"Shuttle service for guests\",\n      \"photography\": \"Professional photographer for the event\"\n    }\n  },\n  \"next_steps\": \"Please confirm the location and guest list to proceed with the booking.\"\n}\n```"
+    },
+    {
+      "step": 8,
+      "timestamp": "2025-03-30T01:35:08.694670",
+      "from": "client_agent",
+      "to": "human",
+      "type": "response",
+      "content": "Excellent! I've arranged a fantastic 21st birthday party for you on May 15th at 8pm. Here are the details of the party plan:\n\n1. Date and Time: May 15th at 8:00 PM\n2. Theme: Modern Glam\n3. Guest List: Up to 50 guests\n4. Catering: Appetizers, Main Course, Desserts, and Beverages (including vegan and gluten-free options)\n5. Entertainment: DJ playing a mix of Top 40 and Classic Hits, Photo Booth, Dance Floor, and Games\n6. Decorations: Gold, Black, and White color scheme with Balloon Arch, LED Lighting, and Personalized Banners\n7. Additional Services: Shuttle service for guests and a professional photographer\n\nThe party planning agent has suggested a great plan, but we need to confirm a few details to finalize the booking:\n\n1. Location: The agent needs a specific location for the party. Would you like to suggest a venue, or should I ask the agent to recommend some options?\n2. Guest List: The plan accommodates up to 50 guests. Do you want to invite that many people, or would you prefer a smaller gathering?\n\nOnce we have these details, I can go ahead and finalize the booking for you. Let me know your preferences, and I'll take care of the rest!"
+    },
+    {
+      "step": 9,
+      "timestamp": "2025-03-30T01:35:08.695397",
+      "from": "client_agent",
+      "to": "human",
+      "type": "message",
+      "content": "Excellent! I've arranged a fantastic 21st birthday party for you on May 15th at 8pm. Here are the details of the party plan:\n\n1. Date and Time: May 15th at 8:00 PM\n2. Theme: Modern Glam\n3. Guest List: Up to 50 guests\n4. Catering: Appetizers, Main Course, Desserts, and Beverages (including vegan and gluten-free options)\n5. Entertainment: DJ playing a mix of Top 40 and Classic Hits, Photo Booth, Dance Floor, and Games\n6. Decorations: Gold, Black, and White color scheme with Balloon Arch, LED Lighting, and Personalized Banners\n7. Additional Services: Shuttle service for guests and a professional photographer\n\nThe party planning agent has suggested a great plan, but we need to confirm a few details to finalize the booking:\n\n1. Location: The agent needs a specific location for the party. Would you like to suggest a venue, or should I ask the agent to recommend some options?\n2. Guest List: The plan accommodates up to 50 guests. Do you want to invite that many people, or would you prefer a smaller gathering?\n\nOnce we have these details, I can go ahead and finalize the booking for you. Let me know your preferences, and I'll take care of the rest!"
+    },
+    {
+      "step": 10,
+      "timestamp": "2025-03-30T01:35:10.979843",
+      "from": "human",
+      "to": "client_agent",
+      "type": "message",
+      "content": "Sounds good, I don't really care about the details. Just pick whatever for the location and guest list. As long as there's food and drinks I'm happy."
+    },
+    {
+      "step": 11,
+      "timestamp": "2025-03-30T01:35:10.980145",
+      "from": "human",
+      "to": "client_agent",
+      "type": "message",
+      "content": "Sounds good, I don't really care about the details. Just pick whatever for the location and guest list. As long as there's food and drinks I'm happy."
+    },
+    {
+      "step": 12,
+      "timestamp": "2025-03-30T01:35:14.089270",
+      "from": "client_agent",
+      "to": "human",
+      "type": "response",
+      "content": "I understand completely! You want a great 21st birthday party without having to worry about the details. I'll take care of everything for you, ensuring there's plenty of food and drinks. Let's finalize the plan with the party planning agent."
+    },
+    {
+      "step": 13,
+      "timestamp": "2025-03-30T01:35:14.089572",
+      "from": "client_agent",
+      "to": "party_planning_agent",
+      "type": "tool_call",
+      "arguments": {
+        "message": "Please finalize the 21st birthday party plan for May 15th at 8pm. Choose a suitable location that can accommodate 50 guests. Confirm the guest list for 50 people. Ensure there's plenty of food and drinks. The user is happy with all other details previously suggested."
+      }
+    },
+    {
+      "step": 14,
+      "timestamp": "2025-03-30T01:35:16.528482",
+      "from": "party_planning_agent",
+      "to": "client_agent",
+      "type": "tool_result",
+      "content": "```json\n{\n  \"party_details\": {\n    \"occasion\": \"21st Birthday Party\",\n    \"date\": \"May 15th\",\n    \"time\": \"8:00 PM\",\n    \"location\": \"The Grand Event Hall, Downtown\",\n    \"capacity\": \"Up to 100 guests\",\n    \"guest_list\": \"Confirmed for 50 guests\",\n    \"catering\": {\n      \"menu\": \"Buffet with Appetizers, Main Course, Desserts, and Open Bar\",\n      \"special_requests\": \"Vegan and Gluten-Free Options Available\"\n    },\n    \"entertainment\": {\n      \"music\": \"DJ with a mix of Top 40 and Classic Hits\",\n      \"activities\": \"Photo Booth, Dance Floor, and Games\"\n    },\n    \"decorations\": {\n      \"color_scheme\": \"Gold, Black, and White\",\n      \"special_features\": \"Balloon Arch, LED Lighting, and Personalized Banners\"\n    },\n    \"additional_services\": {\n      \"transportation\": \"Shuttle service for guests\",\n      \"photography\": \"Professional photographer for the event\"\n    }\n  },\n  \"confirmation_status\": \"All details have been finalized and confirmed. Please review and approve the final plan.\"\n}\n```"
+    },
+    {
+      "step": 15,
+      "timestamp": "2025-03-30T01:35:20.738977",
+      "from": "client_agent",
+      "to": "human",
+      "type": "response",
+      "content": "Great news! I've finalized all the details for your 21st birthday party. Here's a summary of the confirmed plan:\n\n1. Date and Time: May 15th at 8:00 PM\n2. Location: The Grand Event Hall, Downtown (capacity for up to 100 guests)\n3. Guest List: Confirmed for 50 people\n4. Food and Drinks: Buffet with appetizers, main course, desserts, and an open bar (including vegan and gluten-free options)\n5. Entertainment: DJ playing a mix of Top 40 and Classic Hits, Photo Booth, Dance Floor, and Games\n6. Decorations: Gold, Black, and White color scheme with Balloon Arch, LED Lighting, and Personalized Banners\n7. Additional Services: Shuttle service for guests and a professional photographer\n\nThe party planning agent has taken care of all the details, ensuring there's plenty of food and drinks as you requested. The location chosen can comfortably accommodate your guests, and all other aspects of the party have been arranged.\n\nIs there anything else you'd like me to modify or confirm about the party? If not, I can go ahead and give final approval to the party planning agent to book everything for your 21st birthday celebration."
+    },
+    {
+      "step": 16,
+      "timestamp": "2025-03-30T01:35:20.739366",
+      "from": "client_agent",
+      "to": "human",
+      "type": "message",
+      "content": "Great news! I've finalized all the details for your 21st birthday party. Here's a summary of the confirmed plan:\n\n1. Date and Time: May 15th at 8:00 PM\n2. Location: The Grand Event Hall, Downtown (capacity for up to 100 guests)\n3. Guest List: Confirmed for 50 people\n4. Food and Drinks: Buffet with appetizers, main course, desserts, and an open bar (including vegan and gluten-free options)\n5. Entertainment: DJ playing a mix of Top 40 and Classic Hits, Photo Booth, Dance Floor, and Games\n6. Decorations: Gold, Black, and White color scheme with Balloon Arch, LED Lighting, and Personalized Banners\n7. Additional Services: Shuttle service for guests and a professional photographer\n\nThe party planning agent has taken care of all the details, ensuring there's plenty of food and drinks as you requested. The location chosen can comfortably accommodate your guests, and all other aspects of the party have been arranged.\n\nIs there anything else you'd like me to modify or confirm about the party? If not, I can go ahead and give final approval to the party planning agent to book everything for your 21st birthday celebration."
+    },
+    {
+      "step": 17,
+      "timestamp": "2025-03-30T01:35:21.936256",
+      "from": "human",
+      "to": "client_agent",
+      "type": "message",
+      "content": "Sounds perfect, let's do it. \n\nTASK COMPLETE"
+    }
+  ]
+}

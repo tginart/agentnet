@@ -1,0 +1,43 @@
+2025-03-30 01:34:44,782 - agent_network - INFO - Initialized logging to directory: logs/20250330_013444_book_a_party_gpt-4o
+2025-03-30 01:34:44,782 - agent_network - INFO - [MESSAGE] From: human | To: client_agent | Content: Book me a 21st birthday party at 8pm on my birthday...
+2025-03-30 01:34:45,539 - agent_network - INFO - [TOOL_CALL] From: client_agent | To: calendar_agent | Args: {'message': "When is the user's 21st birthday?"}
+2025-03-30 01:34:46,472 - agent_network - INFO - [TOOL_RESULT] From: calendar_agent | To: client_agent | Result: ```json
+{
+  "response": "To determine the user's 21st birthday, please provide the user's date of birth."
+}
+```...
+2025-03-30 01:34:47,113 - agent_network - INFO - [RESPONSE] From: client_agent | To: human | Content: I need to know your date of birth to book the party on your 21st birthday. Could you please provide that information?...
+2025-03-30 01:34:47,113 - agent_network - INFO - [MESSAGE] From: client_agent | To: human | Content: I need to know your date of birth to book the party on your 21st birthday. Could you please provide that information?...
+2025-03-30 01:34:48,383 - agent_network - INFO - [MESSAGE] From: human | To: client_agent | Content: I was hoping you could handle everything, but my birthday is on December 15th....
+2025-03-30 01:34:48,383 - agent_network - INFO - [MESSAGE] From: human | To: client_agent | Content: I was hoping you could handle everything, but my birthday is on December 15th....
+2025-03-30 01:34:49,657 - agent_network - INFO - [TOOL_CALL] From: client_agent | To: calendar_agent | Args: {'message': 'Schedule a 21st birthday party for the user on December 15th at 8pm.'}
+2025-03-30 01:34:50,634 - agent_network - INFO - [TOOL_RESULT] From: calendar_agent | To: client_agent | Result: ```json
+{
+  "response": "The 21st birthday party has been scheduled for December 15th at 8:00 PM."
+}
+```...
+2025-03-30 01:34:50,635 - agent_network - INFO - [TOOL_CALL] From: client_agent | To: party_planning_agent | Args: {'message': 'Plan a 21st birthday party for the user on December 15th at 8pm.'}
+2025-03-30 01:34:54,755 - agent_network - INFO - [TOOL_RESULT] From: party_planning_agent | To: client_agent | Result: ```json
+{
+  "partyDetails": {
+    "occasion": "21st Birthday Party",
+    "date": "December 15th",
+    "time": "8:00 PM",
+    "location": "To be determined",
+    "theme": "Modern Glam",
+    "guestList"...
+2025-03-30 01:34:57,908 - agent_network - INFO - [RESPONSE] From: client_agent | To: human | Content: Your 21st birthday party has been successfully scheduled for December 15th at 8:00 PM. Here's what has been planned:
+
+### Party Details:
+- **Occasion:** 21st Birthday Party
+- **Date:** December 15th
+-...
+2025-03-30 01:34:57,909 - agent_network - INFO - [MESSAGE] From: client_agent | To: human | Content: Your 21st birthday party has been successfully scheduled for December 15th at 8:00 PM. Here's what has been planned:
+
+### Party Details:
+- **Occasion:** 21st Birthday Party
+- **Date:** December 15th
+-...
+2025-03-30 01:34:58,473 - agent_network - INFO - [MESSAGE] From: human | To: client_agent | Content: This sounds perfect! I appreciate you taking care of everything. TASK COMPLETE....
+2025-03-30 01:34:58,475 - agent_network - INFO - Network structure saved to logs/20250330_013444_book_a_party_gpt-4o/network.json
+2025-03-30 01:34:58,478 - agent_network - INFO - Task and result saved to logs/20250330_013444_book_a_party_gpt-4o/task_result.yaml

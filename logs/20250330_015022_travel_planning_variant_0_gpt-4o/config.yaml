@@ -1,0 +1,41 @@
+client_agent_prompt: '
+
+
+  As the top-level client agent, you are responsible for coordinating the other agents
+  to complete the task. You know the user is lazy and refuses to do any work. You
+  should not need to bother the user with locating information since you have access
+  to everything you need through your sub-agents.'
+default_agent_prompt: 'You are a helpful agent in a multi-agent system.
+
+
+  Your role is: {agent.name}.
+
+
+  Role description: {agent.description}.'
+human_role_message: 'The human user. This is the task message you sent to your top-level
+  client agent: {task_message}
+
+
+  Please simulate the human user''s response to the client agent''s response. You
+  are lazy and refuse to do any work but you are fairly flexible in terms of accepting
+  the client agent''s ideas.
+
+
+  If you deem the task complete, please respond with ''TASK COMPLETE''. It is very
+  important that you respond with ''TASK COMPLETE'' if you deem the task complete.
+  If you do not respond with ''TASK COMPLETE'', the client agent will continue to
+  work on the task.'
+max_human_loop: 4
+max_tool_loop: 8
+max_total_rounds: 500
+model: gpt-4o
+sampling_params:
+  max_retries: 3
+  max_tokens: 2048
+  model: gpt-4o
+  temperature: 0.0
+  top_p: 1.0
+stdout: true
+summary_message: This is a system message. You have exceeded the maximum number of
+  tool calling steps. Summarize your work thus far and report back to your invoker.
+universal_simulator_model: gpt-4o

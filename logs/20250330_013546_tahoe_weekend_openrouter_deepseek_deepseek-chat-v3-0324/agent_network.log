@@ -1,0 +1,58 @@
+2025-03-30 01:35:46,459 - agent_network - INFO - Initialized logging to directory: logs/20250330_013546_tahoe_weekend_openrouter_deepseek_deepseek-chat-v3-0324
+2025-03-30 01:35:46,459 - agent_network - INFO - [MESSAGE] From: human | To: client_agent | Content: Find me a 5-star getaway to Tahoe this weekend, make sure there is no blizzard warning...
+2025-03-30 01:35:49,248 - agent_network - INFO - [TOOL_CALL] From: client_agent | To: weather_agent | Args: {'message': 'Check for any blizzard warnings in Tahoe this weekend.'}
+2025-03-30 01:35:49,249 - agent_network - INFO - [MESSAGE] From: client_agent | To: weather_agent | Content: Check for any blizzard warnings in Tahoe this weekend....
+2025-03-30 01:35:50,667 - agent_network - INFO - [TOOL_CALL] From: weather_agent | To: get_geocode | Args: {'location': 'Tahoe'}
+2025-03-30 01:35:51,811 - agent_network - INFO - [TOOL_RESULT] From: get_geocode | To: weather_agent | Result: ```json
+{
+  "location": "Tahoe",
+  "latitude": 39.0968,
+  "longitude": -120.0324
+}
+```...
+2025-03-30 01:35:53,100 - agent_network - INFO - [TOOL_CALL] From: weather_agent | To: get_alerts | Args: {'state': 'California'}
+2025-03-30 01:35:53,280 - agent_network - INFO - [TOOL_RESULT] From: get_alerts | To: weather_agent | Result: Unable to fetch alerts or no alerts found....
+2025-03-30 01:35:56,057 - agent_network - INFO - [RESPONSE] From: weather_agent | To: client_agent | Content: I couldn't find any active blizzard warnings for Tahoe, California, this weekend. However, weather conditions can change, so it's always a good idea to check closer to your travel date or monitor loca...
+2025-03-30 01:35:56,057 - agent_network - INFO - [TOOL_RESULT] From: weather_agent | To: client_agent | Result: I couldn't find any active blizzard warnings for Tahoe, California, this weekend. However, weather conditions can change, so it's always a good idea to check closer to your travel date or monitor loca...
+2025-03-30 01:35:56,058 - agent_network - INFO - [TOOL_CALL] From: client_agent | To: airbnb_agent | Args: {'message': 'Find a 5-star getaway in Tahoe for this weekend.'}
+2025-03-30 01:35:56,058 - agent_network - INFO - [MESSAGE] From: client_agent | To: airbnb_agent | Content: Find a 5-star getaway in Tahoe for this weekend....
+2025-03-30 01:35:57,615 - agent_network - INFO - [TOOL_CALL] From: airbnb_agent | To: get_airbnb_listings | Args: {'location': 'Tahoe'}
+2025-03-30 01:36:03,173 - agent_network - INFO - [TOOL_RESULT] From: get_airbnb_listings | To: airbnb_agent | Result: ```json
+{
+  "listings": [
+    {
+      "id": "12345678",
+      "title": "Cozy Cabin with Lake View",
+      "location": "South Lake Tahoe, CA",
+      "price_per_night": 250,
+      "rating": 4.8,
+      "...
+2025-03-30 01:36:14,955 - agent_network - INFO - [RESPONSE] From: airbnb_agent | To: client_agent | Content: Here are some top-rated Airbnb listings in Tahoe for your weekend getaway:
+
+1. **Luxury Lakefront Villa**
+   - **Location:** Zephyr Cove, NV
+   - **Price per night:** $500
+   - **Rating:** 5.0 (45 rev...
+2025-03-30 01:36:14,956 - agent_network - INFO - [TOOL_RESULT] From: airbnb_agent | To: client_agent | Result: Here are some top-rated Airbnb listings in Tahoe for your weekend getaway:
+
+1. **Luxury Lakefront Villa**
+   - **Location:** Zephyr Cove, NV
+   - **Price per night:** $500
+   - **Rating:** 5.0 (45 rev...
+2025-03-30 01:36:21,250 - agent_network - INFO - [RESPONSE] From: client_agent | To: human | Content: Here’s a fantastic 5-star getaway option for your weekend in Tahoe:
+
+### **Luxury Lakefront Villa**
+- **Location:** Zephyr Cove, NV
+- **Price per night:** $500
+- **Rating:** 5.0 (45 reviews)
+- **Ameni...
+2025-03-30 01:36:21,250 - agent_network - INFO - [MESSAGE] From: client_agent | To: human | Content: Here’s a fantastic 5-star getaway option for your weekend in Tahoe:
+
+### **Luxury Lakefront Villa**
+- **Location:** Zephyr Cove, NV
+- **Price per night:** $500
+- **Rating:** 5.0 (45 reviews)
+- **Ameni...
+2025-03-30 01:36:22,694 - agent_network - INFO - [MESSAGE] From: human | To: client_agent | Content: TASK COMPLETE...
+2025-03-30 01:36:22,698 - agent_network - INFO - Network structure saved to logs/20250330_013546_tahoe_weekend_openrouter_deepseek_deepseek-chat-v3-0324/network.json
+2025-03-30 01:36:22,699 - agent_network - INFO - Task and result saved to logs/20250330_013546_tahoe_weekend_openrouter_deepseek_deepseek-chat-v3-0324/task_result.yaml

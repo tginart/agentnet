@@ -1,0 +1,271 @@
+{
+    "task": "Organize a VIP wine and culinary tour through France's renowned wine regions, including exclusive wine tastings, gourmet dining experiences at Michelin-starred restaurants, and luxury vineyard accommodations.",
+    "verification": {
+        "subpaths": [
+            [
+                "human",
+                "client_agent",
+                "wine_tour_agent",
+                "vineyard_selection_agent",
+                "vineyard_accommodation_booking_agent",
+                "vineyard_accommodation_booking_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "culinary_experience_agent",
+                "dining_reservation_agent",
+                "michelin_dining_booking_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "logistics_coordinator_agent",
+                "luxury_transport_agent",
+                "exclusive_tours_agent",
+                "exclusive_wine_tasting_tool",
+                "human"
+            ],
+            [
+                "human",
+                "client_agent",
+                "personal_concierge_agent",
+                "travel_documents_agent",
+                "visa_application_tool",
+                "human"
+            ]
+        ]
+    },
+    "agents": [
+        {
+            "name": "client_agent",
+            "role": "Primary interface with the user, coordinating a luxurious wine and culinary tour plan with various specialized agents",
+            "tools": [
+                "wine_tour_agent",
+                "culinary_experience_agent",
+                "logistics_coordinator_agent",
+                "personal_concierge_agent"
+            ]
+        },
+        {
+            "name": "wine_tour_agent",
+            "role": "Focuses on organizing wine tours and luxurious stay arrangements within famous wine regions",
+            "tools": [
+                "vineyard_selection_agent",
+                "wine_cellar_selection_agent"
+            ]
+        },
+        {
+            "name": "vineyard_selection_agent",
+            "role": "Identifies and selects top vineyards for both visits and accommodations for the wine tour",
+            "tools": [
+                "vineyard_accommodation_booking_agent"
+            ]
+        },
+        {
+            "name": "vineyard_accommodation_booking_agent",
+            "role": "Books luxury accommodations at selected vineyards",
+            "tools": [
+                "vineyard_accommodation_booking_tool"
+            ]
+        },
+        {
+            "name": "culinary_experience_agent",
+            "role": "Arranges gourmet dining experiences at exclusive restaurants",
+            "tools": [
+                "dining_reservation_agent"
+            ]
+        },
+        {
+            "name": "dining_reservation_agent",
+            "role": "Handles reservations at Michelin-starred restaurants for a high-end culinary experience",
+            "tools": [
+                "michelin_dining_booking_tool"
+            ]
+        },
+        {
+            "name": "logistics_coordinator_agent",
+            "role": "Coordinates all transportation and exclusive tour activities, ensuring seamless transitions and luxury",
+            "tools": [
+                "luxury_transport_agent",
+                "exclusive_tours_agent"
+            ]
+        },
+        {
+            "name": "luxury_transport_agent",
+            "role": "Arranges luxury transportation options including private drivers and high-end vehicles"
+        },
+        {
+            "name": "exclusive_tours_agent",
+            "role": "Plans exclusive wine tasting and vineyard tours with special access",
+            "tools": [
+                "exclusive_wine_tasting_tool"
+            ]
+        },
+        {
+            "name": "personal_concierge_agent",
+            "role": "Handles personalized services and travel documentation needs",
+            "tools": [
+                "travel_documents_agent"
+            ]
+        },
+        {
+            "name": "travel_documents_agent",
+            "role": "Facilitates necessary travel documentation, including visa applications and travel insurance",
+            "tools": [
+                "visa_application_tool",
+                "travel_insurance_tool"
+            ]
+        },
+        {
+            "name": "wine_cellar_selection_agent",
+            "role": "Recommends exclusive wine cellars for private tastings and collections"
+        }
+    ],
+    "tools": [
+        {
+            "name": "vineyard_accommodation_booking_tool",
+            "description": "Books luxury accommodations at top-rated vineyards in the wine regions",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "region": {
+                        "type": "string",
+                        "description": "Wine region for accommodation"
+                    },
+                    "stay_dates": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "date"
+                        },
+                        "description": "Dates for the vineyard stay"
+                    },
+                    "guest_count": {
+                        "type": "number",
+                        "description": "Number of guests for the stay"
+                    }
+                },
+                "required": [
+                    "region",
+                    "stay_dates",
+                    "guest_count"
+                ]
+            }
+        },
+        {
+            "name": "michelin_dining_booking_tool",
+            "description": "Reserves tables at Michelin-starred restaurants with consideration for dietary preferences and timing",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "restaurant_name": {
+                        "type": "string",
+                        "description": "Name of the restaurant to book"
+                    },
+                    "reservation_date": {
+                        "type": "string",
+                        "description": "Date for the reservation",
+                        "format": "date"
+                    },
+                    "number_of_people": {
+                        "type": "number",
+                        "description": "Number of diners in the reservation"
+                    },
+                    "dietary_preferences": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of dietary preferences or restrictions"
+                    }
+                },
+                "required": [
+                    "restaurant_name",
+                    "reservation_date",
+                    "number_of_people"
+                ]
+            }
+        },
+        {
+            "name": "exclusive_wine_tasting_tool",
+            "description": "Arranges exclusive wine tasting sessions at elite vineyards, offering rare wine sampling opportunities",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "vineyard": {
+                        "type": "string",
+                        "description": "Name of the vineyard for the wine tasting"
+                    },
+                    "tasting_date": {
+                        "type": "string",
+                        "description": "Date of the wine tasting event",
+                        "format": "date"
+                    }
+                },
+                "required": [
+                    "vineyard",
+                    "tasting_date"
+                ]
+            }
+        },
+        {
+            "name": "visa_application_tool",
+            "description": "Assists in the application process for travel visas required for the trip",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "nationality": {
+                        "type": "string",
+                        "description": "Nationality of the traveler"
+                    },
+                    "destination_country": {
+                        "type": "string",
+                        "description": "Country for which the visa is needed"
+                    },
+                    "travel_dates": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "date"
+                        },
+                        "description": "Planned travel dates"
+                    }
+                },
+                "required": [
+                    "nationality",
+                    "destination_country",
+                    "travel_dates"
+                ]
+            }
+        },
+        {
+            "name": "travel_insurance_tool",
+            "description": "Provides travel insurance options and facilitates purchases according to the traveler's preferences",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "coverage_type": {
+                        "type": "string",
+                        "description": "Type of coverage desired (e.g., health, trip cancellation)"
+                    },
+                    "traveler_age": {
+                        "type": "number",
+                        "description": "Age of the primary traveler"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "description": "Expected duration of the trip in days"
+                    }
+                },
+                "required": [
+                    "coverage_type",
+                    "traveler_age",
+                    "duration"
+                ]
+            }
+        }
+    ]
+}
