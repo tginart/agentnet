@@ -158,7 +158,7 @@ The interactive terminal browser allows you to:
 The AgentNet codebase is organized as follows:
 
 ```
-agents-as-tools/
+agentnet/
 ├── README.md             # Project documentation
 ├── configs/              # Configuration files
 │   ├── launch/           # Predefined launch configurations
