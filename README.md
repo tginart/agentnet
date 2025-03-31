@@ -315,7 +315,7 @@ After all... who would ever architect a product as an agent network todat? For w
 
 Through observing sample trajectories from the models across the simulated networks of varying complexity (see `viz.py`), I’ve found that success on AgentNet benchmark hinges on two core behaviors:
 
-1) Precise Instruction Following and High SNR Communication: Agents must serve as reliable conduits of information—capable of both interpreting and transmitting instructions accurately through a multi-agent "game of telephone." This includes:
+1) **Precise Instruction Following and High SNR Communication:** Agents must serve as reliable conduits of information—capable of both interpreting and transmitting instructions accurately through a multi-agent "game of telephone." This includes:
 
         - Preserving clarity and intent across multiple hops in a communication chain.
 
@@ -323,7 +323,7 @@ Through observing sample trajectories from the models across the simulated netwo
 
         - Avoiding the introduction of ambiguity or noise as tasks and updates propagate through the network.
 
-2) Cautious Exploration and Overcommunication: Successful agents show an instinct for prudent decision-making. Rather than rushing toward the most direct solution, they:
+2) **Cautious Exploration and Overcommunication:** Successful agents show an instinct for prudent decision-making. Rather than rushing toward the most direct solution, they:
 
         - Proactively identify and engage with all potentially relevant agents or resources.
 
@@ -331,7 +331,7 @@ Through observing sample trajectories from the models across the simulated netwo
 
         - Overcommunicate when uncertain, leaving fewer stones unturned in pursuit of a robust outcome.
 
-These two behaviors—robust inter-agent communication and risk-aware exploration—are critical for effective delegation. In fact, I believe that these two behaviors are not orthogonal but rather synergistic-- precision, high SNR communication allows for **more** communication and exploration of the network.
+These two behaviors—robust inter-agent communication and risk-aware exploration—are critical for effective delegation. In fact, I believe that these two behaviors are not *orthogonal* but rather *synergistic*-- precision, high SNR communication allows for **more** communication and exploration of the network.
 
 ### Next Steps:
 
