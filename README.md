@@ -285,6 +285,7 @@ I intentionally did *not* expend much effort prompting the agent network to bett
 
 **Disclaimer**: These results are completely preliminary and a significant fraction of the network specs currently used are fairly toy. **While I believe the overall structure and methodology is sound** I think higher-quality and higher-volume network specs are needed in order to draw stronger conclusions.
 
+```
 ╒═══════════════════════════════════╤═══════════════════╤═════════════════╤══════════════╕
 │ Model                             │   Completion Rate │   Veracity Rate │   Efficiency │
 ╞═══════════════════════════════════╪═══════════════════╪═════════════════╪══════════════╡
@@ -302,6 +303,8 @@ I intentionally did *not* expend much effort prompting the agent network to bett
 ├───────────────────────────────────┼───────────────────┼─────────────────┼──────────────┤
 │ x-ai/grok-2-1212                  │            0.4617 │          0.3243 │       0.2379 │
 ╘═══════════════════════════════════╧═══════════════════╧═════════════════╧══════════════╛
+```
+
 ### Analysis of Results
 
 I was not sure what to expect going into this -- which models would do well? Would this benchmark have any signal at all? Would all models perform the same?
