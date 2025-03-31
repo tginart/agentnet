@@ -76,17 +76,20 @@ Finally, install requirements:
 
 ### Quickstart
 
-1. You will see that I've push the core results to the logs dir. To replicate it after installation run:
+To enable visualization without needing to simulate from scratch, I've pushed some results to the logs dir.
 
-`python launch.py -l`
-
-2. If you want to jump straight to the results, you can run:
+1. To view results table, you can run:
 
 `python viz.py --eval --pretty`
 
-3. If you want to play with the network trajectory visualizer, run:
+2. If you want to play with the network trajectory visualizer, run:
 
 `python viz.py --app`
+
+3. To replicate the results, set up your .env file and run:
+
+`python launch.py -l`
+
 
 ## Environment
 
@@ -216,7 +219,8 @@ The `src/synth/network_instance_synthesizer.py` module provides tools to use LLM
 
 ```bash
 # Generate harder variants of existing network specs
-python -m src.synth.network_instance_synthesizer # Run as module or really just cd src/synth and run python network_instance_synthesizer.py
+# Run as module or really just cd src/synth and run python network_instance_synthesizer.py
+python -m src.synth.network_instance_synthesizer 
 
 # Use the generate_harder_variants.sh script for batch generation
 bash src/synth/generate_harder_variants.sh
