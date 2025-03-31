@@ -159,7 +159,6 @@ The AgentNet codebase is organized as follows:
 
 ```
 agents-as-tools/
-├── CLAUDE.md             # Instructions and commands for Claude assistant
 ├── README.md             # Project documentation
 ├── configs/              # Configuration files
 │   ├── launch/           # Predefined launch configurations
