@@ -137,6 +137,14 @@ def eval_all_complete_runs(log_dir: str, specs_dir: str,
         # Sort table data alphabetically by model name
         table_data.sort(key=lambda x: x[0])
         
+        # Remove 'openrouter/' prefix for display to make the table less wide
+        for i, row in enumerate(table_data):
+            # Store the original name for sorting
+            original_name = row[0]
+            # Remove 'openrouter/' prefix if present
+            if 'openrouter/' in original_name:
+                row[0] = original_name.replace('openrouter/', '')
+        
         # Print pretty table
         headers = ["Model", "Completion Rate", "Veracity Rate", "Efficiency"]
         print(tabulate(table_data, headers=headers, tablefmt="fancy_grid"))
