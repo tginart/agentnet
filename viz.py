@@ -36,6 +36,7 @@ def eval_all_complete_runs(log_dir: str, specs_dir: str,
     model_to_evaluate: Optional[str] = None, # default is to evaluate all models
     plot: Optional[bool] = False, # default is to not generate plot
     pretty: Optional[bool] = False, # default is to not pretty print tables
+    dir_list: Optional[bool] = False, # default is to not list directories
     ):
     '''
     Evaluate all complete runs in the given log directory.
@@ -64,12 +65,20 @@ def eval_all_complete_runs(log_dir: str, specs_dir: str,
         if present_for_all or include_all_specs:
             specs_for_all_models.add(spec)
 
+    # Keep track of most recent runs by (model, spec) pair
+    most_recent_runs = {}
     
     model_names = set()
     run_eval_results = dict()
     for run in runs:
         if run['spec_name'] in specs_for_all_models:
             model_names.add(run['model'])
+            
+            # Track most recent run for this (model, spec) pair
+            key = (run['model'], run['spec_name'])
+            if key not in most_recent_runs or (run.get('timestamp') and most_recent_runs[key].get('timestamp') and run['timestamp'] > most_recent_runs[key]['timestamp']):
+                most_recent_runs[key] = run
+                
             run_eval_results[run['name']] = compute_eval(run['name'], log_dir, specs_dir)
             run_eval_results[run['name']]['model'] = run['model']
 
@@ -77,7 +86,15 @@ def eval_all_complete_runs(log_dir: str, specs_dir: str,
     # save run_eval_results to json file
     with open('run_eval_results.json', 'w') as f:
         json.dump(run_eval_results, f, indent=4)
-
+    
+    # If dir-list flag is set, output the directories and exit
+    if dir_list:
+        print("\nDirectories containing most recent runs used in evaluation:")
+        # Sort by model name first, then spec name for consistent output
+        for (model, spec), run in sorted(most_recent_runs.items(), key=lambda x: (x[0][0], x[0][1])):
+            print(f"{run['path']}")
+        return
+        
     print("\nEvaluating on the following environments:")
     for spec_name in specs_for_all_models:
         print(f"--- {spec_name} ---")
@@ -1356,6 +1373,8 @@ if __name__ == "__main__":
     parser.add_argument("--plot", action="store_true", help="Generate a Plotly plot of evaluation results")
     # Add pretty flag for tabulate output
     parser.add_argument("--pretty", action="store_true", help="Pretty-print evaluation results using tabulate")
+    # Add dir-list flag to list directories with relevant runs
+    parser.add_argument("--dir-list", action="store_true", help="List directories containing runs used in evaluation")
 
     args = parser.parse_args()
 
@@ -1394,7 +1413,8 @@ if __name__ == "__main__":
             effective_specs_dir, # Use the found/validated spec dir
             model_to_evaluate=args.model,
             plot=args.plot,  # Pass the plot flag to the evaluation function
-            pretty=args.pretty  # Pass the pretty flag to the evaluation function
+            pretty=args.pretty,  # Pass the pretty flag to the evaluation function
+            dir_list=args.dir_list  # Pass the dir-list flag to the evaluation function
         )
         sys.exit(0)
 

@@ -18,6 +18,7 @@ We think of the multi-agent system as a network of agents. The network forms a g
 - The client agent is responsible for managing a multi-step task by managing the information flow and tool-calling over the hierarchy of agents and sub-agents and sub-sub-agents and so on.
 - Leaf nodes represent the network's sensors and actuators. In practice, leaf nodes would basically always be tools or APIs, but in this system we allow for *agent leafs* that can simulate entire potential sub-graphs (via LLM) and return higher-level responses.
 
+
 ### Simulation Structure
 
 As mentioned before, AgentNet models the multi-agent communication network as a graph where nodes are agents (or tools) and messages/requests/responses are sent over edges. In a rather literal sense, an AgentNet simulation resembles a search or walk on a graph. Each discrete step of the simulation corresponds to a directed walk from one node to another. The messages/requests/responses passed along the edge can be thought of as metadata at the given step.
@@ -57,6 +58,58 @@ The real world is scalable and realistic (tautalogically so) but it's not genera
 I find it is difficult (likely in a way that could be meaningfully formalized, but that would take us into a discussion far afield) to build an emulator (a simulator that can run many environments) that is (1) realistic -- provides environments of sufficient quality and fidelity, (2) scalable -- provides a large number of such environments such that they are meaningfully distinct and (3) verifiable --- providers comprehensive, programmatic, and deterministic verifications over agent trajectories
 
 Often, design choices force a direct trade-off between these. I aimed to build, at least the humble beginnings, of a system that could balance these 3 competing properties well.
+
+
+## Setup
+
+### Install
+
+It is suggested to use a virtual env. 
+
+With conda: `conda create -n agents-as-tools python=3.12`
+
+Then activate it: `conda activate agents-as-tools`
+
+Finally, install requirements:
+
+`pip install -r requirements.txt`
+
+### Quickstart
+
+1. You will see that I've push the core results to the logs dir. To replicate it after installation run:
+
+`python launch.py -l`
+
+2. If you want to jump straight to the results, you can run:
+
+`python viz.py --eval --pretty`
+
+3. If you want to play with the network trajectory visualizer, run:
+
+`python viz.py --app`
+
+## Environment
+
+Create a `.env` file in your top-level dir with your API keys.
+
+### Example `.env` file
+
+```
+ANTHROPIC_API_KEY=XXX
+OPENROUTER_API_KEY=XXX
+OPENAI_API_KEY=XXX
+SERPAPI_API_KEY=XXX <-- Optional and not really used now
+```
+
+
+### Agent Network Autonomy
+
+I assume the human is lazy. The agent network should minimize interaction with the human, operating as autonomously as possible. In fact, there is a hard limit on how many times the client agent can bother the human without the penalty of a hard shut-off! In the limit, agents can just bother the human for everything. In every network, I tried to ensure that the task can be completed by organizing the knowledge and tools of the agents in the right way without needing to confirm from the human more than, at most, *one time*.
+
+### Prompting
+
+I intentionally did *not* expend much effort prompting the agent network to better exhibit behaviors. It is possible that variation in model performance is driven by the intrinsic disposition, risk-tolerance, and communication style of the underlying LLM rather than necessarily demonstrating the *general capability* to exhibit the requisit skills and behaviors in a *prompted* setting.
+
 
 ## Core Functionality
 
@@ -153,6 +206,32 @@ The interactive terminal browser allows you to:
 - Verify trajectories against specifications
 - Visualize network interactions in ASCII format
 
+For now, `viz.py` is a bit brittle in how it generates evals given a log dir. The recommended approach to using the `--eval` flag is to make sure you only pass in a log dir with runs that you want to evaluate and that every (model,spec) pair is in the log dir. Else, study the filtering logic closely to make sure you do not have skewed aggregate numbers. This will be improved in a future version.
+
+### Network Spec Synthesis
+
+**Note**: Spec synthesis currently has rough edges and does not yet produce great specs. More work is needed here.
+
+The `src/synth/network_instance_synthesizer.py` module provides tools to use LLMs to generate new network specifications based on existing ones. This is useful for creating variations of networks to test different scenarios and agent behaviors. It combines LLM prompting with a series of programmatic checks to improve the quality of the generated network specs. When the generated spec fails a check (for example, if the agent graph is not deep enough), it is sent back to the LLM with the failure reason for further generative iteration.
+
+```bash
+# Generate harder variants of existing network specs
+python -m src.synth.network_instance_synthesizer # Run as module or really just cd src/synth and run python network_instance_synthesizer.py
+
+# Use the generate_harder_variants.sh script for batch generation
+bash src/synth/generate_harder_variants.sh
+```
+
+Generated network specs are stored in `src/synth/synth_network_specs/` and can be used like any manually created spec. The synthesizer can modify various aspects of the network:
+
+- Add complexity to tasks and objectives
+- Introduce additional constraints or requirements
+- Create variations with different agent capabilities
+- Generate harder variants with more complex verification checks
+
+This approach allows for rapid expansion of the benchmark dataset while maintaining consistent evaluation criteria across network variations.
+
+
 ## Project Structure
 
 The AgentNet codebase is organized as follows:
@@ -242,41 +321,6 @@ Generally speaking, this is just a proof-of-concept right now. There are many po
 - Detection of bottlenecks in information flow
 - Analysis of common failure patterns across different network topologies
 
-
-## Setup
-
-### Install
-
-It is suggested to use a virtual env. 
-
-With conda: `conda create -n agents-as-tools python=3.12`
-
-Then activate it: `conda activate agents-as-tools`
-
-Finally, install requirements:
-
-`pip install -r requirements.txt`
-
-## Environment
-
-Create a `.env` file in your top-level dir with your API keys.
-
-### Example `.env` file
-
-```
-ANTHROPIC_API_KEY=XXX
-OPENROUTER_API_KEY=XXX
-OPENAI_API_KEY=XXX
-SERPAPI_API_KEY=XXX <-- Optional and not really used now
-```
-
-## Agent Network Autonomy
-
-I assume the human is lazy. The agent network should minimize interaction with the human, operating as autonomously as possible. In fact, there is a hard limit on how many times the client agent can bother the human without the penalty of a hard shut-off! In the limit, agents can just bother the human for everything. In every network, I tried to ensure that the task can be completed by organizing the knowledge and tools of the agents in the right way without needing to confirm from the human more than, at most, *one time*.
-
-## Prompting
-
-I intentionally did *not* expend much effort prompting the agent network to better exhibit behaviors. It is possible that variation in model performance is driven by the intrinsic disposition, risk-tolerance, and communication style of the underlying LLM rather than necessarily demonstrating the *general capability* to exhibit the requisit skills and behaviors in a *prompted* setting.
 
 
 
